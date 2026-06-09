@@ -25,3 +25,142 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: mlar
+      description: 请帮我查找多模态学习与表示的相关论文，特别是关于图、文、视频
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: multimodal representation learning
+          keyword_cn: 多模态表示学习
+          query: learning joint representations from multiple modalities
+        - keyword: cross-modal alignment
+          keyword_cn: 跨模态对齐
+          query: aligning representations across different modalities like text and video
+        - keyword: multimodal fusion techniques
+          keyword_cn: 多模态融合技术
+          query: techniques for fusing information from text, image, and video
+        - keyword: visual-textual representation
+          keyword_cn: 视觉-文本表示
+          query: combining visual and textual information for representation learning
+        - keyword: cross-modal retrieval
+          keyword_cn: 跨模态检索
+          query: retrieving relevant items across different modalities like text to video
+        - keyword: joint embedding space
+          keyword_cn: 联合嵌入空间
+          query: learning a shared embedding space for multiple modalities
+      intent_queries:
+        - query: Research on multimodal representation learning combining graph, text, and video data
+          query_cn: 结合图、文本和视频数据的多模态表示学习研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: Multimodal fusion methods for integrating information from graphs, text, and videos
+          query_cn: 整合图、文本和视频信息的多模态融合方法
+          enabled: true
+          source: manual
+          note: ''
+        - query: Joint embedding learning for multimodal data including visual, textual, and structural modalities
+          query_cn: 包括视觉、文本和结构模态的多模态数据联合嵌入学习
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-09T15:22:14.893Z'
+    - tag: MLLM-video
+      description: 多模态大语言模型与视频理解论文检索
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: multimodal large language model
+          keyword_cn: 多模态大语言模型
+          query: papers on multimodal large language models combining text and vision
+        - keyword: vision language model
+          keyword_cn: 视觉语言模型
+          query: vision language models for image understanding
+        - keyword: video understanding
+          keyword_cn: 视频理解
+          query: video understanding and analysis with deep learning
+        - keyword: video-grounded language model
+          keyword_cn: 视频基础语言模型
+          query: language models grounded in video data
+        - keyword: video captioning
+          keyword_cn: 视频字幕生成
+          query: automatic video captioning with attention mechanisms
+        - keyword: image text pretraining
+          keyword_cn: 图像文本预训练
+          query: image-text pretraining for multimodal models
+      intent_queries:
+        - query: Find papers on multimodal large language models for video understanding
+          query_cn: 查找关于多模态大语言模型用于视频理解的论文
+          enabled: true
+          source: manual
+          note: ''
+        - query: Research on video grounded language models and their applications
+          query_cn: 视频基础语言模型及其应用研究
+          enabled: true
+          source: manual
+          note: ''
+        - query: State of the art video understanding models combining vision and language
+          query_cn: 结合视觉和语言的最新视频理解模型
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-09T15:28:35.678Z'
+    - tag: op-distill
+      description: 请帮我查找Agent，强化学习，后训练，On Policy Distilling的相关论文
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: reinforcement learning
+          keyword_cn: 强化学习
+          query: reinforcement learning methods
+        - keyword: post-training
+          keyword_cn: 后训练
+          query: post-training stage
+        - keyword: on-policy distillation
+          keyword_cn: 在策略蒸馏
+          query: on-policy knowledge distillation for agents
+        - keyword: model compression
+          keyword_cn: 模型压缩
+          query: model compression via distillation
+        - keyword: knowledge distillation
+          keyword_cn: 知识蒸馏
+          query: knowledge distillation in reinforcement learning
+        - keyword: language model agent
+          keyword_cn: 语言模型代理
+          query: language model based autonomous agent
+      intent_queries:
+        - query: on policy distillation for reinforcement learning agent post training
+          query_cn: 用于强化学习代理后训练的在策略蒸馏
+          enabled: true
+          source: manual
+          note: ''
+        - query: combining on policy distillation and reinforcement learning for agent post training
+          query_cn: 结合在策略蒸馏和强化学习的代理后训练
+          enabled: true
+          source: manual
+          note: ''
+        - query: methods for post training agents using on policy distillation and reinforcement learning
+          query_cn: 使用在策略蒸馏和强化学习进行代理后训练的方法
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-06-09T15:36:58.055Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
