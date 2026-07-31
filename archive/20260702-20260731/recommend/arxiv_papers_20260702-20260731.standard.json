@@ -1,0 +1,1250 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-31T08:17:04.180880+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 35,
+    "deep_cap": 7,
+    "deep_selected": 18,
+    "quick_candidates": 33,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2607.15592v1",
+      "source": "arxiv",
+      "title": "MGDT: MLLM-Guided Diffusion Transformer with Relation-Adaptive Mixture-of-Experts for Multimodal Knowledge Graph Completion",
+      "abstract": "Multimodal Knowledge Graph Completion (MKGC) requires inferring missing entities from structural, textual, and visual cues. Existing diffusion-based MKGC methods usually denoise directly on raw multimodal features. Such a design forces the denoiser to simultaneously perform relation-dependent cue selection, cross-modal semantic alignment, and structure-aware entity generation, which introduces noisy and semantically inconsistent conditions for diffusion and consequently leads to suboptimal completion performance. To address this limitation, we propose MGDT: MLLM-Guided Diffusion Transformer with Relation-Adaptive Mixture-of-Experts (MGDT), a novel MKGC framework built on an align-then-diffuse paradigm. MGDT first employs a Relation-Adaptive Semantic Routing Mixture-of-Experts (RASR-MoE) module to select relation-relevant multimodal semantic transformation paths and suppress irrelevant modality interference. MGDT then uses a frozen Multimodal Large Language Model (MLLM) as a semantic anchor to align the routed multimodal representations into a unified latent space and reduce cross-modal semantic heterogeneity. Finally, a Knowledge Graph Diffusion Transformer (KGDT) performs graph-conditioned denoising generation in the aligned space to produce the missing entity representation. Experiments on three benchmark datasets show that MGDT consistently outperforms strong baselines.",
+      "authors": [
+        "Xu Hou",
+        "Meiyu Liang",
+        "Wei Huang",
+        "Yawen Li",
+        "Zhe Xue",
+        "Wu Liu",
+        "Guanhua Ye",
+        "Lei Shi",
+        "Kangkang Lu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-17T03:39:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.15592v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Proposes a framework for multimodal knowledge graph completion, which directly extracts relations using structural, textual, and visual cues.",
+      "llm_evidence_cn": "提出多模态知识图谱补全框架，直接利用结构、文本和视觉线索提取关系。",
+      "llm_evidence": "提出多模态知识图谱补全框架，直接利用结构、文本和视觉线索提取关系。",
+      "canonical_evidence": "提出多模态知识图谱补全框架，直接利用结构、文本和视觉线索提取关系。",
+      "llm_tldr_en": "The paper introduces MGDT, an align-then-diffuse framework that first aligns multimodal features with MLLM guidance, then uses a relation-adaptive MoE diffusion transformer for accurate multimodal knowledge graph completion.",
+      "llm_tldr_cn": "针对多模态知识图谱补全中现有扩散方法同时处理多任务导致条件噪声大、语义不一致的问题，该论文提出MGDT框架，采用先对齐再扩散的范式，利用多模态大语言模型引导对齐多模态特征，并通过关系自适应专家混合的扩散Transformer进行实体生成，在多个基准上取得最优性能。为多模态关系提取提供了新的技术路线。",
+      "llm_tldr": "针对多模态知识图谱补全中现有扩散方法同时处理多任务导致条件噪声大、语义不一致的问题，该论文提出MGDT框架，采用先对齐再扩散的范式，利用多模态大语言模型引导对齐多模态特征，并通过关系自适应专家混合的扩散Transformer进行实体生成，在多个基准上取得最优性能。为多模态关系提取提供了新的技术路线。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.16560v1",
+      "source": "arxiv",
+      "title": "From Modalities to Propositions: A Language-Centric Framework for Multimodal Intelligence",
+      "abstract": "We propose a language representation for multimodal data in which any observation, whether image, video, or text, is expressed as a bag of atomic propositions, simple statements about the entities, actions, and relations in a scene. A global semantic codebook unifies these into a shared vocabulary of canonical atomic propositions, placing every modality and observation into one interpretable space that spans fine grained facts to high level concepts and composes into richer ones. This brings interpretability with reasoning, cross-modal understanding and retrieval, and compositionality that enables complex multimodal understanding, rich data curation and complex structured retrieval. We demonstrate the framework on autonomous driving and open-world data.",
+      "authors": [
+        "Nadine Chang",
+        "Maying Shen",
+        "Shizhe Diao",
+        "Jialiang Wang",
+        "Jingde Chen",
+        "Thomas Breuel",
+        "Pavlo Molchanov",
+        "Rafid Mahmood",
+        "Jose M. Alvarez"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.LG",
+        "cs.MM"
+      ],
+      "published": "2026-07-18T00:08:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.16560v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "represents multimodal data as atomic propositions capturing entities, actions, and relations",
+      "llm_evidence_cn": "将多模态数据表示为捕获实体、动作和关系的原子命题",
+      "llm_evidence": "将多模态数据表示为捕获实体、动作和关系的原子命题",
+      "canonical_evidence": "将多模态数据表示为捕获实体、动作和关系的原子命题",
+      "llm_tldr_en": "Proposes a language-centric framework that converts multimodal observations (image, video, text) into bags of atomic propositions describing entities, actions, and relations, enabling cross-modal understanding and reasoning.",
+      "llm_tldr_cn": "该论文针对多模态数据难以统一表达和提取结构化信息的问题，提出以语言为中心的框架，将任意模态观察表达为描述场景中实体、动作和关系的原子命题集合，通过全局语义码本统一为规范命题，实现了可解释的跨模态理解、检索和推理，在自动驾驶等场景中验证了框架的有效性。",
+      "llm_tldr": "该论文针对多模态数据难以统一表达和提取结构化信息的问题，提出以语言为中心的框架，将任意模态观察表达为描述场景中实体、动作和关系的原子命题集合，通过全局语义码本统一为规范命题，实现了可解释的跨模态理解、检索和推理，在自动驾驶等场景中验证了框架的有效性。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.03143v1",
+      "source": "arxiv",
+      "title": "Text as Partial Constraint: Core-Residual Alignment for Robust Vision-Language Learning",
+      "abstract": "Vision-language alignment powers open-vocabulary recognition, retrieval, and LVLM grounding, yet natural captions are often underspecified, making similarity brittle and overly confident under paraphrase and omitted details. We aim to learn representations whose matching is stable across caption views and whose confidence reflects how strongly text constrains an image. We propose Text as Partial Constraint (TPC), a core-residual alignment framework that treats multi-view captions as incomplete supervision. It distills a consensus semantic core as the alignment target, learns a single-view core predictor for standard inference with one query, and explicitly discourages vision-language similarity from depending on the orthogonal unsaid residual. An uncertainty-aware contrastive objective further softens alignment when caption views disagree, reducing overconfident updates under weak language constraints. Across zero-shot recognition and adversarial robustness, TPC achieves 81.42/64.05 Top-1 clean/robust accuracy on ImageNet and 76.19/52.03 on an Avg-14 transfer suite, while improving LVLM transfer with 85.16 POPE F1 and 59.57 OKVQA accuracy under an LLaVA-1.5-7B stack. These results suggest that modeling text as a partial constraint is a practical and principled route to more reliable vision-language representations under underspecified language supervision.",
+      "authors": [
+        "Chengzhen Yu",
+        "Canran Xiao",
+        "Siyuan Ma",
+        "Yang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-03T09:32:01+00:00",
+      "link": "https://arxiv.org/pdf/2607.03143v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes core-residual alignment framework for robust vision-language representation learning",
+      "llm_evidence_cn": "提出核心-残差对齐框架，用于鲁棒视觉-语言表征学习",
+      "llm_evidence": "提出核心-残差对齐框架，用于鲁棒视觉-语言表征学习",
+      "canonical_evidence": "提出核心-残差对齐框架，用于鲁棒视觉-语言表征学习",
+      "llm_tldr_en": "Proposes TPC, a core-residual alignment method that treats captions as partial constraints, distilling a consensus core to improve stability and confidence calibration in vision-language learning.",
+      "llm_tldr_cn": "针对自然语言描述不完整导致视觉-语言对齐脆弱的问题，提出TPC核心-残差对齐框架。该方法将多视角描述视作不完整监督，提取共识语义核心作为对齐目标，并显式抑制对未言明细节的依赖，使相似性对描述变化更稳定，置信度更合理。实验表明该方法提升了开放词汇识别等任务的鲁棒性，为视觉-语言对齐的可靠性提供了新思路。",
+      "llm_tldr": "针对自然语言描述不完整导致视觉-语言对齐脆弱的问题，提出TPC核心-残差对齐框架。该方法将多视角描述视作不完整监督，提取共识语义核心作为对齐目标，并显式抑制对未言明细节的依赖，使相似性对描述变化更稳定，置信度更合理。实验表明该方法提升了开放词汇识别等任务的鲁棒性，为视觉-语言对齐的可靠性提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05019v2",
+      "source": "arxiv",
+      "title": "Beyond Modality Fusion: Deep Ensembles for Multimodal Classification",
+      "abstract": "In multimodal classification, late-fusion approaches classify concatenated modality-specific features extracted by unimodal neural networks. When modality imbalance is pronounced, various regularization techniques have been proposed to balance the learning process and overcome the inferior performance of late-fusion networks. In contrast, this work demonstrates that multimodal data can be effectively classified without any explicit modality fusion, using deep ensembles of unimodal networks. We systematically compare deep ensembles to late-fusion networks at equal parameter count and show that ensembles consistently outperform state-of-the-art late-fusion methods designed to address modality imbalance. This advantage also holds over intermediate-fusion techniques we evaluated and over hybrid methods that combine unimodal and multimodal predictions. We propose and empirically validate a method for selecting the number of models per modality in an ensemble, avoiding computationally expensive exhaustive search. Under extreme modality imbalance and small ensemble sizes, the heuristic indicates that ensembles of unimodal models trained solely on the stronger modality are preferable; as the ensemble scales up, incorporating models from the weaker modality becomes beneficial. Both predictions align with our empirical findings. To systematically explore the challenges of optimizing multimodal models, we propose a synthetic multimodal framework that allows control over both the number of modalities and their predictive strength; our findings are consistent across synthetic and real-world datasets. Finally, by fitting scaling laws to bimodal datasets, we estimate the asymptotic performance of ensembles.",
+      "authors": [
+        "Ilya Burenko",
+        "Dmitry Vetrov"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-07-06T12:59:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.05019v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes deep ensembles of unimodal networks to handle modality imbalance in multimodal classification without explicit fusion.",
+      "llm_evidence_cn": "提出使用单模态网络的深度集成处理多模态分类中的模态不平衡，无需显式融合。",
+      "llm_evidence": "提出使用单模态网络的深度集成处理多模态分类中的模态不平衡，无需显式融合。",
+      "canonical_evidence": "提出使用单模态网络的深度集成处理多模态分类中的模态不平衡，无需显式融合。",
+      "llm_tldr_en": "This paper demonstrates that deep ensembles of unimodal networks outperform state-of-the-art late-fusion methods designed to address modality imbalance, achieving superior multimodal classification without explicit fusion.",
+      "llm_tldr_cn": "针对多模态分类中的模态不平衡问题，该论文证明深度集成单模态网络无需显式融合即可有效分类，系统对比同等参数量下的深度集成与后融合网络，显示集成模型始终优于最新处理后融合方法，甚至优于中间融合方法。主要贡献是提供了一种简单有效的替代方案，避免复杂的模态融合设计。",
+      "llm_tldr": "针对多模态分类中的模态不平衡问题，该论文证明深度集成单模态网络无需显式融合即可有效分类，系统对比同等参数量下的深度集成与后融合网络，显示集成模型始终优于最新处理后融合方法，甚至优于中间融合方法。主要贡献是提供了一种简单有效的替代方案，避免复杂的模态融合设计。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.05348v1",
+      "source": "arxiv",
+      "title": "Beyond Isolated Objects: Relationship-aware Open Vocabulary Scene Understanding via 3D Scene Graph Analysis",
+      "abstract": "Open-vocabulary 3D scene understanding aims to segment 3D scenes beyond predefined categories by transferring semantic knowledge from vision-language models. Existing methods have advanced this task by lifting language-aligned 2D features into 3D, yet they often rely on context-independent semantic representations, leaving object relationships underexplored for contextual refinement. We propose RelGraphOV, a relationship-aware framework that uses 3D scene graphs to enhance open-vocabulary 3D understanding. Our method constructs relational scene graphs from multi-view observations by leveraging vision-language reasoning to infer object relationships and prune geometrically implausible connections, without manual relationship annotations. To aggregate relational context while avoiding feature interference, we introduce an Adaptive Gated Dual-Stream Contextual GAT that separates dense geometric features and semantic CLIP embeddings, performs edge-guided message passing, and adaptively fuses complementary semantics. A hierarchical contrastive objective further promotes instance-level consistency and category-level discrimination. Experiments on ScanNetV2, ScanNet200, ScanNet$++$, and Replica demonstrate strong performance and generalization ability. Project Page: https://cxavireh.github.io/relgraphov-projectpage",
+      "authors": [
+        "Xianhao Chen",
+        "Jiarui Hu",
+        "Yuanbo Yang",
+        "Xiyu Zhang",
+        "Tengyue Wang",
+        "Hujun Bao",
+        "Guofeng Zhang",
+        "Zhaopeng Cui"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-07-06T17:29:49+00:00",
+      "link": "https://arxiv.org/pdf/2607.05348v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Uses 3D scene graphs to infer object relationships from multi-view observations, leveraging vision-language models for relation extraction in multimodal data.",
+      "llm_evidence_cn": "利用3D场景图从多视图观察中推断对象关系，借助视觉语言模型在多模态数据中提取关系。",
+      "llm_evidence": "利用3D场景图从多视图观察中推断对象关系，借助视觉语言模型在多模态数据中提取关系。",
+      "canonical_evidence": "利用3D场景图从多视图观察中推断对象关系，借助视觉语言模型在多模态数据中提取关系。",
+      "llm_tldr_en": "RelGraphOV enhances open-vocabulary 3D understanding by constructing relational scene graphs from vision-language reasoning, enabling relationship-aware contextual refinement and improving object segmentation without manual relations.",
+      "llm_tldr_cn": "该论文针对开放词汇3D场景理解中对象关系未被充分利用的问题，提出RelGraphOV框架，通过视觉语言推理从多视图构建关系场景图并裁剪几何不可行连接，利用对象关系提升语义分割和场景理解效果。在多个基准上验证了关系感知方法的有效性。",
+      "llm_tldr": "该论文针对开放词汇3D场景理解中对象关系未被充分利用的问题，提出RelGraphOV框架，通过视觉语言推理从多视图构建关系场景图并裁剪几何不可行连接，利用对象关系提升语义分割和场景理解效果。在多个基准上验证了关系感知方法的有效性。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.08605v1",
+      "source": "arxiv",
+      "title": "When Structured Sparse Autoencoders Learn Consistent Concepts Across Modalities",
+      "abstract": "Sparse autoencoders (SAEs) have emerged as a promising technique for mechanistic interpretability by learning a set of sparse latent features in large models, each of which encodes a distinct concept. However, in vision-language models (VLMs), vanilla SAEs struggle to learn modality-consistent concepts, with concepts often exhibiting fragmented coverage (i.e., disjoint regions) in the visual modality. To address this challenge, we propose a Structured Sparse AutoEncoder ($S^2AE$) that enforces concept consistency from both semantic and spatial perspectives in the visual modality. Specifically, we group image patches based on Transformer attention similarity and spatial proximity, and introduce a structured sparsity regularization when training the vanilla SAE. The regularization consists of exclusive sparsity for inter-group concept disentanglement and group sparsity for intra-group concept consistency, which drives the latent neurons by SAEs to specialize in distinct, semantically grounded concepts. Evaluated on the \\texttt{Qwen2.5-VL-7B-Instruct} model, the method achieves 6.06% average improvement in semantic alignment (mIoU) and 60.81 in representational efficiency (lower l0 norm) while maintaining near-perfect reconstruction fidelity with an Explained Variance above 99%. Cross-modal analysis further demonstrates that $S^2AE$ enhances neuronal monosemanticity by this visual structural prior, achieving a 3.08% average gain in semantic consistency and a 2.37% average gain in monosemanticity scores for both modalities of multimodal features, thereby fostering more coherent and disentangled representations.",
+      "authors": [
+        "Weiduo Liao",
+        "Yunqiao Yang",
+        "Ying Wei"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-07-09T15:35:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.08605v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "structured sparse autoencoders enforce concept consistency across vision and language modalities",
+      "llm_evidence_cn": "结构化稀疏自编码器强制视觉与语言模态间概念一致性",
+      "llm_evidence": "结构化稀疏自编码器强制视觉与语言模态间概念一致性",
+      "canonical_evidence": "结构化稀疏自编码器强制视觉与语言模态间概念一致性",
+      "llm_tldr_en": "Proposes S^2AE, a structured sparse autoencoder that uses attention-based grouping and structured sparsity to learn modality-consistent concepts in vision-language models.",
+      "llm_tldr_cn": "针对现有稀疏自编码器在视觉语言模型中难以学到模态一致概念、视觉概念覆盖碎片化的问题，提出结构化稀疏自编码器S^2AE。该方法通过基于Transformer注意力相似性和空间邻近度对图像块分组，并引入结构化稀疏正则化，从语义和空间角度强制概念一致性，提升了模型可解释性。",
+      "llm_tldr": "针对现有稀疏自编码器在视觉语言模型中难以学到模态一致概念、视觉概念覆盖碎片化的问题，提出结构化稀疏自编码器S^2AE。该方法通过基于Transformer注意力相似性和空间邻近度对图像块分组，并引入结构化稀疏正则化，从语义和空间角度强制概念一致性，提升了模型可解释性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.08839v1",
+      "source": "arxiv",
+      "title": "Mixture of Probes: Learning from Privileged Modalities in Multimodal LLMs Through Probing",
+      "abstract": "Multimodal Large Language Models (MLLMs) are typically designed under the assumption that all modalities available during training will also be accessible at inference. However, many real-world settings violate this assumption, requiring models to operate under a privileged modality setting, where auxiliary modalities are available only during training. While these modalities contain valuable information, existing MLLMs largely fail to leverage them effectively, as they treat modalities as interchangeable inputs rather than sources of complementary supervision. We propose Mixture of Probes (MoP), a novel framework that disentangles modality-specific and modality-general signals within the MLLM, allowing the model to preserve modality-dependent structure while learning transferable representations across modalities. At its core, MoP achieves this through a structured probing mechanism that extracts and organizes information from intermediate representations of a shared modality encoder, rather than relying only on final-layer alignment as done in existing MLLMs. To support this disentanglement, we further introduce MoP Cross-modal Training (MoP-X), a training strategy for MoP centered around a probe disentanglement loss that prevents probe collapse and encourages cross-modal learning. We evaluate MoP across two domains spanning eight tasks and four modalities under a comprehensive evaluation protocol tailored to the privileged modality setting, where each modality is independently treated as the sole input at inference time. MoP consistently outperforms strong MLLM baselines, achieving up to 65% relative improvement, demonstrating that auxiliary modalities, even when unavailable at inference, can provide substantial gains when effectively leveraged during training. Code, model checkpoints, and evaluation protocols will be made available at https://github.com/Sony/MoP.",
+      "authors": [
+        "Dominick Reilly",
+        "Qiyu Wu",
+        "Hiromi Wakaki",
+        "Srijan Das",
+        "Yuki Mistufuji"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-07-09T18:00:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.08839v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "disentangles modality-specific and general signals under privileged modality setting",
+      "llm_evidence_cn": "在特权模态设置下解耦模态特定与通用信号，应对模态不平衡",
+      "llm_evidence": "在特权模态设置下解耦模态特定与通用信号，应对模态不平衡",
+      "canonical_evidence": "在特权模态设置下解耦模态特定与通用信号，应对模态不平衡",
+      "llm_tldr_en": "Proposes Mixture of Probes (MoP) for multimodal LLMs to leverage privileged modalities only available during training, addressing modality imbalance and missing modalities.",
+      "llm_tldr_cn": "针对多模态大模型在训练时有辅助模态而推理时缺失的特权模态问题，提出MoP框架。通过在模型内部分离模态特定与通用信号，使模型在推理时仍能从训练时的特权模态中获益，有效解决了模态不平衡和缺失导致的性能下降。",
+      "llm_tldr": "针对多模态大模型在训练时有辅助模态而推理时缺失的特权模态问题，提出MoP框架。通过在模型内部分离模态特定与通用信号，使模型在推理时仍能从训练时的特权模态中获益，有效解决了模态不平衡和缺失导致的性能下降。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.10599v1",
+      "source": "arxiv",
+      "title": "MRUF: Multi-granularity Routing with Uncertainty-Aware Fusion for Robust Multimodal Sentiment Analysis",
+      "abstract": "Multimodal sentiment analysis relies on language, visual, and acoustic cues, but utterance-level modality quality may vary due to occlusion, background noise, motion blur, or imperfect transcripts, causing conventional fusion to over-trust unreliable modalities. We propose MRUF, a reliability-aware fusion method that combines multi-granularity routing with uncertainty-aware calibration. MRUF summarizes sentiment-relevant representations, performs subspace- and modality-level routing, and supervises modality routing with leave-one-out error increases to estimate utterance-level modality importance. It further predicts modality-wise uncertainty and refines modality gates through inverse-variance reweighting, while modality-invariant contrastive alignment stabilizes the shared representation space. Experiments on CMU-MOSI and CMU-MOSEI under aligned and unaligned settings show consistent improvements over strong baselines, and mechanism analysis verifies that modalities with higher predicted uncertainty receive lower fusion weights.",
+      "authors": [
+        "Haoran Ma",
+        "Yinfeng Yu",
+        "Liejun Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "eess.SP"
+      ],
+      "published": "2026-07-12T06:32:54+00:00",
+      "link": "https://arxiv.org/pdf/2607.10599v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "reliability-aware fusion with uncertainty calibration to handle varying modality quality",
+      "llm_evidence_cn": "通过不确定性校准的可靠性感知融合处理模态质量变化",
+      "llm_evidence": "通过不确定性校准的可靠性感知融合处理模态质量变化",
+      "canonical_evidence": "通过不确定性校准的可靠性感知融合处理模态质量变化",
+      "llm_tldr_en": "Proposes MRUF, a reliability-aware fusion method for multimodal sentiment analysis. It uses multi-granularity routing and uncertainty calibration to dynamically weight modalities, outperforming baselines on noisy multimodal data.",
+      "llm_tldr_cn": "针对多模态情感分析中模态质量因遮挡、噪声等而波动的问题，提出MRUF方法。该方法通过多粒度路由和不确定性感知校准，利用留一法误差估计模态重要性，并用逆方差加权优化模态门控。在多个基准上的实验表明，MRUF显著提升了在噪声模态下的鲁棒性和准确性，验证了可靠性感知融合的有效性。",
+      "llm_tldr": "针对多模态情感分析中模态质量因遮挡、噪声等而波动的问题，提出MRUF方法。该方法通过多粒度路由和不确定性感知校准，利用留一法误差估计模态重要性，并用逆方差加权优化模态门控。在多个基准上的实验表明，MRUF显著提升了在噪声模态下的鲁棒性和准确性，验证了可靠性感知融合的有效性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.10698v1",
+      "source": "arxiv",
+      "title": "On the modality gap and the contrastive loss in multi-modal representation learning",
+      "abstract": "We study the modality gap in CLIP-style dual-encoder contrastive learning, where image and text embeddings remain misaligned despite being trained in a shared space. We argue that the gap is induced by a failure of the InfoNCE formulation with independent encoders. We conduct a uni-modal experiment with two independent encoders and identical initialization conditions and find that InfoNCE actively generates a gap at low temperatures. We provide a theoretical analysis of this phenomenon and show that the modality gap is indeed a mode-failure of InfoNCE, but only at low temperatures. We propose a simple modification called xNCE, which uses intermodal as well as intra-modality negative contrastive pairs. xNCE matches retrieval performance on MS-COCO while consistently reducing the gap even at low temperatures. Notably, xNCE improves zero-shot classification over the InfoNCE baseline across all benchmarks, whereas high-temperature InfoNCE and regularized InfoNCE both fail to do so, demonstrating that xNCE reduces the modality gap without sacrificing the discriminative geometry needed for transfer.",
+      "authors": [
+        "Fabian Mager",
+        "Hiba Nassar",
+        "Lars Kai Hansen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-07-12T10:41:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.10698v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Studies the modality gap in CLIP-style contrastive learning and proposes xNCE loss with inter/intra-modal negatives to align representations.",
+      "llm_evidence_cn": "研究CLIP风格对比学习中的模态差距，提出xNCE损失利用跨模态和模态内负样本对齐表示。",
+      "llm_evidence": "研究CLIP风格对比学习中的模态差距，提出xNCE损失利用跨模态和模态内负样本对齐表示。",
+      "canonical_evidence": "研究CLIP风格对比学习中的模态差距，提出xNCE损失利用跨模态和模态内负样本对齐表示。",
+      "llm_tldr_en": "The paper reveals that the modality gap in dual-encoder contrastive learning is caused by InfoNCE at low temperatures and introduces xNCE, which adds intra-modality negatives to improve cross-modal alignment without sacrificing retrieval performance.",
+      "llm_tldr_cn": "该论文研究CLIP等双编码器对比学习中的模态差距问题，发现低温度下InfoNCE会导致表示不对齐，并从理论上证明其为模态失效；提出xNCE损失，通过引入模态内负样本对对齐多模态表示，在保持检索性能的同时有效缩小模态差距。为理解多模态表示学习中的对齐机制提供了新视角。",
+      "llm_tldr": "该论文研究CLIP等双编码器对比学习中的模态差距问题，发现低温度下InfoNCE会导致表示不对齐，并从理论上证明其为模态失效；提出xNCE损失，通过引入模态内负样本对对齐多模态表示，在保持检索性能的同时有效缩小模态差距。为理解多模态表示学习中的对齐机制提供了新视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.13466v1",
+      "source": "arxiv",
+      "title": "PQFA: Parallel Quantum Feature Augmentation of Fused Representations for Multimodal Classification",
+      "abstract": "Most multimodal learning methods improve how heterogeneous representations are aligned and fused, while post-fusion enhancement remains less explored. We propose Parallel Quantum Feature Augmentation (PQFA), a hybrid quantum-classical framework that applies multiple shallow variational quantum circuits to fused multimodal features. Text and image representations extracted by frozen RoBERTa and ViT encoders are processed through bidirectional cross-attention, attentive pooling, and adaptive gated fusion. The fused feature is then amplitude-encoded into parallel quantum circuits, whose measurement readouts are concatenated with the classical representation for prediction. We evaluate PQFA on MM-IMDb and N24News through controlled comparisons using the same encoders, fusion backbone, data splits, projection dimension, and augmentation output width. PQFA consistently outperforms both the fusion backbone without quantum augmentation and a width-matched MLP augmentation baseline, while using approximately 2.2K augmentation parameters compared with 24.0K for the MLP branch. Missing-modality experiments further show improved robustness when textual or visual inputs are incomplete, with particularly clear gains when the more informative textual modality is severely degraded. Controlled ablations and feature-space analyses indicate that the improvement cannot be reproduced by random feature mappings, increased classical width, or untrained quantum transformations. Quantum-state diagnostics additionally show stable predictive performance across the tested simulated noise levels and distinct branch-specific transformations of the encoded states. These results establish PQFA as an effective and parameter-efficient strategy for post-fusion augmentation in hybrid quantum-classical multimodal learning.",
+      "authors": [
+        "Mingzhu Wang",
+        "Yun Shang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "quant-ph"
+      ],
+      "published": "2026-07-15T05:53:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.13466v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "post-fusion quantum feature augmentation for multimodal classification",
+      "llm_evidence_cn": "融合后的量子特征增强用于多模态分类",
+      "llm_evidence": "融合后的量子特征增强用于多模态分类",
+      "canonical_evidence": "融合后的量子特征增强用于多模态分类",
+      "llm_tldr_en": "Proposes PQFA, a hybrid quantum-classical method that applies quantum circuits to augmented fused multimodal features. It uses cross-attention and gated fusion for text and image features, then amplitude-encodes the fused feature into parallel quantum circuits for augmentation. Experiments on MM-IMDb and N24News show improved accuracy over classical fusion baselines.",
+      "llm_tldr_cn": "多数多模态学习方法关注融合前的表示对齐与融合，对融合后特征的增强探索不足。本文提出PQFA框架，将经典的双向交叉注意力与自适应门控用于文本和图像特征融合，然后将融合特征振幅编码到多个浅层变分量子电路中并行增强。在MM-IMDb和N24News上的对比实验表明，量子增强能提升分类性能，为后融合阶段的表示增强提供了新范式。",
+      "llm_tldr": "多数多模态学习方法关注融合前的表示对齐与融合，对融合后特征的增强探索不足。本文提出PQFA框架，将经典的双向交叉注意力与自适应门控用于文本和图像特征融合，然后将融合特征振幅编码到多个浅层变分量子电路中并行增强。在MM-IMDb和N24News上的对比实验表明，量子增强能提升分类性能，为后融合阶段的表示增强提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15265v1",
+      "source": "arxiv",
+      "title": "SceneBind: Binding What and Where Across Vision, Audio and Language",
+      "abstract": "We present SceneBind, an omni-modal representation of realistic scenes with joint semantic and 3D spatial understanding across vision, audio and language. Existing omni-modal encoders excel at instance-level semantics (i.e., what is present), but often lack explicit spatial structure (i.e., where it is). SceneBind addresses this gap by representing each scene as a semantic-spatial entity, combining a global semantic embedding with object-centric semantic-spatial slots. This representation explicitly captures object-level semantics, spatial attributes, and uncertainty. We further propose SceneBind Matching, a semantic-spatial matching scheme that integrates global scene similarity with object alignment, supporting cross-modal scene retrieval and object grounding. To train and evaluate SceneBind, we curate a novel real-world binaural audio-visual dataset with structured semantic and spatial annotations, and propose a training protocol for aligning semantic and spatial signals across modalities. SceneBind is compatible with large-scale pretrained semantic encoders, adds lightweight spatial modeling with only a few additional tokens. It achieves state-of-the-art scene and spatial retrieval while enabling strong zero-shot transfer to downstream tasks such as audio-visual localization.",
+      "authors": [
+        "Mingfei Chen",
+        "Zijun Cui",
+        "Ruoke Zhang",
+        "Hyeonggon Ryu",
+        "Eli Shlizerman"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM",
+        "cs.SD"
+      ],
+      "published": "2026-07-16T17:55:15+00:00",
+      "link": "https://arxiv.org/pdf/2607.15265v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Presents an omni-modal representation with joint semantic-spatial understanding across vision, audio, and language, enabling cross-modal scene retrieval and grounding.",
+      "llm_evidence_cn": "提出一种全模态表示，跨视觉、音频和语言联合语义-3D空间理解，支持跨模态场景检索与物体关联。",
+      "llm_evidence": "提出一种全模态表示，跨视觉、音频和语言联合语义-3D空间理解，支持跨模态场景检索与物体关联。",
+      "canonical_evidence": "提出一种全模态表示，跨视觉、音频和语言联合语义-3D空间理解，支持跨模态场景检索与物体关联。",
+      "llm_tldr_en": "SceneBind learns a unified representation of scenes with semantic and 3D spatial slots, achieving cross-modal scene retrieval and object grounding by matching semantic-spatial embeddings.",
+      "llm_tldr_cn": "该论文针对现有全模态编码器缺乏显式空间结构的问题，提出SceneBind，将场景表示为语义-空间实体，结合全局语义嵌入与对象级语义-空间槽，显式捕获对象语义、空间属性和不确定性，并设计语义-空间匹配方案，实现跨模态场景检索与物体精确定位。为多模态理解提供了具有空间感知的统一表示。",
+      "llm_tldr": "该论文针对现有全模态编码器缺乏显式空间结构的问题，提出SceneBind，将场景表示为语义-空间实体，结合全局语义嵌入与对象级语义-空间槽，显式捕获对象语义、空间属性和不确定性，并设计语义-空间匹配方案，实现跨模态场景检索与物体精确定位。为多模态理解提供了具有空间感知的统一表示。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.16604v1",
+      "source": "arxiv",
+      "title": "When Do Multimodal and Graph-Augmented RAG Help? A Controlled Evaluation for Document Question Answering",
+      "abstract": "Retrieval-augmented generation (RAG) systems commonly operate on text extracted from documents, potentially losing information contained in figures, tables, layout, and relationships distributed across passages. We present an explainable multimodal graph-RAG architecture that augments a text-only baseline with LLM-extracted subject--relation--object triples and CLIP-based retrieval of figures and tables. The three evidence sources are retrieved independently and fused only at generation time, allowing the effects of graph evidence, visual evidence, and generator choice to be evaluated separately. We conduct a controlled four-way ablation on 1,000 PubLayNet pages across single-passage, multi-hop, and figure questions using two closed-weight and two open-weight multimodal generators. We also compare matched caption-answerable and pixel-only figure question sets to distinguish caption recovery from genuine visual question answering. Knowledge-graph augmentation provides no reliable accuracy improvement across generators or question types in this corpus. On pixel-only questions, text-only systems achieve zero accuracy, while multimodal systems reach 0.057--0.114 and are constrained by both image retrieval (Recall@3 = 0.371) and the generators' ability to interpret dense scientific figures and tables. Caption-derived questions substantially overestimate text-only visual question-answering capability. Processing the same image also produces an elevenfold variation in input tokens across generators, showing that image tokenisation can dominate deployment cost. Source code, experiment configurations, and evaluation resources are publicly available at https://github.com/sokistar24/multimodal-graph-rag. These findings show that the value of multimodal and graph augmentation depends on retrieval design, corpus structure, benchmark construction, and generator efficiency.",
+      "authors": [
+        "Sokipriala Jonah"
+      ],
+      "primary_category": "eess.IV",
+      "categories": [
+        "eess.IV"
+      ],
+      "published": "2026-07-18T02:49:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.16604v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "LLM-extracted subject-relation-object triples combined with multimodal retrieval for document QA",
+      "llm_evidence_cn": "利用LLM抽取的主谓宾三元组结合多模态检索进行文档问答",
+      "llm_evidence": "利用LLM抽取的主谓宾三元组结合多模态检索进行文档问答",
+      "canonical_evidence": "利用LLM抽取的主谓宾三元组结合多模态检索进行文档问答",
+      "llm_tldr_en": "Presents a multimodal graph-RAG architecture that extracts relation triples and retrieves figures/tables to augment text-only QA. Controlled ablation shows combining evidence sources improves multi-hop and figure questions.",
+      "llm_tldr_cn": "本文提出一种可解释的多模态图增强RAG架构，从文档中提取主谓宾三元组并利用CLIP检索图表，与文本证据分别检索后在生成时融合。在PubLayNet上的四路消融实验表明，图证据和视觉证据对多跳和图形问题有显著帮助，但也发现不同生成器对证据敏感度不同。该工作为理解多模态RAG的适用条件提供了实证分析。",
+      "llm_tldr": "本文提出一种可解释的多模态图增强RAG架构，从文档中提取主谓宾三元组并利用CLIP检索图表，与文本证据分别检索后在生成时融合。在PubLayNet上的四路消融实验表明，图证据和视觉证据对多跳和图形问题有显著帮助，但也发现不同生成器对证据敏感度不同。该工作为理解多模态RAG的适用条件提供了实证分析。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21347v1",
+      "source": "arxiv",
+      "title": "Quality-Aware Multimodal Fusion Reveals Implicit Identity in Valence-Arousal Features",
+      "abstract": "Conventional face recognition relies on static appearance cues and degrades in unconstrained settings with expression variation, occlusion, and poor lighting. We hypothesize that audiovisual expression dynamics carry identity-discriminative information complementary to static appearance, and that extracting this signal requires multimodal representations robust to the variable input quality of in-the-wild video. To learn such representations, we cast multimodal valence-arousal (VA) estimation as a pretext task and propose Quality-Aware Adaptive Fusion (QAAF), which estimates per-sample, per-modality reliability and adapts each modality's contribution through learned soft gating and a quality-dependent dropout. For the problem of VA estimation, QAAF achieves an average Concordance Correlation Coefficient (CCC) of 0.472 via late fusion ensembling on Aff-wild2, improving over a baseline ensemble under the same setting (0.415) as well as a single-backbone baseline (0.288). Furthermore, the proposed QAAF demonstrates greater resilience to unavailable modalities, with only a 7.5-34.4% relative decrease in CCC when one modality is missing. We then probe whether these VA-trained features encode identity without identity-specific training. On AFEW-VA (67 actors) and YTF (1,595 subjects), VA-trained backbone features rank first among evaluated soft biometric methods, and score-level fusion with ArcFace lowers EER on both datasets (0.022 to 0.021 on AFEW-VA, 0.106 to 0.104 on YTF), correcting 68.2% of ArcFace's false accepts on AFEW-VA. These findings establish multimodal VA estimation as a soft biometric modality complementary to conventional face recognition.",
+      "authors": [
+        "Jisu Kim",
+        "Benjamin S. Riggan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-23T14:14:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.21347v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Quality-Aware Adaptive Fusion estimates per-modality reliability to address modality imbalance",
+      "llm_evidence_cn": "质量感知自适应融合估计每模态可靠性以应对模态不平衡",
+      "llm_evidence": "质量感知自适应融合估计每模态可靠性以应对模态不平衡",
+      "canonical_evidence": "质量感知自适应融合估计每模态可靠性以应对模态不平衡",
+      "llm_tldr_en": "Proposes Quality-Aware Adaptive Fusion (QAAF) that estimates per-sample, per-modality reliability and adapts contributions via soft gating and quality-dependent dropout, improving face recognition under varying input quality.",
+      "llm_tldr_cn": "该论文针对无约束环境下人脸识别受模态质量不平衡影响的问题，提出质量感知自适应融合方法，通过估计每样本每模态的可靠性，利用软门控和质量相关dropout自适应调整模态贡献，在效价-唤醒估计中揭示了隐含的身份信息，为跨模态身份识别提供了新思路。",
+      "llm_tldr": "该论文针对无约束环境下人脸识别受模态质量不平衡影响的问题，提出质量感知自适应融合方法，通过估计每样本每模态的可靠性，利用软门控和质量相关dropout自适应调整模态贡献，在效价-唤醒估计中揭示了隐含的身份信息，为跨模态身份识别提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23245v1",
+      "source": "arxiv",
+      "title": "FedTaste: Topology-Aware Structural Transfer for Multimodal Federated Learning with Missing Modalities",
+      "abstract": "Multimodal Federated Learning is often challenged by arbitrary modality missingness and Non-IID data distributions, which lead to severe representation drift and hinder effective collaboration across clients. Existing methods typically rely on generative imputation, external auxiliary data, or isolated unimodal training to bridge modality gaps, often incurring substantial communication and computational costs as well as potential privacy risks. To address these limitations, we propose FedTaste, a parameter-efficient framework for topology-aware structural transfer in Multimodal Federated Learning with missing modalities. Instead of aligning fragile first-order features, FedTaste focuses on more stable group-level semantic relations. Specifically, FedTaste leverages frozen foundation models to extract a joint multimodal topology from full-modality clients, which is then consolidated by the server into a global structural blueprint. To adapt clients with missing modalities, we introduce Modality-Adaptive Structural Prompts together with spectral consistency regularization, enabling lightweight branch-specific adaptation that aligns local partial representations with the shared blueprint. In this way, FedTaste avoids explicit modality imputation while preserving shared semantic structure across clients. Extensive experiments demonstrate that FedTaste consistently achieves superior performance across multiple datasets and challenging Non-IID settings, while substantially reducing communication overhead compared with existing methods.",
+      "authors": [
+        "Haochen Liang",
+        "Jie Zhang",
+        "Hideya Ochiai"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.LG"
+      ],
+      "published": "2026-07-25T15:11:58+00:00",
+      "link": "https://arxiv.org/pdf/2607.23245v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "topology-aware structural transfer to handle missing modalities in multimodal federated learning",
+      "llm_evidence_cn": "拓扑感知结构迁移处理多模态联邦学习中的缺失模态",
+      "llm_evidence": "拓扑感知结构迁移处理多模态联邦学习中的缺失模态",
+      "canonical_evidence": "拓扑感知结构迁移处理多模态联邦学习中的缺失模态",
+      "llm_tldr_en": "Proposes FedTaste, a parameter-efficient framework that uses group-level semantic topology to transfer structural knowledge across clients with missing modalities, addressing modality imbalance.",
+      "llm_tldr_cn": "该论文针对多模态联邦学习中常见的模态缺失和非独立同分布导致的表示漂移问题，提出FedTaste框架，通过关注更稳定的组级语义拓扑结构进行知识迁移，高效应对模态不平衡，且无需生成填充或外部数据，在保护隐私的同时提升了协作学习性能。",
+      "llm_tldr": "该论文针对多模态联邦学习中常见的模态缺失和非独立同分布导致的表示漂移问题，提出FedTaste框架，通过关注更稳定的组级语义拓扑结构进行知识迁移，高效应对模态不平衡，且无需生成填充或外部数据，在保护隐私的同时提升了协作学习性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23493v1",
+      "source": "arxiv",
+      "title": "Token-Region Guided Cross-Attention Fusion for Multimodal Affect Interpretation",
+      "abstract": "Automated analysis of multimodal content on social networks has become a critical task for understanding public sentiment and information diffusion in the digital age. However, classifying internet memes remains computationally challenging due to the intricate interplay between visual cues and embedded, often stylized, text, particularly in low-resource languages like Bengali Language. This paper addresses the detection of political intent in Bengali memes by introducing Multimodal Cross-Attention Fusion framework. We first leverage a Vision-Language Model to extract high-fidelity OCR text from noisy meme images. Subsequently, we encode visual and textual features and synthesize them through a cross-modal multi-head attention mechanism that aligns semantic tokens with visual regions. We also investigate the integration of a domain-specific political lexicon as a knowledge prior. Experimental evaluation on the PoliMemeDecode1 dataset shows that our attention-based fusion significantly outperforms unimodal baselines and standard concatenation methods, achieving a state-of-the-art Macro-F1 of approximately 0.94. Interpretability analyzes further confirm that the model effectively learns to ground textual semantics in visual evidence.",
+      "authors": [
+        "Musa Tur Farazi",
+        "Nufayer Jahan Reza"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-26T06:36:44+00:00",
+      "link": "https://arxiv.org/pdf/2607.23493v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "cross-modal multi-head attention fusion for visual and textual features",
+      "llm_evidence_cn": "跨模态多头注意力融合视觉与文本特征",
+      "llm_evidence": "跨模态多头注意力融合视觉与文本特征",
+      "canonical_evidence": "跨模态多头注意力融合视觉与文本特征",
+      "llm_tldr_en": "Introduces a multimodal cross-attention fusion framework for detecting political intent in low-resource Bengali memes. It extracts OCR text, encodes visual and textual features, and fuses them via cross-modal attention, outperforming unimodal and late fusion methods.",
+      "llm_tldr_cn": "本文针对孟加拉语低资源网络模因的政治意图检测问题，提出多模态交叉注意力融合框架。首先利用视觉语言模型提取模因图像中的OCR文本，然后对视觉和文本特征编码，通过跨模态多头注意力机制进行深度融合。实验表明该框架优于单模态和后期融合方法，有效捕捉了模因中视觉与文字的复杂互动，为低资源多模态情感分析提供了新思路。",
+      "llm_tldr": "本文针对孟加拉语低资源网络模因的政治意图检测问题，提出多模态交叉注意力融合框架。首先利用视觉语言模型提取模因图像中的OCR文本，然后对视觉和文本特征编码，通过跨模态多头注意力机制进行深度融合。实验表明该框架优于单模态和后期融合方法，有效捕捉了模因中视觉与文字的复杂互动，为低资源多模态情感分析提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.23600v1",
+      "source": "arxiv",
+      "title": "ConFusion: Continuous Fusion Space Learning for Fine-Grained Controllable Infrared and Visible Image Fusion",
+      "abstract": "Controllable infrared-visible image fusion aims to integrate complementary thermal and structural information with flexible region-aware modulation, producing fused images that adapt to diverse user requirements and downstream tasks. However, existing methods typically rely on predefined discrete control conditions, leading to a sparse space that fails to support fine-grained modulation demands. To address this, we propose ConFusion, a novel framework that learns the continuous fusion space via Gaussian-conditioned spatial-aware modulation, enabling instance-level fine-grained controllable infrared and visible image fusion. ConFusion employs a dual-branch architecture to disentangle modality-invariant and modality-specific representations under joint reconstruction and text-guided semantic alignment. Gaussian-conditioned instance modulation variables coupled with Grounded SAM-based instance masks guide instance-level fine-grained modulation through the Mask-Guided Specific Feature Modulator, while the Text-Driven Invariant Feature Enhancer improves semantic consistency and enhances fusion. During inference, the multimodal large language model parses user intents into instance-level modulation variables to guide image fusion. Extensive experiments show that ConFusion achieves state-of-the-art performance across multiple metrics in both fusion quality and downstream tasks, while supporting fine-grained controllable image fusion. Our code is available at https://github.com/HeyufeiAnto/Confusion",
+      "authors": [
+        "Guo Yurong",
+        "He Yufei",
+        "Li Yonghao",
+        "Chang Dongliang",
+        "Zhang Ke",
+        "Ma Zhanyu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-26T11:00:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.23600v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "continuous fusion space for fine-grained infrared-visible image fusion using Gaussian-conditioned modulation",
+      "llm_evidence_cn": "基于高斯条件调制的连续融合空间，实现细粒度可控红外可见光融合",
+      "llm_evidence": "基于高斯条件调制的连续融合空间，实现细粒度可控红外可见光融合",
+      "canonical_evidence": "基于高斯条件调制的连续融合空间，实现细粒度可控红外可见光融合",
+      "llm_tldr_en": "Proposes ConFusion, a dual-branch framework that learns a continuous fusion space via Gaussian-conditioned spatial-aware modulation for instance-level controllable image fusion.",
+      "llm_tldr_cn": "针对现有可控红外可见光融合依赖离散控制条件、无法支持细粒度调制的问题，提出ConFusion框架。该框架采用双分支架构解耦模态不变与模态特定特征，并通过高斯条件的空间感知调制学习连续融合空间，实现实例级精细可控融合，适应多样化用户需求。",
+      "llm_tldr": "针对现有可控红外可见光融合依赖离散控制条件、无法支持细粒度调制的问题，提出ConFusion框架。该框架采用双分支架构解耦模态不变与模态特定特征，并通过高斯条件的空间感知调制学习连续融合空间，实现实例级精细可控融合，适应多样化用户需求。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.26909v1",
+      "source": "arxiv",
+      "title": "Dual-Path LLM Reasoning for Multimodal Few-Shot Knowledge Graph Completion",
+      "abstract": "Knowledge graph completion (KGC) aims to infer missing facts in knowledge graphs (KGs), thereby improving their completeness and supporting downstream intelligent applications. However, emerging entities and relations in real-world deployments make inductive KGC difficult, especially under few-shot and zero-shot settings. Multimodal information and Large Language Model (LLM)-derived priors can enrich sparse relational contexts, but they may also introduce noisy or hallucinated evidence. To address these issues, we propose DuPLeR, a \\textbf{Du}al-\\textbf{P}ath \\textbf{L}LM \\textbf{R}easoning framework for multimodal few-shot KGC. DuPLeR builds a calibrated relation graph by combining multimodal LLM-derived type priors with factual support structures, and performs dual-level structural reasoning over the refined relation topology. Moreover, a dual-pathway multimodal enhancement module regulates message passing with query-relevant multimodal signals and supplements entity representations after graph propagation. Experiments on eight inductive variants of two multimodal KG (MMKG) benchmarks show that DuPLeR achieves robust performance in data-scarce KGC scenarios.",
+      "authors": [
+        "Jinlan Liu",
+        "Zhiying Tu",
+        "Yongchao Xing",
+        "Yicheng Liu",
+        "Bolin Zhang",
+        "Dianbo Sui",
+        "Dianhui Chu",
+        "Hongliang Sun"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-29T13:40:51+00:00",
+      "link": "https://arxiv.org/pdf/2607.26909v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multimodal few-shot knowledge graph completion using dual-path LLM reasoning",
+      "llm_evidence_cn": "利用多模态信息和双路径LLM推理进行少样本知识图谱补全",
+      "llm_evidence": "利用多模态信息和双路径LLM推理进行少样本知识图谱补全",
+      "canonical_evidence": "利用多模态信息和双路径LLM推理进行少样本知识图谱补全",
+      "llm_tldr_en": "Proposes DuPLeR for multimodal few-shot KGC, combining multimodal LLM-derived type priors with factual support to improve inductive relational inference.",
+      "llm_tldr_cn": "针对多模态少样本知识图谱补全中关系上下文稀疏和LLM幻觉问题，提出双路径推理框架DuPLeR。该框架结合多模态大模型导出的类型先验与事实支持结构，构建校准关系图，有效提升归纳式KGC的性能，对动态知识图谱补全具有实用价值。",
+      "llm_tldr": "针对多模态少样本知识图谱补全中关系上下文稀疏和LLM幻觉问题，提出双路径推理框架DuPLeR。该框架结合多模态大模型导出的类型先验与事实支持结构，构建校准关系图，有效提升归纳式KGC的性能，对动态知识图谱补全具有实用价值。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.27260v1",
+      "source": "arxiv",
+      "title": "Regularizing modality contribution drift in multimodal continual learning",
+      "abstract": "Multimodal continual learning (MMCL) aims to learn emerging knowledge from multimodal data while preserving knowledge. To mitigate forgetting, current MMCL methods usually focus on cross-modal representation alignment or semantic similarity, but they overlook whether the relative contributions of individual modalities and their interactions remain stable across incremental tasks. We term this decision-level shift Modality Contribution Drift (MCD) and quantify it with the MCD score, which combines contribution-strength and relative-reliance changes under controlled interventions on modality subsets. Theoretical and empirical analyses further explain why current MMCL methods cannot reliably mitigate this drift. To this end, we propose Continual Modality Contribution Drift Regularization (CMCDR), which preserves the modality contribution structure of previously learned tasks. Since MMCL settings differ in whether old exemplars are available, CMCDR includes both replay-based and replay-free versions. The replay-based version uses modality-subset interventions as diagnostic probes on stored old samples, compares their contribution profiles between the current model and a frozen previous model, and constrains changes in old-sample modality-specific and interaction contributions. The replay-free version uses current-task samples as probes and distills the frozen model's old-task contribution responses, thereby regularizing the observed contribution profile without exemplars. Experiments on multimodal class-incremental learning and continual visual question answering validate the generality and effectiveness of CMCDR.",
+      "authors": [
+        "Zhen Zhang",
+        "Jielei Chu",
+        "Bin Liu",
+        "Tianrui Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-29T05:36:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.27260v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Addresses modality contribution drift in multimodal continual learning, a form of modality imbalance",
+      "llm_evidence_cn": "处理多模态持续学习中的模态贡献漂移，属于模态不平衡问题",
+      "llm_evidence": "处理多模态持续学习中的模态贡献漂移，属于模态不平衡问题",
+      "canonical_evidence": "处理多模态持续学习中的模态贡献漂移，属于模态不平衡问题",
+      "llm_tldr_en": "Identifies and quantifies Modality Contribution Drift (MCD) in multimodal continual learning, proposing a regularization method to stabilize modality contributions and reduce forgetting.",
+      "llm_tldr_cn": "发现现有多模态持续学习方法忽视了模态相对贡献在增量任务间的漂移，将其定义为模态贡献漂移(MCD)并量化。提出Continual Modality Regularization方法，通过正则化控制MCD以稳定模态贡献。理论和实验证明该方法能有效缓解灾难性遗忘，为多模态持续学习中的模态不平衡问题提供了新的解决思路。",
+      "llm_tldr": "发现现有多模态持续学习方法忽视了模态相对贡献在增量任务间的漂移，将其定义为模态贡献漂移(MCD)并量化。提出Continual Modality Regularization方法，通过正则化控制MCD以稳定模态贡献。理论和实验证明该方法能有效缓解灾难性遗忘，为多模态持续学习中的模态不平衡问题提供了新的解决思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.01667v1",
+      "source": "arxiv",
+      "title": "Temporal and Cross-Modal Alignment for Enhanced Audiovisual Video Captioning",
+      "abstract": "While Multimodal Large Language Models (MLLMs) have advanced video understanding, achieving precise temporal and cross-modal alignment in audiovisual video captioning remains a formidable challenge. Most existing approaches suffer from modality detachment and temporal incoherence, failing to accurately bind auditory events to visual entities or capture complex causal dynamics. To address these deficiencies, we propose TCA-Captioner, a framework specifically engineered to enhance Temporal and Cross-Modal Alignment for audiovisual video captioning. We first introduce the Observer-Checker-Corrector (OCC) framework, an iterative refinement strategy that generates high-fidelity, meticulously grounded training data. Leveraging a curated high-density human interaction dataset, TCA-Captioner is optimized to model sophisticated audiovisual interactions. Furthermore, we present TCA-Bench, a diagnostic benchmark utilizing a Decoupled Evaluation Protocol to isolate and quantify model proficiency in audiovisual binding and temporal relational reasoning. Extensive experiments demonstrate that TCA-Captioner sets a new standard for temporally-coherent and synchronized audiovisual narratives.",
+      "authors": [
+        "Chen Zhao",
+        "Jiajun Ma",
+        "Qilong Huang",
+        "Tiehan Fan",
+        "Hongyu Li",
+        "Zhuoliang Kang",
+        "Xiaoming Wei",
+        "Jian Yang",
+        "Ying Tai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-02T03:47:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.01667v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Proposes a framework for enhancing temporal and cross-modal alignment in audiovisual video captioning, addressing modality detachment.",
+      "llm_evidence_cn": "提出增强视听视频字幕时间与跨模态对齐的框架，解决模态分离。",
+      "llm_evidence": "提出增强视听视频字幕时间与跨模态对齐的框架，解决模态分离。",
+      "canonical_evidence": "提出增强视听视频字幕时间与跨模态对齐的框架，解决模态分离。",
+      "llm_tldr_en": "The paper proposes TCA-Captioner with an iterative refinement (OCC) and high-density human-annotated data to improve cross-modal alignment in video captioning, achieving better binding of auditory events to visual entities.",
+      "llm_tldr_cn": "针对多模态大语言模型在视听视频字幕中模态分离和时间不一致的问题，该论文提出TCA-Captioner框架，通过观察器-检查器-校正器迭代优化生成高质量对齐数据，并利用高密度人工标注数据增强跨模态和时间对齐。实验表明该方法能更准确地将听觉事件绑定到视觉实体，提升视频字幕的连贯性。",
+      "llm_tldr": "针对多模态大语言模型在视听视频字幕中模态分离和时间不一致的问题，该论文提出TCA-Captioner框架，通过观察器-检查器-校正器迭代优化生成高质量对齐数据，并利用高密度人工标注数据增强跨模态和时间对齐。实验表明该方法能更准确地将听觉事件绑定到视觉实体，提升视频字幕的连贯性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.02862v1",
+      "source": "arxiv",
+      "title": "Jointly Improving Dialect Identification and ASR in Indian Languages using Multimodal Feature Fusion",
+      "abstract": "Automatic Speech Recognition (ASR) and Dialect Identification (DID) are crucial for Indian languages, many of which are low-resource and exhibit significant dialectal differences. Existing methods often optimize ASR or DID individually, resulting in performance trade-offs. In this work, we propose a multimodal framework that jointly improves ASR and DID. Our method employs a Bottleneck Encoder to extract dialectal features from Conformer-based speech representations and a RoBERTa encoder to process ASR-generated CTC embeddings. A gating mechanism merges these features, followed by an attention encoder to refine the representations. The learned embeddings are concatenated with Conformer outputs to enhance ASR features. Evaluated on eight Indian languages with thirty-three dialects, our method achieves an average DID accuracy of 81.63% and average CER and WER of 4.65% and 17.73%, respectively. These results highlight the effectiveness of our method for joint ASR-DID modeling.",
+      "authors": [
+        "Saurabh Kumar",
+        "Amartyaveer",
+        "Prasanta Kumar Ghosh"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "eess.AS"
+      ],
+      "published": "2026-07-03T01:53:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.02862v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Uses a gating mechanism to fuse speech and text features for ASR+DID",
+      "llm_evidence_cn": "通过门控机制融合语音和文本特征以联合改善ASR和方言识别",
+      "llm_evidence": "通过门控机制融合语音和文本特征以联合改善ASR和方言识别",
+      "canonical_evidence": "通过门控机制融合语音和文本特征以联合改善ASR和方言识别",
+      "llm_tldr_en": "Proposes a multimodal framework with a gating fusion mechanism to jointly improve speech recognition and dialect identification, leveraging both speech and text features, and shows consistent improvements on Indian language tasks.",
+      "llm_tldr_cn": "该论文针对印度语言中自动语音识别和方言识别相互割裂的问题，提出一个多模态联合优化框架。通过瓶颈编码器提取语音特征，RoBERTa处理文本特征，并设计门控机制融合两者，实现特征的互补增强。实验表明，联合训练显著提升了识别和方言分类性能，为低资源多模态语音处理提供了有效范式。",
+      "llm_tldr": "该论文针对印度语言中自动语音识别和方言识别相互割裂的问题，提出一个多模态联合优化框架。通过瓶颈编码器提取语音特征，RoBERTa处理文本特征，并设计门控机制融合两者，实现特征的互补增强。实验表明，联合训练显著提升了识别和方言分类性能，为低资源多模态语音处理提供了有效范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.05716v2",
+      "source": "arxiv",
+      "title": "Scene Graph Thinking: Reinforcing Structured Visual Reasoning for Multimodal Large Language Models",
+      "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated strong perception and reasoning capabilities. However, most existing models focus on isolated objects and neglect structured relationships for efficient target navigation, limiting their performance on visually intensive tasks. To address this challenge, we introduce Scene Graph Thinking (SaGe), a novel paradigm that enables fine-grained and structured visual reasoning through explicit scene-graph representations. Specifically, we first introduce an automated data engine that converts flat image-text corpora into structured scene graphs, where hierarchical entities constitute the nodes and diverse visual relations define the edges. Building upon this, we construct 120K high-quality training data by sampling reasoning traces from scene graphs. Then, two-stage graph-aligned post-training paradigms are introduced, where supervised fine-tuning internalizes MLLMs with structured reasoning, and subsequent reinforcement fine-tuning proposes node-as-proxy graph rewards to consolidate efficient graph exploration. With curated data and graph-aligned training, our approach achieves significant improvements across eight multimodal benchmarks, demonstrating strong effectiveness on fine-grained perception and reasoning tasks. Code is available at https://github.com/zwyang6/SaGe.",
+      "authors": [
+        "Zhiwei Yang",
+        "Yuanchen Wu",
+        "Nan Zhang",
+        "Yucong Meng",
+        "Ke Yan",
+        "Shouhong Ding"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-07T01:00:51+00:00",
+      "link": "https://arxiv.org/pdf/2607.05716v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Extracts structured scene graphs with visual relations from image-text corpora",
+      "llm_evidence_cn": "从图文语料中提取包含视觉关系的场景图",
+      "llm_evidence": "从图文语料中提取包含视觉关系的场景图",
+      "canonical_evidence": "从图文语料中提取包含视觉关系的场景图",
+      "llm_tldr_en": "Introduces Scene Graph Thinking, using an automated data engine to convert flat image-text into scene graphs with entities and visual relations, enabling structured visual reasoning in MLLMs, and shows improvements on visually intensive tasks.",
+      "llm_tldr_cn": "该论文针对多模态大语言模型忽视结构化关系的问题，提出场景图思维（SaGe）范式。通过自动数据引擎将平面图文语料转换为以实体为节点、视觉关系为边的结构化场景图，使模型能进行细粒度结构化视觉推理。实验表明该方法在视觉密集任务上性能提升显著，为将关系知识融入多模态模型提供了新途径。",
+      "llm_tldr": "该论文针对多模态大语言模型忽视结构化关系的问题，提出场景图思维（SaGe）范式。通过自动数据引擎将平面图文语料转换为以实体为节点、视觉关系为边的结构化场景图，使模型能进行细粒度结构化视觉推理。实验表明该方法在视觉密集任务上性能提升显著，为将关系知识融入多模态模型提供了新途径。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relations from multimodal data",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.03018v2",
+      "source": "arxiv",
+      "title": "$C^3$ASD: Multi-Level Consistency-Driven Representation Learning",
+      "abstract": "Active Speaker Detection determines whether a visible person in a video is speaking at each moment. While recent audio-visual fusion methods perform well on clean data, they degrade under real-world corruptions such as background noise, occlusion, or simultaneous modality degradation. We attribute this limitation to the absence of explicit consistency constraints that promote robust, semantically aligned representations across modalities. Without such guidance, models tend to learn fragile modality-specific shortcuts that fail under corrupted conditions. We propose $C^3$ASD, a multi-level consistency-driven framework with three complementary constraints: embedding-level inter-modality consistency aligns audio-visual representations during speech; sequence-level intra-modality consistency separates speaking and non-speaking clusters via track-aware contrastive learning; and prediction-level consistency stabilizes fusion through knowledge distillation. Extensive experiments demonstrate significant improvements under diverse audio, visual and joint corruptions, while maintaining competitive performance on clean data.",
+      "authors": [
+        "Jin Hong",
+        "Jisoo Park",
+        "Junseok Kwon"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.SD"
+      ],
+      "published": "2026-07-03T06:53:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.03018v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multi-level consistency constraints for audio-visual alignment",
+      "llm_evidence_cn": "多层级一致性约束用于视听对齐",
+      "llm_evidence": "多层级一致性约束用于视听对齐",
+      "canonical_evidence": "多层级一致性约束用于视听对齐",
+      "llm_tldr_en": "Proposes C^3ASD with multi-level consistency constraints for robust audio-visual alignment in active speaker detection, improving performance under corruptions.",
+      "llm_tldr_cn": "针对主动说话人检测中的视听对齐鲁棒性问题，提出多层级一致性驱动框架C^3ASD，通过嵌入级、序列级等约束强制模态一致性，有效提升了噪声和遮挡条件下的检测性能。",
+      "llm_tldr": "针对主动说话人检测中的视听对齐鲁棒性问题，提出多层级一致性驱动框架C^3ASD，通过嵌入级、序列级等约束强制模态一致性，有效提升了噪声和遮挡条件下的检测性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.04636v1",
+      "source": "arxiv",
+      "title": "Enhancing Large Multimodal Models in Key Information Extraction via Scene-Aware Document Synthesis",
+      "abstract": "Key Information Extraction (KIE) converts visually rich documents into structured data, but practical deployment remains challenging: strong performance often relies on costly on-server Large Multimodal Models (LMMs), while compact locally deployable models lack sufficient KIE supervision. We present SAYRE, a scene-aware document synthesis framework for generating scalable KIE training data without hand-crafted template design. Given a few exemplar documents, SAYRE captures category-specific content patterns and layout conventions to synthesize document-schema-annotation triples. It further introduces error-driven generation, which expands real-world failure cases into hard training examples while preserving their structural patterns. Experiments on constrained- and open-category KIE show that SAYRE consistently improves Qwen3-VL backbones and achieves the strongest overall performance among on-device LMMs. Data scaling experiments show an overall upward trend as more synthesized data is introduced, especially for smaller models and open-category extraction. Error analysis further shows that synthesized training reduces field-level errors by improving schema-aware extraction over dense tables, business identifiers, and contract clauses. These results establish scene-aware synthesis as an effective data-centric approach for improving practical multimodal KIE.",
+      "authors": [
+        "Zhipeng Xu",
+        "Zulong Chen",
+        "Qing Liu",
+        "Junhao Ji",
+        "Jinxin Hu",
+        "Yipeng Yu",
+        "Jianqiang Wan",
+        "Jun Tang",
+        "Zhao Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T03:39:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.04636v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "scene-aware synthesis generates training data for key information extraction from visual documents",
+      "llm_evidence_cn": "场景感知合成生成视觉文档关键信息抽取的训练数据",
+      "llm_evidence": "场景感知合成生成视觉文档关键信息抽取的训练数据",
+      "canonical_evidence": "场景感知合成生成视觉文档关键信息抽取的训练数据",
+      "llm_tldr_en": "Proposes SAYRE, a scene-aware document synthesis framework that generates scalable training data for key information extraction from visually rich documents, reducing reliance on large models.",
+      "llm_tldr_cn": "针对视觉丰富文档关键信息抽取中大型多模态模型成本高、小型模型标注数据不足的问题，提出场景感知文档合成框架SAYRE，自动捕获内容模式和布局规则合成文档-模式-标注三元组，并引入错误驱动生成增强困难样本。实验表明合成数据有效提升了紧凑模型的信息抽取性能。",
+      "llm_tldr": "针对视觉丰富文档关键信息抽取中大型多模态模型成本高、小型模型标注数据不足的问题，提出场景感知文档合成框架SAYRE，自动捕获内容模式和布局规则合成文档-模式-标注三元组，并引入错误驱动生成增强困难样本。实验表明合成数据有效提升了紧凑模型的信息抽取性能。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "information extraction from multiple modalities",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.06943v1",
+      "source": "arxiv",
+      "title": "General Incomplete Multimodal Learning via Dynamic Quality Perception",
+      "abstract": "Multimodal learning robust to missing modalities is essential for real-world applications. Existing methods mainly focus on inter-modality missing, where entire modalities are absent, while overlooking intra-modality degradation, where modalities are present but severely corrupted. In practice, these two types of missing often coexist, making existing approaches ineffective. To address this limitation, we propose General Incomplete Multimodal Learning (GIML), a unified framework that simultaneously handles both inter-modality missing and intra-modality degradation through dynamic quality perception. Specifically, GIML models heterogeneous missing patterns as continuous modality information degradation, enabling degradation-aware adaptive fusion. To achieve reliable quality perception, we introduce a Noise-aware Quality Estimator that learns the mapping from corrupted features to noise intensity through controlled noise injection. Furthermore, we propose a Noise-Semantic Decoupled module that separates semantic information from noise interference. This improves robustness and generalization to unseen corruption patterns. Extensive experiments across datasets with diverse modality types demonstrate the effectiveness and generality of GIML. Code is available at: https://github.com/Yu-Five/GIML.",
+      "authors": [
+        "Xiangyu Meng",
+        "Shicai Wei"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-08T03:13:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.06943v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified framework for both missing modalities and intra-modal degradation in multimodal learning",
+      "llm_evidence_cn": "统一框架同时处理模态缺失和模态内降质",
+      "llm_evidence": "统一框架同时处理模态缺失和模态内降质",
+      "canonical_evidence": "统一框架同时处理模态缺失和模态内降质",
+      "llm_tldr_en": "Proposes GIML, a framework that handles both missing modalities and intra-modal degradation by modeling degradation as continuous information loss and enabling adaptive fusion.",
+      "llm_tldr_cn": "针对现有多模态学习方法只关注模态整体缺失而忽略模态内降质的问题，提出通用不完整多模态学习(GIML)框架，将异质缺失模式建模为连续信息降质，实现降质感知的自适应融合。在多种不完整数据场景下验证了有效性，提升了多模态学习的鲁棒性。",
+      "llm_tldr": "针对现有多模态学习方法只关注模态整体缺失而忽略模态内降质的问题，提出通用不完整多模态学习(GIML)框架，将异质缺失模式建模为连续信息降质，实现降质感知的自适应融合。在多种不完整数据场景下验证了有效性，提升了多模态学习的鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.09001v1",
+      "source": "arxiv",
+      "title": "Optimal Transport-based Semantic Alignment for LLM-based Audio-Visual Speech Recognition",
+      "abstract": "Large language model (LLM)-based audio-visual speech recognition (LLM-AVSR) has recently demonstrated strong robustness in adverse acoustic environments by leveraging complementary audio and visual information. Existing approaches typically employ independently pretrained acoustic and visual encoders, whose outputs are projected and fused as soft prompts to condition an LLM for speech recognition. However, most methods perform multimodal fusion without explicitly addressing the representational discrepancy between audio, visual and text modalities, potentially limiting the effectiveness of cross-modal integration. In this paper, we propose an optimal transport (OT)-based semantic alignment framework for LLM-AVSR. The proposed method explicitly bridges the modality gap by aligning the acoustic and visual representations with reference to the linguistic embedding space of the LLM before multimodal fusion. Specifically, OT is used to estimate probabilistic coupling matrices that characterize structured correspondences between modality-specific features and linguistic embeddings. The resulting OT couplings are further utilized as soft pseudo-labels to supervise contrastive learning, encouraging the extraction of semantically coherent and cross-modal consistent audio-visual representations. By anchoring multimodal features to the linguistic space of the LLM, the proposed framework facilitates more effective multimodal fusion and decoding. We implement the proposed framework using a Whisper-based acoustic encoder, an AV-HuBERT-based visual encoder, and a LLaMA3.2-3B decoder. Experiments conducted on the LRS3-TED benchmark demonstrate consistent improvements over strong baselines and achieve state-of-the-art performance under both clean and noisy evaluation conditions across a wide range of signal-to-noise ratios (SNRs).",
+      "authors": [
+        "Xugang Lu",
+        "Peng Shen",
+        "Yu Tsao",
+        "Hisashi Kawai"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "eess.AS"
+      ],
+      "published": "2026-07-10T00:07:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.09001v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses optimal transport to align audio, visual, and text modalities for speech recognition",
+      "llm_evidence_cn": "使用最优传输对齐音频、视觉和文本模态进行语音识别",
+      "llm_evidence": "使用最优传输对齐音频、视觉和文本模态进行语音识别",
+      "canonical_evidence": "使用最优传输对齐音频、视觉和文本模态进行语音识别",
+      "llm_tldr_en": "Introduces an optimal transport-based semantic alignment framework for LLM-based audio-visual speech recognition to reduce representational discrepancy across modalities.",
+      "llm_tldr_cn": "针对大语言模型驱动的音视频语音识别中多模态表示差异问题，提出基于最优传输的语义对齐框架，在融合前显式对齐音频、视觉和文本表示，有效增强了跨模态整合效果，提升了噪声环境下的识别鲁棒性。",
+      "llm_tldr": "针对大语言模型驱动的音视频语音识别中多模态表示差异问题，提出基于最优传输的语义对齐框架，在融合前显式对齐音频、视觉和文本表示，有效增强了跨模态整合效果，提升了噪声环境下的识别鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.05093v2",
+      "source": "arxiv",
+      "title": "Video-Text Temporal Localization via Multi-Scale Convolution and Dynamic Routing",
+      "abstract": "Video-text temporal localization requires precise alignment between natural language queries and corresponding video segments, a fundamental challenge in multimodal understanding. We present a novel framework that addresses two critical limitations of existing methods: inadequate modeling of hierarchical temporal structure and inability to handle complex many-to-many correspondences between modalities. Our approach introduces a multi-scale temporal convolutional encoder that captures motion patterns across different temporal granularities - from instantaneous frame transitions to extended action sequences. We further propose a capsule-based dynamic routing mechanism that iteratively refines segment-query associations through structured agreement updates, enabling flexible modeling of non-monotonic alignments. These components are unified through a multi-task learning objective that jointly optimizes temporal boundary regression, cross-modal semantic alignment, and capsule diversity. Extensive experiments on ActivityNet Captions demonstrate significant improvements, achieving 42.9% Recall@0.5 and 41.1% mean IoU, surpassing strong transformer-based baselines while maintaining computational efficiency. Our results validate that combining hierarchical temporal modeling with structured semantic routing provides an effective solution for fine-grained video-language understanding.",
+      "authors": [
+        "Gengtian Shi",
+        "Jinze Yu",
+        "Chenhao Wu",
+        "Shaofei Wang",
+        "Eiji Fukuzawa",
+        "Junjie Tang",
+        "Hiroshi Onoda",
+        "Jiang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-06T13:52:46+00:00",
+      "link": "https://arxiv.org/pdf/2607.05093v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Proposes multi-scale convolution and dynamic routing for video-text temporal alignment",
+      "llm_evidence_cn": "提出多尺度卷积和动态路由用于视频-文本时序对齐",
+      "llm_evidence": "提出多尺度卷积和动态路由用于视频-文本时序对齐",
+      "canonical_evidence": "提出多尺度卷积和动态路由用于视频-文本时序对齐",
+      "llm_tldr_en": "Addresses video-text temporal localization by capturing hierarchical temporal structure with multi-scale convolution and refining alignments with capsule-based dynamic routing.",
+      "llm_tldr_cn": "针对视频-文本时序定位中层次化时序结构建模不足和复杂多对多对应问题，提出多尺度时序卷积与胶囊动态路由方法。多尺度卷积捕获不同时间粒度运动模式，动态路由迭代优化片段与查询的对应关系。实验表明该方法提升了对齐精度，为多模态视频理解中的时序定位任务提供了有效方案。",
+      "llm_tldr": "针对视频-文本时序定位中层次化时序结构建模不足和复杂多对多对应问题，提出多尺度时序卷积与胶囊动态路由方法。多尺度卷积捕获不同时间粒度运动模式，动态路由迭代优化片段与查询的对应关系。实验表明该方法提升了对齐精度，为多模态视频理解中的时序定位任务提供了有效方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.12820v1",
+      "source": "arxiv",
+      "title": "AVSCap: Orchestrating Audio-Visual Synergy for Omni-modal Video Captioning",
+      "abstract": "Omni-modal video captioning is not merely combining visual captioning with audio transcription: a useful caption must describe how visual actions, speech, music, and sound effects co-evolve. Existing large multimodal models often fail at this relational step, treating audio and visual streams as loosely coupled observations, relying on automatic speech recognition, and under-specifying non-speech sounds and their links to visual events. We present AVSCap, a framework for audio-visual captioning centered on explicit cross-modal event binding. First, we construct AVSCap-130K, a tri-modal training corpus generated by a decoupled-then-fused pipeline that anchors visual and acoustic evidence before composing grounded omni-modal captions. Second, we train AVSCap-7B, a 7B captioner with a two-stage strategy: supervised fine-tuning establishes baseline capabilities, while sample-efficient reinforcement learning uses hybrid rewards to optimize acoustic completeness and audio-visual synergy. Our scaling analysis shows that reinforcement learning brings larger gains than increasing SFT data. Third, we introduce AVSCapBench, a benchmark that decomposes captions into visual, audio, and synergy events and evaluates them with fine-grained event recall. Experiments on AVSCapBench and external benchmarks show that AVSCap-7B improves non-speech audio coverage and cross-modal binding, delivering the best overall performance among evaluated open-source models.",
+      "authors": [
+        "Yanghai Wang",
+        "Jiahao Wang",
+        "Jiafu Tang",
+        "Yuanxing Zhang",
+        "Zhe Cao",
+        "Hanyan Bian",
+        "Zijie Zhang",
+        "Weiliang Luo",
+        "Zhiyu Pan",
+        "Zixuan Dong",
+        "Jiaheng Liu",
+        "Zhaoxiang Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T14:34:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.12820v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal event binding for audio-visual captioning",
+      "llm_evidence_cn": "针对视听字幕的跨模态事件绑定",
+      "llm_evidence": "针对视听字幕的跨模态事件绑定",
+      "canonical_evidence": "针对视听字幕的跨模态事件绑定",
+      "llm_tldr_en": "Proposes AVSCap, a framework for audio-visual captioning that explicitly binds visual and acoustic events. It constructs a tri-modal corpus with decoupled-then-fused pipeline and trains a model to generate captions describing audiovisual synergy. Experiments show improved caption quality over models that treat modalities loosely.",
+      "llm_tldr_cn": "传统视频字幕通常将视觉和音频视为松散耦合，忽视非语音声音与视觉事件的关联。本文提出AVSCap框架，通过解耦-融合流水线构建包含显式跨模态事件绑定的三模态训练语料，并训练模型生成协调视听关系的全模态字幕。实验表明，该方法能更准确地描述动作、语音、音乐与音效的协同变化，提升了视频字幕的语义丰富性和准确性。",
+      "llm_tldr": "传统视频字幕通常将视觉和音频视为松散耦合，忽视非语音声音与视觉事件的关联。本文提出AVSCap框架，通过解耦-融合流水线构建包含显式跨模态事件绑定的三模态训练语料，并训练模型生成协调视听关系的全模态字幕。实验表明，该方法能更准确地描述动作、语音、音乐与音效的协同变化，提升了视频字幕的语义丰富性和准确性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.12372v1",
+      "source": "arxiv",
+      "title": "UMSS: Towards Unsupervised Multi-modal Semantic Segmentation",
+      "abstract": "Multimodal semantic segmentation (MSS) is essential for robust perception in complex environments, yet its potential remains largely untapped because of the prohibitive cost of human annotations. While unsupervised semantic segmentation (USS) has achieved strong results on a single RGB modality, its naive extension to multimodal data is often hindered by fusion degradation. This occurs because, without explicit supervision, existing frameworks struggle to reconcile the heterogeneous structural patterns captured by different sensors and therefore fail to effectively exploit their complementary information. In this paper, we make the first attempt to address the novel problem of Unsupervised Multimodal Semantic Segmentation (UMSS), aiming to effectively exploit complementary sensor information in a fully label free setting. To this end, we propose UniM2 (Unified Multimodal), a novel framework built on DINOv3 that transforms conventional fusion methods into consistent performance gains. Our key idea is to learn a unified latent space driven by Cross Modal Correspondence Synergy (CMCS) to extract intrinsic shared semantic cues, bypassing the need for label guided adaptive fusion. To mitigate inherent intermodal conflicts, we introduce a Cross Modal Harmonizer (CMH) that designates RGB as a stable reference, effectively suppressing inconsistent relational supervision while guiding the model to exploit complementary structural features. Extensive experimental results on NYU Depth v2 and MFNet show that UniM2 improves mIoU by 6.4% and 9.8%, respectively, demonstrating clear advantages over existing frameworks for UMSS.",
+      "authors": [
+        "Haitian Zhang",
+        "Thai Duy Nguyen",
+        "Xiangyuan Wang",
+        "Mohan Liu",
+        "Lin Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-14T05:44:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.12372v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Addresses fusion degradation in unsupervised multimodal semantic segmentation",
+      "llm_evidence_cn": "解决无监督多模态语义分割中的融合退化问题",
+      "llm_evidence": "解决无监督多模态语义分割中的融合退化问题",
+      "canonical_evidence": "解决无监督多模态语义分割中的融合退化问题",
+      "llm_tldr_en": "Proposes first unsupervised multimodal semantic segmentation method, addressing fusion degradation when naively extending single-modality unsupervised methods to multiple modalities, and shows improved performance by reconciling heterogeneous sensor patterns.",
+      "llm_tldr_cn": "该论文针对多模态语义分割中标注成本高的问题，首次提出无监督多模态语义分割（UMSS）新任务。现有单模态无监督方法直接扩展到多模态时，常因融合退化而无法有效利用互补信息。为此，文章提出一种能协调不同传感器异构结构模式的方法，实现无监督下的高效多模态融合，从而提升分割性能，推动了无监督多模态感知领域的研究。",
+      "llm_tldr": "该论文针对多模态语义分割中标注成本高的问题，首次提出无监督多模态语义分割（UMSS）新任务。现有单模态无监督方法直接扩展到多模态时，常因融合退化而无法有效利用互补信息。为此，文章提出一种能协调不同传感器异构结构模式的方法，实现无监督下的高效多模态融合，从而提升分割性能，推动了无监督多模态感知领域的研究。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.07438v1",
+      "source": "arxiv",
+      "title": "Two-Stage Multi-Modal Fusion with Adaptive Alignment for Action Quality Assessment",
+      "abstract": "Action Quality Assessment (AQA) aims to evaluate how well a person performs a movement, which is essential in applications such as sports scoring, skill assessment, and healthcare. However, unimodal approaches often struggle to capture subtle cues of movement quality in real-world settings. Although multi-modal inputs provide complementary information, existing methods still face two major challenges: heterogeneous modalities often lead to cross-modal misalignment and unstable fusion, and reliable multi-modal annotation is costly, resulting in limited dataset diversity. To address these challenges, we propose DualAlign, a two-stage multi-modal fusion framework with adaptive alignment. The framework first constructs a coherent visual representation by maximizing shared structural information across RGB video, optical flow, and skeleton modalities. Textual semantics are then incorporated after visual stabilization, allowing high-level descriptions to complement rather than distort the underlying visual manifold. To evaluate the framework under realistic multi-modal conditions, we introduce MM--JDM, a movement-quality assessment dataset integrating RGB videos, optical flow, skeleton sequences, and structured text. MM--JDM naturally exhibits modality noise, class imbalance, and label scarcity, making it a challenging benchmark for studying multi-modal fusion and alignment. Extensive experiments show that DualAlign improves average correlation on MM--JDM by 21.16% over the state-of-the-art methods and achieves gains of 3.53% and 5.95% on the RG and Fis-V benchmarks, respectively. DualAlign also remains robust under missing-modality and label-scarce conditions.",
+      "authors": [
+        "Kanglei Zhou",
+        "Ruizhi Cai",
+        "Xinning Wang",
+        "Yijian Zheng",
+        "Liyuan Wang",
+        "Jianguo Li",
+        "Xiaohui Liang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-08T14:09:13+00:00",
+      "link": "https://arxiv.org/pdf/2607.07438v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "two-stage multi-modal fusion with adaptive alignment for heterogeneous modalities",
+      "llm_evidence_cn": "两阶段多模态融合与自适应对齐解决跨模态不对齐",
+      "llm_evidence": "两阶段多模态融合与自适应对齐解决跨模态不对齐",
+      "canonical_evidence": "两阶段多模态融合与自适应对齐解决跨模态不对齐",
+      "llm_tldr_en": "Proposes DualAlign, a two-stage multimodal fusion framework with adaptive alignment to address cross-modal misalignment in Action Quality Assessment, enabling stable fusion from limited data.",
+      "llm_tldr_cn": "针对动作质量评估中多模态输入存在的跨模态不对齐和不稳定融合问题，提出了DualAlign两阶段多模态融合框架，通过自适应对齐构建连贯视觉表示，在有限数据下实现稳定融合，为通用多模态融合技术提供了参考。",
+      "llm_tldr": "针对动作质量评估中多模态输入存在的跨模态不对齐和不稳定融合问题，提出了DualAlign两阶段多模态融合框架，通过自适应对齐构建连贯视觉表示，在有限数据下实现稳定融合，为通用多模态融合技术提供了参考。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.12686v1",
+      "source": "arxiv",
+      "title": "Segregate, Refine, Integrate: Decomposing Multimodal Fusion for Sentiment Analysis",
+      "abstract": "Multimodal fusion must simultaneously refine modality-specific signals and model cross-modal interactions; two competing objectives typically entangled within the same operation. We propose \\textbf{SeRIn} (\\textbf{Se}gregate, \\textbf{R}efine, \\textbf{In}tegrate), a multimodal LM fusion scheme that enforces this separation as an architectural prior. Modality-specific representations evolve along isolated pathways, each refined against its respective encoder context, while a dedicated cross-modal pathway accumulates their joint evolution without contaminating unimodal streams. Full cross-modal interaction is deferred to a final prediction step - ablations confirm that structured interactions, not added capacity, drive the gains; gate analysis under visual corruption reveals emergent modality reweighting without explicit supervision. SeRIn achieves state-of-the-art results on CH-SIMS and CMU-MOSEI, improving all metrics on both benchmarks.",
+      "authors": [
+        "Alexios Filippakopoulos",
+        "Elias Kallioras",
+        "Nikolaos Xiros",
+        "Efthymios Georgiou",
+        "Alexandros Potamianos"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-14T12:13:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.12686v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Decomposes multimodal fusion into segregated refinement and integration for sentiment analysis",
+      "llm_evidence_cn": "将多模态融合分解为分离的精炼和集成，用于情感分析",
+      "llm_evidence": "将多模态融合分解为分离的精炼和集成，用于情感分析",
+      "canonical_evidence": "将多模态融合分解为分离的精炼和集成，用于情感分析",
+      "llm_tldr_en": "Proposes SeRIn, a multimodal fusion scheme for sentiment analysis that segregates modality-specific refinement from cross-modal interaction, showing gains from structured interactions.",
+      "llm_tldr_cn": "针对多模态融合中模态特定信号精炼与跨模态交互相互竞争的问题，提出SeRIn方案，将二者解耦为独立通路，并通过最终预测步骤集成。实验表明，结构化交互而非容量增加是性能提升的关键。该工作为多模态融合架构设计提供了新的先验知识，有助于提升融合效果。",
+      "llm_tldr": "针对多模态融合中模态特定信号精炼与跨模态交互相互竞争的问题，提出SeRIn方案，将二者解耦为独立通路，并通过最终预测步骤集成。实验表明，结构化交互而非容量增加是性能提升的关键。该工作为多模态融合架构设计提供了新的先验知识，有助于提升融合效果。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

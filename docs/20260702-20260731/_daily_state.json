@@ -1,0 +1,489 @@
+{
+  "date": "20260702-20260731",
+  "date_label": "2026-07-02 ~ 2026-07-31",
+  "generated_at": "2026-07-31 08:34:06 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.15592v1",
+      "route": "20260702-20260731/2607.15592v1-mgdt-mllm-guided-diffusion-transformer-with-relation-adaptive-mixture-of-experts-for-multimodal-knowledge-graph-completion",
+      "title": "MGDT: MLLM-Guided Diffusion Transformer with Relation-Adaptive Mixture-of-Experts for Multimodal Knowledge Graph Completion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "提出多模态知识图谱补全框架，直接利用结构、文本和视觉线索提取关系。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.16560v1",
+      "route": "20260702-20260731/2607.16560v1-from-modalities-to-propositions-a-language-centric-framework-for-multimodal-intelligence",
+      "title": "From Modalities to Propositions: A Language-Centric Framework for Multimodal Intelligence",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "将多模态数据表示为捕获实体、动作和关系的原子命题",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.03143v1",
+      "route": "20260702-20260731/2607.03143v1-text-as-partial-constraint-core-residual-alignment-for-robust-vision-language-learning",
+      "title": "Text as Partial Constraint: Core-Residual Alignment for Robust Vision-Language Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出核心-残差对齐框架，用于鲁棒视觉-语言表征学习",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.05019v2",
+      "route": "20260702-20260731/2607.05019v2-beyond-modality-fusion-deep-ensembles-for-multimodal-classification",
+      "title": "Beyond Modality Fusion: Deep Ensembles for Multimodal Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出使用单模态网络的深度集成处理多模态分类中的模态不平衡，无需显式融合。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.05348v1",
+      "route": "20260702-20260731/2607.05348v1-beyond-isolated-objects-relationship-aware-open-vocabulary-scene-understanding-via-3d-scene-graph-analysis",
+      "title": "Beyond Isolated Objects: Relationship-aware Open Vocabulary Scene Understanding via 3D Scene Graph Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用3D场景图从多视图观察中推断对象关系，借助视觉语言模型在多模态数据中提取关系。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.08605v1",
+      "route": "20260702-20260731/2607.08605v1-when-structured-sparse-autoencoders-learn-consistent-concepts-across-modalities",
+      "title": "When Structured Sparse Autoencoders Learn Consistent Concepts Across Modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "结构化稀疏自编码器强制视觉与语言模态间概念一致性",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.08839v1",
+      "route": "20260702-20260731/2607.08839v1-mixture-of-probes-learning-from-privileged-modalities-in-multimodal-llms-through-probing",
+      "title": "Mixture of Probes: Learning from Privileged Modalities in Multimodal LLMs Through Probing",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在特权模态设置下解耦模态特定与通用信号，应对模态不平衡",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.10599v1",
+      "route": "20260702-20260731/2607.10599v1-mruf-multi-granularity-routing-with-uncertainty-aware-fusion-for-robust-multimodal-sentiment-analysis",
+      "title": "MRUF: Multi-granularity Routing with Uncertainty-Aware Fusion for Robust Multimodal Sentiment Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过不确定性校准的可靠性感知融合处理模态质量变化",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.10698v1",
+      "route": "20260702-20260731/2607.10698v1-on-the-modality-gap-and-the-contrastive-loss-in-multi-modal-representation-learning",
+      "title": "On the modality gap and the contrastive loss in multi-modal representation learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "研究CLIP风格对比学习中的模态差距，提出xNCE损失利用跨模态和模态内负样本对齐表示。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.13466v1",
+      "route": "20260702-20260731/2607.13466v1-pqfa-parallel-quantum-feature-augmentation-of-fused-representations-for-multimodal-classification",
+      "title": "PQFA: Parallel Quantum Feature Augmentation of Fused Representations for Multimodal Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "融合后的量子特征增强用于多模态分类",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.15265v1",
+      "route": "20260702-20260731/2607.15265v1-scenebind-binding-what-and-where-across-vision-audio-and-language",
+      "title": "SceneBind: Binding What and Where Across Vision, Audio and Language",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出一种全模态表示，跨视觉、音频和语言联合语义-3D空间理解，支持跨模态场景检索与物体关联。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.16604v1",
+      "route": "20260702-20260731/2607.16604v1-when-do-multimodal-and-graph-augmented-rag-help-a-controlled-evaluation-for-document-question-answering",
+      "title": "When Do Multimodal and Graph-Augmented RAG Help? A Controlled Evaluation for Document Question Answering",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用LLM抽取的主谓宾三元组结合多模态检索进行文档问答",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.21347v1",
+      "route": "20260702-20260731/2607.21347v1-quality-aware-multimodal-fusion-reveals-implicit-identity-in-valence-arousal-features",
+      "title": "Quality-Aware Multimodal Fusion Reveals Implicit Identity in Valence-Arousal Features",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "质量感知自适应融合估计每模态可靠性以应对模态不平衡",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.23245v1",
+      "route": "20260702-20260731/2607.23245v1-fedtaste-topology-aware-structural-transfer-for-multimodal-federated-learning-with-missing-modalities",
+      "title": "FedTaste: Topology-Aware Structural Transfer for Multimodal Federated Learning with Missing Modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "拓扑感知结构迁移处理多模态联邦学习中的缺失模态",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.23493v1",
+      "route": "20260702-20260731/2607.23493v1-token-region-guided-cross-attention-fusion-for-multimodal-affect-interpretation",
+      "title": "Token-Region Guided Cross-Attention Fusion for Multimodal Affect Interpretation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "跨模态多头注意力融合视觉与文本特征",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.23600v1",
+      "route": "20260702-20260731/2607.23600v1-confusion-continuous-fusion-space-learning-for-fine-grained-controllable-infrared-and-visible-image-fusion",
+      "title": "ConFusion: Continuous Fusion Space Learning for Fine-Grained Controllable Infrared and Visible Image Fusion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于高斯条件调制的连续融合空间，实现细粒度可控红外可见光融合",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.26909v1",
+      "route": "20260702-20260731/2607.26909v1-dual-path-llm-reasoning-for-multimodal-few-shot-knowledge-graph-completion",
+      "title": "Dual-Path LLM Reasoning for Multimodal Few-Shot Knowledge Graph Completion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用多模态信息和双路径LLM推理进行少样本知识图谱补全",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.27260v1",
+      "route": "20260702-20260731/2607.27260v1-regularizing-modality-contribution-drift-in-multimodal-continual-learning",
+      "title": "Regularizing modality contribution drift in multimodal continual learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "处理多模态持续学习中的模态贡献漂移，属于模态不平衡问题",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.01667v1",
+      "route": "20260702-20260731/2607.01667v1-temporal-and-cross-modal-alignment-for-enhanced-audiovisual-video-captioning",
+      "title": "Temporal and Cross-Modal Alignment for Enhanced Audiovisual Video Captioning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出增强视听视频字幕时间与跨模态对齐的框架，解决模态分离。",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.03018v2",
+      "route": "20260702-20260731/2607.03018v2-c3asd-multi-level-consistency-driven-representation-learning",
+      "title": "$C^3$ASD: Multi-Level Consistency-Driven Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多层级一致性约束用于视听对齐",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.09001v1",
+      "route": "20260702-20260731/2607.09001v1-optimal-transport-based-semantic-alignment-for-llm-based-audio-visual-speech-recognition",
+      "title": "Optimal Transport-based Semantic Alignment for LLM-based Audio-Visual Speech Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "使用最优传输对齐音频、视觉和文本模态进行语音识别",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.12372v1",
+      "route": "20260702-20260731/2607.12372v1-umss-towards-unsupervised-multi-modal-semantic-segmentation",
+      "title": "UMSS: Towards Unsupervised Multi-modal Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "解决无监督多模态语义分割中的融合退化问题",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.12686v1",
+      "route": "20260702-20260731/2607.12686v1-segregate-refine-integrate-decomposing-multimodal-fusion-for-sentiment-analysis",
+      "title": "Segregate, Refine, Integrate: Decomposing Multimodal Fusion for Sentiment Analysis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将多模态融合分解为分离的精炼和集成，用于情感分析",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.02862v1",
+      "route": "20260702-20260731/2607.02862v1-jointly-improving-dialect-identification-and-asr-in-indian-languages-using-multimodal-feature-fusion",
+      "title": "Jointly Improving Dialect Identification and ASR in Indian Languages using Multimodal Feature Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过门控机制融合语音和文本特征以联合改善ASR和方言识别",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.04636v1",
+      "route": "20260702-20260731/2607.04636v1-enhancing-large-multimodal-models-in-key-information-extraction-via-scene-aware-document-synthesis",
+      "title": "Enhancing Large Multimodal Models in Key Information Extraction via Scene-Aware Document Synthesis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "场景感知合成生成视觉文档关键信息抽取的训练数据",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.05093v2",
+      "route": "20260702-20260731/2607.05093v2-video-text-temporal-localization-via-multi-scale-convolution-and-dynamic-routing",
+      "title": "Video-Text Temporal Localization via Multi-Scale Convolution and Dynamic Routing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出多尺度卷积和动态路由用于视频-文本时序对齐",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.07438v1",
+      "route": "20260702-20260731/2607.07438v1-two-stage-multi-modal-fusion-with-adaptive-alignment-for-action-quality-assessment",
+      "title": "Two-Stage Multi-Modal Fusion with Adaptive Alignment for Action Quality Assessment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "两阶段多模态融合与自适应对齐解决跨模态不对齐",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.05716v2",
+      "route": "20260702-20260731/2607.05716v2-scene-graph-thinking-reinforcing-structured-visual-reasoning-for-multimodal-large-language-models",
+      "title": "Scene Graph Thinking: Reinforcing Structured Visual Reasoning for Multimodal Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "从图文语料中提取包含视觉关系的场景图",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.06943v1",
+      "route": "20260702-20260731/2607.06943v1-general-incomplete-multimodal-learning-via-dynamic-quality-perception",
+      "title": "General Incomplete Multimodal Learning via Dynamic Quality Perception",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "统一框架同时处理模态缺失和模态内降质",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    },
+    {
+      "paper_id": "2607.12820v1",
+      "route": "20260702-20260731/2607.12820v1-avscap-orchestrating-audio-visual-synergy-for-omni-modal-video-captioning",
+      "title": "AVSCap: Orchestrating Audio-Visual Synergy for Omni-modal Video Captioning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "针对视听字幕的跨模态事件绑定",
+      "first_seen_at": "2026-07-31 08:34:06 UTC",
+      "updated_at": "2026-07-31 08:34:06 UTC"
+    }
+  ]
+}
