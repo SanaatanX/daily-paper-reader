@@ -1,0 +1,313 @@
+{
+  "date": "20260731",
+  "date_label": "",
+  "generated_at": "2026-07-31 21:53:19 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.26885v1",
+      "route": "202607/31/2607.26885v1-scalpel-semantic-cross-modal-alignment-via-llm-powered-encoder-learning-for-medical-vision-language-representation",
+      "title": "SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向医学视觉-语言表征的语义跨模态对齐",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.15687v1",
+      "route": "202607/31/2607.15687v1-toward-federated-multimodal-graph-foundation-models-a-topology-aware-multimodal-alignment-framework",
+      "title": "Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "拓扑感知的多模态对齐框架用于联邦图学习",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.15779v1",
+      "route": "202607/31/2607.15779v1-multimodal-ambivalence-and-hesitancy-recognition-via-cross-attention-and-gated-fusion",
+      "title": "Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "文本、音频、视觉模态的交叉注意力与门控融合",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.16789v1",
+      "route": "202607/31/2607.16789v1-multiloreft-decoupling-shared-and-modality-specific-subspaces-in-multimodal-learning-via-low-rank-representation-fine-tuning",
+      "title": "MultiLoReFT: Decoupling Shared and Modality-Specific Subspaces in Multimodal Learning via Low-Rank Representation Fine-Tuning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过低秩微调解耦共享与模态特定子空间，用于多模态学习",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.17673v1",
+      "route": "202607/31/2607.17673v1-beyond-objective-expressivity-geometry-preservation-in-multimodal-contrastive-learning",
+      "title": "Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "几何保持编码器改善多模态对比学习对齐",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.18336v1",
+      "route": "202607/31/2607.18336v1-emoeus-uncertainty-supervision-for-multimodal-emotion-recognition-in-conversation",
+      "title": "EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于动态方差加权的不确定性感知多模态融合",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.20984v1",
+      "route": "202607/31/2607.20984v1-distribution-alignment-bridge-for-uncertainty-aware-text-to-video-retrieval",
+      "title": "Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向文本视频检索的不确定性感知跨模态分布对齐",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.21546v1",
+      "route": "202607/31/2607.21546v1-unda-unpaired-domain-alignment-for-cross-modal-knowledge-transfer-in-medical-imaging",
+      "title": "UnDA: Unpaired Domain Alignment for Cross-Modal Knowledge Transfer in Medical Imaging",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨模态对齐模块与无配对蒸馏，用于融合互补多模态数据",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.22043v1",
+      "route": "202607/31/2607.22043v1-scaling-native-multimodal-pre-training-from-scratch",
+      "title": "Scaling Native Multimodal Pre-Training From Scratch",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "原生多模态预训练规模与跨模态整合",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.22794v1",
+      "route": "202607/31/2607.22794v1-multimodal-domain-generalization-for-depression-detection-an-attention-based-bilstm-network-with-domain-adversarial-training",
+      "title": "Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "音频文本交叉注意力与分段融合技术",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.23181v1",
+      "route": "202607/31/2607.23181v1-towards-dual-brain-minimal-sufficient-representation-for-vision-language-navigation",
+      "title": "Towards Dual-Brain Minimal Sufficient Representation for Vision-Language Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向视觉语言导航的跨模态瓶颈对齐与最小充分表示",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.21371v1",
+      "route": "202607/31/2607.21371v1-dinode-continuous-vision-text-alignment-for-open-vocabulary-semantic-segmentation",
+      "title": "DINOde: Continuous Vision-Text Alignment for Open-Vocabulary Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于常微分方程的连续视觉-文本对齐用于语义分割",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.21908v1",
+      "route": "202607/31/2607.21908v1-unsupervised-multimodal-intent-discovery-via-mllm-guided-concept-generation-and-semantic-propagation",
+      "title": "Unsupervised Multimodal Intent Discovery via MLLM-Guided Concept Generation and Semantic Propagation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于语义概念的多模态无监督表示学习与意图发现",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.22013v1",
+      "route": "202607/31/2607.22013v1-visual-saliency-steering-distillation-for-multimodal-chain-of-thought-reasoning",
+      "title": "Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "针对模态交互融合抑制跨模态差异的问题",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.22531v1",
+      "route": "202607/31/2607.22531v1-twins-learn-to-predict-unified-representations-with-focal-loss",
+      "title": "Twins: Learn to Predict Unified Representations with Focal Loss",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "统一多模态表示与优化不均衡问题",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.21057v1",
+      "route": "202607/31/2607.21057v1-achieving-text-based-person-retrieval-with-any-granularity",
+      "title": "Achieving Text-based Person Retrieval with Any Granularity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态文本-图像检索的粒度对齐",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.23755v1",
+      "route": "202607/31/2607.23755v1-dap-pose-deep-temporal-alignment-and-physics-aware-cross-modal-sensor-fusion-for-robust-pose-estimation",
+      "title": "DAP-Pose: Deep Temporal Alignment and Physics-aware Cross-modal Sensor Fusion for Robust Pose Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "双层跨模态融合与时间对齐用于多模态传感器数据",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.23855v1",
+      "route": "202607/31/2607.23855v1-omnivae-an-audio-video-vae-with-cross-modal-alignment-for-joint-generation",
+      "title": "OmniVAE: An Audio-Video VAE with Cross-Modal Alignment for Joint Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "音频与视频潜空间的跨模态对齐",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    },
+    {
+      "paper_id": "2607.24017v1",
+      "route": "202607/31/2607.24017v1-disentangling-semantic-attention-from-structural-bias-in-the-attention-manifold",
+      "title": "Disentangling Semantic Attention from Structural Bias in the Attention Manifold",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态大模型中的注意力结构偏差；跨模态对齐分析",
+      "first_seen_at": "2026-07-31 21:53:19 UTC",
+      "updated_at": "2026-07-31 21:53:19 UTC"
+    }
+  ]
+}

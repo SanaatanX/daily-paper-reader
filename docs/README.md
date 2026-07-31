@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-07-22 ~ 2026-07-31</span>
+      <span class="dpr-home-dashboard-kicker">2026-07-31</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 16 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-07-31 14:07:23 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-07-31 21:53:19 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共处理16篇论文，精读5篇、速读11篇，核心聚焦开放词汇语义分割与多模态推理。最值得关注的是DINOde的连续视觉-文本对齐方法，以及用视觉显著性蒸馏提升多模态思维链推理的工作。建议读者优先精读这两篇，并顺带浏览VizRAG与跨模态医学图像对齐等速读项目。</p>
+<p>今日19篇论文聚焦多模态对齐与医学AI，精读7篇、速读12篇。最值得关注SCALPEL（9.0分）用大模型增强医学视觉-语言语义对齐，及联邦多模态图对齐框架（8.0分）。下一步可延伸探索对比学习中的几何保持与抑郁检测的域泛化方法。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DINOde: Continuous Vision-Text Alignment for Open-Vocabulary Semantic Segmentation">DINOde: Continuous Vision-Text Alignment for Open-Vocabulary Semantic Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning">Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multi-Modal Object Re-Identification with Prompt-S6 and Semantic-Aware Knowledge Guidance">Multi-Modal Object Re-Identification with Prompt-S6 and Semantic-Aware Knowledge Guidance</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation">SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework">Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion">Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">11 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VizRAG: Enhancing Retrieval-Augmented Generation with Hypergraph Visualization">VizRAG: Enhancing Retrieval-Augmented Generation with Hypergraph Visualization</span></li><li><span class="dpr-home-dashboard-paper-title" title="Diverse-Intent Multi-Turn Fashion Image Retrieval">Diverse-Intent Multi-Turn Fashion Image Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="UnDA: Unpaired Domain Alignment for Cross-Modal Knowledge Transfer in Medical Imaging">UnDA: Unpaired Domain Alignment for Cross-Modal Knowledge Transfer in Medical Imaging</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning">Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation">EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training">Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 

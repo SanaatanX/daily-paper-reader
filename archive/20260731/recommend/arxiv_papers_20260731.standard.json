@@ -1,0 +1,824 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-07-31T21:45:33.552518+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 17,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 40,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2607.26885v1",
+      "source": "arxiv",
+      "title": "SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation",
+      "abstract": "Vision-language pre-training (VLP) serves as a cornerstone for medical multimodal representation learning. However, existing medical VLP frameworks are often constrained by the limited context windows and shallow representational capacities of lightweight text encoders when processing lengthy, terminology-dense clinical reports. While integrating medical large language models (LLMs) offers unprecedented clinical reasoning capabilities, it introduces three major bottlenecks: (i) the anisotropic representational collapse of generative LLMs under standard contrastive objectives, (ii) the prohibitive memory overhead of joint end-to-end training with large batch sizes, and (iii) the medical hallucinations induced by vanilla contrastive losses that ignore fine-grained anatomical laterality and negation modifiers. To address these challenges, we propose \\textbf{SCALPEL}, a \\textbf{S}emantic \\textbf{C}ross-modal \\textbf{A}lignment framework via \\textbf{L}LM-\\textbf{P}owered \\textbf{E}ncoder \\textbf{L}earning. First, Clinical Report Contrastive fine-tuning converts a generative LLM into an isotropic encoder via domain-specific clinical text adaptation. Second, an asymmetric alignment strategy leverages offline feature caching to enable efficient training. Critically, we formulate an Anatomy-Negation Aware Objective that explicitly penalizes mismatched image-text pairs involving laterality confusion or false negations. Extensive experiments across MIMIC-CXR, CheXpert, and IU X-Ray benchmarks demonstrate that SCALPEL achieves state-of-the-art performance in cross-modal retrieval, zero-shot disease classification and medical visual question answering.",
+      "authors": [
+        "Yunzhan Fu",
+        "Enyu Bao",
+        "Xiangyu Shen",
+        "Yihao Wu",
+        "Chunbo Jiang",
+        "Fangli Guan",
+        "Liqi Yan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-29T13:12:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.26885v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "semantic cross-modal alignment for medical vision-language representation learning",
+      "llm_evidence_cn": "面向医学视觉-语言表征的语义跨模态对齐",
+      "llm_evidence": "面向医学视觉-语言表征的语义跨模态对齐",
+      "canonical_evidence": "面向医学视觉-语言表征的语义跨模态对齐",
+      "llm_tldr_en": "SCALPEL addresses medical VLP limitations by using LLM-powered encoders to learn semantically aligned vision-language representations, tackling representation collapse, memory overhead, and hallucinations.",
+      "llm_tldr_cn": "针对医学视觉-语言预训练中轻量文本编码器处理冗长临床报告时上下文受限、表征能力弱的问题，以及引入医学大语言模型带来的表征各向异性坍缩、显存开销大和幻觉等瓶颈，提出SCALPEL框架。该方法通过大语言模型驱动的编码器学习实现语义级别的跨模态对齐，从而获得更稳健的医学视觉语言表示。实验在医学多模态任务上验证了其有效性，为医学影像与文本联合建模提供了新方案。",
+      "llm_tldr": "针对医学视觉-语言预训练中轻量文本编码器处理冗长临床报告时上下文受限、表征能力弱的问题，以及引入医学大语言模型带来的表征各向异性坍缩、显存开销大和幻觉等瓶颈，提出SCALPEL框架。该方法通过大语言模型驱动的编码器学习实现语义级别的跨模态对齐，从而获得更稳健的医学视觉语言表示。实验在医学多模态任务上验证了其有效性，为医学影像与文本联合建模提供了新方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.20984v1",
+      "source": "arxiv",
+      "title": "Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval",
+      "abstract": "This paper proposes the Distribution-Alignment Bridge (DAB), a framework that reconceptualizes text-to-video retrieval as a distribution alignment task rather than traditional deterministic point matching. By modeling both text and video embeddings as Gaussian distributions defined by mean and variance, DAB explicitly accounts for modality-specific uncertainty. We employ a deterministic, diffusion-inspired bridge to iteratively refine text distributions toward their target video distributions through a truncated refinement process. This approach unifies probabilistic embedding and distributional transformation into a cohesive, end-to-end trainable system. To optimize cross-modal similarity, we introduce a distribution-aware contrastive loss based on Kullback-Leibler divergence. Extensive evaluations on MSR-VTT, MSVD, and VATEX benchmarks confirm that DAB significantly outperforms existing probabilistic and diffusion-based baselines, while providing calibrated uncertainty-aware ranking through bridge-induced distributional margins.",
+      "authors": [
+        "Kyeongmo Chae",
+        "Jihoon Lee",
+        "Sangtae Ahn"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-23T07:07:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.20984v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Uncertainty-aware cross-modal distribution alignment for text-video retrieval",
+      "llm_evidence_cn": "面向文本视频检索的不确定性感知跨模态分布对齐",
+      "llm_evidence": "面向文本视频检索的不确定性感知跨模态分布对齐",
+      "canonical_evidence": "面向文本视频检索的不确定性感知跨模态分布对齐",
+      "llm_tldr_en": "DAB recasts text-to-video retrieval as distribution alignment, modeling text and video embeddings as Gaussians with modality-specific uncertainty and applying a deterministic diffusion-inspired bridge plus distribution-aware contrastive loss for robust cross-modal similarity.",
+      "llm_tldr_cn": "文本-视频检索常用确定性点匹配，难以刻画模态不确定性。该文提出分布对齐桥DAB，将文本和视频嵌入建模为均值-方差高斯分布，利用受扩散启发的确定性桥迭代细化文本分布向视频分布靠近，并设计分布感知对比损失。该方法统一了概率嵌入和分布变换，实验证明其能建模不确定性并提升跨模态检索效果，为对齐表示学习提供了新思路。",
+      "llm_tldr": "文本-视频检索常用确定性点匹配，难以刻画模态不确定性。该文提出分布对齐桥DAB，将文本和视频嵌入建模为均值-方差高斯分布，利用受扩散启发的确定性桥迭代细化文本分布向视频分布靠近，并设计分布感知对比损失。该方法统一了概率嵌入和分布变换，实验证明其能建模不确定性并提升跨模态检索效果，为对齐表示学习提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.21546v1",
+      "source": "arxiv",
+      "title": "UnDA: Unpaired Domain Alignment for Cross-Modal Knowledge Transfer in Medical Imaging",
+      "abstract": "Multimodal based approaches often outperform single modality approaches in downstream tasks as the different modalities provide complementary information, yet acquiring paired clinical data remains a significant challenge in real world scenarios. While cross-modal knowledge distillation addresses this, existing methods often struggle with large modality gaps and the propagation of noise from uncertain source-domain predictions. To overcome these challenges, we propose UnDA, an anchor-guided framework for unpaired cross-modal distillation. Our approach introduces a backbone-agnostic Alignment Module that extracts semantically structured class tokens via an attention based pooling mechanism. To ensure robust knowledge transfer, we propose Uncertainty-Weighted Optimal Transport (UCT-OT), which dynamically weights feature-level alignment based on prediction confidence, effectively suppressing noisy supervision. Furthermore, a per-class ProtoNCE objective maintains stable prototype memories to enforce global discriminability across unpaired batches. Evaluations on representative segmentation tasks under strictly unpaired settings show consistent improvements in accuracy and boundary precision in the target modality, demonstrating that meaningful structural knowledge can be transferred across heterogeneous data sources without paired datasets.",
+      "authors": [
+        "Rafsan Jany",
+        "Shadab Tanjeed Ahmad",
+        "Ahsan Bulbul",
+        "Tahsinul Islam",
+        "Md Azam Hossain",
+        "Abu Raihan Mostofa Kamal"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-23T17:33:29+00:00",
+      "link": "https://arxiv.org/pdf/2607.21546v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Cross-modal alignment module and unpaired distillation for complementary multimodal data",
+      "llm_evidence_cn": "跨模态对齐模块与无配对蒸馏，用于融合互补多模态数据",
+      "llm_evidence": "跨模态对齐模块与无配对蒸馏，用于融合互补多模态数据",
+      "canonical_evidence": "跨模态对齐模块与无配对蒸馏，用于融合互补多模态数据",
+      "llm_tldr_en": "UnDA proposes an anchor-guided unpaired cross-modal distillation framework with a backbone-agnostic alignment module that extracts structured class tokens via attention pooling to handle large modality gaps and noisy predictions in medical imaging.",
+      "llm_tldr_cn": "医学影像中获取配对多模态数据困难，跨模态蒸馏常受模态差距大和源域噪声影响。为此该文提出UnDA框架，采用基于注意力池化的骨干无关对齐模块提取语义类别token，并以锚点引导实现无配对跨模态蒸馏。实验表明该方法能更鲁棒地传递知识，缓解模态间隙和噪声传播问题，为缺少配对数据的多模态表示学习提供了可迁移的对齐方案。",
+      "llm_tldr": "医学影像中获取配对多模态数据困难，跨模态蒸馏常受模态差距大和源域噪声影响。为此该文提出UnDA框架，采用基于注意力池化的骨干无关对齐模块提取语义类别token，并以锚点引导实现无配对跨模态蒸馏。实验表明该方法能更鲁棒地传递知识，缓解模态间隙和噪声传播问题，为缺少配对数据的多模态表示学习提供了可迁移的对齐方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.22043v1",
+      "source": "arxiv",
+      "title": "Scaling Native Multimodal Pre-Training From Scratch",
+      "abstract": "Although large language models (LLMs) exhibit remarkable reasoning capabilities, their reliance on text-only pre-training restricts the perception of the multimodal physical world. Native multimodal pre-training avoids this limitation by training models from scratch on multimodal inputs, thereby achieving deep cross-modal integration and mitigating optimization asymmetries inherent to traditional late-fusion architectures. Despite these advantages, the scaling properties of this paradigm remain systematically uncharacterized. To address this gap, we investigate the optimal model size and token count for training a transformer-based vision-language model under a fixed computational budget. We demonstrate that minimal objective loss adheres to a predictable compute law, whereas compute-optimal model sizes and token counts scale as power laws. Notably, language and multimodal objectives manifest distinct scaling behaviors. The language allocation law is largely invariant to the composition of the data, indicating stable language learning regardless of the multimodal data ratio. Conversely, the multimodal allocation law is highly sensitive to this composition. Specifically, text-heavy mixtures become compute-efficient only at larger model scales, shifting the optimal resource allocation toward greater model capacity. Additionally, by modeling the influence of data composition on compute laws and allocation exponents, we derive an efficiency frontier specifying precise configurations of model size, token count, and data mixture. Downstream evaluations further reveal that native multimodal pre-training induces positive cross-modal transfer, thereby enhancing pure-text spatial reasoning and enabling robust multimodal in-context learning. In summary, this empirical research establishes the essential groundwork for predictably scaling multimodal foundation models.",
+      "authors": [
+        "Haoyuan Wu",
+        "Aoqi Wu",
+        "Hai Wang",
+        "Jiajia Wu",
+        "Jinxiang Ou",
+        "Bei Yu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-07-24T07:13:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.22043v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "scaling native multimodal pre-training with cross-modal integration",
+      "llm_evidence_cn": "原生多模态预训练规模与跨模态整合",
+      "llm_evidence": "原生多模态预训练规模与跨模态整合",
+      "canonical_evidence": "原生多模态预训练规模与跨模态整合",
+      "llm_tldr_en": "Investigates optimal model size and token count for native multimodal pre-training under fixed compute, revealing predictable compute laws and showing deep cross-modal integration mitigates optimization asymmetries.",
+      "llm_tldr_cn": "针对文本预训练限制大语言模型感知多模态世界的问题，系统研究从头开始的原生多模态预训练规模规律。在固定计算预算下分析最优模型规模与词元数量，证明最小目标损失符合可预测的计算定律。相比晚期融合架构，该方法实现更深层的跨模态整合并缓解优化不对称，为多模态预训练提供指导。",
+      "llm_tldr": "针对文本预训练限制大语言模型感知多模态世界的问题，系统研究从头开始的原生多模态预训练规模规律。在固定计算预算下分析最优模型规模与词元数量，证明最小目标损失符合可预测的计算定律。相比晚期融合架构，该方法实现更深层的跨模态整合并缓解优化不对称，为多模态预训练提供指导。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.15687v1",
+      "source": "arxiv",
+      "title": "Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework",
+      "abstract": "Multimodal-attributed graphs (MAGs), whose nodes carry modalities such as images and text alongside topological structure, now pervade applications including social platforms, e-commerce, and biomedical networks, offering richer semantic signals than single-modality graphs. In practice, such graphs are fragmented across privacy-restricted silos owned by different platforms and institutions, so learning a broadly transferable model over them demands collaborative training that never exposes raw data. This places the task at the intersection of multimodal graph learning and federated learning, yet existing methods cover only one side of it. To address the challenges from these two perspectives, we propose FedGAMMA, casting federated multimodal graph foundation learning as a two-stage semantic-structural alignment problem of federated pre-training and prompt-based fine-tuning. During pre-training, a shared-private semantic enhancer disentangles cross-modal commonality from modality-specific information, aligning it through optimal transport, a topology-aware graph fusion module decouples semantic and structural views via semantic residual graphs and dual positional encodings, and a dual-channel affinity-aware aggregation mechanism estimates client similarity from feature and graph centroids without exposing raw data. During fine-tuning, FedGAMMA adapts the pretrained encoder through lightweight graph-aware prompts, a shared prompt pool with controlled exploration, and channel-wise prompt synchronization. Experiments on twelve multimodal graph datasets show FedGAMMA consistently surpassing a broad range of baselines across downstream tasks, with gains of up to 12.96%. FedGAMMA further outperforms competitive baselines accross multi-domain datasets on multiple tasks with up to 5.71% under few-shot learning scenario.",
+      "authors": [
+        "Xunkai Li",
+        "Guohao Fu",
+        "Yuming Ai",
+        "Zhengyu Wu",
+        "Hongchao Qin",
+        "Rong-Hua Li",
+        "Guoren Wang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-17T06:57:41+00:00",
+      "link": "https://arxiv.org/pdf/2607.15687v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "topology-aware multimodal alignment framework for federated graph learning",
+      "llm_evidence_cn": "拓扑感知的多模态对齐框架用于联邦图学习",
+      "llm_evidence": "拓扑感知的多模态对齐框架用于联邦图学习",
+      "canonical_evidence": "拓扑感知的多模态对齐框架用于联邦图学习",
+      "llm_tldr_en": "Proposes FedGAMMA, a federated learning framework for multimodal-attributed graphs that performs topology-aware multimodal alignment across privacy-restricted silos.",
+      "llm_tldr_cn": "针对多模态属性图在隐私受限场景下进行协作学习的挑战，提出FedGAMMA框架。该框架结合图拓扑结构与多模态对齐，在联邦学习设置下实现跨机构的知识迁移，推动了多模态图基础模型在隐私保护下的发展。",
+      "llm_tldr": "针对多模态属性图在隐私受限场景下进行协作学习的挑战，提出FedGAMMA框架。该框架结合图拓扑结构与多模态对齐，在联邦学习设置下实现跨机构的知识迁移，推动了多模态图基础模型在隐私保护下的发展。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "carryover_cache",
+      "paper_id": "2607.15687v1"
+    },
+    {
+      "id": "2607.15779v1",
+      "source": "arxiv",
+      "title": "Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion",
+      "abstract": "We present a multimodal framework for Ambivalence/Hesitancy (A/H) recognition in video, developed for the ABAW11 challenge at ECCV 2026. The proposed approach fuses textual, acoustic, and visual modalities extracted from the BAH dataset using three pretrained encoders: F2LLM-v2-0.6B for transcripts (1024-d), WavLM-Large for audio (1024-d), and VideoMAE V2 for facial video (768-d). We first establish comprehensive unimodal baselines using classical classifiers (MLP, Random Forest, GBDT), each optimized via Optuna, and obtain a best unimodal Macro F1 of \\textbf{0.6659} on the test set using text features alone -- substantially outperforming the zero-shot Video-LLaVA baseline (Macro F1: 0.2827). Building on these baselines, we propose a multimodal fusion architecture that combines bidirectional cross-attention across all three modalities with a Gated Multimodal Unit (GMU), with both architectural and optimization hyperparameters selected through a 50-trial Optuna search. This model achieves a Macro F1 of \\textbf{0.7394} on the validation set, a relative improvement of 11.0\\% over the best unimodal baseline, confirming that explicit cross-modal interaction captures complementary cues that no single modality provides in isolation. Final predictions on the official, unlabeled private test set are generated using this model and submitted according to the challenge protocol. Code is publicly available at https://github.com/yassineouzar/IUSD_AH/",
+      "authors": [
+        "Oussama Berhili",
+        "Yassine Ouzar",
+        "Larbi Boubchir"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-17T09:23:36+00:00",
+      "link": "https://arxiv.org/pdf/2607.15779v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cross-attention and gated fusion of text, audio, visual modalities",
+      "llm_evidence_cn": "文本、音频、视觉模态的交叉注意力与门控融合",
+      "llm_evidence": "文本、音频、视觉模态的交叉注意力与门控融合",
+      "canonical_evidence": "文本、音频、视觉模态的交叉注意力与门控融合",
+      "llm_tldr_en": "Proposes a multimodal framework for ambivalence/hesitancy recognition using cross-attention and gated fusion of text, audio, and visual features, achieving high performance on a challenge dataset.",
+      "llm_tldr_cn": "该论文针对视频中的矛盾与犹豫识别任务，提出了一种基于交叉注意力和门控融合的多模态框架，融合文本、音频和视觉特征。在挑战赛数据集上取得优异表现，证明了多模态融合的有效性。",
+      "llm_tldr": "该论文针对视频中的矛盾与犹豫识别任务，提出了一种基于交叉注意力和门控融合的多模态框架，融合文本、音频和视觉特征。在挑战赛数据集上取得优异表现，证明了多模态融合的有效性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-9",
+      "selection_source": "carryover_cache",
+      "paper_id": "2607.15779v1"
+    },
+    {
+      "id": "2607.16789v1",
+      "source": "arxiv",
+      "title": "MultiLoReFT: Decoupling Shared and Modality-Specific Subspaces in Multimodal Learning via Low-Rank Representation Fine-Tuning",
+      "abstract": "Real-world perception and decision making are inherently multimodal, integrating complementary signals across modalities. However, training multimodal models faces two main obstacles. First, collecting large-scale, well-aligned paired multimodal datasets is often impractical, making end-to-end multimodal training difficult. Second, existing multimodal representations frequently entangle information shared across modalities with modality-specific information, hindering interpretability and control. We introduce MultiLoReFT, an efficient and scalable low-rank representation fine-tuning framework for multimodal learning with pretrained unimodal models. MultiLoReFT extends low-rank adaptation to the multimodal setting and learns interpretable projection subspaces that decouple shared and modality-specific information. Across simulated and real-world benchmarks, it produces representations that support multimodal prediction while explicitly revealing how shared and modality-specific information is distributed across modalities.",
+      "authors": [
+        "Sana Tonekaboni",
+        "Viktoria Schuster",
+        "Caroline Uhler"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-18T11:53:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.16789v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "decouples shared and modality-specific subspaces via low-rank fine-tuning for multimodal learning",
+      "llm_evidence_cn": "通过低秩微调解耦共享与模态特定子空间，用于多模态学习",
+      "llm_evidence": "通过低秩微调解耦共享与模态特定子空间，用于多模态学习",
+      "canonical_evidence": "通过低秩微调解耦共享与模态特定子空间，用于多模态学习",
+      "llm_tldr_en": "Introduces MultiLoReFT, a low-rank representation fine-tuning framework that decouples shared and modality-specific information, enabling efficient multimodal learning without extensive paired data.",
+      "llm_tldr_cn": "为解决多模态训练中大规模对齐数据匮乏与表示纠缠问题，提出MultiLoReFT低秩表示微调框架，解耦共享与模态特定子空间，无需大量成对数据即可高效学习多模态表示，为多模态对齐与融合提供了可控制的方法。",
+      "llm_tldr": "为解决多模态训练中大规模对齐数据匮乏与表示纠缠问题，提出MultiLoReFT低秩表示微调框架，解耦共享与模态特定子空间，无需大量成对数据即可高效学习多模态表示，为多模态对齐与融合提供了可控制的方法。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "carryover_cache",
+      "paper_id": "2607.16789v1"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.17673v1",
+      "source": "arxiv",
+      "title": "Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning",
+      "abstract": "Contrastive learning is increasingly moving toward settings with three or more modalities instead of image-text pairs. Yet, extending models from pairwise to higher-order multimodal alignment can introduce optimization and representation challenges. We identify encoder Jacobian conditioning as a key factor in trimodal contrastive learning: poorly conditioned encoders exhibit collapsing or amplified singular-value spectra, leading to exploding Jacobian condition numbers and degraded multimodal alignment. We introduce geometry-preserving encoders (GPEs) by directly conditioning the Jacobian through regularization and demonstrating that simple modifications like LeakyReLU activations and residual paths recover these geometric benefits. Across a synthetic benchmark and four real-world datasets including missing modalities, improving Jacobian conditioning boosts retrieval and linear probe performance across multiple contrastive objectives, whereas expressive objectives yield little benefit in linear probes. More broadly, our results show that multimodal contrastive learning depends not only on objective expressivity, but also on the geometric and optimization properties of the underlying encoders.",
+      "authors": [
+        "Tillmann Rheude",
+        "Roland Eils",
+        "Benjamin Wild"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-07-20T08:25:45+00:00",
+      "link": "https://arxiv.org/pdf/2607.17673v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "geometry-preserving encoders for improved multimodal contrastive alignment",
+      "llm_evidence_cn": "几何保持编码器改善多模态对比学习对齐",
+      "llm_evidence": "几何保持编码器改善多模态对比学习对齐",
+      "canonical_evidence": "几何保持编码器改善多模态对比学习对齐",
+      "llm_tldr_en": "Identifies encoder Jacobian conditioning as key to trimodal contrastive alignment, proposing geometry-preserving encoders to prevent alignment degradation.",
+      "llm_tldr_cn": "针对多模态（三模态）对比学习中因编码器雅可比条件数爆炸引起的对齐退化问题，提出几何保持编码器（GPEs），通过雅可比正则化和残差连接等改进，有效维持了多模态对齐的几何特性。",
+      "llm_tldr": "针对多模态（三模态）对比学习中因编码器雅可比条件数爆炸引起的对齐退化问题，提出几何保持编码器（GPEs），通过雅可比正则化和残差连接等改进，有效维持了多模态对齐的几何特性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-10",
+      "selection_source": "carryover_cache",
+      "paper_id": "2607.17673v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.21371v1",
+      "source": "arxiv",
+      "title": "DINOde: Continuous Vision-Text Alignment for Open-Vocabulary Semantic Segmentation",
+      "abstract": "Open-vocabulary semantic segmentation (OVSS) leverages textual semantics to segment objects beyond predefined categories. While the self-supervised model DINOv3 provides strong structured visual representations, its lack of native textual alignment hinders its direct application to OVSS. To bridge this gap, we propose DINOde, an ODE-based framework that continuously aligns CLIP text embeddings with the DINO visual manifold. Our approach employs two complementary components: (i) Semantic Text Flow (STF), which evolves text embeddings toward the DINO manifold through a continuous ODE trajectory, and (ii) Global Context Flow (GCF), which progressively refines the holistic image representation carried by DINO's CLS token. To preserve the hyperspherical geometry of the feature space during this evolution, we further introduce Velocity Tangent Projection, which constrains the learned velocity field to the tangent space. By modeling alignment as a continuous trajectory, DINOde avoids the manifold entanglement inherent in discrete MLP projections and yields more robust cross-modal alignment. Extensive experiments demonstrate that DINOde consistently outperforms existing methods and achieves state-of-the-art performance across multiple OVSS benchmarks. The code is available at https://github.com/yoon307/DINOde.",
+      "authors": [
+        "Sung-Hoon Yoon",
+        "Hoyong Kwon",
+        "Changgyoon Oh",
+        "Kuk-Jin Yoon"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-23T14:37:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.21371v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Continuous vision-text alignment via ODE for semantic segmentation",
+      "llm_evidence_cn": "基于常微分方程的连续视觉-文本对齐用于语义分割",
+      "llm_evidence": "基于常微分方程的连续视觉-文本对齐用于语义分割",
+      "canonical_evidence": "基于常微分方程的连续视觉-文本对齐用于语义分割",
+      "llm_tldr_en": "DINOde uses an ODE-based framework to continuously align CLIP text embeddings with DINOv3 visual manifold for open-vocabulary segmentation.",
+      "llm_tldr_cn": "开放词汇语义分割需要将文本语义与视觉特征对齐，但自监督DINOv3缺乏原生文本对齐能力。提出DINOde框架，利用常微分方程将CLIP文本嵌入连续演化到DINO视觉流形，并通过语义文本流与全局上下文流逐步精化整体图像表示。实验证明该方法能有效弥合视觉与文本表征鸿沟，提升开放词汇分割性能。",
+      "llm_tldr": "开放词汇语义分割需要将文本语义与视觉特征对齐，但自监督DINOv3缺乏原生文本对齐能力。提出DINOde框架，利用常微分方程将CLIP文本嵌入连续演化到DINO视觉流形，并通过语义文本流与全局上下文流逐步精化整体图像表示。实验证明该方法能有效弥合视觉与文本表征鸿沟，提升开放词汇分割性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.21057v1",
+      "source": "arxiv",
+      "title": "Achieving Text-based Person Retrieval with Any Granularity",
+      "abstract": "Text-based person retrieval faces a critical but under-explored challenge: the inherent uncertainty of query granularity in real-world scenarios. This paper introduces a new paradigm, Text-based Person Retrieval with Any Granularity, and provides a systematic solution. First, we formalize a five-level granularity spectrum and construct UFine6926-MG, a high-quality multi-grained dataset annotated comprehensively at all granularities via a novel Multi-grained Text Annotation Engine. Second, acknowledging that coarse queries naturally correspond to multiple valid candidates, we propose MG-Eval, a holistic evaluation benchmark with progressively detailed texts and cross-identity labels that reflect real-world semantics, alongside tailored evaluation metrics and protocols. Third, after a comprehensive diagnosis reveals the systemic limitations of existing research, we propose the Cross-modal Multi-grained Aligning and Matching (CMAM) framework. CMAM achieves granularity-aware retrieval through: 1) orthogonal-expert perception to disentangle granularity-specific features; 2) probabilistic alignment to model many-to-many matches under query uncertainty; and 3) granularity-consistent reasoning to steer feature learning via joint cross-modal granularity verification. Experiments demonstrate that CMAM significantly outperforms state-of-the-art methods across all granularity levels. This work establishes a foundational benchmark and a robust baseline, paving the way for more practical person retrieval systems.",
+      "authors": [
+        "Jialong Zuo",
+        "Hanyu Zhou",
+        "Dongyue Wu",
+        "Yongtai Deng",
+        "Mengdan Tan",
+        "Nong Sang",
+        "Changxin Gao",
+        "Xiang Bai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-23T08:42:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.21057v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal text-image retrieval with granularity alignment",
+      "llm_evidence_cn": "跨模态文本-图像检索的粒度对齐",
+      "llm_evidence": "跨模态文本-图像检索的粒度对齐",
+      "canonical_evidence": "跨模态文本-图像检索的粒度对齐",
+      "llm_tldr_en": "Introduces text-based person retrieval with any granularity, formalizes a five-level granularity spectrum, constructs a multi-grained dataset and evaluation benchmark to handle coarse and fine queries.",
+      "llm_tldr_cn": "真实场景中文本行人检索的查询粒度具有不确定性，现有方法和数据集通常只考虑固定粒度。本文提出任意粒度检索的新范式，构建包含五级粒度谱系的UFine6926-MG数据集，并设计MG-Eval评测基准和指标以反映真实语义。该方法系统处理粗到细查询下的候选多样性问题，为跨模态检索提供了一个更贴近实际需求的评测协议。",
+      "llm_tldr": "真实场景中文本行人检索的查询粒度具有不确定性，现有方法和数据集通常只考虑固定粒度。本文提出任意粒度检索的新范式，构建包含五级粒度谱系的UFine6926-MG数据集，并设计MG-Eval评测基准和指标以反映真实语义。该方法系统处理粗到细查询下的候选多样性问题，为跨模态检索提供了一个更贴近实际需求的评测协议。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.18336v1",
+      "source": "arxiv",
+      "title": "EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation",
+      "abstract": "Multimodal emotion recognition in conversation (MERC) can leverage multimodal and contextual cues to boost recognition performance. However, existing fusion approaches in MERC often ignore modality-specific uncertainty across utterances caused by conflicting cues, varying noise, and missing modality-specific signals. We propose EmoEUS, an explicit uncertainty supervision framework for MERC. EmoEUS performs uncertainty-aware multimodal fusion by dynamically weighting modalities using learned variance estimates. We also introduce an explicitly supervised loss that aligns each utterance's predicted variance with the distance between the utterance's distributional representation and its emotion- and modality-specific cluster center. Experiments on IEMOCAP and MELD show that EmoEUS consistently outperforms state-of-the-art methods.",
+      "authors": [
+        "Zilong Huang",
+        "Kong Aik Lee",
+        "Junjie Li",
+        "Zhe Li",
+        "Man-Wai Mak"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-07-19T18:09:22+00:00",
+      "link": "https://arxiv.org/pdf/2607.18336v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uncertainty-aware multimodal fusion by dynamic variance-based weighting",
+      "llm_evidence_cn": "基于动态方差加权的不确定性感知多模态融合",
+      "llm_evidence": "基于动态方差加权的不确定性感知多模态融合",
+      "canonical_evidence": "基于动态方差加权的不确定性感知多模态融合",
+      "llm_tldr_en": "Proposes EmoEUS, an uncertainty supervision framework that dynamically weights modalities based on learned variance estimates, improving multimodal emotion recognition by handling modality-specific uncertainty.",
+      "llm_tldr_cn": "为解决多模态情绪识别中模态间不确定性差异问题，提出EmoEUS框架，通过显式不确定性监督和动态方差加权融合文本、音频、视觉信息，有效处理了模态冲突和噪声。",
+      "llm_tldr": "为解决多模态情绪识别中模态间不确定性差异问题，提出EmoEUS框架，通过显式不确定性监督和动态方差加权融合文本、音频、视觉信息，有效处理了模态冲突和噪声。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-8",
+      "selection_source": "carryover_cache",
+      "paper_id": "2607.18336v1",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.21908v1",
+      "source": "arxiv",
+      "title": "Unsupervised Multimodal Intent Discovery via MLLM-Guided Concept Generation and Semantic Propagation",
+      "abstract": "Unsupervised multimodal intent discovery aims to uncover latent intents from unlabeled multimodal dialogues, but remains challenging due to the lack of explicit semantic supervision. Existing methods often provide limited interpretability, as their refinement mainly relies on geometric similarity rather than high-level semantic guidance. To address these limitations, we propose MCSP, a fully unsupervised method that introduces semantic refinement based on concepts into multimodal intent discovery. To obtain reliable semantic evidence for intent discovery, we identify high-quality representative samples for each cluster and use them to support MLLM-guided contrastive reasoning against neighboring clusters, which produces interpretable high-level semantic concepts. Building on these concepts, we perform semantic propagation over a semantically weighted graph to align conceptual information with local structural consistency and generate reliable pseudo-labels for representation refinement. Extensive experiments on three challenging multimodal intent datasets show that MCSP consistently outperforms state-of-the-art methods while producing interpretable clusters grounded in semantic concepts.",
+      "authors": [
+        "Yunjin Gu",
+        "Qianrui Zhou",
+        "Hua Xu"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-07-24T02:25:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.21908v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "unsupervised multimodal intent discovery using semantic concept refinement, combining multiple modalities",
+      "llm_evidence_cn": "基于语义概念的多模态无监督表示学习与意图发现",
+      "llm_evidence": "基于语义概念的多模态无监督表示学习与意图发现",
+      "canonical_evidence": "基于语义概念的多模态无监督表示学习与意图发现",
+      "llm_tldr_en": "Introduces MCSP, a fully unsupervised framework for multimodal intent discovery that uses MLLM-guided concept generation and semantic propagation to improve interpretability and clustering.",
+      "llm_tldr_cn": "针对无监督多模态意图发现缺乏语义监督、现有方法可解释性差的问题，提出MCSP方法。它通过MLLM引导对比推理生成概念级语义证据，并在多模态对话数据上进行语义传播，从而细化聚类。实验表明该方法能更准确地发现隐含意图，并提升聚类可解释性，为多模态对话理解提供新思路。",
+      "llm_tldr": "针对无监督多模态意图发现缺乏语义监督、现有方法可解释性差的问题，提出MCSP方法。它通过MLLM引导对比推理生成概念级语义证据，并在多模态对话数据上进行语义传播，从而细化聚类。实验表明该方法能更准确地发现隐含意图，并提升聚类可解释性，为多模态对话理解提供新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.23755v1",
+      "source": "arxiv",
+      "title": "DAP-Pose: Deep Temporal Alignment and Physics-aware Cross-modal Sensor Fusion for Robust Pose Estimation",
+      "abstract": "Robust and accurate pose estimation with multi-modal sensors is fundamental for autonomous vehicles and mobile robotic systems in complex environments. In this paper, we propose DAP-Pose, a unified end-to-end model for robust multi-modal pose estimation. DAP-Pose introduces a Bi-level Cross-modal Fusion (BCF) module that captures complementary semantic and geometric motion cues from visual, inertial, and GNSS measurements. To handle temporal offsets, we designed a Deep Temporal Alignment (DTA) module that explicitly aligns asynchronous streams in latent space, enabling coherent motion modeling without strict hardware synchronization. Furthermore, we incorporate physics-aware constraints via manifold geometry and GNSS-guided absolute metric scale, enforcing motion consistency and mitigating drift. Experiments upon the public KITTI benchmark dataset were conducted to evaluate the performance of DAP-Pose against existing methods. DAP-Pose achieved the state-of-the-art performance, with the lowest average translation error ($t_{rel}$) of 1.31% and rotation error ($r_{rel}$) of 0.46$^{\\circ}$. Furthermore, it accurately estimates poses and maintains robust performance under severe artificially injected temporal misalignment.",
+      "authors": [
+        "Jianhan Lin",
+        "Yuchu Qin",
+        "Jiateng Yuan",
+        "Wenbo Zhang",
+        "Shuai Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-26T17:00:53+00:00",
+      "link": "https://arxiv.org/pdf/2607.23755v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Bi-level cross-modal fusion and temporal alignment for multimodal sensor data",
+      "llm_evidence_cn": "双层跨模态融合与时间对齐用于多模态传感器数据",
+      "llm_evidence": "双层跨模态融合与时间对齐用于多模态传感器数据",
+      "canonical_evidence": "双层跨模态融合与时间对齐用于多模态传感器数据",
+      "llm_tldr_en": "DAP-Pose proposes end-to-end multimodal pose estimation with bi-level cross-modal fusion and deep temporal alignment.",
+      "llm_tldr_cn": "针对自动驾驶与机器人系统中多模态传感器位姿估计的精度与同步问题，提出统一的端到端模型DAP-Pose。通过双层跨模态融合模块捕捉视觉、惯性、GNSS的互补语义与几何运动线索，并用深度时间对齐模块在隐空间对齐异步数据流。结合流形几何与GNSS约束实现物理感知，在复杂环境下显著提升位姿估计鲁棒性与准确性。",
+      "llm_tldr": "针对自动驾驶与机器人系统中多模态传感器位姿估计的精度与同步问题，提出统一的端到端模型DAP-Pose。通过双层跨模态融合模块捕捉视觉、惯性、GNSS的互补语义与几何运动线索，并用深度时间对齐模块在隐空间对齐异步数据流。结合流形几何与GNSS约束实现物理感知，在复杂环境下显著提升位姿估计鲁棒性与准确性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.22794v1",
+      "source": "arxiv",
+      "title": "Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training",
+      "abstract": "Automatic depression detection with deep learning has shown promise but often suffers from limited generalization due to domain shift arising from inter-speaker variability. To address this critical issue, we present the first patient-independent multimodal depression detection framework that incorporates domain generalization (DG), jointly leveraging both acoustic and textual modalities. The proposed model integrates bidirectional Long Short-Term Memory (BiLSTM) with intra- and cross-modal attention mechanisms, accompanied by segment-level fusion for decision-making. Generalization is further enhanced by applying a gradient reversal layer inspired by Domain-Adversarial Training of Neural Networks (DANN), which promotes domain-invariant representations by adversarially limiting the model's ability to identify individual speakers, effectively reducing patient-specific bias. Conducting experiments on the Androids-Corpus dataset with a 5-fold cross-validation (CV) protocol, various pairings of audio and text feature extractors were evaluated over different segment durations, determining MelSpec and ItalianBERT as the optimal baseline at a 30-second segment duration. The addition of DG to this baseline yields a 2.5% increase in accuracy and 3.3% in F1-score, achieving 93.2% accuracy, 93.2% precision, 96.2% recall, and 94.2% F1-score, surpassing all existing benchmarks. Extensive ablation studies assess the impact of multimodal fusion, deep architectural choices, and DG, highlighting their combined contribution to robust and generalizable depression detection.",
+      "authors": [
+        "Ali Tabaraei",
+        "Federico Simonetta",
+        "Stavros Ntalampiras"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "published": "2026-07-24T13:52:27+00:00",
+      "link": "https://arxiv.org/pdf/2607.22794v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "acoustic-textual fusion with cross-modal attention and segment-level fusion",
+      "llm_evidence_cn": "音频文本交叉注意力与分段融合技术",
+      "llm_evidence": "音频文本交叉注意力与分段融合技术",
+      "canonical_evidence": "音频文本交叉注意力与分段融合技术",
+      "llm_tldr_en": "Proposes a multimodal depression detection framework combining acoustic and textual modalities via BiLSTM with cross-modal attention and domain-adversarial training to improve generalization across speakers.",
+      "llm_tldr_cn": "针对抑郁检测模型在跨说话人场景下泛化能力差的问题，提出首个融合音频与文本模态的多模态域泛化框架。模型使用双向LSTM结合模态内与跨模态注意力，并采用分段融合和梯度反转层进行域对抗训练。实验表明该方法能有效缓解域偏移，提升病人独立设置下的抑郁检测性能，为多模态融合和域泛化提供了实用范式。",
+      "llm_tldr": "针对抑郁检测模型在跨说话人场景下泛化能力差的问题，提出首个融合音频与文本模态的多模态域泛化框架。模型使用双向LSTM结合模态内与跨模态注意力，并采用分段融合和梯度反转层进行域对抗训练。实验表明该方法能有效缓解域偏移，提升病人独立设置下的抑郁检测性能，为多模态融合和域泛化提供了实用范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.22013v1",
+      "source": "arxiv",
+      "title": "Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning",
+      "abstract": "Multimodal chain-of-thought (CoT) reasoning integrates visual and textual cues through step-by-step inference. In small models with limited token budgets, modality-interaction fusion often suppresses tiny cross-modal differences. In particular, multimodal CoT often struggles when different images pair with identical text or different texts pair with an identical image, making such inputs nearly indistinguishable after fusion. This study proposes Visual Saliency Steering Distillation (VSSD). VSSD leverages the attention maps of multimodal large language models to generate perturbed images that capture task-sensitive feature directions, and then applies singular value decomposition to extract dominant steering vectors to guide inter-layer distillation. Experiments on ScienceQA and M$^3$CoT demonstrate that VSSD improves rationale generation and answer inference. The code is available at https://github.com/BGWH123/VSSD.",
+      "authors": [
+        "Hao Yang",
+        "Jin Wang",
+        "Xuejie Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-24T06:22:40+00:00",
+      "link": "https://arxiv.org/pdf/2607.22013v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "addressing modality-interaction fusion suppressing cross-modal differences",
+      "llm_evidence_cn": "针对模态交互融合抑制跨模态差异的问题",
+      "llm_evidence": "针对模态交互融合抑制跨模态差异的问题",
+      "canonical_evidence": "针对模态交互融合抑制跨模态差异的问题",
+      "llm_tldr_en": "The paper addresses modality imbalance in multimodal CoT, where fusion suppresses tiny cross-modal differences. It proposes Visual Saliency Steering Distillation (VSSD), which uses attention maps of MLLMs to generate perturbed images, then extracts steering vectors via SVD to guide distillation, improving reasoning in small models.",
+      "llm_tldr_cn": "小模型在多模态思维链推理中，模态交互融合常掩盖微小的跨模态差异，导致不同图文组合难以区分。VSSD方法利用多模态大模型的注意力图生成扰动图像，经SVD提取主导引导向量，指导层间蒸馏。实验表明该方法显著改善了小模型的多模态推理能力。这为模态不平衡下的推理提供了有效的蒸馏策略。",
+      "llm_tldr": "小模型在多模态思维链推理中，模态交互融合常掩盖微小的跨模态差异，导致不同图文组合难以区分。VSSD方法利用多模态大模型的注意力图生成扰动图像，经SVD提取主导引导向量，指导层间蒸馏。实验表明该方法显著改善了小模型的多模态推理能力。这为模态不平衡下的推理提供了有效的蒸馏策略。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.23855v1",
+      "source": "arxiv",
+      "title": "OmniVAE: An Audio-Video VAE with Cross-Modal Alignment for Joint Generation",
+      "abstract": "Recent generative models are moving beyond silent video or standalone audio synthesis toward the joint generation of synchronized audio and video. Despite this progress, jointly generating audio and video with fine-grained cross-modal correspondence remains challenging due to their fundamental structural differences. Most existing methods use audio and video VAEs trained separately. As a result, the two latent spaces lack cross-modal alignment, leaving the downstream generative model to learn cross-modal synchronization from scratch. We present OmniVAE, a jointly trained audio-video VAE that learns fine-grained semantic alignment between audio and video latent representations. Beyond reconstruction, OmniVAE uses a segment-level audio-video contrastive objective to capture temporal-semantic correspondence and align the two latent spaces. In parallel, it distills features from pretrained modality-specific semantic encoders into each modality, improving the downstream learnability of both latent spaces. Extensive experiments show that both objectives consistently improve the learnability of the latent spaces, translating into higher generation quality and more accurate cross-modal synchronization in downstream text-to-audio-video generation. These findings underscore the importance of learning unified representations as a foundation for omnimodal modeling.1",
+      "authors": [
+        "Jun Zhan",
+        "Chen Yang",
+        "Yitian Gong",
+        "Donghua Yu",
+        "Kuangwei Chen",
+        "Wenbo Zhang",
+        "Kexin Huang",
+        "Qi Luo",
+        "Zhe Xu",
+        "Ying Zhu",
+        "Jin Wang",
+        "Tengyue Zhang",
+        "Qi Chen",
+        "Cheng Chang",
+        "Songlin Wang",
+        "Junqi Dai",
+        "Jiasheng Ye",
+        "Xiaogui Yang",
+        "Tianyi Liang",
+        "Xiangyu Peng",
+        "Zhaoye Fei",
+        "Shimin Li",
+        "Qinyuan Cheng",
+        "Xie Chen",
+        "Xinchi Chen",
+        "Xipeng Qiu"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "cs.CV"
+      ],
+      "published": "2026-07-26T21:51:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.23855v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal alignment between audio and video latents",
+      "llm_evidence_cn": "音频与视频潜空间的跨模态对齐",
+      "llm_evidence": "音频与视频潜空间的跨模态对齐",
+      "canonical_evidence": "音频与视频潜空间的跨模态对齐",
+      "llm_tldr_en": "OmniVAE is a jointly trained audio-video VAE that learns fine-grained semantic alignment between latent representations.",
+      "llm_tldr_cn": "针对音频与视频联合生成中跨模态对应困难、潜在空间缺乏对齐的问题，提出OmniVAE，一种联合训练的音频-视频VAE。通过段级音视频对比学习，在重建之外学习细粒度的音频-视频语义对齐。该方法使下游生成模型能够利用对齐的潜在空间，更有效地生成同步的音频和视频内容。",
+      "llm_tldr": "针对音频与视频联合生成中跨模态对应困难、潜在空间缺乏对齐的问题，提出OmniVAE，一种联合训练的音频-视频VAE。通过段级音视频对比学习，在重建之外学习细粒度的音频-视频语义对齐。该方法使下游生成模型能够利用对齐的潜在空间，更有效地生成同步的音频和视频内容。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.23181v1",
+      "source": "arxiv",
+      "title": "Towards Dual-Brain Minimal Sufficient Representation for Vision-Language Navigation",
+      "abstract": "Vision-and-Language Navigation in continuous environments (VLN-CE) requires an agent to ground language in egocentric observations and plan in unseen scenes. Although recent multimodal large models and world-model-based methods have improved navigation, they often preserve excessive task-irrelevant detail, weakening generalization and increasing computational burden. We propose BrainNav, a navigation framework grounded in the Principle of Minimal Sufficiency. BrainNav consists of three components: a Logical Anchor Model that implements instruction-aware selective perception to suppress environmental noise, a Minimalist Constraint Alignment module that serves as a compact cross-modal bottleneck, efficiently synchronizing discrete linguistic intent with continuous latent dynamics while filtering out redundant information, and a Compression World Model that predicts action-conditioned states within a condensed, low-rank latent space. These modules align semantic intent with spatial perception, enhancing the agent's robustness and efficiency in complex tasks. Experiments show that BrainNav improves over prior SOTA by 2.0 % / 1.0 in SR/SPL on R2R-CE val-unseen and 0.94 % / 0.78 on RxR-CE val-unseen. These results indicate that minimally sufficient world representations provide an effective foundation for robust VLN.",
+      "authors": [
+        "Yihao Wu",
+        "Chenyi Xu",
+        "Liqi Yan",
+        "Chenhuan Cai",
+        "Geyong Min",
+        "Bin Lin",
+        "Fangli Guan",
+        "Jianhui Zhang",
+        "Pan Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-25T12:26:47+00:00",
+      "link": "https://arxiv.org/pdf/2607.23181v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Cross-modal bottleneck alignment and minimal sufficient representation for vision-language navigation",
+      "llm_evidence_cn": "面向视觉语言导航的跨模态瓶颈对齐与最小充分表示",
+      "llm_evidence": "面向视觉语言导航的跨模态瓶颈对齐与最小充分表示",
+      "canonical_evidence": "面向视觉语言导航的跨模态瓶颈对齐与最小充分表示",
+      "llm_tldr_en": "BrainNav applies the Principle of Minimal Sufficiency to VLN-CE, using instruction-aware selective perception, a compact cross-modal bottleneck for alignment, and world-model-based planning to reduce task-irrelevant detail and improve generalization in unseen scenes.",
+      "llm_tldr_cn": "视觉语言导航中，智能体需要将语言指令与第一人称观测对齐，但现有方法常保留过多无关细节。为此BrainNav提出最小充分表示原则，逻辑锚定模型实现指令感知的选择性感知，极简约束对齐模块作为紧凑跨模态瓶颈同步语言和视觉信息，并借助世界模型规划。在连续环境VLN-CE上的实验显示，该方法增强了泛化能力并降低计算负担，为跨模态导航表示学习提供了有效框架。",
+      "llm_tldr": "视觉语言导航中，智能体需要将语言指令与第一人称观测对齐，但现有方法常保留过多无关细节。为此BrainNav提出最小充分表示原则，逻辑锚定模型实现指令感知的选择性感知，极简约束对齐模块作为紧凑跨模态瓶颈同步语言和视觉信息，并借助世界模型规划。在连续环境VLN-CE上的实验显示，该方法增强了泛化能力并降低计算负担，为跨模态导航表示学习提供了有效框架。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2607.22531v1",
+      "source": "arxiv",
+      "title": "Twins: Learn to Predict Unified Representations with Focal Loss",
+      "abstract": "Unified multimodal models seek a shared visual token space that supports both multimodal understanding and image generation. Discrete methods unify the interface via a shared codebook, whereas continuous pipelines often rely on two disparate representations -- semantic features (e.g., ViT) for understanding and low-level latents (e.g., VAE) for synthesis -- resulting in mismatched latent spaces. We propose Twins, a unified continuous token space formed by channel-wise concatenating ViT and VAE features on the same token grid, so the sequence length is unchanged and attention cost does not increase. However, jointly modeling Twins in a Diffusion Transformer exposes a severe optimization imbalance: the model fits the ViT component well but struggles to match the VAE latent distribution. We trace this imbalance to three sources of heterogeneity: frequency bias, intrinsic dimensionality, and condition-aligned vs condition-independent uncertainty. To address it, we adapt a focal regression objective for flow matching that upweights large-error VAE dimensions, better balancing optimization across the ViT and VAE components. On ImageNet, this yields up to 10.57 gFID gain over naive MSE loss without classifier-free guidance. Twins also performs competitively on multimodal understanding benchmarks and improves reconstruction fidelity, narrowing the gap between understanding- and generation-oriented representations.",
+      "authors": [
+        "Kaixiong Gong",
+        "Xin Cai",
+        "Bin Lin",
+        "Hao Wang",
+        "Yunlong Lin",
+        "Mingzhe Zheng",
+        "Bohao Li",
+        "Jian-Wei Zhang",
+        "Miles Yang",
+        "Zhao Zhong",
+        "Liefeng Bo",
+        "Xiangyu Yue"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-24T17:59:39+00:00",
+      "link": "https://arxiv.org/pdf/2607.22531v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "unified multimodal representation with optimization imbalance",
+      "llm_evidence_cn": "统一多模态表示与优化不均衡问题",
+      "llm_evidence": "统一多模态表示与优化不均衡问题",
+      "canonical_evidence": "统一多模态表示与优化不均衡问题",
+      "llm_tldr_en": "Proposes a unified continuous token space by concatenating ViT and VAE features, addressing optimization imbalance via focal loss in Diffusion Transformers. Keeps sequence length unchanged and attention cost low.",
+      "llm_tldr_cn": "针对统一多模态模型中视觉理解与图像生成特征空间不匹配的问题，提出将ViT与VAE特征在通道维度拼接形成统一连续词元空间，从而在不增加序列长度的前提下实现联合建模。通过焦点损失缓解扩散Transformer中模型偏向某一成分的优化不均衡现象。实验表明该方法在不增加注意力开销的前提下提升联合建模效果，为多模态理解与生成提供统一的表征方案。",
+      "llm_tldr": "针对统一多模态模型中视觉理解与图像生成特征空间不匹配的问题，提出将ViT与VAE特征在通道维度拼接形成统一连续词元空间，从而在不增加序列长度的前提下实现联合建模。通过焦点损失缓解扩散Transformer中模型偏向某一成分的优化不均衡现象。实验表明该方法在不增加注意力开销的前提下提升联合建模效果，为多模态理解与生成提供统一的表征方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24017v1",
+      "source": "arxiv",
+      "title": "Disentangling Semantic Attention from Structural Bias in the Attention Manifold",
+      "abstract": "The empirical success of attention mechanism in Multimodal Large Language Models (MLLMs) often obscures its inherent, subtle flaws. Specifically, MLLMs consistently exhibit disproportionate attention toward certain semantically uninformative visual tokens, a phenomenon termed \"register\" or \"Visual Attention Sinks.\" While existing inference intervention methods attempt to identify these sink tokens and redistribute their attention weights, such approaches typically treat these tokens in isolation and suffer from computational inefficiency. Instead, we reframe this phenomenon as a generalized textual bias exerted over visual features that extends beyond isolated sink tokens. From this perspective, a pervasive structural bias leads to the dilution of the semantic visual signal, precipitating multimodal hallucinations as the model prioritizes linguistic priors over valid visual evidence. To address this limitation, we introduce Saliency-guided Purification and Adaptive Redistribution (SPAR), a training-free, plug-and-play intervention. SPAR mitigates this generalized textual bias by purifying structural noise and subsequently redistributing the reclaimed attention budget to the most informative visual regions. Comprehensive evaluations across a diverse spectrum of hallucination benchmarks demonstrate that SPAR effectively restores authentic visual grounding with negligible computational overhead.",
+      "authors": [
+        "Pengkun Jiao",
+        "Bin Zhu",
+        "Jingjing Chen",
+        "Yu-gang Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-27T05:30:19+00:00",
+      "link": "https://arxiv.org/pdf/2607.24017v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "attention bias in multimodal LLMs; cross-modal alignment analysis",
+      "llm_evidence_cn": "多模态大模型中的注意力结构偏差；跨模态对齐分析",
+      "llm_evidence": "多模态大模型中的注意力结构偏差；跨模态对齐分析",
+      "canonical_evidence": "多模态大模型中的注意力结构偏差；跨模态对齐分析",
+      "llm_tldr_en": "Addresses attention sinks in multimodal LLMs by reframing them as a structural textual bias over visual features, and proposes an efficient method to disentangle semantic attention from structural bias in the attention manifold.",
+      "llm_tldr_cn": "多模态大语言模型中的视觉注意力汇聚现象会使模型过度关注无语义视觉标记，现有干预方法孤立处理这些标记且计算开销大。本文将这一现象重构为文本对视觉特征施加的广义结构偏差，提出在注意力流形中解耦语义注意力与结构偏差的新方法，能够在更宏观的视角下重新分配注意力权重。实验表明所提方法能高效缓解注意力稀释问题，为多模态大模型的视觉-语言对齐提供更可靠的分析工具和可解释性支持。",
+      "llm_tldr": "多模态大语言模型中的视觉注意力汇聚现象会使模型过度关注无语义视觉标记，现有干预方法孤立处理这些标记且计算开销大。本文将这一现象重构为文本对视觉特征施加的广义结构偏差，提出在注意力流形中解耦语义注意力与结构偏差的新方法，能够在更宏观的视角下重新分配注意力权重。实验表明所提方法能高效缓解注意力稀释问题，为多模态大模型的视觉-语言对齐提供更可靠的分析工具和可解释性支持。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
