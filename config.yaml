@@ -58,6 +58,42 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-07-31T07:50:14.568Z'
+    - tag: ml
+      description: 查找多模态学习相关论文 包括模态不平衡 模态融合等
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: multimodal learning
+          keyword_cn: 多模态学习
+          query: multimodal learning methods combining different data modalities
+        - keyword: modality imbalance
+          keyword_cn: 模态不平衡
+          query: addressing modality imbalance in multimodal learning
+        - keyword: multimodal fusion
+          keyword_cn: 多模态融合
+          query: techniques for multimodal fusion in deep learning
+        - keyword: cross-modal alignment
+          keyword_cn: 跨模态对齐
+          query: cross-modal alignment representation learning
+        - keyword: multimodal representation
+          keyword_cn: 多模态表示
+          query: multimodal representation learning approaches
+        - keyword: multimodal feature fusion
+          keyword_cn: 多模态特征融合
+          query: feature-level fusion methods for multimodal inputs
+      intent_queries:
+        - query: How to handle modality imbalance in multimodal learning?
+          query_cn: 如何处理多模态学习中的模态不平衡问题？
+          enabled: true
+          source: manual
+          note: ''
+        - query: Latest techniques for multimodal fusion in neural networks
+          query_cn: 神经网络中多模态融合的最新方法
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-07-31T07:56:36.262Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
