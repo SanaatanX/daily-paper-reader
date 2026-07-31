@@ -1,0 +1,265 @@
+{
+  "date": "20260722-20260731",
+  "date_label": "2026-07-22 ~ 2026-07-31",
+  "generated_at": "2026-07-31 14:07:23 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.21371v1",
+      "route": "20260722-20260731/2607.21371v1-dinode-continuous-vision-text-alignment-for-open-vocabulary-semantic-segmentation",
+      "title": "DINOde: Continuous Vision-Text Alignment for Open-Vocabulary Semantic Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于ODE的视觉-文本连续对齐用于开放词表分割",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.22013v1",
+      "route": "20260722-20260731/2607.22013v1-visual-saliency-steering-distillation-for-multimodal-chain-of-thought-reasoning",
+      "title": "Visual Saliency Steering Distillation for Multimodal Chain-of-Thought Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "直接处理多模态思维链中的模态交互融合问题，提出显著度导向蒸馏，属多模态融合的强方法",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.23451v1",
+      "route": "20260722-20260731/2607.23451v1-multi-modal-object-re-identification-with-prompt-s6-and-semantic-aware-knowledge-guidance",
+      "title": "Multi-Modal Object Re-Identification with Prompt-S6 and Semantic-Aware Knowledge Guidance",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向目标重识别的三模态对齐与跨模态交互",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.23493v1",
+      "route": "20260722-20260731/2607.23493v1-token-region-guided-cross-attention-fusion-for-multimodal-affect-interpretation",
+      "title": "Token-Region Guided Cross-Attention Fusion for Multimodal Affect Interpretation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "视觉与OCR文本特征的跨模态多头注意力融合用于多模态情感解释",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.26023v1",
+      "route": "20260722-20260731/2607.26023v1-charm-a-multimodal-graph-foundation-model-with-hierarchical-context-modeling-for-zero-shot-transfer",
+      "title": "CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向文本与图像多模态图数据的层次上下文建模，实现零样本跨域迁移",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.19830v1",
+      "route": "20260722-20260731/2607.19830v1-vizrag-enhancing-retrieval-augmented-generation-with-hypergraph-visualization",
+      "title": "VizRAG: Enhancing Retrieval-Augmented Generation with Hypergraph Visualization",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将超图的可视化表示引入RAG流程，结合多模态大模型的视觉感知能力",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.20291v1",
+      "route": "20260722-20260731/2607.20291v1-diverse-intent-multi-turn-fashion-image-retrieval",
+      "title": "Diverse-Intent Multi-Turn Fashion Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态查询与时尚图像库的对齐",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.21546v1",
+      "route": "20260722-20260731/2607.21546v1-unda-unpaired-domain-alignment-for-cross-modal-knowledge-transfer-in-medical-imaging",
+      "title": "UnDA: Unpaired Domain Alignment for Cross-Modal Knowledge Transfer in Medical Imaging",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨模态知识迁移与注意力对齐模块，契合多模态表示学习",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.21908v1",
+      "route": "20260722-20260731/2607.21908v1-unsupervised-multimodal-intent-discovery-via-mllm-guided-concept-generation-and-semantic-propagation",
+      "title": "Unsupervised Multimodal Intent Discovery via MLLM-Guided Concept Generation and Semantic Propagation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "无监督多模态意图发现，涉及多模态语义对齐与表示学习",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.21970v1",
+      "route": "20260722-20260731/2607.21970v1-textslip-text-self-supervised-clip-for-medical-report-generation",
+      "title": "TextSLIP: Text Self-Supervised CLIP for Medical Report Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向医学报告生成的视觉语言预训练框架，通过文本自监督增强CLIP的跨模态对齐",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.22729v1",
+      "route": "20260722-20260731/2607.22729v1-open-your-models-eyes-video-and-context-aware-multimodal-backchannel-prediction",
+      "title": "Open Your Model's Eyes: Video and Context-Aware Multimodal Backchannel Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "上下文感知的多模态对齐用于反馈预测",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.19886v1",
+      "route": "20260722-20260731/2607.19886v1-mtvdiff-multimodal-conditional-latent-diffusion-for-enhanced-thermal-to-visible-face-translation",
+      "title": "MTVDiff: Multimodal Conditional Latent Diffusion for Enhanced Thermal-to-Visible Face Translation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "使用交叉注意力与门控视觉对齐进行多模态融合",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.20984v1",
+      "route": "20260722-20260731/2607.20984v1-distribution-alignment-bridge-for-uncertainty-aware-text-to-video-retrieval",
+      "title": "Distribution-Alignment Bridge for Uncertainty-Aware Text-to-Video Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态分布对齐与不确定性感知嵌入，用于跨模态检索",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.21057v1",
+      "route": "20260722-20260731/2607.21057v1-achieving-text-based-person-retrieval-with-any-granularity",
+      "title": "Achieving Text-based Person Retrieval with Any Granularity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多粒度文本-图像行人检索的基准与评估协议",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.22919v1",
+      "route": "20260722-20260731/2607.22919v1-controlling-embedding-spaces-with-text-conditioned-transformations",
+      "title": "Controlling Embedding Spaces with Text-Conditioned Transformations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提出文本条件变换控制CLIP等模型中的视觉嵌入，增强跨模态属性对齐",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    },
+    {
+      "paper_id": "2607.23855v1",
+      "route": "20260722-20260731/2607.23855v1-omnivae-an-audio-video-vae-with-cross-modal-alignment-for-joint-generation",
+      "title": "OmniVAE: An Audio-Video VAE with Cross-Modal Alignment for Joint Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "音视频联合变分自编码器与跨模态对齐，涉及多模态表示学习",
+      "first_seen_at": "2026-07-31 14:07:23 UTC",
+      "updated_at": "2026-07-31 14:07:23 UTC"
+    }
+  ]
+}
