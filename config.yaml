@@ -25,5 +25,51 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
-  intent_profiles: []
-source_backends: {}
+  intent_profiles:
+    - tag: MRE
+      description: 多模态关系抽取相关论文
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: multimodal relation extraction
+          keyword_cn: 多模态关系抽取
+          query: extracting relations from multimodal data
+        - keyword: cross-modal relation extraction
+          keyword_cn: 跨模态关系抽取
+          query: cross-modal relation extraction using vision and language
+        - keyword: multimodal information extraction
+          keyword_cn: 多模态信息抽取
+          query: information extraction from multiple modalities
+      intent_queries:
+        - query: How to combine text and images for relation extraction?
+          query_cn: 如何结合文本和图像进行关系抽取？
+          enabled: true
+          source: manual
+          note: ''
+        - query: state of the art multimodal relation extraction models
+          query_cn: 最先进的多模态关系抽取模型
+          enabled: true
+          source: manual
+          note: ''
+        - query: multimodal relation extraction benchmark datasets
+          query_cn: 多模态关系抽取基准数据集
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-07-31T07:50:14.568Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
