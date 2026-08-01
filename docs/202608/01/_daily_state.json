@@ -1,0 +1,313 @@
+{
+  "date": "20260801",
+  "date_label": "",
+  "generated_at": "2026-08-01 21:39:31 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.26720v1",
+      "route": "202608/01/2607.26720v1-cairec-calibrated-modality-imputation-for-incomplete-multimodal-recommendation",
+      "title": "CaIRec: Calibrated Modality Imputation for Incomplete Multimodal Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "针对不完整多模态数据的校准式模态插补，保持跨模态结构一致",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.22919v1",
+      "route": "202608/01/2607.22919v1-controlling-embedding-spaces-with-text-conditioned-transformations",
+      "title": "Controlling Embedding Spaces with Text-Conditioned Transformations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "针对CLIP等多模态嵌入空间，提出文本条件变换以显式暴露视觉属性，增强跨模态表示",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.24407v1",
+      "route": "202608/01/2607.24407v1-mixture-of-thought-tokens-unifying-perception-and-reasoning-for-free-form-multimodal-grounding",
+      "title": "Mixture-of-Thought-Tokens: Unifying Perception and Reasoning for Free-form Multimodal Grounding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "自由形式多模态接地，统一感知与推理",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.24683v1",
+      "route": "202608/01/2607.24683v1-co-learning-for-missing-arbitrary-modalities-in-multi-modal-classification",
+      "title": "Co-Learning for Missing Arbitrary Modalities in Multi-modal Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "协同学习框架处理任意缺失模态",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.25085v1",
+      "route": "202608/01/2607.25085v1-text-prompted-clap-learning-query-conditioned-audio-representations-via-contrastive-learning",
+      "title": "Text-Prompted CLAP: Learning Query-Conditioned Audio Representations via Contrastive Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "交叉注意力融合与对比学习实现查询条件下的音频-文本表示对齐",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.25422v1",
+      "route": "202608/01/2607.25422v1-salient-knowledge-pathways-sparse-cross-modal-routing-for-efficient-knowledge-intensive-multimodal-question-answering",
+      "title": "Salient Knowledge Pathways: Sparse Cross-Modal Routing for Efficient Knowledge-Intensive Multimodal Question Answering",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于稀疏跨模态路由的知识密集型多模态问答高效融合",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.26107v1",
+      "route": "202608/01/2607.26107v1-traceclip-recovering-local-semantics-from-patch-to-cls-contributions",
+      "title": "TraceCLIP: Recovering Local Semantics from Patch-to-CLS Contributions",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过patch到CLS贡献实现跨模态对齐表示学习",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.26947v1",
+      "route": "202608/01/2607.26947v1-progressive-multimodal-alignment-for-continual-instruction-tuning",
+      "title": "Progressive Multimodal Alignment for Continual Instruction Tuning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多模态大模型中面向投影器级跨模态表示的渐进式对齐",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.27790v1",
+      "route": "202608/01/2607.27790v1-semantic-aligned-structural-abstraction-for-multimodal-sentiment-analysis",
+      "title": "Semantic-Aligned Structural Abstraction for Multimodal Sentiment Analysis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向文本与非言语模态的语义对齐结构抽象,实现跨模态情感语义对齐",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.27959v1",
+      "route": "202608/01/2607.27959v1-fire-enhancing-mllms-with-fine-grained-context-learning-for-complex-image-retrieval",
+      "title": "FiRE: Enhancing MLLMs with Fine-Grained Context Learning for Complex Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "构建细粒度多模态五元组数据集并两阶段微调以增强多模态检索",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.28129v1",
+      "route": "202608/01/2607.28129v1-face-and-voice-cross-modal-association-with-learning-convex-feature-embedding",
+      "title": "Face and Voice Cross-modal Association with Learning Convex Feature Embedding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过凸特征嵌入刻画人脸与语音的跨模态关联",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.23052v1",
+      "route": "202608/01/2607.23052v1-similarity-is-not-logic-factored-inference-for-dual-encoder-vision-language-models",
+      "title": "Similarity Is Not Logic: Factored Inference for Dual-Encoder Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在双编码器视觉-语言模型中分离证据提取的因式推理",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.23921v1",
+      "route": "202608/01/2607.23921v1-ddvt-dynamic-dual-level-vision-transformer-fusion-network-for-answer-grounding-in-visual-question-answering",
+      "title": "DDVT: Dynamic Dual-level Vision Transformer Fusion Network for Answer Grounding in Visual Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出跨模态多尺度聚合模块，加强像素级与区域级视觉特征和文本特征的融合",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.23981v1",
+      "route": "202608/01/2607.23981v1-multimodal-semantic-probabilistic-objectness-for-open-world-object-detection",
+      "title": "Multimodal Semantic-Probabilistic Objectness for Open World Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "语言先验校准视觉目标性",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.24701v1",
+      "route": "202608/01/2607.24701v1-spatio-temporal-conditional-denoising-transformer-for-modality-missing-rgbt-tracking",
+      "title": "Spatio-Temporal Conditional Denoising Transformer for Modality-Missing RGBT Tracking",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过时空条件去噪Transformer处理RGBT跟踪中的模态缺失，重建缺失并增强弱模态",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.21970v1",
+      "route": "202608/01/2607.21970v1-textslip-text-self-supervised-clip-for-medical-report-generation",
+      "title": "TextSLIP: Text Self-Supervised CLIP for Medical Report Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在CLIP中引入模态内文本对比学习，增强跨模态对齐",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.22779v1",
+      "route": "202608/01/2607.22779v1-multimodal-surface-emg-hand-gesture-recognition-using-query-based-transformers-for-prosthetic-control",
+      "title": "Multimodal Surface EMG Hand Gesture Recognition Using Query-Based Transformers for Prosthetic Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于查询式Transformer的多模态表面肌电手势识别",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.23451v1",
+      "route": "202608/01/2607.23451v1-multi-modal-object-re-identification-with-prompt-s6-and-semantic-aware-knowledge-guidance",
+      "title": "Multi-Modal Object Re-Identification with Prompt-S6 and Semantic-Aware Knowledge Guidance",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于提示的跨模态交互与三模态对齐用于多模态目标重识别",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    },
+    {
+      "paper_id": "2607.23917v1",
+      "route": "202608/01/2607.23917v1-gaze-to-text-generation-beyond-categorical-decoding-of-human-attention",
+      "title": "Gaze-to-text Generation: Beyond Categorical Decoding of Human Attention",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于多模态大模型将凝视扫描路径解码为自然语言，实现视觉注意力与文本语义的对齐",
+      "first_seen_at": "2026-08-01 21:39:31 UTC",
+      "updated_at": "2026-08-01 21:39:31 UTC"
+    }
+  ]
+}

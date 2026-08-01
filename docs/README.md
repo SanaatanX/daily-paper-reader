@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-07-31</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-01</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 19 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-07-31 21:53:19 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-01 21:39:31 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日19篇论文聚焦多模态对齐与医学AI，精读7篇、速读12篇。最值得关注SCALPEL（9.0分）用大模型增强医学视觉-语言语义对齐，及联邦多模态图对齐框架（8.0分）。下一步可延伸探索对比学习中的几何保持与抑郁检测的域泛化方法。</p>
+<p>今日精读7篇、速读12篇，聚焦多模态推荐与文本可控嵌入空间两大主题。</p>
+<p>最值得关注CaIRec对不完整多模态推荐的校准补全方案，以及基于文本条件的嵌入空间控制方法，均获8.0以上高分。</p>
+<p>建议优先阅读精读列表中的两篇高分论文，再结合速读中的多模态对齐与情感分析文章拓展视野。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,7 +76,7 @@
     <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation">SCALPEL: Semantic Cross-modal Alignment via LLM-Powered Encoder Learning for Medical Vision-Language Representation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework">Toward Federated Multimodal Graph Foundation Models: A Topology-Aware Multimodal Alignment Framework</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion">Multimodal Ambivalence and Hesitancy Recognition via Cross-Attention and Gated Fusion</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CaIRec: Calibrated Modality Imputation for Incomplete Multimodal Recommendation">CaIRec: Calibrated Modality Imputation for Incomplete Multimodal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Controlling Embedding Spaces with Text-Conditioned Transformations">Controlling Embedding Spaces with Text-Conditioned Transformations</span></li><li><span class="dpr-home-dashboard-paper-title" title="Mixture-of-Thought-Tokens: Unifying Perception and Reasoning for Free-form Multimodal Grounding">Mixture-of-Thought-Tokens: Unifying Perception and Reasoning for Free-form Multimodal Grounding</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
@@ -87,7 +89,7 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning">Beyond Objective Expressivity: Geometry Preservation in Multimodal Contrastive Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation">EmoEUS: Uncertainty Supervision for Multimodal Emotion Recognition in Conversation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training">Multimodal Domain Generalization for Depression Detection: An Attention-Based BiLSTM Network with Domain-Adversarial Training</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Progressive Multimodal Alignment for Continual Instruction Tuning">Progressive Multimodal Alignment for Continual Instruction Tuning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Semantic-Aligned Structural Abstraction for Multimodal Sentiment Analysis">Semantic-Aligned Structural Abstraction for Multimodal Sentiment Analysis</span></li><li><span class="dpr-home-dashboard-paper-title" title="FiRE: Enhancing MLLMs with Fine-Grained Context Learning for Complex Image Retrieval">FiRE: Enhancing MLLMs with Fine-Grained Context Learning for Complex Image Retrieval</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
