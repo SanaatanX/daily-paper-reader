@@ -1,0 +1,771 @@
+Title: ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams
+
+URL Source: https://arxiv.org/pdf/2607.24707v1
+
+Published Time: Tue, 28 Jul 2026 02:23:25 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+# Ali Ansari 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA ali.ansari@temple.edu 
+
+# Yasmin Mohammadi 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA yasmin.mohammadi@temple.edu 
+
+# Farnoush Nili 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA farnoush.nili@temple.edu 
+
+# Parsa Esmaeilkhani 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA parsa.esmaeilkhani@temple.edu 
+
+# Longin Jan Latecki 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA latecki@temple.edu 
+
+# Eduard Dragut 
+
+Temple University Department of Computer and Information Sciences Philadelphia, PA, USA edragut@temple.edu 
+
+## Abstract 
+
+Entity-Relationship Diagrams (ERDs) are central to conceptual data-base design, yet they are typically available only as rendered images rather than machine-readable schemas, creating a bottleneck for AI-assisted database engineering tasks such as schema understanding, migration, documentation, and intelligent design assistance. We introduce ERUnderstand , the first large-scale benchmark for struc-tured understanding of ER diagrams, comprising 2,960 diagrams collected from curated educational sources, real-world schemas, and synthetically generated examples spanning diverse domains, multi-ple ER notations (including Chen and Silberschatz-style), varying complexity levels, and Extended Entity–Relationship (EER) con-structs. Each diagram is paired with a standardized JSON repre-sentation that enables fine-grained evaluation of entities, relation-ships, attributes, keys, weak entities, inheritance hierarchies, and other structural components. Evaluating state-of-the-art Vision– Language Models (VLMs), we find that while common ERD ele-ments are recovered reliably (F1 > 0.74), performance drops sharply on weak entities (as low as 0.28 F1), multivalued attributes (0.14 F1), and 𝑛 -ary relationships (0.07 F1). Reasoning-augmented mod-els improve overall Macro-F1 by 15–25%, but remain sensitive to linguistic priors, spatial layout biases, and increasing diagram com-plexity. ERUnderstand fills a critical gap in multimodal benchmarks by providing a standardized, executable-schema-focused resource for advancing visual-structural reasoning in database engineering. The benchmark, dataset, evaluation toolkit, and generation code are publicly available at https://github.com/salinaria/ERUnderstand. 
+
+## CCS Concepts 
+
+• Computing methodologies → Scene understanding ; • Infor-mation systems → Entity relationship models .
+
+## 1 Introduction 
+
+The growing integration of Artificial Intelligence (AI) into database systems is transforming how structured data is designed, queried, documented, and maintained [ 31 , 54 ]. Recent advances include text-to-SQL generation, schema retrieval, database copilots, auto-mated documentation, and multimodal query processing [ 18 , 27 , 29 ]. Despite this progress, one fundamental capability remains largely unexplored: enabling AI systems to understand conceptual database schemas represented as Entity–Relationship Diagrams(ERDs). ERDs remain the dominant abstraction for conceptual database design, capturing entities, relationships, integrity constraints, and inheritance structures prior to physical implementation [ 14 , 47 ]. In practice, however, these diagrams are rarely available in machine-readable form. Instead, they are predominantly distributed as ren-dered images embedded in textbooks, lecture slides, software docu-mentation, PDFs, screenshots, collaborative platforms, and online repositories [ 34 , 36 ]. While database systems can deterministically process symbolic schema representations, they cannot directly in-terpret these visual artifacts. Recovering structured schemas from ERD images is therefore a fundamental capability for AI-assisted database engineering, enabling applications such as automated schema understanding, documentation generation, legacy system modernization, schema migration, and intelligent database assis-tants. Recent Vision–Language Models (VLMs) have demonstrated re-markable capabilities in document understanding and multimodal reasoning, making them a natural candidate for extracting struc-tured information from ER diagrams [ 1 , 46 ]. However, ERDs present challenges that differ substantially from those posed by natural im-ages or conventional documents. Their semantics arise not only from textual labels, but also from formal graphical syntax, symbolic notation, spatial organization, and the topology of visual connec-tions. Correct interpretation therefore requires jointly recovering diagram elements, their semantic roles, and the structural relation-ships that define the underlying conceptual schema, rather than simply recognizing objects or reading text. Despite rapid progress in multimodal reasoning, existing bench-marks focus primarily on charts, flowcharts, scientific figures, geo-metric diagrams, and document layouts [ 32 , 38 , 50 ]. To the best of our knowledge, no benchmark systematically evaluates the struc-tured understanding of conceptual database schemas represented as ER diagrams. Existing datasets emphasize visual perception or arXiv:2607.24707v1 [cs.AI] 27 Jul 2026 Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut                    
+
+> •Ternary relationship: “CCI” .
+> •Composite attribute: “Dept_date” .
+> •Weak entity :“INTERVIEW” (double line).
+> •Weak relationship :“CCI” (double line).
+> •Partial key :“Dept_date” (dashed underline).
+> •PKs :“Name” ,“Cname” (underline).
+
+Figure 1: A sample ERD shown in Chen’s (left) and Silberschatz’s notations (right). 
+
+high-level document comprehension, whereas database engineering applications require reconstructing executable, machine-readable schema representations that can be directly consumed by down-stream tools. This disconnect has limited our ability to measure and improve multimodal reasoning for conceptual database design. To address this gap, we introduce ERUnderstand, the first large-scale benchmark for structured understanding of Entity–Relationship Diagrams (ERDs). The benchmark comprises 2,960 diagrams col-lected from three complementary sources: (i) educational ERDs curated from authoritative textbooks and instructional materials, covering multiple ER notations and rich conceptual modeling con-structs; (ii) production schemas automatically extracted from widely used database benchmarks and real-world systems, including Spider, BIRD, Northwind, AdventureWorks, Sakila, Chinook, Pagila, Em-ployees, ClassicModels, and representative property-graph schemas; and (iii) synthetically generated ERDs produced through an LLM-assisted Graphviz pipeline, enabling controlled variation in domain, notation, structural complexity, and Extended Entity–Relationship (EER) constructs. Each diagram is paired with a standardized machine-readable JSON representation, enabling fine-grained evaluation of schema recovery at the level of entities, relationships, attributes, keys, weak entities, inheritance hierarchies, and other structural components. Unlike answer-based evaluation, this representation allows pre-cise analysis of where multimodal systems succeed or fail when reconstructing conceptual database schemas. ERDs present a uniquely demanding multimodal reasoning task. Correct interpretation requires substantially more than recognizing graphical symbols or reading text: models must jointly infer topol-ogy, semantic roles, notation-dependent conventions, and struc-tural constraints while preserving the integrity of the underlying conceptual graph. Figure 1 illustrates this challenge. Although the diagram contains only a handful of entities, accurately recover-ing the schema requires reasoning over graphical syntax, spatial connectivity, symbolic notation, and relational structure. As our experiments demonstrate, even state-of-the-art Vision–Language Models frequently recognize individual components while failing to reconstruct the complete conceptual schema. Unlike existing multimodal benchmarks that primarily evaluate visual question answering, document understanding, or caption gen-eration, ERUnderstand evaluates the recovery of executable sym-bolic database schemas, making it directly relevant to AI-assisted database engineering. Specifically, this paper makes the following contributions: 
+
+• The ERUnderstand Benchmark. We introduce the first large-scale benchmark for structured understanding of ER diagrams, comprising 2,960 diagrams spanning educational examples, pro-duction database schemas, and synthetically generated ERDs across diverse domains, multiple ER notations, and advanced EER constructs. 
+
+• A Standardized Evaluation Framework. We provide a uni-fied JSON schema, high-quality annotations, structure-aware evaluation metrics, an open-source evaluation toolkit, and re-producible benchmark protocols for fine-grained assessment of schema recovery. 
+
+• Comprehensive Benchmarking of VLMs. We establish the first systematic benchmark of state-of-the-art Vision–Language Models on conceptual database diagram understanding, provid-ing strong baselines for future research. 
+
+• Insights into Multimodal Structural Reasoning. Through ex-tensive analysis, we identify persistent failure modes in current VLMs—including higher-order relationships, notation-dependent semantics, spatial reasoning, and increasing structural complex-ity—highlighting key challenges for future multimodal systems operating on conceptual database schemas. 
+
+## 2 Related Work 
+
+Diagrams encompass diverse visual representations; we focus on 
+
+diagrams as structured visual languages , where graphical elements follow conventions that support logical reasoning [ 10 , 26 , 45 ]. Since Chen’s introduction of the ER model [ 14 ], ERDs have served as formal languages with well-defined syntax and semantics [ 21 , 41 ]. Their precise encoding of database schemas makes them a com-pelling testbed for distinguishing visual-structural reasoning from pattern matching in VLMs. Recent work has evaluated VLMs on a range of diagram under-standing tasks. IconQA [ 32 ] studies abstract visual reasoning, while CSDia [ 51 ] and flowchart benchmarks [ 9 , 39 , 53 ] focus on geomet-ric and procedural diagrams. In parallel, SO-Bench, ExtractBench, OmniSch, and recent VLM-to-BPMN JSON extraction pipelines evaluate schema-grounded or diagram-to-graph structured output in UI, document, chart, PCB schematic, and workflow settings. Om-niSch is especially close in spirit because it compares VLMs against a classical OCR/detector/heuristic baseline for schematic-to-netlist reconstruction. These efforts are complementary: they do not target ER/EER semantics such as weak entities, identifying relationships, ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+Figure 2: Four-stage pipeline for synthetic ERD generation. 
+
+𝑛 -ary relationships, and inheritance hierarchies, which require dis-tinct annotation and evaluation machinery. Within the database community, diagrammatic representations have long been central to schema design and query interfaces, in-cluding Query by Diagram [ 5 ], visual query systems [ 43 ], and tools such as ViziQuer [ 37 ]. Prior work has also explored visual encodings of SQL queries [ 20 , 30 ]. However, despite this extensive literature, the ability of modern VLMs to interpret ERDs as structured data modeling artifacts has not been systematically studied. 
+
+## 3 The ERUnderstand Benchmark 
+
+ERUnderstand is a benchmark for evaluating the ability of VLMs to recover structured database schemas from ERD images. Unlike existing diagram and document understanding benchmarks that fo-cus primarily on recognition or question answering, ERUnderstand evaluates structured schema reconstruction by comparing model outputs against machine-readable ground-truth representations. Each ERD is paired with a standardized JSON schema encoding en-tities, attributes, relationships, keys, and EER constructs, enabling fine-grained evaluation of individual structural components under a unified scoring framework. The benchmark contains 2,960 ERDs collected from three com-plementary sources: (1) curated conceptual ERDs from educational materials and online repositories, (2) real database schemas ex-tracted from widely used benchmarks and open-source systems, and (3) synthetic ERDs generated through an LLM-assisted Graphviz pipeline. Together, these sources provide complementary evaluation settings covering conceptual modeling, realistic database structures, and controlled stress-testing of multimodal structural reasoning. Table 1 shows the statistics of the ERUnderstand dataset. 
+
+## 3.1 Curated ERD Collection 
+
+Data Collection and Representation. We collected 182 ER di-agrams from publicly available educational resources, including database textbooks, course materials, and online repositories. After removing duplicates and manually filtering low-quality examples, the collection contains 148 unique high-quality conceptual ERDs. To ensure reproducibility while respecting copyright restrictions, we release source references and metadata rather than redistributing the original images. To evaluate robustness across visual representations, each under-lying ERD schema is rendered using multiple graphical styles, in-cluding original source representations and standardized Graphviz renderings. This results in 740 diagram instances from the cu-rated collection, covering multiple ER notations such as Chen and Silberschatz-style variants. 
+
+Structured Annotation. Each diagram is converted into a uni-fied JSON representation describing entities, attributes, relation-ships, cardinalities, primary keys, weak entities, identifying rela-tionships, inheritance hierarchies, and other EER constructs. This representation enables automatic regeneration of diagrams and sup-ports element-level evaluation beyond surface-level text matching. 
+
+Annotation Quality. To measure annotation reliability, we conducted a double-annotation study on 30 curated ERDs (15 web-sourced and 15 textbook diagrams). Two annotators independently converted each diagram into the benchmark JSON format using the same annotation guidelines. Agreement was measured using the structure-aware Macro-F1 metric used throughout the benchmark evaluation, resulting in an average agreement score of 0.897; exactly 21 diagrams required joint review, primarily due to ambiguous notation or low-resolution images. Only finalized annotations are included in the released benchmark. 
+
+## 3.2 Real Database Schemas 
+
+To complement conceptual ERDs, ERUnderstand includes 179 real database schemas automatically extracted from widely used data-base benchmarks and open-source systems. The collection includes Spider, BIRD, Northwind, AdventureWorks, Sakila, Chinook, Pag-ila, Employees, ClassicModels, and representative property-graph schemas from domains such as recommendation systems, social networks, fraud detection, and knowledge graphs. Unlike conceptual ERDs, these schemas are derived from exist-ing database structures and therefore primarily contain entities, attributes, primary keys, and binary relationships, with limited representation of advanced EER constructs. All schemas are con-verted into the unified JSON representation and rendered using a standardized Graphviz style. This tier provides realistic database Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Table 1: Statistics of the ERUnderstand benchmark. Educational ERDs include five visual representations for each underlying schema. Production schemas are rendered in a single standardized Graphviz notation.                                                                                                   
+
+> Category Num Ents Rels Attrs W.Ent W.Rel N-ary IS-A Deriv Comp Mult PKs
+> Web 500 2,955 2,625 10,640 80 45 150 85 45 220 125 1,320 Instructional 240 1,235 820 2,785 100 110 70 210 580 55 670 Production Schemas 179 1,036 995 5,426 0000000836 Easy 597 2,409 2,325 8,445 441 447 432 00002,490 Medium 796 4,048 3,776 18,536 920 860 656 36 644 744 748 4,188 Hard 597 4,533 4,377 19,530 1,164 927 546 156 522 612 579 4,617 High IS-A 51 1,199 387 1,494 80 62 29 283 16 25 21 392
+> Total 2,960 17,415 15,305 66,856 2,785 2,451 1,883 770 1,232 1,681 1,528 14,513
+
+structures with an average of 46.4 structural elements per diagram, complementing the conceptual modeling focus of the curated col-lection. 
+
+## 3.3 Synthetic ERD Generation 
+
+To provide controlled evaluation across different levels of structural complexity, we develop a scalable synthetic generation pipeline grounded in the distributions observed in the curated collection. The released benchmark uses fixed random seeds for reproducibility, while the generation framework enables future extensions and anti-overfitting evaluations. The generation process consists of four stages: generating domain-specific database scenarios, converting scenarios into structured JSON schemas, rendering ER diagrams using Graphviz, and assign-ing difficulty levels based on structural complexity and EER charac-teristics. The synthetic collection systematically varies schema size, relationship arity, hierarchy depth, spatial layout, and advanced constructs including weak entities, identifying relationships, inher-itance hierarchies, composite attributes, and multivalued attributes. The synthetic subsets are designed to complement the limita-tions of the curated and production collections. Easy and medium subsets follow the scale and complexity distribution of common educational ERDs, while hard subsets introduce substantially larger schemas with richer EER structures. By increasing the frequency of challenging constructs that occur less frequently in real collec-tions, the synthetic component enables targeted analysis of VLM capabilities under controlled conditions. Unlike static benchmarks, the synthetic generation pipeline al-lows new schemas, domains, and structural variations to be pro-duced while maintaining the same annotation and evaluation frame-work. This enables reproducible testing of multimodal reasoning capabilities across factors such as diagram complexity, topology, and notation variation. Figure 2 illustrates the generation pipeline. 
+
+## 4 Evaluation Methodology 
+
+We evaluate ERD understanding using two complementary metrics: a structure-aware fractional F1-score for fine-grained correctness and BLEU for sequence-level similarity, capturing both structural accuracy and overall output quality. 
+
+Fractional F1-Score. Our main metric is a fractional F1-score, designed for structured outputs with interdependent elements. Un-like standard F1 [ 17 ], it accounts for partial correctness , allowing partially correct predictions. Structural errors (e.g., incorrect rela-tionships, cardinalities, or attribute assignments) are assigned 0.5 weight as both False Positive (FP) and False Negative (FN), follow-ing a standard partial-credit heuristic. We use greedy matching to align predicted elements with ground truth based on label similarity before evaluating structural properties; Appendix B gives prompt-ing, normalization, and a worked 𝑛 -ary example. We compute F1 separately for entities, relationships, attributes, weak entities/re-lationships, and primary keys. Relationship scoring accounts for missed, extra, misconnected, and incorrect predictions: 
+
+𝑇 𝑃 rel = #relations − Rel missed − Rel miscon − N-ary (1) 
+
+𝐹 𝑃 rel = Rel extra + Rel miscon + Cardinality + N-ary 
+
+2 (2) 
+
+𝐹 𝑁 rel = Rel missed + Rel miscon 
+
+2 , F1 rel = 2𝑇 𝑃 rel 
+
+2𝑇 𝑃 rel + 𝐹 𝑃 rel + 𝐹 𝑁 rel 
+
+(3) Invalid or unparsable JSON outputs are scored as empty pre-dictions; we additionally track valid-JSON coverage separately in Appendix B. 
+
+BLEU and Graph Edit Distance (GED). We use BLEU [ 40 ]to measure similarity between predicted and ground-truth JSON outputs, providing a sequence-level complement to structural eval-uation. To reduce sensitivity to ordering, we deterministically sort entities, relationships, and attributes before computing BLEU with NLTK [ 12 ]. We additionally evaluate predictions using Graph Edit Distance (GED) [ 19 ], which measures the minimum number of graph edit operations required to transform a predicted graph into the ground-truth graph. While GED provides a topology-aware metric, we found that it offers limited additional insight beyond Fractional F1, as small local mismatches can propagate into dis-proportionately large penalties in dense ERDs. We therefore use GED as a complementary structural metric rather than a primary evaluation measure. 
+
+## 5 Failure Mode Analysis 
+
+We analyze the failure modes underlying aggregate performance through controlled experiments. We identify three recurring struc-tural biases (i.e., spatial bias, linguistic prior dependence, and com-plexity collapse) that appear consistently across both open- and closed-source models. These patterns suggest recurring weaknesses ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+Figure 3: (a) An example test ER image. (b) The attention map of the top left part for the query What entities is ’has’ connected to directly? , generated in the way similar to [2]. 
+
+shared across model families rather than vendor-specific behavior and provide context for the quantitative results in Section 6. 
+
+Spatial Bias: Insensitivity to Visual Fidelity. We observe a consistent performance gap between curated and synthetic ERDs, with curated diagrams underperforming despite higher visual qual-ity (Macro-F1: 0.59 vs. 0.67 ; BLEU: 0.35 –0.41 vs. 0.40 –0.48 ). To isolate the effect of visual fidelity, we regenerate curated ERDs from the same underlying JSON using Graphviz, producing seman-tically identical diagrams in three notational styles. If visual fidelity were the dominant factor, these renderings would improve perfor-mance. Instead, results remain largely unchanged across notations. For Web ERDs, Macro-F1 varies narrowly between 0.62 and 0.66 ,while Instructional ERDs range from 0.60 to 0.67 . Component-level performance is similarly stable, with entity extraction reaching up to 0.97 , relationship detection up to 0.85 , and attribute recognition up to 0.94 , independent of notation. These results indicate that vi-sual fidelity does not explain the curated–synthetic gap, motivating analysis of semantic and structural factors. 
+
+Linguistic Prior Dependence. To assess whether semantic context influences ERD understanding, we evaluate the synthetic dataset across 10 thematic categories spanning 20 domains, test-ing whether VLMs rely on domain familiarity to compensate for weaknesses in structural reasoning. Across all categories, Macro-F1 exhibits minimal variance. In the Easy tier, scores range from 0.77 
+
+(Legal) to 0.83 (Education), averaging 0.80 , with similar stability in Medium and Hard settings ( 0.72 and 0.67 ). No domain consistently outperforms others. These results indicate that ERD interpretation errors are largely independent of semantic domain, revealing limi-tation in structural reasoning than reliance on domain knowledge. 
+
+Complexity Degradation. To test scalability, we evaluate mod-els on highly complex ERDs (20+ entities and relationships), using a subset of 19 diagrams meeting this criterion. Performance degrades across most models, with Macro-F1 dropping to 0.035 –0.048 and relationship scores near zero (as low as 0.009 ). In contrast, Gem-ini models remain substantially more robust: Gemini-2.0 achieves 
+
+0.428 Macro-F1, while Gemini-2.5 reaches 0.695 with strong perfor-mance across entities and relationships. These results show a clear scalability limit in most VLMs, with sharp degradation beyond a complexity threshold, while Gemini models maintain significantly higher performance on dense visual structures. 
+
+Spatial Proximity Bias in ERDs. Observations 1 and 2 reveal a consistent gap between entity and relationship understanding: models achieve high F1-scores for entities (0.90) but perform sub-stantially worse on relationships (15% drop on curated data, 10% on synthetic). Error analysis shows two recurring patterns: hallu-cinated relationships between spatially proximate entities (false positives) and missed relationships between distant but correctly connected entities (false negatives), indicating failures in spatial reasoning rather than semantics. We hypothesize that models exhibit spatial proximity bias in-ferring relationships based on visual closeness while ignoring dia-gram logic and missing distant yet valid connections. Figure 3(a) illustrates this effect: Qwen hallucinates the relation (Train has Seat Availability), with entities and relation name shown in green circles, while ignoring the true connections (Zone has Station). The hallucinated relation is semantically plausible (“Train has seat availability”), whereas the correct relation is visually grounded, suggesting reliance on superficial cues. To verify this hypothesis, we analyze the attention patterns using Qwen. Figure 3(b) shows the attention map for the query What entities are directly connected to ‘has’? The model fails to attend to the entity Station or the connecting edge, suggesting limited attention to the relevant connecting edges and entities. This bias is further supported by distance analysis. As shown in Figure 4, hallucinated relationships (EXTRA) occur predominantly between nearby entities, while missed relationships (MISSED) are more likely between distant ones. The separation in mean distances (dashed lines) highlights this divergence. These findings suggest that current VLMs rely heavily on spatial heuristics rather than explicit visual connectivity. Addressing this Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Figure 4: Distribution of distances for extra and missed rela-tionship errors, highlighting spatial localization. 
+
+limitation likely requires architectural improvements in modeling explicit visual connectivity rather than more training data. 
+
+Prior-Language Bias in ERDs. The spatial bias analysis shows that models hallucinate relationships between nearby entities while missing valid distant ones. However, distance alone cannot explain why some hallucinations are preferred. For example, the relation 
+
+Train has Seat Availability is inferred while Zone has Station is ignored despite clear visual links (Figure 3(a)), suggesting reliance on semantic plausibility. We hypothesize that VLMs depend on prior-language infor-mation, like familiar entity names, relationship patterns, and co-occurrence statistics, when interpreting ERDs, reflecting reliance on learned visual–linguistic associations [ 1, 46 ] rather than fully grounded structural reasoning. To isolate this effect, we design nam-ing strategies disrupting linguistic cues while preserving structure: 
+
+• Context-Free (CF) : Replace all labels with random random 4-letter strings (e.g., zebc, muxz, aydf). This strategy aims to remove semantic content, encouraging VLMs to rely solely on the semantic content conveyed through diagrammatic notation rather than linguistic cues. 
+
+• Label Permutation (LP) : Randomly shuffle labels across en-tities, attributes, and relationships, preserving vocabulary but breaking semantic alignment. For example, a relationship label such as triggers may be reassigned as an entity name, while 
+
+username may become a relationship label. This manipulation disrupts label-role alignment and serves as a controlled probe of reliance on linguistic cues. We evaluate both settings on 200 medium-complexity ERDs. Fig-ure 5 reports average F1 per diagram. Under CF (blue bars), all models exhibit significant performance drops, confirming strong reliance on linguistic cues. Reasoning models (right of the dashed line) are more robust, with smaller declines (e.g., GPT-5.4: −0.08 ,Claude-4.6: −0.20 ), while non-reasoning models degrade substan-tially (e.g., Claude-4.5: −0.35 , Gemini-3.0-flash: −0.65 ). Under LP (red bars), performance again declines across all models, indicat-ing sensitivity to disrupted label-role alignment. Drops range from 
+
+−0.27 (Gemini-3.0) to −0.49 (Claude-4.6), with non-reasoning mod-els showing similarly large degradation (e.g., Qwen-3.5 −0.51 ). These results demonstrate a strong dependence on prior-language information for inferring ERD structure. While reasoning models Qwen-3.5 
+
+> Claude 3.5
+> Gemini 3.0 Flash
+> GPT 4o
+> Grok-2 Vision
+> GPT 5.4
+> Gemini 3 Pro
+> Claude 4.6 Sonnet
+> Model
+> 0.0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> F1 Score
+> Original
+> Context Free
+> Label Perumutation
+
+Figure 5: F1-scores across Original, CF, and LP settings. Rea-soning models show smaller drops under label perturbations, suggesting greater robustness to disrupted contextual cues. 
+
+are more resilient, most VLMs rely heavily on linguistic patterns rather than diagrammatic structure, limiting generalization to un-familiar domains or naming conventions. Notably, GPT-5.4’s rel-atively stable performance across conditions suggests greater ro-bustness to prior-language perturbations and a stronger reliance on diagrammatic structure. 
+
+Hierarchy Tracing Failure. We observe a sharp drop in IS-A relationship performance when semantic cues are removed. To isolate visual hierarchy tracing, we construct IS-A-only diagrams containing only superclass–subclass links. This subset includes 32 diagrams. Performance degrades sharply across most models: for example, GPT-4o drops from 0.96 to 0.12 and Gemini-2.5 from 0.94 to 0.07, while entity recognition remains high. This indicates that models can detect entities but struggle to infer correct hierarchy direction. Overall, results suggest that IS-A predictions in standard ERDs rely heavily on contextual and semantic cues, degrading significantly when models must rely purely on visual structure. 
+
+Primary Key Bias: Naming vs. Visual Cues. We investigate whether models identify primary keys (PKs) using visual cues (e.g., underlines) or naming conventions (e.g., _id ). Controlled experi-ments show strong dependence on naming patterns. Altering nam-ing conventions substantially degrades performance (missed PKs increase from 40.75 to 105.50), while removing visual cues leads to widespread hallucination (up to 479.62 extra PKs). Misleading naming further amplifies errors (979.88 missed, 799.25 extra). These results indicate a bias toward naming conventions over visual nota-tion in PK identification. This explains the gap between synthetic and curated datasets: models fail to reliably interpret visual PK cues, reducing robustness in real-world ERDs. 
+
+Limits of Interactive Prompting. To assess whether VLM errors can be mitigated through interaction, we evaluate iterative prompting. We select 30 diagrams spanning multiple difficulty lev-els using three models (Grok, Gemini, and Claude), We use a stan-dardized initial prompt followed by targeted follow-up queries. To avoid biasing model responses, we adopt an indirect questioning strategy (e.g., asking models to list weak relationships instead of confirming specific ones). This encourages independent reassess-ment rather than reliance on suggested corrections. Interactive prompting improves performance across all models, particularly for missed elements. For example, Grok reduces missed attributes by 25.9% and missed relationships by 57.1%, while Claude achieves the largest overall error reduction (39.9%), including an 84.2% decrease ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+in hallucinated primary keys. However, improvements are not uni-form. Errors related to structural reasoning, such as incorrect con-nections and misinterpretation of visual notation (e.g., multivalued attributes), persist after interaction, and in some cases, additional di-alogue introduces new errors. Overall, interactive prompting helps recover overlooked elements but has limited impact on deeper rea-soning failures, suggesting that while dialogue refines attention, it cannot compensate for limited spatial and structural understanding. 
+
+## 6 Overall Performance on ERUnderstand 
+
+The analyses in Section 5 identify recurring failure patterns in ERD understanding, including spatial proximity bias, reliance on linguis-tic cues, and degradation under increasing diagram complexity. We now quantify how broadly these patterns manifest across models and datasets. Table 2 reports Macro-F1 and BLEU scores across all settings, including the 179-diagram Schema tier of real-world production database schemas, showing consistent performance degradation across difficulty tiers and diagram sources. We evaluate ten state-of-the-art VLMs under identical zero-temperature settings. Following prior work, we distinguish between 
+
+reasoning models that employ explicit reasoning or reinforcement-based inference mechanisms, and non-reasoning models based on standard single-pass decoding. Evaluated systems include commer-cial models such as ChatGPT-5.4 [ 35 ], Gemini-3.0 [ 3], Claude-4.6-Sonnet [ 8 ], and Grok-2-Vision [ 52 ], alongside open-source models including Llama-3.2-90B Vision, Qwen-3.5-35B [ 49 ], Gemma-3-27B, and GLM-4.5. 
+
+Observation 1: VLMs Exhibit Partial but Inconsistent ERD Comprehension. Models achieve strong performance on semantic content but weaker consistency on structured outputs. This gap is reflected in higher BLEU scores relative to Macro-F1 (Table 2), par-ticularly on curated ERDs. On the synthetic dataset, models achieve BLEU scores between 0.69 and 0.81 and Macro-F1 between 0.52 and 0.73. On curated ERDs, BLEU drops to 0.42–0.64, while Macro-F1 remains relatively stable (0.57–0.64). This asymmetry suggests that models extract textual content effectively but struggle with structural consistency. Slightly improved performance on curated ERDs in Silberschatz notation indicates that more regular layouts reduce structural errors. On the Schema tier, BLEU (0.56–0.59) and Macro-F1 (0.72–0.75) track each other closely (Pearson 𝑟 = +0.98 ), tighter than on any curated or synthetic tier – consistent with Schema’s flat, low-vocabulary JSON structure leaving less room for the semantic/structural split seen elsewhere. Overall, these re-sults highlight a gap between semantic extraction and structural understanding. 
+
+Observation 2: VLMs Struggle with EER Elements. Perfor-mance varies significantly across ERD components, with strong results on basic elements and substantial degradation on struc-turally complex ones. Table 3 reports average F1 scores across EER elements, revealing large disparities. Entities and attributes are recognized reliably, with F1 scores around 0.90 on curated ERDs and 0.95 on synthetic ERDs. In contrast, performance drops for relationships and connectivity by approximately 15% on curated ERDs and 10% on synthetic ERDs. More complex elements exhibit sharper declines: multivalued attributes remain below 0.20 F1 for non-reasoning models, N-ary relationships fall below 0.1, and weak entities and relationships show consistently low recognition. Rea-soning models improve performance but still struggle on these elements. These results indicate that VLMs perform well on label-driven components but struggle to recover visually encoded struc-tural semantics. Language priors often compensate when visual recognition fails, producing systematic errors on elements such as N-ary relationships, IS-A hierarchies, and derived attributes. This pattern motivates the controlled analyses in Section 5. The Schema tier offers a useful contrast: despite averaging 46.4 el-ements per diagram – far larger than any curated tier – its Macro-F1 (0.72–0.75) exceeds Web/Instructional performance. Schema dia-grams contain zero weak entities, weak relationships, 𝑛 -ary rela-tionships, IS-A hierarchies, or derived/composite/multivalued at-tributes, since these constructs are not recoverable from relational DDL. With the EER constructs that drive the sharpest degradations above absent by construction, models are scored only on entities, attributes, primary keys, and binary relationships. Size still mat-ters within Schema, however: Pearson correlation between element count and Macro-F1 is −0.66 , and GPT-5.4-pro drops from 0.911 on the 10-element movielens schema to 0.226 on the 579-element 
+
+adventureworks schema. 
+
+Observation 3: ERD Size Matters. Model performance de-grades as diagram complexity increases, with both evaluation met-rics showing higher accuracy on simpler ERDs. Non-reasoning models experience a pronounced drop from easy to hard diagrams, while reasoning-capable models are more robust, underscoring their advantage in handling complex structural patterns. On curated ERDs from ERUnderstand, we group diagrams into five buckets by element count. Across both Chen and Silberschatz notations, performance decreases monotonically with complexity. Macro-F1 drops from 0.80 → 0.67 for Chen ERDs and from 0.82 → 0.72 for Silberschatz ERDs, corresponding to relative declines of 16 .8% and 
+
+13 .9% , respectively. The Schema tier shows the same monotonic pattern at larger absolute scale: GPT-5.4-pro’s Macro-F1 falls from 0.918 ( ≤30 elements) to 0.742 (31–60) to 0.364 (61–100) to 0.240 (101+ elements). This trend confirms ERD size is a critical factor in model performance, reflecting limitations in scaling to complex visual structures, independent of whether EER constructs exist. 
+
+GED Analysis. Overall, GED trends are broadly consistent with Fractional F1: reasoning-oriented models achieve lower edit dis-tances, while performance degrades substantially as diagram com-plexity increases. For example, GPT-5 achieves normalized GED scores of 0.074, 0.119, and 0.157 on Easy, Medium, and Hard ERDs, respectively, while Grok-2-Vision degrades from 0.363 to 0.727 and 0.891 across the same settings. Similarly, IS-A-only diagrams remain challenging despite their simplified structure, with several models exceeding normalized GED values above 1.0. On the Schema tier, GED corroborates F1 even more tightly (Pearson 𝑟 = −0.98 between Macro-F1 and normalized GED) and correlates with element count at 𝑟 = +0.63 , with GPT-5.4-pro’s mean normalized GED rising from 0.173 ( ≤30 elements) to 0.862 (101+ elements). We found that GED largely corroborates the trends already captured by Fractional F1 while providing less interpretable component-level insights due to its sensitivity to local structural mismatches in dense ERDs. 
+
+OCR Accuracy Analysis. All models achieve high label recog-nition accuracy (avg. 95.5%, max 99.6%, min >87%). These results Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Table 2: BLEU and Macro-F1 scores on synthetic and curated ERD datasets. Web-S and Instr.-S denote Silberschatz-style renderings. Gray: non-reasoning, Cyan: reasoning models. † indicates open-source. Best scores in bold. Model Easy Med Hard Web Web-S Instr. Instr.-S Schema BL F1 BL F1 BL F1 BL F1 BL F1 BL F1 BL F1 BL F1 
+
+Claude-4.6-S 0.79 0.68 0.71 0.52 0.72 0.49 0.36 0.59 0.42 0.64 0.40 0.54 0.42 0.54 0.575 0.737 GPT-5.4-chat 0.86 0.78 0.77 0.65 0.78 0.62 0.38 0.64 0.43 0.67 0.41 0.60 0.43 0.63 0.589 0.740 Gemini-3.0-f 0.87 0.79 0.75 0.60 0.78 0.60 0.40 0.64 0.42 0.67 0.42 0.59 0.41 0.57 0.577 0.739 Grok-2-v 0.70 0.66 0.55 0.42 0.48 0.34 0.23 0.48 0.28 0.51 0.35 0.53 0.30 0.48 0.562 0.720 Qwen-3.5 † 0.87 0.72 0.75 0.53 0.77 0.52 0.38 0.62 0.42 0.68 0.46 0.60 0.42 0.61 0.583 0.741 Llama-3.2 † 0.85 0.81 0.78 0.73 0.74 0.69 0.66 0.66 0.70 0.70 0.64 0.64 0.61 0.61 0.588 0.745 Gemma-3 † 0.72 0.63 0.60 0.43 0.58 0.41 0.52 0.52 0.58 0.58 0.50 0.44 0.49 0.47 0.570 0.725 
+
+Non-Reas. Avg 0.81 0.73 0.70 0.55 0.69 0.52 0.42 0.59 0.45 0.64 0.45 0.57 0.44 0.57 0.578 0.735 GPT-5.4-pro 0.92 0.92 0.86 0.84 0.84 0.79 0.43 0.68 0.46 0.70 0.51 0.70 0.51 0.71 0.593 0.749 
+
+Gemini-3.0-p 0.87 0.88 0.80 0.89 0.80 0.86 0.39 0.68 0.41 0.70 0.43 0.70 0.43 0.66 0.586 0.747 GLM-4.5 † 0.84 0.83 0.78 0.80 0.77 0.76 0.41 0.66 0.44 0.68 0.46 0.66 0.45 0.66 0.591 0.747 
+
+Reas. Avg 0.88 0.88 0.81 0.84 0.80 0.80 0.41 0.67 0.44 0.69 0.47 0.69 0.46 0.68 0.590 0.748 
+
+Table 3: Category-specific F1 Scores for EERs                                                      
+
+> Curated Synthetic Type Non Res Res Non Res Res
+> Entities 0.89 0.93 0.97 1.00
+> RegAttr 0.87 0.93 0.94 0.97
+> Relationships 0.74 0.87 0.89 0.99
+> Multivalued 0.18 0.53 0.14 0.59
+> Composite 0.34 0.86 0.38 0.92
+> Derived 0.40 0.46 0.14 0.76
+> N-ary 0.25 0.45 0.07 0.31 IS-A 0.09 0.28 0.74 0.91
+> PrimaryKeys 0.67 0.78 0.95 0.99
+> Weak-Ents 0.28 0.38 0.29 0.65
+> Weak-Rels 0.17 0.44 0.22 0.55 Macro F1 0.59 0.68 0.59 0.80
+
+suggest that text extraction is not the primary bottleneck for current VLMs on ERDs. 
+
+Open-source vs. Closed-source. Open-source models consis-tently underperform closed-source models, with larger gaps on complex ERDs, suggesting differences in training and reasoning capabilities rather than model size. The Schema tier is a partial exception: GLM-4.5 (open-source) is within 0.002 Macro-F1 of GPT-5.4-pro, and Llama-3.2 outperforms several closed-source models, suggesting the open/closed gap narrows when EER constructs are absent and the task reduces to flat schema extraction. 
+
+Robustness. Repeated evaluations over different versions of the models show minimal variation (Macro-F1 differences <4%), indicating stable and reproducible results. Overall, these findings indicate that ERD understanding is con-strained by visual–structural reasoning rather than OCR or stochas-tic variability, motivating the controlled analyses in Section 5. 
+
+## 7 Conclusion and Discussion 
+
+We introduced ERUnderstand , the first large-scale benchmark for structured understanding of Entity–Relationship Diagrams, containing 2,960 diagrams from educational, production, and syn-thetic sources. Our evaluation across ten state-of-the-art Vision– Language Models shows that while basic ERD elements are recov-ered reliably (F1: 0.89–1.00), performance degrades substantially on complex Extended ER constructs such as weak entities, multivalued attributes, and 𝑛 -ary relationships. Reasoning-augmented models improve overall Macro-F1 by 15–25%, but still exhibit systematic limitations in visual-structural reasoning. Our analysis identifies three recurring failure modes: spatial proximity bias, reliance on linguistic priors over diagram structure, and reduced robustness as diagram complexity increases. These findings demonstrate that understanding ERDs requires more than text extraction or object recognition; it requires recovering the underlying symbolic structure encoded by graphical conventions. ERUnderstand focuses on widely used ER and Extended ER no-tations, including weak entities, identifying relationships, and in-heritance structures. Future extensions could incorporate richer modeling formalisms, including UML class diagrams and emerging property-graph schema languages [ 6, 11 , 44 , 48 ], to further expand the scope of multimodal schema understanding. 
+
+Limitations. ERUnderstand enables AI-assisted schema doc-umentation, education, and accessibility research, but VLM out-puts should not replace human verification in critical settings. Our fractional F1 uses fixed partial-credit weights and greedy label alignment for interpretability; we do not compare against a clas-sical OCR/shape-detection parser; and all evaluations use zero-temperature, single-template prompting. Future work can extend ERUnderstand to broader schema languages, specialized parsing baselines, and stronger constrained-decoding protocols. ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+## References 
+
+[1] Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Floren-cia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al . 2023. Gpt-4 technical report. arXiv preprint arXiv:2303.08774 
+
+(2023). [2] Estelle Aflalo, Meng Du, Shao-Yen Tseng, Yongfei Liu, Chenfei Wu, Nan Duan, and Vasudev Lal. 2022. VL-InterpreT: An Interactive Visualization Tool for Inter-preting Vision-Language Transformers. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 21406–21415. [3] Google AI. [n. d.]. Gemini Language Model. Accessed May 5, 2025. [4] Gerard Allwein and Jon Barwise. 1996. Logical reasoning with diagrams . Oxford University Press. [5] M Angelaccio, T Catarci, and G Santucci. 1990. Query by Diagram: A fully visual query system. Journal of Visual Languages & Computing 1, 3 (1990), 255–273. [6] Renzo Angles, Angela Bonifati, Stefania Dumbrava, George Fletcher, Alastair Green, Jan Hidders, Bei Li, Leonid Libkin, Victor Marsault, Wim Martens, et al .2023. Pg-schema: Schemas for property graphs. Proceedings of the ACM on Management of Data 1, 2 (2023), 1–25. [7] Anonymous. 2025. Visual Structures Helps Visual Reasoning: Addressing the Binding Problem in VLMs. arXiv preprint arXiv:2506.22146 (2025). [8] Anthropic. 2025. Claude 3.7 Sonnet. Large language model. [9] Abdul Arbaz, Heng Fan, Junhua Ding, Meikang Qiu, and Yunhe Feng. 2024. GenFlowchart: parsing and understanding flowchart using generative AI. In 
+
+International Conference on Knowledge Science, Engineering and Management .Springer, 99–111. [10] Jon Barwise and John Etchemendy. 1995. Heterogeneous Logic. Diagrammatic reasoning: Cognitive and computational perspectives (1995), 211–234. [11] Nimo Beeren and George Fletcher. 2023. A Formal Design Framework for Practical Property Graph Schema Languages.. In EDBT . 478–484. [12] Steven Bird, Ewan Klein, and Edward Loper. 2009. Natural language processing with Python: analyzing text with the natural language toolkit . O’Reilly Media, Inc. [13] Boyuan Chen et al . 2024. SpatialVLM: Endowing Vision-Language Models with Spatial Reasoning Capabilities. arXiv preprint arXiv:2401.12168 (2024). [14] Peter Pin-Shan Chen. 1976. The entity-relationship model—toward a unified view of data. ACM transactions on database systems (TODS) 1, 1 (1976), 9–36. [15] Xuweiyi Chen, Ziqiao Ma, Xuejun Zhang, Sihan Xu, Shengyi Qian, Jianing Yang, David Fouhey, and Joyce Chai. 2024. Multi-object hallucination in vision language models. Advances in Neural Information Processing Systems 37 (2024), 44393–44418. [16] Peter C-H Cheng. 2002. Electrifying diagrams for learning: principles for complex representational systems. Cognitive Science 26, 6 (2002), 685–736. [17] Nancy Chinchor and Beth Sundheim. 1993. MUC-5 evaluation metrics. In 
+
+Proceedings of the 5th Conference on Message Understanding (Baltimore, Mary-land) (MUC5 ’93) . Association for Computational Linguistics, USA, 69–78. doi:10.3115/1072017.1072026 [18] Xiang Deng, Huan Sun, Chenyan Xiong, Yuxuan Liang, Jordan Boyd-Graber, and Yu Su. 2021. TURL: Table Understanding through Representation Learning. Proc. VLDB Endow. 14, 3 (2021), 307–319. [19] Xinbo Gao, Bing Xiao, Dacheng Tao, and Xuelong Li. 2010. A survey of graph edit distance. Pattern Anal. Appl. 13, 1 (Feb. 2010), 113–129. [20] Wolfgang Gatterbauer. 2011. Databases will visualize queries too. Proceedings of the VLDB Endowment 4, 12 (2011), 1498–1501. [21] Fausto Giunchiglia and Toby Walsh. 1992. A Theory of Abstraction. Artificial Intelligence 57, 2-3 (1992), 323–389. [22] Eric Hammer. 1995. Logic and visual information. (1995). [23] Yifan Hou, Buse Giledereli, Yilei Tu, and Mrinmaya Sachan. 2024. Do Vision-Language Models Really Understand Visual Language? arXiv preprint arXiv:2410.00193 (2024). [24] Cheng-Yu Hsu et al . 2023. Can Visual Scratchpads With Diagrammatic Abstrac-tions Augment LLM Reasoning?. In Proceedings of the Conference on Empirical Methods in Natural Language Processing .[25] Lei Huang, Weijiang Yu, Weitao Ma, Weihong Zhong, Zhangyin Feng, Haotian Wang, Qianglong Chen, Weihua Peng, Xiaocheng Feng, Bing Qin, et al . 2025. A survey on hallucination in large language models: Principles, taxonomy, chal-lenges, and open questions. ACM Transactions on Information Systems 43, 2 (2025), 1–55. [26] Mateja Jamnik. 2001. Mathematical reasoning with diagrams . University of Chicago Press Chicago. [27] Saehan Jo and Immanuel Trummer. 2024. ThalamusDB: Approximate Query Processing on Multi-Modal Data. Proc. ACM Manag. Data 2, 3, Article 186 (May 2024), 26 pages. [28] Jill H Larkin and Herbert A Simon. 1987. Why a diagram is (sometimes) worth ten thousand words. Cognitive science 11, 1 (1987), 65–100. [29] Viktor Leis, Andrey Gubichev, Atanas Mirchev, Peter Boncz, Alfons Kemper, and Thomas Neumann. 2025. Still Asking: How Good Are Query Optimizers, Really? 
+
+Proceedings of the VLDB Endowment 18, 12 (2025), 5531–5536. [30] Konstantinos Leventidis, Ayush Agarwal, Muhammad Saleem, and Wolfgang Gatterbauer. 2020. QueryVis: Logic-based diagrams help users understand com-plicated SQL queries faster. In Proceedings of the International Conference on Management of Data (SIGMOD) . ACM, 1901–1916. [31] Guoliang Li, Xuanhe Zhou, and Xinyang Zhao. 2024. Llm for data management. 
+
+Proceedings of the VLDB Endowment 17, 12 (2024), 4213–4216. [32] Pan Lu, Liang Qiu, Jiaqi Chen, Tony Xia, Yizhou Zhao, Wei Zhang, Zhou Yu, Xiaodan Liang, and Song-Chun Zhu. 2021. Iconqa: A new benchmark for ab-stract diagram understanding and visual language reasoning. arXiv preprint arXiv:2110.13214 (2021). [33] Potsawee Manakul, Adian Liusie, and Mark JF Gales. 2023. Selfcheckgpt: Zero-resource black-box hallucination detection for generative large language models. 
+
+arXiv preprint arXiv:2303.08896 (2023). [34] Junbo Niu, Zheng Liu, Zhuangcheng Gu, Bin Wang, Linke Ouyang, Zhiyuan Zhao, Tao Chu, Tianyao He, Fan Wu, Qintong Zhang, et al . 2025. Mineru2. 5: A decoupled vision-language model for efficient high-resolution document parsing. In The 64th Annual Meeting of the Association for Computational Linguistics– Industry Track .[35] OpenAI. 2023. ChatGPT Large Language Model. Accessed: 2025-04-05. [36] Linke Ouyang, Yuan Qu, Hongbin Zhou, Jiawei Zhu, Rui Zhang, Qunshu Lin, Bin Wang, Zhiyuan Zhao, Man Jiang, Xiaomeng Zhao, et al . 2025. Omnidocbench: Benchmarking diverse pdf document parsing with comprehensive annotations. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recog-nition . 24838–24848. [37] Jelena Ovčinňikiva, Rihards Balodis, and Guntis Barzdins. 2023. Diagrammatic Queries in ViziQuer. In Proceedings of the International Conference on Conceptual Modeling (ER) . Springer, 403–413. [38] Huitong Pan, Qi Zhang, Cornelia Caragea, Eduard Dragut, and Longin Jan Late-cki. 2024. Flowlearn: Evaluating large vision-language models on flowchart understanding. In ECAI 2024 . IOS Press, 73–80. [39] Huitong Pan, Qi Zhang, Cornelia Caragea, Eduard Dragut, and Longin Jan Late-cki. 2024. Flowlearn: Evaluating large vision-language models on flowchart understanding. In ECAI 2024 . IOS Press, 73–80. [40] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. Bleu: a method for automatic evaluation of machine translation. In Proceedings of the 40th annual meeting of the Association for Computational Linguistics . 311–318. [41] Atsushi Shimojima. 2015. Semantic Properties of Diagrams and Their Cognitive Potentials. Studies in Logic, Language and Information (2015). [42] Sun-Joo Shin. 1994. The logical status of diagrams . Cambridge University Press. [43] Keng Siau. 1998. Visual object-relationship query language for user-oriented database query formulation. Journal of Computer Information Systems 38, 4 (1998), 117–126. [44] Philipp Skavantzos and Sebastian Link. 2025. Entity/relationship graphs: Prin-cipled design, modeling, and data integrity management of graph databases. 
+
+Proceedings of the ACM on Management of Data 3, 1 (2025), 1–26. [45] Keith Stenning and Jon Oberlander. 1995. A cognitive theory of graphical and linguistic reasoning: Logic and implementation. Cognitive science 19, 1 (1995), 97–140. [46] Gemini Team, Rohan Anil, Sebastian Borgeaud, Jean-Baptiste Alayrac, Jiahui Yu, Radu Soricut, Johan Schalkwyk, Andrew M Dai, Anja Hauth, Katie Millican, et al . 2023. Gemini: a family of highly capable multimodal models. arXiv preprint arXiv:2312.11805 (2023). [47] Bernhard Thalheim. 2013. Entity-Relationship Modeling: Foundations of Database Technology . Springer. doi:10.1007/978-3-642-61841-3 [48] Bernhard Thalheim. 2013. Entity-relationship modeling: foundations of database technology . Springer Science & Business Media. [49] Tongyi Lab. 2023. Qwen: A Large-Scale Language Model Developed by Alibaba Cloud. Accessed: 2025-04-05. [50] Jörg von Engelhardt. 2002. The language of graphics: A framework for the analysis of syntax and meaning in maps, charts and diagrams . Yuri Engelhardt. [51] Shaowei Wang, Lingling Zhang, Xuan Luo, Yi Yang, Xin Hu, Tao Qin, and Jun Liu. 2022. Computer science diagram understanding with topology parsing. ACM Transactions on Knowledge Discovery from Data (TKDD) 16, 6 (2022), 1–20. [52] xAI. 2025. Grok 3: Artificial Intelligence Language Model. Accessed: 2025-05-05. [53] Enming Zhang, Ruobing Yao, Huanyong Liu, Junhui Yu, and Jiale Wang. 2024. First Multi-Dimensional Evaluation of Flowchart Comprehension for Multimodal Large Language Models. arXiv preprint arXiv:2406.10057 (2024). [54] Xuanhe Zhou, Chengliang Chai, Guoliang Li, and Ji Sun. 2023. Database meets AI: A survey. Journal of Database Management 35, 1 (2023), 1–45. Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+## A ERUnderstand Benchmark Details 
+
+This appendix provides comprehensive technical specifications for the ERUnderstand benchmark, detailing the ground-truth data gen-eration process and the prompts used for both dataset creation and VLM evaluation. The benchmark’s core innovation lies in pairing each ERD with a precise JSON schema that encodes all structural elements—entities, attributes, relationships, and EER con-structs—enabling fine-grained, element-level evaluation. 
+
+## A.1 JSON Schema Design and Rationale 
+
+Our JSON format evolved through careful consideration of ERD structural properties. An initial approach using relationship names as dictionary keys was abandoned upon recognizing that diagrams commonly contain multiple relationships with identical names—a fundamental ambiguity that would compromise evaluation integrity. The final standardized format addresses this through a two-component structure: (1) Entities Dictionary : Entity names serve as keys, with each entry containing lists for regular attributes, primary keys, multivalued attributes, derived attributes, composite attributes (with nested sub-components), and a weak entity flag. (2) Relationships Array : Each relationship is represented as an object containing the relationship name, array of participating entities, corresponding cardinality constraints, and weak relationship flag. For IS-A hierarchies, objects include superclass, subclasses array, and relation name. This structure ensures unambiguous representation of complex ERD constructs including N-ary relationships, hierarchical struc-tures, and all EER extensions. 
+
+Ground-Truth JSON Schema Template 
+
+1 {
+
+2 "entities": {
+
+3 "Person": {
+
+4 "attributes": ["id", "name"], 
+
+5 "primary_keys": ["id"], 
+
+6 "multivalued": ["email"], 
+
+7 "weak": false 
+
+8 }, 
+
+9 "Student": { 
+
+10 "attributes": ["student_id", "major"], 
+
+11 "primary_keys": ["student_id"], 
+
+12 "derived": ["age"], 
+
+13 "weak": true 
+
+14 }, 
+
+15 "Teacher": {
+
+16 "attributes": ["teacher_id", "department"], 
+
+17 "primary_keys": ["teacher_id"], 
+
+18 "composite": {
+
+19 "name": ["first_name", "last_name"] 
+
+20 }, 
+
+21 "weak": true 
+
+22 }
+
+23 }, 
+
+24 "relationships": [
+
+25 {
+
+26 "entities": ["Student", "Course"], 
+
+27 "cardinality": ["1", "N"], 
+
+28 "name": "takes", 
+
+29 "weak": false 
+
+30 }, 
+
+31 {
+
+32 "entities": ["Student", "Course", "Semester "], 
+
+33 "cardinality": ["N", "1", "1"], 
+
+34 "name": "enrolls", 
+
+35 "weak": true 
+
+36 }, 
+
+37 {
+
+38 "subclasses": ["Student", "Teacher"], 
+
+39 "rel_name": "IsA", 
+
+40 "superclass": "Person" 
+
+41 }
+
+42 ]
+
+43 }
+
+## A.2 Annotation Protocol and Inter-Annotator Agreement 
+
+To ensure the correctness of the curated benchmark, all real-world ER diagrams were manually converted into the benchmark’s stan-dardized JSON representation by two annotators with database backgrounds. Annotation proceeded in two stages. First, the full cu-rated corpus (148 diagrams) was split between the two annotators, who independently annotated their assigned subset while explicitly flagging uncertain elements — ambiguous relationship participa-tion, entity-versus-attribute decisions, primary-key identification, and notation-specific constructs. Second, all flagged diagrams were jointly reviewed and resolved through discussion, yielding the ad-judicated ground-truth annotations released with ERUnderstand .
+
+Double-annotation pilot study. To quantify annotation consis-tency independent of adjudication, we conducted a dedicated double-annotation study on a representative subset of 30 diagrams (15 Web-sourced, 15 Educational-sourced, i.e., textbook diagrams). Both annotators independently labeled the full subset prior to any dis-cussion or adjudication. During subsequent review, 21 of the 30 diagrams required correction or discussion, primarily due to in-consistent notation conventions across sources and low-quality or partially blurred source images. Rather than introducing a separate agreement metric, we mea-sured annotation consistency using the same evaluation pipeline applied throughout ERUnderstand : one annotator’s labels were treated as the reference and the other’s as the prediction, and agree-ment was computed as structure-aware Macro-F1 after the standard JSON normalization and partial-credit structural evaluation used for model assessment. This directly measures agreement on the bench-mark’s target representation, rather than surface- or token-level similarity. The pilot study yielded a mean diagram-level Macro-F1 agree-ment of 89.72% across the 30 diagrams, with Web and Educational subsets both near 90%. Table 4 reports the breakdown by source tier. 
+
+Note on the released benchmark. The 148 diagrams released with 
+
+ERUnderstand follow the split-annotation-plus-adjudication pro-tocol described above, not the independent double-annotation pro-tocol used for the pilot study. Because disagreements identified during adjudication are resolved through discussion before release, ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+Table 4: Inter-annotator agreement on the double-annotation pilot subset, computed as structure-aware Macro-F1 between independent (pre-adjudication) annotations. Tier Diagrams Mean Macro-F1 (%) 
+
+Web 15 90.25 Educational 15 89.19 Pilot (combined) 30 89.72 
+
+the published ground truth is trivially self-consistent by construc-tion; this is not an agreement measurement and should not be interpreted as one. The 89.72% Macro-F1 from the independent pilot study is therefore the meaningful reliability statistic for this annotation process, and we report it as such. 
+
+## A.3 Synthetic Dataset Generation 
+
+The synthetic portion ERUnderstand (2,041 of 2,960 diagrams) was generated through a controlled process using constrained LLM gen-eration. This approach ensures consistent quality, comprehensive coverage of EER elements, and semantic validity across diverse domains. 
+
+A.3.1 Prompt Design for Controlled Generation. The generation process employed carefully designed prompts that enforce strict structural constraints while mandating inclusion of complex EER elements. This dual requirement—limiting basic complexity while requiring advanced features—prevents the LLM from generating overly simplistic schemas and guarantees coverage of visual ele-ments necessary for comprehensive VLM testing. 
+
+Prompt for Medium Complexity Diagrams  
+
+> Instruction: Give me a json file containing 2 arrays of entities and relationships of an ER diagram for the following context: “[DOMAIN_CONTEXT]”. The diagram should include maximum 5 entities, 5 relationships, primary keys, and also may have IsA, ternary relationships, weak entities and relationships, and may have multivalued, derived or composite attributes. The format should be exactly like this: [JSON_TEMPLATE]
+
+Prompt for IS-A Hierarchy Diagrams  
+
+> Instruction: Give me a json file containing 2 arrays of entities and relationships of an hierarchical IsA ER diagram for the following context: “[DOMAIN_CONTEXT]”. The diagram should include at least 30 entities without any attributes, and just have IsA relation-ships. The format should be exactly like this: [JSON_TEMPLATE]
+
+The generation process varied constraints by difficulty level: 
+
+• Easy : Maximum 4 entities and relationships; no EER ele-ments, IS-A hierarchies, or ternary relationships 
+
+• Medium : 5+ entities and relationships; optional EER ele-ments including IS-A and multivalued attributes 
+
+• Hard : 7+ entities and relationships; all EER elements re-quired 
+
+• High : 20+ entities and relationships; comprehensive EER element coverage The mandatory JSON template enforces canonical output format, essential for consistent automated evaluation. Each generated JSON was manually validated for correctness and semantic coherence before rendering. 
+
+## B Evaluation Methodology B.1 VLM Prompting Strategy 
+
+To ensure fair and consistent evaluation across all tested models, we employed a standardized two-part prompting strategy. This approach minimizes variation due to prompt engineering while testing the VLM’s visual comprehension in isolation from its general conversational capabilities. 
+
+System Prompt                              
+
+> You are aprecise parser. Read the ER diagram image and output ONLY aJSON object that strictly follows the provided format (keys, nesting, and booleans). Do not add explanations, comments, or extra text.
+
+User Instruction                  
+
+> Provide acomplete JSON file for this diagram using the schema below: [JSON_FORMAT_TEMPLATE]. Do not add any additional text or comments.
+
+The system prompt establishes a constrained output mode, while the user prompt reiterates strict schema adherence requirements. Any deviation in output structure (e.g., added commentary, format-ting errors) is counted as a syntax failure, strongly emphasizing the necessity for precise, machine-readable JSON generation based purely on visual content. 
+
+## B.2 Text Normalization and Semantic Equivalence 
+
+Our evaluation methodology incorporates several normalization techniques to ensure fair element-level comparison while account-ing for minor labeling variations: 
+
+Text Normalization. 
+
+• Punctuation removal : Characters ( ,, ., -, _) stripped from element names 
+
+• Case-insensitivity : All comparisons performed case-insensitively 
+
+• Whitespace normalization : Multiple spaces collapsed to single spaces 
+
+Semantic Equivalence Mapping. 
+
+• Cardinality normalization : M, N, many , * treated as equivalent 
+
+• Singular/plural handling : manually reviewed when nor-malization leaves semantically distinct forms Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Figure 6: Visual representation of the Online Banking ERD from the synthetic dataset. This diagram illustrates key EER elements: the weak entity Transaction (double rectangle), multivalued attribute phone_number (double ellipse), derived attribute available_funds (dashed ellipse), and composite attribute address (hierarchically connected components). 
+
+• Orthographic variants : normalized only for punctuation, case, and spacing; no tunable fuzzy threshold is used in the final scorer Despite these normalization efforts, we observed two categories of persistent semantic errors requiring manual review: (1) inconsis-tent singular/plural entity naming where semantic meaning differs, and (2) orthographic variations that change semantic meaning (e.g., “student_id” vs. “students_identifier”). To maintain high structural standards, any model output that failed strict JSON schema vali-dation (e.g., syntax errors or unclosed brackets) was treated as a null set, resulting in an F1 score of 0 for that instance. Conditional valid-JSON coverage is tracked separately from structural F1 so for-matting robustness is not confused with diagram comprehension. 
+
+Valid-JSON coverage audit. For the paper model set, GPT-5.4-pro, Gemini-3.0-f, and Grok-2-v produced valid JSON for all Internet and Books diagrams. GPT-5.4-chat, Llama-3.2, Gemma-3, and GLM-4.5 had partial archived coverage (46/100 Internet and 21/48 Books), while the remaining missing folders are treated as unavailable rather than structural failures. This audit separates output-format robust-ness from visual-schema understanding. 
+
+Worked 𝑛 -ary relationship example. Suppose a diagram has 10 ground-truth relationships and a prediction contains one missed relationship, one extra relationship, one misconnected ternary rela-tionship, and one wrong cardinality. Using Eq. (1)–(3), 𝑇 𝑃 rel = 10 −
+
+1−1−1 = 7, 𝐹 𝑃 rel = 1+ ( 1+1+1)/ 2 = 2.5, and 𝐹 𝑁 rel = 1+1/2 = 1.5,giving F1 rel = 14 /( 14 + 2.5 + 1.5) = 0.778 . Thus a partially correct ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+higher-order relation is penalized, but not counted as a complete failure when its label or participants partially match. 
+
+## B.3 Aggregation Strategy for F1-Score 
+
+After computing category-level fractional F1-scores for entities, relationships, attributes, weak entities, weak relationships, and primary keys, we needed an aggregation strategy to produce an overall performance metric. We explored several approaches: 
+
+Weighted F1-Score. We initially experimented with weighting scores according to the frequency of each element type in the diagrams. Although this approach reflected model performance on frequent elements such as entities and attributes, it introduced a “saturation effect:” most models achieved very high scores (>0.90) in these categories, obscuring meaningful performance comparisons between models. 
+
+Simple and Harmonic Averaging. We also tested simple averag-ing and harmonic aggregation. Simple averaging showed promise but still gave disproportionate weight to categories with highly variable performance. Harmonic aggregation, which emphasizes the minimum score, gave too much importance to rare elements such as weak relationships and N-ary relationships. Because these constructs appear infrequently in the dataset, small absolute errors resulted in very low category scores that dominated the aggregate, producing overly pessimistic overall results that did not reflect general model capabilities. 
+
+Macro-F1 (Final Choice). We ultimately adopted Macro-F1, which computes the unweighted mean of category-level F1-scores. This approach treats all ERD element types as equally important for com-prehensive diagram understanding, regardless of their frequency in the dataset. While this means that rare but structurally significant elements (weak entities, N-ary relationships) receive equal weight to common elements (regular entities, attributes), we believe this accurately reflects the goal of complete ERD comprehension. A model that fails systematically on weak entities or N-ary relation-ships has a fundamental gap in understanding ERD notation, even if these elements appear infrequently. Macro-F1 provides balanced assessment across all diagram com-ponents while avoiding the pitfalls of frequency-based weighting. This choice aligns with our goal of evaluating genuine structural comprehension rather than optimizing for common cases. 
+
+Sensitivity to matching and partial-credit choices. We additionally re-scored GPT-5 outputs while varying the misconnection partial-credit weight 𝑓 from 0 to 1. Internet Macro-F1 moved from 0.802 to 0.883 and Books from 0.806 to 0.883, with the default 𝑓 = 0.5
+
+yielding 0.835 and 0.834 respectively. This confirms that the main conclusions are not an artifact of a single partial-credit setting; lower weights are stricter, while higher weights forgive misconnec-tions more aggressively. 
+
+Additional Graph Edit Distance Results. Table 5 reports normal-ized Graph Edit Distance (GED) scores across representative subsets of ERUnderstand. Overall, GED trends are broadly consistent with Fractional F1, with reasoning-oriented models generally achieving lower edit distances and better robustness under increasing struc-tural complexity. As ERDs become larger and more densely con-nected, GED increases substantially across nearly all models, par-ticularly for diagrams containing IS-A hierarchies and higher-order relationships. While GED provides a topology-aware graph-level evaluation signal, we found that it is highly sensitive to small local mismatches, which can propagate into disproportionately large graph penalties in dense diagrams. Consequently, GED primarily serves as a complementary metric to the finer-grained component-level analysis provided by Fractional F1. 
+
+## C Related Work on Diagram Understanding C.1 Diagrammatic Reasoning Foundations 
+
+The term diagram encompasses diverse visual representations from statistical plots to informal sketches to rigorous notations like ERDs or UML. Given this breadth, assertions about “diagram under-standing” often lack precision. Research in diagrammatic reasoning [26, 45] examines how visual structures encode and support infer-ence. This field explores VLMs’ capabilities with flowcharts [ 16 ], geometric reasoning [4], and data visualizations [50]. A persistent limitation emerges across these domains: while VLMs can identify entities within diagrams, their ability to rea-son about relationships between entities remains constrained [ 23 ]. Models often rely on background knowledge rather than genuine comprehension of visual language structure, and they exhibit ten-dencies toward hallucination when interpreting diagrammatic con-tent [15, 25, 33]. These challenges connect to the broader field of visual language theory, which examines how shapes, spatial relations, and connec-tors convey structured meaning according to learned conventions [42 ]. These conventions—flowchart symbols, geometric figures, re-lational graphs—were invented to communicate domain-specific reasoning visually [ 28 ]. Understanding such visual grammars de-mands that models move beyond text recognition to engage in semantic reasoning grounded in spatial logic and symbolic repre-sentation [22]. 
+
+## C.2 Heterogeneous Reasoning Systems 
+
+Database diagrams function as formal languages with well-defined syntax, semantics, and reasoning operations. ERDs exemplify this formalism: shapes and connections follow precise compositional rules that generate infinitely many valid instances [ 7, 10 , 13 , 24 ]. This formal structure enables systematic syntactic validation and error detection, distinguishing ERDs from informal diagrams or workflows lacking standardized conventions [21, 41]. The unambiguous encoding of database schemas in ERDs offers an interpretable yet challenging benchmark for distinguishing gen-uine visual reasoning from pattern matching. By focusing on ERDs, we examine a rich form of diagrammatic reasoning central to data modeling, revealing current VLM limitations in structured visual language comprehension. Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Table 5: Normalized Graph Edit Distance (GED) across representative ERUnderstand subsets. Lower is better. 
+
+Model Easy Medium Hard Extreme IS-A 
+
+Claude-3.5 0.150 0.306 0.297 1.096 1.066 Claude-4.6 0.121 0.197 0.205 1.264 0.564 GPT-4o 0.122 0.216 0.219 1.209 1.047 GPT-5 0.074 0.119 0.157 1.334 0.926 GPT-5.4-pro 0.076 0.114 0.101 – –GPT-5.4-chat 0.087 0.173 0.193 – –Gemini-3.0-flash 0.123 0.308 0.262 0.476 0.639 Gemini-3-Pro 0.118 0.168 0.182 0.454 1.126 Gemma-3 0.302 0.500 0.467 – –Grok-2-Vision 0.363 0.727 0.891 1.300 1.728 Llama-3.2 0.139 0.210 0.220 – –Qwen-3 0.112 0.291 0.263 1.176 0.528 
+
+Qwen-3.5 0.090 0.143 0.136 – –
+
+## D VLM Failure Analysis: Detailed Examples 
+
+This section provides detailed examples of systematic VLM failures, organized by error category. Each example includes the ground-truth structure, model output, and analysis of the failure mecha-nism. 
+
+## D.1 Example 1: EER Element Misclassification 
+
+This example, based on the Online Banking context (Figure 6), demonstrates common failures in correctly identifying EER ele-ments despite correct basic structure parsing. 
+
+Ground Truth Structure. 
+
+• Entity Account : Contains derived attribute available_funds 
+
+(dashed ellipse) 
+
+• Entity Customer : Contains multivalued attribute phone_number 
+
+(double ellipse) 
+
+• Entity Transaction : Weak entity (double rectangle bor-der) 
+
+Detected Errors (Claude 4.6 Output). 
+
+• Derived attribute missing : available_funds classi-fied as regular attribute 
+
+• Multivalued attribute missing : phone_number classi-fied as regular attribute 
+
+• Weak flag mismatch : Transaction entity weak flag incorrectly set to false 
+
+Claude 4.6 Output (EER Misclassification) 
+
+1 "Account": {
+
+2 "attributes": ["account_number", "available_funds", 
+
+3 "account_type", "balance"], 
+
+4 "primary_keys": ["account_number"], 
+
+5 "multivalued": [], 
+
+6 "weak": false 
+
+7 }, 
+
+8 "Transaction": {
+
+9 "attributes": ["transaction_id", "transaction_date", 
+
+10 "amount", "transaction_type"], 
+
+11 "primary_keys": ["transaction_id"], 
+
+12 "multivalued": [], 
+
+13 "weak": false 
+
+14 }, 
+
+15 "Customer": {
+
+16 "attributes": ["customer_id", "name", "phone_number"], 
+
+17 "primary_keys": ["customer_id"], 
+
+18 "multivalued": [], 
+
+19 "weak": false, 
+
+20 "composite": {
+
+21 "address": ["street", "city", "zip_code"] 
+
+22 }
+
+23 }
+
+Analysis. The model successfully identified the composite at-tribute ( address ) but failed on other EER visual notations. This selective success suggests incomplete training on specific visual conventions—double/dashed lines for special attributes and double borders for weak entities. The model appears to recognize hierar-chical nesting (composite attributes) more reliably than line-style variations, indicating a specific gap in visual notation understand-ing rather than a general structural reasoning failure. 
+
+## D.2 Example 2: Spatial Reasoning Failure on Dense Diagrams 
+
+Large-scale ERDs with 20+ entities severely stress VLM spatial reasoning and object detection capabilities. Non-Gemini models frequently exhibited near-complete performance collapse on such diagrams. 
+
+Expected Structure. 22 entities including Student , Thesis ,
+
+Committee , Advisor , Department , etc., connected through 25+ relationships including ternary relationships and weak entity dependencies. 
+
+Typical Model Output (GPT-4o). 
+
+GPT-4o Output (Dense Diagram) 
+
+1 {
+
+2 "entities": {
+
+3 "Student": {
+
+4 "attributes": ["student_id", "name"], 
+
+5 "primary_keys": ["student_id"], 
+
+6 "weak": false 
+
+7 }, 
+
+8 "Thesis": {
+
+9 "attributes": ["thesis_id", "title"], 
+
+10 "primary_keys": ["thesis_id"], 
+
+11 "weak": false 
+
+12 }
+
+13 }, 
+
+14 "relationships": [ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+Figure 7: Example of high-density ERD ( Thesis Defense )with 22 entities, used to test VLM spatial reasoning under visual complexity. Most models failed to parse beyond 2-3 entities from this diagram. 
+
+15 {
+
+16 "name": "writes", 
+
+17 "entities": ["Student", "Thesis"], 
+
+18 "cardinality": ["1", "1"], 
+
+19 "weak": false 
+
+20 }
+
+21 ]
+
+22 }
+
+Analysis. This partial output captures only 2 of 22 entities and 1 of 25+ relationships, demonstrating near-complete breakdown in visual parsing under high density. The model appears to process only a small, localized region of the diagram—possibly focusing on the most prominent or centered elements—while failing to maintain spatial attention across the full image. Quantitatively, F1-scores dropped below 0.05 across all non-Gemini models for diagrams exceeding 15 entities, confirming that visual complexity represents a critical architectural bottleneck. 
+
+## D.3 Example 3: N-ary Relationship Decomposition 
+
+VLMs frequently struggle with ternary and higher-order relation-ships, often decomposing them into multiple binary relationships or recognizing only a subset of participating entities. 
+
+Ground Truth. Ternary relationship schedules connecting three entities: Vet , Pet , Visit with cardinalities [1, N, 1] .
+
+Model Output (Qwen-3). 
+
+Qwen Output (Ternary Collapsed) 
+
+1 {
+
+2 "name": "schedules", 
+
+3 "entities": ["Vet", "Visit"], 
+
+4 "cardinality": ["1", "N"], 
+
+5 "weak": false 
+
+6 }
+
+Analysis. The model correctly identified the relationship name but collapsed the ternary structure into a binary relationship, com-pletely omitting the Pet entity and its cardinality. This represents a systematic failure mode observed across models (average F1: 0.07 for non-reasoning models on N-ary relationships). The error suggests models struggle with the visual parsing task of tracing multiple connection lines from a single diamond shape, possibly due to at-tention mechanisms that favor pairwise associations learned from more common binary relationships in training data. 
+
+## D.4 Example 4: Composite Attribute Flattening 
+
+Models frequently fail to properly nest composite attribute compo-nents, instead flattening all sub-attributes into the main attribute list. 
+
+Ground Truth. Entity Speaker with composite attribute name 
+
+containing sub-components first_name and last_name .
+
+Detected Errors (Gemini-2.0-flash). 
+
+• Composite structure missing : name composite attribute not recognized 
+
+• Flattened components : first_name and last_name 
+
+appear as regular attributes 
+
+• Redundant parent : Parent attribute name also appears in regular attributes list 
+
+Gemini-2.0-flash Output (Composite Flattened) 
+
+1 "Speaker": {
+
+2 "attributes": ["speaker_id", "name", "first_name", 
+
+3 "last_name", "affiliation", "speech_title "], 
+
+4 "primary_keys": ["speaker_id"], 
+
+5 "composite": {}, 
+
+6 "weak": false 
+
+7 }
+
+Analysis. This error pattern reveals difficulty in recognizing hi-erarchical attribute structures conveyed through visual nesting of ellipses. The model successfully identified all attribute names but failed to reconstruct their hierarchical relationships. This suggests a limitation in processing spatial containment and hierarchical vi-sual layouts—the model performs well on flat, list-like attribute detection but struggles with the additional inference required to recognize parent-child relationships in composite structures. The presence of all three terms ( name , first_name , last_name )indicates the model detected the relevant text but misinterpreted the structural semantics. Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Table 6: Iterative dialogue interaction error reductions 
+
+Model Initial Errors Dialog-based Reduction% Grok 353 293 17.00 Attr-missed 81 60 25.9 PK-extra 52 49 5.7 Rel-missed 14 6 57.1 Claude 203 122 39.90 Attr-missed 17 12 29.4 PK-extra 38 6 84.2 Rel-missed 18 12 33.3 Gemini 228 173 24.12 Attr-missed 23 14 39.1 PK-extra 61 42 31.1 Rel-missed 12 7 41.7 
+
+## D.5 Summary of Failure Patterns 
+
+Our analysis across 1,689 diagrams reveals four primary failure categories: (1) Visual notation blindness : Inability to distinguish dashed/-double lines for derived/multivalued attributes and weak entities (F1: 0.14-0.28 for non-reasoning models) (2) Spatial complexity collapse : Near-total failure on dia-grams with 20+ entities (F1 < 0.05 for non-Gemini models) (3) N-ary relationship decomposition : Systematic collapse of ternary+ relationships into binary pairs (F1: 0.07 for non-reasoning models) (4) Hierarchical structure flattening : Failure to preserve nesting in composite attributes and IS-A hierarchies despite text recognition (F1: 0.09-0.38) These patterns indicate that current VLMs excel at text recog-nition and basic shape detection but struggle with visual reason-ing tasks requiring integration of multiple visual cues (line styles, spatial relationships, containment hierarchies). The consistent per-formance gaps across model architectures suggest fundamental limitations in how VLMs process structured visual languages rather than mere training data deficiencies. 
+
+## D.6 Error Mitigation via Interactive Prompting 
+
+Having identified systematic biases in spatial reasoning, semantic inference, and visual notation recognition, we investigate whether these errors can be mitigated through iterative interaction. 
+
+Experimental Setup. We select 30 ERDs spanning five difficulty buckets and evaluate three representative models: Grok (lowest-performing), Gemini (second), and Claude (best-performing). Each model is first prompted using a standardized query to extract struc-tured representations, allowing us to identify baseline errors. 
+
+Interaction Strategy. We then engage models in targeted multi-turn dialogue to encourage reassessment. A key challenge is avoid-ing confirmation bias: directly pointing out errors causes models to overfit to the suggestion. To address this, we adopt an indirect questioning strategy resembling student–teacher interaction. For example, instead of asking “Is CCI a weak relationship?”, we ask “List all weak relationships indicated by double-line diamonds.” This promotes independent reasoning. 
+
+Results. Table 6 summarizes performance changes across inter-action rounds. All models improve in recovering missed elements: 
+
+• Grok: Missed attributes reduced from 0.81 to 0.60 (25.9%), and missed relationships from 14 to 6 (57.1%). 
+
+• Claude: Largest overall improvement (39.9%), with a substantial reduction in hallucinated PKs (0.38 to 0.06, 84.2%). 
+
+• Gemini: Moderate gains, including 41.7% reduction in missed relationships and 31.1% reduction in extra PKs. A recurring issue across models is PK hallucination. Upon prob-ing, both Claude and Gemini acknowledge inferring PKs from se-mantic cues (e.g., “ID”, “email”, “username”) rather than explicit diagram markings. 
+
+Limitations of Interaction. Despite improvements, several error types persist: 
+
+• Structural errors: Incorrect connections between entities and relationships remain difficult to fix. 
+
+• Notation errors: Gemini consistently struggles with multival-ued attributes and double-line encodings. 
+
+• Instability: In some cases, additional interaction introduces new errors or degrades performance. 
+
+Discussion. These findings reveal that interactive prompting has a selective effect: it is effective for recovering missed elements but less effective for correcting deeper structural or visual reasoning errors. This suggests that interaction primarily enhances attention rather than underlying understanding. 
+
+Conclusion. While iterative prompting improves performance, particularly for omission errors, it cannot fully address limitations in spatial reasoning and visual structure parsing. This highlights the need for architectural improvements beyond prompt engineering. 
+
+## D.7 Performance on IS-A Hierarchy Diagrams 
+
+Observation 2 reveals a large gap in IS-A performance between cu-rated and synthetic ERDs, suggesting reliance on semantic shortcuts. To isolate visual reasoning, we construct 32 IS-A-only diagrams containing only superclass–subclass relationships. As shown in Table 7, performance drops sharply across mod-els: GPT-4o (0.963 →0.118), Gemini-2.5 (0.941 →0.073), and Grok-2-vision (0.519 →0.043). Claude-4.6 is more robust (0.889 →0.415), while Qwen-3 performs best overall (0.919 →0.659). Despite this, entity recognition remains high (e.g., GPT-5: 0.992, Claude-4.6: 0.994), indicating that failures stem from incorrect hi-erarchy assignment rather than entity detection. A common error involves reversing superclass and subclass roles. These findings confirm that IS-A understanding in full ERDs is often supported by semantic context, but degrades significantly when models must rely solely on visual connectivity. 
+
+## D.8 PKs: Visual vs. Naming Conventions Bias 
+
+Although PK identification appears strong overall, we observe a significant performance gap between curated and synthetic datasets, suggesting reliance on naming conventions. In synthetic data, PKs consistently follow the _id pattern, raising the question of whether models use visual or linguistic cues. ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams 
+
+Figure 8: Examples of naming strategies: (left) Context-Free with random 4-letter strings, (middle) Original diagram with semantic labels, (right) Label Permutation with shuffled semantic labels Table 7: Performance on IS-A-only diagrams compared to medium-complexity diagrams. Model Dataset F1-Entities F1-IS-A 
+
+Grok-2-vision Medium 0.874 0.519 Grok-2-vision IS-A-only 0.624 0.043 Qwen-3 Medium 0.977 0.919 Qwen-3 IS-A-only 0.956 0.659 Gemini-3.0-flash Medium 0.981 0.904 Gemini-3.0-flash IS-A-only 0.956 0.468 GPT-5.4 Medium 0.995 0.963 GPT-5.4 IS-A-only 0.678 0.118 Claude-3.5 Medium 0.991 0.570 Claude-3.5 IS-A-only 0.412 0.187 Gemini-2.5 Medium 0.998 0.941 Gemini-2.5 IS-A-only 0.890 0.073 GPT-5.4-pro Medium 0.999 0.941 GPT-5.4-pro IS-A-only 0.992 0.104 Claude-4.6 Medium 0.998 0.889 Claude-4.6 IS-A-only 0.994 0.415 We design controlled experiments to isolate this effect: modifying PK names (Changed-PK), removing underline notation (Removed-PK), introducing misleading names (LP), and randomizing attribute names (CF). Table 8 shows that altering naming conventions significantly degrades performance, while removing visual cues leads to wide-spread PK hallucination. Misleading naming produces the worst results, confirming strong reliance on linguistic patterns. Dataset statistics further reveal an imbalance: only 45% of curated entities explicitly mark PKs, compared to dense PK annotation in 
+
+Table 8: Average PK identification errors across all VLMs. Study PrimKey-missed PrimKey-extra 
+
+Curated 61.83 161.52 Synthetic 40.75 38.04 Changed-PK 105.50 56.25 Removed-PK 0.00 479.62 LP 979.88 799.25 CF 799.00 638.12 synthetic data. This amplifies the naming bias and explains cross-dataset performance gaps. Overall, results demonstrate that VLMs fail to reliably use visual PK notation and instead depend heavily on naming conventions, limiting their robustness in real-world ERDs. 
+
+## D.9 Diagram Size Limits 
+
+Observation 3 showed performance degradation as diagram com-plexity increases. To further probe scalability limits, we construct 19 high-complexity ERDs, each containing at least 20 entities and 20 relationships, along with dense connectivity and full EER features. 
+
+Results. As shown in Table 9, most models exhibit near-complete failure. Non-Gemini models achieve Macro-F1 scores between 0.035 and 0.048, with relationship extraction particularly weak (e.g., 0.009 for Qwen-3). Notably, even recent reasoning models such as GPT-5 and Claude-4.6 do not improve over earlier versions. In contrast, Gemini models demonstrate strong robustness. Gemini-2.0-flash achieves 0.428 Macro-F1, with high entity (0.929) and rela-tionship (0.734) scores, while Gemini-2.5 further improves to 0.695, performing consistently well across all components. Ali Ansari, Yasmin Mohammadi, Farnoush Nili, Parsa Esmaeilkhani, Longin Jan Latecki, and Eduard Dragut 
+
+Table 9: Performance on high complexity diagrams, showing a superior performance of Gemini models in this task. Model Macro-F1 Ents Attrs Rels 
+
+Non-reasoning 
+
+Grok-2-vision 0.044 0.033 0.149 0.020 Qwen-3 0.040 0.037 0.146 0.009 
+
+Gemini-3.0-flash 0.428 0.929 0.819 0.734 
+
+GPT-5.4 0.045 0.063 0.157 0.045 Claude-3.5 0.035 0.035 0.143 0.019 
+
+Reasoning 
+
+Gemini-3-pro 0.695 0.986 0.819 0.766 
+
+GPT-5.4-pro 0.035 0.041 0.155 0.032 Claude-4.6 0.048 0.105 0.171 0.040 
+
+Discussion. These results suggest a fundamental scalability limitation in most VLMs when processing densely structured dia-grams. The consistent failure across architectures indicates a likely bottleneck in spatial reasoning and long-range visual dependency tracking rather than data availability. Gemini’s superior performance points to potential architectural differences—such as improved attention mechanisms or visual en-coding strategies—that better support large, complex visual inputs. Given that real-world ERDs often exhibit similar complexity, these findings highlight a critical limitation for practical deployment. 
+
+## D.10 Performance on EER elements 
+
+Category-specific F1 scores reveal how VLMs handle different EER elements and expose their primary weaknesses. These elements are central to database design, and reliably recognizing them is essential. Table 3 presents average F1 scores across ER elements, showing large disparities that warrant targeted investigation. 
+
+Entities, Relationships, and Attributes. Entities and attributes are fundamental ERD primitives, and models recognize them well, achieving approximately 0.90 F1 on curated ERDs and 0.95 on syn-thetic ERDs. In contrast, performance drops for relationships and connectivity. On curated ERDs, relationship-related scores decrease by roughly 15% points relative to entity-recognition, and by about 10% points on synthetic ERDs. This pattern indicates that models often succeed on label-driven components but struggle with the visual structure that encodes relational semantics. 
+
+Multivalued Attributes. Multivalued attributes represent fields with multiple values per entity instance. In Chen notation they appear as double ellipses, and in Silberschatz-style notation they are shown with brackets. Performance remains below 0.20 F1 for non-reasoning models but improves to around 0.60 for reasoning models. 
+
+Composite Attributes. Composite attributes decompose into sub-attributes, typically represented as hierarchically connected ellipses. Non-reasoning models achieve below 0.40 F1, whereas reasoning models improve substantially to values between 0.85 and 0.90 on curated and synthetic ERDs. 
+
+Derived Attributes. Derived attributes are computed from oth-ers and are represented as dotted ellipses in Chen notation and parentheses in Silberschatz-style notation. Non-reasoning models perform poorly on synthetic ERDs, with an F1 of 0.14, showing limited sensitivity to this notation. 
+
+N-ary Relationships. N-ary relationships involve three or more entities and require tracing multiple connections simultaneously. Performance drops sharply, remaining below 0.01 F1 for non-reasoning models and reaching only 0.31 for reasoning models. 
+
+Is-A Relationships. Is-A hierarchies encode inheritance and are drawn as triangles in Chen notation and indicated using directed edges in Silberschatz-style notation. The extreme disparity between curated and synthetic ERDs suggests that models may leverage semantic cues rather than tracing the inheritance structure. This motivates our dedicated hierarchy tracing study in Section 5. 
+
+Primary Keys. Primary keys uniquely identify entity instances and are typically marked by underlining. Although detection ap-pears relatively strong overall, a substantial gap exists between cu-rated and synthetic ERDs. Since synthetic primary keys frequently follow the _id naming convention, we evaluate whether models rely on visual cues or naming patterns in Section 5. 
+
+Weak Entities and Weak Relationships. Weak entities and their identifying relationships rely on subtle boundary cues. Recog-nition remains low, highlighting limited sensitivity to fine-grained visual distinctions. Overall, VLMs consistently underperform on visually subtle or structurally complex notation. Language priors often compensate when visual recognition fails, producing systematic errors on ele-ments such as N-ary relationships, Is-A hierarchies, and derived attributes. These patterns motivate the controlled error analyses presented in Sections 5 through 5.

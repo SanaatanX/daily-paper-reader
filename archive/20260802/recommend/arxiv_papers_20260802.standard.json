@@ -1,0 +1,631 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-02T20:38:14.457985+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 13,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2607.24424v1",
+      "source": "arxiv",
+      "title": "MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning",
+      "abstract": "Vision-language models commonly project all tokens produced by a pretrained vision encoder into a large language model. However, final-layer features can discard text, local attributes, and spatial relationships, while high-resolution inputs substantially increase context length and inference latency. We introduce \\method, a Multi-scale Adaptive Vision Encoder. \\method uses position-dependent gates to fuse shallow, intermediate, and deep features from a vision Transformer, preserving global semantics while enhancing edges, text, and local structure. It then performs question-conditioned token routing according to question relevance, local information content, global semantics, and spatial coverage, with a token budget that adapts to image complexity. To mitigate compression loss, we further introduce full-to-compressed representation distillation and a spatial diversity regularizer. In an illustrative simulation under a unified 7B language-model framework, \\method reduces the average number of SigLIP-SO400M visual tokens from 729 to 146 (approximately 80.0\\%) and improves the mean score on VQAv2, GQA, TextVQA, ScienceQA-IMG, and MMBench by 2.2 percentage points, while reducing single-image time to first token from 228\\,ms to 129\\,ms. We provide the full model design and evaluation protocol. All reported numbers currently serve only as placeholders for paper organization and experimental design; formal claims require real training runs, independent replications, and official benchmark evaluation.",
+      "authors": [
+        "Shaofei Lei"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T13:36:08+00:00",
+      "link": "https://arxiv.org/pdf/2607.24424v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "feature-level fusion of multi-scale vision features with question-conditioned routing",
+      "llm_evidence_cn": "多尺度视觉特征的特征级融合与问题条件令牌路由",
+      "llm_evidence": "多尺度视觉特征的特征级融合与问题条件令牌路由",
+      "canonical_evidence": "多尺度视觉特征的特征级融合与问题条件令牌路由",
+      "llm_tldr_en": "MAViE fuses shallow, intermediate, and deep vision features via position-dependent gates and performs question-conditioned token routing, preserving local attributes while reducing context length and inference latency for efficient multimodal reasoning.",
+      "llm_tldr_cn": "针对视觉语言模型只使用最终层特征易丢失文本、局部属性与空间关系且高分辨率输入开销大的问题，提出多尺度自适应视觉编码器MAViE。它通过位置相关门融合视觉Transformer的浅层、中层和深层特征，保留全局语义的同时增强边缘、文本与局部结构，并按问题相关性与局部信息量进行令牌路由。实验显示该机制在提升细粒度视觉感知的同时降低推理延迟，为高效多模态推理提供了一种特征级融合新方案。",
+      "llm_tldr": "针对视觉语言模型只使用最终层特征易丢失文本、局部属性与空间关系且高分辨率输入开销大的问题，提出多尺度自适应视觉编码器MAViE。它通过位置相关门融合视觉Transformer的浅层、中层和深层特征，保留全局语义的同时增强边缘、文本与局部结构，并按问题相关性与局部信息量进行令牌路由。实验显示该机制在提升细粒度视觉感知的同时降低推理延迟，为高效多模态推理提供了一种特征级融合新方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "feature-level fusion methods for multimodal inputs",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.26555v1",
+      "source": "arxiv",
+      "title": "Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation",
+      "abstract": "Multimodal fake news detectors often generalize poorly across domains because they learn to trust unreliable evidence: domain-specific shortcuts amplified by imbalanced data and semantically inconsistent text-image pairs that make cross-modal evidence unreliable. We propose Expert-Guided Mutual Distillation (EGMD), which learns what evidence to trust across the prediction pipeline. At the input level, input-level calibration encodes pair-level coherence as a shared gain before fusion. At the representation level, an expert-guided teacher aligns domain statistics and encourages domain-specific patterns to concentrate in specialized experts. At the decision level, prototype-anchored domain-specific students use mutual learning and dual-channel distillation to inherit the teacher's feature geometry and calibrated predictions while discouraging local domain priors. We further construct Weibo_Balanced, a domain-balanced benchmark that isolates the effect of imbalance on generalization. Across four datasets in two languages, EGMD achieves state-of-the-art accuracy while reducing domain bias by up to 57.3%.",
+      "authors": [
+        "Xuan Feng",
+        "Guihong Liu",
+        "Tianlong Gu",
+        "Shuai Zhao",
+        "Xuemin Wang",
+        "Chenzhong Bin",
+        "Yang Liu",
+        "Bo An"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-07-29T07:27:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.26555v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "input-level calibration and expert-guided mutual distillation for multimodal fusion",
+      "llm_evidence_cn": "面向多模态融合的输入级校准与专家引导互蒸馏方法",
+      "llm_evidence": "面向多模态融合的输入级校准与专家引导互蒸馏方法",
+      "canonical_evidence": "面向多模态融合的输入级校准与专家引导互蒸馏方法",
+      "llm_tldr_en": "EGMD improves multimodal fake news detection by calibrating pair-level coherence before fusion, aligning domain statistics via expert-guided teacher, and using prototype-anchored students with mutual learning, addressing unreliable cross-modal evidence and domain gaps.",
+      "llm_tldr_cn": "针对多模态假新闻检测器因依赖域特定捷径与语义不一致图文对而泛化差的问题，提出专家引导互蒸馏EGMD。该方法在输入级用校准编码图文对一致性作为共享增益，在表示级由专家引导教师对齐域统计并促使域特定模式集中到专家，在决策级用原型锚定的域学生进行互学习。实验表明EGMD能有效处理不可靠跨模态证据，提升跨域泛化性能，为多模态融合中的可信证据信任提供了新方法。",
+      "llm_tldr": "针对多模态假新闻检测器因依赖域特定捷径与语义不一致图文对而泛化差的问题，提出专家引导互蒸馏EGMD。该方法在输入级用校准编码图文对一致性作为共享增益，在表示级由专家引导教师对齐域统计并促使域特定模式集中到专家，在决策级用原型锚定的域学生进行互学习。实验表明EGMD能有效处理不可靠跨模态证据，提升跨域泛化性能，为多模态融合中的可信证据信任提供了新方法。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2607.27357v1",
+      "source": "arxiv",
+      "title": "Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification",
+      "abstract": "Cross-modal knowledge distillation can transfer diagnostic knowledge from a strong but costly teacher modality to a cheaper and more deployable student modality. In medical image analysis, however, the two modalities are often unpaired: they are collected from different patient cohorts and occupy geometrically incompatible feature spaces. This makes instance-level distillation invalid and direct feature matching unreliable. To address these challenges, we propose Shared Semantic Codebook Distillation (SSCD), which compares teacher and student representations through a shared discrete codebook. Each image is represented as a distribution over a common, modality-agnostic vocabulary, and knowledge is transferred by aligning these distributions across modalities, both globally and class-conditionally, without requiring paired samples or directly comparable raw features. The codebook is evolved online by exponential moving average and kept diverse through entropy regularization and dead-code restart. At inference, all teacher-side and codebook modules are discarded, leaving only the student encoder and classifier. On two heterogeneous unpaired settings, OCT-to-fundus retinal disease classification and CT-to-chest-X-ray pneumonia classification, SSCD improves the student from 64.5 to 70.2 macro-F1 and from 73.8 to 76.3 macro-F1, respectively, outperforming all evaluated distillation baselines on both settings. Code and pretrained models are available at https://github.com/DillanImans/SSCD-unpaired-distillation",
+      "authors": [
+        "Dillan Imans",
+        "Phuoc-Nguyen Bui",
+        "Duc-Tai Le",
+        "Hyunseung Choo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "eess.IV"
+      ],
+      "published": "2026-07-29T18:10:50+00:00",
+      "link": "https://arxiv.org/pdf/2607.27357v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cross-modal representation alignment via shared codebook",
+      "llm_evidence_cn": "通过共享码本实现跨模态表示对齐",
+      "llm_evidence": "通过共享码本实现跨模态表示对齐",
+      "canonical_evidence": "通过共享码本实现跨模态表示对齐",
+      "llm_tldr_en": "Proposes Shared Semantic Codebook Distillation (SSCD) for unpaired cross-modal medical classification, aligning teacher and student distributions over a shared codebook to transfer knowledge across incompatible feature spaces.",
+      "llm_tldr_cn": "针对医学图像跨模态知识蒸馏中实例级蒸馏失效和直接特征匹配不可靠的问题，提出共享语义码本蒸馏（SSCD），通过与模态无关的共享离散码本将图像表示为公共词汇分布并加以对齐，实现非配对模态间的知识迁移。实验表明该方法在跨模态医学分类上有效，同时避免了对特征空间可比较的要求，为跨模态表示对齐与知识蒸馏提供了通用方案，可推广到其他非配对跨模态场景。",
+      "llm_tldr": "针对医学图像跨模态知识蒸馏中实例级蒸馏失效和直接特征匹配不可靠的问题，提出共享语义码本蒸馏（SSCD），通过与模态无关的共享离散码本将图像表示为公共词汇分布并加以对齐，实现非配对模态间的知识迁移。实验表明该方法在跨模态医学分类上有效，同时避免了对特征空间可比较的要求，为跨模态表示对齐与知识蒸馏提供了通用方案，可推广到其他非配对跨模态场景。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.25794v1",
+      "source": "arxiv",
+      "title": "Fine-Grained Food Image Understanding via Target-Aware Data Alignment",
+      "abstract": "Fine-grained food visual--semantic understanding requires models to capture subtle distinctions across ingredients, cooking methods, doneness, color, texture, and plate composition. Although CLIP-style vision-language models provide a natural framework for this task, their effectiveness is limited when training relies on heterogeneous web-collected image--text pairs. Such data often exhibit a web-to-target domain gap and cross-modal misalignment, where images differ from the target distribution and captions are noisy, multilingual, or weakly grounded in visual content. We propose a data-centric multimodal alignment method for fine-grained food description and recognition. Our method first performs target-aware data selection to identify visually relevant training subsets, then applies VLM-based caption refinement to generate visually grounded, target-style descriptions. Using these curated image--caption pairs, we train complementary CLIP-style retrieval experts and further combine their decisions through a hierarchical VLM-assisted multi-expert decision-level fusion strategy that invokes the VLM only when experts disagree. Experiments show that our data refinement strategy significantly improves retrieval performance over naive web supervision, with VLM-based caption refinement alone yielding an average performance gain of approximately 19%. Our full method also achieves more than twice the retrieval score of pure VLM-based retrieval while remaining substantially more efficient.",
+      "authors": [
+        "Jui-Feng Chi",
+        "Wei-Lun Chu",
+        "Bruce Coburn",
+        "Jinge Ma",
+        "Fengqing Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-28T14:44:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.25794v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "cross-modal alignment for fine-grained food image-text pairs",
+      "llm_evidence_cn": "面向细粒度食品图文对的跨模态对齐方法",
+      "llm_evidence": "面向细粒度食品图文对的跨模态对齐方法",
+      "canonical_evidence": "面向细粒度食品图文对的跨模态对齐方法",
+      "llm_tldr_en": "Food VLMs struggle with web-to-target domain gap and noisy captions; a data-centric alignment method selects target-relevant image-text pairs and aligns them for fine-grained food understanding.",
+      "llm_tldr_cn": "针对CLIP式视觉语言模型在细粒度食品图文理解中受网络异构图文对与跨模态错位影响的问题，提出数据驱动的跨模态对齐方法，通过目标感知的数据选择筛选与其目标分布一致的图像-文本对，再结合对齐策略提升识别与描述性能。实验表明该方法能有效缓解域间差距与噪声文本干扰，为多模态对齐在细粒度领域中的应用提供了通用思路。",
+      "llm_tldr": "针对CLIP式视觉语言模型在细粒度食品图文理解中受网络异构图文对与跨模态错位影响的问题，提出数据驱动的跨模态对齐方法，通过目标感知的数据选择筛选与其目标分布一致的图像-文本对，再结合对齐策略提升识别与描述性能。实验表明该方法能有效缓解域间差距与噪声文本干扰，为多模态对齐在细粒度领域中的应用提供了通用思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.23673v1",
+      "source": "arxiv",
+      "title": "Contrastive Parameter Disentanglement for Multi-modal Remote Sensing Image Generation",
+      "abstract": "Existing remote sensing image generation methods are largely confined to single-modality synthesis and therefore fail to exploit the complementary information inherent in multimodal imagery. To address this limitation, we propose a contrastive parameter disentanglement framework for multimodal remote sensing image generation, which generates semantically consistent and structurally aligned images across multiple modalities, including optical, infrared, and synthetic aperture radar (SAR), from a single text prompt. Specifically, we introduce a contrastive parameter disentanglement module that disentangles shared semantics from modality-specific attributes at the parameter level within an orthogonal core subspace. Based on this module, we develop a disentangled optimization strategy that first constrains the parameter matrix A of the LoRA adapter to capture modality-invariant semantics through a multimodal contrastive objective and then guides multiple parameter matrices B to learn modality-specific attributes under text conditioning. This strategy enables the simultaneous generation of multimodal images with consistent semantic content and distinct modality characteristics. Furthermore, to ensure structural alignment across the generated images, we devise a query-key structure transfer mechanism that jointly models multimodal sampling trajectories during inference by transferring structural correlation priors from an anchor modality to the remaining modalities. Extensive experiments demonstrate that our method outperforms state-of-the-art remote sensing image generation approaches in terms of generation quality, semantic consistency, and structural alignment, while also achieving superior performance in the downstream object classification task.",
+      "authors": [
+        "Yu Zhang",
+        "Wenda Zhao",
+        "Haojun Tang",
+        "Haipeng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-26T14:21:06+00:00",
+      "link": "https://arxiv.org/pdf/2607.23673v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "contrastive parameter disentanglement for multimodal representation learning",
+      "llm_evidence_cn": "用于多模态表征学习的对比参数解纠缠",
+      "llm_evidence": "用于多模态表征学习的对比参数解纠缠",
+      "canonical_evidence": "用于多模态表征学习的对比参数解纠缠",
+      "llm_tldr_en": "Introduces a contrastive parameter disentanglement framework for multimodal remote sensing image generation, decoupling shared semantics from modality-specific attributes to produce consistent images across optical, infrared, and SAR modalities from a single text prompt.",
+      "llm_tldr_cn": "现有遥感图像生成局限于单模态，无法利用多模态互补信息。本文提出对比参数解纠缠框架，在正交核心子空间中将共享语义与模态特有属性在参数级解耦，从而从单一文本提示生成光学、红外和SAR等多模态语义一致且结构对齐的图像。",
+      "llm_tldr": "现有遥感图像生成局限于单模态，无法利用多模态互补信息。本文提出对比参数解纠缠框架，在正交核心子空间中将共享语义与模态特有属性在参数级解耦，从而从单一文本提示生成光学、红外和SAR等多模态语义一致且结构对齐的图像。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.26023v1",
+      "source": "arxiv",
+      "title": "CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer",
+      "abstract": "Graph foundation models (GFMs) have emerged as a promising paradigm for transferring knowledge across graph domains and tasks. Real-world graphs associate nodes with text, images, and other modalities, making multimodal graphs essential for representing complex entities and relations. Moreover, collecting labels and adapting models for every new graph domain is costly and often infeasible, motivating zero-shot transfer. Unfortunately, zero-shot transfer on multimodal graphs remains underexplored. Existing GNN-based graph foundation models typically require downstream adaptation, whereas LLM-based graph methods mainly address unimodal graphs or tasks within a single domain. This setting presents two key challenges. First, models must generalize knowledge from individual modalities while capturing transferable cross-modal relations. Second, without target-domain fine-tuning, node representations remain entangled with domain-specific structures and modality-specific characteristics, obscuring shared concepts in unseen domains. To address these challenges, we propose CHARM, a multimodal graph foundation model with hierarchical context modeling for zero-shot transfer. CHARM replaces isolated raw nodes with hierarchical graph contexts that capture multimodal semantics and cross-modal relations. These contexts map domain-specific node patterns to shared high-level concepts, reducing reliance on target-domain supervision or adaptation. A modality-aware graph context encoder integrates multimodal information with graph structure and converts the resulting representations into graph tokens for a large language model . Experiments show consistent improvements on zero-shot multimodal graph tasks.",
+      "authors": [
+        "Ankang Yang",
+        "Jitao Zhao",
+        "Di Jin",
+        "Yuxiao Huang",
+        "Dongxiao He"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-28T17:35:26+00:00",
+      "link": "https://arxiv.org/pdf/2607.26023v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal graph foundation model combining text and images",
+      "llm_evidence_cn": "融合文本与图像的多模态图基础模型",
+      "llm_evidence": "融合文本与图像的多模态图基础模型",
+      "canonical_evidence": "融合文本与图像的多模态图基础模型",
+      "llm_tldr_en": "CHARM introduces a multimodal graph foundation model with hierarchical context modeling, enabling zero-shot transfer across graph domains by jointly representing text, images, and relations in a unified structured form.",
+      "llm_tldr_cn": "现实图数据常将节点与文本、图像等多模态信息关联，而现有图基础模型难以支持跨图零样本迁移。为此提出CHARM，一个多模态图基础模型，通过分层上下文建模统一表示各模态信息与实体关系，实现零样本跨域迁移。实验表明其在多模态图任务上具有较好的泛化能力。该工作为多模态关系建模与图学习提供了新思路。",
+      "llm_tldr": "现实图数据常将节点与文本、图像等多模态信息关联，而现有图基础模型难以支持跨图零样本迁移。为此提出CHARM，一个多模态图基础模型，通过分层上下文建模统一表示各模态信息与实体关系，实现零样本跨域迁移。实验表明其在多模态图任务上具有较好的泛化能力。该工作为多模态关系建模与图学习提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24447v1",
+      "source": "arxiv",
+      "title": "RP-OPSD: Resolution-Privileged On-Policy Self-Distillation for Multimodal Large Language Models",
+      "abstract": "On-Policy Self-Distillation (OPSD) uses privileged information available only to the teacher to provide dense token-level supervision on trajectories generated by the student. However, existing methods often rely on verified solution traces, explanations generated by external models, or manually localized visual evidence, which limits their scalable application to multimodal large language models. To address this issue, we exploit the information gap between high- and low-resolution views of the same image and propose RP-OPSD (Resolution-Privileged On-Policy Self-Distillation for Multimodal Large Language Models). During training, the student policy generates on-policy trajectories from images at one-quarter of the original resolution, while the teacher policy provides supervision using the original-resolution images. By minimizing the divergence between their output distributions along the student trajectories, the student learns the predictive behavior of the teacher under high-resolution inputs, thereby strengthening its low-resolution capability and transferring the learned improvement to original-resolution inference. RP-OPSD requires neither additional human annotations nor external models to generate solution traces but only image--question pairs. Experiments on Qwen3.5-9B show that RP-OPSD achieves a 5.45\\% relative improvement in average performance at the original resolution and a $1.78\\times$ training speedup over OPSD. These results demonstrate that resolution differences can serve as a simple and scalable source of privileged information, providing an effective and efficient approach to on-policy self-distillation for multimodal large language models.",
+      "authors": [
+        "Qihui Zhu",
+        "Yuchen Wang",
+        "Zijian Wen",
+        "Tao Zhang",
+        "Mengjie Zhang",
+        "Yang Liu",
+        "Shuangwu Chen",
+        "Siying Wu",
+        "Jian Yang",
+        "Xiaofeng Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T13:52:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.24447v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal large language model training using resolution-privileged distillation",
+      "llm_evidence_cn": "利用分辨率特权蒸馏训练多模态大语言模型",
+      "llm_evidence": "利用分辨率特权蒸馏训练多模态大语言模型",
+      "canonical_evidence": "利用分辨率特权蒸馏训练多模态大语言模型",
+      "llm_tldr_en": "RP-OPSD exploits resolution gaps between high and low-resolution views to provide privileged supervision for multimodal LLM self-distillation, avoiding external annotations.",
+      "llm_tldr_cn": "多模态大语言模型的同策略自蒸馏通常依赖外部模型或人工定位的视觉证据，难以大规模扩展。RP-OPSD利用同一图像高分辨率与低分辨率视图之间的信息差，让低分辨率学生模型从高分辨率教师模型获取密集的令牌级监督。该方法无需人工标注，在训练中自然生成特权信号，显著提升了多模态模型的指令跟随与视觉理解能力，为自蒸馏提供了可扩展方案。",
+      "llm_tldr": "多模态大语言模型的同策略自蒸馏通常依赖外部模型或人工定位的视觉证据，难以大规模扩展。RP-OPSD利用同一图像高分辨率与低分辨率视图之间的信息差，让低分辨率学生模型从高分辨率教师模型获取密集的令牌级监督。该方法无需人工标注，在训练中自然生成特权信号，显著提升了多模态模型的指令跟随与视觉理解能力，为自蒸馏提供了可扩展方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.26596v1",
+      "source": "arxiv",
+      "title": "Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution",
+      "abstract": "Multimodal large language models (MLLMs) have demonstrated remarkable capabilities by integrating visual and textual understanding within a unified transformer architecture. However, fine-tuning all parameters of these models for visual instruction tuning is computationally expensive and often unnecessary, as the representation requirements for visual and textual tokens diverge significantly in the deeper layers of the network. In this paper, we propose Decoupled Visual Processing (DVP), an efficient training framework that replaces the upper decoder layers of a pretrained LLM with a lightweight, independently trainable single transformer block dedicated exclusively to visual token processing. Specifically, after shared processing through the first half of the decoder layers, visual and textual tokens are split: visual tokens are routed through a newly initialized single transformer block while textual tokens continue through the original frozen decoder layers. The two streams are then concatenated before the language modeling head. During training, only the single transformer block is updated, dramatically reducing the number of trainable parameters. Experiments on the LLaVA-1.5 framework demonstrate that DVP achieves competitive performance on MME, POPE, and ChartQA benchmarks while training only a fraction of the total parameters, suggesting that visual representations in MLLMs can be effectively learned through a decoupled, parameter-efficient pathway.",
+      "authors": [
+        "Mingkuan Feng",
+        "Zhengqi Wen",
+        "Jianhua Tao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-07-29T08:16:28+00:00",
+      "link": "https://arxiv.org/pdf/2607.26596v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "efficient multimodal adaptation via modality-specific transformer substitution",
+      "llm_evidence_cn": "通过模态专用Transformer替换实现高效多模态适应",
+      "llm_evidence": "通过模态专用Transformer替换实现高效多模态适应",
+      "canonical_evidence": "通过模态专用Transformer替换实现高效多模态适应",
+      "llm_tldr_en": "Proposes DVP, an efficient training framework that replaces upper decoder layers of a pretrained LLM with a lightweight visual-token-only transformer block, reducing cost of multimodal adaptation while preserving performance.",
+      "llm_tldr_cn": "多模态大模型在视觉指令微调时全量参数更新代价高，且深层网络中视觉与文本令牌的表征需求差异显著。为此提出解耦视觉处理（DVP）框架，将预训练大模型的上层解码器替换为轻量级且仅处理视觉令牌的可训练Transformer块，实现高效的模态专用适应。该方法在降低计算开销的同时有望保持多模态理解性能，为视觉语言模型的参数高效微调提供了新思路。",
+      "llm_tldr": "多模态大模型在视觉指令微调时全量参数更新代价高，且深层网络中视觉与文本令牌的表征需求差异显著。为此提出解耦视觉处理（DVP）框架，将预训练大模型的上层解码器替换为轻量级且仅处理视觉令牌的可训练Transformer块，实现高效的模态专用适应。该方法在降低计算开销的同时有望保持多模态理解性能，为视觉语言模型的参数高效微调提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24707v1",
+      "source": "arxiv",
+      "title": "ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams",
+      "abstract": "Entity-Relationship Diagrams (ERDs) are central to conceptual database design, yet they are typically available only as rendered images rather than machine-readable schemas, limiting AI-assisted database engineering. We introduce ERUnderstand, the first large-scale benchmark for structured understanding of ER diagrams, comprising 2,960 diagrams collected from curated educational sources, real-world schemas, and synthetically generated examples spanning diverse domains, notations, complexity levels, and Extended Entity-Relationship (EER) constructs. Each diagram is paired with a standardized machine-readable representation for fine-grained evaluation of schema elements. Evaluating state-of-the-art Vision-Language Models (VLMs), we find that while common ERD elements are recovered reliably (F1 > 0.74), performance drops sharply on weak entities (as low as 0.28 F1), multivalued attributes (0.14 F1), and N-ary relationships (0.07 F1). Reasoning-augmented models improve overall performance by 15-25% but remain sensitive to linguistic priors and increasing diagram complexity. ERUnderstand provides a standardized benchmark for evaluating multimodal understanding of conceptual database schemas. The benchmark, dataset, evaluation toolkit, and generation code are publicly available at https://github.com/salinaria/ERUnderstand.",
+      "authors": [
+        "Ali Ansari",
+        "Yasmin Mohammadi",
+        "Farnoush Nili",
+        "Parsa Esmaeilkhani",
+        "Longin Jan Latecki",
+        "Eduard Dragut"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.DB"
+      ],
+      "published": "2026-07-27T17:46:43+00:00",
+      "link": "https://arxiv.org/pdf/2607.24707v1",
+      "tags": [
+        "keyword:MRE",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Benchmark for extracting entities and relationships from ER diagram images with VLMs",
+      "llm_evidence_cn": "使用VLMs从ER图图像中抽取实体与关系的基准",
+      "llm_evidence": "使用VLMs从ER图图像中抽取实体与关系的基准",
+      "canonical_evidence": "使用VLMs从ER图图像中抽取实体与关系的基准",
+      "llm_tldr_en": "Introduces the first benchmark for structured understanding of ER diagrams, pairing 2,960 diagrams with machine-readable schemas to evaluate VLMs on schema extraction.",
+      "llm_tldr_cn": "ER图通常以图像形式存在，难以被机器直接读取。ERUnderstand构建了首个大规模ER图结构化理解基准，含2960张图并配标准化可机读表示，用于细粒度评估VLMs对图中实体与关系的抽取能力。评测发现现有视觉语言模型在复杂EER结构上仍有明显不足。",
+      "llm_tldr": "ER图通常以图像形式存在，难以被机器直接读取。ERUnderstand构建了首个大规模ER图结构化理解基准，含2960张图并配标准化可机读表示，用于细粒度评估VLMs对图中实体与关系的抽取能力。评测发现现有视觉语言模型在复杂EER结构上仍有明显不足。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "Locate recent research on image text relation extraction benchmarks",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.26848v1",
+      "source": "arxiv",
+      "title": "ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures",
+      "abstract": "Scientific figure comprehension and reasoning using multimodal AI requires integrating visual perception with domain-specific reasoning to extract meaningful knowledge, often not presented in the text of a research publication. The Sci-ImageMiner benchmark dataset, accompanied by a community-driven competition, raises the bar over prior scientific competitions by curating a comprehensive, expert-annotated dataset across four end-to-end complementary tasks. The competition attracted 68 active participants and 1,263 public/private submissions from 9th January 2026 to 8th April 2026. Our results show that state-of-the-art multimodal models perform well on classification and summarization tasks but struggle with data extraction and scientific reasoning, particularly in visual question-answering. These findings reveal key limitations and highlight challenges and opportunities for improving domain-aware multimodal AI systems. Overall, the Sci-ImageMiner benchmark and competition establish a rigorous platform for advancing research in scientific figure comprehension and reasoning and demonstrate the potential of state-of-the-art approaches for a challenging and complex research area.",
+      "authors": [
+        "Fahad Ahmed",
+        "Sören Auer",
+        "Jennifer D'Souza"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-29T12:35:31+00:00",
+      "link": "https://arxiv.org/pdf/2607.26848v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "benchmark for information extraction from scientific figures",
+      "llm_evidence_cn": "科学图表信息抽取基准",
+      "llm_evidence": "科学图表信息抽取基准",
+      "canonical_evidence": "科学图表信息抽取基准",
+      "llm_tldr_en": "This ICDAR 2026 competition introduces the Sci-ImageMiner benchmark for information extraction from scientific figures, with four end-to-end tasks, showing that current multimodal models still struggle on harder extraction tasks.",
+      "llm_tldr_cn": "从科学图表中提取知识是多模态AI的重要任务，但现有基准覆盖不足。本文介绍ICDAR 2026竞赛及相关Sci-ImageMiner基准，包含四个端到端互补任务，并汇集68个团队的1263次提交。结果显示现有最强多模态模型在分类和摘要上表现良好，但在精细信息提取任务上仍有困难。该竞赛推动了科学图表信息抽取研究。",
+      "llm_tldr": "从科学图表中提取知识是多模态AI的重要任务，但现有基准覆盖不足。本文介绍ICDAR 2026竞赛及相关Sci-ImageMiner基准，包含四个端到端互补任务，并汇集68个团队的1263次提交。结果显示现有最强多模态模型在分类和摘要上表现良好，但在精细信息提取任务上仍有困难。该竞赛推动了科学图表信息抽取研究。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "Locate recent research on image text relation extraction benchmarks",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24861v1",
+      "source": "arxiv",
+      "title": "HVM-GraphRAG: Holistic-View Multimodal Graph Retrieval-Augmented Generation on Complex Document",
+      "abstract": "Question answering (QA) over complex documents requires models to retrieve and integrate evidence distributed across distant document regions and modalities. Multimodal GraphRAG provides a promising direction by organizing document evidence with graph structures. However, existing methods often suffer from unreliable cross-modal evidence indexing and expensive graph traversal. To address these issues, we propose HVM-GraphRAG, a holistic-view multimodal GraphRAG framework on complex document. HVM-GraphRAG uses a holistic view to guide graph construction, thereby reducing noisy and conflicting graph updates and building reliable indices between concept-level graph nodes and supporting multimodal chunks. During retrieval, HVM-GraphRAG searches over a compact concept-level graph and directly accesses supporting evidence through the constructed index, avoiding costly traversal over dense entity-level graphs. After obtaining the retrieved evidence, HVM-GraphRAG further reorganizes chunks into modality-specific groups, enabling the answering model to better integrate heterogeneous evidence. Experiments on three datasets show that HVM-GraphRAG achieves the best answer performance in most evaluated settings while substantially improving online retrieval efficiency over representative graph-based baselines.",
+      "authors": [
+        "Xin He",
+        "Yili Wang",
+        "Wenqi Fan",
+        "Qing Li",
+        "Qinggang Zhang",
+        "Yi Chang",
+        "Xin Wang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-07-26T12:47:25+00:00",
+      "link": "https://arxiv.org/pdf/2607.24861v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal graph construction and cross-modal evidence retrieval for QA",
+      "llm_evidence_cn": "面向问答的多模态图构建与跨模态证据检索",
+      "llm_evidence": "面向问答的多模态图构建与跨模态证据检索",
+      "canonical_evidence": "面向问答的多模态图构建与跨模态证据检索",
+      "llm_tldr_en": "HVM-GraphRAG improves multimodal GraphRAG on complex documents by building holistic-view guided graphs with reliable concept-to-chunk indices, reducing noisy updates and expensive traversal, and demonstrating gains in retrieval-augmented question answering.",
+      "llm_tldr_cn": "针对复杂文档问答中跨模态证据检索不可靠和图遍历成本高的问题，论文提出HVM-GraphRAG框架，使用整体视图指导图构建，减少噪声并建立概念节点与多模态块之间的可靠索引。实验表明该方法在多模态图检索增强生成中提升了检索与问答性能，为结构化多模态知识组织提供了新途径。",
+      "llm_tldr": "针对复杂文档问答中跨模态证据检索不可靠和图遍历成本高的问题，论文提出HVM-GraphRAG框架，使用整体视图指导图构建，减少噪声并建立概念节点与多模态块之间的可靠索引。实验表明该方法在多模态图检索增强生成中提升了检索与问答性能，为结构化多模态知识组织提供了新途径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.28565v1",
+      "source": "arxiv",
+      "title": "MIND: Multimodal Intent-Driven Network via Diffusion Transformers for Medical Image Fusion",
+      "abstract": "Medical image fusion aims to integrate complementary information from diverse imaging modalities to support clinical diagnosis. Existing methods typically apply uniform fusion rules globally, lacking a deep understanding of diagnostic intents and pathological structures. To address these limitations, we propose MIND, a Multimodal Intent-Driven Network via Diffusion Transformers (DiTs) for medical image fusion. Specifically, we utilize BioMedGPT to generate intent-driven fusion texts from source images, guiding the fusion process with pathology-aware diagnostic intents. To combat the loss of 2D spatial continuity caused by 1D sequence flattening in DiTs, we design a Multi-scale Latent Adapter. This module explicitly extracts source image features before serialization, injecting them into the network via strict dimensional alignment to effectively supplement image features. To resolve the semantic shift caused by decoupling image outputs from diagnostic intents, we design a medical semantic consistency loss. This loss ensures deep semantic locking between fused images and fusion texts while maintaining the stability of the underlying physical manifold reconstruction. Comprehensive experiments on the Harvard, BraTS, and GFP datasets reveal that MIND delivers superior fusion quality, significantly improves downstream brain tumor segmentation accuracy, and enables flexible interactive fusion, holding significant promise for intent-driven intelligent clinical decision support systems.",
+      "authors": [
+        "Yunzhan Fu",
+        "Xiangyu Shen",
+        "Yifei Sun",
+        "Yuhan Chen",
+        "Jian Wu",
+        "Hongxia Xu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T17:30:21+00:00",
+      "link": "https://arxiv.org/pdf/2607.28565v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "intent-driven medical image fusion with diffusion transformers",
+      "llm_evidence_cn": "基于扩散Transformer的意图驱动医学图像融合",
+      "llm_evidence": "基于扩散Transformer的意图驱动医学图像融合",
+      "canonical_evidence": "基于扩散Transformer的意图驱动医学图像融合",
+      "llm_tldr_en": "Proposes MIND, an intent-driven medical image fusion network using diffusion transformers, with BioMedGPT-generated diagnostic intents and a multi-scale latent adapter to preserve 2D spatial continuity.",
+      "llm_tldr_cn": "医学图像融合常采用全局统一规则，缺乏对诊断意图和病理结构的理解。MIND利用BioMedGPT生成意图驱动融合文本，结合扩散Transformer引导融合过程，并设计多尺度潜在适配器缓解一维序列化带来的二维空间连续性问题，提升融合图像质量。",
+      "llm_tldr": "医学图像融合常采用全局统一规则，缺乏对诊断意图和病理结构的理解。MIND利用BioMedGPT生成意图驱动融合文本，结合扩散Transformer引导融合过程，并设计多尺度潜在适配器缓解一维序列化带来的二维空间连续性问题，提升融合图像质量。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.26411v1",
+      "source": "arxiv",
+      "title": "Do Unified Multimodal Models Think in One Space? A Lens Through Cross-Branch Steering",
+      "abstract": "Unified multimodal models (UMMs) aim to integrate understanding and generation within a single architecture, yet it remains unclear whether these capabilities share a unified and transferable semantic space. This question is fundamentally challenging, as the two branches operate over heterogeneous representations (text tokens vs.\\ visual latents) and distinct training objectives, making direct comparison difficult. To address this, we introduce \\emph{cross-branch semantic steering}, an intervention-based framework that extracts semantic directions from one branch and applies them to the other. We show that steering vectors learned from the understanding branch can transfer to generation, enabling controllable image synthesis and improved semantic faithfulness. In contrast, the reverse direction consistently shows limited effectiveness. Our analysis suggests that this asymmetry may be related to a practical representational mismatch: understanding-derived vectors capture transferable, object-centric semantics, while generation-derived vectors primarily encode low-level appearance features. Our results reveal that architectural unification does not guarantee semantic alignment, and establish cross-branch steering as a practical tool for probing multimodal representations.",
+      "authors": [
+        "Yu Wang",
+        "Sharon Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-29T02:46:20+00:00",
+      "link": "https://arxiv.org/pdf/2607.26411v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal representation analysis and semantic steering across branches",
+      "llm_evidence_cn": "跨分支语义引导与多模态表示分析",
+      "llm_evidence": "跨分支语义引导与多模态表示分析",
+      "canonical_evidence": "跨分支语义引导与多模态表示分析",
+      "llm_tldr_en": "This paper asks whether understanding and generation branches in unified multimodal models share a transferable semantic space, and proposes cross-branch semantic steering to extract and apply semantic directions across branches, demonstrating controllable image synthesis and improved generation.",
+      "llm_tldr_cn": "该论文探究统一多模态模型的理解与生成分支是否共享可迁移的语义空间，提出跨分支语义引导干预框架，从理解分支提取语义方向并应用到生成分支。实验显示该引导可控制图像合成并改善生成效果，表明存在跨分支可转移的语义表征。这一发现为统一多模态模型的表征分析和可控生成提供了新视角。",
+      "llm_tldr": "该论文探究统一多模态模型的理解与生成分支是否共享可迁移的语义空间，提出跨分支语义引导干预框架，从理解分支提取语义方向并应用到生成分支。实验显示该引导可控制图像合成并改善生成效果，表明存在跨分支可转移的语义表征。这一发现为统一多模态模型的表征分析和可控生成提供了新视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.27530v1",
+      "source": "arxiv",
+      "title": "When Does Explicit View Routing Work? A Controlled Study of Multi-View Graph-Text Alignment",
+      "abstract": "Graph-text retrieval typically maps a graph and its description to a single embedding, even when a query concerns only one semantic aspect, such as a class label or molecular property. Multiple heads can separate these aspects, but a change in the query head may alter retrieval even when the wrong text is sent to that head. Such behavior demonstrates architectural channelization, not necessarily semantic routing. We examine the conditions under which this distinction can be resolved. Our controlled version of MV-GTA uses deterministic, verifiable text segments; isolated text encoders; view-specific graph heads; and relevance derived from external labels or RDKit descriptors. Correct routing and per-sample derangements form a causal test of whether retrieval depends on content. On BBBP and BACE, correct routing improves label and property nDCG by 0.305 to 0.685 over deranged training. The expected graph head exceeds the best wrong head by 0.303 to 0.453. Topology does not specialize consistently across the two datasets. In a matched three-seed comparison, one joint model obtains mean topology, label, and property nDCG of 0.720/1.000/0.877; three separately trained Single specialists obtain 0.633/0.976/0.859. Property paraphrase augmentation also improves unseen-template nDCG by 0.140 and 0.147 over a matched-exposure canonical control. Consistency and hard-template extensions, however, reduce canonical retrieval in some settings. The evidence is therefore limited to explicit, externally grounded label and property routing and observed multi-interface consolidation. It does not establish free-form routing, consistent three-view specialization, statistical equivalence to specialists, or superior downstream prediction.",
+      "authors": [
+        "Xiao Yue",
+        "Guangzhi Qu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-07-29T23:49:37+00:00",
+      "link": "https://arxiv.org/pdf/2607.27530v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment and explicit view routing in graph-text retrieval",
+      "llm_evidence_cn": "图-文本检索中的跨模态对齐与显式视图路由研究",
+      "llm_evidence": "图-文本检索中的跨模态对齐与显式视图路由研究",
+      "canonical_evidence": "图-文本检索中的跨模态对齐与显式视图路由研究",
+      "llm_tldr_en": "Examines when explicit view routing in multi-view graph-text alignment truly reflects semantic routing, using controlled deterministic text segments and view-specific heads to separate semantic routing from architectural channelization.",
+      "llm_tldr_cn": "面向图-文本跨模态对齐中的显式视图路由问题，论文用可控的确定性文本段、隔离文本编码器与视图专属图头，检验多视图图-文本对齐中路由行为是真正语义路由还是结构通道化。通过外部标签与RDKit描述符构建相关信号，作者揭示了显式视图路由能有效工作的条件，为跨模态表示学习中的语义分离提供可验证的分析范式。",
+      "llm_tldr": "面向图-文本跨模态对齐中的显式视图路由问题，论文用可控的确定性文本段、隔离文本编码器与视图专属图头，检验多视图图-文本对齐中路由行为是真正语义路由还是结构通道化。通过外部标签与RDKit描述符构建相关信号，作者揭示了显式视图路由能有效工作的条件，为跨模态表示学习中的语义分离提供可验证的分析范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.28006v1",
+      "source": "arxiv",
+      "title": "MMLDSum-LLM: Multimodal Long-Document Summarization with Visual-Alignment and Keyword-Aware",
+      "abstract": "Multimodal long documents are core carriers of professional knowledge, where critical evidence is sparsely distributed across paragraphs and modalities. This easily causes key information omission and cross-modal hallucinations in summarization by multimodal LLMs. These issues stem from attention drift in long-range dependency modeling and gaps in inter-modal alignment. To address this, we introduce MMLDSum-Bench, a high-quality benchmark for multimodal long-document summarization, covering multiple domains, context-length scales, and visual-textual modality distributions. We further propose MMLDSum-LLM, a reproducible two-stage training framework that combines supervised fine-tuning with visual-alignment weighted loss and keyword-aware weighted loss, followed by GRPO with a multi-objective reward (keyword coverage, image-text alignment, ROUGE, and length control). Extensive experiments on MMLDSum-Bench, comparing against leading closed-source and open-source multimodal models under a unified evaluation protocol - including LLM-as-a-judge scoring, atomic-claim precision/recall, image-text alignment (ITA), and ROUGE - demonstrate that our approach significantly improves key-information coverage and cross-modal consistency.",
+      "authors": [
+        "Xianpeng Zhang",
+        "Jiahua Yang",
+        "Dongyu Chen",
+        "Lei zhang",
+        "Jian Ma",
+        "Xu guohuan",
+        "Haonan Lu",
+        "Tianhuang Su",
+        "Chuangchuang Wang",
+        "Kai Tang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-30T10:54:09+00:00",
+      "link": "https://arxiv.org/pdf/2607.28006v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Inter-modal alignment and visual-alignment weighted loss for multimodal summarization; cross-modal alignment learning",
+      "llm_evidence_cn": "多模态摘要中的跨模态对齐，使用视觉对齐加权损失缓解模态间隙",
+      "llm_evidence": "多模态摘要中的跨模态对齐，使用视觉对齐加权损失缓解模态间隙",
+      "canonical_evidence": "多模态摘要中的跨模态对齐，使用视觉对齐加权损失缓解模态间隙",
+      "llm_tldr_en": "Introduces MMLDSum-Bench and MMLDSum-LLM, a two-stage training framework with visual-alignment weighted loss and keyword-aware supervision to reduce cross-modal hallucination in multimodal long-document summarization.",
+      "llm_tldr_cn": "多模态长文档摘要中关键证据稀疏分布，多模态大模型容易遗漏关键信息并产生跨模态幻觉，原因是长程注意力漂移与模态间对齐不足。本文构建了覆盖多领域和不同图文分布的高质量基准MMLDSum-Bench，并提出可复现的两阶段训练框架MMLDSum-LLM。通过视觉对齐加权损失和关键词感知监督，有效减少跨模态幻觉、提升摘要忠实度。",
+      "llm_tldr": "多模态长文档摘要中关键证据稀疏分布，多模态大模型容易遗漏关键信息并产生跨模态幻觉，原因是长程注意力漂移与模态间对齐不足。本文构建了覆盖多领域和不同图文分布的高质量基准MMLDSum-Bench，并提出可复现的两阶段训练框架MMLDSum-LLM。通过视觉对齐加权损失和关键词感知监督，有效减少跨模态幻觉、提升摘要忠实度。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

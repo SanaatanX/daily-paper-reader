@@ -1,0 +1,249 @@
+{
+  "date": "20260802",
+  "date_label": "",
+  "generated_at": "2026-08-02 20:46:55 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2607.24424v1",
+      "route": "202608/02/2607.24424v1-mavie-a-multi-scale-adaptive-vision-encoder-for-fine-grained-visual-perception-and-efficient-multimodal-reasoning",
+      "title": "MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多尺度视觉特征的特征级融合与问题条件令牌路由",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.26555v1",
+      "route": "202608/02/2607.26555v1-where-detectors-fail-closing-the-tail-domain-gap-with-expert-guided-mutual-distillation",
+      "title": "Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态融合的输入级校准与专家引导互蒸馏方法",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.27357v1",
+      "route": "202608/02/2607.27357v1-shared-semantic-codebook-distillation-for-unpaired-cross-modal-medical-classification",
+      "title": "Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过共享码本实现跨模态表示对齐",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.25794v1",
+      "route": "202608/02/2607.25794v1-fine-grained-food-image-understanding-via-target-aware-data-alignment",
+      "title": "Fine-Grained Food Image Understanding via Target-Aware Data Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向细粒度食品图文对的跨模态对齐方法",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.26023v1",
+      "route": "202608/02/2607.26023v1-charm-a-multimodal-graph-foundation-model-with-hierarchical-context-modeling-for-zero-shot-transfer",
+      "title": "CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "融合文本与图像的多模态图基础模型",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.26596v1",
+      "route": "202608/02/2607.26596v1-decoupled-visual-processing-efficient-multimodal-adaptation-via-modality-specific-transformer-substitution",
+      "title": "Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过模态专用Transformer替换实现高效多模态适应",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.26848v1",
+      "route": "202608/02/2607.26848v1-icdar-2026-competition-on-information-extraction-from-atomic-layer-depositionetching-alde-scientific-figures",
+      "title": "ICDAR 2026 Competition on Information Extraction from Atomic Layer Deposition/Etching (ALD/E) Scientific Figures",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "科学图表信息抽取基准",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.28565v1",
+      "route": "202608/02/2607.28565v1-mind-multimodal-intent-driven-network-via-diffusion-transformers-for-medical-image-fusion",
+      "title": "MIND: Multimodal Intent-Driven Network via Diffusion Transformers for Medical Image Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于扩散Transformer的意图驱动医学图像融合",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.23673v1",
+      "route": "202608/02/2607.23673v1-contrastive-parameter-disentanglement-for-multi-modal-remote-sensing-image-generation",
+      "title": "Contrastive Parameter Disentanglement for Multi-modal Remote Sensing Image Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用于多模态表征学习的对比参数解纠缠",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.24447v1",
+      "route": "202608/02/2607.24447v1-rp-opsd-resolution-privileged-on-policy-self-distillation-for-multimodal-large-language-models",
+      "title": "RP-OPSD: Resolution-Privileged On-Policy Self-Distillation for Multimodal Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用分辨率特权蒸馏训练多模态大语言模型",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.24707v1",
+      "route": "202608/02/2607.24707v1-erunderstand-evaluating-vision-language-models-on-structured-er-diagrams",
+      "title": "ERUnderstand: Evaluating Vision-Language Models on Structured ER Diagrams",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "使用VLMs从ER图图像中抽取实体与关系的基准",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.24861v1",
+      "route": "202608/02/2607.24861v1-hvm-graphrag-holistic-view-multimodal-graph-retrieval-augmented-generation-on-complex-document",
+      "title": "HVM-GraphRAG: Holistic-View Multimodal Graph Retrieval-Augmented Generation on Complex Document",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向问答的多模态图构建与跨模态证据检索",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.26411v1",
+      "route": "202608/02/2607.26411v1-do-unified-multimodal-models-think-in-one-space-a-lens-through-cross-branch-steering",
+      "title": "Do Unified Multimodal Models Think in One Space? A Lens Through Cross-Branch Steering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨分支语义引导与多模态表示分析",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.27530v1",
+      "route": "202608/02/2607.27530v1-when-does-explicit-view-routing-work-a-controlled-study-of-multi-view-graph-text-alignment",
+      "title": "When Does Explicit View Routing Work? A Controlled Study of Multi-View Graph-Text Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "图-文本检索中的跨模态对齐与显式视图路由研究",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    },
+    {
+      "paper_id": "2607.28006v1",
+      "route": "202608/02/2607.28006v1-mmldsum-llm-multimodal-long-document-summarization-with-visual-alignment-and-keyword-aware",
+      "title": "MMLDSum-LLM: Multimodal Long-Document Summarization with Visual-Alignment and Keyword-Aware",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态摘要中的跨模态对齐，使用视觉对齐加权损失缓解模态间隙",
+      "first_seen_at": "2026-08-02 20:46:55 UTC",
+      "updated_at": "2026-08-02 20:46:55 UTC"
+    }
+  ]
+}

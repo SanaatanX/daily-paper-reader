@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-01</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-02</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 15 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-01 21:39:31 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-02 20:46:55 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读7篇、速读12篇，聚焦多模态推荐与文本可控嵌入空间两大主题。</p>
-<p>最值得关注CaIRec对不完整多模态推荐的校准补全方案，以及基于文本条件的嵌入空间控制方法，均获8.0以上高分。</p>
-<p>建议优先阅读精读列表中的两篇高分论文，再结合速读中的多模态对齐与情感分析文章拓展视野。</p>
+<p>今日精读聚焦多尺度视觉编码器与检测长尾域蒸馏，另含食品图像与多模态图模型速读。最值得关注MAViE视觉编码器的细粒度感知能力，以及专家引导互蒸馏提升尾部场景检测的思路。建议普通读者先了解这两篇的核心方法，再去速读列表挑感兴趣的应用方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CaIRec: Calibrated Modality Imputation for Incomplete Multimodal Recommendation">CaIRec: Calibrated Modality Imputation for Incomplete Multimodal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Controlling Embedding Spaces with Text-Conditioned Transformations">Controlling Embedding Spaces with Text-Conditioned Transformations</span></li><li><span class="dpr-home-dashboard-paper-title" title="Mixture-of-Thought-Tokens: Unifying Perception and Reasoning for Free-form Multimodal Grounding">Mixture-of-Thought-Tokens: Unifying Perception and Reasoning for Free-form Multimodal Grounding</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning">MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation">Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification">Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -89,9 +87,9 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Progressive Multimodal Alignment for Continual Instruction Tuning">Progressive Multimodal Alignment for Continual Instruction Tuning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Semantic-Aligned Structural Abstraction for Multimodal Sentiment Analysis">Semantic-Aligned Structural Abstraction for Multimodal Sentiment Analysis</span></li><li><span class="dpr-home-dashboard-paper-title" title="FiRE: Enhancing MLLMs with Fine-Grained Context Learning for Complex Image Retrieval">FiRE: Enhancing MLLMs with Fine-Grained Context Learning for Complex Image Retrieval</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Fine-Grained Food Image Understanding via Target-Aware Data Alignment">Fine-Grained Food Image Understanding via Target-Aware Data Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer">CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer</span></li><li><span class="dpr-home-dashboard-paper-title" title="Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution">Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span><span class="dpr-home-dashboard-tag">mre <strong>2</strong></span></div>
 </section>
 </div>
 
