@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-02</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-03</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 15 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 11 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-02 20:46:55 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-03 21:30:30 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读聚焦多尺度视觉编码器与检测长尾域蒸馏，另含食品图像与多模态图模型速读。最值得关注MAViE视觉编码器的细粒度感知能力，以及专家引导互蒸馏提升尾部场景检测的思路。建议普通读者先了解这两篇的核心方法，再去速读列表挑感兴趣的应用方向。</p>
+<p>今日从11篇论文中精读1篇、速读3篇，聚焦多模态理解与生成方向；最值得关注的是精读论文《Multi-Modal Object Re-Identification》提出的双语义引导与全局-局部互调制机制，以及速读中Chinchilla缩放混合视觉Diffusion Transformer的扩展思路；建议先精读多模态重识别方法，再快速浏览视频生成与音视频融合的7分工作以把握近期热点。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning">MAViE: A Multi-scale Adaptive Vision Encoder for Fine-grained Visual Perception and Efficient Multimodal Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation">Where Detectors Fail: Closing the Tail-Domain Gap with Expert-Guided Mutual Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification">Shared Semantic Codebook Distillation for Unpaired Cross-Modal Medical Classification</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multi-Modal Object Re-Identification with Dual Semantic Guidance and Global-Local Mutual Modulation">Multi-Modal Object Re-Identification with Dual Semantic Guidance and Global-Local Mutual Modulation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">10 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Fine-Grained Food Image Understanding via Target-Aware Data Alignment">Fine-Grained Food Image Understanding via Target-Aware Data Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer">CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer</span></li><li><span class="dpr-home-dashboard-paper-title" title="Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution">Decoupled Visual Processing: Efficient Multimodal Adaptation via Modality-Specific Transformer Substitution</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Chimera: Designing and Chinchilla-Scaling Hybrid Visual Diffusion Transformers">Chimera: Designing and Chinchilla-Scaling Hybrid Visual Diffusion Transformers</span></li><li><span class="dpr-home-dashboard-paper-title" title="DoubleHelix: Structured Cross-Modal Fusion for Audio-Visual Speech Recognition with LLMs">DoubleHelix: Structured Cross-Modal Fusion for Audio-Visual Speech Recognition with LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="MoRoute: Dynamic Routing for In-Context Multimodal Video Generation">MoRoute: Dynamic Routing for In-Context Multimodal Video Generation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span><span class="dpr-home-dashboard-tag">mre <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>9</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,480 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-03T21:24:26.249182+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 1,
+    "deep_cap": 7,
+    "deep_selected": 1,
+    "quick_candidates": 10,
+    "quick_skim_target": 12,
+    "quick_selected": 10
+  },
+  "deep_dive": [
+    {
+      "id": "2607.29207v1",
+      "source": "arxiv",
+      "title": "Multi-Modal Object Re-Identification with Dual Semantic Guidance and Global-Local Mutual Modulation",
+      "abstract": "Multi-modal object Re-Identification (ReID) aims to retrieve target instances by leveraging complementary information across modalities. However, existing methods suffer from two challenges. First, they often fail to exploit well-aligned and reliable semantic priors, making them vulnerable to background clutter and cross-modal misalignment. On the other hand, they typically rely on holistic feature modeling, overlooking the synergy between global and local representations. To overcome these limitations, we propose a robust multi-modal ReID framework with dual semantic guidance and global-local mutual modulation, which mainly consists of three key components, namely the Text-Semantic Injector (TSI), the Masked Global-Local Modulator (MGLM), and the Hierarchical MoE Fusion (HMF). The TSI enhances semantic awareness by integrating clean and coherent textual features into visual tokens. The MGLM enables part-aware cross-modal interaction through joint guidance from soft masks and global context, improving fine-grained feature alignment. Finally, the HMF adaptively aggregates multi-spectral features under local semantic supervision, yielding discriminative and robust representations. Extensive experiments on three multi-modal ReID benchmarks demonstrate the effectiveness of the proposed method. The code will be made publicly available at https://github.com/zw-absin/DSGM upon acceptance.",
+      "authors": [
+        "Weixiang Zhou",
+        "Xingguo Xu",
+        "Yuhao Wang",
+        "Cong Wang",
+        "Yang Yang",
+        "Zhixun Su",
+        "Jinshan Pan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-31T09:27:10+00:00",
+      "link": "https://arxiv.org/pdf/2607.29207v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Directly addresses cross-modal misalignment and multimodal representation learning for object re-identification.",
+      "llm_evidence_cn": "直接解决跨模态错位与多模态表示学习，用于目标重识别。",
+      "llm_evidence": "直接解决跨模态错位与多模态表示学习，用于目标重识别。",
+      "canonical_evidence": "直接解决跨模态错位与多模态表示学习，用于目标重识别。",
+      "llm_tldr_en": "Proposes a multi-modal ReID framework with dual semantic guidance and global-local mutual modulation to handle cross-modal misalignment and background clutter.",
+      "llm_tldr_cn": "多模态目标重识别常受背景杂乱和跨模态错位影响，现有方法缺乏可靠语义先验且忽视全局-局部协同。该框架引入文本语义注入器与掩码全局-局部相互调制，利用双语义引导对齐跨模态表示，同时建模全局和局部信息。实验表明该方法能显著提升多模态ReID的鲁棒性和准确率。这是面向跨模态对齐与多模态表示学习的强方法匹配。",
+      "llm_tldr": "多模态目标重识别常受背景杂乱和跨模态错位影响，现有方法缺乏可靠语义先验且忽视全局-局部协同。该框架引入文本语义注入器与掩码全局-局部相互调制，利用双语义引导对齐跨模态表示，同时建模全局和局部信息。实验表明该方法能显著提升多模态ReID的鲁棒性和准确率。这是面向跨模态对齐与多模态表示学习的强方法匹配。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2607.28611v1",
+      "source": "arxiv",
+      "title": "Chimera: Designing and Chinchilla-Scaling Hybrid Visual Diffusion Transformers",
+      "abstract": "Visual generation increasingly requires high-resolution images, long videos, and multimodal context, making the quadratic cost of full attention prohibitive. We introduce Chimera, a hybrid visual diffusion backbone with a principled scaling recipe. Chimera processes text, image, and video tokens in one raster-ordered stream without positional embeddings. It combines Kimi Delta Attention (KDA) for long-context state tracking with O(N) complexity, interleaved Multi-head Latent Attention (MLA) for direct global interaction, and modality-aware short convolutions for local spatiotemporal context. Sparse Mixture-of-Experts (MoE) layers expand capacity while controlling activated compute. To scale this heterogeneous architecture, we introduce HeteroP, a module-wise scheme that transfers hyperparameters across width and depth according to each tensor's functional fan-in and model depth. HeteroP yields a consistently tuned family used to fit Chinchilla-style compute-optimal laws for activated model size, training-token count, and image-video data ratio. Guided by these laws, we train an 11B-parameter Chimera with 2B activated parameters. Experiments show three results. First, measured by pretraining diffusion loss, the dense backbone is 1.7x as compute-efficient as a matched full-attention Wan-2.1 2B baseline, while the complete system reaches 7.3x. Second, without length-specific fine-tuning, Chimera extrapolates zero-shot from 5-second training clips to 30-second videos, with only 6.5% FID degradation in the last five seconds. Third, the fitted laws show that compute-optimal image pretraining divides compute nearly evenly between activated model size and training-token count, whereas video pretraining modestly favors model size at higher budgets. These results establish a foundation for designing and scaling efficient long-context diffusion architectures.",
+      "authors": [
+        "Chongjian Ge",
+        "Hanwen Jiang",
+        "Tianyu Wang",
+        "Jiuxiang Gu",
+        "Yiran Xu",
+        "Ziwen Chen",
+        "Shaoteng Liu",
+        "Jing Shi",
+        "Yicong Hong",
+        "Zefan Cai",
+        "Hailin Jin",
+        "Hao Tan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T17:58:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.28611v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "hybrid visual diffusion backbone processing text, image, and video tokens with novel attention and MoE fusion",
+      "llm_evidence_cn": "混合视觉扩散骨干统一处理文本、图像和视频token，融合多种注意力与MoE机制",
+      "llm_evidence": "混合视觉扩散骨干统一处理文本、图像和视频token，融合多种注意力与MoE机制",
+      "canonical_evidence": "混合视觉扩散骨干统一处理文本、图像和视频token，融合多种注意力与MoE机制",
+      "llm_tldr_en": "Chimera is a hybrid visual diffusion backbone that processes text, image, and video tokens in one stream, combining KDA, interleaved multi-head latent attention, modality-aware convolutions, and sparse MoE with a Chinchilla-style scaling recipe.",
+      "llm_tldr_cn": "高分辨率图像、长视频和多模态条件生成对Transformer注意力造成巨大开销。论文提出Chimera，一种混合视觉扩散骨架，将文本、图像和视频token放在统一流中处理，利用Kimi Delta Attention实现线性复杂度长程跟踪，并交错多头潜变量注意力与模态感知卷积，结合稀疏MoE扩展容量。通过HeteroP等缩放方法可预测地扩展该异构架构。实验验证了其在大规模视觉生成上的效率和扩展性。",
+      "llm_tldr": "高分辨率图像、长视频和多模态条件生成对Transformer注意力造成巨大开销。论文提出Chimera，一种混合视觉扩散骨架，将文本、图像和视频token放在统一流中处理，利用Kimi Delta Attention实现线性复杂度长程跟踪，并交错多头潜变量注意力与模态感知卷积，结合稀疏MoE扩展容量。通过HeteroP等缩放方法可预测地扩展该异构架构。实验验证了其在大规模视觉生成上的效率和扩展性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "Latest techniques for multimodal fusion in neural networks",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.23523v1",
+      "source": "arxiv",
+      "title": "CircuitWeave: Topology-Behavior Alignment for Executable Multimodal RTL Generation",
+      "abstract": "Text-only LLMs generate RTL from natural-language specifications, but prose can leave connectivity, register boundaries, and state-output relations implicit even when interfaces and cycle-level behavior are specified. Schematics can make these structural relations explicit and thereby complement the behavioral constraints conveyed by text. Yet simply adding an image creates a fusion challenge: direct multimodal decoding does not explicitly separate the evidence roles of text and schematics or make missing and conflicting constraints explicit before code generation.We present CircuitWeave, a contract-mediated multimodal framework that extracts a topology contract from the schematic and a behavior contract from the text. It fuses these records into a circuit contract that serializes correspondences, missing evidence, and conflicts, then generates RTL only from this contract. A joint objective supervises both contracts, serialized fusion, contract-conditioned RTL generation, and reverse reconstruction of covered contract fields from reference RTL.We construct 5,000 executable-qualified packages, each containing a specification, generated schematic, structured contracts, reference RTL, and self-checking testbench, and use the training split to adapt Qwen with LoRA. On VerilogEval-Human, CircuitWeave reaches 46.60% pass@1, 61.49% pass@5, and 65.39% pass@10. These point estimates are 8.46, 5.85, and 2.57 percentage points above those of the same adapted checkpoint without the schematic. On RTLLM, it reaches 40.00%, 48.00%, and 52.00%, two percentage points above the adapted text-only condition at each cutoff.The dataset is publicly available at https://huggingface.co/datasets/fengjiahao0421/CircuitWeave.",
+      "authors": [
+        "Jiahao Feng",
+        "Haiyan Qin",
+        "Zhiwei Xie",
+        "Wang Kang"
+      ],
+      "primary_category": "cs.AR",
+      "categories": [
+        "cs.AR"
+      ],
+      "published": "2026-07-26T07:43:52+00:00",
+      "link": "https://arxiv.org/pdf/2607.23523v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Contract-mediated multimodal fusion framework that aligns text and schematic evidence.",
+      "llm_evidence_cn": "契约中介的多模态融合框架，对齐文本与原理图证据。",
+      "llm_evidence": "契约中介的多模态融合框架，对齐文本与原理图证据。",
+      "canonical_evidence": "契约中介的多模态融合框架，对齐文本与原理图证据。",
+      "llm_tldr_en": "CircuitWeave extracts a topology contract from schematic and a behavior contract from text, fusing them to generate executable RTL while making conflicts explicit.",
+      "llm_tldr_cn": "文本生成RTL时，连接关系等结构信息常隐含，单纯加入图像又存在融合难题。CircuitWeave构建契约中介的多模态框架，分别从原理图提取拓扑契约、从文本提取行为契约，并在生成RTL前融合这些记录以显式暴露缺失和冲突信息。实验表明该框架能够生成更可执行且与规范一致的RTL。该方法展示了多模态融合在硬件生成中的应用，是典型的多模态融合技术。",
+      "llm_tldr": "文本生成RTL时，连接关系等结构信息常隐含，单纯加入图像又存在融合难题。CircuitWeave构建契约中介的多模态框架，分别从原理图提取拓扑契约、从文本提取行为契约，并在生成RTL前融合这些记录以显式暴露缺失和冲突信息。实验表明该框架能够生成更可执行且与规范一致的RTL。该方法展示了多模态融合在硬件生成中的应用，是典型的多模态融合技术。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.29112v1",
+      "source": "arxiv",
+      "title": "DoubleHelix: Structured Cross-Modal Fusion for Audio-Visual Speech Recognition with LLMs",
+      "abstract": "Audio-visual speech recognition (AVSR) relies on effective fusion of audio and visual modalities, yet existing approaches treat cross-modal interaction as a single-step operation without structured iterative refinement. We present DoubleHelix, a multimodal fusion framework that reformulates fusion as an iterative cross-modal interaction process with adaptive degradation-aware enhancement. The framework comprises three components including ReverseParallelHelix for multi-turn structured interaction with learned alignment constraints, QualitySensor for learning degradation-aware gating signals, and HelixReplication for consistency-guided conditional feature enhancement. Experiments on LRS3 demonstrate that DoubleHelix achieves 0.68% WER on clean audio, outperforming previous best results by 5.6% relative improvement under matched backbone settings. Comprehensive ablation studies validate each component contribution, including targeted analysis of design choices such as asymmetric pathway weighting. The framework shows improved robustness under evaluated babble-noise conditions, achieving 11.6% WER at SNR -5dB.",
+      "authors": [
+        "Ziwei Cheng",
+        "Zhenhua Tan",
+        "Zhuomin Zhu"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "cs.AI"
+      ],
+      "published": "2026-07-31T07:40:59+00:00",
+      "link": "https://arxiv.org/pdf/2607.29112v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "iterative structured cross-modal fusion for audio-visual speech recognition",
+      "llm_evidence_cn": "面向音视频语音识别的迭代结构化跨模态融合",
+      "llm_evidence": "面向音视频语音识别的迭代结构化跨模态融合",
+      "canonical_evidence": "面向音视频语音识别的迭代结构化跨模态融合",
+      "llm_tldr_en": "DoubleHelix is a multimodal fusion framework that reformulates fusion as iterative cross-modal interaction with learned alignment constraints, degradation-aware gating, and conditional feature enhancement. It achieves 0.68% WER on LRS3, surpassing previous methods.",
+      "llm_tldr_cn": "音视频语音识别需要有效融合音频与视觉信息，但现有方法常把跨模态交互视为单步操作。本文提出DoubleHelix，将融合建模为多轮结构化交互过程：ReverseParallelHelix实现带对齐约束的交互，QualitySensor学习退化感知门控信号，HelixReplication进行一致性条件特征增强。在LRS3基准上，该方法取得0.68%的词错误率，优于已有方法。该框架展示了迭代式跨模态融合的潜力，适用于更广泛的多模态感知任务。",
+      "llm_tldr": "音视频语音识别需要有效融合音频与视觉信息，但现有方法常把跨模态交互视为单步操作。本文提出DoubleHelix，将融合建模为多轮结构化交互过程：ReverseParallelHelix实现带对齐约束的交互，QualitySensor学习退化感知门控信号，HelixReplication进行一致性条件特征增强。在LRS3基准上，该方法取得0.68%的词错误率，优于已有方法。该框架展示了迭代式跨模态融合的潜力，适用于更广泛的多模态感知任务。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.24554v1",
+      "source": "arxiv",
+      "title": "DeCoRAG: Cognitive Decoupling and Semantic-Aware Cropping for Complex Document Understanding",
+      "abstract": "Advancing multimodal retrieval-augmented generation (RAG) for complex document understanding presents a formidable dual dilemma of accuracy and efficiency, particularly in graph RAG. Processing structurally sparse yet visually dense layouts, such as extracting a tiny data marker from a financial chart, often incurs computationally prohibitive token overhead while still triggering catastrophic hallucination. However, multimodal Graph RAG pipelines rely on graph-construction stages that assume Vision-Language Models (VLMs) can resolve sparse semantics within high-density layouts. We challenge this assumption, revealing that forcing VLMs to localize visual evidence, interpret semantics, and extract relations triggers a \"Visual Attention Sink,\" a mechanism driving catastrophic semantic loss, while full-page processing incurs massive computational overhead. Controlled interventions verify that this failure is boundary-driven rather than content-specific and that semantic anchoring mitigates it. To fundamentally correct this flawed paradigm, we introduce DeCoRAG, a multimodal Graph RAG pipeline that shifts knowledge processing from coupled visual-semantic reasoning to \"Cognitive Decoupling.\" Rather than passively processing raw pixels, its graph-construction stage establishes a macroscopic Semantic Anchor to neutralize the attention sink. This anchor subsequently drives our Region-Aware Pruning and Cropping (RAP-Crop) mechanism, shifting the reasoning space from dense, noisy backgrounds to purified, intent-driven semantic clusters. The resulting graph supports hybrid retrieval and answer generation. Across complex document benchmarks, DeCoRAG improves the semantic pass rate by up to 12.5 percentage points over the strongest baseline and generalizes to DocVQA. RAP-Crop reduces offline graph-construction prompt tokens by 40.8% without sacrificing end-to-end accuracy.",
+      "authors": [
+        "Shuo Wang",
+        "Kai Zhang",
+        "Wenyuan Huang",
+        "Yizheng Yu",
+        "Xia Liao",
+        "Junming Su",
+        "Qing Wang",
+        "Fang Xi"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.CV"
+      ],
+      "published": "2026-07-27T15:28:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.24554v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal graph RAG pipeline that forces VLMs to localize visual evidence, interpret semantics, and extract relations from dense layouts",
+      "llm_evidence_cn": "多模态图RAG管线要求视觉语言模型在高密度布局中定位证据、解释语义并抽取关系",
+      "llm_evidence": "多模态图RAG管线要求视觉语言模型在高密度布局中定位证据、解释语义并抽取关系",
+      "canonical_evidence": "多模态图RAG管线要求视觉语言模型在高密度布局中定位证据、解释语义并抽取关系",
+      "llm_tldr_en": "DeCoRAG uses cognitive decoupling and semantic-aware cropping to improve multimodal graph RAG, enabling VLMs to accurately and efficiently extract relations and localize visual evidence in dense document layouts.",
+      "llm_tldr_cn": "多模态图检索增强生成在复杂文档中面临精度与效率的两难，高密度视觉布局容易导致VLMs出现视觉注意力幻觉。论文提出DeCoRAG，通过认知解耦将定位、语义理解和关系抽取任务分离，并引入语义感知裁剪减少token开销。实验表明该方法能显著提升从稀疏语义高密度布局中抽取关系的准确性，同时降低计算成本。这为多模态文档关系抽取提供了一种新范式。",
+      "llm_tldr": "多模态图检索增强生成在复杂文档中面临精度与效率的两难，高密度视觉布局容易导致VLMs出现视觉注意力幻觉。论文提出DeCoRAG，通过认知解耦将定位、语义理解和关系抽取任务分离，并引入语义感知裁剪减少token开销。实验表明该方法能显著提升从稀疏语义高密度布局中抽取关系的准确性，同时降低计算成本。这为多模态文档关系抽取提供了一种新范式。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relational facts from multimodal data",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.29545v1",
+      "source": "arxiv",
+      "title": "MoRoute: Dynamic Routing for In-Context Multimodal Video Generation",
+      "abstract": "Multimodal video generation aims to generate and edit videos conditioned on arbitrary combinations of text, images, and videos within a single model, allowing diverse tasks to share complementary data and generative priors. Unifying these tasks requires multimodal understanding of diverse conditions, which is typically provided by a pretrained vision-language model (VLM). A key challenge is how to connect the VLM's hierarchical multimodal representations with a pretrained video diffusion transformer (DiT). Existing methods either inject features from only the final or a few manually selected VLM layers, or jointly train architecture-matched understanding and generation streams, making it difficult to reuse heterogeneous pretrained backbones. We introduce MoRoute, a unified multimodal video generation framework that formulates a frozen VLM and a pretrained video DiT with different architectures as heterogeneous experts connected through dynamic layer routing. For each input, a lightweight block-wise router enables every DiT block to select the VLM layer most relevant to its generation stage, thereby learning an adaptive correspondence between multimodal understanding and video synthesis. MoRoute further incorporates reference images and source videos directly into the DiT token sequence through unified in-context conditioning, preserving fine-grained visual details across diverse generation and editing tasks. Experiments on IntelligentVBench, OpenVE-Bench, and RefVIE-Bench show that MoRoute consistently surpasses the best competing method on each benchmark, improving the average score by 0.15, 0.18, and 0.34 on a 1-5 scale, respectively.",
+      "authors": [
+        "Chong Gao",
+        "Jie Ma",
+        "Zhan Peng",
+        "Chongxiao Wang",
+        "Haoxue Wu",
+        "Jun Liang",
+        "Guanbin Li",
+        "Jing Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-31T15:38:56+00:00",
+      "link": "https://arxiv.org/pdf/2607.29545v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "dynamic routing of VLM hierarchical representations into video diffusion transformers for multimodal fusion",
+      "llm_evidence_cn": "动态路由将视觉语言模型分层表示送入视频扩散模型，实现多模态融合",
+      "llm_evidence": "动态路由将视觉语言模型分层表示送入视频扩散模型，实现多模态融合",
+      "canonical_evidence": "动态路由将视觉语言模型分层表示送入视频扩散模型，实现多模态融合",
+      "llm_tldr_en": "MoRoute addresses the challenge of connecting VLM hierarchical multimodal representations with pretrained video diffusion transformers via dynamic routing, enabling flexible reuse of heterogeneous multimodal backbones for in-context video generation.",
+      "llm_tldr_cn": "多模态视频生成需要让一个模型接收文本、图像和视频的任意组合，但如何连接视觉语言模型的分层表示与视频扩散模型是关键。现有方法只注入最后层或固定几层特征，或联合训练架构匹配的理解与生成流，难以复用异构预训练骨干。论文提出动态路由机制MoRoute，按需选择VLMs各层特征输送给扩散模型。实验表明其能高效融合多模态条件，并提升生成效果与灵活性。",
+      "llm_tldr": "多模态视频生成需要让一个模型接收文本、图像和视频的任意组合，但如何连接视觉语言模型的分层表示与视频扩散模型是关键。现有方法只注入最后层或固定几层特征，或联合训练架构匹配的理解与生成流，难以复用异构预训练骨干。论文提出动态路由机制MoRoute，按需选择VLMs各层特征输送给扩散模型。实验表明其能高效融合多模态条件，并提升生成效果与灵活性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "Latest techniques for multimodal fusion in neural networks",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2607.25106v1",
+      "source": "arxiv",
+      "title": "IMPRINT: Image-Conditioned Query Enrichment for Long-Tail Object Goal Navigation",
+      "abstract": "Embodied AI increasingly relies on queryable semantic maps built from pre-trained vision-language models to enable zero-shot Object Goal Navigation (ObjectNav). However, existing approaches typically depend on text-only queries, which become less reliable as semantic specificity increases toward fine-grained object categories. We introduce IMPRINT, a zero-shot plug-and-play framework that enriches textual object queries with web-sourced images to improve grounding in queryable maps. Retrieved images are encoded using a vision-language model, matched against the semantic map to produce similarity maps, and aggregated to yield context-aware localization. Notably, this requires no training or modification of the underlying navigation policy. To explicitly evaluate long-tail behavior, we present HSSD-rare, a new ObjectNav benchmark built on Habitat Synthetic Scenes and featuring semantically specific subcategories. Across both OVON and HSSD-rare, image-conditioned queries consistently improve object grounding and yield end-to-end navigation gains. Further analysis reveals that translating localization gains to navigation performance depends critically on downstream detection quality, highlighting a key systems bottleneck in long-tail embodied navigation.",
+      "authors": [
+        "Jelin Raphael Akkara",
+        "Filippo Ziliotto",
+        "Luciano Serafini",
+        "Lamberto Ballan",
+        "Tommaso Campari"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-27T22:09:32+00:00",
+      "link": "https://arxiv.org/pdf/2607.25106v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "image-conditioned query enrichment for vision-language grounding in ObjectNav",
+      "llm_evidence_cn": "利用图像增强文本查询，实现视觉-语言对齐定位",
+      "llm_evidence": "利用图像增强文本查询，实现视觉-语言对齐定位",
+      "canonical_evidence": "利用图像增强文本查询，实现视觉-语言对齐定位",
+      "llm_tldr_en": "IMPRINT is a zero-shot framework that enriches text-only object queries with web-sourced images, then aggregates similarity maps in a queryable semantic map to improve long-tail object goal navigation without retraining.",
+      "llm_tldr_cn": "针对零样本目标导航中纯文本查询在细粒度类目上不够可靠的问题，提出IMPRINT，从网络检索图像并用视觉语言模型编码，与语义地图匹配生成相似度图，聚合后提供上下文感知的定位。该方法即插即用，无需训练或改动导航策略。实验显示在长尾目标上显著提升导航成功率。该框架展示了借助外部图像丰富文本查询的跨模态增强范式。",
+      "llm_tldr": "针对零样本目标导航中纯文本查询在细粒度类目上不够可靠的问题，提出IMPRINT，从网络检索图像并用视觉语言模型编码，与语义地图匹配生成相似度图，聚合后提供上下文感知的定位。该方法即插即用，无需训练或改动导航策略。实验显示在长尾目标上显著提升导航成功率。该框架展示了借助外部图像丰富文本查询的跨模态增强范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.28285v1",
+      "source": "arxiv",
+      "title": "Beyond Visual Ambiguity: Guiding Robust Monocular Depth Estimation in Challenging Scenarios via Detailed Long Captions",
+      "abstract": "Monocular depth estimation (MDE) faces challenges with non-Lambertian surfaces and adverse weather conditions due to the visual ambiguities inherent in single-image limited information. Existing works address them in isolation via image inpainting or augmentation, yielding limited robustness gains. Language, as a powerful complementary modality to vision, is demonstrated to enhance the visual perception capabilities of vision-language models (VLMs) via detailed long captions. However, prior language-integrated MDE methods fail to fully harness this potential due to short text input with limited information, coarse global text feature learning, and limited language guidance during depth decoding. To address these limitations, we propose CapDepth, a novel framework for robust MDE that leverages guidance from detailed long captions to alleviate visual ambiguities in both challenging scenarios. First, we design a detailed long caption input template that explicitly conveys rich spatial relationships among multiple atom sentences. Second, a dynamic caption encoder is introduced to extract fine-grained depth-relevant text features via progressive masked attention. Finally, we propose a text-adaptive decoder that guides enhanced depth decoding with text features via stable adaptive layer normalization. Extensive experiments validate the efficacy of CapDepth, which outperforms state-of-the-art methods, achieving depth error reductions of 25.0% on non-Lambertian surfaces and 22.0% under adverse weather conditions.",
+      "authors": [
+        "Junrui Zhang",
+        "Jiaqi Li",
+        "Yiran Wang",
+        "Liao Shen",
+        "Zhiguo Cao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-30T14:32:02+00:00",
+      "link": "https://arxiv.org/pdf/2607.28285v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "uses detailed long captions as complementary language modality to guide vision-language fusion in monocular depth estimation",
+      "llm_evidence_cn": "利用细长文本描述作为语言模态引导单目深度估计中的视觉-语言融合",
+      "llm_evidence": "利用细长文本描述作为语言模态引导单目深度估计中的视觉-语言融合",
+      "canonical_evidence": "利用细长文本描述作为语言模态引导单目深度估计中的视觉-语言融合",
+      "llm_tldr_en": "Proposes using detailed long captions to guide monocular depth estimation in challenging scenarios, enhancing vision-language fusion and robustness by integrating rich language guidance into the depth decoding process.",
+      "llm_tldr_cn": "单目深度估计在非朗伯表面和恶劣天气下因单图歧义而困难，已有方法将图像修复或增强孤立处理，鲁棒性有限。本文利用详细长描述作为语言互补模态，针对短文本信息不足、粗粒度全局文本特征等问题，在深度解码中引入更充分的语言引导。实验表明该方法在挑战场景下显著增强深度估计鲁棒性，展示了语言引导视觉感知的价值。",
+      "llm_tldr": "单目深度估计在非朗伯表面和恶劣天气下因单图歧义而困难，已有方法将图像修复或增强孤立处理，鲁棒性有限。本文利用详细长描述作为语言互补模态，针对短文本信息不足、粗粒度全局文本特征等问题，在深度解码中引入更充分的语言引导。实验表明该方法在挑战场景下显著增强深度估计鲁棒性，展示了语言引导视觉感知的价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.28580v1",
+      "source": "arxiv",
+      "title": "DualG-MRAG: Decoupling Macro-Reasoning and Micro-Matching for Multimodal Retrieval-Augmented Generation",
+      "abstract": "While Multimodal Retrieval-Augmented Generation (MM-RAG) has shown promising results, it still struggles with complex multi-hop reasoning tasks. Existing methods primarily focus on independent instance-level matching, which often fails to capture explicit relationships across modalities and documents. Although Graph-enhanced methods introduce structural modeling, they face a fundamental challenge in multimodal scenarios: incorporating fine-grained visual features leads to rapid graph expansion and retrieval noise, whereas coarse-grained representations cause the discarding of critical local evidence. To address this dilemma, we propose DualG-MRAG, a Dual-tier framework that introduces a decoupled architecture comprising Macro-reasoning and Micro-matching Graphs for Multimodal RAG. Specifically, to suppress retrieval noise by isolating global structural reasoning from fine-grained evidence matching, we construct a Macro Graph for global topological routing and a Micro Graph for precise local verification. Subsequently, to enable dynamic relevance propagation across heterogeneous evidence sources, we formulate retrieval as a query-driven message passing process via a GNN Retriever. Furthermore, to provide the generative model with coherent structural guidance, we introduce a dynamic programming decoding mechanism that extracts explicit reasoning paths directly from the GNN's forward pass, replacing the standard input of isolated document chunks. Extensive experiments demonstrate that DualG-MRAG outperforms baselines in both evidence recall and complex QA accuracy.",
+      "authors": [
+        "Jiacheng Tao",
+        "Qingyun Sun",
+        "Haonan Yuan",
+        "Ziwei Zhang",
+        "Jianxin Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-07-30T17:40:05+00:00",
+      "link": "https://arxiv.org/pdf/2607.28580v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multimodal retrieval-augmented generation with decoupled macro-reasoning and micro-matching",
+      "llm_evidence_cn": "解耦宏观推理与微观匹配的多模态检索增强生成",
+      "llm_evidence": "解耦宏观推理与微观匹配的多模态检索增强生成",
+      "canonical_evidence": "解耦宏观推理与微观匹配的多模态检索增强生成",
+      "llm_tldr_en": "Proposes DualG-MRAG, a dual-tier framework decoupling macro-reasoning and micro-matching for multimodal retrieval-augmented generation, balancing fine-grained visual evidence and structural modeling for complex multi-hop reasoning.",
+      "llm_tldr_cn": "该论文针对多模态检索增强生成在多跳推理中难以同时保留细粒度视觉证据与结构信息的问题，提出DualG-MRAG双层级框架。框架将跨模态关系建模解耦为宏观推理与微观匹配，分别处理全局结构与局部证据，以避免图爆炸或证据丢失。实验结果表明该方法在复杂多跳多模态问答任务上提升了检索准确率和生成质量。该工作为多模态融合与跨模态关系建模提供了有效的解耦架构。",
+      "llm_tldr": "该论文针对多模态检索增强生成在多跳推理中难以同时保留细粒度视觉证据与结构信息的问题，提出DualG-MRAG双层级框架。框架将跨模态关系建模解耦为宏观推理与微观匹配，分别处理全局结构与局部证据，以避免图爆炸或证据丢失。实验结果表明该方法在复杂多跳多模态问答任务上提升了检索准确率和生成质量。该工作为多模态融合与跨模态关系建模提供了有效的解耦架构。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.28991v1",
+      "source": "arxiv",
+      "title": "CAER: Conflict-Aware Evidence Routing with Dual Prefix Experts for Multimodal Large Language Models",
+      "abstract": "Multimodal Large Language Models (MLLMs) have demonstrated remarkable capabilities in multimodal understanding and generation. However, when textual inputs conflict with visual evidence, they still suffer from hallucinations and produce responses inconsistent with visual content. Existing approaches mainly rely on decoding strategies, additional training, verification methods, or prompting techniques, but often lack fine-grained conflict localization and conflict-aware generation. In this work, we propose CAER, a backbone-agnostic framework for visual-language conflict detection and conflict-aware generation. CAER introduces a span-grounded evidence router that transforms claim representations into soft textual queries and retrieves corresponding evidence from frozen visual tokens, enabling fine-grained conflict estimation. Furthermore, we design a dual-prefix expert routing mechanism that learns separate experts for visually supported and contradicted inputs, enabling conflict-aware generation through explicit expert selection. Experiments on the public MMMC benchmark and our newly curated AgriConflict dataset demonstrate that CAER effectively detects visual-language conflicts and improves the reliability of open-source MLLMs without updating their backbone parameters.",
+      "authors": [
+        "Zixuan Liu",
+        "Juntao Cai",
+        "Xiaoxu Cai",
+        "Haishuai Wang",
+        "Jiajun Bu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-07-31T03:38:12+00:00",
+      "link": "https://arxiv.org/pdf/2607.28991v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal conflict detection between text and visual evidence in MLLMs",
+      "llm_evidence_cn": "多模态大模型中文本与视觉证据的冲突检测与一致性生成",
+      "llm_evidence": "多模态大模型中文本与视觉证据的冲突检测与一致性生成",
+      "canonical_evidence": "多模态大模型中文本与视觉证据的冲突检测与一致性生成",
+      "llm_tldr_en": "Proposes CAER, a backbone-agnostic framework for visual-language conflict detection and conflict-aware generation, using span-grounded evidence routing and dual prefix experts in MLLMs.",
+      "llm_tldr_cn": "该论文指出多模态大模型在文本与视觉证据冲突时容易产生幻觉，现有方法缺乏细粒度冲突定位与冲突感知生成能力。为此提出CAER框架，利用跨度级证据路由器将声明转化为软查询，并结合双前缀专家进行条件生成。实验结果表明CAER能在多种冲突场景下降低幻觉率，使输出与视觉内容更一致。该框架与主干模型无关，为跨模态对齐与可靠多模态生成提供了通用解决方案。",
+      "llm_tldr": "该论文指出多模态大模型在文本与视觉证据冲突时容易产生幻觉，现有方法缺乏细粒度冲突定位与冲突感知生成能力。为此提出CAER框架，利用跨度级证据路由器将声明转化为软查询，并结合双前缀专家进行条件生成。实验结果表明CAER能在多种冲突场景下降低幻觉率，使输出与视觉内容更一致。该框架与主干模型无关，为跨模态对齐与可靠多模态生成提供了通用解决方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2607.29000v1",
+      "source": "arxiv",
+      "title": "PaletteID: Prototype-Composed Semantic Identifiers for Multimodal CTR Prediction",
+      "abstract": "Multimodal information can improve the accuracy of click-through rate (CTR) prediction and effectively alleviate item cold-start and long-tail problems. Recent studies commonly discretize pretrained multimodal embeddings into semantic identifiers (SIDs), allowing the model to learn task-specific semantic representations for recommendation. However, existing methods still provide limited gains due to two major limitations. First, codebook assignment fails to preserve semantic relevance and discards fine-grained continuous signals in the original embedding space. Second, the residual code paths are highly dependent on prefix codes, which limits the effective representational scalability of hierarchical identifiers. To address these issues, we propose PaletteID (PID), a prototype-based semantic identifier. Inspired by palette-based color composition, PID uses a compact set of representative prototype items as semantic anchors to bridge pretrained multimodal content space and recommendation models. Specifically, we first construct a prototype palette with Semantic Quality-Aware Determinantal Point Process (SQ-DPP), which jointly considers local content density and global semantic diversity. Then, for each target item, PID retrieves a sequence of semantically related prototypes and aggregates them into an informative PID representation, enabling rich and complementary semantic modeling. Extensive experiments on two public datasets demonstrate that PID consistently improves CTR prediction and yields larger gains for long-tail items. PID also produces more robust identifier assignments and provides more interpretable token semantics than existing residual SID methods.",
+      "authors": [
+        "Huanyu Liu",
+        "Baining Chen",
+        "Hui Liu",
+        "Zengyang Li",
+        "Ziyi Huang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.LG"
+      ],
+      "published": "2026-07-31T03:54:38+00:00",
+      "link": "https://arxiv.org/pdf/2607.29000v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Improves multimodal representation learning via prototype-composed semantic identifiers for CTR prediction.",
+      "llm_evidence_cn": "通过原型组合语义标识符改进多模态表示学习，用于CTR预测。",
+      "llm_evidence": "通过原型组合语义标识符改进多模态表示学习，用于CTR预测。",
+      "canonical_evidence": "通过原型组合语义标识符改进多模态表示学习，用于CTR预测。",
+      "llm_tldr_en": "PaletteID improves multimodal CTR prediction by composing semantic identifiers from prototypes, preserving continuous signals and avoiding codebook assignment issues.",
+      "llm_tldr_cn": "现有方法将预训练多模态嵌入离散化为语义标识符，但存在码本赋值破坏语义相关性、层级标识符扩展受限等问题。PaletteID提出原型组合语义标识符，用原型组合替代直接码本分配，保留原始嵌入空间的连续细粒度信号，并缓解层级前缀依赖。在CTR预测任务上验证了该多模态表示学习方法的效果。该方法为推荐场景中的多模态表示学习提供了新思路，但并非面向关系抽取。",
+      "llm_tldr": "现有方法将预训练多模态嵌入离散化为语义标识符，但存在码本赋值破坏语义相关性、层级标识符扩展受限等问题。PaletteID提出原型组合语义标识符，用原型组合替代直接码本分配，保留原始嵌入空间的连续细粒度信号，并缓解层级前缀依赖。在CTR预测任务上验证了该多模态表示学习方法的效果。该方法为推荐场景中的多模态表示学习提供了新思路，但并非面向关系抽取。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
