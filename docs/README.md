@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-03</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-07</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 11 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-03 21:30:30 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-07 01:31:15 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日从11篇论文中精读1篇、速读3篇，聚焦多模态理解与生成方向；最值得关注的是精读论文《Multi-Modal Object Re-Identification》提出的双语义引导与全局-局部互调制机制，以及速读中Chinchilla缩放混合视觉Diffusion Transformer的扩展思路；建议先精读多模态重识别方法，再快速浏览视频生成与音视频融合的7分工作以把握近期热点。</p>
+<p>今日共处理19篇论文，其中7篇精读、12篇速读，聚焦多模态学习前沿。</p>
+<p>最值得关注的是《UG-UMRE》提出的不确定性引导模态增强与分布校准，以及《PHA-Net》的层次对齐文本视频检索，均获9分以上高分。</p>
+<p>建议普通读者可延伸关注多模态大模型的反事实模态归因与跨模态融合偏差分析，理解模态选择与平衡问题。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multi-Modal Object Re-Identification with Dual Semantic Guidance and Global-Local Mutual Modulation">Multi-Modal Object Re-Identification with Dual Semantic Guidance and Global-Local Mutual Modulation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="UG-UMRE: Uncertainty-Guided Modality Augmentation and Distributional Calibration for Unified Multimodal Relation Extraction">UG-UMRE: Uncertainty-Guided Modality Augmentation and Distributional Calibration for Unified Multimodal Relation Extraction</span></li><li><span class="dpr-home-dashboard-paper-title" title="PHA-Net: Prototype-based Hierarchical Alignment Network for Text-Video Retrieval">PHA-Net: Prototype-based Hierarchical Alignment Network for Text-Video Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="RHEA: Reliability-Harmonized Reconstruction and Assignment for Robust Multimodal-Attributed Graph Clustering">RHEA: Reliability-Harmonized Reconstruction and Assignment for Robust Multimodal-Attributed Graph Clustering</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Chimera: Designing and Chinchilla-Scaling Hybrid Visual Diffusion Transformers">Chimera: Designing and Chinchilla-Scaling Hybrid Visual Diffusion Transformers</span></li><li><span class="dpr-home-dashboard-paper-title" title="DoubleHelix: Structured Cross-Modal Fusion for Audio-Visual Speech Recognition with LLMs">DoubleHelix: Structured Cross-Modal Fusion for Audio-Visual Speech Recognition with LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="MoRoute: Dynamic Routing for In-Context Multimodal Video Generation">MoRoute: Dynamic Routing for In-Context Multimodal Video Generation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs">Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="Understanding and Overcoming Cross-modal Fusion Bias in Multimodal Anomaly Detection From A Fisher Information Perspective">Understanding and Overcoming Cross-modal Fusion Bias in Multimodal Anomaly Detection From A Fisher Information Perspective</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal domain adaptation under label shift and blockwise missing modalities">Multimodal domain adaptation under label shift and blockwise missing modalities</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>9</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 

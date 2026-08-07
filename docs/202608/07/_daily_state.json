@@ -1,0 +1,313 @@
+{
+  "date": "20260807",
+  "date_label": "",
+  "generated_at": "2026-08-07 01:31:15 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.04949v1",
+      "route": "202608/07/2608.04949v1-ug-umre-uncertainty-guided-modality-augmentation-and-distributional-calibration-for-unified-multimodal-relation-extraction",
+      "title": "UG-UMRE: Uncertainty-Guided Modality Augmentation and Distributional Calibration for Unified Multimodal Relation Extraction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "面向统一多模态关系抽取，解决模态噪声与异质性",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00551v1",
+      "route": "202608/07/2608.00551v1-pha-net-prototype-based-hierarchical-alignment-network-for-text-video-retrieval",
+      "title": "PHA-Net: Prototype-based Hierarchical Alignment Network for Text-Video Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于原型的层级跨模态对齐用于文本-视频检索",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00621v1",
+      "route": "202608/07/2608.00621v1-rhea-reliability-harmonized-reconstruction-and-assignment-for-robust-multimodal-attributed-graph-clustering",
+      "title": "RHEA: Reliability-Harmonized Reconstruction and Assignment for Robust Multimodal-Attributed Graph Clustering",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "面向噪声多模态图的节点级模态可靠性建模",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.02092v1",
+      "route": "202608/07/2608.02092v1-deep-multimodal-fusion-detection-through-spatial-mask-and-channel-fusion",
+      "title": "Deep Multimodal Fusion Detection through Spatial Mask and Channel Fusion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于空间掩码与通道融合的深度多模态融合检测方法",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.04054v1",
+      "route": "202608/07/2608.04054v1-modality-agreement--and-conflict-aware-prototype-hypergraph-learning-for-multimodal-intent-understanding",
+      "title": "Modality Agreement- and Conflict-Aware Prototype Hypergraph Learning for Multimodal Intent Understanding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出原型超图融合方法，同时建模模态间一致与冲突，核心贡献是多模态融合。",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.04234v1",
+      "route": "202608/07/2608.04234v1-multimodal-alignment-through-joint-kernel-entropic-gromov--wasserstein-optimal-transport",
+      "title": "Multimodal Alignment Through Joint Kernel Entropic Gromov--Wasserstein Optimal Transport",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用最优传输将多种模态对齐到共享潜在空间，实现结构保持的跨模态对齐",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.05131v1",
+      "route": "202608/07/2608.05131v1-opd-v-visual-on-policy-self-distillation-with-modality-balance",
+      "title": "OPD-V: Visual On-Policy Self-Distillation with Modality Balance",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多模态大模型自蒸馏中的模态平衡处理",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00076v2",
+      "route": "202608/07/2608.00076v2-which-modality-decides-counterfactual-modality-attribution-for-multimodal-llms",
+      "title": "Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "反事实模态归因量化哪个模态驱动预测",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00986v1",
+      "route": "202608/07/2608.00986v1-understanding-and-overcoming-cross-modal-fusion-bias-in-multimodal-anomaly-detection-from-a-fisher-information-perspective",
+      "title": "Understanding and Overcoming Cross-modal Fusion Bias in Multimodal Anomaly Detection From A Fisher Information Perspective",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "分析跨模态融合偏差并提出即插即用缓解框架",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.01282v1",
+      "route": "202608/07/2608.01282v1-multimodal-domain-adaptation-under-label-shift-and-blockwise-missing-modalities",
+      "title": "Multimodal domain adaptation under label shift and blockwise missing modalities",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "处理多模态域适应中的分块缺失模态与模态不平衡",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.01302v1",
+      "route": "202608/07/2608.01302v1-beyond-symmetric-fusion-exploiting-task-dependent-modality-strengths-for-rgb-event-small-object-detection",
+      "title": "Beyond Symmetric Fusion: Exploiting Task-Dependent Modality Strengths for RGB-Event Small Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "按任务利用模态优势进行非对称RGB-事件融合",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00530v1",
+      "route": "202608/07/2608.00530v1-unleashing-the-power-of-text-text-guided-flow-matching-for-image-fusion-under-complex-degradations",
+      "title": "Unleashing the Power of Text: Text-Guided Flow Matching for Image Fusion under Complex Degradations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "文本引导的自适应退化图像融合",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.01354v1",
+      "route": "202608/07/2608.01354v1-pixvl-self-supervised-training-of-pixel-level-mllms-via-a-unified-mask--text-consistency-cycle",
+      "title": "PixVL: Self-Supervised Training of Pixel-Level MLLMs via a Unified Mask--Text Consistency Cycle",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过掩码-文本一致性实现像素级多模态大语言模型的自监督多模态表示学习",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.01794v1",
+      "route": "202608/07/2608.01794v1-illuminating-visual-identity-in-universal-multimodal-embeddings",
+      "title": "Illuminating Visual Identity in Universal Multimodal Embeddings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向通用多模态嵌入的视觉身份判别统一建模与大规模基准构建",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.02148v1",
+      "route": "202608/07/2608.02148v1-douyin-multimodal-embedding-model-technical-report",
+      "title": "Douyin Multimodal Embedding Model Technical Report",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "两阶段多模态嵌入模型实现高效且可区分的表示学习",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2607.27902v1",
+      "route": "202608/07/2607.27902v1-one-patch-is-enough-reinforcement-optimized-visual-token-grounding-for-mllm-based-scene-text-spotting",
+      "title": "One Patch Is Enough: Reinforcement-Optimized Visual Token Grounding for MLLM-Based Scene Text Spotting",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过视觉标记接地对齐文本识别与空间定位",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2607.28986v1",
+      "route": "202608/07/2607.28986v1-adjudicated-captioning-multi-agent-alignment-scoring-and-consensus-distilled-beam-arbitration-for-strict-zero-shot-image-captioning",
+      "title": "Adjudicated Captioning: Multi-Agent Alignment Scoring and Consensus-Distilled Beam Arbitration for Strict Zero-Shot Image Captioning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向图像-文本理解的对齐评分与接地反馈",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00561v1",
+      "route": "202608/07/2608.00561v1-through-the-lens-local-geometric-decomposition-of-vision-language-model-representations",
+      "title": "Through the LENS: Local Geometric Decomposition of Vision-Language Model Representations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过局部几何分解揭示视觉-语言模型中跨模态融合的深度相关轨迹",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    },
+    {
+      "paper_id": "2608.00623v1",
+      "route": "202608/07/2608.00623v1-towards-effective-federated-multimodal-graph-learning-via-navigating-multifaceted-heterogeneity",
+      "title": "Towards Effective Federated Multimodal Graph Learning via Navigating Multifaceted Heterogeneity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态属性图的联邦多模态学习方法，处理模态异质性",
+      "first_seen_at": "2026-08-07 01:31:15 UTC",
+      "updated_at": "2026-08-07 01:31:15 UTC"
+    }
+  ]
+}

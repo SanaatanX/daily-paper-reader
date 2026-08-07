@@ -1,17 +1,407 @@
 {
-  "generated_at": "2026-08-03T21:24:26.250633+00:00",
-  "updated_date": "20260803",
+  "generated_at": "2026-08-07T01:16:00.727763+00:00",
+  "updated_date": "20260807",
   "carryover_days": 9,
   "tag_states": {
     "MRE": {
-      "updated_date": "20260803",
+      "updated_date": "20260807",
       "carryover_days": 9,
       "items": []
     },
     "ml": {
-      "updated_date": "20260803",
+      "updated_date": "20260807",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2608.05000v1",
+          "source": "arxiv",
+          "title": "Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes",
+          "abstract": "Vision offers a critical axis for advancing foundation models, driving a shift towards natively unified multimodal pretraining. Despite this momentum, the design space and the fundamental mechanisms of how modalities interact during unified training remain underexplored. We provide empirical clarity through a systematic exploration of multimodal pretraining. Our controlled experiments on both synthetic and large-scale real-world datasets yield four key insights into the physics of multimodal pretraining: (i) Knowledge Flow: We disentangle how language, visual understanding, and visual generation transfer knowledge across modalities, revealing distinct patterns of influence and asymmetry; (ii) Synergy vs. Competition: We show that data \"complexity\" largely determines whether modalities are synergistic, identify architectural choices that promote synergy: such as shared attention and normalization with modality-specific feed-forward layers, and find that these behaviors generalize across different visual tokenizer designs; (iii) Early Unification: Unifying modalities from the very early stages and training them jointly is shown to be more effective than late alignment or sequential training. This process uncovers a vision laziness phenomenon, where delayed integration leads models to rely on language priors; (iv) Recipes: We derive efficient pretraining recipes that achieve strong generative performance using only 5% of the compute budget. These core findings are subsequently validated at scale by training multiple 13.5B MoE models on 2T tokens. We hope this study provides a principled foundation for understanding and scaling multimodal pretraining.",
+          "authors": [
+            "Junlin Han",
+            "Shengbang Tong",
+            "David Fan",
+            "Minghao Chen",
+            "Philip Torr",
+            "Filippos Kokkinos",
+            "Mike Lewis"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.LG",
+            "cs.MM"
+          ],
+          "published": "2026-08-05T16:09:25+00:00",
+          "link": "https://arxiv.org/pdf/2608.05000v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "systematic study of multimodal pretraining, modality synergy, and knowledge flow",
+          "llm_evidence_cn": "系统研究多模态预训练、模态协同与知识流",
+          "llm_evidence": "系统研究多模态预训练、模态协同与知识流",
+          "canonical_evidence": "系统研究多模态预训练、模态协同与知识流",
+          "llm_tldr_en": "Provides empirical clarity on multimodal pretraining via controlled experiments, revealing knowledge flow patterns, modality synergy vs competition, and early unification recipes.",
+          "llm_tldr_cn": "多模态预训练设计空间巨大，但模态交互机制尚未充分理解。该工作通过可控实验系统探索多模态预训练，在合成与真实大规模数据集上揭示知识流、模态协同与竞争等关键规律，并给出早期统一与训练配方。实验表明语言、视觉理解与视觉生成之间的知识迁移呈现不对称模式。这些发现为构建原生统一多模态基础模型提供了实证指导。",
+          "llm_tldr": "多模态预训练设计空间巨大，但模态交互机制尚未充分理解。该工作通过可控实验系统探索多模态预训练，在合成与真实大规模数据集上揭示知识流、模态协同与竞争等关键规律，并给出早期统一与训练配方。实验表明语言、视觉理解与视觉生成之间的知识迁移呈现不对称模式。这些发现为构建原生统一多模态基础模型提供了实证指导。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "multimodal learning methods combining different data modalities",
+          "matched_requirement_id": "req-10",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.05000v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.03475v1",
+          "source": "arxiv",
+          "title": "Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition",
+          "abstract": "Multimodal intent recognition combines linguistic, acoustic, and visual evidence, but individual modalities may be noisy, missing, semantically conflicting, or disproportionately dominant. Existing methods typically infer modality importance implicitly and either reweight or suppress unreliable inputs, without determining whether a degraded modality can be repaired and subsequently trusted. We propose PRIME (Precision-weighted Reliability Inference and Modality rEstoration), a closed-loop reliability guided framework that jointly diagnoses, restores, and reassesses modality quality at the sample level. PRIME represents the weakness of each modality through a contextual log-variance estimated from complementary diagnostic evidence, including predictive confidence, epistemic disagreement, cross-modal consensus, and feature degeneracy. Because modality-reliability annotations are unavailable, the estimator is explicitly trained using controlled modality corruption with known degradation severity, together with a heteroscedastic uncertainty objective. Rather than directly discarding an unreliable modality, PRIME uses its estimated weakness to control a prototype-conditioned variational restoration module that reconstructs the degraded representation from complementary modalities. Crucially, reliability is re-estimated after restoration, allowing the model to determine whether the repaired representation has become sufficiently trustworthy to contribute to prediction. The resulting post-restoration precisions are used for inverse-variance multimodal fusion. Experiments on multimodal intent-recognition benchmarks show that PRIME maintains competitive clean-data performance while improving robustness under missing, noisy, conflicting, and modality-imbalanced conditions.",
+          "authors": [
+            "Suraj Kumar",
+            "Mohnish Raj",
+            "Soumi Chattopadhayay",
+            "Chandranath Adak",
+            "Ayan Dutta"
+          ],
+          "primary_category": "cs.MM",
+          "categories": [
+            "cs.MM",
+            "cs.AI",
+            "cs.CL"
+          ],
+          "published": "2026-08-04T11:14:13+00:00",
+          "link": "https://arxiv.org/pdf/2608.03475v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Closed-loop reliability diagnosis and restoration for degraded modalities",
+          "llm_evidence_cn": "闭环可靠性诊断与恢复处理退化模态",
+          "llm_evidence": "闭环可靠性诊断与恢复处理退化模态",
+          "canonical_evidence": "闭环可靠性诊断与恢复处理退化模态",
+          "llm_tldr_en": "PRIME jointly diagnoses, restores, and reassesses modality quality at the sample level to handle noisy, missing, or conflicting modalities in multimodal intent recognition.",
+          "llm_tldr_cn": "多模态意图识别中常有模态噪声、缺失、语义冲突或过度主导，现有方法隐式加权或抑制不可靠输入，但不知道退化模态能否修复。PRIME框架通过上下文对数方差表示模态弱点，在样本级别进行联合诊断、恢复和重新评估，形成闭环可靠性引导。实验表明该方法能有效提升鲁棒性，为模态不平衡问题提供新的解决思路。",
+          "llm_tldr": "多模态意图识别中常有模态噪声、缺失、语义冲突或过度主导，现有方法隐式加权或抑制不可靠输入，但不知道退化模态能否修复。PRIME框架通过上下文对数方差表示模态弱点，在样本级别进行联合诊断、恢复和重新评估，形成闭环可靠性引导。实验表明该方法能有效提升鲁棒性，为模态不平衡问题提供新的解决思路。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+          "matched_requirement_id": "req-16",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.03475v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.01622v1",
+          "source": "arxiv",
+          "title": "SMM Transformer: Leveraging Spiking Neural Networks for Multimodal Tasks",
+          "abstract": "Spiking Neural Networks (SNNs) enable event-driven computation with sparse activations, but building multimodal Transformers on SNNs is hindered by unstable training in deep spiking stacks and the mismatch between dense softmax attention and spike-based communication. We propose SMM Transformer, an SNN-based multimodal Transformer framework that combines (i)PLMP, a Parallel LIF with Multistage Learnable Parameters neuron and a tailored P-STBP algorithm for stable deep SNN training, (ii) SMSA, an attention-inspired spike-driven token-mixing module that replaces dense pairwise softmax attention with channel-wise spike co-activation and self-compensation, and (iii)SMoE, a spiking mixture-of-experts module for modality-aware fusion. Across visual and multimodal benchmarks, SMM Transformer achieves competitive accuracy compared to ANN baselines. Under a standard MAC/AC arithmetic model, SMSA reduces the estimated operator-level compute energy of the attention module by up to 97%, while whole-model profiling shows more moderate but consistent efficiency gains.",
+          "authors": [
+            "Xiubo Liang",
+            "Jinxing Han",
+            "Yuke Li",
+            "Haoqi Zhu",
+            "Yu Zhao",
+            "Hongzhi Wang"
+          ],
+          "primary_category": "cs.NE",
+          "categories": [
+            "cs.NE",
+            "cs.MM"
+          ],
+          "published": "2026-08-03T02:54:28+00:00",
+          "link": "https://arxiv.org/pdf/2608.01622v1",
+          "tags": [
+            "keyword:ml",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "modality-aware fusion via spiking mixture-of-experts in a multimodal Transformer",
+          "llm_evidence_cn": "通过脉冲混合专家实现多模态Transformer中的模态感知融合",
+          "llm_evidence": "通过脉冲混合专家实现多模态Transformer中的模态感知融合",
+          "canonical_evidence": "通过脉冲混合专家实现多模态Transformer中的模态感知融合",
+          "llm_tldr_en": "This paper proposes SMM Transformer, an SNN-based multimodal Transformer with stable training, a spike-driven token-mixing module, and a spiking mixture-of-experts for modality-aware fusion, advancing efficient multimodal fusion in deep learning.",
+          "llm_tldr_cn": "针对在脉冲神经网络上构建多模态Transformer面临深层训练不稳定、密集softmax注意力与脉冲通信不匹配的问题，提出SMM Transformer框架。该框架结合并行LIF神经元和P-STBP算法保证稳定训练，设计脉冲驱动的token混合模块替代密集注意力，并用脉冲混合专家实现模态感知融合。视觉与多模态任务上的实验显示其性能与效率兼优。这为低功耗事件驱动多模态融合开辟了新途径。",
+          "llm_tldr": "针对在脉冲神经网络上构建多模态Transformer面临深层训练不稳定、密集softmax注意力与脉冲通信不匹配的问题，提出SMM Transformer框架。该框架结合并行LIF神经元和P-STBP算法保证稳定训练，设计脉冲驱动的token混合模块替代密集注意力，并用脉冲混合专家实现模态感知融合。视觉与多模态任务上的实验显示其性能与效率兼优。这为低功耗事件驱动多模态融合开辟了新途径。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "techniques for multimodal fusion in deep learning",
+          "matched_requirement_id": "req-12",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.01622v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.02583v1",
+          "source": "arxiv",
+          "title": "UEmbed: Unified Sparse and Dense Multimodal Embeddings",
+          "abstract": "Sparse retrieval underpins modern search systems, from web search to retrieval-augmented generation. Existing work has introduced Learned Sparse Retrieval (LSR) to push beyond exact lexical matching toward richer semantics. Yet LSR has so far remained tied to encoder-style bidirectional architectures, and its extension to multimodal settings still relies heavily on auxiliary cross-modal modules. To address these limitations, we introduce UEmbed (Unified Embedding), a decoder-only multimodal embedding model that produces both sparse lexical and dense representations in one causal forward pass. UEmbed appends N learnable special tokens to the input and partitions the vocabulary into N disjoint subsets. Each token's causal hidden state predicts sparse weights over its assigned subset, and the N subsets are concatenated into the full sparse vector. Trained on public data, we release UEmbed at 2B, 4B, and 9B scales. UEmbed-9B reaches 71.8 (dense) and 71.0 (sparse) on MMEB-v2, outperforming multimodal embedding models trained on publicly available data (e.g., RzenEmbed). On BEIR, UEmbed also remains competitive with strong dense and sparse baselines. Furthermore, we demonstrate the practical utility of UEmbed across three dimensions: effectiveness, efficiency, and agentic applications. Overall, UEmbed offers a new paradigm: it unifies dense and sparse embeddings in one model, while further extending sparse retrieval to unify text and multimodal inputs.",
+          "authors": [
+            "Tingyu Song",
+            "Mingxin Li",
+            "Yanzhao Zhang",
+            "Dingkun Long",
+            "Pengjun Xie",
+            "Zhijie Nie",
+            "Yilun Zhao",
+            "Shu Wu"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.CL",
+            "cs.IR"
+          ],
+          "published": "2026-08-03T17:54:11+00:00",
+          "link": "https://arxiv.org/pdf/2608.02583v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "unified multimodal embedding model for sparse and dense representation learning",
+          "llm_evidence_cn": "统一的多模态嵌入模型，学习稀疏与稠密表示",
+          "llm_evidence": "统一的多模态嵌入模型，学习稀疏与稠密表示",
+          "canonical_evidence": "统一的多模态嵌入模型，学习稀疏与稠密表示",
+          "llm_tldr_en": "UEmbed is a decoder-only multimodal embedding model producing sparse lexical and dense representations in a single forward pass, removing auxiliary cross-modal modules for unified multimodal retrieval.",
+          "llm_tldr_cn": "稀疏检索支撑现代搜索，但学习型稀疏检索仍局限于编码器且多模态扩展依赖辅助模块。为突破这一限制，本文提出UEmbed，一个仅解码器的多模态嵌入模型，通过附加可学习令牌并划分词汇表，在一次前向中同时输出稀疏词项与稠密表示。实验结果显示该统一嵌入能有效提升多模态检索效率与效果，为统一稀疏-稠密多模态表示提供了新思路。",
+          "llm_tldr": "稀疏检索支撑现代搜索，但学习型稀疏检索仍局限于编码器且多模态扩展依赖辅助模块。为突破这一限制，本文提出UEmbed，一个仅解码器的多模态嵌入模型，通过附加可学习令牌并划分词汇表，在一次前向中同时输出稀疏词项与稠密表示。实验结果显示该统一嵌入能有效提升多模态检索效率与效果，为统一稀疏-稠密多模态表示提供了新思路。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "multimodal representation learning approaches",
+          "matched_requirement_id": "req-14",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.02583v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.04348v1",
+          "source": "arxiv",
+          "title": "iStructTab: Structured Feature Sequencing for Multimodal Learning of Image and Tabular Data",
+          "abstract": "Multimodal learning of images and tabular data is often impaired by ineffective representations, resulting in redundancy, dispersion, and generalization problems. To tackle this challenge, we introduce Graph-Enhanced Descriptor Sequencing (GEDS), a structured feature sequencing algorithm grounded in principles from the Column Permutation Problem (CPP). GEDS refines statistical descriptors of the features through similarity graph-based computations, systematically determining an effective feature sequencing. We incorporate GEDS within an order-aware efficient transformer framework, utilizing order-aware memory tokens that explicitly adhere to the derived feature sequencing via a dedicated loss function. Experimental results across multimodal benchmarks demonstrate that iStructTab effectively minimizes feature dispersion, improving predictive performance and robustness, and highlighting the significance of structured feature sequencing in multimodal learning.",
+          "authors": [
+            "Al Zadid Sultan Bin Habib",
+            "Md Younus Ahamed",
+            "Prashnna Gyawali",
+            "Gianfranco Doretto",
+            "Donald A. Adjeroh"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG",
+            "stat.ML"
+          ],
+          "published": "2026-08-05T01:47:34+00:00",
+          "link": "https://arxiv.org/pdf/2608.04348v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "multimodal learning method combining images and tabular data via structured feature sequencing",
+          "llm_evidence_cn": "通过结构化特征排序结合图像与表格数据的多模态学习方法",
+          "llm_evidence": "通过结构化特征排序结合图像与表格数据的多模态学习方法",
+          "canonical_evidence": "通过结构化特征排序结合图像与表格数据的多模态学习方法",
+          "llm_tldr_en": "iStructTab proposes Graph-Enhanced Descriptor Sequencing (GEDS) to order features and an order-aware transformer with memory tokens, improving multimodal learning of image and tabular data by reducing representation redundancy and dispersion.",
+          "llm_tldr_cn": "图像与表格数据的多模态学习常因表示无效而导致冗余、分散和泛化问题。本文提出图增强描述子排序（GEDS），基于相似图计算统计描述子并系统确定特征顺序，随后在顺序感知Transformer中通过顺序感知内存令牌显式利用该排序。多个多模态数据集上的实验显示，GEDS能有效减少表示冗余、改善泛化，为图像-表格多模态学习提供了一种结构化特征组织的新思路。",
+          "llm_tldr": "图像与表格数据的多模态学习常因表示无效而导致冗余、分散和泛化问题。本文提出图增强描述子排序（GEDS），基于相似图计算统计描述子并系统确定特征顺序，随后在顺序感知Transformer中通过顺序感知内存令牌显式利用该排序。多个多模态数据集上的实验显示，GEDS能有效减少表示冗余、改善泛化，为图像-表格多模态学习提供了一种结构化特征组织的新思路。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "multimodal learning methods combining different data modalities",
+          "matched_requirement_id": "req-10",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.04348v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.04396v1",
+          "source": "arxiv",
+          "title": "CofactVLA: Deconfounding Vision-Language-Action Models via Counterfactual Intervention",
+          "abstract": "Vision-Language-Action (VLA) models have driven significant progress in robotic manipulation, yet they fundamentally struggle with the vision-override phenomenon. Driven by the severe modality imbalance between dense visual streams and sparse linguistic instructions, VLAs frequently fall prey to causal confusion. Instead of treating language as the primary causal driver, the policy entirely bypasses the original instruction by overfitting to spurious visual confounders, such as prominent objects or familiar layouts. To systematically alleviate this bias, we formalize the process of action generation as a Dual-path Deconfounding Graph (DDG) and propose CofactVLA, a novel causal intervention framework. By dynamically constructing a language-masked counterfactual branch within a single forward pass, CofactVLA isolates and neutralizes visual confounders through two synergistic mechanisms. First, Action-Level Orthogonal Projection Guidance (OPG) geometrically projects the factual velocity field away from the counterfactual visual bias during continuous flow matching, extracting the pure semantic intent. Second, Feature-Level Counterfactual Covariance Reduction (CCR) mathematically deconfounds latent representations by penalizing the positive eigenspace of the covariance difference, explicitly suppressing dominant visual shortcuts while preserving the causal language intent. Extensive experiments demonstrate that CofactVLA establishes a new state-of-the-art across diverse simulation benchmarks. Beyond simulation, real-world robot experiments demonstrate the causal efficacy of our method in bridging the generalization gap, yielding a 52.3\\% absolute success rate gain under out-of-distribution scenarios.",
+          "authors": [
+            "Yan Zhang",
+            "Yinan Wu",
+            "Haoran Duan",
+            "Jungong Han"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-05T02:58:41+00:00",
+          "link": "https://arxiv.org/pdf/2608.04396v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "explicitly addresses severe modality imbalance between visual and linguistic modalities in VLA models",
+          "llm_evidence_cn": "直接针对视觉与语言模态间的严重模态不平衡问题",
+          "llm_evidence": "直接针对视觉与语言模态间的严重模态不平衡问题",
+          "canonical_evidence": "直接针对视觉与语言模态间的严重模态不平衡问题",
+          "llm_tldr_en": "Vision-language-action models suffer from vision-override due to severe modality imbalance between dense visual streams and sparse instructions. CofactVLA formalizes action generation as a dual-path deconfounding graph and applies counterfactual intervention to restore language as the causal driver and reduce spurious visual confounding.",
+          "llm_tldr_cn": "针对视觉-语言-动作模型因严重模态不平衡而出现视觉覆盖、忽略语言指令的问题，本文提出CofactVLA反事实干预框架，将动作生成形式化为双路径去混杂图，动态构造语言条件干预以剔除伪视觉混淆物。实验表明该方法能有效恢复语言的主导作用，提升操作策略对指令的跟随能力，为缓解多模态学习中模态失衡问题提供了新的因果建模思路。",
+          "llm_tldr": "针对视觉-语言-动作模型因严重模态不平衡而出现视觉覆盖、忽略语言指令的问题，本文提出CofactVLA反事实干预框架，将动作生成形式化为双路径去混杂图，动态构造语言条件干预以剔除伪视觉混淆物。实验表明该方法能有效恢复语言的主导作用，提升操作策略对指令的跟随能力，为缓解多模态学习中模态失衡问题提供了新的因果建模思路。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "addressing modality imbalance in multimodal learning",
+          "matched_requirement_id": "req-11",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.04396v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.02109v1",
+          "source": "arxiv",
+          "title": "Same Semantics, Different Paths: Self-Improving Alignment for Vision-Text Compression",
+          "abstract": "Vision-Text Compression (VTC) renders long texts into images and encodes them through the vision encoder (ViT), compressing thousands of text tokens into far fewer visual tokens. However, since the ViT is pretrained predominantly on natural images, it captures visual attributes (glyphs, font sizes, layout) rather than linguistic semantics, causing rendered-image representations to diverge from native-text representations. We term this cross-path inconsistency and show, via rendering perturbation experiments, that it is a critical yet overlooked bottleneck of VTC. We propose SPIRAL (Self-improving Path Integration and Realignment), a self-supervised alignment framework that closes this gap using only the model's own text-path behavior as supervision, requiring no external teachers or additional annotations. SPIRAL operates at two complementary granularities: token-level on-policy distillation (OPD) for local faithfulness, and sequence-level preference optimization (DPO) for global coherence. On VTCBench, SPIRAL improves the overall score of Qwen3-VL-8B from 35.10 to 54.02, approaching the native text-input performance (55.60) and outperforming models up to 30x larger. The two granularities exhibit complementary strengths: OPD excels at retrieval and is sample-efficient, while DPO is stronger on reasoning and memory and scales better with data. SPIRAL's benefits also generalize to out-of-domain benchmarks, confirming that effective VTC hinges on aligning rendered-image representations back to native-text semantics.",
+          "authors": [
+            "Tianyu Liang",
+            "Xiangxi Zheng",
+            "Yilin Wang",
+            "Dongxing Mao"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-03T12:08:56+00:00",
+          "link": "https://arxiv.org/pdf/2608.02109v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "self-supervised cross-modal alignment between rendered-image and native-text representations",
+          "llm_evidence_cn": "自监督对齐渲染图像与原生文本的跨模态表示",
+          "llm_evidence": "自监督对齐渲染图像与原生文本的跨模态表示",
+          "canonical_evidence": "自监督对齐渲染图像与原生文本的跨模态表示",
+          "llm_tldr_en": "SPIRAL addresses cross-path inconsistency in vision-text compression, where ViT captures visual attributes rather than linguistic semantics. It uses self-supervised alignment from the model's own text-path behavior to close the representation gap, as verified by rendering perturbation experiments.",
+          "llm_tldr_cn": "视觉-文本压缩中渲染图像经视觉编码器后主要保留字形、字体、布局等视觉属性，而非语言语义，造成跨路径表示不一致。本文通过渲染扰动实验证实该瓶颈，并提出SPIRAL自监督对齐框架，仅利用模型自身文本路径行为完成两路径的特征校准。结果显示该框架能显著降低渲染图像与原生文本表示间的语义差距，为跨模态对齐提供了通用且高效的自改进路径。",
+          "llm_tldr": "视觉-文本压缩中渲染图像经视觉编码器后主要保留字形、字体、布局等视觉属性，而非语言语义，造成跨路径表示不一致。本文通过渲染扰动实验证实该瓶颈，并提出SPIRAL自监督对齐框架，仅利用模型自身文本路径行为完成两路径的特征校准。结果显示该框架能显著降低渲染图像与原生文本表示间的语义差距，为跨模态对齐提供了通用且高效的自改进路径。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "cross-modal alignment representation learning",
+          "matched_requirement_id": "req-13",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.02109v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.05137v1",
+          "source": "arxiv",
+          "title": "SmartMage: Dynamic Modality Orchestration for 3D Scene Understanding",
+          "abstract": "Understanding 3D scenes is fundamental to embodied intelligence, requiring joint reasoning over heterogeneous information from multiple modalities, including visual and geometric cues. However, the relevance of these modalities often varies across queries. Existing Multimodal Large Language Models (MLLMs) typically rely on fixed modality combinations, overlooking query-dependent modality needs. Such a rigid design can introduce semantic noise from irrelevant modalities while underutilizing more informative ones, leading to wasted computation and diluted reasoning. To address these challenges, this paper proposes SmartMage, a unified MLLM that dynamically orchestrates heterogeneous modalities for semantic-aware 3D scene understanding. Specifically, SmartMage incorporates: (1) a Semantic-guided Modality Adaptive RouTng (SMART) module that selects task-relevant modalities using semantic priors, text-modality alignment, and modality quality; and (2) a Modality-Aware Gating Expert (MAGE) module that leverages modality priors to guide expert activation, fostering adaptive specialization in multimodal reasoning. Empirically, SmartMage achieves state-of-the-art performance across five 3D scene understanding benchmarks, and attains competitive results on RGB-only video understanding benchmarks. In our diagnostic benchmark ScanFacet, tasks are divided into fine-grained semantic categories, enabling analysis of modality combinations preferred by each semantic type. The observed modality-semantic patterns provide further evidence of SmartMage's effectiveness. Project page: https://yuecheong.github.io/SmartMage/.",
+          "authors": [
+            "Yue Zhang",
+            "Yingzhao Jian",
+            "Yunqiu Xu",
+            "Xiaoxiao Sun",
+            "Hehe Fan"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-05T17:56:35+00:00",
+          "link": "https://arxiv.org/pdf/2608.05137v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "dynamic modality orchestration to select informative modalities and suppress irrelevant ones for query-dependent 3D scene understanding",
+          "llm_evidence_cn": "根据查询动态编排模态，抑制无关模态、利用有效模态，平衡多模态中的信息贡献",
+          "llm_evidence": "根据查询动态编排模态，抑制无关模态、利用有效模态，平衡多模态中的信息贡献",
+          "canonical_evidence": "根据查询动态编排模态，抑制无关模态、利用有效模态，平衡多模态中的信息贡献",
+          "llm_tldr_en": "SmartMage unifies MLLM with dynamic modality orchestration for 3D scene understanding, avoiding fixed modality combinations and reducing semantic noise to improve reasoning efficiency and accuracy.",
+          "llm_tldr_cn": "本文指出现有MLLM处理3D场景理解时固定使用全部模态，忽略了查询对不同模态的相关性。为此提出SmartMage，一种能动态编排异构模态的统一MLLM，根据语义查询选择信息量大的模态并抑制噪声模态。该方法减少无关模态带来的语义噪声与计算浪费，在3D场景理解任务上提升了推理质量和效率。这一动态模态选择思路为应对多模态学习中的模态不平衡提供了有效方案。",
+          "llm_tldr": "本文指出现有MLLM处理3D场景理解时固定使用全部模态，忽略了查询对不同模态的相关性。为此提出SmartMage，一种能动态编排异构模态的统一MLLM，根据语义查询选择信息量大的模态并抑制噪声模态。该方法减少无关模态带来的语义噪声与计算浪费，在3D场景理解任务上提升了推理质量和效率。这一动态模态选择思路为应对多模态学习中的模态不平衡提供了有效方案。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+          "matched_requirement_id": "req-16",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.05137v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2608.04623v1",
+          "source": "arxiv",
+          "title": "Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition",
+          "abstract": "Zero-shot Skeleton Action Recognition (ZSAR) remains ambiguous when unseen actions share similar skeleton joint dynamics but differ in objects or scene context. RGB provides these missing cues, yet existing multimodal methods typically maintain independent skeleton and RGB scoring branches and fuse their outputs. Without using unlabeled test data for adaptation or fusion calibration, a fixed fusion weight cannot capture class-pair-dependent modality reliability, while an adaptive rule lacks target-side feedback for deciding which branch should dominate. We bypass this weight-selection problem via the classify-by-generation paradigm, where each class is scored by how accurately a text-conditioned denoiser predicts the noise added to the skeleton feature. This formulation separates the progressively corrupted skeleton from fixed conditioning, allowing RGB and text to jointly condition a single class-scoring function rather than produce independent scores. We instantiate this idea as Multimodal Triplet Diffusion for Skeleton-Text Matching (TDSM-MM), augmenting a text-conditioned denoising Transformer with a non-diffused RGB condition token that serves as a stable visual anchor during skeleton data reconstruction. Our proposed TDSM-MM has been ablated via extensive experiments and achieved the best inductive accuracy on three of four NTU-60/120 splits and surpasses the transductive state-of-the-art on NTU-120 96/24 (i.e., 71.3% vs. 69.1%), without test-time adaptation, suggesting that diffusion-based methods can be a promising direction for zero-shot learning.",
+          "authors": [
+            "Zehao Bao",
+            "Shujun Guo",
+            "Bruce X. B. Yu"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV"
+          ],
+          "published": "2026-08-05T09:28:00+00:00",
+          "link": "https://arxiv.org/pdf/2608.04623v1",
+          "tags": [
+            "keyword:MRE",
+            "keyword:ml",
+            "query:MRE",
+            "query:ml"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "modality reliability and fusion weight bypass in zero-shot action recognition",
+          "llm_evidence_cn": "零样本动作识别中的模态可靠性与融合权重回避方法",
+          "llm_evidence": "零样本动作识别中的模态可靠性与融合权重回避方法",
+          "canonical_evidence": "零样本动作识别中的模态可靠性与融合权重回避方法",
+          "llm_tldr_en": "Visual Anchoring in Diffusion bypasses fusion weight selection by classify-by-generation, where each class is scored by text-conditioned denoising accuracy on skeleton input, implicitly handling modality reliability.",
+          "llm_tldr_cn": "零样本骨骼动作识别中相似的关节动态可能对应不同动作，RGB能提供补充线索，但固定融合权重无法捕捉类别相关的模态可靠性。提出基于扩散的视觉锚定方法，采用分类即生成的范式，用文本条件去噪器对骨骼输入的预测准确度来给类别打分，从根源上避免显式融合权重选择。该方法在目标类别上提升了零样本识别性能，并自适应处理模态可靠性问题。",
+          "llm_tldr": "零样本骨骼动作识别中相似的关节动态可能对应不同动作，RGB能提供补充线索，但固定融合权重无法捕捉类别相关的模态可靠性。提出基于扩散的视觉锚定方法，采用分类即生成的范式，用文本条件去噪器对骨骼输入的预测准确度来给类别打分，从根源上避免显式融合权重选择。该方法在目标类别上提升了零样本识别性能，并自适应处理模态可靠性问题。",
+          "llm_tags": [
+            "query:ml"
+          ],
+          "matched_query_tag": "query:ml",
+          "matched_query_text": "addressing modality imbalance in multimodal learning",
+          "matched_requirement_id": "req-11",
+          "selection_source": "carryover_cache",
+          "paper_id": "2608.04623v1",
+          "carry_days": 1
+        }
+      ]
     }
   }
 }
