@@ -1,0 +1,313 @@
+{
+  "date": "20260809",
+  "date_label": "",
+  "generated_at": "2026-08-09 20:23:46 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.00574v1",
+      "route": "202608/09/2608.00574v1-relax-within-balance-across-geometry-guided-load-balancing-for-vision-language-mixture-of-experts",
+      "title": "Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "解决视觉-语言MoE中图像与文本标记的负载失衡",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01614v1",
+      "route": "202608/09/2608.01614v1-linear-multi-timescale-retention-as-a-memory-efficient-vision-language-bridge",
+      "title": "Linear Multi-Timescale Retention as a Memory-Efficient Vision-Language Bridge",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出一种新的跨模态桥接模块，以线性复杂度实现视觉序列到记忆状态的融合",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.05000v1",
+      "route": "202608/09/2608.05000v1-towards-physics-of-multimodal-pretraining-knowledge-flow-modality-synergy-early-unification-and-recipes",
+      "title": "Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "系统探索多模态预训练，揭示语言、视觉与生成模态间的知识流动、协同与竞争",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.02109v1",
+      "route": "202608/09/2608.02109v1-same-semantics-different-paths-self-improving-alignment-for-vision-text-compression",
+      "title": "Same Semantics, Different Paths: Self-Improving Alignment for Vision-Text Compression",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以自监督方式对齐视觉与文本路径的表示，属于跨模态对齐表示学习",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.02477v1",
+      "route": "202608/09/2608.02477v1-unpaired-modality-agnostic-generative-recommendation",
+      "title": "Unpaired Modality-Agnostic Generative Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过未配对多模态观测处理模态不平衡",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.02769v1",
+      "route": "202608/09/2608.02769v1-daif-a-data-driven-intermediate-fusion-framework-for-multimodal-supervised-learning-via-approximate-message-passing",
+      "title": "DAIF: A Data-Driven Intermediate Fusion Framework for Multimodal Supervised Learning via Approximate Message Passing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "数据驱动的中间融合框架从多模态数据中学习融合粒度",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.03475v1",
+      "route": "202608/09/2608.03475v1-adaptive-modality-reliability-diagnosis-and-restoration-for-robust-multimodal-intent-recognition",
+      "title": "Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "闭环可靠性诊断与恢复机制处理多模态意图识别中的噪声、缺失与主导模态",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.03611v1",
+      "route": "202608/09/2608.03611v1-rethinking-modality-reliability-in-multimodal-sentiment-analysis-with-incomplete-observations",
+      "title": "Rethinking Modality Reliability in Multimodal Sentiment Analysis with Incomplete Observations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在不完整多模态观测中显式建模模态可靠性",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.03631v1",
+      "route": "202608/09/2608.03631v1-seer-a-self-grounded-evidence-interface-for-controlled-spatial-relation-classification",
+      "title": "SEER: A Self-Grounded Evidence Interface for Controlled Spatial Relation Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在视觉-语言模型中进行实体-关系推理与关系分类，并显式建模主客体证据",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.04348v1",
+      "route": "202608/09/2608.04348v1-istructtab-structured-feature-sequencing-for-multimodal-learning-of-image-and-tabular-data",
+      "title": "iStructTab: Structured Feature Sequencing for Multimodal Learning of Image and Tabular Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向图像与表格数据的多模态表示与融合方法",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.04396v1",
+      "route": "202608/09/2608.04396v1-cofactvla-deconfounding-vision-language-action-models-via-counterfactual-intervention",
+      "title": "CofactVLA: Deconfounding Vision-Language-Action Models via Counterfactual Intervention",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "直接针对视觉与语言模态间的严重模态不平衡问题",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01314v1",
+      "route": "202608/09/2608.01314v1-remember-r1-mitigating-long-context-visual-forgetting-through-reinforcement-learning",
+      "title": "Remember-R1: Mitigating Long-Context Visual Forgetting through Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "针对多模态大模型长程推理中的视觉遗忘问题，通过强化学习强制模型持续使用视觉证据，属于模态不平衡的缓解策略",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01389v1",
+      "route": "202608/09/2608.01389v1-kovre-training-an-efficient-embedding-model-for-korean-visual-document-retrieval",
+      "title": "KoVRE: Training an Efficient Embedding Model for Korean Visual Document Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向视觉文档检索的多模态嵌入表示学习",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01622v1",
+      "route": "202608/09/2608.01622v1-smm-transformer-leveraging-spiking-neural-networks-for-multimodal-tasks",
+      "title": "SMM Transformer: Leveraging Spiking Neural Networks for Multimodal Tasks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于脉冲神经网络的多模态Transformer，包含用于模态感知融合的脉冲混合专家模块",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.02583v1",
+      "route": "202608/09/2608.02583v1-uembed-unified-sparse-and-dense-multimodal-embeddings",
+      "title": "UEmbed: Unified Sparse and Dense Multimodal Embeddings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "统一的多模态嵌入模型，同时生成稀疏与稠密表示",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.00994v1",
+      "route": "202608/09/2608.00994v1-entity-faithful-repair-of-synthetic-supervision-for-zero-shot-image-captioning",
+      "title": "Entity-Faithful Repair of Synthetic Supervision for Zero-Shot Image Captioning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "针对零样本图像字幕合成图像-文本实体级错配进行忠实修复",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01473v1",
+      "route": "202608/09/2608.01473v1-slot2text-object-centric-visual-tokenization-for-efficient-and-spatially-traceable-surgical-mllms",
+      "title": "Slot2Text: Object-Centric Visual Tokenization for Efficient and Spatially Traceable Surgical MLLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态大模型的物体中心视觉词元化，用槽点潜变量实现紧凑表示",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01635v1",
+      "route": "202608/09/2608.01635v1-mitigating-visual-degradation-in-mllms-via-spatial-spectral-visual-anchor-learning",
+      "title": "Mitigating Visual Degradation in MLLMs via Spatial-Spectral Visual Anchor Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过空间-频谱视觉锚点学习缓解多模态大模型中的表示偏离",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    },
+    {
+      "paper_id": "2608.01660v1",
+      "route": "202608/09/2608.01660v1-ground-cover-and-refine-evidence-centric-frame-selection-for-long-video-question-answering",
+      "title": "Ground, Cover, and Refine: Evidence-Centric Frame Selection for Long-Video Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "时间戳文本与视频帧的跨模态对齐",
+      "first_seen_at": "2026-08-09 20:23:46 UTC",
+      "updated_at": "2026-08-09 20:23:46 UTC"
+    }
+  ]
+}

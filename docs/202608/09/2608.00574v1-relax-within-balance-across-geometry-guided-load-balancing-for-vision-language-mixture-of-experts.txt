@@ -1,0 +1,1420 @@
+Title: Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts
+
+URL Source: https://arxiv.org/pdf/2608.00574v1
+
+Published Time: Tue, 04 Aug 2026 00:35:18 GMT
+
+Number of Pages: 22
+
+Markdown Content:
+# Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts 
+
+# Ziang Wu 2,3 ∗, Peng Jin 1,4 ∗, Qishen Yin 1∗,Munan Ning 1,2 , Hao Li 1,4 , Peizhen Zhang 5, Li Yuan 1,2 †
+
+> 1
+
+Shenzhen Graduate School, Peking University 
+
+> 2
+
+Peng Cheng Laboratory 
+
+> 3
+
+School of Software and Microelectronics, Peking University 
+
+> 4
+
+Qwen Team; 5Sun Yat-sen University {ziangwu, giesen_yin}@stu.pku.edu.cn, {jp21mails, munanning, ozymandisli}@gmail.com, zhangpzh5@alumni.sysu.edu.cn, yuanli-ece@pku.edu.cn 
+
+Abstract 
+
+Vision-language MoE batches contain different numbers of image and text tokens. Image resolution, image count, tiling, and prompt length all change this token mix. We call the stan-dard token-level Switch auxiliary loss Std-Aux . Std-Aux balances only the mixed load, so large image and text load errors can cancel at one mix. On our main model, the same trained router shows more than a fivefold change in load im-balance across image resolutions. We hold the image and text load profiles fixed and derive the exact load curve as the token mix varies. The image–text load gap controls sensitivity to the token mix. Physical preprocessing can also change the condi-tional profiles. The fixed-profile law excludes such changes. To design a remedy, we examine the router-input structure. Im-age and text occupy distinct regions, while visual tokens group strongly by source image. The modality boundary motivates separate image and text terms. The image boundary motivates one equal-weight routing instance per image. ReBA , or Relax Within, Balance Across, implements both choices. Across four split backbones, ReBA lowers load on every reported bench-mark input while keeping mean task accuracy comparable to Std-Aux. ReBA also lowers average load over the tested range and worst physical load under resolution and tiling shifts. Code is available at https://github.com/ZiangWu-77/ReBA. 
+
+# 1 Introduction 
+
+MoEfication and LLaMA-MoE convert trained dense FFNs into sparse experts and activate selected experts (Zhang et al. 2022; Zhu et al. 2024). Under expert parallelism, the busi-est expert can determine the layer time (He et al. 2026). Vision-language inference adds another source of variation. Dynamic resolution changes the number of visual tokens (Wang et al. 2024b). Image count, tiling, and prompt length also change the image–text token mix. We therefore study split-MoE inference across changing token mixes. However, load balance should hold across changing token mixes, not only at one mix. Figure 1 shows physical Split-Qwen3VL-4B runs and fixed-profile curves from the same checkpoint. The physical runs preserve the method order 
+
+> ∗
+
+These authors contributed equally. 
+
+> †
+
+Corresponding author. 0.2 0.4 0.6 0.8 Image-token fraction a
+
+0.0 0.2 0.4 0.6 RMS-CV 
+
+Std-Aux Coupled-ImgInst ReBA Physical runs 
+
+Figure 1: Fixed-profile predictions and physical Split-Qwen3VL-4B runs. Lines show fixed-profile predictions. Large markers show physical runs at five pixel budgets. Std-Aux is the standard token-level Switch auxiliary loss. Coupled-ImgInst forms one profile per image but keeps one mixed image and text loss. ReBA uses separate modality terms and equal-weight image instances. Lower RMS-CV is better. and local curve structure. Std-Aux is balanced near one mix but becomes imbalanced as the mix changes. The result shows that balance at one composition does not imply balance across compositions. The failure comes from mixed-load balancing. Std-Aux observes only the mixed image–text load. The image load and text load can each remain imbalanced. Their expert-wise errors can point in opposite directions and cancel near one to-ken mix. When the token mix changes, the two errors receive different weights. Consequently, the cancellation breaks and the mixed load rises. To explain this failure, we derive an exact law for fixed image and text load profiles. The law separates the best load from sensitivity to the token mix. The image–text load gap controls this sensitivity. A large gap gives a steep load curve arXiv:2608.00574v1 [cs.CV] 1 Aug 2026 and a narrow low-load region. A small gap gives a flat-ter curve and a wider low-load region. However, physical preprocessing can also change the conditional profiles. The fixed-profile law isolates only the token-ratio effect. To design a remedy, we examine the router-input struc-ture. The measurements show two useful boundaries. First, image and text occupy distinct regions. The modality bound-ary motivates separate image and text terms. Second, visual tokens group strongly by source image, while different im-ages retain a measurable gap. The image boundary motivates one routing instance per image. To this end, ReBA uses sepa-rate modality terms and equal-weight image instances. ReBA averages routing within each image and balances the equal-weight mean of the image profiles. Equal image weighting limits repeated optimization weight from correlated patches. Text remains pooled because text has a larger cross-sample gap. Experiments support both design choices. ReBA lowers average RMS-CV over the tested ratio range and worst phys-ical load under Split-Qwen3VL-4B resolution and InternVL tiling shifts. ReBA also lowers benchmark-input mean layer CV on every reported task and all four split backbones. Mean task accuracy remains comparable to Std-Aux. An idealized expert-compute proxy improves at medium and high visual loads. These split-backbone experiments test ReBA training. In contrast, the native checkpoints test whether the rout-ing diagnosis also appears in released sparse models. Native physical sweeps show that conditional-profile changes can outweigh token-ratio changes. The paper makes three contributions. 
+
+• Workload-wide evaluation. We show that vision-language MoE load changes with the image–text token mix. We evaluate average and difficult-case load across stated workload ranges. 
+
+• Composition-shift law. We derive the exact fixed-profile load curve as the image–text token ratio changes. The image–text load gap determines the curve steepness. 
+
+• Geometry-guided ReBA. ReBA balances image and text with separate terms and treats each image as one equal-weight routing instance. The two choices follow measured modality and image boundaries. 
+
+# 2 Background and Related Work 
+
+Sparse MoE layers and load balancing. A sparse MoE layer (Shazeer et al. 2017; Fedus, Zoph, and Shazeer 2022) replaces a dense FFN with N parallel experts {Ei}Ni=1 . Let 
+
+T be the number of tokens in the batch statistic, and let k be the number of selected experts per token. For token t, xt is the router input and Wr xt gives the router logits. Efficient expert-parallel execution needs balanced expert load. Std-Aux uses the standard Switch auxiliary loss 
+
+Laux = N ·
+
+> N
+
+X
+
+> i=1
+
+fi · pi, (1) where fi= 1
+
+> T
+
+P  
+
+> t1
+> k
+
+1[i ∈ top -k(Wr xt)] is the normalized hard assignment frequency and pi= 1
+
+> T
+
+P
+
+> t
+
+softmax( Wr xt)i
+
+the average soft gate mass. The hard frequency fi measures realized dispatch to expert i. The soft mass pi provides gra-dients to the router. The loss penalizes experts that have both high realized load and high average gate mass. Both f and p
+
+are token averages with no sample identity or modality label. 
+
+Laux therefore constrains only the mixed load of the current batch. Image and text may remain imbalanced on their own. Their errors can cancel in the mixed load. 
+
+Sparse MoE routing. Early sparse models introduced learned routing, expert parallelism, and auxiliary balance terms (Shazeer et al. 2017; Lepikhin et al. 2021; Fedus, Zoph, and Shazeer 2022; Du et al. 2022). Later work changes rout-ing stability, assignment, or the load objective (Lewis et al. 2021; Zhou et al. 2022; Zoph et al. 2022; Dai et al. 2022; Roller et al. 2021; Wang et al. 2024a; Qiu et al. 2025). Fine-grained and shared-expert MoEs create additional routing patterns (Jiang et al. 2024; Dai et al. 2024). 
+
+Dense-to-MoE conversion. Dense FFNs can become sparse experts by partitioning existing parameters or copy-ing dense blocks. MoEfication and LLaMA-MoE partition dense FFNs and activate selected experts (Zhang et al. 2022; Zhu et al. 2024). Sparse upcycling instead copies dense blocks (Komatsuzaki et al. 2023). The systems benefit can shrink when one expert receives much more work. We use disjoint FFN splitting, which preserves the dense FFN pa-rameter budget (Appendix A.2). 
+
+Vision-language MoE routing. Sparse experts support vision, contrastive image-text pretraining, instruction tun-ing, and unified multimodal learning (Riquelme et al. 2021; Mustafa et al. 2022; Lin et al. 2024a; Li et al. 2024a,b; Lin et al. 2024b; Wu et al. 2023). Released vision-language MoEs also include native sparse backbones (Wu et al. 2024). Mod-ern Qwen and InternVL families build on vision-language alignment and variable visual tokenization (Wang et al. 2024b; Chen et al. 2023). SMAR reports that expert modal-ity preferences can emerge under Std-Aux (Xia et al. 2025). ReBA studies the resulting hard expert loads. ReBA links the image–text load gap to sensitivity across token mixes. 
+
+MoE systems and inference. Expert-parallel systems im-prove communication, kernels, and execution (He et al. 2021; Rajbhandari et al. 2022; Hwang et al. 2022; Gale et al. 2022). Recent inference methods modify capacity or post-routing execution to reduce expert stragglers (He et al. 2026; Li, Wu, and Zhu 2026; Wang et al. 2026). ReBA instead changes conditional routing profiles during training. 
+
+# 3 Problem and Diagnosis 
+
+3.1 Ratio-Dependent Load Balance 
+
+Figure 1 combines a physical Split-Qwen3VL-4B resolution sweep with load curves predicted from the same checkpoint profiles. The image-token fraction changes while the router stays fixed. Std-Aux RMS-CV changes by more than fivefold across the five settings. The learned profiles therefore define a checkpoint-specific balance point rather than uniform bal-ance across token mixes. The resolution sweep shows that a converged auxiliary loss does not guarantee balance across token mixes. Q: What  color  are  the cat’s eyes?                                                             
+
+> 𝑎 ≈ 𝑎 0Diff in image
+> resolution
+> Same Question
+> 𝑎 > 𝑎 0
+> Router
+> balanced imbalanced
+> 1. Ratio shift breaks Std -Aux balance 2. Observed geometry I
+> Distinct modality regions Forms modality -specific expert
+> Makes shortcut
+> easy
+> E1
+> E2
+> E3
+> E4
+> 3. Law for ratio shift
+> 𝑞 𝑎 = 𝑎𝑞 𝐼 +1 − 𝑎 𝑞 𝑇
+> 𝑞 𝑎 0= 𝑎 0𝑞 𝐼 +1 − 𝑎 0𝑞 𝑇 = 𝑢
+> CV qa=𝑁 𝑎 − 𝑎 0𝑞 𝐼 − 𝑞 𝑇 2
+> 4. The imbalance reason
+> Large modality-specific
+> Large 𝑞 𝐼 − 𝑞 𝑇 2
+> Narrow balance region
+> 𝑎
+> CV
+> 𝑎 0
+> 5. ReBA Balance before mixing
+> ℒaux = ℒ bal 𝐼 ∪ 𝑇
+> ℒReBA = 𝜆 𝐼 ℒimg 𝐼 + 𝜆 𝑇 ℒtext 𝑇
+> Separate by modality
+> Each modality must balance on its own.
+> The image –text load gap is controlled .
+> 6. Observed geometry II
+> Image: weak but usable cross -sample gap
+> Text: stronger spontaneous sample separation
+> ℳ𝐼 =𝐼 1, … , 𝐼 𝑀 , ℒ img = ℒ inst ℳ𝐼
+> ℳ𝑇 =𝑇 pool ,ℒtxt = ℒ inst ℳ𝑇
+> Query1
+> Query2
+> Query3
+> 7. ReBA batch results
+> 𝑞 𝐼 ≈ 𝑞 𝑇 ≈ 𝑢
+> Broader balance region
+> 𝑎
+> CV
+> 𝑎 0
+> Std-Aux
+> ReBA
+
+Figure 2: ReBA follows two measured routing boundaries. The modality boundary gives separate image and text terms. The image boundary gives one equal-weight routing instance per image in the auxiliary objective. Patches are averaged within each image, while image profiles remain separate. The trained router stays balanced over a wider image-token ratio range. The standard loss aggregates routing statistics over all tokens before balancing experts. The loss observes one mixed load rather than separate image and text loads. Our main model learns strongly opposing conditional loads even though the mixed load is near balance. The mixed loss can therefore appear successful while the two conditional loads remain large. Section 3.2 measures this hidden cancellation. 
+
+3.2 Modality-Complementary Loads 
+
+We call the image and text loads modality complementary 
+
+when both loads are nonuniform and their expert-wise errors point in opposite directions. The direction and size of the errors both matter. A negative correlation is not enough when both errors are small. Let L be the number of MoE layers. Let qIl and qTl be the normalized image and text load profiles at layer l. We define the mean layer ℓ1 conditional gap as 
+
+G1 = L−1 P
+
+> l
+
+∥qIl − qTl ∥1.On Split-Qwen3VL-4B, the mean layer Pearson correla-tion under Std-Aux is −0.949 and G1 = 0 .798 , although overall mean layer CV is only 0.273 . Under ReBA, the cor-relation and gap fall to −0.166 and 0.137 (Fig. 3). Std-Aux therefore learns large and opposing conditional loads. Sec-tion 3.3 asks why a linear router can learn this shortcut so easily. 
+
+3.3 Routing Geometry Explains the Shortcut 
+
+We probe router-input states from a no-aux Split-Qwen3VL-4B checkpoint and two open native MoEs, Qwen3-VL-MoE-30B and Qwen3.5-MoE-35B. Appendix E gives the native routing protocol and statistics. 
+
+Modality distinction is strongest. Image and text occupy separate regions of router-input space (top of Fig. 4). In the two native routers, 52% and 61% of experts receive more than twice as much dispatch from one modality as from the other (Appendix E.7). A linear router can use this direction to send image and text tokens toward different experts. 
+
+Visual tokens have a clear image boundary. Tokens from one image form a tight routing bloc and tend to route together. Different images retain a small but measurable same-minus-different cosine gap (bottom of Fig. 4). The inter-image gap exceeds the within-image gap, so the image is a useful routing unit. Text has roughly twice the cross-sample gap on the main model, so we keep text pooled. The measured routing structure has two clear scales: modality distinction ≫ inter-image distinction ,
+
+inter-image distinction > within-image distinction .
+
+These scales give two design rules. The modality boundary motivates separate image and text terms. The image boundary motivates one visual routing instance per image. Grouping 0 12 24 35 Decoder layer −1 01Image--text correlation  (a) Orientation 
+
+0 12 24 35 Decoder layer 0.0 0.5 1.0 Mean  L1 gap 
+
+(b) Magnitude 
+
+Std-Aux ReBA Figure 3: Std-Aux learns large modality-complementary loads. Image and text errors point in opposite directions and remain far apart across layers. ReBA reduces the negative correlation and the mean layer ℓ1 gap. Faint traces show layer values. Solid curves are Gaussian-smoothed trends; shading extends correlation trends to the lower axis bound and mag-nitude trends to zero. correlated patches limits repeated influence and preserves cross-image differences. The routing geometry explains why the shortcut can emerge. Section 3.4 explains why the shortcut creates ratio-sensitive load. 
+
+3.4 Exact Composition-Shift Law for Fixed Conditional Profiles 
+
+The analysis changes only the image–text token ratio and holds the conditional load profiles fixed. Resolution, tiling, and input content may also change those profiles. Let qI and qT be normalized image and text expert-load profiles. Let a be the image-token fraction. Their mixed pro-file is q(a) = aq I + (1 − a)qT . Let u = (1 /N, . . . , 1/N ) be the uniform expert-load profile. Suppose the mixed profile is uniform at a reference fraction a0, so q(a0) = u. Then 
+
+q(a) − u = ( a − a0)( qI − qT ). (2) The equation separates two causes of load change. The scalar 
+
+a − a0 measures the change in token mix. The vector qI − qT
+
+measures the image–text conditional load gap. A larger gap creates a narrower low-load region. This identity assumes that qI and qT remain fixed as a changes. Real checkpoints need not reach zero imbalance at any ratio. Let L be the number of MoE layers, and let ql(a) be the mixed profile at layer l. Define R(a) = L−1 P 
+
+> l
+
+CV 2(ql(a)) ,which is squared aggregate RMS-CV. For fixed image and text conditional profiles qIl and qTl ,
+
+R(a) = R(a⋆) + κ(a − a⋆)2,κ = NL
+
+X
+
+> l
+
+∥qIl − qTl ∥22. (3) The fixed-profile load curve is a parabola. The value a⋆ is the image-token fraction that minimizes the curve. The floor 
+
+R(a⋆) is the lowest squared load reached by the fixed profiles. The curvature κ measures how fast load rises away from a⋆.ReBA reduces the conditional profile gap, which reduces the curvature. Under a distribution of batch ratios, expected squared load grows with ratio variance. Expected load also grows when the deployment mean moves away from the checkpoint’s best ratio. Appendix B.1 gives the exact expression, proof, bounds, and edge cases. Appendix E measures how physical preprocessing changes the conditional profiles. The law identifies the conditional load gap that ReBA must reduce. The routing geometry identifies the units that ReBA should balance. 
+
+# 4 ReBA 
+
+ReBA follows these two findings. ReBA separates image and text objectives. ReBA also treats each image as one visual routing instance. 
+
+4.1 Separate Modality Objectives 
+
+Std-Aux balances one mixed image–text load. ReBA com-putes one image term and one text term. Both terms are non-negative, so one modality cannot hide the other modality’s error. A small ReBA loss therefore requires both modality loads to approach balance under the aligned hard–soft sur-rogate. Appendix B.2 gives the objective identity, unique optimum, bounds, alignment condition, and gradient analy-sis. 
+
+4.2 Image-Level Routing Instances 
+
+An image-level routing instance contains all visual tokens from one image, while different images remain separate. Image averaging limits repeated influence from correlated patches and preserves cross-image differences. Let g(xt) be the router logits for token t, and let pt,i =softmax( g(xt)) i be the soft probability for expert i. De-fine the normalized hard top-k dispatch as ft,i = 1 
+
+> k
+
+1[i ∈
+
+top -k g (xt)] . A routing instance m contains Sm tokens. Its soft profile Pm,i and hard profile Fm,i are 
+
+Pm,i = 1
+
+Sm
+
+X
+
+> t∈m
+
+pt,i , Fm,i = 1
+
+Sm
+
+X
+
+> t∈m
+
+ft,i . (4) Equation (4) removes token length inside one routing in-stance. The soft profile carries gradients, while the hard pro-file records realized dispatch. Let M be the set of routing instances. The vectors ¯P and 
+
+¯F are equal-instance averages over this set: 
+
+¯Pi = 1
+
+|M| 
+
+X
+
+> m∈M
+
+Pm,i , ¯Fi = 1
+
+|M| 
+
+X
+
+> m∈M
+
+Fm,i . (5) Equation (5) gives every routing instance equal optimization weight, regardless of its token count. Using the same expert count N as in Laux , the instance balance loss is 
+
+Linst (M) = N
+
+> N
+
+X
+
+> i=1
+
+¯Fi ¯Pi. (6) Layer 24 
+
+Split-Qwen3VL-4B Layer 32 
+
+Qwen3-VL-MoE-30B Layer 26 
+
+Qwen3.5-MoE-35B     
+
+> Image Text 010 20 30 Decoder layer 0.00 0.05 0.10 Sample cosine gap
+
+Split-Qwen3VL-4B   
+
+> 020 40 Decoder layer
+
+Qwen3-VL-MoE-30B     
+
+> 010 20 30 40 Decoder layer
+
+Qwen3.5-MoE-35B  
+
+> Image Text
+
+Figure 4: Router-input geometry across three models. Top: image and text occupy distinct regions. Translucent contours show high-density sets; black lines are linear visual separators in the displayed t-SNE coordinates, not separability tests. Bottom: same-minus-different sample cosine gaps. Faint traces show layer values; solid curves and shaded areas show Gaussian-smoothed trends relative to zero. The hard mean ¯F measures realized instance-level load. The soft mean ¯P sends the balancing gradient to the router. The loss keeps the hard–soft form of Laux , but changes the aver-aging unit to an instance. The set Mimg contains one routing instance per image. The set Mtxt contains one pooled text instance. The weights 
+
+λimg and λtxt are the observed image and text token fractions. The complete objective is 
+
+LReBA = λimg Linst (Mimg )+ λtxt Linst (Mtxt ). (7) The modality weights preserve the observed image–text composition. The instance construction changes optimiza-tion weight inside each modality. It does not change physical token counts. ReBA gives image profiles equal weight only in the auxiliary objective. The rule does not assume equal infer-ence cost. Every visual token still enters its routed experts and contributes to its image profile. The equal-weight mean pre-vents longer images from receiving extra optimization weight from correlated patches. Benchmark and physical-load met-rics still count every true top-k dispatch. Appendix A gives the token-weighted form and tensor operations. The image loss does not force every image profile to be uniform. The router can lower mean image load through within-image spreading or between-image profile variation. Section 5.3 measures both outcomes. 
+
+4.3 Implementation 
+
+We set the image and text coefficients from the observed token ratio. The image identifiers define the visual instance segments. No new router or expert parameter is added. The implementation reuses the standard Switch-style hard–soft term. ReBA only changes the groups over which routing statistics are averaged. Hard dispatch counts are treated as stop-gradient in the standard surrogate. The extra aggregation costs O(|M| N ) per layer. Appendix A gives pseudocode, tensor shapes, split tensors, and the true top-k dispatch pro-tocol. 
+
+# 5 Experiments 
+
+The experiments test three claims. ReBA should reduce con-ditional load, remain stable across token mixes, and preserve task quality. 
+
+5.1 Setup 
+
+Backbone. Our primary testbed is Split-Qwen3VL-4B : a split-MoE built from Qwen3-VL-4B-Instruct with N =4 , top-
+
+2 experts at all 36 decoder layers. Each SwiGLU intermediate 0.5 0.6 0.7 0.8 0.9 Image-token fraction a
+
+0.0 0.1 0.2 0.3 RMS-CV 
+
+(a) Split-Qwen3VL-4B aggregate load 
+
+1 3 6 12 Number of tiles 0.0 0.1 0.2 0.3 RMS-CV 
+
+(b) Split-InternVL3-8B aggregate load 
+
+Std-Aux Coupled-ImgInst ReBA Figure 5: ReBA lowers physical load under resolution and tiling shifts. (a) Split-Qwen3VL-4B resolution shifts. Dashed curves show fixed-profile predictions. Markers show physical runs. (b) InternVL tiling shifts. Markers show physical runs. Dashed curves interpolate between tested settings. Light fills extend the curves to zero and are not uncertainty bands. dimension is split into disjoint groups with matching gate/up rows and down columns. FFN weights are not copied or ex-panded. The conversion adds only a router. We finetune one epoch on Cambrian-737K (Tong et al. 2024), varying only the auxiliary loss, and repeat on Split-Qwen2.5VL-3B, Split-Qwen2VL-7B, and Split-InternVL3-8B. The split backbones represent dense-to-sparse deployment. Expert imbalance can reduce sparse-execution benefits across compositions. Re-leased native MoEs are used only for routing diagnostics. All ReBA training comparisons use the four split backbones. 
+
+Baselines. No-Aux removes the load-balancing objective and keeps the same task training. Std-Aux uses the token-level Laux (Fedus, Zoph, and Shazeer 2022). ReBA uses separate terms, per-image visual profiles, and pooled text. A seven-point coefficient sweep uses the fixed probe (Ap-pendix C.1). 
+
+Fixed routing probe. All non-shift analyses use the same 
+
+500 -sample Cambrian training probe for every method. We fix min _pixels = max _pixels . Appendix A gives the com-plete protocol and data provenance. 
+
+Load metrics. Workload composition is the aggregate image-token fraction of the evaluated request set. Let ql,e 
+
+be the fraction of routed tokens sent to expert e at layer l. For the normalized layer profile ql, let u = (1 /N, . . . , 1/N ) be uniform expert use. We define 
+
+CV( ql) = std e(ql,e )mean e(ql,e ) = √N ∥ql − u∥2.
+
+Let L be the number of evaluated MoE layers. Benchmark tables report mean layer CV, L−1 P 
+
+> l
+
+CV( ql). Composi-tion studies report RMSCV = 
+
+q
+
+L−1 P 
+
+> l
+
+CV 2(ql), whose square is R(a). Mean layer CV weights every layer equally. RMS-CV gives more weight to highly imbalanced layers. Both metrics measure distance from uniform expert use, and lower values are better. Benchmark and physical-shift metrics use token-weighted true top-k dispatch counts. 
+
+Metrics and domains. Composition experiments report RMS-CV from true top-k counts. Minimum and worst are the domain extrema. AUC is the normalized trapezoidal average over the tested domain, not an estimate of a deployment distribution. 
+
+Samples and uncertainty. Task accuracy uses each benchmark’s standard VLMEvalKit scorer and no GPT judge (Duan et al. 2024). The fixed routing probe contains 500 samples. Physical shifts use 466 paired image-bearing samples. Confidence intervals use 1,000 paired bootstrap re-samples. 
+
+Experiment map. Table 1 tests load and task quality across tasks and backbones. Table 2 measures how the router bal-ances image loads. Figures 1 and 5 test fixed-profile and physical load. Table 3 separates the method choices. 
+
+5.2 Conditional and Overall Load Balance 
+
+Table 1 reports task accuracy and mean layer CV on each benchmark’s own inputs. ReBA lowers mean layer CV for every benchmark and backbone. The load reduction is consistent across tasks, but the accuracy changes are mixed. The backbone order is Split-Qwen3VL-4B, Split-Qwen2.5VL-3B, Split-Qwen2VL-7B, and Split-InternVL3-8B. Their mean accuracy differs from Std-Aux by +0 .3,
+
++0 .2, −0.2, and +0 .6 points. We therefore claim consistent load reduction and comparable mean task quality. We do not claim a uniform accuracy gain. ReBA also improves both conditional loads. The mean image–text correlation changes from −0.949 to −0.166 . The mean ℓ1 gap changes from 0.798 to 0.137 (Fig. 3). The lower mixed load therefore does not come from a new image–text cancellation. 
+
+5.3 How Image Balance Is Realized 
+
+Sections 3.3 and 4.2 define one image-level routing instance per image. We measure how the trained router uses that design. Image balance can improve in two ways. First, tokens from one image can use experts more evenly. Second, different im-ages can use different expert profiles. Within-image CV mea-sures the first effect. The between-image share ρ2 measures Method POPE HallusionBench MME MMBench MMStar SEEDBench ScienceQA Avg                                                                                                                                                                                                                     
+
+> Split-Qwen3VL-4B —Accuracy (%, ↑)No-Aux 86.9 66.9 1597 63.5 43.6 70.9 64.3 66.0 Std-Aux 83.2 65.2 1520 65.7 45.3 71.2 64.4 65.8
+> ReBA 87.8 63.1 1768 65.5 46.1 71.5 62.3 66.1
+> Mean layer CV (↓)No-Aux 0.73 0.67 0.70 0.67 0.69 0.70 0.66 0.69 Std-Aux 0.47 0.45 0.48 0.37 0.42 0.42 0.37 0.43
+> ReBA 0.12 0.25 0.18 0.13 0.13 0.12 0.20 0.16 Split-Qwen2.5VL-3B —Accuracy (%, ↑)No-Aux 87.5 61.5 1637 52.9 42.7 64.8 61.8 61.9 Std-Aux 86.9 59.7 1717 58.0 44.7 67.3 61.7 63.1
+> ReBA 85.2 64.0 1696 57.4 43.9 67.1 62.0 63.3
+> Mean layer CV (↓)No-Aux 0.76 0.68 0.69 0.68 0.71 0.72 0.67 0.70 Std-Aux 0.35 0.26 0.27 0.20 0.24 0.25 0.22 0.26
+> ReBA 0.15 0.25 0.21 0.19 0.17 0.16 0.21 0.19 Split-Qwen2VL-7B —Accuracy (%, ↑)No-Aux 87.4 64.8 1879 69.8 47.8 72.0 69.4 68.5 Std-Aux 86.4 60.6 1925 67.9 46.7 71.6 67.8 66.8 ReBA 87.3 60.1 1936 67.2 47.1 71.8 66.0 66.6
+> Mean layer CV (↓)No-Aux 0.70 0.63 0.65 0.64 0.65 0.66 0.64 0.65 Std-Aux 0.23 0.24 0.23 0.18 0.18 0.17 0.21 0.21
+> ReBA 0.10 0.21 0.19 0.15 0.14 0.13 0.19 0.16 Split-InternVL3-8B —Accuracy (%, ↑)No-Aux 87.2 56.0 1980 70.5 51.1 73.9 73.3 68.7 Std-Aux 88.0 55.2 1906 70.4 50.8 72.8 72.2 68.2
+> ReBA 86.6 55.4 2027 69.6 51.1 74.2 72.5 68.8
+> Mean layer CV (↓)No-Aux 0.70 0.64 0.67 0.63 0.66 0.66 0.63 0.66 Std-Aux 0.25 0.21 0.25 0.14 0.18 0.19 0.16 0.20
+> ReBA 0.16 0.18 0.18 0.11 0.14 0.14 0.13 0.15
+
+Table 1: Task accuracy and benchmark-input load across four backbones. Mean layer CV uses true top-k counts on each benchmark’s inputs. ReBA lowers load on every benchmark and backbone. Mean accuracy remains comparable to Std-Aux. MME uses its raw score and is excluded from mean accuracy. the second effect relative to mean per-image squared imbal-ance. Appendix B.3 gives the exact identity and edge cases. The estimate uses 466 image profiles or 500 text profiles per layer.            
+
+> Method Within-image CV ↓
+> Image between-profile share ρ2↑
+> Text between-profile share ρ2↑
+> Std-Aux 0.48 0.19 0.30 ReBA 0.21 0.79 0.87
+
+Table 2: ReBA lowers within-image CV and raises the between-profile share ρ2. The text change is measured af-ter training. ReBA uses both routes. Within-image CV falls from 0.48 
+
+to 0.21 . The image between-profile share rises from 0.19 to 
+
+0.79 (Table 2). Image profiles therefore become flatter within each image and more varied across images. The text between-profile share also rises from 0.30 to 0.87 .The text loss does not use text-sample identities. The higher text share is therefore a learned outcome rather than a direct text-instance constraint. 
+
+5.4 Load Across Modality Compositions 
+
+Figure 1 shows the complete fixed-profile curves and five physical Split-Qwen3VL-4B settings. Std-Aux has a narrow minimum. Coupled-ImgInst moves the minimum but keeps a steep curve. ReBA lowers the curvature κ by 96 .3% and remains low across the tested ratio range. Average-over-range and worst RMS-CV summarize the controlled curve. Figure 5(a) returns to the Split-Qwen3VL-4B resolution sweep. The dashed curves show fixed-profile predictions near the tested ratios. The dashed curves vary only the image–text token ratio. Differences from physical markers also reflect changed conditional profiles. The physical runs follow the local curve shape. ReBA stays below Coupled-ImgInst at all five settings and below Std-Aux at four settings. At the highest resolution, aggregate RMS-CV falls from 0.351 for Std-Aux and 0.139 for Coupled-ImgInst to 0.115 .Figure 5(b) changes the InternVL tile count. Tiling changes both the image–text ratio and the visual routing pro-file. The panel therefore tests physical load rather than exact fixed-profile prediction. ReBA remains below Std-Aux at every tile count and is lowest from three to twelve tiles. 
+
+5.5 Which Design Choices Are Necessary? 
+
+Table 3 changes one design choice at a time. Coupled-ImgInst forms one profile per image but still computes one mixed image–text loss. Coupled-SymInst adds one profile per text row and still uses the mixed loss. Both variants use one standard coefficient. Decoupled-Matched uses separate image and text losses with per-image visual profiles and pooled text. For a batch with M images, its image and text weights are M 2/(M +1) 2
+
+and 1/(M + 1) 2. These weights match the two quadratic terms inside Coupled-ImgInst. ReBA-TextInst keeps the separate losses and token-ratio weights but uses one text profile per row. Full ReBA uses separate losses, per-image visual profiles, pooled text, and token-ratio weights.                      
+
+> Variant Image Text Overall Std-Aux 0.447 0.445 0.273 Coupled-ImgInst 0.170 0.640 0.097 Coupled-SymInst 0.567 0.543 0.348 Decoupled-Matched 0.109 0.477 0.154 ReBA-TextInst 0.108 0.138 0.098
+> ReBA 0.099 0.110 0.077
+
+Table 3: Ablation mean layer CV on the fixed probe. Columns report image, text, and overall profiles from true top-k counts. Lower is better. The text defines every variant. 
+
+Are image instances enough? No. Coupled-ImgInst lowers image CV from 0.447 to 0.170 , but text CV rises to 
+
+0.640 . Its overall CV is only 0.097 because the mixed profile still permits image and text errors to cancel. Image aggre-gation can move the mixed optimum, but it cannot remove cross-modal cancellation. Coupled-SymInst raises overall CV to 0.348 . Row-level text profiles therefore do not fix a mixed objective. 
+
+Are separate modality terms enough? Separate terms re-duce the image–text load gap. Decoupled-Matched reaches 
+
+0.154 overall CV. Its overall CV is below the Std-Aux value of 0.273 but above the full ReBA value of 0.077 . The remain-ing difference tests matched coefficients against token-ratio coefficients. 
+
+Does text need row-level instances? No in this setting. ReBA-TextInst reaches 0.098 overall CV, while pooled-text ReBA reaches 0.077 . Full ReBA also gives the lowest image and text CV in Table 3. 
+
+5.6 Implication for Expert-Parallel Compute 
+
+Expert-parallel execution waits for the most loaded expert at each layer. Let nl,e be the token count assigned to expert e
+
+at layer l. The proxy T proxy expert sums the busiest-expert count across layers. The idealized ratio Sideal divides the Std-Aux proxy total by the ReBA proxy total: 
+
+T proxy expert = X
+
+> l
+
+max  
+
+> e
+
+nl,e , Sideal = T proxy Std -Aux 
+
+T proxy ReBA 
+
+.
+
+At each layer, the proxy assumes that the busiest expert sets expert-compute time. A value Sideal > 1 means that ReBA has lower bottleneck token work than Std-Aux. ReBA gives an ideal speedup of 1.23 –1.25 × at medium and high Split-Qwen3VL-4B settings. The proxy assumes equally fast ex-perts, perfect placement, and no communication or non-MoE work. The proxy is not a latency measurement. Appendix C.3 reports all settings. 
+
+# 6 Conclusion 
+
+Vision-language batches contain different image–text token mixes. Standard balancing can hide opposing conditional errors that cancel near one mix and create a narrow low-load region. ReBA balances image and text separately and aggregates one profile per image. Across four split back-bones, ReBA lowers benchmark-input load with comparable mean task quality. ReBA also lowers average-over-range and worst physical load across the tested shifts. The fixed-profile law isolates token-ratio changes. Physical preprocessing can also change the conditional profiles. Native checkpoints show similar routing geometry and suggest that ReBA may apply beyond split models. 
+
+# References 
+
+Chen, Z.; Wu, J.; Wang, W.; Su, W.; Chen, G.; Xing, S.; Zhong, M.; Zhang, Q.; Zhu, X.; Lu, L.; Li, B.; Luo, P.; Lu, T.; Qiao, Y.; and Dai, J. 2023. InternVL: Scaling up Vision Foundation Models and Aligning for Generic Visual-Linguistic Tasks. arXiv:2312.14238. Dai, D.; Deng, C.; Zhao, C.; Xu, R. X.; Gao, H.; Chen, D.; Li, J.; Zeng, W.; Yu, X.; Wu, Y.; Xie, Z.; Li, Y. K.; Huang, P.; Luo, F.; Ruan, C.; Sui, Z.; and Liang, W. 2024. DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models. arXiv:2401.06066. Dai, D.; Dong, L.; Ma, S.; Zheng, B.; Sui, Z.; Chang, B.; and Wei, F. 2022. StableMoE: Stable Routing Strategy for Mixture of Experts. In Annual Meeting of the Association for Computational Linguistics .Du, N.; Huang, Y.; Dai, A. M.; Tong, S.; Lepikhin, D.; Xu, Y.; Krikun, M.; Zhou, Y.; Yu, A. W.; Firat, O.; Zoph, B.; Fedus, L.; Bosma, M.; Zhou, Z.; Wang, T.; Wang, Y. E.; Webster, K.; Pellat, M.; Robinson, K.; Meier-Hellstern, K.; Duke, T.; Dixon, L.; Zhang, K.; Le, Q. V.; Wu, Y.; Chen, Z.; and Cui, C. 2022. GLaM: Efficient Scaling of Language Models with Mixture-of-Experts. In International Conference on Machine Learning .Duan, H.; Fang, X.; Yang, J.; Zhao, X.; Ma, Z.; Qiao, Y.; Li, M.; Liang, T.; Zhu, L.; Agarwal, A.; Li, X.; Ding, S.; Bu, J.; Liu, Z.; Qi, Z.; Li, Y.; Zang, Y.; Chen, Z.; Chen, L.; Liu, Y.; Ma, Y.; Sun, H.; Zhang, Y.; Lu, S.; Wong, T. H.; Wang, W.; Zhou, P.; Fu, C.; Cui, J.; Chen, J.; Song, E.; Mao, S.; Lin, J.; Wei, X.; Li, J.; Sun, Z.; Wang, Z.; Zhang, Z.; Dong, X.; He, J.; Zhang, P.; Wang, J.; Lin, D.; and Chen, K. 2024. VLMEvalKit: An Open-Source Toolkit for Evaluating Large Multi-Modality Models. In ACM International Conference on Multimedia .Fedus, W.; Zoph, B.; and Shazeer, N. 2022. Switch Trans-formers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity. Journal of Machine Learning Re-search , 23(120): 1–39. Gale, T.; Narayanan, D.; Young, C.; and Zaharia, M. 2022. MegaBlocks: Efficient Sparse Training with Mixture-of-Experts. arXiv:2211.15841. He, J.; Qiu, J.; Zeng, A.; Yang, Z.; Zhai, J.; and Tang, J. 2021. FastMoE: A Fast Mixture-of-Expert Training System. arXiv:2103.13262. He, S.; Cai, W.; Huang, J.; and Li, A. 2026. Capacity-Aware Inference: Mitigating the Straggler Effect in Mixture of Ex-perts. In International Conference on Learning Representa-tions .Hwang, C.; Cui, W.; Xiong, Y.; Yang, Z.; Liu, Z.; Hu, H.; Wang, Z.; Salas, R.; Jose, J.; Ram, P.; Chau, J.; Cheng, P.; Yang, F.; Yang, M.; and Xiong, Y. 2022. Tutel: Adaptive Mixture-of-Experts at Scale. arXiv:2206.03382. Jiang, A. Q.; Sablayrolles, A.; Roux, A.; Mensch, A.; Savary, B.; Bamford, C.; Chaplot, D. S.; de las Casas, D.; Hanna, E. B.; Bressand, F.; Lengyel, G.; Bour, G.; Lample, G.; Lavaud, L. R.; Saulnier, L.; Lachaux, M.-A.; Stock, P.; Sub-ramanian, S.; Yang, S.; Antoniak, S.; Scao, T. L.; Gervet, T.; Lavril, T.; Wang, T.; Lacroix, T.; and Sayed, W. E. 2024. Mixtral of Experts. arXiv:2401.04088. Komatsuzaki, A.; Puigcerver, J.; Lee-Thorp, J.; Ruiz, C. R.; Mustafa, B.; Ainslie, J.; Tay, Y.; Dehghani, M.; and Houlsby, N. 2023. Sparse Upcycling: Training Mixture-of-Experts from Dense Checkpoints. In International Conference on Learning Representations .Lepikhin, D.; Lee, H.; Xu, Y.; Chen, D.; Firat, O.; Huang, Y.; Krikun, M.; Shazeer, N.; and Chen, Z. 2021. GShard: Scaling Giant Models with Conditional Computation and Automatic Sharding. In International Conference on Learning Repre-sentations .Lewis, M.; Bhosale, S.; Dettmers, T.; Goyal, N.; and Zettle-moyer, L. 2021. BASE Layers: Simplifying Training of Large, Sparse Models. In International Conference on Ma-chine Learning .Li, B.; Wu, C.; and Zhu, S. 2026. MACS: Modality-Aware Capacity Scaling for Efficient Multimodal MoE Inference. arXiv:2605.05225. Li, J.; Wang, X.; Zhu, S.; Kuo, C.-W.; Xu, L.; Chen, F.; Jain, J.; Shi, H.; and Wen, L. 2024a. CuMo: Scaling Multimodal LLM with Co-Upcycled Mixture-of-Experts. arXiv:2405.05949. Li, Y.; Jiang, S.; Hu, B.; Wang, L.; Zhong, W.; Luo, W.; Ma, L.; and Zhang, M. 2024b. Uni-MoE: Scaling Unified Multi-modal LLMs with Mixture of Experts. arXiv:2405.11273. Lin, B.; Tang, Z.; Ye, Y.; Huang, J.; Zhang, J.; Pang, Y.; Jin, P.; Ning, M.; Luo, J.; and Yuan, L. 2024a. MoE-LLaVA: Mixture of Experts for Large Vision-Language Models. arXiv:2401.15947. Lin, X. V.; Shrivastava, A.; Luo, L.; Iyer, S.; Lewis, M.; Ghosh, G.; Zettlemoyer, L.; and Aghajanyan, A. 2024b. MoMa: Efficient Early-Fusion Pre-training with Mixture of Modality-Aware Experts. arXiv:2407.21770. Mustafa, B.; Riquelme, C.; Puigcerver, J.; Jenatton, R.; and Houlsby, N. 2022. Multimodal Contrastive Learning with LIMoE: the Language-Image Mixture of Experts. In Ad-vances in Neural Information Processing Systems .Qiu, Z.; Huang, Z.; Zheng, B.; Wen, K.; Wang, Z.; Men, R.; Titov, I.; Liu, D.; Zhou, J.; and Lin, J. 2025. Demons in the Detail: On Implementing Load Balancing Loss for Training Specialized Mixture-of-Expert Models. arXiv:2501.11873. Rajbhandari, S.; Li, C.; Yao, Z.; Zhang, M.; Aminabadi, R. Y.; Awan, A. A.; Rasley, J.; and He, Y. 2022. DeepSpeed-MoE: Advancing Mixture-of-Experts Inference and Training to Power Next-Generation AI Scale. In International Con-ference on Machine Learning .Riquelme, C.; Puigcerver, J.; Mustafa, B.; Neumann, M.; Jenatton, R.; Pinto, A. S.; Keysers, D.; and Houlsby, N. 2021. Scaling Vision with Sparse Mixture of Experts. In Advances in Neural Information Processing Systems .Roller, S.; Sukhbaatar, S.; Szlam, A.; and Weston, J. 2021. Hash Layers For Large Sparse Models. In Advances in Neural Information Processing Systems .Shazeer, N.; Mirhoseini, A.; Maziarz, K.; Davis, A.; Le, Q.; Hinton, G.; and Dean, J. 2017. Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer. In 
+
+International Conference on Learning Representations .Tong, S.; Brown, E.; Wu, P.; Woo, S.; Middepogu, M.; Akula, S. C.; Yang, J.; Yang, S.; Iyer, A.; Pan, X.; Wang, Z.; Fer-gus, R.; LeCun, Y.; and Xie, S. 2024. Cambrian-1: A Fully Open, Vision-Centric Exploration of Multimodal LLMs. In 
+
+Advances in Neural Information Processing Systems .Wang, L.; Gao, H.; Zhao, C.; Sun, X.; and Dai, D. 2024a. Auxiliary-Loss-Free Load Balancing Strategy for Mixture-of-Experts. arXiv:2408.15664. Wang, P.; Bai, S.; Tan, S.; Wang, S.; Fan, Z.; Bai, J.; Chen, K.; Liu, X.; Wang, J.; Ge, W.; Fan, Y.; Dang, K.; Du, M.; Ren, X.; Men, R.; Liu, D.; Zhou, C.; Zhou, J.; and Lin, J. 2024b. Qwen2-VL: Enhancing Vision-Language Model’s Percep-tion of the World at Any Resolution. arXiv:2409.12191. Wang, Y.; Wu, Y.; Wu, X.; Cui, J.; Cai, W.; Guo, Z.; and Huang, J. 2026. ReaLB: Real-Time Load Balancing for Mul-timodal MoE Inference. arXiv:2604.19503. Wu, J.; Hu, X.; Wang, Y.; Pang, B.; and Soricut, R. 2023. Omni-SMoLA: Boosting Generalist Multimodal Models with Soft Mixture of Low-rank Experts. arXiv:2312.00968. Wu, Z.; Chen, X.; Pan, Z.; Liu, X.; Liu, W.; Dai, D.; Gao, H.; Ma, Y.; Wu, C.; Wang, B.; Xie, Z.; Wu, Y.; Hu, K.; Wang, J.; Sun, Y.; Li, Y.; Piao, Y.; Guan, K.; Liu, A.; Xie, X.; You, Y.; Dong, K.; Yu, X.; Zhang, H.; Zhao, L.; Wang, Y.; and Ruan, C. 2024. DeepSeek-VL2: Mixture-of-Experts Vision-Language Models for Advanced Multimodal Understanding. arXiv:2412.10302. Xia, G.; Ding, Y.; Li, F.; Ren, L.; Chen, W.; Feng, F.; and Wang, X. 2025. SMAR: Soft Modality-Aware Routing Strat-egy for MoE-based Multimodal Large Language Models Pre-serving Language Capabilities. arXiv:2506.06406. Zhang, Z.; Lin, Y.; Liu, Z.; Li, P.; Sun, M.; and Zhou, J. 2022. MoEfication: Transformer Feed-forward Layers are Mixtures of Experts. In Findings of the Association for Computational Linguistics .Zhou, Y.; Lei, T.; Liu, H.; Du, N.; Huang, Y.; Zhao, V.; Dai, A.; Chen, Z.; Le, Q.; and Laudon, J. 2022. Mixture-of-Experts with Expert Choice Routing. In Advances in Neural Information Processing Systems .Zhu, T.; Qu, X.; Dong, D.; Ruan, J.; Tong, J.; He, C.; and Cheng, Y. 2024. LLaMA-MoE: Building Mixture-of-Experts from LLaMA with Continual Pre-training. arXiv:2406.16554. Zoph, B.; Bello, I.; Kumar, S.; Du, N.; Huang, Y.; Dean, J.; Shazeer, N.; and Fedus, W. 2022. ST-MoE: Designing Stable and Transferable Sparse Expert Models. arXiv:2202.08906. 
+
+# Appendix 
+
+Overview. The appendix provides the ReBA implementa-tion, mathematical analysis, additional split model results, workload shift measurements, and native MoE diagnostics. Appendix A defines the implementation and evaluation pro-tocol. Appendix B derives the composition shift law and ex-plains the balance objective. Appendix C reports coefficient sweeps, checkpoint checks, and expert compute estimates. Appendix D measures resolution and tiling shifts. Appendix E tests the routing diagnosis on released native MoEs. 
+
+# A Implementation and Protocol 
+
+A.1 ReBA Algorithm 
+
+Section 4.1 of the main paper introduces separate image and text objectives. This subsection asks how ReBA converts token routing into those objectives. Let N be the number of routed experts and k be the experts selected per token. Let t
+
+index tokens, i index experts, and m index routing instances. The scalar Sm is the token count of instance m.Let xt be the router input of token t, and let g(xt) be its router logits. The scalar pt,i is the soft routing probability for expert i. The normalized hard top k dispatch indicator is ft,i = k−11[i ∈ top - k(g(xt))] . For one routing instance, define the mean soft profile Pm and mean hard profile Fm as 
+
+Pm,i = 1
+
+Sm
+
+X
+
+> t∈m
+
+pt,i , Fm,i = 1
+
+Sm
+
+X
+
+> t∈m
+
+ft,i .Pm describes where the router wants to send tokens in in-stance m. Fm describes where those tokens are actually dis-patched. The set MI contains one routing instance per image. The set MT contains one pooled text instance for the batch. Let r ∈ { I, T } index image or text. The vectors ¯Pr and ¯Fr
+
+are equal instance mean profiles for modality r. The scalars 
+
+λI and λT are the realized image and text token fractions used as loss weights. ReBA applies one hard and soft term to each modality. Algorithm S1 uses image level and text level routing in-stances. Table S1 defines the symbols used by the algorithm. The notation separates token statistics from instance statis-tics. Each image forms one routing instance. All text tokens form one pooled text instance. The hard profile measures realized expert use. The soft profile provides gradients to the router. Their dot product 
+
+Symbol Meaning 
+
+N, k routed experts and experts selected per token 
+
+t, m, S m token index, instance index, and tokens in in-stance mxt, g (xt) router input and router logits for token tpt,i , f t,i soft probability and normalized hard top k
+
+indicator 
+
+Pm, F m soft and hard mean profiles of instance m
+
+MI one routing instance per image 
+
+MT one pooled routing instance for text 
+
+¯Pr , ¯Fr equal instance profile for modality rλI , λ T realized image and text token fractions inside ReBA 
+
+Table S1: Notation used by Algorithm S1. Rows define one symbol or related symbol group, and the second column gives its meaning. Image statistics are averaged within each image and then across images. Text statistics remain pooled. penalizes experts that receive high hard load and high soft probability at the same time. Standard token averaging gives each image weight in pro-portion to its number of visual tokens. The resulting profile gives each token equal weight and is 
+
+ˆfi =
+
+> M
+
+X
+
+> m=1
+
+Sm
+
+P 
+
+> j
+
+Sj
+
+Fm,i . (S1) A longer image therefore receives more optimization weight. ReBA removes this length weight inside the auxiliary objec-tive by using M −1 P 
+
+> m
+
+Fm,i for M image instances. Every visual token still contributes to its image profile and to ex-pert execution. Computing instance identifiers and segment means costs O(T + M N ) per layer for T tokens and M
+
+images. This cost is small relative to the expert FFNs. 
+
+A.2 Dense to Split MoE Construction 
+
+Appendix A.2 supports the dense to split construction used by the main paper. This subsection asks how disjoint sparse experts preserve the dense FFN parameters. The primary backbone starts from Qwen3-VL-4B-Instruct. Each SwiGLU FFN has Wgate , W up ∈ RI×H and Wdown ∈ RH×I . Here, 
+
+H is the hidden size and I is the dense FFN intermediate size. Let e index experts, and let Ge contain the intermediate neuron indices assigned to expert e. Let h be the FFN input hidden state. 
+
+Algorithm S1 ReBA (Relax Within, Balance Across)        
+
+> Require: router outputs, image instances MI, pooled text instance MT, token ratio weights λI, λ T
+
+1: for r ∈ { I, T } do 
+
+2: for m ∈ M r do 
+
+3: compute within instance profiles Pm and Fm
+
+4: end for 
+
+5: ¯Pr ← |M r |−1 P 
+
+> m∈M rPm
+
+6: ¯Fr ← |M r |−1 P 
+
+> m∈M rFm
+
+7: Lr ← N PNi=1 ¯Fr,i ¯Pr,i 
+
+8: end for 
+
+9: return LReBA = λI LI + λT LTProperty Splitting Sparse upcycling Initialization disjoint neurons copied dense FFNs FFN parameters preserved grows with copies Initial similarity low high Routing adaptation required easier initially Use here controlled conversion not used 
+
+Table S2: Splitting and sparse upcycling under the conversion settings compared here. Rows identify initialization, param-eter count, initial similarity, routing adaptation, and use in this paper. Columns define the two conversion approaches. Let {G e}Ne=1 be a disjoint partition of {1, . . . , I }. For ex-pert e, define 
+
+W (e)gate = Wgate [Ge, :] , W (e)up = Wup [Ge, :] ,W (e)down = Wdown [: , Ge].
+
+The resulting expert is 
+
+FFN e(h) = W (e)down 
+
+
+
+SiLU( W (e)gate h) ⊙ W (e)up h
+
+
+
+.
+
+When all experts are active, 
+
+FFN dense (h) = 
+
+> N
+
+X
+
+> e=1
+
+FFN e(h).
+
+Each intermediate neuron belongs to exactly one expert. The gate and up rows use the same partition. The down columns use the matching partition. Summing all expert outputs there-fore recovers the dense FFN output. A new router matrix Wr ∈ RN ×H is initialized at zero. The initial routing step samples experts uniformly so every expert receives gradient. Sparse routing evaluates only the selected experts. With four experts and top-2 routing, one token activates half of the original intermediate neurons. With SCALE=true , the combined routed expert output is multiplied by √N k , where N counts routed experts that are not shared and k is the number selected per token. The scale corrects output magnitude after sparse expert selection under the implemented gating rule. The scale is an implementation detail rather than a ReBA theoretical claim. All decoder FFNs are converted. The split experts jointly contain the same FFN parameters as the dense model, apart from the small N × H
+
+router. The split construction preserves the dense FFN parameter set. Table S2 contrasts this construction with sparse upcy-cling. The comparison explains the initialization used in this paper. The comparison does not claim that splitting is better than sparse upcycling in general. 
+
+A.3 Training Setup 
+
+The main paper compares four split backbones under matched training settings. This subsection records which set-tings remain fixed across comparison arms. We apply the same construction to Qwen2.5-VL-3B, Qwen2-VL-7B, and InternVL3-8B. These models produce the four split back-bones in the main paper. The vision encoder is frozen during SFT. The language model, router, and unfrozen multimodal modules are trained. No-Aux, Std-Aux, and ReBA share the same initial split checkpoint and task training setup. Only the balancing objective changes. All backbones receive one epoch of supervised fine tuning on Cambrian-737K (Tong et al. 2024). The primary 4B runs use full parameter training, bfloat16, FlashAttention, a cosine schedule, learning rate 10 −5, warmup ratio 0.03 , and maximum sequence length 4096 . The per device batch is four with 16 accumulation steps. The recorded global batch is 512. All reported split model training runs were conducted on NVIDIA H20 GPUs. ZeRO-1 and gradient checkpointing are used. The vision encoder remains frozen. Distributed layouts varied with model size. All comparison arms for one backbone used the same layout. Final routing analyses use the last checkpoint af-ter one epoch. Coefficient studies evaluate λaux ∈{0.001 , 0.002 , 0.005 , 0.01 , 0.02 , 0.05 , 0.1}. The fixed rout-ing probe does not choose a checkpoint. Downstream evalu-ation uses VLMEvalKit (Duan et al. 2024) with rule based or exact match scoring and no GPT judge. The same prepro-cessing and evaluation version are used within each backbone comparison. 
+
+A.4 Routing and Evaluation Protocol 
+
+Appendix A supplies the metrics and probe provenance used throughout the main paper. This subsection asks how routing balance and workload sensitivity are measured. Every load result uses true top k dispatched counts. Let ql,e be the fraction of dispatched tokens sent to ex-pert e at MoE layer l. The vector ql sums to one, and 
+
+u = (1 /N, . . . , 1/N ) represents uniform expert use. The layer coefficient of variation (CV) is 
+
+CV( ql) = std e(ql,e )mean e(ql,e ) = √N ∥ql − u∥2. (S2) Layer CV is zero under uniform routing. Layer CV increases as expert load moves away from uniform. Lower CV therefore means better load balance. Let L be the number of MoE layers. Mean layer CV and root mean squared CV (RMS CV) are 
+
+MeanCV = 1
+
+L
+
+X
+
+> l
+
+CV( ql), (S3) 
+
+RMSCV = 
+
+s 1
+
+L
+
+X
+
+> l
+
+CV 2(ql). (S4) MeanCV gives equal weight to every layer’s CV. RMS CV gives more weight to layers with large CV. Benchmark tables use MeanCV on each benchmark’s inputs. Composition ex-periments use RMS CV because severely imbalanced layers can dominate expert parallel execution. 
+
+Workload and tail summaries. Workload composition is the aggregate image token fraction of the evaluated request set. A request image token fraction is computed from one request instead. For request level RMS CV, we pool all dis-patched tokens within one request at each layer, compute that request’s RMS CV, and then take p90 or p95 across paired requests. These are request percentiles, not percentiles across layers. On a stated domain, minimum and worst are the smallest and largest RMS CV. Range is their difference. Area under the load curve (AUC) is a normalized average, not ROC AUC. For points (aj , y j ) ordered by image token fraction, we define 
+
+AUC [a1,a J ] = 1
+
+aJ − a1
+
+> J−1
+
+X
+
+> j=1
+
+(aj+1 − aj ) yj + yj+1 
+
+2 ,
+
+where yj is aggregate RMS CV at aj . This normalized AUC is average RMS CV over the stated image token fraction in-terval. Lower is better. Controlled AUC uses a ∈ [0 .1, 0.9] .Physical AUC uses the span of measured image token frac-tions. InternVL AUC uses measured fractions even when its plot uses tile count. AUC gives uniform interval weight rather than deployment request frequency weight. 
+
+Metrics for conditional profiles. Let qIl and qTl be image only and text only normalized load profiles at layer l. We measure their separation with 
+
+G1 = 1
+
+L
+
+X
+
+> l
+
+∥qIl − qTl ∥1, mean layer ℓ1 gap ,
+
+(S5) 
+
+G2 =
+
+s 1
+
+L
+
+X
+
+> l
+
+∥qIl − qTl ∥22, RMS ℓ2 conditional gap .
+
+(S6) 
+
+G1 is the mean layer ℓ1 distance. G2 is the RMS ℓ2 dis-tance. Both quantities measure separation, but their values should not be compared numerically. The split model result reports G1, while native tables report G2. Curvature with fixed profiles is 
+
+κ = NL
+
+X
+
+> l
+
+∥qIl − qTl ∥22 = N G 22. (S7) The scalar κ is defined only for fixed conditional profiles. A larger κ means that squared RMS CV changes faster with image token fraction. For the split model, mean layer Pearson correlation centers each image and text profile by u, computes Pearson correla-tion across experts, and averages over layers. Native median centered residual cosine instead computes the cosine between 
+
+qIl − u and qTl − u at each layer and reports the layer median. These orientation metrics are not interchangeable. Let hi and hj be router input hidden states of two sampled tokens. “Same sample” means the same source image for vi-sual tokens or source row for text tokens. “Different samples” means different source images or rows. The sample cosine gap is 
+
+∆sample = E[cos( hi, h j ) | same sample ]
+
+− E[cos( hi, h j ) | different samples ]. (S8) A positive gap means that same sample tokens are more sim-ilar than different sample tokens. The gap motivates an image level routing instance. The gap does not imply that every im-age uses a unique expert subset. At each layer and modality, the probe uniformly subsamples at most 2,000 tokens with seed 0 and averages all eligible off diagonal pairs. 
+
+Within- and between profile metrics. CV within images first computes CV for each image profile, averages over im-ages, and then averages over valid layers. Let Fm,l be the hard routing profile of valid instance m at layer l. Let ¯Fl be the equal instance mean profile, and let M be the number of valid instances. Define 
+
+ρ2,l = M −1 P 
+
+> m
+
+CV 2(Fm,l ) − CV 2( ¯Fl)
+
+M −1 P 
+
+> m
+
+CV 2(Fm,l ) . (S9) The scalar ρ2,l is the share of mean per instance squared im-balance represented by variation across instance profiles. A larger value means that instances use more different profiles. A larger value does not itself mean better balance. The re-ported ρ2 averages valid layers and must be read with within image CV and mean profile load. When the denominator is positive, ρ2 ∈ [0 , 1] .
+
+Prediction diagnostics. For five matched Qwen resolu-tions, mean absolute error (MAE) is the mean absolute dif-ference between predicted and physical RMS CV. Maximum error is the largest absolute difference. Pearson and Spearman correlations compare the five paired values. These descrip-tive values are not significance tests. 
+
+Native model diagnostics. The effective number of experts is the inverse Simpson quantity 
+
+Neff (q) = 1
+
+P 
+
+> e
+
+q2
+
+> e
+
+. (S10) The count equals N under uniform routing and approaches one when one expert dominates. The count measures ef-fective use rather than experts with nonzero counts. Native tables report the layer median for conditional image and text profiles. Each finite count null trial preserves the observed token count, the number of routed experts N , top k, and the number of layers. Each token selects k distinct experts uniformly without replacement. We run 10,000 simulations, compute RMS CV, and report the observed value, null mean, their ratio, and whether any simulated value reaches the ob-servation. 
+
+Idealized expert compute proxy. Let nl,e be the dis-patched token count of expert e at layer l. T proxy expert sums the busiest expert count across layers. The idealized utilization 
+
+Uproxy compares average expert work with that bottleneck work: 
+
+T proxy expert = X
+
+> l
+
+max  
+
+> e
+
+nl,e , Uproxy =
+
+P 
+
+> l
+
+N −1 P 
+
+> e
+
+nl,e 
+
+T proxy expert 
+
+,
+
+(S11) and 
+
+Sideal = T proxy Std -Aux 
+
+T proxy ReBA 
+
+. (S12) Uproxy = 1 means perfect balance under the proxy. Sideal >
+
+1 means ReBA has lower maximum dispatched token work than Std-Aux. Neither quantity is measured latency or throughput. The proxy assumes one equally fast device per expert and perfect placement. The proxy excludes communi-cation, kernel effects, shared experts, and non MoE layers. The fixed probe contains 500 rows selected by seeded reservoir sampling from the cleaned Cambrian training cor-pus with seed 42. It is a training corpus routing probe, not a held out test set. Qwen probes fix min _pixels =max _pixels = 1 ,003 ,520 . The probe contains 469 ,224 im-age tokens and 118 ,218 text tokens, giving image fraction 
+
+a = 0 .7988 . Of the 500 rows, 466 contain an image. Physi-cal sweeps use this paired subset because every row succeeds at every tested setting. Confidence intervals (CIs) use 1,000 paired bootstrap re-samples. Each resample recomputes profiles and load metrics from dispatched counts. Request tails compute a per request RMS CV before taking percentiles. 
+
+A.5 Result Provenance 
+
+The main paper combines benchmark inputs, a fixed routing probe, and paired physical sweeps. Table S3 states the sample set and intervention used by each main result. Benchmark results use each benchmark’s own inputs. Di-agnostic results use the fixed probe. Physical shift results use the paired 466-request subset. No probe selects a checkpoint. 
+
+# B Mathematical Details 
+
+B.1 Composition Shift Law 
+
+Section 3.4 of the main paper asks how load changes when only token composition changes. Appendix B.1 holds image and text conditional profiles fixed. The derivation excludes profile changes caused by resolution, tiling, or content. Let l index MoE layers, and let L be the number of MoE layers. The vectors qIl and qTl are fixed normalized image and text load profiles. Let a be the deterministic image token fraction. The mixed profile is 
+
+ql(a) = aq Il + (1 − a)qTl .
+
+The vector ql(a) changes linearly with a. Let u = 1/N be uniform expert use, and let dl = qIl − qTl be the conditional profile difference. Let R(a) be mean squared layer CV. Its square root is aggregate RMS CV. Expanding the squared distance from uniform gives CV 2(q) = N ∥q − u∥22,
+
+R(a) = NL
+
+X
+
+> l
+
+(qTl − u) + ad l 
+
+> 22
+
+(S13) 
+
+= κa 2 + 2 ba + c, (S14) where 
+
+κ = NL
+
+X
+
+> l
+
+∥dl∥22, b = NL
+
+X
+
+> l
+
+d⊤ 
+
+> l
+
+(qTl − u),
+
+and 
+
+c = NL
+
+X
+
+> l
+
+∥qTl − u∥22.
+
+The scalar b is the linear coefficient set by the text residual and conditional difference. The scalar c is squared load at 
+
+a = 0 . The mixed profile is linear in a, so squared distance from uniform is quadratic. When κ > 0, completing the square identifies the uncon-strained optimum: 
+
+a⋆ = −b/κ, R(a) = R(a⋆) + κ(a − a⋆)2.a⋆ is the fraction that minimizes the unrestricted parabola. 
+
+R(a⋆) is the lowest squared load of the fixed profiles. The curvature κ controls how quickly load rises away from that fraction. The curvature is determined by the conditional profile gap: 
+
+κ = NL
+
+X
+
+> l
+
+∥qIl − qTl ∥22.
+
+ReBA aims to reduce conditional imbalance and the resulting curvature. A fraction must remain inside the tested interval. If a⋆ lies outside, the feasible minimum occurs at the nearest endpoint. If κ = 0 , image and text profiles match at every layer and R(a) is constant. 
+
+Workload distribution corollary. Let A be the random image token fraction in deployment. E[A] is mean composi-tion, and Var( A) is composition variance. Taking the expec-tation of the completed square form gives 
+
+E[R(A)] = R(a⋆) + κE[( A − a⋆)2].
+
+The identity 
+
+E[( A − a⋆)2] = Var( A) + ( E[A] − a⋆)2
+
+proves 
+
+E[R(A)] = R(a⋆) + κ Var( A) + κ(E[A] − a⋆)2.
+
+Expected squared load has three sources. The first source is the best fixed profile floor. The second source is workload composition variance. The third source is mismatch between mean workload and the best fraction. Controlled AUC in-stead weights a fixed interval uniformly. Controlled AUC is a standardized range summary rather than this deployment expectation. 
+
+Zero floor intuition. Let a0 be a reference fraction where the mixed profile is exactly uniform. Then 
+
+ql(a) − u = ( a − a0)( qIl − qTl ),
+
+and 
+
+pR(a) = |a − a0|
+
+s NL
+
+X
+
+> l
+
+∥qIl − qTl ∥22.
+
+Load grows linearly in |a − a0|, while squared load grows quadratically. A large image and text profile gap creates a narrow low load region around a0.Main result Samples Preprocessing Metric Role Figure 1 fixed Qwen profiles vary a from 0.1 to 0.9 aggregate RMS CV predicted load region Figure 3 500-sample Qwen probe fixed pixels MeanCV, G1, mean Pear-son complementarity Figure 4 fixed split probe and na-tive dumps model specific defaults sample cosine gap routing geometry Table 1 each benchmark’s in-puts benchmark defaults accuracy and MeanCV breadth across tasks Table 2 466 image rows and 500 text streams fixed Qwen pixels within image CV and ρ2 balance realization Table 3 500-sample Qwen probe fixed Qwen pixels conditional and overall MeanCV design ablation Figure 5(a) 466 paired requests five Qwen pixel budgets aggregate RMS CV and fixed profile residual physical resolution shift Figure 5(b) 466 paired requests InternVL tiles 1, 3, 6, 12 aggregate RMS CV physical tiling shift Sec. 5.6 paired 466-sample sub-set Qwen and InternVL settings T proxy expert , Uproxy , Sideal idealized expert compute 
+
+Table S3: Provenance of the main results. Rows identify main paper results. Columns define each result’s sample set, prepro-cessing or intervention, metric, and role. Benchmark rows use their benchmark inputs, diagnostic rows use the fixed probe, and physical rows use paired requests. 
+
+Complementarity special case. We first state the identity for one layer and omit the layer index. Let δI = qI − u
+
+be the image residual from uniform. Let δT = qT − u be the text residual. Exact cancellation at a0 requires opposite directions with ratio dependent magnitudes: 
+
+∥qI − qT ∥2 = ∥qI − u∥2
+
+1 − a0
+
+= ∥qT − u∥2
+
+a0
+
+, (S15) 
+
+CV( q(a)) = |a − a0|
+
+1 − a0
+
+CV( qI ) = |a − a0|
+
+a0
+
+CV( qT ).
+
+(S16) The mixed profile can be uniform while both conditional profiles remain far from uniform. This cancellation family explains why one mixed balancing term cannot identify both conditional loads. 
+
+Conditional CV upper bound. The next bound connects curvature to the conditional CV values that ReBA directly reduces. The inequality ∥x − y∥22 ≤ 2∥x − u∥22 + 2 ∥y − u∥22
+
+gives 
+
+κ ≤ 2
+
+L
+
+X
+
+> l
+
+CV 2(qIl ) + CV 2(qTl ) .
+
+Exact conditional balance gives zero curvature. Approximate conditional balance gives a finite curvature bound. The bound is sufficient but may not be tight. 
+
+Composition versus conditional profile change. Let s in-dex a physical preprocessing setting. The vectors qI
+
+> 0,l
+
+, q T 
+
+> 0,l
+
+are source conditional profiles, while qIs,l , q Ts,l are profiles after setting s. Let as be the measured image token fraction. The fixed profile prediction is 
+
+qpred ,l (s) = asqI 
+
+> 0,l
+
++ (1 − as)qT
+
+> 0,l
+
+The profile change residual is 
+
+rl(s) = as(qIs,l − qI
+
+> 0,l
+
+) + (1 − as)( qTs,l − qT
+
+> 0,l
+
+).
+
+The physical profile has the exact decomposition 
+
+qphys ,l (s) − u = qpred ,l (s) − u + rl(s). (S17) After squaring and averaging, 
+
+Rphys (s) = Rpred (s) + D(s) + 2 Cint (s), (S18) where 
+
+D(s) = NL
+
+X
+
+> l
+
+∥rl(s)∥22
+
+and 
+
+Cint (s) = NL
+
+X
+
+> l
+
+(qpred ,l (s) − u)⊤rl(s).Rpred (s) is squared load from composition change alone. 
+
+Rphys (s) is squared load from the physical forward. D(s)
+
+is the nonnegative squared magnitude of profile change. A positive Cint (s) increases predicted imbalance. A negative interaction offsets predicted imbalance. Qwen resolution mostly preserves the local predicted structure in the tested range. InternVL tiling changes con-ditional profiles more strongly. A physical curve can there-fore fall below its fixed profile prediction even when profile change is large. Appendix E.7 applies the decomposition to native MoEs. 
+
+B.2 Separate Modality Terms 
+
+Section 4.1 of the main paper uses separate image and text terms. Appendix B.2 asks whether one mixed term can guar-antee conditional balance. The aligned standard surrogate constrains only aq I + (1 − a)qT .Let ∆ be any small zero sum expert load residual. The condition 1⊤∆ = 0 keeps each profile normalized. Consider 
+
+qI = u + ∆ , qT = u − a
+
+1 − a ∆
+
+for a nonzero feasible ∆. The image profile moves away from uniform by ∆, while the text profile moves in the oppo-site direction. Their weighted mixture remains uniform. One mixed objective cannot distinguish this pair from conditional balance. Let LReBA be the ReBA auxiliary objective. λI and λT
+
+are positive modality weights. Under exact hard and soft alignment, its excess above the minimum is 
+
+LReBA − (λI + λT ) = λI CV 2(qI ) + λT CV 2(qT ).
+
+Each excess term is nonnegative, so one modality cannot cancel the other. The minimum is unique at qI = qT = u
+
+under exact alignment. Let ϵ be an allowed total excess. If the excess is at most ϵ, then 
+
+CV 2(qI ) ≤ ϵ/λ I , CV 2(qT ) ≤ ϵ/λ T .
+
+Each conditional squared CV is bounded by ϵ divided by its modality weight. 
+
+Expansion for hard and soft routing. Let F r and P r be hard and soft modality profiles. Define deviations δF r =
+
+F r − u and δP r = P r − u. The implementation computes 
+
+N (F r )⊤P r , which expands as 
+
+N (F r )⊤P r = 1 + N (δF r )⊤δP r . (S19) The constant one is the uniform routing value. The inner product measures whether hard and soft deviations point in the same direction. The expression equals 1 + CV 2(F r )
+
+only under exact alignment. Table S5 measures alignment on trained checkpoints. Positive cosine supports the approxima-tion but does not prove equal deviations. 
+
+Modality specific gradient. Let zt,e be the router logit for token t and expert e. pt,e is its soft routing probability, and 
+
+F re is the hard modality load of expert e. Treating F r as stop gradient gives 
+
+∂Lr
+
+∂z t,e 
+
+∝ pt,e 
+
+F re − X
+
+> j
+
+pt,j F rj
+
+ .
+
+An expert above the token’s soft load average receives a downward update under loss minimization. An underused ex-pert receives the opposite signal. Separate terms send image specific feedback to image tokens and text specific feedback to text tokens. The derivation explains why modality separation removes cross modal cancellation. Appendix B.3 explains why the image term uses one instance per image. 
+
+B.3 Image Balance Decomposition 
+
+Sections 4.2 and 5.3 of the main paper treat each image as one routing instance. Appendix B.3 asks how image level balance can improve. Let M be the number of image instances, and let Fm be normalized hard profile of image m. Let ¯F =
+
+M −1 P 
+
+> m
+
+Fm be the equal image mean, and let u be the uniform expert profile. The variance decomposition gives 
+
+1
+
+M
+
+X
+
+> m
+
+∥Fm −u∥22 = ∥ ¯F −u∥22 + 1
+
+M
+
+X
+
+> m
+
+∥Fm − ¯F ∥22. (S20) The left side is mean squared imbalance for each image. The first term on the right is imbalance of the mean image profile. The second term is variation among image profiles. The between image term also has a pairwise form: 
+
+1
+
+M
+
+X
+
+> m
+
+∥Fm − ¯F ∥22 = 12M 2
+
+X
+
+> m,n
+
+∥Fm − Fn∥22.
+
+The pairwise identity averages squared distances between all image profile pairs. The identity does not require every image pair to prefer opposite experts. Multiplying by N gives the CV identity used in the main paper. The between profile share is 
+
+ρ2 = M −1 P 
+
+> m
+
+CV 2(Fm) − CV 2( ¯F )
+
+M −1 P 
+
+> m
+
+CV 2(Fm) .
+
+When the denominator is positive, ρ2 ∈ [0 , 1] . A value near one means profiles differ strongly while their mean is rel-atively balanced. A value near zero means most imbalance remains in the mean profile. The value is undefined when every instance profile is uniform. ReBA can reduce image load through two routes. Tokens inside one image can spread across more experts. Different images can also use different profiles whose equal weight mean is balanced. A large ρ2 alone does not imply good balance, so Table 2 reports ρ2 with within image CV and mean profile load. The main paper measurements indicate both routes. 
+
+# C Additional Split Model Results 
+
+C.1 Coefficient Protocol 
+
+Section 5.2 of the main paper fixes one auxiliary coefficient for final comparisons. This subsection asks whether ReBA depends on one narrow coefficient choice. We test seven values of the global auxiliary coefficient λaux . Each value defines a separate training run. The modality weights inside ReBA remain the realized image and text token fractions. Table S4 reports load on the fixed probe. ReBA load decreases across the tested coefficient grid. The value 0.1 gives the lowest image, text, and overall load in this grid. The sweep does not show that 0.1 is optimal outside the tested values. 
+
+C.2 Offline Fixed Probe Checkpoints and Hard and Soft Alignment 
+
+The main paper reports load at the final checkpoint. This subsection asks whether lower ReBA load appears only at that checkpoint. Training time logs do not use a fixed evaluation set, so we evaluate matched saved checkpoints offline on the same 500-sample probe. Figure S2 reports image, text, and overall load at the evaluated checkpoint steps. Std-Aux mean layer CV ReBA mean layer CV Aux. coefficient λaux Image Text Overall Image Text Overall 0.001 .604 .646 .523 .572 .623 .492 0.002 .586 .628 .468 .534 .588 .463 0.005 .550 .567 .421 .458 .564 .383 0.010 .547 .593 .375 .303 .442 .245 0.020 .537 .535 .339 .200 .362 .158 0.050 .519 .506 .321 .130 .204 .105 0.100 .447 .445 .273 .099 .110 .077 
+
+Table S4: Auxiliary coefficient results on the fixed 500 row routing probe. Rows are seven separate training runs defined by 
+
+λaux . Columns report image, text, and overall mean layer CV for Std-Aux and ReBA using true top k dispatch counts. Lower values are better. 0.0 0.2 0.4 Mean layer CV 
+
+Image 
+
+> 0.0 0.2 0.4
+
+Text       
+
+> 200 400 600 800 1000 1200 1400 Training step 0.0 0.2 0.4
+
+Overall 
+
+> ReBA Std-Aux
+
+Figure S2: Offline load evaluation across saved checkpoints on the fixed 500-sample probe. Each marker is one saved checkpoint evaluated on the same ordered probe with fixed preprocessing. Image values use the 466 image bearing rows. Text and overall values use the full 500 row probe. All values use true top k dispatched counts. Lines connect evaluated checkpoints and do not show online minibatch statistics. ReBA has lower image and text load at every evaluated checkpoint. Overall load shows a smaller absolute difference because image and text errors can cancel under Std-Aux. The checkpoint plot measures load. Table S5 separately tests the hard and soft alignment assumption used in Ap-pendix B.2. The squared CV interpretation in Appendix B.2 assumes that hard and soft routing deviations point in simi-lar directions. Table S5 measures this alignment on the fixed probe. For each layer and modality, we compute the cosine between F r − u and P r − u. Positive layers have a cosine above zero.                    
+
+> Method Modality Median [IQR] Positive layers Std-Aux Image 0.969 [0 .938 ,0.982] 36 /36
+> Std-Aux Text 0.953 [0 .916 ,0.979] 36 /36
+> ReBA Image 0.770 [0 .380 ,0.886] 31 /36
+> ReBA Text 0.831 [0 .582 ,0.901] 29 /36
+
+Table S5: Deviation alignment between hard and soft routing on the fixed 500 row probe. Rows identify each method and modality. Median and interquartile range (IQR) summarize layer cosines between F r − u and P r − u. Positive layers counts cosines above zero. Most layers have positive alignment for both methods and both modalities. ReBA has weaker alignment because several ReBA layers are close to uniform. Small deviation norms make directional cosine less stable. Table S5 supports an approximation rather than an identity at every trained layer. 
+
+C.3 Expert Compute Proxy 
+
+The main paper uses an idealized proxy to connect expert imbalance with potential expert parallel work. Appendix C.3 asks whether ReBA reduces the work assigned to the busiest expert at every physical setting. The proxy assumes one equally fast device per routed ex-pert. The proxy assumes perfect placement and no overlap between MoE layers. The proxy counts expert work in dis-patched tokens. The proxy excludes communication, kernel overhead, shared experts, and non MoE layers. Let l index the L MoE layers, and let e index the N routed experts. The count nl,e is the number of tokens dispatched to expert e at layer l. The busiest expert work summed across layers is 
+
+T proxy expert =
+
+> L
+
+X
+
+> l=1
+
+max  
+
+> e
+
+nl,e .Setting UStd -Aux UReBA Sideal Paired 95% interval 
+
+Split-Qwen3VL-4B 
+
+200 ,704 px 0.930 0.914 0.983 [0.973, 0.998] 
+
+401 ,408 px 0.815 0.938 1.151 [1.133, 1.167] 
+
+802 ,816 px 0.740 0.912 1.233 [1.222, 1.245] 
+
+1,204 ,224 px 0.712 0.888 1.247 [1.236, 1.257] 
+
+1,605 ,632 px 0.698 0.871 1.248 [1.238, 1.257] 
+
+Split-InternVL3-8B 
+
+1 tile 0.809 0.846 1.046 [1.043, 1.049] 3 tiles 0.810 0.864 1.066 [1.061, 1.071] 6 tiles 0.883 0.948 1.074 [1.069, 1.078] 12 tiles 0.914 0.966 1.057 [1.053, 1.060] 
+
+Table S6: Idealized expert compute proxy across physical shifts on 466 paired requests. Rows identify Qwen pixel budgets and InternVL tile counts. Columns report idealized expert utilization for Std-Aux and ReBA, ideal speedup, and its paired bootstrap interval. Higher utilization is better. 
+
+Sideal = T proxy Std -Aux /T proxy ReBA . Values above one indicate lower maximum dispatched token work under ReBA. The interval uses 1,000 paired bootstrap resamples over 466 requests. The proxy is not latency or throughput. The idealized utilization is 
+
+Uproxy =
+
+PLl=1 1
+
+> N
+
+PNe=1 nl,e 
+
+T proxy expert 
+
+.
+
+We compare the Std-Aux and ReBA proxy totals with 
+
+Sideal = T proxy Std -Aux 
+
+T proxy ReBA 
+
+.
+
+At one layer, the busiest expert determines idealized expert work. T proxy expert adds bottleneck work across layers. Uproxy 
+
+compares average work with bottleneck work. Perfect bal-ance gives Uproxy = 1 , while lower utilization implies more waiting. 
+
+Sideal > 1 means ReBA has lower bottleneck work than Std-Aux. Sideal = 1 means equal proxy totals, and 
+
+Sideal < 1 means higher ReBA proxy work. Std-Aux and ReBA process the same paired requests with the same top 
+
+k. Their total dispatched token counts therefore match, so 
+
+Sideal = UReBA /U Std -Aux up to numerical precision. For example, counts [25 , 25 , 25 , 25] process 100 to-kens with busiest count 25 and utilization one. Counts 
+
+[55 , 15 , 15 , 15] process the same total with busiest count 55 and utilization 25 /55 = 0 .455 . The second routing creates more idealized waiting. Table S6 applies the proxy to the same 466 paired requests used by the physical Qwen and InternVL sweeps. Each row is one pixel budget or tile count. UStd -Aux and UReBA report utilization, while Sideal reports the proxy total ratio. The paired interval uses 1,000 bootstrap resamples of the 466 requests. Each resample uses the same request IDs for Std-Aux and ReBA. The interval summarizes Sideal , not measured latency. ReBA gives no proxy speedup at the lowest Qwen set-ting because Std-Aux is already near its best ratio. ReBA gives 1.23 to 1.25 times ideal speedup at the three largest Qwen settings. InternVL gains are smaller and remain above one at every tile count. Lower imbalance therefore reduces bottleneck token work under the proxy assumptions. The proxy is not a latency or throughput measurement. Real execution also depends on communication, expert placement, kernels, shared experts, and non MoE layers. Ta-ble S6 supports a potential expert compute benefit rather than an end to end speedup. 
+
+# D Workload Shift Results 
+
+D.1 Fixed Profile Load Curves 
+
+Section 5.5 of the main paper compares controlled and phys-ical workload shifts. Appendix D.1 asks how their complete load ranges differ. Panel (a) isolates composition under fixed profiles. Panel (b) reports physical forwards that may also change the profiles. In Table S7, Min and Worst are the lowest and highest RMS CV on each domain. Range is Worst minus Min. AUC is average RMS CV over the stated fraction interval. The scalar κ is fixed profile curvature. 
+
+(a) Controlled recomposition 
+
+Method Min Worst AUC κ
+
+Split-Qwen3VL-4B 
+
+Std-Aux .0687 .3695 .1998 .8205 Coupled-ImgInst .1034 .5842 .2939 .6390 Decoupled-Matched .1305 .4510 .2790 .2188 ReBA-TextInst .1011 .1350 .1102 .0265 
+
+ReBA .0702 .1067 .0811 .0306 
+
+Split-InternVL3-8B 
+
+Std-Aux .1917 .4152 .2585 .5160 ReBA .1444 .2331 .1692 .1059 (b) Real resolution / tiling sweeps 
+
+Method Worst AUC Range 
+
+Split-Qwen3VL-4B 
+
+Std-Aux .3511 .2041 .2821 Coupled-ImgInst .2491 .1453 .1516 ReBA .1148 .0711 .0623 
+
+Split-InternVL3-8B 
+
+Std-Aux .1949 .1626 .1082 
+
+Coupled-ImgInst .3004 .2022 .1763 ReBA .1444 .1024 .1128 
+
+Table S7: Load response to modality composition shifts. Panel (a) reports controlled recomposition, and panel (b) reports physical sweeps. Rows identify methods within each split backbone. Columns report domain summaries of aggre-gate RMS CV. Controlled recomposition uses a ∈ [0 .1, 0.9] .Physical sweeps use realized image token fractions. AUC is the normalized trapezoidal average on each stated domain. The domains represent different workloads. Lower is better for every reported metric. ReBA gives the lowest controlled worst load and AUC on both split backbones. ReBA also gives the lowest physical worst load for Qwen and InternVL. Controlled and phys-Method a Prediction Physical Residual Std-Aux 0.4885 0.0696 0.0690 −0.0006                                             
+
+> 0.6654 0.1641 0.1813 +0 .0172
+> 0.7965 0.2765 0.2836 +0 .0071
+> 0.8543 0.3275 0.3274 −0.0001
+> 0.8868 0.3563 0.3511 −0.0052
+> Coupled-ImgInst 0.4885 0.2840 0.2491 −0.0349
+> 0.6654 0.1607 0.1232 −0.0376
+> 0.7965 0.1050 0.0975 −0.0076
+> 0.8543 0.1071 0.1197 +0 .0126
+> 0.8868 0.1166 0.1390 +0 .0224
+> ReBA 0.4885 0.0713 0.0755 +0 .0042
+> 0.6654 0.0726 0.0526 −0.0201
+> 0.7965 0.0815 0.0765 −0.0050
+> 0.8543 0.0871 0.0985 +0 .0115
+> 0.8868 0.0906 0.1148 +0 .0243
+
+Table S8: Fixed profile predictions and physical Split-Qwen3VL-4B runs on 466 paired requests. Row groups identify methods, and rows identify observed image token fractions. Columns report predicted RMS CV, physical RMS CV, and their residual. Predictions use conditional profiles from the 1,003 ,520 -pixel fixed probe. ical AUC values use different domains and should not be compared as estimates of one deployment distribution. 
+
+D.2 Qwen Physical Resolution Sweep 
+
+Appendix D.2 asks whether the fixed profile curve describes the local structure of real Qwen resolution changes. The sweep changes the pixel budget and reruns the model. Ta-ble S8 compares each physical forward with the fixed profile prediction at the same observed image token fraction. Resid-ual is physical RMS CV minus predicted RMS CV at that fraction. Std-Aux has small prediction errors at all five settings. Coupled-ImgInst and ReBA show larger local residuals, but both methods preserve the broad predicted trend. The cor-respondence supports the local fixed profile structure. The correspondence does not prove that the conditional profiles remain unchanged. Prediction MAE, maximum error, Pearson correlation, and Spearman correlation are 0.006 /0.017 /0.998 /1.000 for Std-Aux, 0.023 /0.038 /0.947 /0.900 for Coupled-ImgInst, and 0.013 /0.024 /0.888 /0.900 for ReBA. Across all 15 pairs, MAE is 0.014 and Pearson correlation is 0.983 . These statis-tics describe five points per method and are not treated as independent samples. 
+
+Supplementary request tails. The main paper reports ag-gregate load. Table S9 adds a request level diagnostic for the same 466 paired requests. Each entry is a percentile over per request RMS CV values. ReBA lowers p95 at every tested Qwen resolution. The request level result supports the aggregate result, but the main paper does not use p90 or p95 as a primary metric.                          
+
+> Std-Aux ReBA Pixel budget p90 p95 p90 p95
+> 200 ,704 .406 .438 .351 .386
+> 401 ,408 .443 .462 .322 .367
+> 802 ,816 .469 .492 .310 .352
+> 1,204 ,224 .480 .499 .310 .349
+> 1,605 ,632 .485 .504 .319 .358
+
+Table S9: Supplementary request level Qwen load tails on 466 paired requests. Rows identify physical pixel budgets. Columns report p90 and p95 over per request RMS CV values for Std-Aux and ReBA using true dispatch counts.                      
+
+> Method Tiles aPred. Phys. Resid. Std-Aux 1 .6617 .1949 .1949 +.0000
+> 3.7840 .2279 .1844 −.0435
+> 6.9243 .2948 .1130 −.1818
+> 12 .9461 .3068 .0868 −.2201
+> ReBA 1.6617 .1444 .1444 +.0000
+> 3.7840 .1498 .1249 −.0248
+> 6.9243 .1677 .0437 −.1241
+> 12 .9461 .1715 .0316 −.1398
+
+Table S10: Fixed profile predictions and physical Split-InternVL3-8B runs on 466 paired requests. Row groups identify methods, and rows identify tile counts and mea-sured image token fractions. Columns report predicted RMS CV, physical RMS CV, and their residual. Predictions use the one tile conditional profiles. 
+
+D.3 InternVL Tiling Sweep 
+
+Appendix D.3 asks what happens when preprocessing changes both composition and conditional profiles. InternVL tiling changes token composition and visual routing profiles. Table S10 compares the one tile fixed profile prediction with each physical tiling forward. The prediction error grows at six and twelve tiles. The large negative residuals show that profile change offsets the composition only prediction. ReBA still has lower physical load than Std-Aux at every tested tile count. The residual contains image change, text change, and their interaction. Appendix E tests the same distinction between composition and profile change on native MoEs. 
+
+# E Native MoE Diagnostics 
+
+Appendix E asks whether the routing diagnosis also appears in native sparse backbones. The native experiments do not train ReBA. The experiments test conditional load gaps, fixed profile sensitivity, and physical profile change. 
+
+E.1 Router and Probe Protocol 
+
+The main paper uses native routing statistics to test the diag-nosis beyond split models. Appendix E.1 asks which dispatch and preprocessing settings produce those statistics. Routed experts compete in top k selection. Shared experts run for every token and are excluded from routed load statistics. Model Setting Image tokens Text tokens a                    
+
+> 30B Low 11,844 10,978 .519 Source 17,751 10,978 .618 High 103,267 10,978 .904 35B Low 11,844 11,284 .512 Source 17,751 11,284 .611 High 103,267 11,284 .901
+
+Table S11: Realized native physical sweep composition on 64 paired samples. Rows identify each native model and resolution setting. Columns report aggregate image and text token counts and their resulting image token fraction a.We probe Qwen3-VL-MoE-30B-A3B-Instruct with 48 MoE layers, 128 routed experts, and top 8 dispatch. We also probe Qwen3.5-MoE-35B-A3B with 40 MoE layers, 256 routed experts, and top 8 dispatch. Qwen3.5 provides selected indices directly. Qwen3-VL applies no index chang-ing expert bias, so top 8 router logits recover its dispatch. Vision boundary, video, padding, and control tokens are ex-cluded from text. The fresh protocol uses the same 64 Cam-brian sample IDs at every setting. Low uses 
+
+(min_pixels , max_pixels ) = (65 ,536 , 200 ,704) .Source uses the default lower bound and max_pixels =1,003 ,520 . High fixes both bounds at 1,605 ,632 .The native physical sweep uses the same 64 paired samples at low, source, and high resolution. Let a be the aggregate image token fraction. Table S11 reports the resulting image and text token counts. The text token count stays nearly fixed within each model. The image token count changes by almost one order of mag-nitude. The resulting image token fraction spans about 0.51 
+
+to 0.90 .
+
+E.2 Source Image and Text Load Gap 
+
+Section 3.4 of the main paper links composition sensitivity to conditional profile differences. Appendix E.2 asks whether native image and text profiles differ at the source setting. Table S12 reports image, text, and mixed load for both native models. Here N/k gives routed expert count and selected experts per token. CV I , CV T , and CV mix are aggregate image, text, and mixed RMS CV. Cos. is median centered residual cosine. Neg. is the percentage of layers with negative cosine. G2 is the RMS ℓ2 conditional gap, and κ = N G 22 is fixed pro-file curvature. Effective I/T gives median inverse Simpson expert counts for image and text.                         
+
+> Model N/k CV ICV TCV mix Cos. Neg. 30B 128 /8.822 1.051 .632 −.075 66.7% 35B 256 /8.997 1.242 .820 +.108 22.5% Model G2κEffective I/T
+> 30B .121 1.865 76.3/61.3 35B .094 2.246 130.9/98.3
+
+Table S12: Native source image and text load gap on the fresh 64 sample probe. Rows identify native models. Columns re-port routing size, image, text, and mixed aggregate RMS CV, orientation statistics, conditional gap, curvature, and median effective expert counts. Both native models have large image and text load. The mixed load is smaller than either conditional load. The two models differ in orientation, so large fixed profile sensitiv-ity does not require strong negative alignment. Table S12 separates conditional magnitude from orientation. 
+
+E.3 Magnitude and Orientation Decomposition 
+
+Appendix E.2 reports both conditional magnitude and ori-entation. Appendix E.3 asks how those quantities combine into sensitivity. Let θl be the angle between image and text residuals at layer l. The law of cosines gives 
+
+κl = CV 2 
+
+> I,l
+
++ CV 2 
+
+> T,l
+
+−2 CV I,l CV T,l cos θl.
+
+The conditional magnitude is CV 2 
+
+> I,l
+
++ CV 2
+
+> T,l
+
+. The signed orientation is −2 CV I,l CV T,l cos θl. Their sum is layer cur-vature κl. Negative cosine increases the gap, while positive cosine reduces it. Large conditional magnitudes can still yield high sensitivity when cosine is positive. The mean conditional magnitude and orientation terms are 
+
+1.780 and +0 .084 for 30B, giving κ = 1 .865 . Orientation contributes only 4.5% . The 35B terms are 2.536 and −0.290 ,giving κ = 2 .246 . Mild alignment reduces sensitivity, but the conditional magnitudes remain large. The layerwise identity separates sensitivity into condi-tional magnitude and signed orientation. Figure S3 shows both terms at each native MoE layer. Conditional magnitude is the larger term in both models. Orientation changes the total sensitivity, but orientation alone does not determine sensitivity. 
+
+E.4 Finite Count Null 
+
+Appendix E.4 asks whether finite token counts alone explain observed native load. Finite counts create nonzero variation under uniform routing. Table S13 compares the observed native load with a count matched uniform routing null. Each simulated token selects k distinct experts uniformly. Every trial preserves token count, expert count, top k, and layer count. 012Conditional magnitude  Qwen3-VL-30B 
+
+> 0123
+
+Qwen3.5-35B     
+
+> 0.0 0.5 Signed orientation −1 0020 40 MoE layer 012Total  κl
+> 020 40 MoE layer 0123
+
+Figure S3: Native sensitivity is dominated by condi-tional magnitude. Conditional magnitude is CV 2 
+
+> I,l
+
++ CV 2
+
+> T,l
+
+.Signed orientation is −2 CV I,l CV T,l cos θl. Their sum is the exact total κl.                        
+
+> Model Profile Observed Null mean Ratio 30B Image .822 .0291 28.3 Text 1.051 .0370 28.4 Mixed .632 .0229 27.7 35B Image .997 .0418 23.8 Text 1.242 .0524 23.7 Mixed .820 .0327 25.1
+
+Table S13: Finite count null on the fresh 64 sample native probe. Rows identify each model and conditional or mixed profile. Columns report observed RMS CV, the mean across 10,000 count matched uniform routing trials, and their ratio. Trials preserve token counts, N , top k, and layer counts. Every observed load exceeds the null mean by more than 23 times. No simulated trial reaches an observed value. The conclusion applies to this count matched uniform routing null. 
+
+E.5 Fixed Profile Load Curves 
+
+Appendix E.5 asks how composition changes load when na-tive source profiles stay fixed. Figure S4 varies a while hold-ing those profiles fixed. 0.0 0.2 0.4 0.6 0.8 1.0 Image-token fraction a
+
+> 0.8 1.0 1.2 Fixed-profile RMS-CV  Qwen3-VL-MoE-30B Qwen3.5-MoE-35B
+
+Figure S4: Both native checkpoints have curved fixed profile load curves. Source conditional profiles are held fixed while composition changes. The vertical axis is aggregate RMS CV from true top 8 counts. Lower is better. Charcoal solid denotes 30B and green dashed denotes 35B; filled markers show the observed source ratios. Colors distinguish models in this panel. Both native checkpoints have curved fixed profile load functions. The figure measures composition sensitivity only and does not predict physical resolution changes. 
+
+E.6 Physical Resolution Sweep and Profile Drift 
+
+Appendix E.6 asks whether physical resolution follows the fixed profile prediction. Resolution can change both composi-tion and conditional profiles. Table S14 compares predictions with physical forwards on the same 64 samples. Pred. eval-uates fixed source profiles at measured a. Phys. is the actual forward, and Resid. is Phys. minus Pred. The 95% confidence interval (CI) is a paired bootstrap interval for physical RMS CV.                                 
+
+> Qwen3-VL-MoE-30B
+> Setting aPred. Phys. Resid. Phys. 95% CI Low .519 .645 .645 −.001 [.622, .695] Source .618 .632 .632 .000 [.613, .674] High .904 .745 .655 −.089 [.641, .679]
+> Qwen3.5-MoE-35B
+> Setting aPred. Phys. Resid. Phys. 95% CI Low .512 .837 .865 +.028 [.853, .913] Source .611 .820 .820 .000 [.808, .862] High .901 .921 .718 −.203 [.709, .741]
+
+Table S14: Fixed profile predictions and physical native model runs on 64 paired samples. Row groups identify mod-els, and rows identify resolution settings. Columns report image token fraction, predicted and physical RMS CV, their residual, and paired bootstrap intervals for physical RMS CV. The 30B physical curve is flatter than its fixed profile prediction. The 35B physical curve reverses the predicted increase at high resolution. Figure S5 visualizes the same comparison with paired bootstrap intervals. 0.65 0.70 0.75 RMS-CV 
+
+Qwen3-VL-30B      
+
+> 0.5 0.6 0.7 0.8 0.9 Observed image-token fraction a
+> 0.70 0.75 0.80 0.85 0.90 RMS-CV
+
+Qwen3.5-35B  
+
+> Fixed-profile prediction Physical forward
+
+Figure S5: Physical resolution changes composition and pro-files. Gray dashed hollow curves keep source profiles fixed. Green solid filled curves are physical forwards. Error bars are paired bootstrap 95% intervals over the 64 shared sam-ples. The 30B local load curve becomes flatter. Conditional profile change reverses the 35B prediction. The 30B physical curve becomes flatter. The 35B physical curve reverses the composition only trend. Conditional pro-file change is therefore material in the native physical sweep. Appendix E.7 identifies the exact drift terms. 
+
+E.7 Exact Profile Drift and Expert Preference 
+
+Appendix E.6 finds departures from fixed profile predictions. Appendix E.7 asks which exact term explains those depar-tures. Equation (S18) separates squared physical load into fixed profile load, drift magnitude, and interaction. In Table S15, Rpred is squared fixed profile RMS CV and 
+
+Rphys is squared physical RMS CV. D is squared profile change magnitude, and 2Cint is its interaction with the pre-dicted residual. Cos. (p, r ) is the cosine between predicted and profile change residuals. DI and DT are modality spe-cific squared drift terms. Error is the numerical residual of the exact identity.                                      
+
+> Model Setting Rpred D2Cint Rphys Cos. (p, r )
+> 30B Low .4165 .0044 −.0054 .4156 −.062
+> High .5548 .1899 −.3151 .4295 −.485
+> 35B Low .7002 .0109 +.0374 .7485 +.214
+> High .8478 .1769 −.5095 .5152 −.658
+> Model Setting DIDTError 30B Low .0041 .0003 0.0
+> High .1897 .0000 5.6×10 −17
+> 35B Low .0099 .0009 0.0
+> High .1757 .0001 1.1×10 −16
+
+Table S15: Exact native squared CV decomposition on 64 paired samples. Rows identify models and non source set-tings. Columns report fixed profile load, drift magnitude, interaction, physical load, residual orientation, modality spe-cific drift, and numerical identity error. The interaction is negative at both high resolution settings. The negative interaction flattens the 30B prediction and re-verses the 35B prediction. Image profile change accounts for most measured drift magnitude. Figure S6 asks how drift magnitude and interaction com-bine with fixed profile load at each non source setting. Low High Physical setting −0.5 0.0 0.5 Squared RMS-CV  Qwen3-VL-30B      
+
+> Low High Physical setting
+> Qwen3.5-35B
+> Fixed-profile Rpred
+> Drift D
+> Interaction 2Cint
+> Physical Rphys
+
+Figure S6: Conditional profile change can flatten or reverse composition only predictions. The legend separates fixed pro-file prediction, drift, interaction, and physical load. The inter-action sign determines reinforcement, flattening, or reversal. The negative interaction term explains why profile change can reduce physical load even when composition only load rises. 
+
+Expert preference. The main paper also asks whether na-tive experts show modality preference. Figure S7 measures each expert’s normalized image to text dispatch ratio on the earlier probe. Let fimg ,e be expert e’s normalized image dis-patch share. Let ftxt ,e be its normalized text dispatch share. A positive log 2(fimg ,e /f txt ,e ) means image preference, while a negative value means text preference. Absolute log ratio above one means more than twofold preference. In the 30B model, 67 of 128 experts receive more than twice as much dispatch from one modality as from the other. This count is 52% of the routed experts. In the 35B model, 156 of 256 experts satisfy the same rule. This count is 61%. Figure S7 shows the sorted expert ratios. 0 25 50 75 100 125 experts (sorted by modality preference) 010        
+
+> log 2 (fimg /ftxt ) Qwen3-VL-MoE-30B ( N= 128 , native), layer 40 050 100 150 200 250 experts (sorted by modality preference) −5 05
+> log 2 (fimg /ftxt ) Qwen3.5-MoE-35B ( N= 256 , native), layer 34
+
+Figure S7: Native experts show modality preference in the earlier 500 row probe. Signed log 2(fimg ,e /f txt ,e ) compares normalized image and text dispatch shares for expert e. Color marks an absolute log ratio above one. Counts are 67 of 128 for 30B and 156 of 256 for 35B. The result supports modality specialization, not universal complementarity. The expert level evidence supports modality specializa-tion in both native routers. The evidence does not establish universal strong complementarity. 
+
+E.8 Earlier 500 Row Probe with Different Preprocessing 
+
+Appendix E.8 asks whether the source gap pattern also ap-pears in an earlier 500 row probe. This probe uses 500 rows that contain text. Its preprocessing differs from the fresh 64 sample protocol. Table S16 reports its source profile statistics as a qualitative replication. 
+
+Model RMS CV I RMS CV T Cos. κ G2
+
+30B .696 .887 −.192 1.505 .294 35B .778 1.079 +.091 1.539 .314 
+
+Table S16: Earlier native 500 row probe under its original preprocessing. Rows identify native models. Columns report conditional RMS CV, median centered residual cosine, fixed profile curvature, and RMS ℓ2 conditional gap. Values are not pooled with the fresh 64 sample results. The earlier probe reproduces the orientation difference and nonzero conditional gaps. The earlier and fresh protocols use different preprocessing, so their values and CIs should not be pooled. The native results support the routing diagnosis and the fixed profile boundary. The native results do not test ReBA training on native MoEs.

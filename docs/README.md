@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-07</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-09</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 19 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-07 01:31:15 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-09 20:23:46 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共处理19篇论文，其中7篇精读、12篇速读，聚焦多模态学习前沿。</p>
-<p>最值得关注的是《UG-UMRE》提出的不确定性引导模态增强与分布校准，以及《PHA-Net》的层次对齐文本视频检索，均获9分以上高分。</p>
-<p>建议普通读者可延伸关注多模态大模型的反事实模态归因与跨模态融合偏差分析，理解模态选择与平衡问题。</p>
+<p>今日共读19篇论文，精读7篇、速读12篇，聚焦多模态与视觉-语言模型优化。最值得关注的是两篇9分精读：几何引导负载均衡提升视觉-语言MoE效率，线性多时间尺度保留机制降低记忆开销。后续可优先复现这两项方法，并顺带浏览速读中多模态融合与模态可靠性诊断的8分工作。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -76,7 +74,7 @@
     <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="UG-UMRE: Uncertainty-Guided Modality Augmentation and Distributional Calibration for Unified Multimodal Relation Extraction">UG-UMRE: Uncertainty-Guided Modality Augmentation and Distributional Calibration for Unified Multimodal Relation Extraction</span></li><li><span class="dpr-home-dashboard-paper-title" title="PHA-Net: Prototype-based Hierarchical Alignment Network for Text-Video Retrieval">PHA-Net: Prototype-based Hierarchical Alignment Network for Text-Video Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="RHEA: Reliability-Harmonized Reconstruction and Assignment for Robust Multimodal-Attributed Graph Clustering">RHEA: Reliability-Harmonized Reconstruction and Assignment for Robust Multimodal-Attributed Graph Clustering</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts">Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts</span></li><li><span class="dpr-home-dashboard-paper-title" title="Linear Multi-Timescale Retention as a Memory-Efficient Vision-Language Bridge">Linear Multi-Timescale Retention as a Memory-Efficient Vision-Language Bridge</span></li><li><span class="dpr-home-dashboard-paper-title" title="Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes">Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
@@ -89,7 +87,7 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs">Which Modality Decides? Counterfactual Modality Attribution for Multimodal LLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="Understanding and Overcoming Cross-modal Fusion Bias in Multimodal Anomaly Detection From A Fisher Information Perspective">Understanding and Overcoming Cross-modal Fusion Bias in Multimodal Anomaly Detection From A Fisher Information Perspective</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal domain adaptation under label shift and blockwise missing modalities">Multimodal domain adaptation under label shift and blockwise missing modalities</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DAIF: A Data-Driven Intermediate Fusion Framework for Multimodal Supervised Learning via Approximate Message Passing">DAIF: A Data-Driven Intermediate Fusion Framework for Multimodal Supervised Learning via Approximate Message Passing</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition">Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Rethinking Modality Reliability in Multimodal Sentiment Analysis with Incomplete Observations">Rethinking Modality Reliability in Multimodal Sentiment Analysis with Incomplete Observations</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
