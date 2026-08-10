@@ -1,0 +1,662 @@
+Title: DiffImaginE: Imagine to Verify Entity Types with Diffusio
+
+URL Source: https://arxiv.org/pdf/2608.03025v1
+
+Published Time: Wed, 05 Aug 2026 00:23:25 GMT
+
+Number of Pages: 12
+
+Markdown Content:
+# DiffImaginE: Imagine to Verify Entity Types with Diffusion 
+
+Feng Zhang 1,* , Feiyu Han 2,* , Rongxin Yang 3,* , Yang Liu 2, Yancheng Chen 2
+
+Rui Wang 4, Yingguang Yang 5, Tian Xueyun 2, Chongyang Zhang 6,7 , Hao Zheng 6
+
+Xu Kefu 3, Congjing Ran 8, Fuhai Chen 1, Bin Chong 3,†        
+
+> 1Fuzhou University; 2Chinese Academy of Sciences; 3Peking University; 4Alibaba Group
+> 5University of Science and Technology of China; 6Fullive Innovation (Beijing) AI Technology Co., Ltd.; 7Baidu; 8Wuhan University
+> *Equal contribution. †Corresponding author: chongbin@pku.edu.cn
+
+# Abstract 
+
+Multimodal named entity recognition (MNER) determines, for each candidate span, whether an entity-type hypothe-sis is supported by the joint textual and visual evidence. Existing imagine-and-compare verifiers typically map each 
+
+(span , type ) pair to a single predicted visual feature and com-pare it with the observed image representation. Such determin-istic imagination compresses the diverse visual realisations of an entity type into one prototype, making the verifier brittle when the same type appears through substantially different vi-sual cues. Moreover, the resulting compatibility score lacks a probabilistic interpretation and provides only indirect supervi-sion for rejecting confusable type hypotheses. We propose DiffImaginE , which formulates MNER type verification as conditional latent diffusion inference. Given span-localised visual evidence, a type-conditioned denoiser predicts the noise injected into its standardised latent repre-sentation. The resulting denoising error provides an ELBO-consistent surrogate for the type-conditional negative log-likelihood, enabling different type hypotheses to be compared according to how well they explain the observed evidence. Dif-fImaginE preserves a standard multimodal encoder stack and replaces only the deterministic verifier with a classifier-free-guided diffusion scorer trained using Min-SNR weighting. To bridge generative likelihood estimation and discriminative pre-diction, we directly supervise per-type diffusion scores as clas-sification logits, learn to aggregate evidence across noise lev-els, and use antithetic sampling to reduce Monte-Carlo com-parison variance. Our theoretical analysis shows that classifier-free guidance sharpens the induced type posterior and charac-terises when antithetic pairing yields lower variance at equal denoiser cost. Experiments on Twitter-2015 and Twitter-2017 show that DiffImaginE consistently improves over a matched deterministic ImaginE control under the same encoder, auxil-iary objectives, and evaluation protocol, with further support from ablations and paired significance tests. 
+
+# 1 Introduction 
+
+Named entity recognition (NER) on social-media text is chal-lenging because posts are often short, noisy, and lexically am-biguous. Multimodal NER (MNER) uses accompanying im-ages to resolve such ambiguity. For example, “Jordan dropped 40” may refer to a person, a brand, or another entity, while the associated image can reveal whether “Jordan” denotes an ath-lete, an organisation, or a miscellaneous entity [Moon et al., 2018, Zhang et al., 2018, Lu et al., 2018]. A widely adopted formulation therefore enumerates candidate spans and verifies whether each proposed entity type is compatible with the joint text–image context [Yu et al., 2020, Chen et al., 2022, Wang et al., 2022]. Under this formulation, verification is central: the encoders provide contextualised multimodal representations, but the final decision depends on the compatibility assigned to each (span , type ) hypothesis. Prior work commonly performs verification through imag-ination . Given a span and candidate type, a predictor synthe-sises the visual feature expected under that hypothesis, and a comparator measures its agreement with the observed evi-dence [Chen et al., 2022, Xu et al., 2022]. Although intuitive, this deterministic formulation compresses the diverse visual realisations of a type into a single imagined point. A PER men-tion may appear as a frontal face, profile, distant figure, or ac-tion scene, while an ORG mention may be supported by a logo, storefront, uniform, or advertisement. A single prototype can-not adequately capture such intra-type variation, particularly for heterogeneous and visually overlapping categories such as 
+
+MISC .Moreover, deterministic compatibility scores provide no ex-plicit likelihood interpretation. They measure resemblance to one imagined feature, but not how plausibly the observed evi-dence can be explained under each competing type. Negative hypotheses therefore receive mainly indirect contrastive pres-sure, allowing related types to obtain similarly high scores. A more suitable verifier should instead ask: under which type hy-pothesis is the observed span-localised visual evidence most plausible? 
+
+Diffusion models offer a natural mechanism for this com-parison. A conditional denoiser trained across multiple cor-ruption levels models a distribution of possible observations rather than a single representative point. Its expected class-conditional denoising error can be interpreted as a negative variational bound on the conditional log-likelihood, enabling classification by comparing reconstruction errors across hy-potheses [Li et al., 2023, Clark and Jaini, 2023]. However, existing diffusion classifiers mainly operate on full images. 1arXiv:2608.03025v1 [cs.AI] 4 Aug 2026 Applying them to MNER is non-trivial because the scored ob-ject is a low-dimensional, span-conditioned cross-modal latent whose scale changes with the jointly trained encoder, while the generative score must ultimately support discriminative span classification and rejection of the non-entity hypothesis. We propose DiffImaginE , a conditional latent diffusion ver-ifier for MNER. It preserves the standard text encoder, vi-sion encoder, and span–visual interaction modules, while re-placing deterministic imagination with type-conditioned dif-fusion scoring. For each candidate span, cross-attention ex-tracts span-localised visual evidence, which is standardised and corrupted with Gaussian noise. A shared denoiser predicts the injected noise under each candidate type, and the result-ing Min-SNR-weighted errors define type-specific verification scores. A NULL-conditioned branch further enables classifier-free guidance [Ho and Salimans, 2022, Hang et al., 2023]. DiffImaginE thus evaluates each hypothesis according to how well its conditional denoising process explains the same obser-vation. Because a generative likelihood surrogate is not necessar-ily an optimal discriminative classifier, we further adapt the scorer in three ways. We directly supervise per-type scores as classification logits, learn timestep aggregation weights to em-phasise discriminative noise levels, and use antithetic noise pairs to reduce Monte-Carlo comparison variance when the odd component dominates. The resulting scores are fused with the original multimodal representations by the final entity clas-sifier. DiffImaginE changes only the verification mechanism. Our matched ImaginE control uses the same encoders, span-localisation modules, auxiliary objectives, classifier head, op-timisation procedure, and decoding protocol, but retains de-terministic imagine-and-compare verification. This controlled comparison isolates the effect of replacing single-point imagi-nation with distributional diffusion scoring (Section 4.5). Our contributions are summarised as follows: • Diffusion-based type verification. We formulate MNER verification as conditional latent diffusion infer-ence, replacing single-point visual imagination with an ELBO-based distributional scorer. • Adaptation to multimodal span latents. We combine latent standardisation, span- and type-conditioned denois-ing, classifier-free guidance, and Min-SNR weighting for low-dimensional span-localised evidence. • Discriminative and variance-reduced scoring. We su-pervise diffusion scores as type logits, learn their aggre-gation across timesteps, and derive the condition under which antithetic estimation reduces comparison variance (Sections 3.7 and 3.9). • Controlled evaluation. Experiments on Twitter-2015 and Twitter-2017 show consistent improvements over a matched deterministic verifier, supported by ablations and paired tests. LOC           
+
+> PER
+> ORG
+> Type Feature space Evidence
+> collapse
+> LOC PER ORG
+> Traditional verifier
+> LOC
+> PER
+> ORG
+> Type Feature space Evidence
+> LOC PER ORG
+> Diffimgin E（ours ）
+
+z 𝜖 
+
+> Noise
+> Denoise
+> imagined point
+> action pose
+> frontal face
+> profile face
+> PER
+
+Figure 1: DiffImaginE replaces single-point imagine-and-compare verification with type-conditioned denoising on span-localised visual evidence: each type is scored by its denoising error, which better sep-arates confusable hypotheses when visual evidence for a type is di-verse. 
+
+# 2 Preliminaries 
+
+We introduce the span-level MNER formulation, the visual ev-idence scored by DiffImaginE, and the diffusion-classifier es-timator underlying our verifier. 
+
+## 2.1 Multimodal NER and Span-Level Type Ver-ification 
+
+An MNER instance consists of a token sequence x =(x1, . . . , x L) and an image m. The task is to iden-tify all entity spans and assign each a type from 
+
+Y = {PER , LOC , ORG , MISC }. Following the enumerate-and-verify formulation, we enumerate candidate spans s = ( i, j )
+
+satisfying 1 ≤ i ≤ j ≤ L and j − i + 1 ≤ W , and classify each into one of K = |Y| + 1 = 5 labels, including the non-entity class O. Thus, the verifier jointly determines whether a candidate is an entity and, if so, its type. 
+
+## 2.2 Span-Localised Visual Evidence 
+
+A text encoder (RoBERTa [Liu et al., 2019]) produces contex-tual token states, while a vision encoder (CLIP-ViT [Radford et al., 2021, Dosovitskiy et al., 2020]) produces global and patch-level image features. Both are projected into a shared 
+
+d-dimensional space. Boundary-aware pooling yields a span representation s ∈ Rd, which attends over the image patches to produce span-localised visual evidence zv 
+
+> s
+
+∈ Rd [Vaswani et al., 2017, Chen et al., 2022]. DiffImaginE scores type hy-potheses against zv 
+
+> s
+
+; all upstream encoders and interaction modules are shared with the deterministic baseline. 
+
+## 2.3 Diffusion Models and the Diffusion Classi-fier 
+
+We use a variance-preserving DDPM [Ho et al., 2020, Nichol and Dhariwal, 2021] with T steps and cosine schedule 
+
+{¯αt}T −1 
+
+> t=0
+
+. Given a clean latent v ∈ Rd, the forward process is 
+
+vt = √¯αt v + √1 − ¯αt ϵ, ϵ ∼ N (0 , I ), (1) 2Vision              
+
+> Encoder
+> Text
+> Encoder
+> Cross -Attention
+> Diffusion
+> Verifier
+> Score
+> Classifier
+> sz
+> PER LOC ORG
+> Diffusion Verifier
+> z
+> Add noise
+> t1tk𝜖
+> Type embedding
+> PER LOC ORG
+> Null embedding
+> （unconditional ）
+> Shared Denoising
+> Score
+> LOC PER ORG
+> （Text input ）
+> Jordan dropped 40
+
+Figure 2: DiffImaginE pipeline: cross-attention yields span represen-tation s and span-localised visual evidence z; the diffusion verifier scores each type by type-conditioned denoising (with a NULL branch for classifier-free guidance), and the classifier fuses these scores with multimodal features for the final prediction. 
+
+where a conditional denoiser ϵθ (vt, c, t ) predicts the injected noise under condition c. The corresponding signal-to-noise ra-tio is SNR( t) = ¯ αt/(1 − ¯αt).A diffusion classifier [Li et al., 2023, Clark and Jaini, 2023] evaluates class hypothesis k through its expected denoising error: 
+
+err k = Et,ϵ 
+
+[
+
+w(t) ∥∥ϵ − ϵθ
+
+(√¯αtv + √1 − ¯αtϵ, ck, t )∥ ∥22
+
+]
+
+.
+
+(2) With an appropriate w(t), err k corresponds to the negative ELBO of log pθ (v | ck) up to a class-independent constant, so lower error indicates a more likely class [Kingma et al., 2021, Ho et al., 2020]. DiffImaginE sets v = zv 
+
+> s
+
+and uses the composite condi-tion ck = ( s, ek), yielding the denoiser ϵθ (vt, s, ek, t ). The resulting error measures how well type k explains the visual evidence associated with span s. We estimate the expectation by Monte-Carlo sampling over (t, ϵ ), writing err k,n for an in-dividual estimate and err k for the aggregate. 
+
+# 3 The DiffImaginE Model 
+
+## 3.1 Overview 
+
+DiffImaginE replaces the deterministic imagine-and-compare verifier with the conditional diffusion scorer of Equation (2). For each valid span, span–visual cross-attention produces 
+
+zv 
+
+> s
+
+, which is standardised (Section 3.2), scored under all K
+
+type hypotheses (Section 3.4), and fused with textual and vi-sual representations for final classification (Figure 2). Reverse imagination and the visual-relevance gate are inherited un-changed from ImaginE and detailed in the technical appendix. Padding and invalid spans are masked from all diffusion for-wards. 
+
+## 3.2 Latent Standardisation 
+
+The signal scale of zv 
+
+> s
+
+is set by the encoder, not by the diffusion schedule, so a cosine schedule calibrated for unit-variance data is mismatched on a raw, low-dimensional cross-modal latent. Before diffusion we estimate a per-dimension mean μ and standard deviation σ of zv 
+
+> s
+
+over a calibration set of training batches and operate the diffusion process on the standardised latent v = ( zv 
+
+> s
+
+− μ) ⊘ σ, mirroring the la-tent scaling of latent diffusion models [Rombach et al., 2022]. Because the encoder drifts during joint training, (μ, σ) are re-estimated after the denoiser warmup and periodically there-after, so the SNR curve tracks the live encoder. Unlike image diffusion, the scored object here is a d-dimensional span sum-mary rather than a spatial field, so miscalibrated scale directly distorts the relative noise levels at which types are compared. We treat standardisation as a prerequisite for stable scoring and isolate its effect in the no_latent_norm ablation. 
+
+## 3.3 Type-Conditioned Denoiser 
+
+The denoiser ϵθ (vt, s, ek, t ) is an adaptive-LayerNorm (AdaLN) Transformer/MLP block [Peebles and Xie, 2023]: the timestep embedding and the type embedding ek are mapped to per-layer scale/shift parameters that modulate the normalised activations, while the span representation s enters as an input feature. The type-embedding table has K + 1 
+
+rows: K rows for the supervised classes (including O) and one extra NULL row e∅, the unconditional embedding used for classifier-free guidance (Section 3.4). The NULL row is a guidance device, distinct from the O class, which is a genuine type hypothesis the scorer must rank. The AdaLN projection is half-zero-initialised so the type condition has a small but non-zero effect from the first step, avoiding a long regime in which the conditioning signal is silenced. 
+
+## 3.4 Classifier-Free-Guided ELBO Scoring 
+
+For span s with standardised evidence v, the per-type error of Equation (2) is estimated by Monte-Carlo over timesteps and noise. Following classifier-free guidance [Ho and Salimans, 2022, Dhariwal and Nichol, 2021], we also evaluate the de-noiser under the NULL condition e∅ and form a guided score with guidance scale g ≥ 0:
+
+err ∅ = Et,ϵ 
+
+[w(t) ∥ϵ − ϵθ (vt, s, e∅, t )∥22
+
+], (3) 
+
+score (g) 
+
+> k
+
+= −(err k − g (err ∅ − err k))
+
+= −(1 + g) err k + g err ∅. (4) The same noise sample ϵ is shared across all K+1 hypothe-ses at each (t, s ), so comparisons differ only through the de-noiser response. Training draws timesteps by stratified sam-pling over M strata of [0 , T ); evaluation stacks a fixed set of N timesteps in [tlo , t hi ] into one batched forward. The re-sulting errors err (g) 
+
+> k,n
+
+= (1 + g)err k,n − gerr ∅,n are aggre-gated as score k = − ∑ 
+
+> n
+
+w(tn/T )err (g)
+
+> k,n
+
+. Because err ∅ is type-independent, g acts as a posterior-sharpening factor in the idealised ELBO regime (Proposition 1). 
+
+## 3.5 Min-SNR Weighting and the Denoising Ob-jective 
+
+The denoiser is trained with a denoising score-matching loss weighted per timestep by the Min-SNR-γ rule [Hang et al., 32023], which equalises the gradient contribution across noise levels by clipping the SNR weight at γ:
+
+Ldiff = Et,ϵ 
+
+[ wγ (t) ∥ϵ − ϵθ (vt, s, ey , t )∥22
+
+],wγ (t) = min(SNR( t), γ )SNR( t) , (5) where y is the gold type of the span ( O is a valid supervised type, so the score on O is well-defined at test time). With probability pcf the gold condition ey is replaced by e∅ dur-ing training, which fits the unconditional denoiser branch that classifier-free guidance contrasts against in Equation (4). The classifier scores and Ldiff are produced by a single fused de-noiser forward per Monte-Carlo step. 
+
+## 3.6 Training Objectives 
+
+The verifier and encoder are trained jointly. The primary term is class-weighted cross-entropy Ltask , with a lower weight for O to mitigate span-enumeration imbalance. The diffusion path adds Ldiff (Equation (5)) and a score-level contrastive loss Lico over entity spans within the evaluation timestep window. Reverse-imagination alignment, VICReg regularisa-tion [Bardes et al., 2021], BIO supervision, cross-modal In-foNCE [Oord et al., 2018, Radford et al., 2021], grounding, type ranking, and hard-example objectives are inherited by both DiffImaginE and the deterministic control. Their defini-tions and weights are deferred to the technical appendix, en-suring that the main comparison isolates the verifier. 
+
+## 3.7 From a Generative Score to a Discrimina-tive Scorer 
+
+A bare ELBO score is a generative quantity used as a discrimi-native feature, which is known to be suboptimal as a classifier. DiffImaginE closes this gap with three independent compo-nents. 
+
+Likelihood-based classification objective. We supervise the per-type scores directly : treating score k as a logit, Lclf is a cross-entropy over all K types (including O) with a learnable temperature τclf ,
+
+Lclf = CE (softmax k(score k/τ clf ), y ), (6) which aligns the ordering of the scores with the gold type dur-ing training, so the scores are trained as classification logits rather than read off a frozen generative model [Xian et al., 2024]. We parameterise τclf = exp( θτ ) to keep it positive, initialised so that τclf = 0 .1.
+
+Learnable timestep aggregation. The score-side weighting 
+
+w(t) of Equation (2) is left unspecified by the ELBO up to the variational choice; we instantiate it as a learned aggre-gation. Instead of a uniform mean over the active timesteps, a tiny zero-initialised network maps the normalised timestep 
+
+t/T to a logit, and the per-timestep errors are aggregated with the resulting softmax weights; zero initialisation makes the aggregation identical to a uniform mean at start-up, after which the model up-weights the most discriminative noise lev-els [Jeong et al., 2025]. This weight is distinct from the Min-SNR loss weight wγ (t) of Equation (5): the former shapes the evaluation-time score, while wγ (t) acts only on Ldiff .
+
+Antithetic variance reduction. The Monte-Carlo noise is drawn in same-timestep pairs (ϵ, −ϵ). Because the type-discriminative part of the score is, to leading order, odd in 
+
+ϵ and shared across types, antithetic pairing lowers the vari-ance of the per-timestep type comparison relative to an i.i.d. estimator of equal cost when the odd error component domi-nates [Jia et al., 2026]; Proposition 2 makes the condition pre-cise. Finally, a score LayerNorm with a learnable temperature rescales the K score channels so they are not dwarfed by the 
+
+d-dimensional representations when fused in the classifier. 
+
+## 3.8 Decoding 
+
+At test time, weighted-interval-scheduling dynamic program-ming selects the maximum-confidence non-overlapping span set in O(S log S) time, where S = O(LW ). A span is ac-cepted only when its best entity logit exceeds the O logit and its diffusion margin max k̸ =O score k − score O exceeds an ab-stention threshold. The guidance scale and both margins are tuned on the development set and reused unchanged for strict test F1; greedy decoding is retained only as an ablation. 
+
+## 3.9 Theoretical Analysis 
+
+We state two results about the scorer; both are proved in the technical appendix. The first relates guided scoring to a tem-pered posterior under an idealised uniform type prior; in train-ing, the empirical dominance of O is handled by class weight-ing in Ltask and the classifier head rather than inside the score layer. The second compares antithetic and i.i.d. estimators of the type-difference score. 
+
+Assumption 1 (ELBO-consistent weighting) . We adopt the standard diffusion-classifier modelling assumption [Ho et al., 2020, Kingma et al., 2021, Li et al., 2023]: the timestep weighting w(t) in Equation (2) is the variational weighting under which err k equals the negative variational bound on 
+
+log pθ (v | s, ek), and the gap between this bound and the exact log-likelihood, together with the prior and reconstruc-tion terms and the entropy of the forward process, is folded into a constant C independent of the type k. We thus treat 
+
+err k = − log pθ (v | s, ek) + C as the operative model rather than an exact identity. 
+
+Proposition 1 (Guided score is a tempered posterior) . Under Assumption 1 and a uniform prior over the K types, the un-guided score score k = −err k satisfies softmax k(score k) = 
+
+pθ (ek | v, s), so arg max k score k is the Bayes-optimal type and softmax k(score k/τ ) is a temperature-τ posterior esti-mate. For guided scoring, with any guidance scale g ≥ 0 and 
+
+4temperature τ > 0, the classifier-free-guided score of Equa-tion (4) satisfies 
+
+softmax k
+
+(score (g) 
+
+> k
+
+/τ ) = softmax k
+
+(score k/ τ
+
+> 1+ g
+
+)
+
+∝ pθ (ek | v, s)(1+ g)/τ .
+
+(7) 
+
+That is, guidance and temperature combine into a single ef-fective exponent (1 + g)/τ on the posterior: increasing g (or lowering τ ) sharpens the type distribution, while decreasing 
+
+g (or raising τ ) flattens it, with no effect on the arg max . At 
+
+τ = 1 the guided score is exactly the posterior raised to the power 1 + g.
+
+The proof is the diffusion-classifier ELBO identity followed by the observation that err ∅ is type-independent and hence cancels inside the softmax, leaving an exact rescaling of the logits by 1 + g. This reading motivates the dev-tuning grid for 
+
+g and the choice of −err k as the initial logit parameterisation in Equation (6). We next evaluate whether the resulting scorer improves MNER in practice. 
+
+Assumption 2 (Square-integrable, symmetric noise) . The noise ϵ ∼ N (0 , I ) is symmetric ( ϵ d
+
+= −ϵ), and for a fixed timestep t and span s the per-sample squared errors ϕk(ϵ) = 
+
+∥ϵθ (√¯αtv + √1 − ¯αt ϵ, s, ek, t ) − ϵ∥22 are square-integrable for every k.
+
+Proposition 2 (Antithetic variance reduction) . Fix t and a type pair (k, j ), and let f (ϵ) = ϕk(ϵ) − ϕj (ϵ) be the single-sample type-difference, with even/odd parts fe(ϵ) = 12 (f (ϵ) + 
+
+f (−ϵ)) and fo(ϵ) = 12 (f (ϵ) − f (−ϵ)) . Under Assumption 2, the antithetic estimator ̂ D anti = 12 (f (ϵ) + f (−ϵ)) and the two-sample i.i.d. estimator ̂ D iid = 12 (f (ϵ(1) ) + f (ϵ(2) )) use the same number of denoiser evaluations and are both unbi-ased for E[f ] = err k − err j , with 
+
+Var (̂ D anti ) = Var( fe),
+
+Var (̂ D iid ) = 12
+
+(Var( fe) + Var( fo)). (8) 
+
+Hence Var( ̂ D anti ) ≤ Var( ̂ D iid ) if and only if Var( fe) ≤
+
+Var( fo): the antithetic estimator achieves lower variance pre-cisely when the odd component carries at least as much variance as the even one. A first-order expansion of the de-noiser about ϵ = 0 shows the odd part of f is dominated by 
+
+−2⟨ϵ, ak − aj ⟩, with ak = ϵθ (√¯αtv, s, ek, t ). The criterion therefore holds when the inter-type gap ak − aj is large rel-ative to the denoiser’s local sensitivity to ϵ. Proofs and the termwise aggregation argument are in the technical appendix. 
+
+# 4 Experiments 
+
+Having specified the scorer (Section 3) and stated its theoret-ical properties (Section 3.9), we ask whether diffusion-based type verification improves MNER over deterministic imagi-nation and whether the ablations match those properties. We evaluate on Twitter-2015 and Twitter-2017; the protocol is summarised in Section 4.5. 
+
+## 4.1 Datasets 
+
+We evaluate on the two standard Twitter-MNER benchmarks (Table 1). The text splits follow the canonical UMT re-lease [Yu et al., 2020]; the accompanying images follow the HVPNeT distribution [Chen et al., 2022]. The data-preparation pipeline pins the upstream mirror to a fixed com-mit and verifies a golden SHA-256 of every split file, so any silent drift raises an error rather than changing the numbers.          
+
+> Table 1: Datasets used in the protocol. Entity types are
+> PER /LOC /ORG /MISC .
+
+Dataset Train Dev Test Types 
+
+Twitter-2015 4,000 1,000 3,257 4Twitter-2017 3,373 723 723 4
+
+## 4.2 Main Results 
+
+Table 2 reports strict precision/recall/ F1 on both benchmarks for published baselines, the matched ImaginE control, and Dif-fImaginE. The primary contrast is DiffImaginE vs. ImaginE (Section 4.5); per-type F1 and a paired test appear in Table 3. On Twitter-2015, DiffImaginE improves over ImaginE by 
+
++1 .73 strict F1 (77 .17 vs. 75 .44 ), driven mainly by higher precision ( 77 .41 vs. 76 .32 ) and recall ( 76 .93 vs. 74 .58 ). On Twitter-2017, swapping the ImaginE verifier for the diffusion scorer raises strict F1 from 87 .72 to 88 .44 (+0 .72 ), with preci-sion rising from 86 .60 to 87 .72 and recall from 88 .86 to 89 .16 .The paired per-type test in Table 3 rejects the null at p = 0 .032 ,so the gain is statistically significant at the 0.05 level. Because DiffImaginE and ImaginE share the same encoder and train-ing recipe (Section 4.5), we attribute the improvement to the verifier. DiffImaginE also reaches the best listed F1 on both datasets ( 77 .17 on Twitter-2015 and 88 .44 on Twitter-2017); published baselines use different encoders and fusion designs and are shown for context only. The larger Twitter-2015 mar-gin suggests that diffusion scoring helps most when visual ev-idence is noisier and single-point imagination is brittle. 
+
+## 4.3 Per-Type Results 
+
+Table 3 breaks down the Twitter-2017 contrast from Sec-tion 4.2. The paired test compares DiffImaginE and ImaginE on the same training seeds; it rejects the null at p = 0 .032 .Gains concentrate on PER (92 .76 to 93 .91 ), where faces pro-vide strong visual cues, and on ORG (85 .44 to 86 .24 ), where logos and brand imagery help disambiguation. LOC is un-changed ( 87 .12 vs. 87 .08 ), and MISC improves only slightly (75 .06 to 75 .84 ), remaining the hardest type because of high visual and lexical diversity. The per-type pattern is consistent with the diffusion scorer exploiting diverse visual evidence rather than a single imagined feature vector. 
+
+## 4.4 Qualitative Case Study 
+
+Figure 3 visualises how DiffImaginE maps localised visual ev-idence to a type decision. The input establishes disambiguat-5Table 2: Main results: span-level strict precision (P), recall (R), and F1 (%) on the two Twitter-MNER benchmarks. Published baselines are cited from their original papers; a dash marks a value not reported in the source. ImaginE and DiffImaginE (below the rule) are, respectively, our matched deterministic control and our full model, which differ only in the verifier. DiffImaginE (last row) is shown in bold; the best value in each column is likewise in bold. 
+
+Twitter-2015 Twitter-2017 Method P R F1 P R F1 
+
+UMT [Yu et al., 2020] 71.67 75.23 73.41 85.28 85.34 85.31 Co-attention [Zhang et al., 2018] 69.87 74.59 72.15 85.13 83.20 84.10 HVPNeT [Chen et al., 2022] 73.87 76.82 75.32 85.84 87.93 86.87 MAF [Xu et al., 2022] 71.86 75.10 73.42 86.13 86.38 86.25 De-Bias [Zhang et al., 2023] 74.45 76.13 75.28 87.59 86.11 86.84 SMNER [Zhou et al., 2022] 75.34 76.81 76.06 88.15 87.47 87.81 VEC-MNER [Wei et al., 2024] 74.56 75.23 74.89 87.42 87.61 87.51 SEPA [Ding et al., 2025] 74.71 76.84 75.76 87.50 87.05 87.27 ImaginE (ours, deterministic) 76.32 74.58 75.44 86.60 88.86 87.72 
+
+DiffImaginE (ours) 77.41 76.93 77.17 87.72 89.16 88.44 Table 3: Per-type strict F1 (↑) on Twitter-2017 and the paired DiffImaginE-vs-ImaginE test. DiffImaginE (last row) is shown in bold; the best value per type is likewise in bold.                 
+
+> Method PER LOC ORG MISC paired p
+> ImaginE (ours, deterministic) 92.76 87.12 85.44 75.06 0.032
+> DiffImaginE (ours) 93.91 87.08 86.24 75.84 0.032
+
+ing comic context for the person-like mention “Donald Duck.” The span–visual attention (SVA) panel answers where the model looks: the shared encoder grounds the span in charac-ter and comic regions, but attention does not assign a label. The prediction rows hold this evidence constant and isolate the verifier: ImaginE’s single imagined-feature match returns 
+
+PER , whereas DiffImaginE recovers MISC . The five-cell bar answers which type the evidence supports. Each cell schemat-ically gives the normalised contribution from one fixed noise level to the aggregated MISC -over-PER margin; darker blue means stronger positive support. Learned weighting combines these probes into a MISC -favouring signal that helps the fused classifier overcome the person-name prior. Together, the pan-els expose two advantages: multi-noise validation across com-plementary signal-to-noise regimes and likelihood-based com-parison of how well competing type-conditioned denoisers ex-plain the observed latent. Unless noted, ablation and budget-sweep rows are means over three seeds, whereas Table 2 reports the single selected operating point (EMA weights at the best-dev threshold); the two are therefore not directly comparable digit-for-digit, which also explains why no_diffusion (87 .71 ) and the ImaginE control in Table 2 ( 87 .72 ) differ by 0.01 . Removing the diffusion verifier entirely ( no_diffusion ) causes the largest drop, from 88 .78 to 87 .71 (−1.07 F1), confirming that the gain comes from the scorer rather than the shared stack. Score normalisation ( 88 .09 ), Min-SNR weighting ( 88 .10 ), and the antithetic estimator ( 88 .14 ) each cost about 0.6 to 
+
+0.7 F1 when removed, matching the roles identified in Sec-tions 3.7 and 3.9; classifier-free guidance ( 88 .38 ), learnable Carl Barks panel of Donald Duck demonstrating his negotiation skills.       
+
+> Gold: (1) Donald Duck [MISC]
+> ImaginE: (1) Donald Duck [PER]
+> DiffImaginE: (1) Donald Duck [MISC]
+> 5-step verifier (MISC − PER)
+> t=0 T
+> Model input SVA attention
+
+Figure 3: From evidence localisation to type verification. The input supplies disambiguating context, SVA shows where mention-relevant evidence is localised, and the prediction rows contrast single-point ImaginE with DiffImaginE. The five cells schematically show fixed-noise contributions to the MISC -over-PER margin; learned aggrega-tion produces the final verification signal, with darker blue denoting stronger positive support. 
+
+timestep aggregation ( 88 .42 ), and the contrastive score term 
+
+Lico (88 .21 ) matter less on Twitter-2017. we treat this as seed noise on one dataset and keep both terms for their ben-efit on Twitter-2015 and in per-type behaviour. The technical appendix reports the same ablation variants on Twitter-2015 over the same seeds, where no_diffusion again yields the largest drop. The evaluation-budget sweep (Table 5) shows that strict 
+
+F1 is essentially flat in the number of evaluation timesteps (between 88 .47 and 88 .71 for N from 1 to 20 ), so a small Monte-Carlo budget already captures most of the score signal and the verifier can be run cheaply at test time. The warmup-length sweep favours a moderate schedule, with ten warmup 6Table 4: Ablation results on Twitter-2017 (strict F1, ↑). Each variant is the mean over three seeds (42/43/44). Bold marks the reference configuration ( main ) and the highest F1 among variants. 
+
+## Variant F1 Variant F1 main 88.78 no_clf_diffusion 88.68 no_latent_norm 88.58 no_learnable_tw 88.42 g_fixed_1 88.40 no_warmup 88.39 no_cfg 88.38 no_l_ico 88.21 greedy_decode 88.17 no_antithetic 88.14 no_min_snr 88.10 no_score_norm 88.09 no_diffusion 87.71                          
+
+> Table 5: Evaluation-budget sweep on Twitter-2017: strict F1as a function of the number of evaluation timesteps Nand of the diffusion warmup length. The best value in each sweep row is in bold.
+> Sweep Setting
+> N(eval timesteps) 12510 20 strict F188.66 88.61 88.47 88.50 88.71
+> warmup epochs 510 20 strict F188.19 88.58 88.44
+
+epochs ( 88 .58 ) ahead of five ( 88 .19 ); together with the abla-tion grid, these results trace the empirical gains back to the diffusion scorer and to the training choices analysed in Sec-tions 3, 3.7 and 3.9. At inference, verifier cost scales linearly with the number of candidate spans, types scored, and evalua-tion timesteps; antithetic evaluation doubles the denoiser for-wards relative to a single-noise draw but stabilises type rank-ing, which is why Table 5 reports similar F1 for small N . Seed-controlled mechanism plots in the technical appendix show that gold-type score channels separate entity from non-entity spans, that mid-range noise yields the lowest reconstruction error for the correct type, and that antithetic pairing reduces score variance at fixed forward budget. 
+
+## 4.5 Experimental Setup 
+
+All experiments follow a fixed and reproducible protocol. 
+
+Baselines. We report two baseline families. Published base-lines include representative MNER methods: UMT [Yu et al., 2020], co-attention [Zhang et al., 2018], OCSGA [Wu et al., 2020], RpBERT [Sun et al., 2021], HVPNeT [Chen et al., 2022], ITA [Wang et al., 2022], and MAF [Xu et al., 2022]. Our control baseline, ImaginE , is a deterministic reimple-mentation of imagine-and-compare verification. It shares the encoder stack, auxiliary objectives, classifier head, and reg-ularisation with DiffImaginE, including R-Drop [Wu et al., 2021] and augmentation-aware consistency, and differs only in the verifier. This controlled comparison isolates the effect of diffusion-based scoring. 
+
+Metrics. We report span-level strict-match precision, recall, and F1, where a prediction is correct only when both its bound-aries and type match the gold annotation. Per-type F1 is also reported, with strict F1 as the primary metric. Evaluation uses a fixed Monte-Carlo seed, making repeated evaluation of the same checkpoint deterministic. Ablations and matched com-parisons use training seeds 42 /43 /44 and paired tests with multiple-comparison correction. The main table reports the EMA checkpoint and threshold selected on the development set, while ablations and budget analyses report averages across seeds. 
+
+Implementation. The model uses RoBERTa-base and CLIP-ViT-B/32 projected to a shared width d. The diffusion verifier adopts a cosine schedule with T = 1000 , M strati-fied training samples, N evaluation timesteps within a selected window, classifier-free dropout pcf , guidance scale g, and Min-SNR clip γ. Training uses AdamW [Loshchilov and Hutter, 2017], separate learning rates for pretrained and newly intro-duced modules, linear warmup, AMP, EMA, and distributed data parallelism. Antithetic sampling uses paired noise (ϵ, −ϵ):it preserves the training budget but increases evaluation from 
+
+N to 2N denoiser forwards, and can be disabled for an N -forward budget. Diffusion hyperparameters and decoding mar-gins are selected on the development set and fixed for test evaluation; the full search space is provided in the technical appendix. 
+
+# 5 Related Work 
+
+Prior MNER systems improve encoding and fusion through co-attention [Moon et al., 2018, Zhang et al., 2018, Lu et al., 2018], unified multimodal transformers with span-detection auxiliaries [Yu et al., 2020], object-level and relation-propagation attention [Wu et al., 2020, Sun et al., 2021], and hierarchical visual prefixes with alignment objec-tives [Chen et al., 2022, Wang et al., 2022, Xu et al., 2022]. DiffImaginE is complementary: it leaves the encoder stack unchanged and modifies only the per-(span, type) verification rule. A parallel line within MNER replaces the verifier with de-terministic imagination: given a span and a type, the model predicts a single visual feature vector and scores agreement with the observation [Chen et al., 2022, Xu et al., 2022]. This design is fast but cannot represent multimodal visual realisa-tions of a type and offers no likelihood interpretation of the score. Our ImaginE control reimplements this paradigm with the same encoders and losses as DiffImaginE, which makes the diffusion-versus-deterministic comparison in Section 4.2 and Table 4 a direct test of the verification rule rather than of the surrounding MNER stack. Diffusion models generate data by iterative denoising [Sohl-Dickstein et al., 2015, Ho et al., 2020, Song and Ermon, 2019, Song et al., 2020, Nichol and Dhariwal, 2021, Kingma et al., 2021] and support classifier-free guidance [Dhariwal and Nichol, 2021, Ho and Salimans, 2022]. A related line 7treats class-conditional denoising error as a zero-shot classi-fier [Li et al., 2023, Clark and Jaini, 2023]; likelihood-based discriminative objectives and learned timestep weightings re-cover much of the gap over bare ELBO scores [Xian et al., 2024, Jeong et al., 2025], and antithetic noise pairing reduces estimator variance [Jia et al., 2026], an effect we formalise in Proposition 2. DiffImaginE applies these ideas to span-conditioned cross-modal latents in structured MNER. 
+
+# 6 Conclusion 
+
+DiffImaginE recasts multimodal NER type verification as con-ditional latent diffusion, scoring each type hypothesis by how well a type-conditioned denoiser reconstructs noise injected into span-localised visual evidence. We supervise the scores as classification logits, learn how to aggregate errors across timesteps, and estimate expectations antithetically; two propo-sitions in Section 3.9 justify guidance as posterior sharpening and antithetic pairing as variance reduction at fixed cost under an even/odd criterion. A matched ImaginE control attributes the observed gains to the diffusion verifier rather than to en-coder or fusion changes. On Twitter-2015 and Twitter-2017 the diffusion scorer improves strict F1 over this control, with ablations and budget sweeps that trace the benefit to the veri-fier and to the design choices in Section 3.7. Results are limited to short-text, single-image Twitter posts, where the number of evaluation timesteps trades compute for score fidelity and where image quality varies widely. Natural next steps are multi-image or video evidence, open-vocabulary types, and applying the same span-conditioned diffusion veri-fier to other structured labelling tasks with visual context. 
+
+# Supplementary Material 
+
+This supplementary material contains the proofs of the two propositions together with the full loss, hyperparameter, and ablation-configuration specifications. Equation, proposition, and assumption numbers refer to the corresponding statements in the main paper. 
+
+# A Proof of Proposition 1 (Guided score is a tempered posterior) 
+
+Unguided score and Bayes posterior. Under the ELBO-consistent weighting assumption, for every type k and span 
+
+s the expected weighted denoising error equals the negative conditional log-likelihood up to a type-independent constant, 
+
+err k = − log pθ (v | s, ek) + C, (9) which is the diffusion-classifier identity [Li et al., 2023, Kingma et al., 2021]. With a uniform prior p(ek | s) = 1 /K ,Bayes’ rule gives 
+
+pθ (ek | v, s) = pθ (v | s, ek)
+
+∑ 
+
+> j
+
+pθ (v | s, ej )= exp( −err k + C)
+
+∑ 
+
+> j
+
+exp( −err j + C)= softmax k(score k),
+
+(10) since score k = −err k and the common factor eC can-cels. Therefore arg max k score k = arg max k pθ (ek | v, s)
+
+is the Bayes-optimal type, and softmax k(score k/τ ) is the temperature-τ posterior. 
+
+Guidance as a temperature. The guided score satisfies 
+
+score (g) 
+
+> k
+
+= −(1 + g) err k + g err ∅. The term g err ∅ is in-dependent of k, so it is an additive constant inside the softmax and cancels: 
+
+softmax k
+
+(score (g) 
+
+> k
+
+/τ ) = softmax k
+
+( −(1+ g)err k +g err ∅
+
+> τ
+
+)
+
+= softmax k
+
+( −(1+ g)err k
+
+> τ
+
+)
+
+= softmax k
+
+( score k
+
+> τ / (1+ g)
+
+)
+
+.
+
+(11) Substituting score k = log pθ (v | s, ek) + const and using the uniform prior, 
+
+softmax k
+
+(score (g) 
+
+> k
+
+/τ ) ∝ exp 
+
+( 1+ gτ log pθ (v | s, ek)
+
+)
+
+∝ pθ (ek | v, s)(1+ g)/τ .
+
+(12) For τ = 1 this is pθ (ek | v, s)1+ g , a posterior raised to the power 1 + g. The map is a monotone (rank-preserving) sharp-ening: it does not change arg max k, and it makes the distribu-tion strictly more peaked for g > 0. □
+
+# B Proof of Proposition 2 (Antithetic variance reduction) 
+
+We first record the even/odd decomposition, then compute the two variances, then justify the leading-order claim. 
+
+Lemma 1 (Orthogonal even/odd decomposition) . Let ϵ d
+
+= −ϵ
+
+and let f be square-integrable. With fe(ϵ) = 12 (f (ϵ) + f (−ϵ)) 
+
+and fo(ϵ) = 12 (f (ϵ) − f (−ϵ)) we have f = fe + fo, E[f ] = 
+
+E[fe], E[fo] = 0 , Cov( fe, f o) = 0 , and Var( f ) = Var( fe) + Var( fo).Proof. f = fe + fo is immediate. Since ϵ d
+
+= −ϵ, E[fo] =  
+
+> 12
+
+(E[f (ϵ)] − E[f (−ϵ)]) = 0 , hence E[f ] = E[fe]. For the covariance, fefo is an odd function of ϵ (a product of an even and an odd function), so E[fefo] = 0 by symmetry, and 
+
+Cov( fe, f o) = E[fefo] − E[fe]E[fo] = 0 . Orthogonality then gives Var( f ) = Var( fe) + Var( fo).8Variances of the two estimators. The per-sample type dif-ference f (ϵ) = ϕk(ϵ)−ϕj (ϵ) is square-integrable, and both es-timators use two denoiser evaluations (the antithetic estimator evaluates ϕk, ϕ j at ϵ and at −ϵ; the i.i.d. estimator at two inde-pendent draws). Unbiasedness of both for E[f ] = err k − err j
+
+follows from Lemma 1 and linearity. For the antithetic estima-tor, ̂
+
+D anti = 12
+
+(f (ϵ) + f (−ϵ)) = fe(ϵ),
+
+Var( ̂ D anti ) = Var( fe). (13) For two independent samples ϵ(1) , ϵ (2) ,
+
+Var( ̂ D iid ) = Var 
+
+( 12
+
+(f (ϵ(1) ) + f (ϵ(2) )))
+
+= 12 Var( f )= 12
+
+(Var( fe) + Var( fo)),
+
+(14) using independence and Lemma 1. Therefore, 
+
+Var( ̂ D anti ) ≤ Var( ̂ D iid )
+
+⇐⇒ Var( fe) ≤ 12
+
+(Var( fe) + Var( fo))
+
+⇐⇒ Var( fe) ≤ Var( fo).
+
+Leading-order dominance of the odd component. Write 
+
+ϕk(ϵ) = ∥ϵθ (·, ek)∥22 − 2⟨ϵ, ϵ θ (·, ek)⟩ + ∥ϵ∥22. The data-independent term ∥ϵ∥22 is identical across types and cancels in f = ϕk − ϕj :
+
+f (ϵ) = ∥ϵθ (·, ek)∥22 − ∥ ϵθ (·, ej )∥22
+
+− 2⟨ϵ, ϵ θ (·, ek) − ϵθ (·, ej )⟩, (15) where each ϵθ (·, ek) = ϵθ (√¯αtv + √1 − ¯αt ϵ, s, ek, t ) de-pends on ϵ through its input. Expand the denoiser to first order around ϵ = 0 , ϵθ (·, ek) = ak + √1 − ¯αt Jk ϵ + o(∥ϵ∥), with 
+
+ak = ϵθ (√¯αtv, s, ek, t ) and Jacobian Jk. The explicit cross term contributes the odd component −2⟨ϵ, ak −aj ⟩+O(∥ϵ∥2).The squared-norm term is not purely even: ∥ϵθ (·, ek)∥22 =
+
+∥ak∥22 + 2 √1 − ¯αt ⟨J⊤ 
+
+> k
+
+ak, ϵ ⟩ + O(∥ϵ∥2), whose first-order part is also odd in ϵ. Collecting both contributions, the odd part of f is, to first order, 
+
+fo(ϵ) ≈ − 2〈ϵ, (ak − aj ) − √1 − ¯αt (J⊤ 
+
+> k
+
+ak − J⊤ 
+
+> j
+
+aj )〉, (16) while the quadratic remainders are even to leading order. When the denoiser is well-conditioned, i.e. the Jacobian terms are small relative to the inter-type gap ∥ak − aj ∥, the odd part is dominated by −2⟨ϵ, ak − aj ⟩ and Var( fo) ≈ 4 ∥ak − aj ∥22.In this regime Var( fo) > Var( fe), so by the exact criterion above the antithetic estimator reduces the variance of the type-discriminative score. We stress that the criterion Var( fe) ≤
+
+Var( fo) is exact; the first-order analysis only supplies a suffi-cient condition under which it holds. □
+
+Remark 1. The cancellation of ∥ϵ∥22 and the oddness of the cross term are exactly why antithetic pairing helps the type comparison more than it would help a single absolute error: the large, type-shared, even fluctuations are differenced away, leaving an odd, type-discriminative term that the antithetic av-erage removes from the variance while preserving the mean. 
+
+# C Composite Loss Definitions 
+
+The total training objective is the weighted sum 
+
+L = Ltask + αdiff Ldiff + β Lico + λclf Lclf 
+
++ αrev Lrev ira + βrev Lrev ico 
+
++ γrev Lrev sig + λbio Lbio 
+
++ λxm Lxmodal + λgr Lground 
+
++ λhard Lhard + λfp Lfp . (17) Table 6 lists each term, its role, and its default weight. Every term returns a graph-connected zero when it has no contribut-ing spans, which keeps distributed gradient synchronisation intact. Equation (17) omits the R-Drop regulariser [Wu et al., 2021] used by both DiffImaginE and the deterministic base-line, which is applied as a symmetric-KL consistency between two dropout forward passes (weight αrdrop = 0 .5 by default). 
+
+Table 6: Composite loss terms. O denotes the non-entity class; “entity spans” are spans whose gold label is not O.
+
+Term Role Notes / default 
+
+Ltask class-weighted CE on the final K-way logits 
+
+O down-weighted; online hard-O mining at train time 
+
+Ldiff Min-SNR-weighted denoising score matching gold type incl. O;CFG dropout pcf 
+
+Lico contrastive CE on per-type scores of entity spans restricted to the eval timestep window 
+
+Lclf likelihood-based classification on the scores all K types; learnable 
+
+τclf 
+
+Lrev ira reverse-imagination alignment to s
+
+visual-gate weighted 
+
+Lrev ico reverse-path type contrastive visual-gate weighted 
+
+Lrev sig VICReg-style anti-collapse on reverse imagination prevents constant collapse 
+
+Lbio token-level BIO sequence labelling (shared) masked CE on first subword 
+
+Lxmodal sentence-level cross-modal InfoNCE (shared) symmetric, learnable temperature 
+
+Lground attention-entropy grounding hinge (shared) entity spans focus on fewer patches 
+
+Lhard hard-negative type margin ranking (shared) gold vs. hardest wrong type 
+
+Lfp symmetric false-positive margin on O spans mirror of Lhard ;precision 
+
+9D Hyperparameters and Search Ranges 
+
+Table 7 lists the default hyperparameters and the ranges searched on the development set. The deterministic baseline shares every shared-stack and regularisation hyperparame-ter; only the verifier-specific diffusion hyperparameters are unique to DiffImaginE. 
+
+Table 7: Default hyperparameters and development-set search ranges. 
+
+Group Parameter Default Range 
+
+Encoders text encoder RoBERTa-base {base, large} vision encoder CLIP-ViT-B/32 {B/32, L/14} shared width d 256 {256, 384, 512} Diffusion timesteps T 1000 –eval timesteps N 5 {1, 2, 5, 10, 20} train MC steps M 4 {2, 4} Min-SNR γ 5.0 {1, 5, ∞}Guidance CFG dropout pcf 0.15 [0.0, 0.3] guidance scale g dev-tuned {1, 2, 3, 4} 
+
+Fβ for selection 1.0 {0.5, 1.0} Warmup / loss warmup epochs 10 {5, 10, 20} 
+
+αdiff 1.0 {0.1, 1.0, 2.0} 
+
+β (Lico ) 0.5 [0.0, 1.0] 
+
+λclf 0.5 {0.1, 0.5, 1.0} Optimisation encoder LR 2e-5 –new-module LR 1e-4 –EMA decay 0.999 –
+
+# E Ablation Configurations 
+
+Table 8 describes the core ablation variants referenced in the main paper and the hypothesis each one tests. The full grid contains 54 variants: the 15 core variants listed below plus extended variants drawn from the evaluation-budget, loss-weight, auxiliary-objective, precision-calibration, and archi-tecture sweeps; the complete variant registry, with each vari-ant’s command-line configuration, is released with the code, and every variant is run over multiple seeds on both datasets. 
+
+Table 8: Core ablation variants and the hypothesis each tests. 
+
+Variant Hypothesis tested 
+
+main Reference DiffImaginE configuration. no_diffusion Deterministic ImaginE verifier: is the diffusion paradigm necessary? no_cfg Remove classifier-free guidance ( g = 0 ,no dropout). no_min_snr Uniform denoising weight instead of Min-SNR. no_latent_norm Diffuse on the raw, unstandardised latent. no_score_norm Remove the score LayerNorm + learnable temperature. no_l_diff Drop the denoising score-matching term. no_l_ico Drop the windowed contrastive term. no_clf_diffusion Drop the likelihood-based classification objective Lclf .no_warmup Skip the denoiser warmup phase. no_train_on_o Supervise the denoiser on entity spans only. no_learnable_tw Uniform-mean timestep aggregation. no_antithetic I.i.d. Monte-Carlo noise instead of antithetic pairs. greedy_decode Greedy non-overlap decoding instead of the DP decoder. g_fixed_1 Pin g = 1 instead of dev-tuning it. 
+
+10 References 
+
+Adrien Bardes, Jean Ponce, and Yann LeCun. Vicreg: Variance-invariance-covariance regularization for self-supervised learning. 
+
+arXiv preprint arXiv:2105.04906 , 2021. Xiang Chen, Ningyu Zhang, Lei Li, Yunzhi Yao, Shumin Deng, Chuanqi Tan, Fei Huang, Luo Si, and Huajun Chen. Good visual guidance make a better extractor: Hierarchical visual prefix for multimodal entity and relation extraction. In Findings of the asso-ciation for computational linguistics: NAACL 2022 , pages 1607– 1618, 2022. Kevin Clark and Priyank Jaini. Text-to-image diffusion models are zero shot classifiers. Advances in Neural Information Processing Systems , 36:58921–58937, 2023. Prafulla Dhariwal and Alexander Nichol. Diffusion models beat gans on image synthesis. Advances in neural information processing systems , 34:8780–8794, 2021. Guohui Ding, Yushuo Kong, and Xinlei Li. Sepa: An semantic pro-jection alignment framework for multimodal named entity recog-nition. In Proceedings of the 2025 International Conference on Multimedia Retrieval , pages 202–210, 2025. Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weis-senborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, et al. An im-age is worth 16x16 words: Transformers for image recognition at scale. arXiv preprint arXiv:2010.11929 , 2020. Tiankai Hang, Shuyang Gu, Chen Li, Jianmin Bao, Dong Chen, Han Hu, Xin Geng, and Baining Guo. Efficient diffusion training via min-snr weighting strategy. In Proceedings of the IEEE/CVF inter-national conference on computer vision , pages 7441–7451, 2023. Jonathan Ho and Tim Salimans. Classifier-free diffusion guidance. 
+
+arXiv preprint arXiv:2207.12598 , 2022. Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion prob-abilistic models. Advances in neural information processing sys-tems , 33:6840–6851, 2020. Yujin Jeong, Arnas Uselis, Seong Joon Oh, and Anna Rohrbach. Dif-fusion classifiers understand compositionality, but conditions ap-ply. arXiv preprint arXiv:2505.17955 , 2:9, 2025. Jing Jia, Sifan Liu, Bowen Song, Wei Yuan, Liyue Shen, and Guanyang Wang. Antithetic noise in diffusion models. In Interna-tional Conference on Learning Representations , 2026. Diederik Kingma, Tim Salimans, Ben Poole, and Jonathan Ho. Vari-ational diffusion models. Advances in neural information process-ing systems , 34:21696–21707, 2021. Alexander C Li, Mihir Prabhudesai, Shivam Duggal, Ellis Brown, and Deepak Pathak. Your diffusion model is secretly a zero-shot classifier. In Proceedings of the IEEE/CVF International Confer-ence on Computer Vision , pages 2206–2217, 2023. Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. Roberta: A robustly optimized bert pretraining approach. arXiv preprint arXiv:1907.11692 , 2019. Ilya Loshchilov and Frank Hutter. Decoupled weight decay regular-ization. arXiv preprint arXiv:1711.05101 , 2017. Di Lu, Leonardo Neves, Vitor Carvalho, Ning Zhang, and Heng Ji. Visual attention model for name tagging in multimodal social me-dia. In Proceedings of the 56th annual meeting of the associa-tion for computational linguistics (volume 1: Long papers) , pages 1990–1999, 2018. Seungwhan Moon, Leonardo Neves, and Vitor Carvalho. Multimodal named entity recognition for short social media posts. In Proceed-ings of the 2018 conference of the North American chapter of the association for computational linguistics: Human language tech-nologies, volume 1 (long papers) , pages 852–860, 2018. Alexander Quinn Nichol and Prafulla Dhariwal. Improved denois-ing diffusion probabilistic models. In International conference on machine learning , pages 8162–8171. PMLR, 2021. Aaron van den Oord, Yazhe Li, and Oriol Vinyals. Representa-tion learning with contrastive predictive coding. arXiv preprint arXiv:1807.03748 , 2018. William Peebles and Saining Xie. Scalable diffusion models with transformers. In Proceedings of the IEEE/CVF international con-ference on computer vision , pages 4195–4205, 2023. Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervision. In International con-ference on machine learning , pages 8748–8763. PmLR, 2021. Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Björn Ommer. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 10684–10695, 2022. Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli. Deep unsupervised learning using nonequilibrium thermodynamics. In International conference on machine learn-ing , pages 2256–2265. pmlr, 2015. Yang Song and Stefano Ermon. Generative modeling by estimating gradients of the data distribution. Advances in neural information processing systems , 32, 2019. Yang Song, Jascha Sohl-Dickstein, Diederik P Kingma, Abhishek Kumar, Stefano Ermon, and Ben Poole. Score-based generative modeling through stochastic differential equations. arXiv preprint arXiv:2011.13456 , 2020. Lin Sun, Jiquan Wang, Kai Zhang, Yindu Su, and Fangsheng Weng. Rpbert: a text-image relation propagation-based bert model for multimodal ner. In Proceedings of the AAAI conference on arti-ficial intelligence , volume 35, pages 13860–13868, 2021. Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. At-tention is all you need. Advances in neural information processing systems , 30, 2017. Xinyu Wang, Min Gui, Yong Jiang, Zixia Jia, Nguyen Bach, Tao Wang, Zhongqiang Huang, and Kewei Tu. Ita: Image-text align-ments for multi-modal named entity recognition. In Proceedings 
+
+11 of the 2022 conference of the North American chapter of the asso-ciation for computational linguistics: human language technolo-gies , pages 3176–3189, 2022. Pengfei Wei, Hongjun Ouyang, Qintai Hu, Bi Zeng, Guang Feng, and Qingpeng Wen. Vec-mner: Hybrid transformer with visual-enhanced cross-modal multi-level interaction for multimodal ner. In Proceedings of the 2024 International Conference on Multime-dia Retrieval , pages 469–477, 2024. Lijun Wu, Juntao Li, Yue Wang, Qi Meng, Tao Qin, Wei Chen, Min Zhang, Tie-Yan Liu, et al. R-drop: Regularized dropout for neural networks. Advances in neural information processing systems , 34: 10890–10905, 2021. Zhiwei Wu, Changmeng Zheng, Yi Cai, Junying Chen, Ho-fung Le-ung, and Qing Li. Multimodal representation with embedded vi-sual guiding objects for named entity recognition in social media posts. In Proceedings of the 28th ACM International conference on multimedia , pages 1038–1046, 2020. Jia Jun Cheng Xian, Sadegh Mahdavi, Renjie Liao, and Oliver Schulte. From graph diffusion to graph classification. arXiv preprint arXiv:2411.17236 , 2024. Bo Xu, Shizhou Huang, Chaofeng Sha, and Hongya Wang. Maf: A general matching and alignment framework for multimodal named entity recognition. In Proceedings of the fifteenth ACM interna-tional conference on web search and data mining , pages 1215– 1223, 2022. Jianfei Yu, Jing Jiang, Li Yang, and Rui Xia. Improving multimodal named entity recognition via entity span detection with unified multimodal transformer. In Proceedings of the 58th annual meet-ing of the association for computational linguistics , pages 3342– 3352, 2020. Qi Zhang, Jinlan Fu, Xiaoyu Liu, and Xuanjing Huang. Adaptive co-attention network for named entity recognition in tweets. In 
+
+Proceedings of the AAAI conference on artificial intelligence , vol-ume 32, 2018. Xin Zhang, Jingling Yuan, Lin Li, and Jianquan Liu. Reducing the bias of visual objects in multimodal named entity recognition. In 
+
+Proceedings of the Sixteenth ACM international conference on web search and data mining , pages 958–966, 2023. Baohang Zhou, Ying Zhang, Kehui Song, Wenya Guo, Guoqing Zhao, Hongbin Wang, and Xiaojie Yuan. A span-based mul-timodal variational autoencoder for semi-supervised multimodal named entity recognition. In Proceedings of the 2022 conference on empirical methods in natural language processing , pages 6293– 6302, 2022. 
+
+12

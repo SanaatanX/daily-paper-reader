@@ -1,0 +1,297 @@
+{
+  "date": "20260810",
+  "date_label": "",
+  "generated_at": "2026-08-10 21:25:18 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.05833v1",
+      "route": "202608/10/2608.05833v1-visr-kgc-visual-subgraph-reasoning-with-vision-language-models-for-multimodal-knowledge-graph-completion",
+      "title": "ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "多模态知识图谱补全利用文本和图像推断缺失关系，与跨视觉和文本模态的关系抽取直接对应",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.03991v1",
+      "route": "202608/10/2608.03991v1-perceptual-anchoring-prototype-guided-text-calibration-for-training-free-open-vocabulary-semantic-segmentation",
+      "title": "Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨模态对齐，文本校准，开放词汇分割，视觉-语言",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.04623v1",
+      "route": "202608/10/2608.04623v1-visual-anchoring-in-diffusion-multimodal-zero-shot-skeleton-action-recognition",
+      "title": "Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于扩散的按类别生成范式，避免融合权重选择并处理不可靠模态",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.05137v1",
+      "route": "202608/10/2608.05137v1-smartmage-dynamic-modality-orchestration-for-3d-scene-understanding",
+      "title": "SmartMage: Dynamic Modality Orchestration for 3D Scene Understanding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "动态调度异构模态以处理查询相关的模态相关性",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.05683v1",
+      "route": "202608/10/2608.05683v1-distmedvl-distributional-vision-language-alignment-for-uncertainty-aware-medical-image-segmentation",
+      "title": "DistMedVL: Distributional Vision-Language Alignment for Uncertainty-Aware Medical Image Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨模态对齐，分布对齐，视觉-语言，医学图像分割，不确定性",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.07385v1",
+      "route": "202608/10/2608.07385v1-omni-modal-decomposition-autoencoders-learn-full-stack-wearable-disentangled-representations",
+      "title": "Omni-modal decomposition autoencoders learn full-stack wearable disentangled representations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "OmniDecVAEs从任意多模态学习解耦可解释表示，推进多模态表示学习",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.03025v1",
+      "route": "202608/10/2608.03025v1-diffimagine-imagine-to-verify-entity-types-with-diffusio",
+      "title": "DiffImaginE: Imagine to Verify Entity Types with Diffusio",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态命名实体识别利用图文联合证据并进行扩散式类型验证",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.03120v1",
+      "route": "202608/10/2608.03120v1-seco-sbir-semantically-consistent-prompt-learning-for-zero-shot-sketch-based-image-retrieval",
+      "title": "SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过文本引导的多模态提示和可学习耦合函数，在每一层将文本表示注入视觉编码器，实现图文跨模态对齐",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.04509v1",
+      "route": "202608/10/2608.04509v1-cargo-vl-counterfactual-arbitration-with-risk-constrained-group-optimization-for-vision-language-models",
+      "title": "CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于组合视觉语言证据源的群相对反事实优化方法",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.04726v1",
+      "route": "202608/10/2608.04726v1-when-prompts-become-pixels-prompt-region-grounding-for-multimodal-reasoning",
+      "title": "When Prompts Become Pixels: Prompt-Region Grounding for Multimodal Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提示区域对齐方法将图像中的问题区域与模型提示对齐，用于跨模态对齐",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.04926v1",
+      "route": "202608/10/2608.04926v1-consistency-driven-co-evolution-for-self-supervised-cross-representation-learning",
+      "title": "Consistency-Driven Co-Evolution for Self-Supervised Cross-Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "针对图表、表格与代码跨表征对齐的自监督方法",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.05260v1",
+      "route": "202608/10/2608.05260v1-a-paragraph-is-worth-a-thousand-captions-rethinking-text-supervision-for-vision-language-retrieval",
+      "title": "A Paragraph is Worth a Thousand Captions: Rethinking Text Supervision for Vision-Language Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究文本监督粒度对对比式视觉语言表示学习的影响",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.01543v1",
+      "route": "202608/10/2608.01543v1-v-mem-modality-routed-retrieval-for-long-term-multimodal-agentic-memory",
+      "title": "V-Mem: Modality-Routed Retrieval for Long-Term Multimodal Agentic Memory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向跨模态记忆检索的模态间隙感知路由",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.01664v1",
+      "route": "202608/10/2608.01664v1-fau-at-imageclef-2026-task-on-multimodal-reasoning-robust-candidate-scoring-and-concise-multilingual-visual-answering",
+      "title": "FAU at ImageCLEF 2026 Task on Multimodal Reasoning Robust Candidate Scoring and Concise Multilingual Visual Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合视觉语言模型得分与融合投票的多模态推理系统",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.02907v1",
+      "route": "202608/10/2608.02907v1-bayesian-data-reweighting-improves-multimodal-retrieval-for-knowledge-based-visual-question-answering",
+      "title": "Bayesian Data Reweighting Improves Multimodal Retrieval for Knowledge-Based Visual Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态检索表示的贝叶斯对比训练",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.03733v1",
+      "route": "202608/10/2608.03733v1-failure-informed-image-self-augmentation-for-multimodal-large-language-model-self-improvement",
+      "title": "Failure-Informed Image Self-Augmentation for Multimodal Large Language Model Self-Improvement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态LLM自我改进的失败感知图像增强",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.05381v1",
+      "route": "202608/10/2608.05381v1-c3po-evaluating-cross-modal-composition-and-counterfactual-performance-in-omnimodal-models",
+      "title": "C$^3$PO: Evaluating Cross-Modal Composition and Counterfactual Performance in Omnimodal Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向全域模型跨模态组合与反事实冲突的基准",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    },
+    {
+      "paper_id": "2608.06060v1",
+      "route": "202608/10/2608.06060v1-learning-from-failures-retrieval-centric-cot-via-hard-negatives-for-unified-multimodal-retrieval",
+      "title": "Learning from Failures: Retrieval-Centric CoT via Hard Negatives for Unified Multimodal Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过检索中心思维链与难负样本改进跨模态查询表示",
+      "first_seen_at": "2026-08-10 21:25:18 UTC",
+      "updated_at": "2026-08-10 21:25:18 UTC"
+    }
+  ]
+}

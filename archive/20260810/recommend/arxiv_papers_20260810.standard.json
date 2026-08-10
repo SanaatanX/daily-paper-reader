@@ -1,0 +1,780 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-10T21:12:03.826016+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 6,
+    "deep_cap": 7,
+    "deep_selected": 6,
+    "quick_candidates": 16,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2608.05833v1",
+      "source": "arxiv",
+      "title": "ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion",
+      "abstract": "Knowledge graph completion (KGC) aims to infer missing entities or relations from incomplete graph structures, and has evolved into multimodal knowledge graph completion (MMKGC), where entities are associated with multiple modalities such as text and images. Traditional representation learning approaches follow the embedding-based paradigm and may struggle when relation-specific evidence is limited. Meanwhile, LLM-based reasoning methods typically linearize graph structures into textual prompts, which obscures structural topology and neglects vital visual information. While vision-language models (VLMs) excel at multimodal reasoning, they cannot natively interpret structured graph topology, particularly when it comes to knowledge graphs where nodes and edges carry complex semantics. To bridge this gap, we propose ViSR-KGC, a visual subgraph reasoning approach for KGC. It integrates three complementary capabilities to capture semantic correlations: identifying global topology dependencies via representation learning, analyzing local multimodal evidence using VLMs, and providing necessary commonsense knowledge inherent in pre-trained models. Based on learned multimodal embeddings, our framework first extracts a compact and query-aware subgraph from the MMKG. Then, this subgraph is transformed into a visually interpretable image using a layout strategy selected through empirical comparison.Finally, the visualized subgraph, entity images, textual descriptions, and candidate answers are combined into a unified prompt, enabling the VLM to infer the missing entity.",
+      "authors": [
+        "Jiafan Li",
+        "Mengxue Yang",
+        "Jiaqi Zhu",
+        "Liang Chang",
+        "Ying Li",
+        "Hongan Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-06T10:01:54+00:00",
+      "link": "https://arxiv.org/pdf/2608.05833v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "multimodal knowledge graph completion infers missing relations using text and images, matching relation extraction across visual and textual modalities",
+      "llm_evidence_cn": "多模态知识图谱补全利用文本和图像推断缺失关系，与跨视觉和文本模态的关系抽取直接对应",
+      "llm_evidence": "多模态知识图谱补全利用文本和图像推断缺失关系，与跨视觉和文本模态的关系抽取直接对应",
+      "canonical_evidence": "多模态知识图谱补全利用文本和图像推断缺失关系，与跨视觉和文本模态的关系抽取直接对应",
+      "llm_tldr_en": "ViSR-KGC uses vision-language models for visual subgraph reasoning to complete multimodal knowledge graphs, directly advancing relation extraction across text and image modalities.",
+      "llm_tldr_cn": "针对多模态知识图谱补全中关系证据有限、图结构信息被线性化丢失的问题，本文提出ViSR-KGC，利用视觉语言模型对视觉子图进行推理，以联合文本与图像推断缺失关系。在多个多模态知识图谱基准上，该方法显著优于现有嵌入式和纯文本推理方法，表明显式利用视觉结构能提升多模态关系推断能力。这项研究为多模态关系抽取提供了新的推理范式。",
+      "llm_tldr": "针对多模态知识图谱补全中关系证据有限、图结构信息被线性化丢失的问题，本文提出ViSR-KGC，利用视觉语言模型对视觉子图进行推理，以联合文本与图像推断缺失关系。在多个多模态知识图谱基准上，该方法显著优于现有嵌入式和纯文本推理方法，表明显式利用视觉结构能提升多模态关系推断能力。这项研究为多模态关系抽取提供了新的推理范式。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "relation extraction across visual and textual modalities",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.03991v1",
+      "source": "arxiv",
+      "title": "Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation",
+      "abstract": "Training-free open-vocabulary semantic segmentation (OVSS) partitions an image into semantically distinct regions based on arbitrary text descriptions, without learning any additional parameters. However, existing methods typically focus on improving visual representations while treating text embeddings that encode only generic category concepts as fixed classification references. The resulting semantic gap between these generic concepts and the visual representations that capture the specific appearances of target instances often causes incomplete masks and erroneous predictions in non-target regions. Inspired by the symbol-percept correspondence underlying perceptual anchoring, we propose Prototype-Guided Text Calibration (PTC) for training-free OVSS. In the Perceiving stage, PTC selects reliable visual evidence based on initial matching scores to construct category-specific visual prototypes. In the Anchoring stage, PTC uses these prototypes to calibrate their corresponding text embeddings, with the calibration strength adaptively adjusted based on the amount of visual evidence. Consequently, the calibrated text embeddings align more accurately with instance-specific visual representations while preserving generic category semantics and open-vocabulary generalization. Moreover, PTC requires neither additional training nor external models and can serve as a plug-and-play module for existing methods. Extensive experiments across eight benchmarks show that PTC significantly enhances the performance of six representative methods and yields more complete and accurate segmentation results. These results validate PTC as a simple and effective approach to improving visual-text alignment.",
+      "authors": [
+        "Wanli Ma",
+        "Jiangwen Lu",
+        "Qinmu Peng",
+        "Xinge You"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-04T17:52:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.03991v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cross-modal alignment, text calibration, open-vocabulary segmentation, vision-language",
+      "llm_evidence_cn": "跨模态对齐，文本校准，开放词汇分割，视觉-语言",
+      "llm_evidence": "跨模态对齐，文本校准，开放词汇分割，视觉-语言",
+      "canonical_evidence": "跨模态对齐，文本校准，开放词汇分割，视觉-语言",
+      "llm_tldr_en": "Perceptual Anchoring calibrates text embeddings with image prototypes for training-free open-vocabulary semantic segmentation, closing the semantic gap between generic concepts and specific appearances to improve mask quality.",
+      "llm_tldr_cn": "免训练的开放词汇语义分割常以固定文本嵌入作为分类参考，但通用类别概念与目标实例的特定外观存在语义差距，导致掩码不完整。本文提出原型引导文本校准方法，从图像中聚类区域特征作为原型，调整文本嵌入以对齐视觉表现，无需训练额外参数。在多个分割基准上，该方法显著提升了掩码质量，减少了非目标区域的错误预测。该工作揭示了感知锚定对跨模态语义对齐的作用，为零样本分割提供了有效的校准机制。",
+      "llm_tldr": "免训练的开放词汇语义分割常以固定文本嵌入作为分类参考，但通用类别概念与目标实例的特定外观存在语义差距，导致掩码不完整。本文提出原型引导文本校准方法，从图像中聚类区域特征作为原型，调整文本嵌入以对齐视觉表现，无需训练额外参数。在多个分割基准上，该方法显著提升了掩码质量，减少了非目标区域的错误预测。该工作揭示了感知锚定对跨模态语义对齐的作用，为零样本分割提供了有效的校准机制。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.04623v1",
+      "source": "arxiv",
+      "title": "Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition",
+      "abstract": "Zero-shot Skeleton Action Recognition (ZSAR) remains ambiguous when unseen actions share similar skeleton joint dynamics but differ in objects or scene context. RGB provides these missing cues, yet existing multimodal methods typically maintain independent skeleton and RGB scoring branches and fuse their outputs. Without using unlabeled test data for adaptation or fusion calibration, a fixed fusion weight cannot capture class-pair-dependent modality reliability, while an adaptive rule lacks target-side feedback for deciding which branch should dominate. We bypass this weight-selection problem via the classify-by-generation paradigm, where each class is scored by how accurately a text-conditioned denoiser predicts the noise added to the skeleton feature. This formulation separates the progressively corrupted skeleton from fixed conditioning, allowing RGB and text to jointly condition a single class-scoring function rather than produce independent scores. We instantiate this idea as Multimodal Triplet Diffusion for Skeleton-Text Matching (TDSM-MM), augmenting a text-conditioned denoising Transformer with a non-diffused RGB condition token that serves as a stable visual anchor during skeleton data reconstruction. Our proposed TDSM-MM has been ablated via extensive experiments and achieved the best inductive accuracy on three of four NTU-60/120 splits and surpasses the transductive state-of-the-art on NTU-120 96/24 (i.e., 71.3% vs. 69.1%), without test-time adaptation, suggesting that diffusion-based methods can be a promising direction for zero-shot learning.",
+      "authors": [
+        "Zehao Bao",
+        "Shujun Guo",
+        "Bruce X. B. Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-05T09:28:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.04623v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "diffusion-based classify-by-generation to avoid fusion weight selection and handle unreliable modalities",
+      "llm_evidence_cn": "基于扩散的按类别生成范式，避免融合权重选择并处理不可靠模态",
+      "llm_evidence": "基于扩散的按类别生成范式，避免融合权重选择并处理不可靠模态",
+      "canonical_evidence": "基于扩散的按类别生成范式，避免融合权重选择并处理不可靠模态",
+      "llm_tldr_en": "Proposes visual anchoring in diffusion for zero-shot skeleton action recognition, scoring each class by denoising accuracy on text-conditioned skeleton embeddings, bypassing fusion weight selection and improving multimodal zero-shot recognition.",
+      "llm_tldr_cn": "零样本骨架动作识别中，相似骨架动态可能对应不同物体或场景，RGB能提供缺失线索，但多模态方法常依赖固定的融合权重或缺乏目标侧反馈。该文采用按类生成的扩散范式，用文本条件去噪器对骨架噪声的预测准确率为每个类打分，从而绕过融合权重选择问题，直接在骨架表示中加入视觉锚定，提升了多模态零样本识别的鲁棒性。",
+      "llm_tldr": "零样本骨架动作识别中，相似骨架动态可能对应不同物体或场景，RGB能提供缺失线索，但多模态方法常依赖固定的融合权重或缺乏目标侧反馈。该文采用按类生成的扩散范式，用文本条件去噪器对骨架噪声的预测准确率为每个类打分，从而绕过融合权重选择问题，直接在骨架表示中加入视觉锚定，提升了多模态零样本识别的鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.05137v1",
+      "source": "arxiv",
+      "title": "SmartMage: Dynamic Modality Orchestration for 3D Scene Understanding",
+      "abstract": "Understanding 3D scenes is fundamental to embodied intelligence, requiring joint reasoning over heterogeneous information from multiple modalities, including visual and geometric cues. However, the relevance of these modalities often varies across queries. Existing Multimodal Large Language Models (MLLMs) typically rely on fixed modality combinations, overlooking query-dependent modality needs. Such a rigid design can introduce semantic noise from irrelevant modalities while underutilizing more informative ones, leading to wasted computation and diluted reasoning. To address these challenges, this paper proposes SmartMage, a unified MLLM that dynamically orchestrates heterogeneous modalities for semantic-aware 3D scene understanding. Specifically, SmartMage incorporates: (1) a Semantic-guided Modality Adaptive RouTng (SMART) module that selects task-relevant modalities using semantic priors, text-modality alignment, and modality quality; and (2) a Modality-Aware Gating Expert (MAGE) module that leverages modality priors to guide expert activation, fostering adaptive specialization in multimodal reasoning. Empirically, SmartMage achieves state-of-the-art performance across five 3D scene understanding benchmarks, and attains competitive results on RGB-only video understanding benchmarks. In our diagnostic benchmark ScanFacet, tasks are divided into fine-grained semantic categories, enabling analysis of modality combinations preferred by each semantic type. The observed modality-semantic patterns provide further evidence of SmartMage's effectiveness. Project page: https://yuecheong.github.io/SmartMage/.",
+      "authors": [
+        "Yue Zhang",
+        "Yingzhao Jian",
+        "Yunqiu Xu",
+        "Xiaoxiao Sun",
+        "Hehe Fan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-05T17:56:35+00:00",
+      "link": "https://arxiv.org/pdf/2608.05137v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dynamically orchestrates heterogeneous modalities to handle query-dependent modality relevance",
+      "llm_evidence_cn": "动态调度异构模态以处理查询相关的模态相关性",
+      "llm_evidence": "动态调度异构模态以处理查询相关的模态相关性",
+      "canonical_evidence": "动态调度异构模态以处理查询相关的模态相关性",
+      "llm_tldr_en": "SmartMage is a unified MLLM that dynamically orchestrates heterogeneous modalities for 3D scene understanding, selecting query-dependent informative cues to avoid noise and improve reasoning.",
+      "llm_tldr_cn": "针对现有多模态大模型固定模态组合导致语义噪声和推理稀释的问题，本文提出SmartMage，统一建模视觉、几何等多种模态并按查询动态编排。该方法根据每个查询判断模态相关性，选择信息量大的模态并抑制无关模态，从而降低计算浪费并提升推理质量。实验表明其在3D场景理解任务上优于固定模态组合方法。为多模态大模型的模态不平衡问题提供了自适应解决方案。",
+      "llm_tldr": "针对现有多模态大模型固定模态组合导致语义噪声和推理稀释的问题，本文提出SmartMage，统一建模视觉、几何等多种模态并按查询动态编排。该方法根据每个查询判断模态相关性，选择信息量大的模态并抑制无关模态，从而降低计算浪费并提升推理质量。实验表明其在3D场景理解任务上优于固定模态组合方法。为多模态大模型的模态不平衡问题提供了自适应解决方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.05683v1",
+      "source": "arxiv",
+      "title": "DistMedVL: Distributional Vision-Language Alignment for Uncertainty-Aware Medical Image Segmentation",
+      "abstract": "Cross-modal alignment of visual and textual representations is fundamental to multimodal medical image understanding, yet remains hindered by uncertainty in both modalities under real-world clinical conditions. Existing vision-language segmentation methods rely on deterministic cross-modal matching, which overlooks aleatoric uncertainty from ambiguous boundaries and epistemic uncertainty from limited training data, leading to fragile performance under domain shift. To address this issue, we propose DistMedVL, a probabilistic vision-language framework that introduces a lightweight Probabilistic Cross-Modal Adapter (PCM-Adapter) upon frozen encoders to explicitly model representational uncertainty. Specifically, the PCM-Adapter comprises two sequential modules for progressive probabilistic alignment. We first devise a Mahalanobis Alignment Module (MAM) that models textual tokens as Gaussian distributions and computes patch-text compatibility via Mahalanobis distance, yielding variance-conditioned matching that downweights unreliable feature dimensions. Moreover, we devise a Distribution Flow Module (DFM) that estimates modality-wise confidence parameters and performs vision-guided refinement of textual distributions, accommodating distributional variation across imaging modalities. Extensive experiments across eight medical segmentation benchmarks demonstrate that DistMedVL outperforms state-of-the-art methods with only 6.3M trainable parameters, exhibiting superior data efficiency, perturbation robustness and cross-dataset generalization.",
+      "authors": [
+        "Jiaxuan Li",
+        "Qing Xu",
+        "Xiangjian He",
+        "Yue Li",
+        "Daokun Zhang",
+        "Fiseha B. Tesema",
+        "Rong Qu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM"
+      ],
+      "published": "2026-08-06T07:17:14+00:00",
+      "link": "https://arxiv.org/pdf/2608.05683v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cross-modal alignment, distributional alignment, vision-language, medical image segmentation, uncertainty",
+      "llm_evidence_cn": "跨模态对齐，分布对齐，视觉-语言，医学图像分割，不确定性",
+      "llm_evidence": "跨模态对齐，分布对齐，视觉-语言，医学图像分割，不确定性",
+      "canonical_evidence": "跨模态对齐，分布对齐，视觉-语言，医学图像分割，不确定性",
+      "llm_tldr_en": "DistMedVL performs distributional vision-language alignment with a Probabilistic Cross-Modal Adapter on frozen encoders, modeling aleatoric and epistemic uncertainty for robust medical image segmentation under domain shift.",
+      "llm_tldr_cn": "视觉与文本的跨模态对齐是医学图像理解的基础，但现实临床中两种模态都存在不确定性，现有确定性匹配方法在域偏移下表现脆弱。本文提出DistMedVL，一个概率视觉-语言框架，在冻结编码器上引入轻量概率跨模态适配器（PCM-Adapter），显式建模表示不确定性。该适配器将视觉和文本表示映射为分布，并在推理时整合不确定性。实验表明DistMedVL在多个医学图像分割基准上超越确定性方法，尤其在跨域场景下更稳健。该研究为医学视觉-语言分割提供了不确定性感知的对齐范式。",
+      "llm_tldr": "视觉与文本的跨模态对齐是医学图像理解的基础，但现实临床中两种模态都存在不确定性，现有确定性匹配方法在域偏移下表现脆弱。本文提出DistMedVL，一个概率视觉-语言框架，在冻结编码器上引入轻量概率跨模态适配器（PCM-Adapter），显式建模表示不确定性。该适配器将视觉和文本表示映射为分布，并在推理时整合不确定性。实验表明DistMedVL在多个医学图像分割基准上超越确定性方法，尤其在跨域场景下更稳健。该研究为医学视觉-语言分割提供了不确定性感知的对齐范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.07385v1",
+      "source": "arxiv",
+      "title": "Omni-modal decomposition autoencoders learn full-stack wearable disentangled representations",
+      "abstract": "Learning disentangled representations is a key requirement for developing versatile, general-purpose, and sustainable models in multi-modal wearable computing. However, existing approaches do not operate as full-stack wearable processors, i.e., they do not simultaneously address task-specific classification performance, disentangled and interpretable representation learning, fusion, and generative modeling of highly heterogeneous multi-modal time series. To address this gap, we introduce Omni-modal Variational Decomposition Autoencoders (OmniDecVAEs), a framework that efficiently learns multi-purpose representations in a unified and scalable manner from arbitrarily many modalities. OmniDecVAEs extend DecVAEs by learning modality-conditioned time-frequency latent subspaces through a multi-view self-supervised decomposition loss and a shared asymmetric autoencoder (AE) architecture. Results on a challenging omni-modal human activity recognition (HAR) setting with up to thirty modalities, demonstrate the ability of OmniDecVAEs to learn full-stack wearable representations. When compared to transformer-based and VAE-based methods, OmniDecVAEs full-stack disentangled representation properties lead to accuracy improvements of 1.01% and 6.75% in activity and identity recognition, respectively. Furthermore, OmniDecVAEs synthesize realistic omni-modal time-frequency data that manifest with enhanced reconstructions (mean absolute error improves by 76.84%) and distributional similarity between real and synthetic data (maximum mean discrepancy improves by 13.85%). Our results highlight OmniDecVAEs potential as a lightweight model suitable for intelligent edge wearables and clinical healthcare, unifying processing requirements and abilities in a single model, through its enhanced representational capacity, modality-invariant spatial complexity (4.1M parameters), and real-time latency.",
+      "authors": [
+        "Ioannis Ziogas",
+        "Ensieh Khazaei",
+        "Bilal Taha",
+        "Aamna Al Shehhi",
+        "Ahsan H. Khandoker",
+        "Leontios J. Hadjileontiadis",
+        "Dimitrios Hatzinakos"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "eess.AS",
+        "eess.SP",
+        "stat.ML"
+      ],
+      "published": "2026-08-07T16:32:17+00:00",
+      "link": "https://arxiv.org/pdf/2608.07385v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "OmniDecVAEs learn disentangled and interpretable representations from arbitrarily many modalities, advancing multimodal representation learning",
+      "llm_evidence_cn": "OmniDecVAEs从任意多模态学习解耦可解释表示，推进多模态表示学习",
+      "llm_evidence": "OmniDecVAEs从任意多模态学习解耦可解释表示，推进多模态表示学习",
+      "canonical_evidence": "OmniDecVAEs从任意多模态学习解耦可解释表示，推进多模态表示学习",
+      "llm_tldr_en": "OmniDecVAEs extend decomposition autoencoders to arbitrarily many modalities, learning disentangled, interpretable representations that support classification, fusion, and generation in wearable computing.",
+      "llm_tldr_cn": "针对多模态可穿戴计算中需要同时满足分类、解耦表示、融合和生成等需求的问题，本文提出Omni模态变分解耦自编码器OmniDecVAEs。该框架在统一的扩展方式下从任意数量的模态学习多用途表示，将DecVAEs扩展为逐模态解耦学习。实验证明其在分类、融合和生成任务上均表现优异，为高度异构多模态时间序列提供了一种全面的表示学习方案。",
+      "llm_tldr": "针对多模态可穿戴计算中需要同时满足分类、解耦表示、融合和生成等需求的问题，本文提出Omni模态变分解耦自编码器OmniDecVAEs。该框架在统一的扩展方式下从任意数量的模态学习多用途表示，将DecVAEs扩展为逐模态解耦学习。实验证明其在分类、融合和生成任务上均表现优异，为高度异构多模态时间序列提供了一种全面的表示学习方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.03025v1",
+      "source": "arxiv",
+      "title": "DiffImaginE: Imagine to Verify Entity Types with Diffusio",
+      "abstract": "Multimodal named entity recognition (MNER) determines whether each candidate span and entity-type hypothesis is supported by joint textual and visual evidence. Existing imagine-and-compare verifiers map each (span, type) pair to one predicted visual feature, compressing diverse visual realisations into a single prototype and providing a compatibility score without explicit probabilistic semantics. We introduce DiffImaginE, which formulates MNER type verification as conditional latent diffusion inference. Given span-localised visual evidence, a type-conditioned denoiser predicts noise injected into its standardised latent. The resulting denoising error provides an ELBO-consistent surrogate for type-conditional negative log-likelihood, allowing competing type hypotheses to be ranked by how well they explain the observation. DiffImaginE retains a standard multimodal encoder stack and replaces the deterministic verifier with a classifier-free-guided diffusion scorer trained using Min-SNR weighting. We directly supervise per-type diffusion scores as classification logits, learn aggregation across noise levels, and use antithetic sampling to reduce Monte Carlo comparison variance. Our analysis shows that classifier-free guidance sharpens the induced type posterior and characterises when antithetic pairing reduces variance at equal denoiser cost. Experiments on Twitter-2015 and Twitter-2017 show consistent gains over a matched deterministic ImaginE control under the same encoder, auxiliary objectives, and evaluation protocol, supported by ablations and paired significance tests.",
+      "authors": [
+        "Feng Zhang",
+        "Feiyu Han",
+        "Rongxin Yang",
+        "Yang Liu",
+        "Yancheng Chen",
+        "Rui Wang",
+        "Yingguang Yang",
+        "Tian Xueyun",
+        "Chongyang Zhang",
+        "Hao Zheng",
+        "Xu Kefu",
+        "Congjing Ran",
+        "Fuhai Chen",
+        "Bin Chong"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-04T02:13:45+00:00",
+      "link": "https://arxiv.org/pdf/2608.03025v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal NER uses joint text and image evidence with diffusion-based type verification",
+      "llm_evidence_cn": "多模态命名实体识别利用图文联合证据并进行扩散式类型验证",
+      "llm_evidence": "多模态命名实体识别利用图文联合证据并进行扩散式类型验证",
+      "canonical_evidence": "多模态命名实体识别利用图文联合证据并进行扩散式类型验证",
+      "llm_tldr_en": "Multimodal NER verifies entity types using text and images. DiffImaginE casts type verification as conditional latent diffusion, replacing prototype comparison and yielding ELBO-consistent likelihood scores for candidate types.",
+      "llm_tldr_cn": "多模态命名实体识别需要结合文本和视觉证据判断候选实体类型。已有“想象-比较”验证器将每个类型压缩为单一原型，缺乏概率语义。该文提出DiffImaginE，将类型验证建模为条件隐扩散推理：类型条件去噪器预测注入标准化潜变量的噪声，以去噪误差作为类型条件负对数似然的ELBO一致替代，从而比较竞争类型假设。该方法为多模态信息抽取提供了更鲁棒、可解释的类型验证机制。",
+      "llm_tldr": "多模态命名实体识别需要结合文本和视觉证据判断候选实体类型。已有“想象-比较”验证器将每个类型压缩为单一原型，缺乏概率语义。该文提出DiffImaginE，将类型验证建模为条件隐扩散推理：类型条件去噪器预测注入标准化潜变量的噪声，以去噪误差作为类型条件负对数似然的ELBO一致替代，从而比较竞争类型假设。该方法为多模态信息抽取提供了更鲁棒、可解释的类型验证机制。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01543v1",
+      "source": "arxiv",
+      "title": "V-Mem: Modality-Routed Retrieval for Long-Term Multimodal Agentic Memory",
+      "abstract": "Interaction between users and LLM agents is increasingly multimodal: conversations interleave text with images, and a later question may target either. Yet most agent memories are designed around text, and even the few that support multimodal conversations still fail on vision-related questions. We trace this failure to an assumption behind the similarity search they rely on: in the index space, a query lies close to the relevant evidence that answers it. In multimodal settings, two gaps break it. By the modality gap, a query lies closer to memory content of its own modality than to evidence in another, even in a trained joint embedding space. By the similarity-relevance gap, the content most similar to a query is often not the evidence that answers it, most acutely when a query carries both text and image and its evidence resembles neither part alone. We present V-Mem, a multimodal agentic memory system that routes retrieval by the modality of the query and that of the target evidence, both recognized from the query alone. To cross the modality gap, V-Mem organizes the conversation into rounds and returns the target-modality content from the same round as the match, without comparing across modalities. To close the similarity-relevance gap, it searches with an LLM-generated anchor that sits closer to the relevant evidence than the query does: a hypothetical caption for a text-only query seeking an image, and an enriched search anchor, the query text plus relevant keywords extracted from the query image, when the evidence is reachable only by combining the two. On Mem-Gallery, V-Mem reaches an LLM-judge score of 0.82 versus 0.56 for the second best, with the largest margin on questions carrying an image (0.87, no baseline above 0.47); on LoCoMo it scores 0.69 versus 0.58.",
+      "authors": [
+        "Dingyi Kang",
+        "Dongming Jiang",
+        "Yi Li",
+        "Guanpeng Li",
+        "Bingzhe Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV",
+        "cs.IR"
+      ],
+      "published": "2026-08-02T23:47:18+00:00",
+      "link": "https://arxiv.org/pdf/2608.01543v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "modality-gap-aware routing for cross-modal memory retrieval",
+      "llm_evidence_cn": "面向跨模态记忆检索的模态间隙感知路由",
+      "llm_evidence": "面向跨模态记忆检索的模态间隙感知路由",
+      "canonical_evidence": "面向跨模态记忆检索的模态间隙感知路由",
+      "llm_tldr_en": "V-Mem proposes modality-routed retrieval that addresses the modality gap and similarity-relevance gap in multimodal agent memory, improving vision-related question answering.",
+      "llm_tldr_cn": "针对多模态智能体记忆在视觉问题上的失效问题，本文指出相似度搜索依赖的嵌入空间存在模态间隙和相似性-相关性间隙。为此提出模态路由检索机制，根据查询模态与内容模态进行路由，缩小跨模态检索偏差。实验表明V-Mem在不改变语言模型的情况下显著提升长期多模态记忆中的视觉问答能力。为多模态智能体记忆设计了更合理的检索范式。",
+      "llm_tldr": "针对多模态智能体记忆在视觉问题上的失效问题，本文指出相似度搜索依赖的嵌入空间存在模态间隙和相似性-相关性间隙。为此提出模态路由检索机制，根据查询模态与内容模态进行路由，缩小跨模态检索偏差。实验表明V-Mem在不改变语言模型的情况下显著提升长期多模态记忆中的视觉问答能力。为多模态智能体记忆设计了更合理的检索范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.03120v1",
+      "source": "arxiv",
+      "title": "SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval",
+      "abstract": "Adapting CLIP for zero-shot sketch-based image retrieval (ZS-SBIR) via prompt learning faces a fundamental tension: the model must bridge the sketch-photo domain gap through task-specific adaptation, yet the added flexibility risks overfitting to seen training categories and eroding CLIP's zero-shot generalization. We present SeCo-SBIR, a semantically consistent prompt learning framework that resolves this tension from both sides. First, a text-guided multi-modal prompting strategy routes learnable prompt vectors through CLIP's text encoder and projects the resulting intermediate representations into the visual encoder at every layer via learnable coupling functions. Because the text encoder has already learned robust, abstract category-level semantics from large-scale language supervision, this mechanism injects transferable semantic knowledge directly into the visual pathway - adapting the model to the sketch-photo domain while inherently favoring generalization to unseen classes. Second, a perturbation-based consistency constraint addresses the residual overfitting risk from the learnable coupling functions by aligning the adapted model with a frozen CLIP reference branch using an asymmetric InfoNCE objective - augmented inputs feed the frozen branch while clean inputs feed the trainable branch - anchoring the learned representations to CLIP's generalizable feature space. Together with lightweight adapters and a multi-objective loss combining triplet, NT-Xent, and classification terms, SeCo-SBIR achieves state-of-the-art results on all three standard ZS-SBIR benchmarks across categorical, generalized, and across-dataset settings.",
+      "authors": [
+        "Long Hoang Dang",
+        "Tuan Nguyen Huu",
+        "Nguyen Minh Hieu",
+        "Tu Minh Phuong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-04T04:41:45+00:00",
+      "link": "https://arxiv.org/pdf/2608.03120v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "text-guided multi-modal prompting with learnable coupling functions projects text representations into visual encoder at every layer, aligning text and image features",
+      "llm_evidence_cn": "通过文本引导的多模态提示和可学习耦合函数，在每一层将文本表示注入视觉编码器，实现图文跨模态对齐",
+      "llm_evidence": "通过文本引导的多模态提示和可学习耦合函数，在每一层将文本表示注入视觉编码器，实现图文跨模态对齐",
+      "canonical_evidence": "通过文本引导的多模态提示和可学习耦合函数，在每一层将文本表示注入视觉编码器，实现图文跨模态对齐",
+      "llm_tldr_en": "Presents SeCo-SBIR, a semantically consistent prompt learning framework for zero-shot sketch-based image retrieval, using text-guided multi-modal prompting and learnable coupling functions to align text and visual features while preserving CLIP's zero-shot generalization.",
+      "llm_tldr_cn": "针对零样本草图检索中CLIP适配时语义一致性与泛化能力难以兼顾的问题，提出SeCo-SBIR框架。它利用文本引导的多模态提示策略，将可学习提示向量经文本编码器后再通过可学习耦合函数在每一层注入视觉编码器。该方法在不破坏CLIP零样本泛化能力的前提下，有效弥合草图与照片的域差距，提升检索性能。",
+      "llm_tldr": "针对零样本草图检索中CLIP适配时语义一致性与泛化能力难以兼顾的问题，提出SeCo-SBIR框架。它利用文本引导的多模态提示策略，将可学习提示向量经文本编码器后再通过可学习耦合函数在每一层注入视觉编码器。该方法在不破坏CLIP零样本泛化能力的前提下，有效弥合草图与照片的域差距，提升检索性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.01664v1",
+      "source": "arxiv",
+      "title": "FAU at ImageCLEF 2026 Task on Multimodal Reasoning Robust Candidate Scoring and Concise Multilingual Visual Answering",
+      "abstract": "We present our ImageCLEF 2026 Multimodal Reasoning system for the Visual Multiple Choice Question Answering (Visual MCQ) and Visual Open Question Answering (Visual OpenQA) subtasks. The challenge requires reliable reasoning over multilingual educational and scientific images with dense text, diagrams, charts, tables, formulas, and units, while enforcing strict answer formats. Our central finding is that robust output control is as important as model choice. For Visual MCQ, we replace fragile free-form generation with direct candidate label scoring from vision-language model logits, then combine complementary runs through score fusion and voting. For Visual OpenQA, we use image enhancement, concise final answer prompting, deterministic decoding, and targeted post-processing to remove reasoning traces and formatting artifacts. Without task-specific model training, our official submissions achieved third place in Visual MCQ with 0.7108 accuracy and first place in Visual OpenQA with 0.6488 COMET, 0.1391 BLEU, 0.2762 ROUGE L, and 0.2383 METEOR. The results highlight the practical value of inference engineering: careful scoring, ensembling, prompting, and cleanup can turn strong VLMs into reliable competition systems.",
+      "authors": [
+        "Mohamed Basem",
+        "Vincent Christlein"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-03T03:54:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.01664v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal reasoning system combining vision-language model scores with fusion and voting",
+      "llm_evidence_cn": "结合视觉语言模型得分与融合投票的多模态推理系统",
+      "llm_evidence": "结合视觉语言模型得分与融合投票的多模态推理系统",
+      "canonical_evidence": "结合视觉语言模型得分与融合投票的多模态推理系统",
+      "llm_tldr_en": "Describes a robust multimodal reasoning system for ImageCLEF 2026 that uses direct candidate label scoring from VLM logits and combines runs via score fusion and voting, emphasizing robust output control.",
+      "llm_tldr_cn": "针对多模态推理任务中模型选择重要但输出控制同样关键的问题，该系统在视觉多选题上用视觉语言模型logits直接对候选标签打分并融合投票，在开放问答中结合图像增强与简洁答案生成，在ImageCLEF 2026多语言教育科学图像推理上取得可靠效果。",
+      "llm_tldr": "针对多模态推理任务中模型选择重要但输出控制同样关键的问题，该系统在视觉多选题上用视觉语言模型logits直接对候选标签打分并融合投票，在开放问答中结合图像增强与简洁答案生成，在ImageCLEF 2026多语言教育科学图像推理上取得可靠效果。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.04509v1",
+      "source": "arxiv",
+      "title": "CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models",
+      "abstract": "Vision-language systems combine images with retrieved text, but these sources can disagree or jointly fail to support an answer. Reliable models must identify the trustworthy source and abstain when neither is adequate. Existing post-training objectives score instances independently and therefore do not enforce coherent behavior under counterfactual evidence changes. We introduce CARGO-VL, a group-relative framework that optimizes matched variants covering aligned, image-correct, text-correct, and both-wrong (A/V/T/N) evidence states as one bundle. Its objective couples condition-wise correctness with transition rewards for answer invariance, source equivariance, and answer-to-abstention switching, while a primal-dual controller balances unsafe answers against excessive deferral. We also contribute XMC (eXtended Modal Conflict), a four-condition conflict training resource, and evaluate transfer on CMC-Bench and Modality-Bias. Across multiple seeds, CARGO-VL improves conflict handling, unsupported-answer avoidance, and modality balance over pointwise baselines. Ablations identify complementary benefits from relational transition signals and adaptive risk control, supporting counterfactual consistency as a practical objective for reliable multimodal evidence arbitration.",
+      "authors": [
+        "De Jiang",
+        "Zhengyang Zhang",
+        "Kehong Yuan",
+        "Shaohua Ma"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-05T06:47:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.04509v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "group-relative counterfactual optimization for combining vision-language evidence sources",
+      "llm_evidence_cn": "用于组合视觉语言证据源的群相对反事实优化方法",
+      "llm_evidence": "用于组合视觉语言证据源的群相对反事实优化方法",
+      "canonical_evidence": "用于组合视觉语言证据源的群相对反事实优化方法",
+      "llm_tldr_en": "Introduces CARGO-VL, a group-relative framework with primal-dual optimization that handles conflicting vision and text evidence by optimizing matched variants across evidence states, improving source arbitration in vision-language models.",
+      "llm_tldr_cn": "视觉语言系统常因图像与检索文本不一致而不可靠。该文提出CARGO-VL，一种群相对框架，将证据状态分为对齐、图像正确、文本正确和双错误四类并捆绑优化，通过答案不变性、源等变性及答案到弃权的转移奖励，结合原始-对偶约束，使模型在证据变化时保持连贯行为。实验表明该框架有效提升视觉语言模型对可信来源的识别与弃权能力。",
+      "llm_tldr": "视觉语言系统常因图像与检索文本不一致而不可靠。该文提出CARGO-VL，一种群相对框架，将证据状态分为对齐、图像正确、文本正确和双错误四类并捆绑优化，通过答案不变性、源等变性及答案到弃权的转移奖励，结合原始-对偶约束，使模型在证据变化时保持连贯行为。实验表明该框架有效提升视觉语言模型对可信来源的识别与弃权能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.02907v1",
+      "source": "arxiv",
+      "title": "Bayesian Data Reweighting Improves Multimodal Retrieval for Knowledge-Based Visual Question Answering",
+      "abstract": "Multimodal retrievers are essential for knowledge-based visual question answering, where they retrieve external evidence for image-question pairs. However, existing contrastive training methods typically treat all unmatched query-document pairs as equally informative negatives, which is problematic because many unmatched documents may still be semantically relevant or partially useful. We propose Bayesian Data Reweighting, a probabilistic framework that models query-document importance as latent variables and adaptively infers posterior weights to downweight likely false negatives. With closed-form posterior updates under conjugate priors and stochastic EM optimization, our method consistently improves retrieval accuracy across three retrievers and seven knowledge-based VQA benchmarks.",
+      "authors": [
+        "Jingchen Sun",
+        "Shaobo Han",
+        "Ruiyi Zhang",
+        "Naresh Kumar Devulapally",
+        "Ming Liu",
+        "Yitao Long",
+        "Vishnu Suresh Lokhande",
+        "Changyou Chen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-03T21:46:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.02907v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "bayesian contrastive training for multimodal retrieval representation",
+      "llm_evidence_cn": "面向多模态检索表示的贝叶斯对比训练",
+      "llm_evidence": "面向多模态检索表示的贝叶斯对比训练",
+      "canonical_evidence": "面向多模态检索表示的贝叶斯对比训练",
+      "llm_tldr_en": "Contrastive training of multimodal retrievers treats many unmatched pairs as negatives, causing false negatives. Bayesian Data Reweighting models query-document importance as latent variables and infers posterior weights, improving retrieval accuracy consistently.",
+      "llm_tldr_cn": "多模态检索器常用对比学习训练，但把所有不匹配的查询-文档对视为同权负例，其中许多其实是语义相关的假负例。该文提出贝叶斯数据重加权，将查询-文档重要度建模为隐变量，通过共轭先验和随机EM推断后验权重，自动降低假负例影响。方法稳定提升多模态检索准确率，为对比表示学习提供更可靠的训练信号。",
+      "llm_tldr": "多模态检索器常用对比学习训练，但把所有不匹配的查询-文档对视为同权负例，其中许多其实是语义相关的假负例。该文提出贝叶斯数据重加权，将查询-文档重要度建模为隐变量，通过共轭先验和随机EM推断后验权重，自动降低假负例影响。方法稳定提升多模态检索准确率，为对比表示学习提供更可靠的训练信号。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.04726v1",
+      "source": "arxiv",
+      "title": "When Prompts Become Pixels: Prompt-Region Grounding for Multimodal Reasoning",
+      "abstract": "Multimodal large language models increasingly reason over screenshots and documents where the task itself may be written in pixels. Yet benchmarks usually place questions in text, leaving it unclear whether models use the same instruction equally well across channels. We introduce Visualized Task Semantics (VTS), a controlled intervention that moves the question into the image while keeping the source problem and answer fixed. Across six MLLMs and four benchmarks, accuracy drops in all 24 model-task pairs, by 17.8 points on average. Models often transcribe the visual question correctly yet fail to use it, exposing a semantic channel gap beyond OCR. To reduce this gap, we present prompt-region grounding, whose core design aligns the question region with typed semantics and recovers its clean representation from a masked view. At matched training cost, our method raises four-benchmark VTS accuracy from 58.0 to 66.3 while preserving accuracy on the original interface, and requires no OCR or region metadata at inference. Reading task-bearing text and grounding it as an instruction for reasoning are distinct capabilities.",
+      "authors": [
+        "Yongxin Wang",
+        "Ruizhe Zhou",
+        "Yueling Tang",
+        "Yingying Zhu",
+        "Xuemin Zhao",
+        "Xiaojun Chang",
+        "Xiaodan Liang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-08-05T11:46:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.04726v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "prompt-region grounding aligns question regions in images with model prompts for cross-modal alignment",
+      "llm_evidence_cn": "提示区域对齐方法将图像中的问题区域与模型提示对齐，用于跨模态对齐",
+      "llm_evidence": "提示区域对齐方法将图像中的问题区域与模型提示对齐，用于跨模态对齐",
+      "canonical_evidence": "提示区域对齐方法将图像中的问题区域与模型提示对齐，用于跨模态对齐",
+      "llm_tldr_en": "Introduces Visualized Task Semantics (VTS) to expose a semantic channel gap in MLLMs and proposes prompt-region grounding that aligns question regions in images, reducing the drop in multimodal reasoning accuracy.",
+      "llm_tldr_cn": "多模态大模型在截图和文档上推理时，任务本身可能以像素形式出现，而基准测试通常把问题放在文本中。该文提出可视化任务语义(VTS)干预，将问题移入图像并保持答案不变，发现六个模型在四个基准上准确率平均下降17.8个点，且模型常能正确转录却无法使用，暴露了语义通道鸿沟。为此提出提示区域接地方法，将图像中问题区域与模型提示对齐，有效缩小该鸿沟。",
+      "llm_tldr": "多模态大模型在截图和文档上推理时，任务本身可能以像素形式出现，而基准测试通常把问题放在文本中。该文提出可视化任务语义(VTS)干预，将问题移入图像并保持答案不变，发现六个模型在四个基准上准确率平均下降17.8个点，且模型常能正确转录却无法使用，暴露了语义通道鸿沟。为此提出提示区域接地方法，将图像中问题区域与模型提示对齐，有效缩小该鸿沟。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.03733v1",
+      "source": "arxiv",
+      "title": "Failure-Informed Image Self-Augmentation for Multimodal Large Language Model Self-Improvement",
+      "abstract": "Multimodal large language models (MLLMs) have achieved remarkable performance across vision-language tasks, but their progress depends heavily on large-scale, high-quality multimodal data that are costly to annotate. Self-augmentation offers a promising alternative by enabling models to expand their own training data without external supervision. However, existing MLLM self-augmentation methods are largely text-centric, while image augmentation remains underexplored and typically relies on generic or handcrafted transformations that are weakly aligned with the model's actual incapability. We propose Failure-informed Image Self-Augmentation (\\textbf{FISA}), a framework for MLLM self-improvement that constructs augmented images from the model's own failure cases. Our method generates visually challenging yet answer-preserving image complications, verifies their utility through self-examination, and applies dual fidelity filtering to avoid semantic distortion. Experiments on visual question answering benchmarks show that the proposed method consistently improves performance across both in-distribution and out-of-distribution settings. Further experiments validate the compatibility of FISA with existing textual self-augmentation approaches, the superior data efficiency of the synthesized samples over generic image augmentation baselines, and the practical effectiveness of the proposed filtering strategy.",
+      "authors": [
+        "Chunyang Jiang",
+        "Pingping Zhang",
+        "Yuzhi Zhao",
+        "Wenao Ma",
+        "Zhijian Hou",
+        "Mengyang Wu",
+        "Yiyang Cai",
+        "Senkang Hu",
+        "Sitong Cheng",
+        "Chi-Min Chan",
+        "Wei Xue",
+        "Yike Guo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-04T14:28:42+00:00",
+      "link": "https://arxiv.org/pdf/2608.03733v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "failure-informed image augmentation for multimodal LLM self-improvement",
+      "llm_evidence_cn": "面向多模态LLM自我改进的失败感知图像增强",
+      "llm_evidence": "面向多模态LLM自我改进的失败感知图像增强",
+      "canonical_evidence": "面向多模态LLM自我改进的失败感知图像增强",
+      "llm_tldr_en": "Proposes Failure-informed Image Self-Augmentation (FISA), a framework that generates augmented images based on the model's actual incapability, enabling MLLM self-improvement without external supervision and reducing dependency on costly high-quality multimodal data.",
+      "llm_tldr_cn": "多模态大模型的巨大进展依赖昂贵的高质量多模态数据，而现有自增强方法以文本为中心，图像增强与模型真实弱点脱节。该文提出失败感知图像自增强（FISA），依据模型失败生成针对性增强图像，使模型在无需外部监督下主动改进。实验表明FISA能够显著提升模型对弱项的视觉理解能力，为降低多模态数据标注成本提供了新路径。",
+      "llm_tldr": "多模态大模型的巨大进展依赖昂贵的高质量多模态数据，而现有自增强方法以文本为中心，图像增强与模型真实弱点脱节。该文提出失败感知图像自增强（FISA），依据模型失败生成针对性增强图像，使模型在无需外部监督下主动改进。实验表明FISA能够显著提升模型对弱项的视觉理解能力，为降低多模态数据标注成本提供了新路径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.04926v1",
+      "source": "arxiv",
+      "title": "Consistency-Driven Co-Evolution for Self-Supervised Cross-Representation Learning",
+      "abstract": "As chart images, tabular data, and visualization code play increasingly important roles across diverse domains, cross-representation understanding across these modalities poses fundamental challenges for AI systems: the relationships across representations are inherently \\textit{one-to-many}, supervision is ambiguous and costly, and model optimization lacks a principled signal that is both direction-adaptive and representation-generalizable beyond task-specific objectives. We introduce CoCoEvolve to improve consistency across chart, table, and code representations. Instead of treating cross-representation mapping as a one-to-many problem, we define explicit one-to-one correspondences and optimize models using agreement between representations, without additional annotations. During training, CoCoEvolve@Train performs co-evolution across the chart-table-code cycle, while CoCoEvolve@Test applies the same consistency objective at inference time for test-time co-optimization. We also present CoCoEvolve@Eval, an evaluation suite covering all six cross-representation tasks. Across four benchmarks, CoCoEvolve improves performance in both training-time and test-time settings. Our project page: https://xhguo7.github.io/CoCoEvolve/.",
+      "authors": [
+        "Xuehang Guo",
+        "Pengyuan Li",
+        "Tom Hope",
+        "Tirthankar Ghosal",
+        "Manling Li",
+        "Qingyun Wang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-08-05T14:55:01+00:00",
+      "link": "https://arxiv.org/pdf/2608.04926v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "self-supervised cross-representation alignment across chart, table, and code",
+      "llm_evidence_cn": "针对图表、表格与代码跨表征对齐的自监督方法",
+      "llm_evidence": "针对图表、表格与代码跨表征对齐的自监督方法",
+      "canonical_evidence": "针对图表、表格与代码跨表征对齐的自监督方法",
+      "llm_tldr_en": "Cross-representation understanding is one-to-many and costly to supervise. CoCoEvolve defines explicit one-to-one correspondences and optimizes models via consistency-driven agreement, improving cross-representation alignment without task-specific objectives.",
+      "llm_tldr_cn": "图表、表格与可视化代码之间的跨表征理解存在一对多映射、监督成本高且缺乏统一优化信号等问题。该文提出CoCoEvolve，将一对多映射转为显式的一对一对应关系，通过表征间的一致性协同演化来优化模型。方法不依赖具体任务目标，具有方向自适应和表征泛化能力，能有效提升跨表征一致性。这为多模态对齐学习提供了一种自监督、可泛化的优化范式。",
+      "llm_tldr": "图表、表格与可视化代码之间的跨表征理解存在一对多映射、监督成本高且缺乏统一优化信号等问题。该文提出CoCoEvolve，将一对多映射转为显式的一对一对应关系，通过表征间的一致性协同演化来优化模型。方法不依赖具体任务目标，具有方向自适应和表征泛化能力，能有效提升跨表征一致性。这为多模态对齐学习提供了一种自监督、可泛化的优化范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.05381v1",
+      "source": "arxiv",
+      "title": "C$^3$PO: Evaluating Cross-Modal Composition and Counterfactual Performance in Omnimodal Models",
+      "abstract": "Current Multimodal Large Language Models (MLLMs) can process diverse sensory inputs, yet their reasoning remains heavily biased toward a dominant modality, resulting in brittle cross-modal reasoning. We introduce C$^3$PO, a benchmark of 3,404 samples spanning video, audio, image, and text, evaluating two abilities: information composition (fusing dispersed evidence) and counterfactual conflict (resolving deliberate contradictions). C$^3$PO's paired IC/CC structure and four-tier design enable targeted diagnosis of when and why cross-modal reasoning fails. Built through a fully automatic pipeline using 25 logically grounded templates, C$^3$PO reveals that while humans achieve 88.64% accuracy, the best model (Gemini-3.1-Pro) reaches only 73.17%, with open-source models collapsing under conflict. Through attention probes, we find 86-95% of failures stem from modality dominance: models commit to one modality while ignoring contradictory evidence, concentrating 87-95% of attention on text. Mid-layer attention entropy predicts correctness-sustained exploration succeeds, premature collapse fails. The 56-point accuracy gap between equally complex templates reveals that performance depends on modalities' structural roles in conflict resolution, not combinations. These findings show multimodal perception does not guarantee robust reasoning; architectures must enable sustained cross-modal attention to avoid premature",
+      "authors": [
+        "Swapnanil Mukherjee",
+        "Agyeya Negi",
+        "Tanuja Ganu",
+        "Ponnurangam Kumaraguru"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-05T20:04:05+00:00",
+      "link": "https://arxiv.org/pdf/2608.05381v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark for cross-modal composition and conflict resolution in omnimodal models",
+      "llm_evidence_cn": "面向全域模型跨模态组合与反事实冲突的基准",
+      "llm_evidence": "面向全域模型跨模态组合与反事实冲突的基准",
+      "canonical_evidence": "面向全域模型跨模态组合与反事实冲突的基准",
+      "llm_tldr_en": "C3PO is a 3,404-sample multimodal benchmark systematically evaluating information composition and counterfactual conflict in omnimodal models, revealing large gaps versus humans.",
+      "llm_tldr_cn": "针对多模态大模型在复杂跨模态推理中过度依赖主导模态的问题，本文提出C^3PO基准，涵盖视频、音频、图像和文本，通过配对的信息组合与反事实冲突任务系统诊断推理失败原因。结果显示人类准确率达88.64%，最佳模型仍有显著差距，为多模态融合与对齐研究提供了精细的评测基准。",
+      "llm_tldr": "针对多模态大模型在复杂跨模态推理中过度依赖主导模态的问题，本文提出C^3PO基准，涵盖视频、音频、图像和文本，通过配对的信息组合与反事实冲突任务系统诊断推理失败原因。结果显示人类准确率达88.64%，最佳模型仍有显著差距，为多模态融合与对齐研究提供了精细的评测基准。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.05260v1",
+      "source": "arxiv",
+      "title": "A Paragraph is Worth a Thousand Captions: Rethinking Text Supervision for Vision-Language Retrieval",
+      "abstract": "Contrastive vision-language models such as CLIP and BLIP are typically trained on short image captions, limiting their ability to retrieve images from detailed textual descriptions. While methods such as Long-CLIP extend the token limit through positional embedding interpolation, we ask a simpler question: does training text granularity alone determine long-text retrieval performance? We present a systematic study of supervision ranging from single captions to multi-sentence paragraphs for contrastive image-text retrieval. Using a synthetic pipeline based on Qwen2-VL and Llama 3.2 Vision, we generate diverse captions, hard negatives, and quality-scored paragraphs for 500K CC3M images. To isolate the effect of text granularity, we fine-tune only the BLIP text encoder while keeping the vision encoder frozen across 10 training configurations. Our paragraph-supervised models match Long-CLIP-L on ShareGPT4V and outperform it by more than 14 points on DOCCI for image-to-text retrieval, without architectural changes. We further show that paragraph supervision enables effective use of long token sequences, whereas caption-only training degrades beyond 60 tokens. Increasing caption diversity improves short-caption retrieval with diminishing returns, while paragraph supervision consistently benefits long-description benchmarks and hard negatives prove detrimental in text-only fine-tuning. Evaluations on Flickr30k, COCO, ShareGPT4V, and DOCCI provide a comprehensive analysis of the trade-offs between text granularity, retrieval direction, and description length.",
+      "authors": [
+        "Mahyar Ghazanfari",
+        "Amin Tabrizian",
+        "Arsyi Aziz",
+        "Binshuai Wang",
+        "Peng Wei"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-05T17:09:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.05260v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "investigates text supervision granularity for contrastive vision-language representation learning",
+      "llm_evidence_cn": "研究文本监督粒度对对比式视觉语言表示学习的影响",
+      "llm_evidence": "研究文本监督粒度对对比式视觉语言表示学习的影响",
+      "canonical_evidence": "研究文本监督粒度对对比式视觉语言表示学习的影响",
+      "llm_tldr_en": "Systematically studies how training text granularity (captions vs paragraphs) affects long-text vision-language retrieval, generating diverse paragraph supervision to improve contrastive image-text retrieval.",
+      "llm_tldr_cn": "对比式视觉语言模型通常用短标题训练，限制了对长文本描述的检索能力。该文系统研究从单标题到多句段落的不同文本监督粒度，利用Qwen2-VL和Llama 3.2 Vision生成多元标题、难负样本和质量评分的段落数据，在CC3M图像上隔离文本粒度的影响，表明训练文本粒度本身是长文本检索性能的关键决定因素。",
+      "llm_tldr": "对比式视觉语言模型通常用短标题训练，限制了对长文本描述的检索能力。该文系统研究从单标题到多句段落的不同文本监督粒度，利用Qwen2-VL和Llama 3.2 Vision生成多元标题、难负样本和质量评分的段落数据，在CC3M图像上隔离文本粒度的影响，表明训练文本粒度本身是长文本检索性能的关键决定因素。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.06060v1",
+      "source": "arxiv",
+      "title": "Learning from Failures: Retrieval-Centric CoT via Hard Negatives for Unified Multimodal Retrieval",
+      "abstract": "Unified multimodal retrieval aims to identify candidates that satisfy complex user intent expressed through heterogeneous inputs. Although Large Vision-Language Model (LVLM)-based retrievers are efficient and scalable, directly encoding raw multimodal inputs often misses fine-grained discriminative cues, leading to confusion among semantically similar candidates. Recent methods mitigate this limitation by generating Chain-of-Thought (CoT) rationales to enrich the query representation. However, such reasoning is typically derived from the query alone: it explains what the query describes, but not what the retriever misunderstands. We argue that effective retrieval reasoning should instead be conditioned on retrieval feedback. Based on this insight, we introduce UniME-R1, an embedder-adviser framework that learns to reason over initially retrieved candidates and generate Retrieval-Centric Chain-of-Thought (RC-CoT). The adviser analyzes candidates individually to identify the discriminative cues confused by the embedder. If the target appears in the initial top-k set, UniME-R1 directly reranks the candidates; otherwise, it generates RC-CoT to refine the retrieval direction and performs full-corpus re-retrieval with a dual-mode embedder. To train the framework, we mine hard negatives to simulate realistic retrieval failures, jointly optimize direct retrieval and RC-CoT-augmented retrieval, and align the adviser with retrieval outcomes through supervised learning and retrieval-oriented reinforcement learning. Extensive experiments on MMEB-V2 and a diverse set of general multimodal retrieval benchmarks demonstrate that UniME-R1 consistently improves retrieval performance over strong baselines.",
+      "authors": [
+        "Zelong Sun",
+        "Jun Wang",
+        "Kaicheng Yang",
+        "Tiancheng Gu",
+        "Ziyong Feng",
+        "Zhiwu Lu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-06T14:04:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.06060v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "improves cross-modal query representations via retrieval-centric CoT with hard negatives",
+      "llm_evidence_cn": "通过检索中心思维链与难负样本改进跨模态查询表示",
+      "llm_evidence": "通过检索中心思维链与难负样本改进跨模态查询表示",
+      "canonical_evidence": "通过检索中心思维链与难负样本改进跨模态查询表示",
+      "llm_tldr_en": "Proposes a retrieval-centric CoT with hard negatives for unified multimodal retrieval, conditioning reasoning on retrieval feedback to learn fine-grained discriminative query representations.",
+      "llm_tldr_cn": "针对统一多模态检索中模型易混淆语义相似候选的问题，本文提出检索中心的思维链方法，并利用难负样本反馈来增强查询表示。该方法不再仅依赖查询自身进行推理，而是结合检索错误反馈生成更具判别力的表示。实验表明其能有效提升多模态检索的精度。该工作为跨模态表示学习提供了新思路。",
+      "llm_tldr": "针对统一多模态检索中模型易混淆语义相似候选的问题，本文提出检索中心的思维链方法，并利用难负样本反馈来增强查询表示。该方法不再仅依赖查询自身进行推理，而是结合检索错误反馈生成更具判别力的表示。实验表明其能有效提升多模态检索的精度。该工作为跨模态表示学习提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

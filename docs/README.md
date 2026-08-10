@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 18 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-09 20:23:46 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-10 21:25:18 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读19篇论文，精读7篇、速读12篇，聚焦多模态与视觉-语言模型优化。最值得关注的是两篇9分精读：几何引导负载均衡提升视觉-语言MoE效率，线性多时间尺度保留机制降低记忆开销。后续可优先复现这两项方法，并顺带浏览速读中多模态融合与模态可靠性诊断的8分工作。</p>
+<p>今日共梳理18篇论文，其中6篇精读、12篇速读，重点聚焦多模态理解与知识图谱补全。</p>
+<p>最值得关注的是精读中评分最高的《ViSR-KGC》（9.0分），用视觉子图推理做多模态知识图谱补全；此外《Perceptual Anchoring》（8.0分）提出无需训练的开词汇分割校准方法，也值得一读。</p>
+<p>建议优先精读这两篇高分开创性工作，速读部分可留意扩散模型与草图检索的交叉方向，作为后续扩展阅读。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts">Relax Within, Balance Across: Geometry-Guided Load Balancing for Vision-Language Mixture-of-Experts</span></li><li><span class="dpr-home-dashboard-paper-title" title="Linear Multi-Timescale Retention as a Memory-Efficient Vision-Language Bridge">Linear Multi-Timescale Retention as a Memory-Efficient Vision-Language Bridge</span></li><li><span class="dpr-home-dashboard-paper-title" title="Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes">Towards Physics of Multimodal Pretraining: Knowledge Flow, Modality Synergy, Early Unification, and Recipes</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion">ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion</span></li><li><span class="dpr-home-dashboard-paper-title" title="Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation">Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition">Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,7 +89,7 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DAIF: A Data-Driven Intermediate Fusion Framework for Multimodal Supervised Learning via Approximate Message Passing">DAIF: A Data-Driven Intermediate Fusion Framework for Multimodal Supervised Learning via Approximate Message Passing</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition">Adaptive Modality Reliability Diagnosis and Restoration for Robust Multimodal Intent Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Rethinking Modality Reliability in Multimodal Sentiment Analysis with Incomplete Observations">Rethinking Modality Reliability in Multimodal Sentiment Analysis with Incomplete Observations</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DiffImaginE: Imagine to Verify Entity Types with Diffusio">DiffImaginE: Imagine to Verify Entity Types with Diffusio</span></li><li><span class="dpr-home-dashboard-paper-title" title="SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval">SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models">CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>

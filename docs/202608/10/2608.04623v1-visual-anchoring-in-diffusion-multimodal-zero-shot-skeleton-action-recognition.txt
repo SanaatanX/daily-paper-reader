@@ -1,0 +1,752 @@
+Title: Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition
+
+URL Source: https://arxiv.org/pdf/2608.04623v1
+
+Published Time: Thu, 06 Aug 2026 00:43:07 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition 
+
+## Zehao Bao The University of Hong Kong Hong Kong SAR, China 
+
+zehao_bao@connect.hku.hk 
+
+## Shujun Guo Zhejiang University Hangzhou, China 
+
+shujunguo@zju.edu.cn 
+
+## Bruce X.B. Yu *
+
+## Zhejiang University Hangzhou, China 
+
+xinboyu@intl.zju.edu.cn 
+
+## Abstract 
+
+Zero-shot Skeleton Action Recognition (ZSAR) remains am-biguous when unseen actions share similar skeleton joint dynamics but differ in objects or scene context. RGB pro-vides these missing cues, yet existing multimodal methods typically maintain independent skeleton and RGB scoring branches and fuse their outputs. Without using unlabeled test data for adaptation or fusion calibration, a fixed fu-sion weight cannot capture class-pair-dependent modality reliability, while an adaptive rule lacks target-side feed-back for deciding which branch should dominate. We bypass this weight-selection problem via the classify-by-generation paradigm, where each class is scored by how accurately a text-conditioned denoiser predicts the noise added to the skeleton feature. This formulation separates the pro-gressively corrupted skeleton from fixed conditioning, al-lowing RGB and text to jointly condition a single class-scoring function rather than produce independent scores. We instantiate this idea as Multimodal Triplet Diffusion for Skeleton–Text Matching (TDSM-MM) 1, augmenting a text-conditioned denoising Transformer with a non-diffused RGB condition token that serves as a stable visual an-chor during skeleton data reconstruction. Our proposed TDSM-MM has been ablated via extensive experiments and achieved the best inductive accuracy on three of four NTU-60/120 splits and surpasses the transductive state-of-the-art on NTU-120 96/24 (i.e., 71.3% vs. 69.1%), without test-time adaptation, suggesting that diffusion-based methods can be a promising direction for zero-shot learning. 
+
+## 1. Introduction 
+
+Skeleton-based human action recognition [8, 20, 28] dis-cards background and object appearance to focus on body dynamics, yielding a compact representation that becomes a  
+
+> *Corresponding author.
+> 1Project page: https://github.com/ZehaoBao/TDSM-MM (a) Modality balance varies by pair Skeleton
+> ambiguous
+> RGB
+> decisive
+> RGB Heavy Skeleton
+> decisive
+> RGB
+> ambiguous
+> Skeleton Heavy
+> one global weight or seen-trained gate
+> No unseen-label feedback Pair-dependent calibration burden
+> Seen-calibrated fusion may transfer unevenly across unseen pairs
+> (b) Condition before candidate scoring Shared noised skeleton
+> drink water phone call candidate text c varies
+> Same non-diffused RGB condition token One joint denoising scorer Candidate energies
+> drink water phone call lowest error wins
+
+Figure 1. Motivation. (a) Pair-varying modality reliability burdens post-hoc fusion. (b) TDSM-MM jointly scores candidates from skeleton, text, and RGB. 
+
+limitation when actions share similar joint motion and differ only in visual context: a held knife is invisible in skeleton representations, and headache versus salute produce nearly identical poses. Supervised methods tolerate this when ev-ery class has labeled examples, but the space of human ac-tions is open-ended, motivating Zero-shot Action Recogni-tion (ZSAR) [11, 13, 35], which recognizes unseen action categories that have no labeled training instances by lever-aging their semantic descriptions. ZSAR bridges seen and unseen classes through a shared semantic space, but this space inherits the limitations of the available modalities: when an action is distinguished pri-marily by appearance rather than motion, text descriptions cannot fully compensate for the missing visual evidence in skeleton features. RGB therefore provides a natural comple-mentary modality. However, existing RGB-enhanced ZSAR methods have not consistently achieved gains over strong skeleton-based approaches. For example, Beyond-Skeleton 1arXiv:2608.04623v1 [cs.CV] 5 Aug 2026 Zero-shot Learning (BSZSL) [19] does not consistently out-perform skeleton-only Triplet Diffusion for Skeleton-Text Matching (TDSM) [11], indicating that simply introducing RGB features is insufficient and that the modality interac-tion mechanism remains a critical challenge. Many multimodal recognition approaches explore modality interaction through feature-level integration, rep-resentation alignment, or decision-level fusion [1, 12, 33]. These strategies generally process modalities as separate branches and combine them after modality-specific rep-resentations have been learned. We argue that zero-shot recognition requires a different perspective: because un-seen classes provide no labels for calibrating modality in-teractions, complementary modalities should participate di-rectly in the recognition process rather than being combined through post-hoc score fusion. We therefore formulate mul-timodal ZSAR as a conditioning problem inside a diffusion-based classify-by-generation framework [10, 11, 17]: a can-didate class is evaluated according to how accurately the denoiser predicts the diffusion noise under the correspond-ing class and modality conditions. Unlike previous multi-modal fusion strategies, this formulation enables the aux-iliary modality to guide generation rather than provide an independent prediction score. RGB provides a natural conditioning signal for two complementary reasons. First, RGB bridges the skeleton– text modality gap: RGB and text are already well aligned through large-scale vision-language pretraining [9, 25], while RGB and skeleton describe the same action instance from different views, giving the denoiser an intermediate anchor between the two. Second, text conditioning alone is sparse, naming only the class label without the execution style, viewpoint, or object interactions that distinguish visu-ally similar actions; RGB supplies sample-specific evidence unavailable to class-level text, allowing the denoiser to eval-uate each candidate under the observed visual context. This raises a specific question, however: why must RGB enter as a non-diffused RGB condition token inside the denoiser, rather than through a more direct alternative such as early fusion into the skeleton representation, independent RGB score fusion, or a conditioning-token interface without a corruption-based objective? We find that each of these al-ternatives fails to preserve the anchor property motivated above. We instantiate this as Multimodal Triplet Diffusion for Skeleton–Text Matching (TDSM-MM), extending a text-conditioned denoising transformer with a single non-diffused RGB condition token (Figure 1): the denoiser at-tends jointly over the noised skeleton, text tokens, and this RGB condition token, whose stable presence enables it to serve as a visual anchor whose influence grows with the skeleton’s corruption, extending to the visual modality the role text plays in text-to-image diffusion [14, 27]. The con-tributions of this work are threefold: • Diffusion-based multimodal formulation. We intro-duce the first diffusion-based formulation for multi-modal zero-shot skeleton action recognition, treating RGB as a condition within the classify-by-generation framework rather than as an independent prediction branch. • RGB conditioning mechanism. Based on this formu-lation, we introduce a non-diffused RGB condition to-ken that remains uncorrupted while the skeleton repre-sentation is progressively noised. This design exploits two complementary properties of RGB: bridging the skeleton–text modality gap and providing instance-level visual details unavailable from sparse text descriptions. The non-diffused RGB condition token serves as a stable visual anchor during denoising. • Empirical validation. We instantiate the proposed framework as TDSM-MM, achieving the best inductive accuracy on three of four NTU-60/120 splits and surpass-ing the transductive state of the art on NTU-120 96/24 without test-time adaptation. Further analysis shows that the improvement mainly comes from object- and posture-dependent unseen classes. 
+
+## 2. Related Work 
+
+Zero-Shot Learning. Zero-shot learning (ZSL) recog-nizes target classes without labeled examples for those classes by transferring knowledge from labeled seen classes through auxiliary semantics such as attributes or lan-guage [31]. Its semantic interface has evolved from man-ually engineered attribute, lexical, and keyword spaces to-ward learned label and text embeddings, reducing the need for hand-designed representations [31]. ZSL protocols are commonly divided into inductive and transductive settings according to whether the model exploits target-domain in-formation beyond the candidate-class semantics [31]. In-ductive methods learn from labeled seen-class samples and apply a fixed model to unseen instances. Transductive meth-ods additionally use target-side information at the class or instance level: PGFA uses designated unseen-class proto-types to align text features; DynaPURLS adapts represen-tations using unlabeled target instances accumulated dur-ing inference; and Skeleton-Cache builds a nonparametric cache from incoming target samples [34, 38, 39]. We fo-cus on inductive, fixed-model inference under the original TDSM protocol [11], scoring each sample independently without updating model parameters, prompts, prototypes, or caches from incoming target instances. With this protocol boundary established, the next question is what evidence an action-recognition model observes at inference. 
+
+Zero-Shot Action Recognition. Human action recog-nition (HAR) has expanded from RGB and gray-scale 2video to depth, skeleton, inertial, and other sensing modal-ities [29]. Despite this expansion in sensing modalities, conventional systems generally learn a fixed set of actions from labeled examples, whose collection and annotation are costly, particularly for emerging or rare activities [2]. Zero-shot action recognition (ZSAR) instead transfers knowl-edge from seen to disjoint unseen action categories through shared class semantics [13, 31]. Skeleton-based ZSAR has progressed from POS-aware generative embeddings to mutual-information alignment and dual skeleton–text alignment, body-part and temporal modeling, and context-aware semantics [5, 13, 16, 30, 35, 37]; despite these advances, it does not observe current-video appearance at inference. Conversely, RGB-centric zero-shot video methods retain appearance and scene cues but do not maintain an explicit skeleton stream for body dy-namics [3, 22, 26]. These complementary limitations moti-vate multimodal skeleton ZSAR. Multimodal skeleton methods differ primarily in whether RGB is retained at inference and how it enters the class decision. Training-only learners such as C2VL [6] and MMCL [21] use RGB or vision–language supervision to improve skeleton representations but return to skeleton-only inference. The closest multimodal ZSAR method, BSZSL [19], instead retains sample-specific RGB at test time and applies text-guided RGB–skeleton feature en-hancement and contrastive alignment before multiplying a visual-semantic class factor by a skeleton prediction factor. It therefore uses RGB through representation enhancement and modality-specific prediction rather than as a condition of a candidate-wise generative scorer. Notably, TDSM re-ports higher accuracy without RGB on three of the four NTU-60/120 splits [11], suggesting that the benefit of vi-sual evidence depends not only on its availability but also on how it enters candidate scoring. 
+
+Generative Models for Zero-Shot Recognition. Gener-ative ZSL methods differ in whether generation synthesizes training data or directly supplies a candidate-class score. An established route generates unseen-class feature instances for a downstream classifier [4, 31]; skeleton-specific VAE variants improve this route through semantic factor disen-tanglement in SA-DVAE and frequency-semantic enhance-ment in FS-VAE [18, 32]. Direct-scoring methods instead rank candidates with a class-conditioned error or energy, as in SCALE [23]. Diffusion classifiers implement this inter-face by keeping the same noised observation fixed, substi-tuting each candidate condition in turn, and ranking candi-dates by their noise-prediction errors [10, 17]. TDSM ap-plies this rule to skeleton ZSAR by noising a skeleton rep-resentation, conditioning the denoiser on each candidate class text, and selecting the text that produces the mini-mum denoising error [11]; FDSM retains this candidate-wise interface while introducing frequency-aware modeling and curriculum-guided semantics [36]. Flora instead uses flow matching and condition-free contrastive regularization to form a token-level velocity classifier [7]. These strands expose a scoring-interface gap rather than simply a missing modality combination. Visual-assisted ZSAR shows that appearance from current sample’s video can complement skeleton motion, yet existing methods use it either for training-time representation enhancement or for modality-specific prediction. Candidate-wise diffusion of-fers a different interface by evaluating each class hypoth-esis through one denoising energy. TDSM-MM therefore places the current RGB representation inside the same de-noiser that processes the noised skeleton and candidate text: holding the skeleton and RGB fixed while varying only the candidate text allows visual evidence to modify the relative denoising errors—and therefore the ranking—of candidate classes, without producing an independent RGB ranking or requiring a post-hoc fusion weight. 
+
+## 3. Method 
+
+3.1. Overview and Notation 
+
+Task setting. Let Ys and Yu be disjoint sets of seen and unseen action classes. The seen-class training set is Ds =
+
+{(xi, 0, vi, y i)}Mi=1 , where xi, 0 is the clean skeleton feature of video i, vi is its aligned RGB feature, and yi ∈ Y s is the class label. For every candidate class c ∈ Y s ∪ Y u, a frozen text encoder provides a local token matrix T c and a global vector gc. At test time, the model assigns (xi, 0, vi) to one class in Yu.
+
+Core workflow. Figure 2 illustrates the three modality paths and the shared scoring procedure used for training and inference. Following TDSM [11], we add noise only to xi, 0 and do not sample a reverse diffusion chain for classification. The denoiser predicts the added noise from the noised skeleton under candidate-text and current-video RGB conditions, and the resulting prediction error serves as the candidate energy. Building on TDSM’s candidate-wise diffusion scorer, TDSM-MM introduces RGB condi-tioning through a non-diffused RGB condition token that interacts jointly with the noised skeleton and each candidate text. During training, correct and wrong texts are evaluated with identical skeleton, RGB, timestep, and noise. During inference, the same quantities are fixed for each noise draw while unseen candidate text c is varied, and the class with the lowest averaged energy is selected. 
+
+Why joint conditioning instead of late fusion? Indepen-dent late fusion assigns two scores to each candidate class 
+
+c: a skeleton–text score sskel (c) and an RGB–text score 
+
+sRGB (c), with lower values indicating better matches. For 3wrong label           
+
+> 35 local text tokens
+> skeleton feature
+> add noise noisy skeleton token
+> RGB feature non-diffused RGB token
+> 135 text 1
+> AdaLN
+> predicted noise
+> training inference
+> Train correct label Inference unseen candidates
+> Linear
+> Global text + timestep
+> Noise head Denoising error Training objective
+> noise-prediction space
+> target noise correct pred. wrong pred.
+> low error high error
+> required separation pull push
+
+Inference 
+
+Lower error ranks higher k1 k2 kK 
+
+> OpenCLIP ViT-H/14 Text Encoder
+> (SD 2.1)
+> Shift-GCN
+> OpenCLIP ViT-H/14
+
++  
+
+> 37-token input
+> joint attention
+> global text noise
+> RSRSSkeleton sequence
+> gc dt = 2048 d = 768 xi,0: ds = 256 vi: dv = 1024 zi v: d = 768 xi,t: ds = 256 Ei (c)r
+
+Figure 2. Training and inference in TDSM-MM. Only skeleton features undergo forward diffusion; candidate text and current-video RGB jointly condition the CrossDiT denoiser. Training enforces a lower denoising error for the correct text than a wrong text, whereas inference ranks unseen candidates by the same error without an independent RGB score. 
+
+the true class yi and a competitor c, define the modality-specific margin as ∆m(yi, c ) = sm(c) − sm(yi) for m ∈{skel , RGB }. A fused score with skeleton weight α ∈ [0 , 1] 
+
+ranks yi ahead of c only if 
+
+α∆skel (yi, c ) + (1 − α)∆ RGB (yi, c ) > 0. (1) When the modalities disagree, the suitable range of α de-pends on the class pair and score scales, so a weight se-lected on seen classes may transfer unevenly to unseen pairs. TDSM-MM instead produces one energy conditioned on the skeleton, current RGB observation, and candidate text, introducing neither an independent RGB ranking nor an explicit post-hoc fusion weight. 
+
+3.2. Multimodal Candidate-Conditioned Denoiser 
+
+Frozen input representations. A frozen Shift-GCN [8] maps each skeleton sequence to xi, 0 ∈ Rds , where 
+
+ds = 256 . For candidate class c, we use the frozen Open-CLIP ViT-H text encoder employed by Stable Diffusion 2.1 [9, 27] to encode two prompts separately: the action name and the fixed TDSM description. Both sequences are padded or truncated to L = 35 positions. Concatenating the two token sequences along the feature dimension gives 
+
+T c ∈ RL×dt , and concatenating their pooled representa-tions gives gc ∈ Rdt , with dt = 2048 . A frozen OpenCLIP ViT-H/14 visual encoder [9] processes eight uniformly sam-pled RGB frames. Each 1024 -dimensional frame feature is 
+
+ℓ2-normalized; the features are then averaged and normal-ized again to obtain vi ∈ Rdv , where dv = 1024 . All three encoders are frozen; the CrossDiT denoiser, including its input projections and learned positional embeddings, is op-timized. 
+
+Skeleton corruption and token construction. Following the standard DDPM forward process [15], for timestep t ∈{0, . . . , T − 1} we corrupt only the clean skeleton feature: 
+
+xi,t = √¯αt xi, 0 + √1 − ¯αt ϵi, ϵi ∼ N (0, I), (2) where ¯αt controls the retained skeleton signal. The noised feature xi,t ∈ Rds and each row of T c ∈ RL×dt are sepa-rately projected to the denoiser width d = 768 , producing one skeleton token and L text tokens with learned positional embeddings. A learned affine mapping Ev : Rdv → Rd and RGB slot embedding pv produce one non-diffused RGB condition token: 
+
+zvi = Ev (vi) + pv ∈ Rd. (3) Because temporal order is removed by frame averaging, 
+
+vi mainly represents sample-level appearance and context, whereas xi, 0 encodes temporal body dynamics. 
+
+Joint CrossDiT processing. We append the RGB condi-tion token zvi to the L projected text tokens, forming the conditioning stream. Each CrossDiT block, inherited from TDSM and built on DiT [11, 24], uses separate query, key, value, and output projections for the skeleton and condition-ing streams, followed by one joint multi-head attention op-eration. The outputs return to their respective streams and pass through separate feed-forward networks. Thus, every block processes 1 + L + 1 = 37 tokens: one noised skeleton token, 35 text tokens, and one RGB condition token. The global text vector gc is embedded and added to the timestep embedding to control AdaLN in both streams and in the fi-nal prediction layer. RGB does not generate AdaLN param-eters; as part of the conditioning stream, however, its hid-den state is normalized, text–time modulated, and updated 4by every block. The final layer maps the updated skeleton token to the predicted noise in Rds .
+
+Operational definition of the visual anchor. We call zvi
+
+non-diffused because it receives no forward-process corrup-tion at the denoiser input. The same input RGB condition token is reused when candidate class c changes, providing a sample-specific visual reference for every candidate evalu-ation. “Stable” refers only to this uncorrupted input: the to-ken’s hidden state still evolves inside CrossDiT and is mod-ulated by candidate text and timestep. Consequently, RGB can modify the noise prediction differently under different class hypotheses without producing class logits or a sepa-rate RGB ranking. 
+
+3.3. Paired Candidate Training 
+
+Candidate denoising energy. To keep notation compact, let Dθ (xi,t , t ; c, vi) denote the noise predicted by the de-noiser when candidate c supplies (T c, gc). For each train-ing sample, we draw ϵi ∼ N (0, I) and ti uniformly from 
+
+{0, . . . , T −1}, then construct xi,t i with Eq. (2). The candi-date energy is the mean squared noise-prediction error over the ds skeleton-feature dimensions: 
+
+Ei(c) = 1
+
+ds
+
+∥Dθ (xi,t i , t i; c, vi) − ϵi∥22 . (4) 
+
+Correct- and wrong-text objective. For each true label 
+
+yi, we sample y− 
+
+> i
+
+∼ Uniform( Ys). The two denoiser eval-uations Ei(yi) and Ei(y− 
+
+> i
+
+) share xi, 0, vi, ti, and ϵi; only the class text changes. To mask accidental matches, let ai = 1 
+
+if y−
+
+> i
+
+̸ = yi and ai = 0 otherwise. For a mini-batch of size 
+
+B, the objective is 
+
+Ldiff = 1
+
+B
+
+> B
+
+X
+
+> i=1
+
+Ei(yi),
+
+LTD = 1
+
+B
+
+> B
+
+X
+
+> i=1
+
+ai
+
+Ei(yi) − E i(y− 
+
+> i
+
+) + γ
+
+> +
+
+,
+
+L = Ldiff + LTD .
+
+(5) where [z]+ = max( z, 0) . We use γ = 1 and unit weights for both terms. The objective therefore trains one denoiser to assign lower energy to the correct class text than to a wrong class text under identical skeleton and visual evidence. It in-troduces no RGB classification loss, RGB-specific ranking loss, or comparison between different RGB samples. 
+
+3.4. Candidate-Wise Zero-Shot Inference 
+
+Scoring every unseen class. We use one fixed timestep 
+
+t⋆ and a fixed bank of N independently sampled Gaus-sian noise vectors {ϵ(n)}Nn=1 , shared across test samples. For a test sample (xi, 0, vi) and each noise draw, we con-struct x(n) 
+
+> i,t ⋆
+
+once using Eq. (2), then reuse the same noised skeleton, RGB feature, timestep, and noise while evaluat-ing every candidate c ∈ Y u. The candidate energy, averaged score, and prediction are 
+
+Ei,n (c) = 1
+
+ds
+
+Dθ (x(n) 
+
+> i,t ⋆
+
+, t ⋆; c, vi) − ϵ(n) 22
+
+,Si(c) = 1
+
+N
+
+> N
+
+X
+
+> n=1
+
+Ei,n (c),
+
+byi = arg min 
+
+> c∈Y u
+
+Si(c).
+
+(6) Only candidate text changes inside the class loop; the cur-rent sample’s RGB feature never supplies an independent ranking. After checkpoint selection, inference updates nei-ther model parameters nor prompts, prototypes, or caches from the incoming unseen test stream. The experimental setup specifies t⋆ and N .
+
+## 4. Experiments 
+
+4.1. Experimental Setup 
+
+Datasets and splits. We evaluate on NTU RGB+D 60 [28] and NTU RGB+D 120 [20] under the standard SynSE [13] seen/unseen splits (48/12 and 55/5 for NTU-60; 96/24 and 110/10 for NTU-120). Following the primary TDSM protocol, models are trained using only seen-class samples, and we report top-1 zero-shot accuracy on unseen classes. After the inherited checkpoint-selection procedure, inference uses a fixed model without updating parameters, prompts, prototypes, or caches from the incoming target stream. 
+
+Features and backbones. Following SynSE, skeleton features are extracted using a frozen Shift-GCN [8] (256-d). RGB features are extracted using a frozen OpenCLIP ViT-H/14 visual encoder [9] (1024-d). Class semantic em-beddings are extracted using the frozen OpenCLIP ViT-H text encoder employed by Stable Diffusion 2.1 [9, 27], with the original TDSM [11] class-name and LLM-description prompts. 
+
+Comparison protocol. We use the published skeleton-only TDSM [11] as the closest paradigm reference, shar-ing the frozen skeleton/text representations and CrossDiT design. Our content-free constant-slot ablation provides the same-architecture control for sample-specific RGB content. Flora is the strongest external inductive baseline, while Dy-naPURLS is a representative transductive baseline. 
+
+Implementation. Our denoiser is a 12-block trans-former [24] with hidden dimension 768, trained from 5scratch. We optimize it for 50k iterations with AdamW, a learning rate of 10 −4, weight decay of 0.01 , a 100-step warmup, cosine scheduling, and batch size 256. Training uses a 50-step DDPM scheduler with ϵ-prediction. At in-ference, we follow TDSM and use timestep t = 25 with 
+
+N = 10 noise samples for denoising-error estimation. Un-less noted, reported accuracies are averaged over five eval-uation runs with independent noise samples. 
+
+4.2. Comparison with State-of-the-Art Methods. 
+
+Table 1 compares TDSM-MM with representative zero-shot action recognition methods, including skeleton-only approaches, the diffusion baseline TDSM [11], the RGB-enhanced BSZSL [19], and recent inductive and transduc-tive methods. Compared with skeleton-only TDSM, TDSM-MM im-proves accuracy on all four SynSE splits, with the largest gains on NTU-60 48/12, NTU-120 96/24, and NTU-120 110/10 ( +10 .2, +6 .2, and +12 .4 percentage points, respec-tively). This demonstrates that RGB provides complemen-tary information beyond skeleton dynamics, while the lim-ited gain on NTU-60 55/5 is consistent with its near satu-ration. The improvement over BSZSL [19] and the weak performance of RGB-only OpenCLIP matching ( 19 .3% –
+
+60 .3% ) further indicate that the gain comes from effective skeleton–RGB interaction rather than RGB features alone. Among inductive methods, TDSM-MM achieves the best performance on three of four splits, outperforming Flora [7] by 0.9, 4.9, and 7.0 percentage points on NTU-60 48/12, NTU-120 96/24, and NTU-120 110/10, respectively. Notably, on NTU-120 96/24, TDSM-MM reaches 71 .3% 
+
+and exceeds the transductive DynaPURLS [39] ( 69 .1% )without using target-stream statistics or test-time adapta-tion. 
+
+4.3. Ablations 
+
+Effect of RGB conditioning design. Table 2 evaluates different variants of the RGB conditioning mechanism, including content removal, alternative fusion, and condi-tion corruption. Removing sample-specific RGB informa-tion reduces accuracy from 66 .2% to 56 .5% , showing that the improvement comes from informative visual evidence rather than merely introducing an additional condition to-ken slot. Injecting RGB features into the skeleton-side token achieves only 59 .4% , while corrupting the RGB condition token reduces performance to 56 .3% . These comparisons show that, among the tested designs, a separate and non-diffused RGB condition token provides the most effective guidance for diffusion-based recognition. 
+
+Interaction with the scoring formulation. To test whether RGB conditioning benefits specifically from 1 5 10 20 25 35 49 Diffusion timestep t -> greater skeleton corruption -25 -20 -15 -10 -5 0Top-1 accuracy change from matched RGB (pp) Matched RGB (reference) default t=25 
+
+> Same-action RGB
+> Different-action RGB
+
+Figure 3. Effect of RGB substitution across diffusion timesteps on NTU-60 48/12. Action-incompatible RGB becomes increasingly harmful as skeleton corruption grows, whereas same-action RGB remains close to matched RGB. 
+
+diffusion-based scoring, we compare matched discrimina-tive and diffusion CrossDiT variants. Adding the RGB condition token improves the discriminative model from 
+
+49 .60% to 50 .86% , but improves the diffusion model from 
+
+56 .94% to 66 .67% . The gain difference is 8.47 percentage points, with a 95% class-stratified bootstrap confidence in-terval of [6 .39 , 10 .55] , indicating that denoising-based scor-ing substantially amplifies RGB conditioning. 
+
+4.4. Mechanism Analysis 
+
+RGB conditioning versus score fusion. We freeze a constant-slot skeleton-diffusion scorer and a seen-trained RGB–text scorer, then fit temperature-calibrated global fu-sion and select a two-layer candidate-wise gate over score, confidence, and rank features on four seen-class folds. On the same ten-draw bank, the skeleton scorer, calibrated fu-sion, learned gate, and joint conditioning reach 56 .94% ,
+
+60 .52% , 57 .03% , and 66 .67% , respectively. The strongest tested independent fusion remains 6.15 percentage points below joint conditioning, with a paired class-stratified 95% bootstrap confidence interval of [4 .68 , 7.58] .
+
+Candidate-dependent RGB influence. We first perform a paired counterfactual intervention at the default timestep 
+
+t = 25 : the checkpoint, skeleton, candidate texts, timestep, and ten-noise bank are fixed, while only the RGB feature is replaced. Matched, same-action, and controlled different-action RGB yield 66 .39% , 66 .06% , and 53 .12% accu-racy, respectively. Under different-action replacement, the true-versus-donor margin shifts toward the donor class for 
+
+78 .0% of samples, the donor improves by an average of 1.22 
+
+ranking positions, and 7.8% of predictions turn to the donor. Thus, RGB changes relative candidate energies rather than contributing only a candidate-independent offset. 6Method Paradigm Modality Setting NTU-60 NTU-120 48/12 55/5 96/24 110/10 
+
+Skeleton-only, inductive 
+
+SynSE [13] alignment S inductive 33.3 75.8 38.7 62.7 SMIE [35] alignment S inductive 40.2 78.0 45.3 65.7 SA-DVAE [18] VAE S inductive 41.4 82.4 46.1 68.8 PURLS [37] alignment S inductive 41.0 79.2 52.0 72.0 FS-VAE [32] VAE S inductive 57.2 86.9 62.5 74.4 Neuron [5] prototype S inductive 62.7 86.9 57.1 71.5 SkeletonContext [30] alignment+ctx S inductive 64.4 89.6 60.1 74.2 TDSM [11] diffusion S inductive 56.0 86.5 65.1 74.2 Flora † [7] flow S inductive 65.3 86.3 66.4 79.6 
+
+Transductive (uses test-time statistics) 
+
+DynaPURLS [39] TTA S transductive 71.8 88.5 69.1 89.1 
+
+RGB-only (appearance matching), training-free 
+
+OpenCLIP ViT-H/14 [9] matching R inductive 19.3 60.3 18.5 41.3 
+
+multimodal, inductive 
+
+BSZSL [19] alignment S+R inductive 53.0 83.0 56.1 77.7 
+
+TDSM-MM (ours) diffusion S+R inductive 66.2 86.8 71.3 86.6 
+
+Table 1. Top-1 ZSL accuracy (%) on the NTU-60/120 SynSE splits (S=skeleton, R=RGB). Boldface entries mark the best inductive result within each input-modality group. DynaPURLS uses target-stream statistics and is shown for reference; † denotes Flora’s reported 4s-Shift-GCN result. 
+
+Variant RGB interface Acc. (%) 
+
+Diffusion routing/training controls 
+
+Constant slot content-free condition token 56.5 Skeleton-side RGB skeleton-side early fusion 59.4 RGB-corrupted training noised RGB condition token 56.3 TDSM-MM non-diffused condition token 66.2 
+
+Matched discriminative CrossDiT controls 
+
+D0: constant slot content-free condition token 49.6 D1: skeleton-side RGB skeleton-side early fusion 48.2 D2: RGB conditioning non-diffused condition token 50.9 
+
+Table 2. Ablations on NTU-60 48/12. The noised-token variant corrupts RGB only during training and uses non-diffused RGB at inference. In D1, a content-free condition token slot is retained for capacity matching, while sample-specific RGB enters through skeleton-side early fusion. 
+
+Corruption-dependent visual anchoring. Replacing matched RGB with different-action RGB reduces accu-racy by 2.20 and 23 .52 percentage points at t = 1 and 
+
+t = 49 , respectively. The paired endpoint change is −21 .31 
+
+percentage points, with a subject-cluster 95% bootstrap confidence interval of [−23 .52 , −17 .32] , while same-action replacement remains stable. This timestep-dependent effect is consistent with RGB serving as a visual anchor when skeleton evidence becomes increasingly corrupted. 
+
+RGB input Top-1 (%) 
+
+Matched current-video RGB 86.6 
+
+Zero vector 52.6 Seen-training mean 40.5 Label-mismatched real RGB 35.5 Table 3. Paired RGB-content interventions on NTU-120 110/10 using a fixed checkpoint and ten shared noise draws. Only the RGB input changes. 
+
+Reliability of RGB conditioning. A 2×2 clean/noisy RGB factorial experiment further separates training-time condition reliability from test-time sensitivity. Test-time RGB corruption reduces the clean-trained model from 
+
+66 .39% to 64 .92% , but has little effect on the noisy-trained model ( 55 .32% → 55 .23% ). The top-1 inter-action is 1.38 percentage points (95% bootstrap confi-dence interval [−0.06 , 2.88] ), while the candidate-margin interaction is 0.0343 (95% bootstrap confidence interval 
+
+[0 .0238 , 0.0446] ), suggesting that clean-condition training increases sensitivity to RGB reliability. 
+
+Sample-specific visual evidence. To verify that RGB conditioning exploits instance-level visual cues rather than only an RGB pathway, we replace the original RGB feature with zero, mean, or label-mismatched RGB while keeping the skeleton, text, and checkpoint fixed. Table 3 shows that 7matched current-video RGB substantially outperforms all alternatives, indicating that the gain comes from sample-specific visual evidence rather than a generic visual prior. The effect is class-dependent: visually ambiguous classes retain larger gains, whereas some motion-dominant classes show limited or negative changes, suggesting that RGB con-ditioning mainly reshapes competition among visually con-fusable actions. 
+
+## 5. Discussion and Limitations 
+
+When RGB conditioning is effective. RGB conditioning is most beneficial when visual information provides com-plementary evidence beyond skeleton motion. The consis-tent improvements on NTU-60 48/12 and NTU-120 96/24 and 110/10 ( +10 .2, +6 .2, and +12 .4 percentage points over skeleton-only TDSM, respectively) suggest that condition-ing is particularly useful when the skeleton–text correspon-dence is insufficient to resolve unseen classes. On NTU-120 96/24, TDSM-MM further surpasses the transductive Dy-naPURLS ( 71 .3% vs. 69 .1% ) without using any test-time statistics, trading additional per-sample RGB observations for a fully inductive inference procedure. 
+
+Modality fairness. Our matched reference is the same-backbone, same-paradigm skeleton-only TDSM ( ±RGB); under this controlled comparison, adding RGB consistently improves aggregate accuracy on three of four splits and is near-neutral on the fourth, reversing the prior negative evi-dence (BSZSL). 
+
+Limitations and future directions. RGB conditioning depends on informative and correctly aligned visual ob-servations: label-mismatched real RGB reduces accuracy from 86 .6% to 35 .5% on the fixed NTU-120 110/10 check-point, while salute regresses relative to all three reference conditions. The corruption-dependent and per-class analy-ses characterize fixed checkpoints and therefore quantify test-population rather than training-seed uncertainty. Infer-ence requires O(K·N ) denoiser evaluations per sample; with cached RGB features, the additional RGB condition to-ken increases denoiser parameters by 0.30% and measured scorer latency by 3.08 –4.37% , while online deployment ad-ditionally incurs the frozen ViT-H/14 encoding cost. Han-dling missing, unreliable, or misleading RGB remains an important direction. 
+
+## 6. Conclusion 
+
+In this paper, we showed that in inductive ZSAR, supply-ing RGB information as conditioning of a single denois-ing objective is more effective than combining independent modality scores. Score combination is limited by the ab-sence of unseen-class supervision for weight calibration; conditioning avoids the weighting problem by absorbing fusion into learned attention. TDSM-MM instantiates this principle with a single non-diffused RGB condition token, which serves as a stable visual anchor during diffusion de-noising. It achieves the best inductive accuracy on three of four NTU-60/120 splits, and on 96/24 surpasses the trans-ductive state of the art without using any test-time statistics. However, per-class competition remains: conditioning miti-gates but does not eliminate regressions on visually confus-able classes, and the gain depends on RGB carrying class-relevant cues that skeletons lack. Addressing these residual regressions is a direction for future work. 
+
+## References                   
+
+> [1] Tadas Baltruˇ saitis, Chaitanya Ahuja, and Louis-Philippe Morency. Multimodal machine learning: A survey and tax-onomy. IEEE transactions on pattern analysis and machine intelligence , 41(2):423–443, 2019. [2] Kaixuan Chen, Dalin Zhang, Lina Yao, Bin Guo, Zhiwen Yu, and Yunhao Liu. Deep learning for sensor-based human ac-tivity recognition: Overview, challenges, and opportunities.
+> ACM Computing Surveys (CSUR) , 54(4):1–40, 2021. [3] Shizhe Chen and Dong Huang. Elaborative rehearsal for zero-shot action recognition. In Proceedings of the IEEE/CVF international conference on computer vision ,pages 13638–13647, 2021. [4] Shiming Chen, Dingjie Fu, Salman Khan, and Fahad Shah-baz Khan. GenZSL: Generative zero-shot learning via induc-tive variational autoencoder. In Proceedings of the 42nd In-ternational Conference on Machine Learning , pages 8108– 8122. PMLR, 2025. [5] Yang Chen, Jingcai Guo, Song Guo, and Dacheng Tao. Neu-ron: Learning context-aware evolving representations for zero-shot skeleton action recognition. In Proceedings of the Computer Vision and Pattern Recognition Conference , pages 8721–8730, 2025. [6] Yang Chen, Tian He, Junfeng Fu, Ling Wang, Jingcai Guo, Ting Hu, and Hong Cheng. Vision-language meets the skele-ton: Progressively distillation with cross-modal knowledge for 3d action representation learning. IEEE Transactions on Multimedia , 27:2293–2303, 2025. [7] Yang Chen, Miaoge Li, Zhijie Rao, Deze Zeng, Song Guo, and Jingcai Guo. Learning by neighbor-aware semantics, de-ciding by open-form flows: Towards robust zero-shot skele-ton action recognition. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings , pages 3374–3383, 2026. [8] Ke Cheng, Yifan Zhang, Xiangyu He, Weihan Chen, Jian Cheng, and Hanqing Lu. Skeleton-based action recognition with shift graph convolutional network. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 183–192, 2020. [9] Mehdi Cherti, Romain Beaumont, Ross Wightman, Mitchell Wortsman, Gabriel Ilharco, Cade Gordon, Christoph Schuh-mann, Ludwig Schmidt, and Jenia Jitsev. Reproducible scal-ing laws for contrastive language-image learning. In Pro-
+
+8ceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 2818–2829, 2023. [10] Kevin Clark and Priyank Jaini. Text-to-image diffusion mod-els are zero shot classifiers. In Advances in Neural Informa-tion Processing Systems , pages 58921–58937. Curran Asso-ciates, Inc., 2023. [11] Jeonghyeok Do and Munchurl Kim. Bridging the skeleton-text modality gap: Diffusion-powered modality alignment for zero-shot skeleton-based action recognition. In Proceed-ings of the IEEE/CVF International Conference on Com-puter Vision , pages 12757–12768, 2025. [12] Xibin Dong, Zhiwen Yu, Wenming Cao, Yifan Shi, and Qianli Ma. A survey on ensemble learning. Frontiers of Computer Science , 14(2):241–258, 2020. [13] Pranay Gupta, Divyanshu Sharma, and Ravi Kiran Sarvadev-abhatla. Syntactically guided generative embeddings for zero-shot skeleton action recognition. In 2021 IEEE Interna-tional Conference on Image Processing (ICIP) , pages 439– 443. IEEE, 2021. [14] Jonathan Ho and Tim Salimans. Classifier-free diffusion guidance, 2022. [15] Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising dif-fusion probabilistic models. In Advances in Neural Infor-mation Processing Systems , pages 6840–6851. Curran Asso-ciates, Inc., 2020. [16] Jidong Kuang, Hongsong Wang, Chaolei Han, Yang Zhang, and Jie Gui. Zero-shot skeleton-based action recognition with dual visual-text alignment. Pattern Recognition , 171: 112342, 2026. [17] Alexander C Li, Mihir Prabhudesai, Shivam Duggal, Ellis Brown, and Deepak Pathak. Your diffusion model is secretly a zero-shot classifier. In Proceedings of the IEEE/CVF Inter-national Conference on Computer Vision , pages 2206–2217, 2023. [18] Sheng-Wei Li, Zi-Xiang Wei, Wei-Jie Chen, Yi-Hsin Yu, Chih-Yuan Yang, and Jane Yung-jen Hsu. Sa-dvae: Improv-ing zero-shot skeleton-based action recognition by disentan-gled variational autoencoders. In European conference on computer vision , pages 447–462. Springer, 2024. [19] Hongjie Liu, Yingchun Niu, Kun Zeng, Chun Liu, Mengjie Hu, and Qing Song. Beyond-skeleton: Zero-shot skeleton action recognition enhanced by supplementary rgb visual in-formation. Expert Systems with Applications , 273:126814, 2025. [20] Jun Liu, Amir Shahroudy, Mauricio Perez, Gang Wang, Ling-Yu Duan, and Alex C Kot. Ntu rgb+ d 120: A large-scale benchmark for 3d human activity understanding. IEEE transactions on pattern analysis and machine intelligence ,42(10):2684–2701, 2020. [21] Jinfu Liu, Chen Chen, and Mengyuan Liu. Multi-modality co-learning for efficient skeleton-based action recognition. In Proceedings of the 32nd ACM international conference on multimedia , pages 4909–4918, 2024. [22] Bolin Ni, Houwen Peng, Minghao Chen, Songyang Zhang, Gaofeng Meng, Jianlong Fu, Shiming Xiang, and Haibin Ling. Expanding language-image pretrained models for gen-eral video recognition. In European conference on computer vision , pages 1–18. Springer, 2022. [23] Soroush Oraki, Feng Ding, and Jie Liang. SCALE: Semantic- and confidence-aware conditional variational au-toencoder for zero-shot skeleton-based action recognition, 2026. [24] William Peebles and Saining Xie. Scalable diffusion models with transformers. In Proceedings of the IEEE/CVF inter-national conference on computer vision , pages 4195–4205, 2023. [25] Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervi-sion. In International conference on machine learning , pages 8748–8763. PmLR, 2021. [26] Hanoona Rasheed, Muhammad Uzair Khattak, Muhammad Maaz, Salman Khan, and Fahad Shahbaz Khan. Fine-tuned clip models are efficient video learners. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 6545–6554, 2023. [27] Robin Rombach, Andreas Blattmann, Dominik Lorenz, Patrick Esser, and Bj¨ orn Ommer. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 10684–10695, 2022. [28] Amir Shahroudy, Jun Liu, Tian-Tsong Ng, and Gang Wang. Ntu rgb+ d: A large scale dataset for 3d human activity anal-ysis. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 1010–1019, 2016. [29] Zehua Sun, Qiuhong Ke, Hossein Rahmani, Mohammed Bennamoun, Gang Wang, and Jun Liu. Human action recog-nition from various data modalities: A review. IEEE trans-actions on pattern analysis and machine intelligence , 45(3): 3200–3225, 2023. [30] Ning Wang, Tieyue Wu, Naeha Sharif, Farid Boussaid, Guangming Zhu, Lin Mei, Mohammed Bennamoun, and Liang Zhang. Skeletoncontext: Skeleton-side context prompt learning for zero-shot skeleton-based action recognition. In 
+
+Proceedings of the IEEE/CVF Conference on Computer Vi-sion and Pattern Recognition (CVPR) , pages 20170–20180, 2026. [31] Wei Wang, Vincent W Zheng, Han Yu, and Chunyan Miao. A survey of zero-shot learning: Settings, methods, and appli-cations. ACM Transactions on Intelligent Systems and Tech-nology (TIST) , 10(2):1–37, 2019. [32] Wenhan Wu, Zhishuai Guo, Chen Chen, Hongfei Xue, and Aidong Lu. Frequency-semantic enhanced variational au-toencoder for zero-shot skeleton-based action recognition. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 11122–11131, 2025. [33] Bruce X.B. Yu, Yan Liu, Xiang Zhang, Sheng-hua Zhong, and Keith C.C. Chan. Mmnet: A model-based multimodal network for human action recognition in rgb-d videos. IEEE Transactions on Pattern Analysis and Machine Intelligence ,45(3):3522–3538, 2022. [34] Kai Zhou, Shuhai Zhang, Zeng You, Jinwu Hu, Mingkui Tan, and Fei Liu. Zero-shot skeleton-based action recognition with prototype-guided feature alignment. IEEE Transactions on Image Processing , 34:4602–4617, 2025. 
+
+9[35] Yujie Zhou, Wenwen Qiang, Anyi Rao, Ning Lin, Bing Su, and Jiaqi Wang. Zero-shot skeleton-based action recognition via mutual information estimation and maximization. In Pro-ceedings of the 31st ACM international conference on multi-media , pages 5302–5310, 2023. [36] Yuxi Zhou, Zhengbo Zhang, Jingyu Pan, Zhiyu Lin, and Zhigang Tu. Frequency-enhanced diffusion models: Curriculum-guided semantic alignment for zero-shot skele-ton action recognition. The Visual Computer , 42:310, 2026. [37] Anqi Zhu, Qiuhong Ke, Mingming Gong, and James Bai-ley. Part-aware unified representation of language and skele-ton for zero-shot action recognition. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 18761–18770, 2024. [38] Jingmin Zhu, Anqi Zhu, Hossein Rahmani, Jun Liu, Mo-hammed Bennamoun, and Qiuhong Ke. Boosting skeleton-based zero-shot action recognition with training-free test-time adaptation. In Advances in Neural Information Pro-cessing Systems , pages 103521–103551. Curran Associates, Inc., 2025. [39] Jingmin Zhu, Anqi Zhu, James Bailey, Jun Liu, Hossein Rahmani, Mohammed Bennamoun, Farid Boussaid, and Qi-uhong Ke. Dynapurls: Dynamic refinement of part-aware representations for skeleton-based zero-shot action recogni-tion. IEEE Transactions on Pattern Analysis and Machine Intelligence , pages 1–16, 2026. 
+
+10 Technical Supplement 
+
+This technical supplement provides implementation and evaluation details, expanded controls for RGB routing, the scoring objective, and independent-score fusion, additional interventions characterizing non-diffused RGB condition-ing, and sensitivity and efficiency analyses. The main paper is self-contained; the material below provides extended re-sults and protocol-level auditability. 
+
+## A. Implementation and Evaluation Protocol 
+
+A.1. Datasets and Zero-Shot Protocols 
+
+We evaluate on the NTU RGB+D 60 and NTU RGB+D 120 datasets [20, 28] using the four class partitions adopted by TDSM [11]. Table S1 lists the number of seen-class train-ing samples and unseen-class test samples after applying the corresponding cross-subject and class filters. Training uses paired skeleton and RGB observations from seen classes, whereas candidate-wise evaluation is restricted to the des-ignated unseen classes.                
+
+> Protocol Seen/unseen Train Test NTU-60 48/12 48/12 31,882 3,270 NTU-60 55/5 55/5 36,548 1,356 NTU-120 96/24 96/24 50,116 9,883 NTU-120 110/10 110/10 57,469 3,948 Table S1. Dataset protocols used in the main experiments. “Train” contains labeled seen-class samples; “test” contains samples from the designated unseen classes.
+
+We follow the checkpoint-selection and reporting con-vention of the original TDSM benchmark and, for repro-ducibility, use a fixed training seed of 2027. The inherited checkpoint-evaluation interface uses three diffusion-noise draws during training; after selection, the checkpoint is kept fixed, and the reported main results are re-evaluated with ten draws. Candidate scoring does not update model pa-rameters, prompts, prototypes, or caches from incoming tar-get samples, and all counterfactual analyses reuse the same fixed checkpoint within each comparison. 
+
+A.2. Frozen Input Representations 
+
+Skeleton. A frozen Shift-GCN [8] maps each skeleton se-quence to xi, 0 ∈ Rds , where ds = 256 . This is the only modality subjected to the DDPM forward process [15]. 
+
+Text. We use the frozen OpenCLIP-compatible ViT-H text encoder employed by Stable Diffusion 2.1 [9, 27]. The action name and the fixed TDSM description are encoded separately, each padded or truncated to 35 positions. Con-catenating the two last-hidden-state sequences along the channel dimension gives T c ∈ R35 ×2048 for candidate c;concatenating their pooled outputs gives gc ∈ R2048 .
+
+RGB. A frozen OpenCLIP ViT-H/14 visual encoder pre-trained on LAION-2B [9] processes eight frames sampled uniformly over video i. Each 1024-dimensional frame em-bedding is ℓ2-normalized, the embeddings are averaged over time, and the average is normalized again. A learned linear layer maps the resulting vi ∈ R1024 to one 768-dimensional RGB condition token. 
+
+A.3. Denoiser Architecture 
+
+We retain the main-paper notation Dθ for the denoiser, which inherits the 12-block CrossDiT design of TDSM, with width 768, 12 attention heads, and an MLP expansion ratio of 4. Each block first forms separate query, key, and value projections for the skeleton stream and the condition-ing stream, concatenates the projected tokens for joint atten-tion, and then splits the two streams before separate feed-forward networks. The sum of the timestep embedding and projected global candidate-text embedding controls AdaLN modulation in both streams. RGB does not independently control AdaLN and does not produce class logits; it affects the predicted skeleton noise through joint attention with the candidate text and noised skeleton. The term non-diffused refers specifically to the input route: the RGB feature is not corrupted by the forward diffu-sion process. Its hidden representation still changes through AdaLN, attention, and feed-forward updates inside Cross-DiT. The reported model uses one RGB condition token, RGB condition dropout probability zero, and guidance scale one. 
+
+A.4. Training and Candidate-Wise Inference 
+
+For a seen-class sample (xi, 0, vi, y i), training samples one timestep ti from the T = 50 step schedule, one Gaussian noise vector ϵi, and one wrong seen-class label y− 
+
+> i
+
+. The correct and wrong passes share xi,t i , vi, ti, and ϵi; only the candidate text changes. The implementation samples y−
+
+> i
+
+uniformly from the complete seen label set and masks the triplet term when y− 
+
+> i
+
+= yi. Algorithm S1 summarizes one training update. At inference, the model uses a fixed timestep t⋆ = 25 
+
+and a bank of N = 10 Gaussian noise draws. For each draw, the noised skeleton and RGB are held fixed while can-didate text is substituted. The candidate score is the mean squared error (MSE) of the noise prediction averaged over the shared bank, and the minimum-score candidate is se-lected. Algorithm S2 summarizes this procedure, which re-11 Quantity Native size CrossDiT size Role Skeleton feature xi, 0 256 1 × 768 Diffused target representation Local text T c 35 × 2048 35 × 768 Candidate-specific condition tokens Global text gc 2048 768 AdaLN modulation with timestep Framewise RGB 8 × 1024 — Uniformly sampled visual observations Pooled RGB vi 1024 1 × 768 Non-diffused RGB condition token Joint attention sequence — 37 × 768 1 skeleton, 35 text, and 1 RGB condition token Table S2. Representations and tensor sizes. All three feature encoders are frozen; the projections, positional embeddings, CrossDiT blocks, and output layer are trainable. 
+
+Algorithm S1 TDSM-MM training update 
+
+Input : Seen sample (xi, 0, vi, y i), seen label set Ys, and frozen class-text embeddings 
+
+Output : Updated denoiser parameters θ 
+
+> 1:
+
+Sample ti ∼ Uniform {0, . . . , T − 1} 
+
+> 2:
+
+Sample ϵi ∼ N (0, I) 
+
+> 3:
+
+xi,t i ← √¯αti xi, 0 + √1 − ¯αti ϵi 
+
+> 4:
+
+Set y+ 
+
+> i
+
+← yi and sample y− 
+
+> i
+
+∼ Uniform( Ys) 
+
+> 5:
+
+for q ∈ { +, −} do  
+
+> 6:
+
+ˆϵqi ← Dθ (xi,t i , t i; yqi , vi) 
+
+> 7:
+
+Ei(yqi ) ← d−1 
+
+> s
+
+∥ˆϵqi − ϵi∥22 
+
+> 8:
+
+end for  
+
+> 9:
+
+ℓi ← max  0, Ei(yi) − E i(y− 
+
+> i
+
+) + γ 
+
+> 10:
+
+Li ← E i(yi) + 1[y−
+
+> i
+
+̸ = yi]ℓi 
+
+> 11:
+
+Update θ using the batch mean of Li
+
+quires KN denoiser evaluations for K unseen candidates and does not compute an independent RGB ranking. 
+
+Algorithm S2 Candidate-wise zero-shot inference 
+
+Input : Sample (xi, 0, vi), unseen candidates Yu, timestep 
+
+t⋆, and shared noise bank {ϵ(n)}Nn=1 
+
+Output : Predicted unseen class byi 
+
+> 1:
+
+for n = 1 , . . . , N do  
+
+> 2:
+
+x(n) 
+
+> i,t ⋆
+
+← √¯αt⋆ xi, 0 + √1 − ¯αt⋆ ϵ(n) 
+
+> 3:
+
+for each c ∈ Y u do  
+
+> 4:
+
+bϵi,n (c) ← Dθ (x(n) 
+
+> i,t ⋆
+
+, t ⋆; c, vi) 
+
+> 5:
+
+Ei,n (c) ← d−1 
+
+> s
+
+∥bϵi,n (c) − ϵ(n)∥22 
+
+> 6:
+
+end for  
+
+> 7:
+
+end for  
+
+> 8:
+
+for each c ∈ Y u do  
+
+> 9:
+
+Si(c) ← N −1 PNn=1 Ei,n (c) 
+
+> 10:
+
+end for  
+
+> 11:
+
+return byi ← arg min c∈Y u Si(c)
+
+A.5. Statistical Reporting 
+
+Unless stated otherwise, each paired 95% confidence inter-val (CI) is estimated using 10,000 class-stratified bootstrap replicates, resampling test examples within each true class while preserving the observed class counts. Paired accu-racy comparisons additionally use exact two-sided McNe-mar tests. The NTU-120 110/10 analysis reports a subject-cluster bootstrap as a sensitivity check. Intervals from these procedures quantify paired test-population effects, while variation across diffusion-noise banks quantifies Monte Carlo evaluation variation. 
+
+## B. Expanded Controlled Comparisons 
+
+B.1. RGB Routing Controls 
+
+Table S4 expands the routing ablation from the main paper. The constant-slot model retains a condition-token position but removes sample-specific RGB content. The skeleton-side model projects RGB and adds it to the skeleton token before CrossDiT while keeping a content-free condition slot for capacity matching. The RGB-corrupted model applies the DDPM schedule to the RGB condition during training but evaluates with non-diffused RGB. All rows preserve the same candidate-wise diffusion-scoring interface. Replacing the constant slot with informative, non-diffused RGB improves accuracy by 9.68 percentage points. Skeleton-side routing retains part of the benefit but remains 6.75 points below the separate RGB condition, while cor-rupting the RGB condition during training reduces it to the constant-slot level. Within these controlled routes, both vi-sual content and its non-diffused conditioning path are im-portant. 
+
+B.2. Matched Discriminative CrossDiT 
+
+To separate the denoising objective from generic mul-timodal attention, we construct a discriminative Cross-DiT with the same 12-block, 768-wide, 12-head architec-ture, identical frozen inputs, 37-token interface, optimizer, 50,000-update budget, batch order, wrong-label stream, and shared initialization across its three routing arms. Instead of predicting diffusion noise, it produces candidate scores and 12 Item Value Item Value Optimizer AdamW Learning rate 10 −4                                                      
+
+> Weight decay 0.01 LR schedule 100-step warmup, cosine Updates 50,000 Batch size 256 DDPM steps T50 Prediction target ϵ
+> Diffusion-loss weight 1Triplet-loss weight 1Triplet margin γ1Wrong texts/update 1 per sample Inference timestep 25 Reported noise draws 10 Test batch size 512 Feature workers 4Python / PyTorch 3.9.19 / 2.4.0 CUDA / cuDNN 11.8 / 9.1 Diffusers / Transformers 0.32.2 / 4.44.2 Accelerate / OpenCLIP 0.33.0 / 3.3.0 Hardware RTX 4090, 24 GB Frozen RGB frames 8 per video Table S3. Optimization, inference, and execution settings used by TDSM-MM. Diffusion route Top-1 (%) Content-free constant slot 56 .50 ±0.75
+> Skeleton-side RGB 59 .43 ±0.64
+> RGB-corrupted training 56 .28 ±0.39
+> Non-diffused RGB condition token 66 .18 ±0.68
+> Table S4. Controlled RGB-routing variants on NTU-60 48/12. Val-ues are means and standard deviations (SDs) over independently sampled evaluation-noise banks for each evaluated variant. Objective Content-free RGB condition RGB gain Diffusion 56.94 66.67 +9 .72
+> Discriminative 49.60 50.86 +1 .25
+> Table S5. Objective-matched RGB control on NTU-60 48/12. The RGB gain compares the condition-token model with the corre-sponding content-free model.
+
+minimizes the pairwise ranking objective softplus( q− 
+
+> i
+
+−q+ 
+
+> i
+
+)
+
+for one positive and one wrong candidate per sample. D0 uses a content-free token, D1 adds RGB to the skeleton-side token, and D2 uses an RGB condition token. The diffusion RGB gain is +9 .72 points (95% CI 
+
+[8 .26 , 11 .22] ), whereas the discriminative gain is +1 .25 
+
+points (95% CI [−0.24 , 2.78] ). Their interaction is +8 .47 
+
+points with a class-stratified 95% CI of [6 .39 , 10 .55] . Within the discriminative objective, D2 also exceeds skeleton-side D1 ( 48 .17% ) by 2.69 points (95% CI [1 .16 , 4.25] ). The to-ken route can therefore help a discriminative model, but the substantially larger gain emerges when RGB conditioning participates in candidate-wise denoising. 
+
+B.3. Independent-Score Fusion and Learned Gating 
+
+We next test whether a stronger independent-score rule can recover the joint scorer’s gain. The skeleton branch is the constant-slot diffusion scorer, and the RGB branch is a two-layer projection head trained on the 48 seen classes           
+
+> Scoring route Top-1 (%) Skeleton diffusion score 56.94 Independent RGB score 38.50 Normalized fixed fusion 56.94 Temperature-calibrated fixed fusion 60.52
+> Entropy-conditioned rule 60.12 Margin-conditioned rule 56.12 Sample-wise learned gate 54.62 Candidate-wise learned gate 57.03
+> Joint diffusion scorer 66 .67
+> Table S6. Independent-score routes on NTU-60 48/12.
+
+against OpenCLIP text prototypes. We form 12-way seen-class episodes and use four gate-only class-held-out folds: both frozen base branches have seen all 48 training classes, while temperatures, fusion weights, gate features, and gate architecture are selected without unseen examples or scores. Each learned gate is a two-layer MLP. The sample-wise gate emits one skeleton weight per sample; the candidate-wise gate emits one weight per sample–candidate pair from cali-brated scores, confidence summaries, and normalized ranks. The best tested independent route is temperature-calibrated fixed fusion at 60 .52% , which remains 6.15 points below joint conditioning (95% CI [4 .68 , 7.58] ). The preselected candidate-wise learned gate reaches 57 .03% ;the joint scorer exceeds it by 9.63 points (95% CI 
+
+[8 .10 , 11 .16] , exact McNemar p = 1 .41 × 10 −26 ). Thus, within the tested independent-score family, seen-trained adaptive fusion does not close the gap to a scorer in which RGB, skeleton, and candidate text interact before a single denoising energy is produced. 
+
+Correctness overlap. We additionally compare the per-sample correctness sets of the constant-slot skeleton scorer (F0), independent RGB scorer, and joint diffusion scorer (F2) on the same 3,270 examples. F2 rescues 569 F0 er-13 rors, yielding a net gain of 318 correct predictions. More importantly, F0 and RGB are both wrong on 961 exam-ples, yet F2 correctly classifies 386 of them (40.17%; class-stratified 95% CI [37 .26 , 43 .00] ). These 386 predictions lie outside the union of the two independent branches’ correct sets, showing that joint conditioning produces correct deci-sions unavailable from either tested independent top-1 out-put rather than merely selecting between them. 
+
+## C. Additional Analysis of Visual Anchoring 
+
+C.1. Counterfactual RGB Interventions 
+
+For each test sample, we construct three RGB conditions while keeping the checkpoint, skeleton, candidate texts, timestep, and complete diffusion-noise bank fixed. Matched 
+
+uses the sample’s own RGB. Same-action matches setup, camera, performer, and action but uses the other repetition. 
+
+Different-action matches setup, camera, performer, and rep-etition but uses another action from the unseen candidate set; its donor label and RGB feature are denoted by eyi and 
+
+vdonor  
+
+> i
+
+, respectively. The donor-label mapping is determin-istic, has no fixed points, and is constructed before evalua-tion; missing alternate-repetition features are extracted us-ing the same frozen eight-frame RGB encoder. Let Si(c; v) denote the candidate score averaged over the shared noise bank when class c is evaluated under RGB fea-ture v, extending the score Si(c) defined in Algorithm S2. We report the true-versus-best-wrong margin 
+
+mi(v) = min 
+
+> c̸=yi
+
+Si(c; v) − Si(yi; v), (S1) which is positive when the true class outranks every alter-native. For a different-action donor, we define its relative score gap ri(v) and the induced shift as 
+
+ri(v) = Si(eyi; v) − Si(yi; v),
+
+∆donor  
+
+> i
+
+= ri(vdonor  
+
+> i
+
+) − ri(vi). (S2) A negative value means donor RGB moves the donor class upward relative to the true class. We additionally report the donor’s rank improvement and the fraction of predictions that turn to its label. Unlike absolute energy, none of these candidate-relative quantities can be changed by adding the same scalar offset to every candidate. At the default timestep, matched, same-action, and different-action RGB yield 66 .39% , 66 .06% , and 53 .12% ,respectively. Under different-action replacement, ∆donor  
+
+> i
+
+<
+
+0 for 77 .98% of samples, the donor improves by 1.218 rank positions on average, and 7.80% of predictions turn to the donor label. Same-action replacement changes accuracy by only −0.34 points, supporting semantic compatibility rather than an unconditional requirement for exact instance iden-tity. 
+
+Cross-split extension. We repeat the intervention on the three remaining evaluated protocols using the correspond-ing fixed main-table checkpoint for each split, t = 25 ,and one shared ten-draw Gaussian noise bank across RGB conditions. Table S7 reports 10,000-replicate class-stratified paired bootstrap intervals. Sharing the complete noise bank removes evaluation-noise variation from each paired con-trast, isolating the effect of RGB substitution. TDSM-MM consistently distinguishes matched visual evidence from action-incompatible substitutes: matched ac-curacy exceeds different-action accuracy on all three splits (exact two-sided McNemar p ≤ 2.10 × 10 −7). The donor-pair shift is strictly negative and the normalized donor-rank gain is strictly positive on every split, with all corresponding confidence intervals excluding zero. Moreover, ∆donor  
+
+> i
+
+< 0
+
+for 79.65%, 78.97%, and 79.23% of samples on 55/5, 96/24, and 110/10, respectively. Thus, the candidate-relative effect observed on 48/12 extends consistently to the other evalu-ated protocols. 
+
+Robustness to within-action variation. Same-action RGB preserves performance across all three splits: the matched-minus-same differences are +0 .59 points (95% CI [0 .00 , 1.18] , p = 0.0768 ), −0.25 points (95% CI 
+
+[−0.73 , 0.23] , p = 0.3244 ), and −0.15 points (95% CI 
+
+[−0.76 , 0.46] , p = 0 .6909 ) on 55/5, 96/24, and 110/10. Be-cause this donor preserves the action, setup, camera, and performer while changing only the repetition, the result demonstrates robustness to within-action repetition together with the sensitivity to action semantics established by the different-action intervention. This oracle donor construction isolates semantic compatibility; during zero-shot inference, current-video RGB supplies the corresponding compatible visual observation without access to the target label. 
+
+C.2. Dependence on Skeleton Corruption 
+
+Table S8 applies the same intervention over the 50-step diffusion schedule. The same skeleton, candidate order, RGB donor map, and ten noise draws are reused at every timestep. We define action-incompatible RGB damage as 
+
+D(t) = Acc matched (t) − Acc different (t). Because raw MSE scales can change with timestep, the primary cross-timestep evidence is accuracy, candidate rank, the sign of ∆donor  
+
+> i
+
+,and label transitions. Different-action damage grows from 2.20 points at t = 1 
+
+to 23.52 points at t = 49 , an endpoint increase of 21.31 points. The normalized-t slope of D(t) is 21.48 points (95% CI [19 .45 , 23 .52] ), whereas the same-minus-matched slope is −0.82 points (95% CI [−2.29 , 0.66] ). Donor shifts be-come more frequently negative, donors move farther up-ward, and turn-to-donor transitions become more common. These output-level interventions support the visual-anchor interpretation: incompatible visual evidence becomes more 14 Protocol Matched Same Different M–D (95% CI) Donor shift (95% CI) Norm. rank gain (95% CI) Turn NTU-60 55/5 87.17 86.58 84.51 +2 .65 [1 .70 , 3.69] −0.249 [ −0.262 , −0.237] +0 .0647 [0 .0553 , 0.0743] 0.96 NTU-120 96/24 70.77 71.02 64.19 +6 .58 [5 .89 , 7.23] −0.329 [ −0.336 , −0.323] +0 .1118 [0 .1097 , 0.1138] 5.65 NTU-120 110/10 86.58 86.73 74.27 +12 .31 [11 .37 , 13 .25] −0.404 [ −0.413 , −0.396] +0 .1089 [0 .1061 , 0.1117] 10.51 Table S7. Cross-split controlled RGB substitutions at t = 25 . M–D is matched minus different-action top-1 in percentage points; donor shift follows Equation S2; rank gain is normalized by K − 1; and Turn is the percentage of predictions that change to the donor label. Brackets are 95% class-stratified bootstrap intervals.                                                                      
+
+> tMatched Same Different D(t)∆donor P−Rank gain Turn-to-donor 156.36 56.79 54.16 2.20 −0.113 68.90 0.445 3.15 559.63 59.54 55.69 3.94 −0.157 70.03 0.627 3.73 10 62.14 62.39 55.84 6.30 −0.202 71.28 0.801 4.59 20 66.09 64.98 54.13 11 .96 −0.307 75.38 1.094 6.54 25 66.39 66.06 53.12 13 .27 −0.363 77.98 1.218 7.80 35 65.93 65.32 48.23 17 .71 −0.477 82.45 1.506 10.64 49 62.60 62.20 39.08 23 .52 −0.588 87.03 1.892 14.28 Table S8. Counterfactual RGB effects across diffusion timesteps on NTU-60 48/12. D(t)is matched minus different-action accuracy;
+> ∆donor is the mean donor-pair shift; P−is the fraction with negative shift.
+
+consequential as the diffused skeleton is less informative, while semantically compatible RGB remains comparatively stable. 
+
+Cross-protocol endpoint extension. We test whether this corruption-dependent behavior extends beyond 48/12 by evaluating t ∈ {1, 25 , 49 } on the other three evaluated protocols. Within each protocol, the checkpoint, skeleton features, candidate texts and order, RGB donor map, and ten-noise bank are fixed across timesteps. Using the dam-age D(t) defined above, we measure endpoint growth as 
+
+G = D(49) − D(1) .Table S9 shows positive growth on all four protocols, with every paired interval strictly above zero. On the three newly extended splits, the endpoint change in matched-minus-same-action accuracy remains within 0.38 points in magnitude, whereas incompatible-RGB damage grows by 5.83–13.12 points. From t = 1 to t = 49 , normalized donor-rank movement and the turn-to-donor rate also in-crease on every split, by 6.57–19.91 and 6.78–9.25 percent-age points, respectively. The endpoint effect therefore trans-fers across the evaluated protocols: under high rather than low skeleton corruption, the non-diffused RGB condition exerts greater candidate-relative influence, while action-compatible RGB remains stable. 
+
+C.3. Candidate-Level Score Trajectories 
+
+Figure S1 visualizes the candidate-level mechanism under-lying the aggregate results above. We reuse the per-sample score arrays from the preceding fixed-model evaluations and shared noise banks, without retraining or changing the inference protocol. Scores are oriented so that lower is bet-ter and min–max normalized across candidates within each condition; this transformation preserves the complete rank-ing and its top-1 prediction. High-effect cases are selected deterministically within the outcome pattern illustrated by each panel, making the candidate reordering visible while the preceding aggregate analyses quantify its prevalence. 15 Protocol D(1) D(25) D(49) G 95% CI for G
+
+NTU-60 48/12 2.20 13.27 23.52 21.31 [19 .27 , 23 .33] 
+
+NTU-60 55/5 3.91 2.65 9.73 5.83 [3 .83 , 7.74] 
+
+NTU-120 96/24 3.04 6.58 13.63 10.59 [9 .74 , 11 .43] 
+
+NTU-120 110/10 8.61 12.31 21.73 13.12 [11 .85 , 14 .41] 
+
+Table S9. Cross-protocol growth of action-incompatible RGB damage. D(t) is matched minus different-action accuracy, and G = D(49) −
+
+D(1) ; all values are percentage points. Intervals use 10,000 paired bootstrap replicates: class-stratified for the three endpoint extensions and the existing sample bootstrap for 48/12. 
+
+Figure S1. Candidate-level score trajectories under controlled visual evidence. Scores are oriented lower-is-better and min–max normalized within each condition, so zero marks the prediction while all ranks are preserved. (a) Joint F2 recovers the true class missed by both tested independent scorers. (b) Different-action RGB promotes its donor. (c) Same-action RGB preserves the correct ordering, whereas incompatible RGB changes the winner. (d) The same donor preserves the true winner at t = 1 but becomes the prediction at t = 49 ,illustrating the aggregate corruption-dependent effect. 
+
+16 Panel (a) makes the correctness-overlap result con-crete: joint conditioning produces the correct ordering even though neither independent branch yields the true top-1 class. Panels (b) and (c) show that changing only RGB can alter relative candidate energies according to action compat-ibility, rather than adding a candidate-independent offset. Panel (d) further shows that the same action-incompatible donor produces stronger reordering when skeleton corrup-tion increases. Together with the aggregate paired results in Tables S7 and S9, these trajectories establish that RGB participates inside candidate-wise scoring, provides action-relevant evidence, and becomes more influential as skeleton evidence is corrupted. 
+
+C.4. Clean/Noisy Training–Testing Factorial 
+
+The route ablation changes how RGB is presented dur-ing training, whereas the counterfactual study intervenes at inference. To separate these factors, we evaluate clean-trained and noisy-trained condition models with either a non-diffused RGB condition token or a controlled noisy RGB condition token after projection. Table S10 reports both top-1 accuracy and the mean margin from Equation S1. The top-1 train-by-test interaction is +1 .38 points with a 95% CI of [−0.06 , 2.87] , so its interval narrowly includes zero. The candidate-margin interaction is +0 .0343 with a 95% CI of [0 .0238 , 0.0446] . Clean-condition training there-fore yields a clear improvement in candidate separation, while the top-1 interaction remains less conclusive. 
+
+C.5. Class-Level Effects on NTU-120 110/10 
+
+Table S11 holds the 110/10 checkpoint, skeleton, candidate texts, timestep, and ten noise draws fixed while replacing RGB with a zero vector, the seen-training mean, or a real label-mismatched feature. The learned RGB projection bias and slot embedding remain present under the zero condi-tion, so zero and mean are content-removal controls rather than retrained architectures. Matched RGB gives a positive point estimate against all three controls for seven of ten classes; five remain sup-ported by both subject-cluster bootstrap intervals and Holm-adjusted exact McNemar tests. The largest effects occur for classes such as headache , juggling table tennis balls , and                             
+
+> RGB training RGB test Top-1 Margin Clean-trained Clean 66.39 0.1535 Clean-trained Noisy 64.92 0.1189 Noisy-trained Clean 55.32 0.0291 Noisy-trained Noisy 55.23 0.0288 Table S10. Clean/noisy RGB training–testing factorial on NTU-60 48/12. Unseen class ( n)Matched Zero / mean / mismatch drop (275) 49.5 46.5 / 53.5 / 0.4 put on jacket (275) 94.9 25.1 / 93.1 / 11.3 salute (275) 49.5 87.6 / 81.1 / 86.2 headache (275) 94.2 9.1 / 75.6 / 11.3 punch/slap (274) 95.3 94.9 / 95.3 / 1.5 juggling table tennis balls (514) 86.4 46.7 / 0.0 / 0.0 put something into bag (515) 90.3 67.0 / 2.1 / 47.6 cross arms (515) 85.4 6.8 / 4.1 / 0.6 butt kicks (514) 97.9 97.5 / 91.6 / 80.9 wield knife toward another person (516) 99.4 45.0 / 0.4 / 83.9
+> Overall (3,948) 86.58 52.58 / 40.53 / 35.49 Table S11. Per-class top-1 under paired RGB-content interven-tions on NTU-120 110/10. Controls list zero, train-mean, and mis-matched RGB, respectively.
+
+cross arms , whose skeleton patterns can be insufficiently specific. The stable regression for salute shows that RGB can also redistribute decisions unfavorably within a visually confusable class set. The aggregate effect is therefore driven by class-dependent complementarity rather than a uniform improvement for every action. 
+
+## D. Inference Sensitivity and Computational Cost 
+
+D.1. Timestep and Noise-Count Sensitivity 
+
+With matched RGB and ten noise draws, the fixed 48/12 checkpoint reaches 66 .09% , 66 .39% , and 65 .93% at t = 20 ,25, and 35, respectively. Thus, the inherited t = 25 setting lies in a stable moderate-noise region; the sweep is a sensi-tivity analysis rather than a procedure for selecting t from unseen accuracy. Table S12 uses a fresh 20-draw bank and evaluates sub-sets of size N ∈ { 1, 5, 10 , 20 }. For N = 5 and 10, we sample 1,000 subsets from the same 20 draws; N = 1 uses all 20 singleton subsets. Monte Carlo variation falls sharply through ten draws. The nested N = 10 and N = 20 pre-dictions reach 66 .606% and 66 .575% , respectively, so dou-bling the score-generation work does not improve accuracy 17 N Subsets Mean ± SD Min–max Cost 1 20 65 .28 ± 1.79 61.93–69.63 5% 5 1,000 66 .56 ± 0.72 64.47–68.59 25% 10 1,000 66 .64 ± 0.44 65.29–68.07 50% 20 1 66.58 66.58 100% Table S12. Noise-count sensitivity on NTU-60 48/12. Metric TDSM → MM Change Parameters (M) 261 .209 → 261 .997 +0 .30%                         
+
+> FLOPs/candidate (G) 3.043 →3.125 +2 .69%
+> Batch latency (ms) 157 .14 →164 .09 +4 .42%
+> Batch memory (GiB) 1.776 →1.855 +4 .45%
+> Train latency (ms) 416 .54 →429 .74 +3 .17%
+> Peak memory (GiB) 17 .137 →17 .634 +2 .90%
+> 48/12 scoring (s) 120 .29 →125 .54 +4 .37%
+> Table S13. Candidate-scorer resource profile. Offline feature en-coders and data loading are excluded.
+
+in this comparison. 
+
+D.2. Resource Profile 
+
+Table S13 separates the candidate scorer from offline vi-sual encoding. Adding the RGB projection and one RGB condition token increases scorer parameters by 0.30% and counted FLOPs by 2.69%. At the largest profiled scorer batch, latency and allocated memory increase by 4.42% and 4.45%, respectively. Projecting the standard 48/12 evalu-ation workload of 3,270 samples, 12 candidates, and ten noise draws gives a scorer-time increase of 4.37%. Precomputed RGB features occupy 4,096 bytes per video; the train and evaluation feature files used in the pro-file total 0.197 GiB. Encoding eight frames with the ViT-H/14 visual graph takes 55.33 ms/video, yielding 93.72 ms/video for the measured online GPU components when combined with the TDSM-MM scorer; video decoding and CPU preprocessing are excluded. This architecture-only timing uses the same ViT-H/14 computation graph and ten-sor shapes, although pretrained weight values were not loaded for the timing run. Consequently, the cached-feature figures quantify the architectural scorer overhead, while on-line deployment additionally incurs the frozen visual en-coder. 
+
+## E. Summary of Supplementary Evidence 
+
+The expanded controls show that the observed gain is not explained by an occupied token slot, simple skeleton-side RGB routing, or the tested fixed and learned independent-score fusion schemes. Across all four evaluated NTU protocols, fixed-checkpoint interventions show that RGB changes relative candidate energies according to action compatibility, and the cross-protocol endpoint extension shows that incompatible RGB is more disruptive under high than low skeleton corruption. Together with the sensitivity and resource analyses, these results characterize both the operating behavior and the practical cost of non-diffused RGB conditioning. 18
