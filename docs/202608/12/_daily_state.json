@@ -1,0 +1,297 @@
+{
+  "date": "20260812",
+  "date_label": "",
+  "generated_at": "2026-08-12 20:24:54 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.05671v1",
+      "route": "202608/12/2608.05671v1-urnet-a-unified-reparameterized-network-for-efficient-rgb-d-semantic-segmentation",
+      "title": "URNet: A Unified Reparameterized Network for Efficient RGB-D Semantic Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在单一编码器中同时进行多模态特征提取与跨模态融合，属于特征级融合方法",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.08418v1",
+      "route": "202608/12/2608.08418v1-learning-deep-modality-shared-self-expressiveness-for-image-clustering-with-textual-information",
+      "title": "Learning Deep Modality-Shared Self-Expressiveness for Image Clustering with Textual Information",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向跨模态图文聚类的深度模态共享自表达学习",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.09572v1",
+      "route": "202608/12/2608.09572v1-hyperbolic-multimodal-continual-learning",
+      "title": "Hyperbolic Multimodal Continual Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "双曲多模态持续学习中的跨模态不变性与关系结构保持",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.10240v1",
+      "route": "202608/12/2608.10240v1-sequential-modality-dropout-for-robust-multi-modal-sequential-recommendation",
+      "title": "Sequential Modality Dropout for Robust Multi-Modal Sequential Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用顺序模态丢弃应对模态缺失与不平衡",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.10700v1",
+      "route": "202608/12/2608.10700v1-deciding-when-to-rely-on-visual-information-gated-multimodal-fusion-in-sequential-recommendation",
+      "title": "Deciding When to Rely on Visual Information: Gated Multimodal Fusion in Sequential Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "推荐中自适应视觉依赖的门控多模态融合",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.11167v1",
+      "route": "202608/12/2608.11167v1-multimodal-code-switching-interleaving-visual-objects-into-language-for-explicit-object-level-alignment",
+      "title": "MultiModal Code-Switching: Interleaving Visual Objects into Language for Explicit Object-Level Alignment",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "视觉对象与文本实体之间的显式对象级对齐",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.06938v1",
+      "route": "202608/12/2608.06938v1-debias-in-text-believe-your-eyes-text-anchored-cross-modal-transfer-for-visual-counter-commonsense-reasoning",
+      "title": "Debias in Text, Believe Your Eyes: Text-Anchored Cross-Modal Transfer for Visual Counter-Commonsense Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出文本锚定跨模态迁移，在多模态大模型中统一视觉证据与文本去偏",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.06943v1",
+      "route": "202608/12/2608.06943v1-dual-space-modality-consistency-learning-for-universal-cross-modal-re-identification",
+      "title": "Dual-Space Modality Consistency Learning for Universal Cross-Modal Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "空间域和频域中的跨模态一致性学习",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.07886v1",
+      "route": "202608/12/2608.07886v1-vision-language-grounding-as-bidirectional-concept-correspondence",
+      "title": "Vision-Language Grounding as Bidirectional Concept Correspondence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将视觉语言基础定位重构为文本片段与图像片段之间的双向概念对应，提升对齐粒度",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.08107v1",
+      "route": "202608/12/2608.08107v1-neupat-neuron-aware-plasticity-allocation-tuning-for-language-preserving-mllms",
+      "title": "NeuPAT: Neuron-aware Plasticity Allocation Tuning for Language-Preserving MLLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态指令调优中的神经元级可塑性分配",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.08307v1",
+      "route": "202608/12/2608.08307v1-frequency-domain-dual-branch-fusion-for-medical-visual-question-answering",
+      "title": "Frequency-Domain Dual-Branch Fusion for Medical Visual Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于对齐视觉和文本表示的双分支频域融合模块",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.09270v1",
+      "route": "202608/12/2608.09270v1-grasp-granularity-aware-region-alignment-and-semantic-prototype-learning-for-fine-grained-cross-modal-understanding-in-drone-views",
+      "title": "GRASP: Granularity-Aware Region Alignment and Semantic Prototype Learning for Fine-Grained Cross-Modal Understanding in Drone Views",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向细粒度跨模态理解的区域对齐与原型学习方法",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.04010v1",
+      "route": "202608/12/2608.04010v1-parvl-parallel-scaling-and-expandable-compute-allocation-for-multimodal-llms",
+      "title": "ParVL: Parallel Scaling and Expandable Compute Allocation for Multimodal LLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态大语言模型的并行视觉-语言扩展与计算分配",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.04452v1",
+      "route": "202608/12/2608.04452v1-q-cuegraph-query-conditioned-visual-evidence-graphs-for-multimodal-reasoning",
+      "title": "Q-CueGraph: Query-Conditioned Visual Evidence Graphs for Multimodal Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "将问题和图像表示映射为有预算的坐标级观察，利用OCR/布局图和查询条件视觉节点进行多模态推理",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.05816v1",
+      "route": "202608/12/2608.05816v1-whence-the-voice-self-supervised-dual-source-audio-visual-localisation-via-selective-convergence",
+      "title": "Whence the Voice? Self-supervised Dual-source Audio-Visual Localisation via Selective Convergence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用选择性收敛进行自监督视听对应学习",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.06917v1",
+      "route": "202608/12/2608.06917v1-regraph-learning-to-generate-recipe-graphs-from-food-images",
+      "title": "ReGraph: Learning to Generate Recipe Graphs from Food Images",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "使用大语言模型从食物图像中提取结构化食谱图（实体和依赖关系）",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.06972v1",
+      "route": "202608/12/2608.06972v1-generative-embedding-benchmark-how-much-information-survives-in-a-dense-embedding",
+      "title": "Generative Embedding Benchmark: How Much Information Survives in a Dense Embedding?",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "评测密集嵌入中生成式信息保持度的基准",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    },
+    {
+      "paper_id": "2608.08630v1",
+      "route": "202608/12/2608.08630v1-vlzip-unified-visual-and-textual-compression-for-interleaved-long-context-modeling",
+      "title": "VLZip: Unified Visual and Textual Compression for Interleaved Long-Context Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "视觉与文本表征的统一压缩与层内注入",
+      "first_seen_at": "2026-08-12 20:24:54 UTC",
+      "updated_at": "2026-08-12 20:24:54 UTC"
+    }
+  ]
+}

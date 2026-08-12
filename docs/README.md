@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-10</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-12</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 18 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-10 21:25:18 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-12 20:24:54 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共梳理18篇论文，其中6篇精读、12篇速读，重点聚焦多模态理解与知识图谱补全。</p>
-<p>最值得关注的是精读中评分最高的《ViSR-KGC》（9.0分），用视觉子图推理做多模态知识图谱补全；此外《Perceptual Anchoring》（8.0分）提出无需训练的开词汇分割校准方法，也值得一读。</p>
-<p>建议优先精读这两篇高分开创性工作，速读部分可留意扩散模型与草图检索的交叉方向，作为后续扩展阅读。</p>
+<p>今日精读2篇、速读12篇，重点聚焦RGB-D语义分割与跨模态学习。最值得关注的是URNet的高效重参数化分割网络，以及文本信息辅助的图像聚类方法。建议下一步可深入探索多模态对齐与融合的统一框架。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -76,9 +74,9 @@
     <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion">ViSR-KGC: Visual Subgraph Reasoning with Vision-Language Models for Multimodal Knowledge Graph Completion</span></li><li><span class="dpr-home-dashboard-paper-title" title="Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation">Perceptual Anchoring: Prototype-Guided Text Calibration for Training-free Open-Vocabulary Semantic Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition">Visual Anchoring in Diffusion: Multimodal Zero-Shot Skeleton Action Recognition</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="URNet: A Unified Reparameterized Network for Efficient RGB-D Semantic Segmentation">URNet: A Unified Reparameterized Network for Efficient RGB-D Semantic Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Learning Deep Modality-Shared Self-Expressiveness for Image Clustering with Textual Information">Learning Deep Modality-Shared Self-Expressiveness for Image Clustering with Textual Information</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hyperbolic Multimodal Continual Learning">Hyperbolic Multimodal Continual Learning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -89,9 +87,9 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DiffImaginE: Imagine to Verify Entity Types with Diffusio">DiffImaginE: Imagine to Verify Entity Types with Diffusio</span></li><li><span class="dpr-home-dashboard-paper-title" title="SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval">SeCo-SBIR: Semantically Consistent Prompt Learning for Zero-Shot Sketch-Based Image Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models">CARGO-VL: Counterfactual Arbitration with Risk-Constrained Group Optimization for Vision-Language Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Debias in Text, Believe Your Eyes: Text-Anchored Cross-Modal Transfer for Visual Counter-Commonsense Reasoning">Debias in Text, Believe Your Eyes: Text-Anchored Cross-Modal Transfer for Visual Counter-Commonsense Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Space Modality Consistency Learning for Universal Cross-Modal Re-Identification">Dual-Space Modality Consistency Learning for Universal Cross-Modal Re-Identification</span></li><li><span class="dpr-home-dashboard-paper-title" title="Vision-Language Grounding as Bidirectional Concept Correspondence">Vision-Language Grounding as Bidirectional Concept Correspondence</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 

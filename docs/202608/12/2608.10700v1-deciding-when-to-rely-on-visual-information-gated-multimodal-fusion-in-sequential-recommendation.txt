@@ -1,0 +1,283 @@
+Title: Deciding When to Rely on Visual Information: Gated Multimodal Fusion in Sequential Recommendation
+
+URL Source: https://arxiv.org/pdf/2608.10700v1
+
+Published Time: Wed, 12 Aug 2026 00:51:27 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Deciding When to Rely on Visual Information: Gated Multimodal Fusion in Sequential Recommendation 
+
+## Natalija Glisovic ∗
+
+natalija.glisovic@ingka.ikea.com IKEA Retail (Ingka Group) and KTH Royal Institute of Technology Malmö, Sweden 
+
+## Danica Kragic 
+
+dani@kth.se KTH Royal Institute of Technology Stockholm, Sweden 
+
+## Martin Tegner 
+
+martin.tegner@ingka.ikea.com IKEA Retail (Ingka Group) Malmö, Sweden 
+
+## Abstract 
+
+Multimodal sequential recommender systems commonly fuse vi-sual and collaborative signals uniformly, treating visual features as generically informative regardless of item or user context. We argue that visual utility, defined as the contribution of visual signals to rec-ommendation quality, is a latent contextual variable that depends on both the item and the user’s interaction history rather than a fixed item property. To model this variability, we introduce VisGate, a framework that makes adaptive item-level fusion decisions condi-tioned on item embeddings and the user’s current sequence context. Visual representations are learned through a contrastive objective over sequential co-occurrence patterns, preserving complemen-tarity with collaborative embeddings rather than aligning them into a shared space. Beyond achieving competitive recommenda-tion performance, VisGate’s learned gate serves as a measurement tool for understanding when and why visual information is ben-eficial. Our analyses show that visual utility varies across items, increases under interaction sparsity when collaborative signals are weak, and correlates with visual distinctiveness in semantically meaningful ways. Together, these findings highlight the importance of both fine-grained fusion and modality complementarity, while demonstrating that item-level visual utility can be estimated and interpreted through learned gating behaviour. 
+
+## CCS Concepts 
+
+• Information systems → Recommender systems ;
+
+## Keywords 
+
+sequential recommenders, visually-aware recommender systems, multimodal, collaborative filtering 
+
+ACM Reference Format: 
+
+Natalija Glisovic, Danica Kragic, and Martin Tegner. 2026. Deciding When to Rely on Visual Information: Gated Multimodal Fusion in Sequential Recommendation. In The 20th ACM Conference on Recommender Systems (RecSys ’26), September 28–October 2, 2026, Minneapolis, MN, USA. ACM, New York, NY, USA, 8 pages. 
+
+> Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for third-party components of this work must be honored. For all other uses, contact the owner/author(s).
+> CARS @ RecSys ’26, Minneapolis, MN, USA
+> © 2026 Copyright held by the owner/author(s).
+
+## 1 Introduction 
+
+Context-aware recommender systems have long recognised that when, where, and how a user interacts with an item shapes what constitutes a relevant recommendation [2, 16]. However, most sys-tems treat contextual signals as predefined and static. We argue that which modality to rely on is itself a contextual decision that depends not on fixed item properties, but on the user’s interaction state at the point of recommendation. Sequential recommenders capture temporal dynamics of user behaviour through interaction patterns, but face well-known limi-tations under data sparsity. Learned ID-based embeddings struggle to represent cold-start items or users with limited history [13]. In-corporating item content such as images has shown promise in ad-dressing these limitations [15], giving rise to multimodal sequential recommendation [6, 11]. Yet, a question that remains less explored is when visual content helps. Product images are often more available than text in e-commerce, where descriptions are frequently sparse, generic, or missing. Figure 1 illustrates this with IKEA examples where a patterned duvet is described only as "green/multicolour" and a cabinet simply as "white", text that fails to capture the vi-sual characteristics most likely to influence purchase decisions [29]. Most existing approaches fuse modalities uniformly, treating visual features as generically informative regardless of item or context [20], yet naive fusion introduces noise when modalities carry re-dundant or conflicting signals [4, 15]. Duvet cover and pillowcase, dark green/multicolour, 150x200/50x60 cm 
+
+> Bathroom high cabinet, white, 30x190 cm
+
+Figure 1: Examples from the IKEA dataset where visual fea-tures provide richer information than text descriptions. arXiv:2608.10700v1 [cs.IR] 11 Aug 2026 CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA Glisovic et al. 
+
+We introduce VisGate, a framework that treats modality utility, i.e. the item-level contribution of a given modality to recommenda-tion quality, as a latent contextual variable inferred from interaction patterns and user state. A context-aware adaptive gating mecha-nism learns when to rely on visual versus collaborative signals, conditioned on both item-level embeddings and the user’s current sequence representation. Visual representations are learned via a contrastive objective over sequential co-occurrence patterns, pre-serving complementarity with collaborative embeddings rather than aligning them into a shared space. This design is motivated by three research questions: 
+
+RQ1: Is visual utility item-dependent, or can it be captured by uniform fusion across all items? 
+
+RQ2: Does visual utility increase under interaction sparsity, when collaborative signals are weakest? 
+
+RQ3: Does visual utility correlate with visual distinctiveness, such that the gate assigns higher visual weight to items whose appearance is more informative? We validate VisGate on four datasets, using the learned gate as a measurement tool to answer these questions. Our main contribu-tions are: 
+
+• We introduce modality utility as a concept and show that it is a latent, dynamic contextual variable shaped by interaction history and user state, not a fixed item property. 
+
+• We propose VisGate, combining co-occurrence grounded visual projection with an item-level adaptive gating mecha-nism that conditions fusion decisions on the user’s current sequence context. 
+
+• We validate three hypotheses about when visual signals help, providing empirical evidence that fusion granularity and complementarity preservation matter as much as the choice of fusion mechanism. 
+
+• We analyse failure cases where the gate misleads, identi-fying a practical interaction-count threshold as a post-hoc correction. 
+
+## 2 Related Work 
+
+Sequential recommendation has evolved from RNN-based approaches such as GRU4Rec [10] to transformer architectures including SAS-Rec [13] and BERT4Rec [23]. Despite strong performance, purely ID-based models struggle with data sparsity and cold-start items, motivating the incorporation of item content. Multimodal recommender systems address this by augmenting ID-based embeddings with visual and textual signals [18]. Classical visual models such as VBPR [8] and DVBPR [12] established founda-tions for image-based recommendation, while graph-based methods such as MMGCN [26] and FREEDOM [33] propagate multimodal signals through interaction graphs. Recent work has questioned whether multimodal gains stem from cross-modal understanding or increased model complexity [20], and shown that naive handling of missing modalities can harm performance [15], highlighting the need for more principled fusion strategies. A directly relevant thread concerns how contextual informa-tion is modelled. Early work on context-aware recommendations distinguishes a representational view, where context is a set of predefined dimensions such as location, from an interactional view, where context emerges dynamically and is not fully observable in advance [1, 2]. More recent work has pushed toward latent con-text. [3] showed that fusing contextual embeddings with an RNN’s hidden state via element-wise products outperforms naive feature concatenation, while [5] formalised user intent as a latent variable inferred from interaction sequences using variational autoencoders, without requiring explicit context labels. In multimodal sequential recommendation, early work such as UniSRec [11] and TedRec [28] replaced or augmented item IDs with text-based representations to enable transferable sequence models. Subsequent methods shifted toward adaptive fusion. MMSR [6], HM4SR [31], and CAMMSR [27] introduce gating or mixture-of-experts mechanisms to route across modalities at the sequence or step level, while MP4SR [30] uses contrastive pre-training over mixed-modality sequences to regularise representations. Together, these methods confirm that static, uniform fusion introduces noise when modalities carry redundant or conflicting signals. VisGate situates itself within the latent context modelling tradi-tion, treating visual utility, i.e. the item-level contribution of visual signals to recommendation quality, as a latent contextual variable inferred from interaction patterns and the user’s current sequence state. Unlike prior multimodal sequential methods that operate at sequence or step level and align modalities into shared spaces, VisGate makes fusion decisions at the item level and deliberately preserves complementarity between visual and collaborative repre-sentations, enabling the interpretable gating behaviour we analyse in Section 4.2. 
+
+## 3 Methodology 
+
+This section introduces VisGate, which serves both as a compet-itive recommender and as a tool for studying context-dependent modality utility. We describe the three components: co-occurrence grounded visual projection, context-aware adaptive gating, and the training procedure. The overall architecture of VisGate is illustrated in Figure 2. 
+
+## 3.1 Co-occurrence Grounded Visual Projection 
+
+To learn visual representations that capture user-relevant patterns, we employ a projection supervised by sequential co-occurrence pat-terns. The key insight is that items appearing in temporal proximity in user sequences often share visual characteristics that influence user preferences, providing a natural source of supervision for vi-sual feature learning. Crucially, this projection maps visual features into a co-occurrence grounded space rather than into the collabora-tive embedding space itself, preserving complementarity between the two modalities. We train a multilayer perceptron (MLP) projector 𝑓 𝜃 : R𝑑 → R𝑑 
+
+that maps visual features from the pre-trained vision encoder to a co-occurrence grounded space: 
+
+𝑓 𝜃 (𝑣 𝑖 ) = Linear 2 (GELU (Linear 1 (𝜙 (𝑣 𝑖 )))) (1) where Linear 1 : R𝑑 → Rℎ and Linear 2 : Rℎ → R𝑑 are linear transformations with hidden dimension ℎ. Unlike approaches that project visual features into collaborative embedding space [8], this supervision keeps visual representations in a complementary space. Gated Multimodal Fusion in Sequential Recommendation CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA 3      
+
+> Item ID
+> ID k
+> ID Embedding
+> ek
+> CLIP image
+> vk
+> Learnable MLP
+> fθ(v k)
+> s1
+> s2
+> …sk-2
+> sk-1
+> [MASK] sk+2
+> sk+1
+> LayerNorm
+> LN(e i)
+> Transformer Encoder Softmax
+> P(s k|s k)MLM loss
+> Ranking
+> score(c i) = h n· E(c i)ID candidate Trained Frozen Masked Output
+> Gated Fusion:  gi = σ(MLP gate ([LN(e i)  ); LN(f θ* (v i)])), hi = g i ⊙ LN(e i) + (1-g i) ⊙ α·LN(F θ* (v i))
+> LayerNorm
+> LN(f θ*(v i)) Training function:
+> ℒTotal =ℒMLM+ ℒGate
+
+Figure 2: An overview of VisGate architecture 
+
+We optimize the projector using a contrastive objective over positive item pairs extracted from user sequences based on temporal proximity: 
+
+P = {( 𝑖, 𝑗 ) | ∃ 𝑢, 𝑡 1, 𝑡 2 : 𝑠 𝑢 𝑡 1 = 𝑖, 𝑠 𝑢 𝑡 2 = 𝑗, |𝑡 1 − 𝑡 2 | ≤ 𝑤 } (2) where 𝑤 is a temporal window size. The contrastive loss encourages visual features of temporally co-occurring items to be similar: 
+
+Lco-occ = − 1
+
+|B| ∑︁ (𝑖,𝑝 ) ∈ B 
+
+log exp (sim (𝑓 𝜃 (𝑣 𝑖 ), 𝑓 𝜃 (𝑣 𝑝 ))/ 𝜏 )
+
+Í𝑗 ∈ N ( 𝑖 ) exp (sim (𝑓 𝜃 (𝑣 𝑖 ), 𝑓 𝜃 (𝑣 𝑗 ))/ 𝜏 )
+
+(3) where B ⊂ P is a batch of positive pairs, sim (· , ·) denotes cosine similarity, N ( 𝑖 ) are sampled negative items, and 𝜏 is a learnable temperature parameter. Co-occurring pairs exhibit significantly higher visual similarity than random pairs (Mann–Whitney 𝑈 , 𝑝 <
+
+10 −10 , effect size 𝑟 ≈ 0.2–0 .3), confirming that co-occurrence is a meaningful, if noisy, supervision signal. 
+
+## 3.2 Context-Aware Adaptive Gating 
+
+After pre-training, we introduce a context-aware adaptive gating mechanism that learns to balance ID and visual representations for each item. The key difference from prior gated fusion approaches [6, 27] is that our gate is conditioned on both item-level embeddings and the user’s current sequence context. This reflects the observa-tion that visual utility is not a fixed item property. The same item may benefit more from visual signals early in a user’s interaction history, when collaborative embeddings are sparse, than later when rich interaction patterns have accumulated. By conditioning on the transformer’s hidden state at the masked position, the gate can adapt its fusion decision to the user’s context at the point of recommendation. Concretely, let z ∈ R𝑑 denote the transformer’s final hidden state at the masked position, capturing the user’s current sequence context. The gating function takes layer-normalized embeddings from both modalities alongside this contextual signal: 
+
+𝑔 𝑖 = 𝜎 (MLP gate ([ LN (𝑒 𝑖 ); LN (𝑓 𝜃 ∗ (𝑣 𝑖 )) ; LN (z)])) (4) 
+
+ℎ𝑖 = 𝑔 𝑖 ⊙ LN (𝑒 𝑖 ) + ( 1 − 𝑔 𝑖 ) ⊙ ( 𝛼 · LN (𝑓 𝜃 ∗ (𝑣 𝑖 ))) (5) where [· ; ·] denotes concatenation, LN (·) represents layer normal-ization, 𝜃 ∗ are the pre-trained projector parameters, 𝛼 ∈ R is a learnable scalar that scales the visual component, and MLP gate is a two-layer network with ReLU activation and dropout. Layer nor-malization ensures both modalities and the sequence context have comparable scales, so the gate makes decisions based on semantic relevance rather than magnitude differences. The gate 𝑔 𝑖 ∈ [ 0, 1]𝑑 
+
+produces element-wise weights determining the contribution of collaborative versus visual signals to the final item representation 
+
+ℎ𝑖 .
+
+## 3.3 Training 
+
+The final training objective combines the standard masked language modeling (MLM) loss from BERT4Rec with gating regularization terms: 
+
+Ltotal = LMLM + L gate 
+
+LMLM = −∑︁  
+
+> 𝑖 ∈ M
+
+log 𝑃 (𝑠 𝑖 | ℎ<𝑖 )
+
+where M denotes the set of masked positions, and 𝑃 (𝑠 𝑖 | ℎ<𝑖 ) =
+
+softmax (z⊤ 
+
+> 𝑖
+
+H) is computed using the transformer’s final hidden state z𝑖 and the gated item-embedding matrix H ∈ R𝐼 ×𝑑 .During training, we jointly optimize the transformer parame-ters, ID embeddings, gating mechanism, and scaling factor, while keeping the pre-trained projector 𝜃 ∗ fixed: 
+
+𝚽 ∗, E∗, 𝝍 ∗, 𝛼 ∗ = arg min  
+
+> 𝚽 ,E,𝝍 ,𝛼
+
+Ltotal 
+
+To encourage meaningful gating adaptation, we incorporate auxiliary losses: 
+
+Lgate = 𝜆 1 Lsparsity + 𝜆 2 Lutil 
+
+where Lsparsity = E𝑖 [4𝑔 𝑖 (1 − 𝑔 𝑖 )] encourages decisive gating de-cisions, and Lutil = |E𝑖 [𝑔 𝑖 ] − 0.5| prevents collapse to a single modality by encouraging balanced utilization across the item set. We apply higher learning rates for the gating mechanism to enable quick adaptation, standard rates for ID embeddings, and keep the visual projector frozen. 
+
+## 4 Experiments 
+
+In this section, we present the experimental evaluation of Vis-Gate. We begin by describing the experimental setup, including the datasets, baseline models, and evaluation settings. Next, we CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA Glisovic et al. 
+
+Table 1: Summary statistics of the datasets used in experi-ments. Avg. Len is the average sequence length. Dataset #Users #Items Avg. Len 
+
+IKEA 49,962 23,551 7.15 Amazon Scientific 38,861 22,909 4.05 Amazon Video Games 71,473 17,934 4.49 Amazon Health & Household 159,404 76,806 8.52 present the main result, followed by targeted analyses addressing the research questions introduced in Section 1. 
+
+## 4.1 Experimental Setup 
+
+4.1.1 Datasets. We evaluate VisGate on three public Amazon Re-view datasets [17]: Amazon Scientific, Amazon Video Games, and Amazon Health & Household. Each dataset contains user–item in-teractions accompanied by item images. For each user, we order interactions based on timestamps to construct sequential recom-mendation data. In addition to the Amazon datasets, we include a proprietary IKEA dataset with a similar schema. Following prior research [14, 21, 25], we filter out users and items with fewer than five interactions. The exception is the Amazon Sci-entific dataset, which we retain as a sparse benchmark to evaluate model robustness under limited interaction conditions. Here, we only remove users and items with fewer than two interactions. Table 1 summarizes the statistics of the datasets. 
+
+4.1.2 Baselines. To evaluate the effectiveness of VisGate, we com-pare against four categories of recommender systems: Collaborative Filtering (CF): BERT4Rec [23], SASRec [13], GRU4Rec [10]. Visually-aware recommender systems: VBPR [8], DVBPR [12], AMR [24]. Multimodal recommender systems: MMGCN [26], FREEDOM [33]. Lastly, multimodal sequential recommender systems: UniSRec [11], MP4SR [30], MMSR [6], HM4SR [31]. We implement all baselines using their original GitHub reposito-ries, or the standardized implementations from MMRec 1.
+
+4.1.3 Evaluation Settings. We follow the leave-one-out evaluation protocol [9, 14, 32]. Specifically, for each user sequence, we reserve the last interacted item as the test instance and the second-to-last item for validation, using all preceding interactions for model train-ing. To assess statistical reliability, we average all results over 5 independent runs with different random seeds and mark improve-ments as significant where a paired t-test against the strongest baseline on each dataset yields p < 0.01. For evaluation, we use Hit Ratio (Hit@ 𝑘 ) and Normalized Dis-counted Cumulative Gain (NDCG@ 𝑘 ) with 𝑘 = 5, 10, where Hit@ 𝑘 
+
+checks if the ground-truth item appears in the top-𝑘 recommenda-tions, and NDCG@ 𝑘 additionally accounts for its ranking position [14]. 
+
+4.1.4 Implementation Details. We implement VisGate in PyTorch and train all models using Adam, with gradient norms clipped to 1 .0 and early stopping based on validation Hit@10 (patience of 5 epochs, with a maximum budget of 50 epochs). We retain 
+
+> 1https://github.com/enoche/MMRec
+
+Figure 3: Percentage of images used for the datasets based on the item-level gating function. 
+
+the checkpoint achieving the best validation performance. The gating MLP uses twice the base learning rate and a weight decay of 10 −5 to enable faster adaptation of the fusion mechanism, while all remaining parameters use the base learning rate with a weight decay of 10 −4.Capacity-related hyperparameters are fixed and matched across VisGate and all baselines: hidden dimension of 256, 2 Transformer layers, 4 attention heads, maximum sequence length of 50, batch size of 128, dropout rate of 0 .1, and masking probability of 0 .15. The remaining VisGate-specific hyperparameters, which have no direct counterparts in the baselines, are selected independently for each dataset via random search on the validation split. Specifically, the learning rate is selected from 0 .0001 , 0.0005 , 0.001 , 0.005 , 0.01, 
+
+𝜆 1 and 𝜆 2 are sampled log-uniformly from [0.001 , 0.05 ], and the co-occurrence window 𝑤 is selected from 1 , 2, 3, 5, 7. The visual pro-jector 𝑓 𝜃 is pre-trained separately using the contrastive objective and subsequently frozen. This separation ensures that the gate’s fusion decisions can be attributed to the modality-combination mechanism rather than to a visual projector that continues to re-shape the visual representation during training. 
+
+## 4.2 Results 
+
+Table 2 presents results across all four datasets. VisGate achieves the strongest overall performance. The largest gains are on the IKEA and Amazon Scientific, which are the two sparsest datasets. On denser datasets gains are more modest. In these cases, methods that incorporate text alongside images, such as FREEDOM and HM4SR, are more competitive. We organise the analysis around our three research questions. 
+
+## 4.3 RQ1: Is Visual Utility Item-Dependent? 
+
+From Table 3 we can see that item-level gating performs better than fixed gate values, confirming that no single modality weight suits all items. Additionally, from Figure 3 we identify that within each dataset, the distribution of learned gate values is broad rather than peaked, showing that the gate makes genuinely item-level decisions. The quadrant analysis in Figure 4 further reveals a complementary pattern where items with strong image but weak ID embeddings receive low gate values ( ¯ 𝑔 = 0.21 on IKEA), while strong-ID/weak-image items receive high ones ( ¯ 𝑔 = 0.76), with gaps of ≈0.55–0 .67 between complementary quadrants across datasets. Gated Multimodal Fusion in Sequential Recommendation CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA 
+
+Table 2: Performance comparison across datasets. Best result is bolded, second best is underlined. % Improve shows relative improvement of VisGate over the best baseline. † denotes significant improvement over the best baseline.                                                                                                                                                                                                                                                       
+
+> IKEA Amazon Scientific Amazon Video Games Amazon Health & Household Category Model H@5 N@5 H@10 N@10 H@5 N@5 H@10 N@10 H@5 N@5 H@10 N@10 H@5 N@5 H@10 N@10 CF BERT4Rec 0.1352 0.1290 0.1881 0.1469 0.0643 0.0448 0.1163 0.0620 0.1332 0.1230 0.1754 0.1345 0.1045 0.0853 0.1517 0.1004 SASRec 0.1247 0.1058 0.1782 0.1229 0.0817 0.0574 0.1292 0.0761 0.1229 0.1210 0.1702 0.1239 0.1041 0.0766 0.1339 0.0934 GRU4Rec 0.1139 0.1002 0.1699 0.1189 0.0640 0.0429 0.1098 0.0622 0.1328 0.1203 0.1744 0.1341 0.1053 0.0799 0.1347 0.0931 Visually-aware VBPR 0.1655 0.1333 0.2543 0.1509 0.0729 0.0611 0.1283 0.0803 0.1399 0.1209 0.1831 0.1281 0.1001 0.0871 0.1499 0.1093 DVBPR 0.1799 0.1447 0.2688 0.1569 0.0848 0.0639 0.1358 0.0811 0.1427 0.1231 0.1834 0.1283 0.1092 0.0896 0.1577 0.1103 AMR 0.1758 0.1266 0.2681 0.1496 0.0799 0.0578 0.1293 0.0791 0.1426 0.1230 0.1880 0.1301 0.1101 0.0902 0.1573 0.1109 Multimodal MMGCN 0.1753 0.1201 0.2591 0.1544 0.0841 0.0600 0.1286 0.0793 0.1430 0.1233 0.1881 0.1344 0.1101 0.0907 0.1564 0.1114 FREEDOM 0.1755 0.1299 0.2603 0.1548 0.0844 0.0610 0.1294 0.0801 0.1432 0.1237 0.1882 0.1379 0.1105 0.0910 0.1579 0.1122 Multimodal Sequential UniSRec 0.1694 0.1402 0.2511 0.1511 0.0685 0.0603 0.1207 0.0764 0.1330 0.1198 0.1734 0.1354 0.1045 0.0833 0.1403 0.1089 MP4SR 0.1783 0.1493 0.2664 0.1534 0.0748 0.0610 0.1222 0.0810 0.1293 0.1142 0.1684 0.1322 0.1067 0.0849 0.1426 0.1103 MMSR 0.1780 0.1578 0.2683 0.1604 0.0640 0.0583 0.1172 0.0734 0.1284 0.1203 0.1760 0.1365 0.1107 0.0911 0.1566 0.1209 HM4SR 0.1910 0.1545 0.2777 0.1629 0.0633 0.0572 0.1170 0.0712 0.1302 0.1232 0.1863 0.1400 0.1148 0.1004 0.1577 0.1225
+> Ours VisGate 0.2207 †0.1801 †0.2889 †0.1748 †0.1011 †0.0759 †0.1462 †0.0996 †0.1449 0.1236 0.1907 0.1413 0.1210 †0.1013 0.1681 †0.1224 % Improve +15.5 +13.5 +7.1 +7.3 +19.2 +18.8 +7.7 +22.8 +1.2 –+1.0 +2.5 +3.9 +0.8 +6.5 –
+
+Table 3: Uniform fusion at fixed gate values vs. learned item-level gating. 
+
+Uniform Gating Dataset 0.3 0.5 0.7 VisGate IKEA (H@10) 0.2619 0.2795 0.2636 0.2889 
+
+Amazon H&H (H@10) 0.1577 0.1492 0.1309 0.1681 
+
+(a) IKEA (b) Amazon H&H Figure 4: Gate value 𝑔 𝑖 as a function of ID and image em-bedding strength( ℓ2 norm, min-max normalised). Dashed lines mark the per-axis medians, partitioning items into four equal-population quadrants. Mean gate values ¯𝑔 are an-notated in each quadrant; the shaded regions (red: strong-image/ weak-ID; green: strong-ID / weak-image) highlight the two complementary quadrants where the gate difference is largest. 
+
+## 4.4 RQ2: Does Visual Utility Increase Under Sparsity? 
+
+The largest performance gains appear on the two sparsest datasets, IKEA and Amazon Scientific, where ID embeddings are least reliable. At the item level, weak-ID items consistently receive lower gate values, while strong-ID items rely more on collaborative signals. The temporal analysis in Table 4 confirms this dynamically. We see that early interactions receive lower gate values than recent ones across all datasets, with the effect most pronounced on IKEA and 
+
+Table 4: Mean gate value ¯𝑔 for early (first half) vs. recent (second half) interactions by sequence position, averaged across users. Lower values indicate greater visual reliance. 
+
+Dataset Early ¯ 𝑔 Recent ¯ 𝑔 Δ
+
+IKEA 0.441 0.468 +0.027 Amazon Scientific 0.573 0.601 +0.028 Amazon Video Games 0.607 0.621 +0.014 Amazon Health & Household 0.588 0.603 +0.015 
+
+Amazon Scientific, where collaborative signal accumulates more slowly. 
+
+## 4.5 RQ3: Does Visual Utility Correlate With Visual Distinctiveness? 
+
+Figure 5 shows items at the extremes of the gate distribution. Low-gated items are visually distinctive. For example, patterned bed sheets or products with clear branding, where appearance directly influences purchase decisions [7, 19, 22]. High-gated items have generic appearances, such as a plain white bookself. Here, interac-tion patterns are more informative. This confirms the gate assigns visual weight in semantically meaningful ways consistent with consumer behaviour research. However, the gate is an imperfect proxy. The most consistent failure occurs with visually distinctive but interactionally sparse items as seen in Figure 6. The gate correctly identifies weak col-laborative signal but incorrectly infers strong visual signal, when both are unreliable due to limited co-occurrence supervision. Table 5 quantifies this. The failure rate is highest in the low-gate, low-interaction quadrant. A simple interaction-count threshold could serve as a post-hoc correction, and should be explored in future work. 
+
+## 4.6 Ablation Study 
+
+Table 6 summarises ablation results. Removing the contrastive loss has the largest impact, confirming that complementarity-preserving supervision is the most important component. Removing gating CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA Glisovic et al. 0.75 0.41 0.66 0.12 
+
+Figure 5: Pictures of images with highest gate (top) and lowest (bottom) based on their average gating values with IKEA on the left hand side and Amazon H&H on the right hand side. 0.21 0.19 
+
+Figure 6: Failure cases from IKEA (left) and Amazon Health & Household (right). Items have visually distinctive appear-ances and low gate values (high visual reliance) but few inter-actions, leading to poorly calibrated visual representations. Gate values and mean interaction counts are shown below each item. Table 5: Fraction of items where removing visual features improves Hit@10, partitioned by gate value and interaction count (IKEA). Low gate = high visual reliance.      
+
+> Low interaction count High interaction count Low gate (visual) 0.31 0.09 High gate (collab) 0.07 0.04
+
+causes the second-largest drop. To better understand the effect of the sequence-context of the gate, we compare to an item-only vari-ant that does not include the sequence context. This leads to a drop in performance, confirming that visual utility depends on user state as well as item properties. Joint end-to-end training performs worse than the two-stage design, suggesting joint optimisation causes the projector to drift from co-occurrence grounded representations. 
+
+Table 6: Ablation study on IKEA and Amazon Health & House-hold datasets.                            
+
+> Dataset Variant Hit@10 NDCG@10 IKEA w/o Gating 0.2711 0.1669 w/o Co-occurrence Learning 0.2658 0.1629 w/o Contrastive Loss 0.2311 0.1572 Joint End-to-End Training 0.2743 0.1673 w/o Sequence Context 0.2799 0.1711
+> VisGate (full) 0.2889 0.1748
+> Amazon H&H w/o Gating 0.1492 0.1034 w/o Co-occurrence Learning 0.1501 0.1109 w/o Contrastive Loss 0.1304 0.1011 Joint End-to-End Training 0.1649 0.1198 w/o Sequence Context 0.1632 0.1203
+> VisGate (full) 0.1681 0.1224
+
+## 5 Discussion 
+
+These findings propose several principles for context-aware multi-modal recommendation that extend beyond sequential systems. 
+
+Context determines fusion granularity Item-level gating achieves competitive performance with existing multimodal se-quential methods, while consistently outperforming uniform and sequence-level fusion strategies. This suggests that matching fusion decisions to the level at which modality informativeness varies is at least as important as the choice of fusion mechanism itself. Modal-ity utility is not a static feature of an item but a latent contextual variable shaped by interaction history and user state. 
+
+Complementarity should be preserved, not eliminated The alignment paradigm dominant in multimodal learning optimises for cross-modal retrieval, finding images that match text queries. But for systems that infer context from multiple signals rather than translate between them, alignment reduces the value of fusion by making modalities redundant. Context-aware recommendation stands to benefit most when modalities contribute orthogonal infor-mation, with visual, behavioural, and textual signals each capturing dimensions of user intent that the others cannot. 
+
+Latent context is measurable Using a learned gate as a proxy for per-item modality contribution is straightforward to implement and produces interpretable estimates of a quantity that is other-wise difficult to observe directly. This has implications beyond visual recommendation. A similar approach could support context diagnostics in any setting where the relative informativeness of available signals varies across items, users, or interaction states. 
+
+## 6 Conclusion and Future Work 
+
+This paper investigated when and why visual content provides complementary value to collaborative signals in sequential recom-mendation, framing the problem as one of latent context modelling. We introduced modality utility as a latent contextual variable and proposed VisGate as both a competitive recommender and a mea-surement tool for studying it empirically. Using the learned gate as an analytical lens, we showed that visual utility is item-dependent rather than uniform, increases un-der interaction sparsity when collaborative signals are weakest, Gated Multimodal Fusion in Sequential Recommendation CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA 
+
+and correlates with visual distinctiveness in semantically meaning-ful ways. We also identified a systematic failure mode in which the gate misfires for visually distinctive but interactionally sparse items, where neither modality is well calibrated. These findings validate the importance of item-level fusion granularity and com-plementarity preservation. These principles are not specific to our architecture and generalise to any multimodal system where con-textual signals vary in informativeness across items or interaction states. For future work, an open theoretical question is whether the optimal fusion granularity (item, step, sequence) can be predicted from dataset statistics alone, without training a gate. We also plan to extend the framework to richer contextual signals, incorporating textual modalities via LLMs and conditioning the gate on broader sequence-level context, enabling it to capture not only which items benefit from visual signals but when in a user’s interaction history those signals are most informative. 
+
+## Acknowledgments 
+
+This work was supported by the Wallenberg AI, Autonomous Systems and Software Program (WASP, http://wasp-sweden.org), funded by the Knut and Alice Wallenberg Foundation. 
+
+## References 
+
+[1] Gediminas Adomavicius, Konstantin Bauman, Alexander Tuzhilin, and Moshe Unger. 2022. Context-Aware Recommender Systems: From Foundations to Recent Developments. In Recommender Systems Handbook (3rd ed.). Springer US, 211– 250. [2] Gediminas Adomavicius, Bamshad Mobasher, Francesco Ricci, and Alexander Tuzhilin. 2011. Context-Aware Recommender Systems. AI Magazine 32, 3 (2011), 67–80. doi:10.1609/aimag.v32i3.2364 [3] Alex Beutel, Paul Covington, Sagar Jain, Can Xu, Jia Li, Vince Gatto, and Ed H. Chi. 2018. Latent Cross: Making Use of Context in Recurrent Recommender Systems. In Proceedings of the Eleventh ACM International Conference on Web Search and Data Mining (WSDM ’18) . ACM, 46–54. [4] Simone Borg Bruun, Krisztian Balog, and Maria Maistro. 2024. Dataset and Models for Item Recommendation Using Multi-Modal User Interactions. In Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR ’24) . Association for Computing Machinery, New York, NY, USA, 709–718. doi:10.1145/3626772.3657881 [5] Bo Chang, Alexandros Karatzoglou, Yuyan Wang, Xu Can, Ed. H. Chi, and Minmin Chen. 2023. Latent User Intent Modeling for Sequential Recommenders. In 
+
+Companion Proceedings of the ACM Web Conference 2023 (WWW ’23 Companion) .ACM, 427–431. [6] Hao Ding, Yan Hu, et al. 2023. Adaptive Multi-Modalities Fusion in Sequen-tial Recommendation Systems. In Proceedings of the 32nd ACM International Conference on Information and Knowledge Management (CIKM ’23) . ACM. [7] D. J. Gupta, D. C. S. Rao, D. R. M R, and M. P. P. 2025. The Psychology of Color in Marketing: How Visual Elements Affect Consumer Perception. Journal of Marketing & Social Research 2, 3 (2025), 128–133. doi:10.61336/jmsr/25-03-14 [8] Ruining He and Julian McAuley. 2016. VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback. In Proceedings of the Thirtieth AAAI Conference on Artificial Intelligence (AAAI ’16) . AAAI Press, Phoenix, Arizona, 144–150. [9] Liam Hebert, Marialena Kyriakidi, Hubert Pham, Krishna Sayana, James Pine, Sukhdeep Sodhi, and Ambarish Jash. 2025. FLARE: Fusing Language Models and Collaborative Architectures for Recommender Enhancement. In Companion Proceedings of the ACM Web Conference 2025 (WWW Companion ’25) . Association for Computing Machinery, New York, NY, USA, 2235–2244. doi:10.1145/3701716. 3717554 [10] Balázs Hidasi, Alexandros Karatzoglou, Linas Baltrunas, and Domonkos Tikk. 2016. Session-Based Recommendations with Recurrent Neural Networks. In 4th International Conference on Learning Representations (ICLR ’16) . OpenReview.net, San Juan, Puerto Rico. https://openreview.net/forum?id=v5gKSgA0 [11] Yu Hou, Sheng Mu, Wayne Xin Zhao, Yali Li, Bolin Ding, and Ji-Rong Wen. 2022. Towards Universal Sequence Representation Learning for Recommender Systems. In Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD ’22) . ACM, 585–593. [12] Wang-Cheng Kang, Chen Fang, Zhaowen Wang, and Julian McAuley. 2017. Visually-Aware Fashion Recommendation and Design with Generative Image Models. In 2017 IEEE International Conference on Data Mining (ICDM ’17) . IEEE, New Orleans, LA, USA, 207–216. [13] Wang-Cheng Kang and Julian McAuley. 2018. Self-Attentive Sequential Recom-mendation. In Proceedings of the 12th ACM Conference on Recommender Systems (RecSys ’18) . Association for Computing Machinery, New York, NY, USA, 238–246. doi:10.1145/3240323.3240374 [14] Kibum Kim, Sein Kim, Hongseok Kang, Jiwan Kim, Heewoong Noh, Yeonjun In, Kanghoon Yoon, Jinoh Oh, and Chanyoung Park. 2025. Image is All You Need: Towards Efficient and Effective Large Language Model-Based Recommender Systems. arXiv:2503.06238 [cs.IR] https://arxiv.org/abs/2503.06238 [15] Daniele Malitesta, Emanuele Rossi, Claudio Pomo, Tommaso Di Noia, and Fragkiskos D. Malliaros. 2024. Do We Really Need to Drop Items with Missing Modalities in Multimodal Recommendation?. In Proceedings of the 33rd ACM International Conference on Information and Knowledge Management (CIKM ’24) . Association for Computing Machinery, New York, NY, USA, 3943–3948. doi:10.1145/3627673.3679898 [16] Pablo Mateos and Alejandro Bellogín. 2025. A systematic literature review of recent advances on context-aware recommender systems. Artificial Intelligence Review (2025). [17] Jianmo Ni, Jiacheng Li, and Julian McAuley. 2019. Justifying Recommendations Using Distantly-Labeled Reviews and Fine-Grained Aspects. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) . Association for Computational Linguistics, Stroudsburg, PA, USA, 188– 197. doi:10.18653/v1/D19-1018 [18] Sergio Oramas, Oriol Nieto, Mohamed Sordo, and Xavier Serra. 2017. A Deep Multimodal Approach for Cold-start Music Recommendation. In Proceedings of the 1st Workshop on Deep Learning for Recommender Systems (DLRS ’17) . Association for Computing Machinery, New York, NY, USA, 1–6. doi:10.1145/3125486.3125492 [19] Jacob L. Orquin, Martin P. Bagger, Erik S. Lahm, Klaus G. Grunert, and Joachim Scholderer. 2020. The Visual Ecology of Product Packaging and Its Effects on Consumer Attention. Journal of Business Research 111 (2020), 187–195. doi:10. 1016/j.jbusres.2019.01.043 [20] Claudio Pomo, Matteo Attimonelli, Danilo Danese, Fedelucio Narducci, and Tom-maso Di Noia. 2025. Do Recommender Systems Really Leverage Multimodal Content? A Comprehensive Analysis on Multimodal Representations for Recom-mendation. In Proceedings of the 34th ACM International Conference on Information and Knowledge Management (CIKM ’25) . Association for Computing Machinery, New York, NY, USA, 1–11. [21] Weicong Qin, Yi Xu, Weijie Yu, Chenglei Shen, Xiao Zhang, Ming He, Jianping Fan, and Jun Xu. 2025. MoRE: A Mixture of Reflectors Framework for Large Language Model-Based Sequential Recommendation. In Proceedings of the Nineteenth ACM Conference on Recommender Systems (RecSys ’25) . Association for Computing Machinery, New York, NY, USA, 299–308. doi:10.1145/3705328.3748055 [22] Paurav Shukla, Jaywant Singh, and Weisha Wang. 2022. The Influence of Creative Packaging Design on Customer Motivation to Process and Purchase Decisions. 
+
+Journal of Business Research 147 (2022), 338–347. doi:10.1016/j.jbusres.2022.04.026 [23] Fei Sun, Jun Liu, Jian Wu, Changhua Pei, Xiao Lin, Wenwu Ou, and Peng Jiang. 2019. BERT4Rec: Sequential Recommendation with Bidirectional Encoder Repre-sentations from Transformer. In Proceedings of the 28th ACM International Confer-ence on Information and Knowledge Management (CIKM ’19) . Association for Com-puting Machinery, New York, NY, USA, 1441–1450. doi:10.1145/3357384.3357895 [24] Jiaxi Tang, Xin Du, Xiangnan He, Fajie Yuan, Qi Tian, and Tat-Seng Chua. 2020. Adversarial Training Towards Robust Multimedia Recommender System. IEEE Transactions on Knowledge and Data Engineering 32, 5 (2020), 855–867. doi:10. 1109/TKDE.2019.2893638 [25] Tianxin Wei, Bowen Jin, Ruirui Li, Hansi Zeng, Zhengyang Wang, Jianhui Sun, Qingyu Yin, Hanqing Lu, Suhang Wang, Jingrui He, and Xianfeng Tang. 2024. Towards Unified Multi-Modal Personalization: Large Vision-Language Models for Generative Recommendation and Beyond. In Proceedings of the 12th International Conference on Learning Representations (ICLR 2024) . OpenReview.net, Vienna, Austria. https://openreview.net/forum?id=EID-2-s2.0-85195618040 [26] Yinwei Wei, Xiang Wang, Liqiang Nie, Xiangnan He, Richang Hong, and Tat-Seng Chua. 2019. MMGCN: Multi-Modal Graph Convolution Network for Personalized Recommendation of Micro-Video. In Proceedings of the 27th ACM International Conference on Multimedia (MM ’19) . ACM, Nice, France, 1437–1445. doi:10.1145/ 3343031.3350917 [27] Jinfeng Xu, Zheyu Chen, Shuo Yang, Jinze Li, Hewei Wang, Yijie Li, Jian-heng Tang, Yunhuai Liu, and Edith C. H. Ngai. 2026. CAMMSR: Category-Guided Attentive Mixture of Experts for Multimodal Sequential Recommendation. arXiv:2603.04320 [cs.IR] https://arxiv.org/abs/2603.04320 [28] Lanling Xu, Zhen Tian, Bingqian Li, Junjie Zhang, Jinpeng Wang, Mingchen Cai, and Wayne Xin Zhao. 2024. Sequence-level Semantic Representation Fusion for Recommender Systems. arXiv:2402.18166 [cs.IR] https://arxiv.org/abs/2402.18166 CARS @ RecSys ’26, September 28–October 2, 2026, Minneapolis, MN, USA Glisovic et al. 
+
+[29] Minglei Yin, Bin Liu, Neil Zhenqiang Gong, and Xin Li. 2025. Securing Visually-Aware Recommender Systems: An Adversarial Image Reconstruction and Detec-tion Framework. ACM Transactions on Management Information Systems 16, 3, Article 27 (2025), 29 pages. doi:10.1145/3743681 [30] Lingzi Zhang, Xin Zhou, Zhiwei Zeng, and Zhiqi Shen. 2024. Multimodal Pre-training for Sequential Recommendation via Contrastive Learning. ACM Transac-tions on Recommender Systems 3, 1 (October 2024), Article 9. doi:10.1145/3682075 [31] Shengzhe Zhang, Liyi Chen, Dazhong Shen, Chao Wang, and Hui Xiong. 2025. Hierarchical Time-Aware Mixture of Experts for Multi-Modal Sequential Recom-mendation. In Proceedings of the ACM Web Conference 2025 (WWW ’25) . ACM, Sydney, NSW, Australia. [32] Kun Zhou, Hui Yu, Wayne Xin Zhao, and Ji-Rong Wen. 2022. Filter-enhanced MLP is All You Need for Sequential Recommendation. In Proceedings of the ACM Web Conference 2022 (WWW ’22) . ACM, 2388–2399. doi:10.1145/3485447.3512141 [33] Xin Zhou and Zhiqi Shen. 2023. A Tale of Two Graphs: Freezing and Denoising Graph Structures for Multimodal Recommendation. In Proceedings of the 31st ACM International Conference on Multimedia (MM ’23) . ACM, Ottawa, ON, Canada, 1–9. doi:10.1145/3581783.3611943
