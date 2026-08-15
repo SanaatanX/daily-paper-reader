@@ -1,15 +1,15 @@
 {
-  "generated_at": "2026-08-12T20:12:02.915358+00:00",
-  "updated_date": "20260812",
+  "generated_at": "2026-08-15T19:19:02.299230+00:00",
+  "updated_date": "20260815",
   "carryover_days": 9,
   "tag_states": {
     "MRE": {
-      "updated_date": "20260812",
+      "updated_date": "20260815",
       "carryover_days": 9,
       "items": []
     },
     "ml": {
-      "updated_date": "20260812",
+      "updated_date": "20260815",
       "carryover_days": 9,
       "items": []
     }

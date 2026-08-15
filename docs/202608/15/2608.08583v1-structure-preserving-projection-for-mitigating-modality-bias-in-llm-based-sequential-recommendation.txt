@@ -1,0 +1,292 @@
+Title: Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation
+
+URL Source: https://arxiv.org/pdf/2608.08583v1
+
+Published Time: Tue, 11 Aug 2026 01:12:25 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation 
+
+## Tzu-Wei Chiu ∗
+
+National Taiwan University Taipei, Taiwan R12922A14@ntu.edu.tw 
+
+## Song-Duo Ma ∗
+
+National Taiwan University Taipei, Taiwan R14944001@ntu.edu.tw 
+
+## Hsin-Yu Lin 
+
+National Taiwan University Taipei, Taiwan R14922159@ntu.edu.tw 
+
+## Pu-Jen Cheng 
+
+National Taiwan University Taipei, Taiwan pjcheng@csie.ntu.edu.tw 
+
+## Abstract 
+
+Recent LLM-based recommenders integrate textual and collabora-tive signals by projecting collaborative embeddings into the em-bedding space of the LLM. However, this projection can introduce modality bias that distorts the underlying collaborative structure and limits the usefulness of projected embeddings. To address this issue, we propose a novel structure-preserving projection approach that maintains the relational geometry of collaborative embeddings through dedicated structure-preserving losses. Comprehensive ex-periments demonstrate that our approach consistently improves recommendation performance, providing a more reliable path for LLM-based recommendation. 
+
+## CCS Concepts 
+
+• Information systems → Recommender systems .
+
+## Keywords 
+
+Sequential Recommendation, Large Language Models, Structure Preservation 
+
+ACM Reference Format: 
+
+Tzu-Wei Chiu, Song-Duo Ma, Hsin-Yu Lin, and Pu-Jen Cheng. 2026. Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation. In 20th ACM Conference on Recommender Systems (RecSys ’26), September 27-October 02, 2026, Minneapolis, MN, USA. ACM, New York, NY, USA, 6 pages. https://doi.org/10.1145/3773078.3831768 
+
+## 1 Introduction 
+
+Sequential recommendation aims to predict users’ next interaction item by modeling temporal patterns and behavioral transitions from historical sequences in large-scale platforms such as e-commerce, streaming, and social media [5, 14, 16]. Early approaches based on recurrent and self-attentive architectures, such as GRU4Rec [7] and SASRec [8], established strong baselines by capturing sequential dependencies in collaborative signals. However, these models rely     
+
+> ∗Equal contribution.
+> This work is licensed under a Creative Commons Attribution 4.0 International License.
+> RecSys ’26, Minneapolis, MN, USA
+> © 2026 Copyright held by the owner/author(s). ACM ISBN 979-8-4007-2284-4/2026/09 https://doi.org/10.1145/3773078.3831768 This user has watched <Reservoir Dogs> [Reservoir Dogs Emb] , ...
+> This user has watched <Reservoir Dogs> [The Great Escape Emb] , ...
+> Original Embedding
+> Shuffle Embedding
+
+Model HR@1 (Orig.) HR@1 (Shuf.) 𝚫 
+
+Direct 0.4531 0.4542 +0.0011 LLaRA [12] 0.4743 0.4678 −0.0065 
+
+Figure 1: Embedding-shuffle diagnostic. Shuffling collabora-tive embeddings while keeping titles fixed leaves MovieLens HR@1 (Hit Ratio at 1) nearly unchanged ( Δ = Shuf. −Orig. 
+
+≈ 0), revealing weak reliance on collaborative embeddings. 
+
+primarily on interaction patterns and co-occurrence statistics, lim-iting their ability to reason over heterogeneous signals such as item content and natural language descriptions. Recently, LLM-based recommender systems have emerged as a promising direction for combining the language understanding capabilities of LLMs with collaborative signals derived from user interaction histories. Rather than relying solely on interaction pat-terns, these methods reformulate recommendation as a language modeling task and incorporate textual item information, such as ti-tles or descriptions, into prediction. To further exploit collaborative signals learned by traditional recommenders, several studies project pretrained item embeddings into the LLM embedding space, allow-ing the model to condition on both textual and collaborative inputs. For example, CoLLM [17] formulates recommendation as a binary decision problem over textual item histories and collaborative rep-resentations; LLaRA [12] performs next-title generation with a curriculum that gradually replaces placeholders with projected em-beddings; and A-LLMRec [9] aligns collaborative representations with SBERT-based text before projection. Despite their promising performance, these methods largely as-sume that once collaborative embeddings are mapped into the LLM embedding space, the model can effectively utilize the collaborative signals encoded in them. However, this assumption is far from guar-anteed. A central challenge is the modality bias between the two arXiv:2608.08583v1 [cs.IR] 9 Aug 2026 RecSys ’26, September 27-October 02, 2026, Minneapolis, MN, USA Tzu-Wei Chiu, Song-Duo Ma, Hsin-Yu Lin, and Pu-Jen Cheng 
+
+input modalities in LLM-based recommendation: textual item infor-mation and projected collaborative embeddings. Specifically, LLMs may over-rely on the textual signals while failing to effectively utilize the collaborative signals encoded in projected embeddings. This bias arises from a fundamental mismatch in representational structure. Item titles follow linguistic patterns that are well aligned with LLM pretraining, whereas user behavior sequences encompass diverse and often cross-domain transitions that are not naturally aligned with the LLM representation space. A single item may be followed by a wide range of subsequent items depending on context, intent, or temporal preferences. Consequently, directly projecting collaborative representations into the LLM embedding space does not guarantee that their underlying structure will be faithfully preserved or effectively utilized. We verify this phenomenon quantitatively through an embedding-shuffle diagnostic. Using the MovieLens dataset [6], we find that shuffling collaborative embeddings while preserving titles has a negligible impact on Hit Ratio at 1 (HR@1) for baselines that pri-marily rely on textual signals (Fig. 1). This suggests that projected collaborative embeddings may act more like generic soft prompts than true collaborative signals [13], reflecting a stronger reliance on text than on collaborative information. This behavior mirrors findings in vision-language models where models remain confident even when non-textual inputs are corrupted [11, 18]. We attribute this bias to projection-induced distortion of collabo-rative structure . Without explicit constraints, the projection module may fail to preserve the relational geometry originally captured by the sequential recommender, such as item-item similarities and sequence-aware relationships. To mitigate this issue, we propose a 
+
+structure-preserving projection approach that explicitly preserves col-laborative structure in the projected LLM embedding space. Specifi-cally, we introduce two objectives: (1) Cosine Similarity Preservation ,which aligns relational geometry between the original and projected spaces, and (2) Contrastive Preservation , which preserves sequence-aware discrimination between positive and negative items. Our contributions are threefold: (1) We provide quantitative evidence from the embedding shuffle tests that LLM-based rec-ommenders may overlook the collaborative information encoded in projected embeddings. (2) We introduce a structure-preserving projection approach, enforced by two novel learning objectives designed to preserve item-item relational geometry and sequence-aware discrimination. (3) Through experiments on LastFM and MovieLens, we demonstrate consistent improvements in HR@1, and provide diagnostic analyses showing that our approach more effectively leverages collaborative signals. 
+
+## 2 Methodology 
+
+In this section, we introduce a structure-preserving projection ap-proach that integrates collaborative representations into a pre-trained LLM while explicitly preserving the relational structure of the original embedding space. The approach consists of: (1) a pretrained sequential recommender that provides collaborative em-beddings, (2) an MLP projector that maps these embeddings into the LLM embedding space, and (3) two structure-preserving objectives that constrain the projection to maintain relational geometry. 
+
+## 2.1 Model Overview 
+
+Following recent LLM-based recommendation methods such as LLaRA and A-LLMRec, we formulate next-item prediction as a next-token generation task. Given a user interaction sequence I =
+
+[𝑖 1, 𝑖 2, . . . , 𝑖 𝑡 ], the goal is to predict the next item 𝑖 𝑡 +1.Each item 𝑖 ∈ I has a collaborative embedding e𝑖 ∈ R𝑑 from a pretrained sequential recommender and a title with token embed-dings E𝑡 𝑖 . The collaborative item embeddings are projected by an MLP into the LLM embedding space z𝑖 = MLP (e𝑖 ).For each interaction, we insert both the title embedding and projected collaborative embedding into the LLM prompt: 
+
+X = {Einstruction , E𝑡 𝑖 1 , z𝑖 1 , . . . , E𝑡 𝑖𝑡 , z𝑖 𝑡 }. (1) The LLM jointly leverages textual content and collaborative signals, trained with next-token prediction to minimize the negative log-likelihood of the ground-truth title tokens 𝑌 = [𝑤 1, . . . , 𝑤 𝑚 ]:
+
+LLM = −
+
+> 𝑚
+
+∑︁ 
+
+> 𝑗 =1
+
+log 𝑃 𝜃 
+
+ 𝑤 𝑗 | 𝑤 < 𝑗 , 𝑋  . (2) 
+
+## 2.2 Structure-Preserving Objectives 
+
+To ensure that collaborative information is preserved in the pro-jected space, we introduce two structure-preserving objectives: 
+
+(1) Cosine Similarity Preservation. The first objective preserves the relational geometry of the original embedding space. Given item embeddings e𝑖 , e𝑗 and their projected counterparts z𝑖 = MLP (e𝑖 ),
+
+z𝑗 = MLP (e𝑗 ), we define 𝑆 orig  
+
+> 𝑖 𝑗
+
+= cos (e𝑖 , e𝑗 ) and 𝑆 proj  
+
+> 𝑖 𝑗
+
+= cos (z𝑖 , z𝑗 ).The loss is then computed as the mean squared difference between the two similarity matrices: 
+
+Lsim = 1
+
+|B| 2∑︁ 𝑖,𝑗 ∈ B 
+
+
+
+𝑆 proj  
+
+> 𝑖 𝑗
+
+− 𝑆 orig 
+
+> 𝑖 𝑗
+
+2
+
+. (3) where B is the batch of item embeddings. This loss encourages the projector to preserve pairwise relational geometry by making item-item similarities in the projected space consistent with those in the original collaborative space. 
+
+(2) Contrastive Preservation. The second objective ensures that the projection preserves the sequence-aware discrimination learned by the sequential recommender. Sequential models encode a prefer-ence ordering by producing higher similarity between a sequence representation and its true next item than with randomly sampled negative items. To preserve this behavior after projection, we use a contrastive objective that pulls the projected sequence embedding to align more closely with the projected positive item embedding, while pushing it away from projected negative item embeddings. Given a sequence representation h𝑠 ∈ R𝑑 , the true next item embedding e𝑝 and a randomly sampled negative embedding e𝑛 ,
+
+z𝑠 = MLP (h𝑠 ), z𝑝 = MLP (e𝑝 ), and z𝑛 = MLP (e𝑛 ). We optimize the objective using a binary cross-entropy loss: 
+
+Lcontrast = − log 𝜎  ⟨z𝑠 , z𝑝 ⟩ − log  1 − 𝜎 (⟨ z𝑠 , z𝑛 ⟩) . (4) The contrastive objective encourages projected representations to preserve the preference ordering learned by the sequential encoder. Specifically, it encourages projected sequence representations to have higher similarity with positive items and lower similarity with randomly sampled negative items. Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation RecSys ’26, September 27-October 02, 2026, Minneapolis, MN, USA 
+
+## 2.3 Optimization and Training 
+
+The total training objective combines the next-token prediction loss with one of the proposed structure-preserving objectives: 
+
+• Cosine-LM : L = LLM + 𝛼 Lsim .
+
+• Contrastive-LM : L = LLM + 𝛼 Lcontrast .where 𝛼 controls the strength of the structure-preserving objective. Training proceeds in two stages. First, we pretrain the MLP projector using only the corresponding structure-preserving loss while keeping the sequential recommender and LLM fixed. This provides the projector with a structure-aware initialization before integrating the projected embeddings into the LLM. We then jointly optimize the projector and the trainable LLM parameters using the corresponding objective above, while keeping the sequential recommender frozen. The structure-preserving loss continues to constrain the projected representations during fine-tuning, prevent-ing the collaborative structure from being excessively distorted by the language-modeling objective. 
+
+## 3 Experiments 
+
+We conduct experiments on two public datasets to evaluate the proposed approach and provide additional analyses to better un-derstand its behavior and effectiveness. 
+
+## 3.1 Experimental Setup 
+
+Datasets. We adopt the preprocessed LastFM [3] and MovieLens-100K [6] datasets released by LLaRA [12]. Both datasets have also been widely used in recent LLM-based sequential recommendation studies, including iLoRA [10], AFL [2], and S-DPO [4]. User interac-tions are chronologically ordered and split into training, validation, and test sets with an 8:1:1 ratio to prevent data leakage. Dataset statistics are summarized in Table 1. 
+
+Baselines. We compare three categories of methods. (1) Traditional sequential models : GRU4Rec and SASRec , which model user inter-action sequences directly and also serve as collaborative embedding backbones. (2) Text-based LLM recommendation : LLaMA2-7B [15] in a zero-shot setting and TALLRec [1], which instruction-tunes LLaMA2-7B for next-item prediction. (3) LLM recommendation with projected collaborative embeddings : Direct , which jointly trains the projector and LLM using next-token prediction; LLaRA [12], which augments Direct with curriculum prompt tuning; and our Cosine-LM and Contrastive-LM , which additionally impose structure-preserving objectives on the collaborative representations. 
+
+Implementation Details. We use the pretrained SASRec model re-leased by LLaRA. GRU4Rec and all LLM-based methods follow the training setup of LLaRA. We fine-tune LLaMA2-7B with LoRA us-ing cosine learning-rate scheduling and a batch size of 128. For the proposed structure-preserving losses, the coefficient 𝛼 is selected on the validation set through a linear search with a step size of 0.1. The selected values are 𝛼 = 0.4 for Cosine-LM and 𝛼 = 0.8 for Contrastive-LM. 
+
+## 3.2 Evaluation Protocol 
+
+Candidate Construction. Following the evaluation setting of LLaRA, each test instance is associated with a candidate set of 20 items,          
+
+> Dataset # Users # Items # Interactions
+> LastFM 1,220 4,606 73,510 MovieLens-100K 943 1,682 100,000
+
+Table 1: Statistics of the datasets. 
+
+consisting of the ground-truth next item and 19 sampled negative items. The same candidate set is used when evaluating ID-based and LLM-based methods, ensuring that all methods are compared under the same candidate space. 
+
+Evaluation Procedure. For each test instance, all methods are eval-uated on the same 20-item candidate set. GRU4Rec and SASRec first produce scores over the full item vocabulary, after which rank-ing is restricted to the candidate set. LLM-based methods instead generate an item title, which is normalized and matched against the candidate titles. A generation is considered valid only when it uniquely matches one candidate; unmatched or ambiguous gen-erations are treated as invalid. A valid prediction is correct if the matched candidate corresponds to the ground-truth item. 
+
+Metrics. Following LLaRA and S-DPO [4], we report Hit Ratio at 1 (HR@1) and Valid Ratio (VR). For LLM-based methods, HR@1 is computed over valid generations as HR@1 = 𝑁 correct /𝑁 valid , where 
+
+𝑁 correct is the number of valid predictions matching the ground-truth item and 𝑁 valid is the number of generations that uniquely match one candidate item. VR is defined as VR = 𝑁 valid /𝑁 test , where 
+
+𝑁 test denotes the total number of test instances. Invalid generations therefore reduce VR but are excluded from the denominator of HR@1. For ID-based methods, whose outputs always correspond to valid candidate items, VR is 1 and HR@1 is the fraction of test instances for which the ground-truth item is ranked first among the 20 candidates. 
+
+## 3.3 Overall Recommendation Performance 
+
+As shown in Table 2, traditional sequential models (GRU4Rec, SAS-Rec) markedly outperform zero-shot LLaMA2-7B, reflecting the limitations of text-only LLMs in leveraging collaborative signals. Through instruction tuning, TALLRec bridges this gap and sur-passes both methods, confirming that targeted alignment can un-lock the recommendation capabilities of LLMs. Projected collaborative embeddings consistently improve perfor-mance over text-only baselines, indicating that collaborative signals provide complementary information beyond textual prompts. Our Cosine-LM and Contrastive-LM outperform Direct and LLaRA, with Contrastive-LM achieving the highest HR@1 on both datasets, in-dicating that contrastive alignment provides greater gains than cosine preservation. We assess statistical significance using paired t-tests across five random seeds. Our improvements are statistically significant on LastFM ( 𝑝 < 0.05). On MovieLens, due to the ex-ploratory nature of the analysis and higher variance across runs, we report marginal significance at 𝑝 < 0.1 (denoted by †). 
+
+## 3.4 Analysis of Modality Reliance 
+
+To verify whether the LLM truly leverages the collaborative signals from the projected embeddings or merely relies on the textual RecSys ’26, September 27-October 02, 2026, Minneapolis, MN, USA Tzu-Wei Chiu, Song-Duo Ma, Hsin-Yu Lin, and Pu-Jen Cheng 
+
+Method LastFM ∗ MovieLens †
+
+Metric HR@1 VR HR@1 VR 
+
+Baseline 
+
+GRU4Rec [7] 0.2616 1.0000 0.3750 1.0000 SASRec [8] 0.2233 1.0000 0.3444 1.0000 LLaMA2-7B [15] 0.0246 0.3443 0.0421 0.4421 TALLRec [1] 0.4180 0.9836 0.3895 0.9263 
+
+GRU4Rec Embedding 
+
+Direct 0.4872 0.9590 0.4043 0.9895 LLaRA [12] 0.4344 0.9836 0.4421 0.9684 
+
+Cosine-LM (ours) 0.5133 0.9262 0.4681 0.9895 
+
+Contrastive-LM (ours) 0.5546 0.9754 0.4881 0.8842 
+
+SASRec Embedding 
+
+Direct 0.4721 0.9967 0.4531 0.9789 LLaRA [12] 0.4676 0.9820 0.4743 0.9811 
+
+Cosine-LM (ours) 0.5309 0.9885 0.4874 0.9853 
+
+Contrastive-LM (ours) 0.5511 0.9902 0.4993 0.9832 
+
+Table 2: Overall recommendation performance. Significance is tested on HR@1 via paired t-tests across five seeds against the strongest baseline per block: ∗ denotes 𝑝 < 0.05 on LastFM, and † denotes marginal significance at 𝑝 < 0.1 on MovieLens. 
+
+information from item titles, we conduct a shuffle-based ablation study. We introduce two noise settings during inference: 
+
+Text Shuffle: For each item in the interaction history, we re-place its title with the title of a randomly sampled item from the global item pool, while keeping its original collaborative embedding unchanged. This breaks the correspondence between the interac-tion history and textual signals while preserving the collaborative input. A performance drop therefore indicates reliance on textual information. 
+
+Embedding Shuffle: For each item in the interaction history, we replace its collaborative embedding with that of a randomly sampled item from the global item pool, while keeping its original title unchanged. This corrupts the collaborative signals while preserving the textual input. A performance drop therefore indicates reliance on collaborative information. Figure 2 reports HR@1 under the original setting and the two shuffle settings on LastFM and MovieLens, revealing a clear contrast between baseline and our structure-preserving approaches. 
+
+Over-reliance on Text in Baselines: For Direct and LLaRA, shuffling the text causes a catastrophic performance drop. By contrast, shuf-fling the embeddings results in negligible impact. This suggests that these baselines primarily function as text-driven recommenders: the projected embeddings are not effectively utilized as collaborative signals and are instead treated as generic soft prompts. 
+
+Effective Alignment in Proposed Methods: In contrast, our Cosine-LM and Contrastive-LM show substantial performance degradation when embeddings are shuffled. This sensitivity confirms that our structure-preserving objectives successfully encourage the LLM to utilize the geometric information encoded in collaborative em-beddings. By enforcing structural alignment, our methods leverage both textual and collaborative signals and mitigate modality bias. Direct LLaRA Cosine-LM Contrastive-LM  
+
+> 0.0 0.1 0.2 0.3 0.4 0.5 0.6
+> HR@1
+> Original Text Shuffle Embedding Shuffle
+
+(a) LastFM Direct LLaRA Cosine-LM Contrastive-LM   
+
+> 0.0 0.1 0.2 0.3 0.4 0.5 0.6
+> HR@1
+> Original Text Shuffle Embedding Shuffle
+
+(b) MovieLens 
+
+Figure 2: Shuffle-based diagnostic of modality bias: baselines mainly rely on titles, whereas our methods actively leverage collaborative embedding structure. Method LastFM MovieLens Metric Tau Rho SIM@10 Tau Rho SIM@10 Direct 0.2864 0.4151 0.2150 0.2334 0.3447 0.1237 LLaRA [12] 0.3723 0.5290 0.2618 0.2064 0.3015 0.0879             
+
+> Cosine-LM 0.7801 0.9324 0.5327 0.7501 0.8573 0.5940 Contrastive-LM 0.6147 0.8047 0.4383 0.3682 0.5188 0.2104
+
+Table 3: Structure preservation between original and pro-jected item embeddings. Higher is better. 
+
+## 3.5 Embedding Structure Preservation 
+
+We evaluate structure preservation by comparing the relational structure of the original collaborative space and the projected space using Kendall’s Tau, Spearman’s Rho, and SIM@10. For each item, all other items are ranked by cosine similarity in both spaces. We then compute Kendall’s Tau and Spearman’s Rho between the two rankings for each item and report the average across all items. SIM@10 is defined as the average overlap between the top-10 near-est neighbors in the original and projected spaces. While Tau and Rho measure global ranking consistency across the entire item space, SIM@10 focuses on local neighborhood preservation by ex-amining whether the nearest neighbors of each item remain stable after projection. Table 3 shows that Cosine-LM achieves substantially stronger geometric preservation, consistent with its explicit objective of matching pairwise similarities in the original collaborative space. In-terestingly, however, this stronger geometric fidelity does not trans-late directly into the best recommendation performance: Contrastive-LM achieves higher HR@1 despite lower Tau, Rho, and SIM@10. This difference highlights an important trade-off between global geometric preservation and task-specific discriminative preservation .Cosine-LM attempts to retain the overall item–item neighborhood structure, including relationships that may not be directly relevant to next-item prediction. In contrast, Contrastive-LM is free to re-shape parts of this geometry as long as sequence representations remain better aligned with positive next items than with nega-tive items. Thus, preserving the original embedding space more faithfully is not necessarily equivalent to preserving the informa-tion most useful for recommendation. These results suggest that Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation RecSys ’26, September 27-October 02, 2026, Minneapolis, MN, USA 0% 30% 70% 100% 
+
+> Training Progress
+> 0.0 0.2 0.4 0.6 0.8
+> Loss Weight (  )
+> sim
+> contrast
+
+(a) Dynamic Weight Schedule GRU4RecSASRec 0.450 0.475 0.500 0.525 0.550 0.575 0.600   
+
+> LastFM
+> GRU4RecSASRec 0.450 0.475 0.500 0.525 0.550 0.575 0.600
+> MovieLens HR@1
+> Cosine-LM Contrastive-LM Combined
+
+(b) Performance Comparison 
+
+Figure 3: Synergy Analysis. (a) The dynamic schedule shifts from geometric preservation to contrastive alignment using cosine interpolation. (b) Combined yields the best HR@1 on both datasets, confirming the effectiveness of the curriculum. 
+
+moderate structural distortion can be beneficial when it improves task-relevant discrimination. 
+
+## 3.6 Synergy of Combined Loss 
+
+While Cosine-LM excels at preserving geometric structure and Contrastive-LM provides superior discriminative power, we hypoth-esize that these objectives are complementary. Initiating training with geometric constraints can prevent early structural distortion, establishing a stable topology that facilitates the subsequent learn-ing of sequence-aware discrimination. To verify this hypothesis, we adopt a three-phase training sched-ule that gradually shifts the optimization focus from geometric preservation to task-specific discrimination. During the Warm-up 
+
+phase (0%–30%), we set 𝛼 sim = 0.4 and optimize primarily for cosine similarity preservation, encouraging the projector to establish a stable mapping that retains the relational structure of the original collaborative space. During the Transition phase (30%–70%), 𝛼 sim 
+
+is gradually decayed to 0 while 𝛼 contrast is increased to 0.8 using co-sine interpolation, allowing the model to progressively trade global geometric fidelity for sequence-aware discrimination without an abrupt change in the optimization objective. Finally, in the Refine-ment phase (70%–100%), we keep 𝛼 contrast = 0.8, enabling the model to focus on distinguishing positive next items from negatives after a structurally meaningful projection has already been established. Figure 3a illustrates this schedule. As shown in Figure 3b, Combined consistently outperforms both individual objectives on LastFM and MovieLens. This result supports the complementary roles of the two losses: cosine preser-vation provides a well-structured initialization that limits early distortion of collaborative relationships, while contrastive learning subsequently reshapes this structure toward the recommendation objective. The resulting curriculum therefore balances geometric fidelity and task-specific discrimination, leading to better recom-mendation performance than optimizing either objective alone. 
+
+## 3.7 Ablation of Joint Fine-tuning 
+
+To investigate the potential for further performance improvements, we conduct an ablation study on jointly fine-tuning the sequential 
+
+LastFM (HR@1) MovieLens (HR@1) Method Original Fine-tuned Original Fine-tuned Direct 0.4721 0.4852 0.4531 0.4574 LLaRA [12] 0.4676 0.4754 0.4743 0.4787 
+
+Cosine-LM 0.5309 0.5492 0.4874 0.5026 
+
+Contrastive-LM 0.5511 0.5702 0.4993 0.5106 Table 4: Ablation of joint fine-tuning. "Original" keeps SAS-Rec frozen, while "Fine-tuned" updates SASRec jointly with LLM. Our methods remain consistently better than baselines. 
+
+backbone (SASRec) with the LLM and projector. In our main experi-ments, SASRec was kept frozen to isolate the projector’s alignment capability. Here, we unfreeze it to allow collaborative embeddings to adapt towards the LLM representation space. Table 4 compares the frozen-backbone setting (Original) and the joint fine-tuning setting (Fine-tuned). While enabling back-bone updates improves all methods, our structure-preserving ap-proaches maintain a clear advantage over strong baselines under both settings. Notably, the performance gains from joint fine-tuning are larger for Cosine-LM and Contrastive-LM than for Direct and LLaRA, suggesting a synergistic effect between backbone adapta-tion and our geometry-aware objectives. When SASRec becomes trainable, it can actively reshape the collaborative embedding topol-ogy to better satisfy the geometric and contrastive constraints, thereby strengthening the manifold alignment with the LLM. 
+
+## 4 Conclusion 
+
+In this paper, we identify and address a previously overlooked phenomenon of modality bias in LLM-based recommenders that integrate textual and collaborative signals. We propose a structure-preserving projection approach with two complementary objec-tives: cosine similarity preservation and sequence-aware contrastive alignment, enabling more faithful integration of collaborative sig-nals into LLMs. Experiments across two datasets and multiple col-laborative backbones confirm the prevalence of modality bias and show that our approach effectively preserves collaborative infor-mation while substantially improving recommendation accuracy. These findings establish structure-preserving projection as an effec-tive solution for reliable LLM-based recommendation. Future work includes expanding the method to richer modalities, evaluating it against a broader range of recommendation models, and developing interpretable mechanisms that explicitly surface collaborative cues. 
+
+## Acknowledgments 
+
+We thank the anonymous reviewers for their insightful and con-structive feedback. This work was supported by the National Sci-ence and Technology Council (NSTC), Taiwan, under Grant NSTC 115-2634-F-001-006. 
+
+## References    
+
+> [1] Keqin Bao, Jizhi Zhang, Yang Zhang, Wenjie Wang, Fuli Feng, and Xiangnan He. 2023. TALLRec: An Effective and Efficient Tuning Framework to Align Large Lan-guage Model with Recommendation. In Proceedings of the 17th ACM Conference on Recommender Systems (Singapore, Singapore) (RecSys ’23) . Association for Com-puting Machinery, New York, NY, USA, 1007–1014. doi:10.1145/3604915.3608857
+
+RecSys ’26, September 27-October 02, 2026, Minneapolis, MN, USA Tzu-Wei Chiu, Song-Duo Ma, Hsin-Yu Lin, and Pu-Jen Cheng 
+
+[2] Shihao Cai, Jizhi Zhang, Keqin Bao, Chongming Gao, Qifan Wang, Fuli Feng, and Xiangnan He. 2025. Agentic Feedback Loop Modeling Improves Recommendation and User Simulation. In Proceedings of the 48th International ACM SIGIR Conference on Research and Development in Information Retrieval (Padua, Italy) (SIGIR ’25) .Association for Computing Machinery, New York, NY, USA, 2235–2244. doi:10. 1145/3726302.3729893 [3] Ivan Cantador, Peter Brusilovsky, and Tsvi Kuflik. 2011. Second workshop on information heterogeneity and fusion in recommender systems (HetRec2011). In Proceedings of the Fifth ACM Conference on Recommender Systems (Chicago, Illinois, USA) (RecSys ’11) . Association for Computing Machinery, New York, NY, USA, 387–388. doi:10.1145/2043932.2044016 [4] Yuxin Chen, Junfei Tan, An Zhang, Zhengyi Yang, Leheng Sheng, Enzhi Zhang, Xiang Wang, and Tat-Seng Chua. 2024. On softmax direct preference optimiza-tion for recommendation. In Proceedings of the 38th International Conference on Neural Information Processing Systems (Vancouver, BC, Canada) (NIPS ’24) . Curran Associates Inc., Red Hook, NY, USA, Article 863, 27 pages. [5] Hui Fang, Danning Zhang, Yiheng Shu, and Guibing Guo. 2020. Deep Learning for Sequential Recommendation: Algorithms, Influential Factors, and Evaluations. 39, 1, Article 10 (Nov. 2020), 42 pages. doi:10.1145/3426723 [6] F. Maxwell Harper and Joseph A. Konstan. 2015. The MovieLens Datasets: History and Context. ACM Trans. Interact. Intell. Syst. 5, 4, Article 19 (Dec. 2015), 19 pages. doi:10.1145/2827872 [7] Balázs Hidasi, Alexandros Karatzoglou, Linas Baltrunas, and Domonkos Tikk. 2016. Session-based Recommendations with Recurrent Neural Networks. In 4th International Conference on Learning Representations, ICLR 2016, San Juan, Puerto Rico, May 2-4, 2016, Conference Track Proceedings , Yoshua Bengio and Yann LeCun (Eds.). http://arxiv.org/abs/1511.06939 [8] Wang-Cheng Kang and Julian J. McAuley. 2018. Self-Attentive Sequential Rec-ommendation. CoRR abs/1808.09781 (2018). arXiv:1808.09781 http://arxiv.org/ abs/1808.09781 [9] Sein Kim, Hongseok Kang, Seungyoon Choi, Donghyun Kim, Minchul Yang, and Chanyoung Park. 2024. Large Language Models meet Collaborative Filtering: An Efficient All-round LLM-based Recommender System. In Proceedings of the 30th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (Barcelona, Spain) (KDD ’24) . Association for Computing Machinery, New York, NY, USA, 1395–1406. doi:10.1145/3637528.3671931 [10] Xiaoyu Kong, Jiancan Wu, An Zhang, Leheng Sheng, Hui Lin, Xiang Wang, and Xiangnan He. 2024. Customizing language models with instance-wise LoRA for sequential recommendation. In Proceedings of the 38th International Conference on Neural Information Processing Systems (Vancouver, BC, Canada) (NIPS ’24) .Curran Associates Inc., Red Hook, NY, USA, Article 3593, 24 pages. [11] Kang-il Lee, Minbeom Kim, Seunghyun Yoon, Minsung Kim, Dongryeol Lee, Hyukhun Koh, and Kyomin Jung. 2025. VLind-Bench: Measuring Language Priors in Large Vision-Language Models. In Findings of the Association for Com-putational Linguistics: NAACL 2025 , Luis Chiruzzo, Alan Ritter, and Lu Wang (Eds.). Association for Computational Linguistics, Albuquerque, New Mexico, 4129–4144. doi:10.18653/v1/2025.findings-naacl.231 [12] Jiayi Liao, Sihang Li, Zhengyi Yang, Jiancan Wu, Yancheng Yuan, Xiang Wang, and Xiangnan He. 2024. LLaRA: Large Language-Recommendation Assistant (SIGIR ’24) . Association for Computing Machinery, New York, NY, USA, 1785–1795. doi:10.1145/3626772.3657690 [13] Xiao Liu, Kaixuan Ji, Yicheng Fu, Weng Tam, Zhengxiao Du, Zhilin Yang, and Jie Tang. 2022. P-Tuning: Prompt Tuning Can Be Comparable to Fine-tuning Across Scales and Tasks. In Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) , Smaranda Muresan, Preslav Nakov, and Aline Villavicencio (Eds.). Association for Computational Linguistics, Dublin, Ireland, 61–68. doi:10.18653/v1/2022.acl-short.8 [14] Massimo Quadrana, Paolo Cremonesi, and Dietmar Jannach. 2018. Sequence-Aware Recommender Systems. ACM Comput. Surv. 51, 4, Article 66 (July 2018), 36 pages. doi:10.1145/3190616 [15] Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yas-mine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhos-ale, Dan Bikel, Lukas Blecher, Cristian Canton-Ferrer, Moya Chen, Guillem Cucu-rull, David Esiobu, Jude Fernandes, Jeremy Fu, Wenyin Fu, Brian Fuller, Cynthia Gao, Vedanuj Goswami, Naman Goyal, Anthony Hartshorn, Saghar Hosseini, Rui Hou, Hakan Inan, Marcin Kardas, Viktor Kerkez, Madian Khabsa, Isabel Kloumann, Artem Korenev, Punit Singh Koura, Marie-Anne Lachaux, Thibaut Lavril, Jenya Lee, Diana Liskovich, Yinghai Lu, Yuning Mao, Xavier Martinet, Todor Mihaylov, Pushkar Mishra, Igor Molybog, Yixin Nie, Andrew Poulton, Jeremy Reizenstein, Rashi Rungta, Kalyan Saladi, Alan Schelten, Ruan Silva, Eric Michael Smith, Ranjan Subramanian, Xiaoqing Ellen Tan, Binh Tang, Ross Taylor, Adina Williams, Jian Xiang Kuan, Puxin Xu, Zheng Yan, Iliyan Zarov, Yuchen Zhang, Angela Fan, Melanie Kambadur, Sharan Narang, Aurélien Ro-driguez, Robert Stojnic, Sergey Edunov, and Thomas Scialom. 2023. Llama 2: Open Foundation and Fine-Tuned Chat Models. CoRR abs/2307.09288 (2023). arXiv:2307.09288 doi:10.48550/ARXIV.2307.09288 [16] Shoujin Wang, Liang Hu, Yan Wang, Longbing Cao, Quan Z. Sheng, and Mehmet Orgun. 2019. Sequential Recommender Systems: Challenges, Progress and Prospects. In Proceedings of the Twenty-Eighth International Joint Conference on Artificial Intelligence (IJCAI-2019) . International Joint Conferences on Artifi-cial Intelligence Organization, 6332–6338. doi:10.24963/ijcai.2019/883 [17] Yang Zhang, Fuli Feng, Jizhi Zhang, Keqin Bao, Qifan Wang, and Xiangnan He. 2025. CoLLM: Integrating Collaborative Embeddings Into Large Language Models for Recommendation. IEEE Trans. on Knowl. and Data Eng. 37, 5 (May 2025), 2329–2340. doi:10.1109/TKDE.2025.3540912 [18] Xu Zheng, Chenfei Liao, Yuqian Fu, Kaiyu Lei, Yuanhuiyi Lyu, Lutao Jiang, Bin Ren, Jialei Chen, Jiawen Wang, Chengxin Li, Linfeng Zhang, Danda Pani Paudel, Xuanjing Huang, Yu-Gang Jiang, Nicu Sebe, Dacheng Tao, Luc Van Gool, and Xuming Hu. 2025. MLLMs are Deeply Affected by Modality Bias. arXiv:2505.18657 [cs.AI] https://arxiv.org/abs/2505.18657

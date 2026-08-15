@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-12</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-15</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 18 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-12 20:24:54 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-15 19:30:00 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读2篇、速读12篇，重点聚焦RGB-D语义分割与跨模态学习。最值得关注的是URNet的高效重参数化分割网络，以及文本信息辅助的图像聚类方法。建议下一步可深入探索多模态对齐与融合的统一框架。</p>
+<p>今日共处理19篇论文，精读7篇、速读12篇，重点覆盖多模态融合与模态偏差缓解。最值得关注的是两篇8分精读：结构保持投影缓解LLM序列推荐中的模态偏差，以及双轴模态缺失下的多模态联邦学习；速读中异质视觉-语言集成、红外-可见光融合与RGB-事件ReID也均获8分。建议优先精读这两篇高分论文，再速览三篇同分速读以把握多模态领域前沿。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="URNet: A Unified Reparameterized Network for Efficient RGB-D Semantic Segmentation">URNet: A Unified Reparameterized Network for Efficient RGB-D Semantic Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Learning Deep Modality-Shared Self-Expressiveness for Image Clustering with Textual Information">Learning Deep Modality-Shared Self-Expressiveness for Image Clustering with Textual Information</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hyperbolic Multimodal Continual Learning">Hyperbolic Multimodal Continual Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation">Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Federated Learning under Dual-Axis Modality Missingness">Multimodal Federated Learning under Dual-Axis Modality Missingness</span></li><li><span class="dpr-home-dashboard-paper-title" title="Unlocking the Power of Medical Tabular Data via Semantic-Aware Multimodal Pre-training">Unlocking the Power of Medical Tabular Data via Semantic-Aware Multimodal Pre-training</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,9 +87,9 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Debias in Text, Believe Your Eyes: Text-Anchored Cross-Modal Transfer for Visual Counter-Commonsense Reasoning">Debias in Text, Believe Your Eyes: Text-Anchored Cross-Modal Transfer for Visual Counter-Commonsense Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dual-Space Modality Consistency Learning for Universal Cross-Modal Re-Identification">Dual-Space Modality Consistency Learning for Universal Cross-Modal Re-Identification</span></li><li><span class="dpr-home-dashboard-paper-title" title="Vision-Language Grounding as Bidirectional Concept Correspondence">Vision-Language Grounding as Bidirectional Concept Correspondence</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Heterogeneous Vision-Language Ensemble with Disagreement-Aware Reranking for Text-Based Person Anomaly Retrieval">Heterogeneous Vision-Language Ensemble with Disagreement-Aware Reranking for Text-Based Person Anomaly Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="P2Fusion: Prompt-based Progressive Infrared-Visible Image Fusion via Dual-Prior Distillation">P2Fusion: Prompt-based Progressive Infrared-Visible Image Fusion via Dual-Prior Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification">Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 

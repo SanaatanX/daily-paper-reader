@@ -1,0 +1,313 @@
+{
+  "date": "20260815",
+  "date_label": "",
+  "generated_at": "2026-08-15 19:30:00 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.08583v1",
+      "route": "202608/15/2608.08583v1-structure-preserving-projection-for-mitigating-modality-bias-in-llm-based-sequential-recommendation",
+      "title": "Structure-Preserving Projection for Mitigating Modality Bias in LLM-Based Sequential Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过结构保持投影缓解模态偏差",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.09240v1",
+      "route": "202608/15/2608.09240v1-multimodal-federated-learning-under-dual-axis-modality-missingness",
+      "title": "Multimodal Federated Learning under Dual-Axis Modality Missingness",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过模态感知置信度调节处理双轴模态缺失",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.10522v1",
+      "route": "202608/15/2608.10522v1-unlocking-the-power-of-medical-tabular-data-via-semantic-aware-multimodal-pre-training",
+      "title": "Unlocking the Power of Medical Tabular Data via Semantic-Aware Multimodal Pre-training",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "建模表格结构的语义感知多模态预训练，用于视觉-语言表示学习",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.10864v1",
+      "route": "202608/15/2608.10864v1-multi-view-relational-distillation-for-spatial-reasoning-with-vision-language-models",
+      "title": "Multi-View Relational Distillation for Spatial Reasoning with Vision-Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多视图关系蒸馏，在VLM空间推理中保持视觉-文本对齐",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.12209v1",
+      "route": "202608/15/2608.12209v1-generation-as-auxiliary-supervision-enhancing-visual-understanding-at-zero-inference-overhead-via-decoupled-embedding-prediction",
+      "title": "Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过解耦嵌入预测实现生成引导的多模态表示学习",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.12570v1",
+      "route": "202608/15/2608.12570v1-attribute-conditioned-multimodal-slot-factorization-for-controllable-fashion-retrieval",
+      "title": "Attribute-Conditioned Multimodal Slot Factorization for Controllable Fashion Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多模态槽编码器将文本与图像嵌入分解为属性特定的融合槽",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.12748v1",
+      "route": "202608/15/2608.12748v1-scaling-representation-diversity-modulated-attention-and-reconstructive-regularization-for-visual-grounding",
+      "title": "Scaling Representation Diversity: Modulated Attention and Reconstructive Regularization for Visual Grounding",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "调制注意力对比头与JEPA辅助流实现词元级视觉-语言对齐",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.12843v1",
+      "route": "202608/15/2608.12843v1-heterogeneous-vision-language-ensemble-with-disagreement-aware-reranking-for-text-based-person-anomaly-retrieval",
+      "title": "Heterogeneous Vision-Language Ensemble with Disagreement-Aware Reranking for Text-Based Person Anomaly Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向文本检索的跨模态对齐与视觉-语言嵌入模型集成融合",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.13045v1",
+      "route": "202608/15/2608.13045v1-p2fusion-prompt-based-progressive-infrared-visible-image-fusion-via-dual-prior-distillation",
+      "title": "P2Fusion: Prompt-based Progressive Infrared-Visible Image Fusion via Dual-Prior Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出红外与可见光图像融合方法，属于多模态融合技术",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.13092v1",
+      "route": "202608/15/2608.13092v1-paths-prompt-aware-spatio-temporal-transformer-with-hierarchical-multi-modal-fusion-for-rgb-event-video-person-re-identification",
+      "title": "Paths: Prompt-aware Spatio-temporal Transformer with Hierarchical Multi-modal Fusion for RGB-Event Video Person Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向RGB-事件行人重识别的提示感知时空Transformer与层次多模态融合",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.07867v1",
+      "route": "202608/15/2608.07867v1-confer-conflict-aware-evidence-negotiation-for-regime-calibrated-weak-supervision-in-multimodal-emotion-recognition",
+      "title": "CONFER: Conflict-Aware Evidence Negotiation for Regime-Calibrated Weak Supervision in Multimodal Emotion Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向弱监督多模态情感识别的冲突感知证据协商融合",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.07895v1",
+      "route": "202608/15/2608.07895v1-auditing-instruction-trajectory-mismatches-in-multimodal-robot-demonstrations",
+      "title": "Auditing Instruction-Trajectory Mismatches in Multimodal Robot Demonstrations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态概率融合，以熵加权融合各模态专家",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.07993v1",
+      "route": "202608/15/2608.07993v1-mrbench-a-comprehensive-benchmark-for-human-motion-text-retrieval",
+      "title": "MRBench: A Comprehensive Benchmark for Human Motion-Text Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于人类动作-文本检索的基准，评估跨模态对齐",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.08021v1",
+      "route": "202608/15/2608.08021v1-evidence-rl-towards-evidence-intensive-visual-reasoning",
+      "title": "Evidence-RL: Towards Evidence-intensive Visual Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用反事实证据解缠训练视觉-语言模型，使其回答依赖视觉证据而非语言先验",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.08676v1",
+      "route": "202608/15/2608.08676v1-unispace-unified-visual-representation-and-scalable-multimodal-modeling",
+      "title": "UniSpace: Unified Visual Representation and Scalable Multimodal Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "统一视觉表示空间保留细粒度细节，同时支撑多模态理解、生成与编辑",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.06930v1",
+      "route": "202608/15/2608.06930v1-avcap-reinforcing-audio-video-joint-caption-with-detail-aware-reward",
+      "title": "AVCap: Reinforcing Audio-Video Joint Caption with Detail-Aware Reward",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "音频视频联合字幕生成，结合两种模态的多模态学习",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.07932v1",
+      "route": "202608/15/2608.07932v1-sportsgrounder-proposal-aided-interleaved-grounding-for-dense-sports-video-reasoning",
+      "title": "SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用开放词汇视觉专家辅助大语言模型进行密集跨模态视频推理与接地",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.08060v1",
+      "route": "202608/15/2608.08060v1-zomp-zeroth-order-multi-modal-prompt-tuning-for-vision-language-models",
+      "title": "ZOMP: Zeroth-Order Multi-Modal Prompt Tuning for Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "同时调优视觉与文本分支的提示，属于多模态表示学习方法",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    },
+    {
+      "paper_id": "2608.08663v1",
+      "route": "202608/15/2608.08663v1-a-dynamic-semantics-framework-for-grounding-human-referring-expressions-in-visual-perceptual-data",
+      "title": "A Dynamic-Semantics Framework for Grounding Human Referring Expressions in Visual Perceptual Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于动态语义的指称表达视觉接地框架",
+      "first_seen_at": "2026-08-15 19:30:00 UTC",
+      "updated_at": "2026-08-15 19:30:00 UTC"
+    }
+  ]
+}

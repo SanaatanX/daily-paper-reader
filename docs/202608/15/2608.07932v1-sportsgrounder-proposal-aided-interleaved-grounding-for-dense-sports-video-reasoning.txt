@@ -1,0 +1,434 @@
+Title: SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning
+
+URL Source: https://arxiv.org/pdf/2608.07932v1
+
+Published Time: Tue, 11 Aug 2026 00:26:49 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+# SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning 
+
+# Yizhi Li 
+
+Zhejiang University Hangzhou, China yizhi.24@intl.zju.edu.cn 
+
+# Jiawei Jiang 
+
+Beijing Jiaotong University Beijing, China byjiaweijiang@gmail.com 
+
+# Guanhong Wang 
+
+Zhejiang University Hangzhou, China guanhongwang@zju.edu.cn 
+
+# Yingcai Wu 
+
+Zhejiang University Hangzhou, China ycwu@zju.edu.cn 
+
+# Gaoang Wang ∗
+
+Zhejiang University Hangzhou, China gaoangwang@intl.zju.edu.cn 
+
+## Abstract 
+
+Sports video analysis is crucial for athletic analytics and broadcast-ing enhancement. Dense sports video reasoning, however, demands a fine-grained understanding of numerous small-scale, highly in-teractive, and visually homogeneous entities (e.g., players sharing identical uniforms, the ball) across long temporal contexts. Current Large Multimodal Models (LMMs) inherently struggle with such dense visual complexities. Due to the lack of fine-grained visual details, these models often over-rely on textual priors to guess an-swers, especially when distinguishing visually similar actions and players. To address this, we propose SportsGrounder , a framework that leverages an open-vocabulary visual expert to aid interleaved grounding specifically for dense sports video reasoning. To achieve precise spatial localization, we extract domain-guided object pro-posals and introduce an Interleaved Grounding Fusion (IGF) mech-anism. The IGF frame-by-frame integrates explicit bounding box coordinates and implicit visual semantics with global grid features. This design preserves strict temporal alignment and prevents se-quence length explosion. Furthermore, we design an Action-Aware Supervision (AAS) module that directly regularizes the model’s hid-den states, forcing the network to learn accurate motion represen-tations rather than relying on language bias. Optimized with Mixed Preference Optimization (MPO) to better distinguish deceptive dis-tractors, our extensive experiments on newly curated dense sports VQA datasets (derived from SoccerNet and FineSports) demonstrate that SportsGrounder significantly improves fine-grained reasoning and achieves state-of-the-art accuracy. 
+
+## CCS Concepts 
+
+• Computing methodologies → Activity recognition and un-derstanding ; Knowledge representation and reasoning .
+
+> ∗Corresponding author.
+> This work is licensed under a Creative Commons Attribution 4.0 International License.
+> MM ’26, Rio de Janeiro, Brazil
+> © 2026 Copyright held by the owner/author(s). ACM ISBN 979-8-4007-2213-4/2026/11 https://doi.org/10.1145/3767308.3836263
+
+## Keywords 
+
+Video Question Answering, Dense Sports Video Reasoning, Visual Grounding, Multimodal Learning 
+
+ACM Reference Format: 
+
+Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang. 2026. SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning. In Proceedings of the 34th ACM International Conference on Multimedia (MM ’26), November 10–14, 2026, Rio de Janeiro, Brazil. ACM, New York, NY, USA, 10 pages. https://doi.org/10.1145/3767308.3836263 
+
+## 1 Introduction 
+
+Sports video understanding is of great significance for athletic ana-lytics, tactical coaching, and broadcasting enhancement, driving a major paradigm shift from coarse-grained event classification to highly granular, deductive video reasoning [2, 7, 45, 48]. In pro-fessional sports broadcasts, dense video reasoning requires a fine-grained understanding of numerous small-scale, visually similar entities (e.g., players of the same team, referees, the ball) and their rapid, complex interactions over extended temporal horizons. While the recent advancement of Large Multimodal Models (LMMs) has significantly improved general Video Question Answering (VQA) [6, 24, 54], directly applying existing LMMs to dense sports scenar-ios reveals critical limitations, as evidenced by their sub-optimal performance on emerging multi-agent and rule-grounded bench-marks [16, 22, 32, 46]. Recently, Large Multimodal Models (LMMs) have demonstrated remarkable capabilities in general video understanding and open-ended visual question answering. By leveraging powerful Large Language Models (LLMs) alongside robust visual encoders, these architectures can seamlessly process interleaved vision-language inputs, enabling impressive zero-shot reasoning and rich semantic comprehension across diverse domains. However, several challenges remain when applying these general-purpose LMMs to dense, highly dynamic scenarios such as profes-sional sports broadcasts. (1) Severe loss of fine-grained spatial details. 
+
+Most contemporary LMMs rely on standard Vision Transformers (ViTs) to extract holistic grid features. The inherent patch-based processing and global pooling operations easily discard the sub-tle movements and complex spatial geometries of small, distant, and visually homogeneous entities (e.g., players sharing identical uniforms), which are crucial for accurate sports reasoning [4, 11]. Achieving pixel-level spatio-temporal alignment is paramount, yet arXiv:2608.07932v1 [cs.CV] 8 Aug 2026 MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang 
+
+Figure 1: Core challenges in fine-grained dense sports broad-cast video grounding. (Left) Crowded Entities: Multiple play-ers with similar appearances in close proximity; (Middle) Small Objects: Crucial entities like the ball occupy very few pixels in broadcast views; (Right) Action Ambiguity: Visu-ally similar initial states (e.g., a kicking motion) can lead to distinct fine-grained actions like passing or dribbling. 
+
+existing architectures struggle to perceive micro-level motion dy-namics without dedicated structural interventions [18, 25, 39, 52]. (2) Systemic over-reliance on language priors. Because the extracted micro-level visual evidence is often blurry, occluded, or ambigu-ous, models tend to ignore the visual input and guess the answers based on dataset biases or textual cues [23, 29]. This modality bias is deeply problematic in the sports domain where actions share similar macro-level semantics; an LMM might hallucinate a “shot” instead of a “pass” simply due to linguistic likelihood, failing rudi-mentary counterfactual stress tests and exposing a brittle temporal comprehension [12, 19, 36, 51]. (3) Inefficient and destructive integra-tion of visual grounding. To provide precise localization and resolve this representation bottleneck, some methods introduce external object detectors [8, 33, 47]. Yet, naively appending hundreds of object tokens or textual bounding boxes at the end of the global visual sequence destroys the inherent temporal structure of the video [40, 43]. Moreover, this concatenation quadratically increases the sequence length, leading to an unacceptable self-attention com-putational overhead that cripples inference speeds in long-context scenarios [26, 49, 57]. To directly address these challenges, we propose SportsGrounder ,to the best of our knowledge, the first framework that leverages proposal-aided interleaved grounding for dense sports video rea-soning. Recognizing the inefficiency of using all object proposals in a crowded broadcast frame, we utilize an open-vocabulary visual ex-pert (OV-DINO [38]) combined with a domain-specific vocabulary to select only the top-𝐾 most relevant entities. To fuse these object-level details without destroying the temporal sequence, we propose the Interleaved Grounding Fusion (IGF) mechanism. Instead of globally concatenating tokens, IGF integrates explicit bounding box coordinates and implicit semantic features with the global grid features frame by frame, akin to recent advancements in grounded chain-of-thought processing [20]. This simple yet effective design preserves temporal alignment and successfully avoids sequence length explosion. To ensure the model focuses on actual visual movements rather than exploiting language bias, we introduce an Action-Aware Supervision (AAS) module. Drawing inspiration from recent verifiable action regularizers [31, 50], AAS provides ex-plicit supervision on the terminal hidden states of the LMM during action-related queries, forcing the visual projectors to learn accu-rate, bias-resistant motion representations. Finally, the entire model is trained with a Mixed Preference Optimization (MPO) strategy. By optimizing over sets of preferred and dispreferred responses, MPO refines the decision boundary to successfully distinguish the hard-negative options commonly found in sports VQA, overcoming the inherent limitations of standard pairwise preference learning [9, 13, 35, 41, 56]. In summary, our main contributions are as follows: 
+
+• We introduce SportsGrounder, the first proposal-aided rea-soning framework specifically designed for dense sports VQA, which successfully mitigates the over-reliance on lan-guage priors by integrating an open-vocabulary visual ex-pert. 
+
+• We propose the Interleaved Grounding Fusion (IGF) mech-anism, which frame-by-frame combines explicit spatial an-chors with global contexts, maintaining temporal alignment while keeping the sequence length highly efficient. 
+
+• We design an Action-Aware Supervision (AAS) module and utilize the MPO strategy to explicitly regularize the represen-tation space, driving the model to focus on accurate motion dynamics against deceptive distractors. 
+
+• Extensive experiments on our newly curated dense sports VQA datasets (based on SoccerNet and FineSports) demon-strate that SportsGrounder achieves state-of-the-art perfor-mance and significantly improves fine-grained reasoning capabilities. 
+
+## 2 Related Work 2.1 Large Multimodal Models for Dense Video Reasoning 
+
+Recent Large Multimodal Models (LMMs) have made significant strides in general video understanding [5, 6, 17, 42, 58], yet dense scenes with visually similar, small-scale entities expose a persis-tent failure mode: without reliable visual evidence, models tend to bypass genuine visual reasoning and instead exploit statistical lan-guage priors to guess answers [34]. The Video-MME benchmark [6] systematically characterizes this gap between coarse-grained and fine-grained performance. SlowFocus [27] partially addresses it by identifying query-relevant segments and performing dense lo-cal sampling, while LLaVA-ST [15] introduces Language-Aligned Positional Embedding and a Spatial-Temporal Packer for joint spa-tial and temporal localization. MotionBench [11] further reveals that state-of-the-art VLMs fall below 60% accuracy on fine-grained motion perception tasks, motivating Through-Encoder fusion for motion-level understanding. Grounded-VideoLLM [39] sharpens moment localization by introducing discrete temporal tokens and a dedicated temporal stream. Despite these advances, none of these works target the specific failure mode of dense sports video, where the language bias problem is especially acute due to the high visual similarity between action categories and players. This limitation directly motivates our Action-Aware Supervision and object-centric branch. 
+
+## 2.2 Open-Vocabulary Detection and Grounding for Video LMMs 
+
+Integrating explicit spatial grounding into LMMs requires both a capable open-vocabulary detector and an efficient fusion strategy. SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil 
+
+OV-DINO introduces language-aware selective fusion for accu-rate zero-shot detection [38], while Video-GroundingDINO gener-ates continuous spatio-temporal tubes for open-vocabulary video grounding [44]. At finer granularities, RGA3 accepts arbitrary visual prompts via Spatial-Temporal Overlay Modules [37], and VideoGLaMM achieves pixel-level grounded video conversations [25]. For action-centric understanding, ActionVOS segments state-changing objects using action-guided focal loss [28], and Kwon et al. refine this via question-conditioned keyframe selection [14]. Beyond Bare Queries constructs on-the-fly 3D scene graphs for multi-hop deduc-tive reasoning [21]. On the preference optimization side, DPO [30] establishes the foundational framework for aligning model outputs with relative preference signals, and the MPO framework [41] ex-tends this to multimodal reasoning by jointly optimizing preference, quality, and generative objectives. Our framework draws on these two lines of work, combining an OV-DINO-based grounding mod-ule with MPO training to calibrate the model’s decision boundary against hard-negative distractors common in sports VQA. 
+
+## 2.3 Sports Video Analytics 
+
+Sports video analytics provides a demanding evaluation setting for multi-agent tracking and rule-based logical deduction. The Soccer-Net benchmark suite [3] has driven progress in complex tasks such as game state reconstruction [7], and X-VARS introduces explain-ability into sports officiating by aligning natural language rules with multi-view visual evidence [10]. Foundation models like Soc-cerMaster [48] have emerged to unify diverse soccer understanding tasks, while SoccerBench assesses knowledge-driven multi-agent reasoning across comprehensive soccer scenarios [31]. SportR fur-ther mandates explicit visual grounding by requiring models to output precise bounding boxes for rule infractions [45]. For fine-grained perception, FineSports provides hierarchical, multi-person annotations to evaluate models on high-speed, obstructed interac-tions [47]. However, existing benchmarks either lack systematic evaluation of language bias or do not assess fine-grained action disambiguation under dense entity conditions. In this work, we primarily evaluate on SoccerNet and conduct generalization exper-iments on FineSports to validate the robustness of our framework. 
+
+## 3 Methodology 
+
+To address the inherent challenge of fine-grained spatio-temporal reasoning in dense sports scenarios, we introduce SportsGrounder ,a Large Multimodal Model (LMM). As illustrated in Figure 2, our ar-chitecture seamlessly integrates an open-vocabulary visual expert with a powerful LMM backbone to achieve precise visual grounding without overwhelming the sequence length. The overall framework consists of three core components: (1) Proposal-Aided Representa-tion; (2) Interleaved Grounding Fusion (IGF); and (3) Action-Aware Supervision (AAS). To ensure optimal adaptation and prevent cata-strophic forgetting, SportsGrounder is trained via a progressive cur-riculum comprising representation alignment, parameter-efficient fine-tuning (PEFT), and Mixed Preference Optimization (MPO). 
+
+## 3.1 Proposal-Aided Representation 
+
+Given a video instance V, we uniformly sample 𝑇 frames, denoted as {𝐼 1, 𝐼 2, . . . , 𝐼 𝑇 }. To capture a comprehensive understanding of the dynamic scene, we propose a proposal-aided representation strategy that disentangles the holistic background context from the fine-grained foreground entities. 
+
+Global Grid Context. For the global branch, we utilize a pre-trained Vision Transformer Φvit [42] to extract the dense grid fea-tures. By removing the global pooling layer, we preserve the dense grid representations. For the 𝑡 -th frame 𝐼 𝑡 , the global feature map is obtained as: 
+
+Zvit  
+
+> 𝑡
+
+= Φvit (𝐼 𝑡 ) ∈ R𝑁 ×𝑑 vit (1) where 𝑁 is the number of patch tokens and 𝑑 vit is the hidden dimen-sion of the ViT. This branch ensures the model retains a holistic understanding of the field layout, crowd context, and overall scene structure. 
+
+Language-Aware Object Grounding. To explicitly capture fine-grained entities, we introduce an object-centric branch powered by OV-DINO [38], a state-of-the-art open-vocabulary detector equipped with a Language-Aware Selective Fusion (LASF) module. In its na-tive configuration, the model decodes a dense set of selective fusion queries Qsf ∈ R𝑀 ×𝑑 dino , where 𝑀 = 900 and 𝑑 dino is the hidden dimension. However, directly interleaving 𝑀 queries per frame would computationally overwhelm the LMM’s context window. To distill critical visual semantics, we propose a Domain-Guided Top-𝐾 Selection mechanism. We define a sport-specific semantic vocabulary Vsports and map it into text embeddings E𝑡 ∈ R𝐶 ×𝑑 dino ,where 𝐶 is the number of target categories. Following the alignment mechanics of OV-DINO, we compute the cross-modality similarity score matrix S:
+
+S = F𝑐 (Qsf ) ⊗ E⊤ 
+
+> 𝑡
+
+∈ R𝑀 ×𝐶 (2) where F𝑐 is the linear projection for class embeddings, and ⊗ de-notes standard matrix multiplication. By evaluating the maximum confidence scores across the Vsports categories in S, we filter the 𝑀 
+
+proposals and strictly retain only the top-𝐾 queries ( 𝐾 ≪ 𝑀 ) that exhibit the highest alignment with our core sports elements. The fil-tered semantic object features for frame 𝐼 𝑡 are concisely represented as Zsem  
+
+> 𝑡
+
+∈ R𝐾 ×𝑑 dino .Simultaneously, recognizing that dense sports reasoning neces-sitates rigorous geometric precision, we extract the explicit nor-malized bounding box coordinates b𝑡 ∈ R𝐾 ×4 associated with these selected queries. This dual extraction yields a hybrid representation for each entity, comprising both implicit high-dimensional vectors and explicit spatial anchors. 
+
+## 3.2 Interleaved Grounding Fusion (IGF) 
+
+To map the disparate visual representations into the unified latent space of the large language model ( 𝑑 llm ), we employ two distinct MLP projectors, Pvit and Pdino . The global grid context is projected as: ˜Zvit  
+
+> 𝑡
+
+= Pvit (Zvit  
+
+> 𝑡
+
+) ∈ R𝑁 ×𝑑 llm (3) For the object-centric branch, we construct a Hybrid Entity Token 
+
+sequence. Specifically, for the 𝑘 -th selected entity in frame 𝐼 𝑡 , we first tokenize its explicit bounding box b𝑡,𝑘 = [𝑥 1, 𝑦 1, 𝑥 2, 𝑦 2] and map it through the LLM’s text embedding layer Φemb to obtain a discrete textual embedding Ebox  
+
+> 𝑡,𝑘
+
+∈ R𝐿 box ×𝑑 llm , where 𝐿 box denotes the average token length of the coordinate string. MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang 
+
+Figure 2: The overall architecture of SportsGrounder. Given a dense sports video and a text prompt, the framework first employs a proposal-aided representation strategy. A Vision Transformer captures the global grid context, while a pre-trained open-vocabulary detector (OV-DINO) leverages a text encoder to explicitly select and ground key domain-specific entities. These global and local representations are then chronologically combined frame-by-frame via the Interleaved Grounding Fusion (IGF) mechanism to preserve strict temporal correspondence. The fused visual tokens and text instructions are processed by the InternVL3.5 backbone. From the final hidden state, the model generates the final VQA response and simultaneously routes features to an auxiliary Action-Aware Supervision (AAS) head for dynamic motion regularization. 
+
+Subsequently, we project its corresponding semantic visual em-bedding Zsem  
+
+> 𝑡,𝑘
+
+(a 1 ×𝑑 dino slice from Zsem  
+
+> 𝑡
+
+) via Pdino , yielding a spatial-aware semantic vector Pdino (Zsem  
+
+> 𝑡,𝑘
+
+) ∈ R1×𝑑 llm . By concatenating the explicit coordinate tokens with the implicit visual vector, the joint object representation for all 𝐾 entities in frame 𝐼 𝑡 is formulated as: ˜Zobj  
+
+> 𝑡
+
+=
+
+> 𝐾
+
+Ê
+
+> 𝑘 =1
+
+
+
+Ebox  
+
+> 𝑡,𝑘
+
+⊕ P dino (Zsem  
+
+> 𝑡,𝑘
+
+)
+
+
+
+∈ R𝐾 (𝐿 box +1) × 𝑑 llm (4) where ⊕ denotes concatenation along the token sequence dimen-sion, and É𝐾 𝑘 =1 indicates the sequential concatenation of these hybrid representations across all 𝐾 selected objects. Traditional methods tend to append all tokens at the end of the sequence, but this disrupts temporal correspondence and weakens local cross-attention. To fix this, we propose Interleaved Grounding Fusion (IGF), which chronologically interleaves global contexts and hybrid object tokens on a frame-by-frame basis: 
+
+Hvis =
+
+h ˜Zvit 1 ⊕ ˜Zobj 1 ⊕ · · · ⊕ ˜Zvit  
+
+> 𝑇
+
+⊕ ˜Zobj 
+
+> 𝑇
+
+i
+
+∈ R𝑇 (𝑁 +𝐾 (𝐿 box +1) ) × 𝑑 llm 
+
+(5) By drastically distilling the redundant object queries via the vocabulary-guided selection ( 𝐾 ≪ 900) and mapping them into a compact hybrid representation, the resultant sequence length is sig-nificantly constrained. This interleaved topology effectively circum-vents the quadratic explosion of the self-attention matrix associated with naive fusion O(( 𝑇 (𝑁 + 𝐾 · 𝐿 box )) 2), ensuring that the LMM simultaneously accesses the macro-environment and geometrically-anchored micro-entities at each timestamp with profound compu-tational efficiency. 
+
+## 3.3 Action-Aware Supervision (AAS) Mechanism 
+
+Optimizing the LMM solely via standard auto-regressive text gen-eration loss often leads the model to over-rely on language priors, neglecting the complex motion dynamics present in dense sports videos. To enforce rigorous spatio-temporal reasoning and ensure the model grounds its predictions in actual visual evidence, we introduce an auxiliary Action-Aware Supervision (AAS) branch. Let Htext be the token embeddings of the prompt instruction (containing Q and C). The complete input sequence to the LMM is 
+
+H𝑖𝑛 = [Hvis ⊕ Htext ]. After the causal forward pass, we obtain the sequence of hidden states E ∈ R𝐿 ×𝑑 llm .We extract the final hidden state hEOS corresponding to the end-of-sequence token. Given that standard attention mechanisms SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil 
+
+propagate prior context forward, hEOS encapsulates the global se-mantic aggregation of the entire video-text input. We map this state to the action semantic space to predict the discrete action category ˆ𝑦 act :
+
+𝑝 (𝑖 ) 
+
+> act
+
+= Softmax (Wact h(𝑖 ) 
+
+> EOS
+
++ bact ) ∈ R𝐶 (6) where 𝑖 denotes the sample index within a batch, Wact ∈ R𝐶 ×𝑑 llm 
+
+is the action projection head, and 𝐶 is the number of predefined action classes. While causal attention mechanisms can naturally heavily weigh the adjacent textual inputs at the terminal tokens, the explicit back-propagation of Lact directly through hEOS mitigates this tendency. This direct gradient flow compels the terminal state to actively ag-gregate vital spatio-temporal dynamics from the preceding visual sequence Hvis , preventing the model from relying solely on the textual context. 
+
+Task-Conditional Dynamic Masking. Dense sports VQA datasets inherently comprise a heterogeneous mixture of tasks, encompass-ing not only action recognition but also spatial reasoning and object localization. Enforcing action supervision on non-action queries would inevitably lead to negative transfer and distort spatial feature representations. To circumvent this, we propose a task-conditional dynamic masking mechanism. We define an indicator function 
+
+I(𝑖 ) 
+
+> act
+
+∈ { 0, 1} derived a priori from the dataset’s meta-annotations, where I(𝑖 ) 
+
+> act
+
+= 1 if the ground-truth task category of the 𝑖 -th query pertains to action semantics, and 0 otherwise. The masked AAS loss over a mini-batch of size 𝐵 is formulated as: 
+
+Lact = − 1
+
+Í𝐵 𝑖 =1 I(𝑖 ) 
+
+> act
+
++ 𝜖 
+
+> 𝐵
+
+∑︁ 
+
+> 𝑖 =1
+
+I(𝑖 )
+
+> act
+> 𝐶
+
+∑︁ 
+
+> 𝑐 =1
+
+𝑦 (𝑖 ) 
+
+> act ,𝑐
+
+log (𝑝 (𝑖 ) 
+
+> act ,𝑐
+
+) (7) where 𝑦 (𝑖 ) 
+
+> act
+
+is the ground-truth action label for the 𝑖 -th sample, and 
+
+𝜖 is a small smoothing constant to prevent zero-division. To ensure numerical stability and consistent gradient flow during training, we implement a balanced task-sampling strategy during mini-batch construction, ensuring that each batch contains a minimum pro-portion of action-related queries where Í I(𝑖 ) 
+
+> act
+
+> 0. By employing this sparse supervisory signal, the LMM acts as a task-aware router: it activates the fine-grained action classifi-cation head exclusively when motion dynamics are interrogated, while preserving unbiased spatio-temporal representations for pure localization tasks. 
+
+## 3.4 Three-Stage Training Curriculum 
+
+To ensure stable convergence and optimal feature alignment, the framework is optimized via a progressive three-stage curriculum. 
+
+Stage 1: Asymmetric Representation Alignment. To prevent cata-strophic forgetting of the pre-trained generalized visual capabilities, we adopt an asymmetric freezing strategy. We freeze the visual en-coders ( Φvit , Φdino ), the large language model, and the pre-trained global connector Pvit . We exclusively optimize the parameters of the newly initialized object projector, denoted as 𝜃 dino , using image-text pairs. The objective is to minimize the auto-regressive negative log-likelihood of the ground-truth text tokens Y = {𝑦 1, 𝑦 2, . . . , 𝑦 𝐿 }:min 
+
+> 𝜃 dino
+
+Lalign = −
+
+> 𝐿
+
+∑︁ 
+
+> 𝑗 =1
+
+log 𝑃 (𝑦 𝑗 | Hvis (𝜃 dino ), 𝑦 <𝑗 ) (8) where Hvis (𝜃 dino ) explicitly denotes that the interleaved visual se-quence is dynamically updated solely through the gradients back-propagated to Pdino . This strict partial optimization ensures that the nascent object queries seamlessly align towards the established manifold of the LLM without perturbing the robust grid represen-tations. 
+
+Stage 2: Parameter-Efficient Supervised Fine-Tuning (PEFT). Fol-lowing the initial alignment, performing full-parameter fine-tuning on the massive LMM backbone is computationally prohibitive and prone to catastrophic forgetting. Therefore, we freeze the dense pre-trained weights of the LMM ( Φllm ) and employ Low-Rank Adap-tation (LoRA). Specifically, for the pre-trained weight matrices W0,we inject trainable low-rank decomposition matrices such that the forward pass becomes W = W0 + BA , where B and A contain the LoRA parameters 𝜃 LoRA .Concurrently, both the global and object visual projectors ( Pvit 
+
+and Pdino ) are fully unfrozen to undergo end-to-end task-specific optimization. Thus, the active learnable parameter set is strictly confined to ΘSFT = {𝜃 LoRA , 𝜃 Pvit , 𝜃 Pdino }. Given the interleaved mul-timodal context prefix X = [Hvis ⊕ Htext ] and the target answer sequence Yans = {𝑦 1, . . . , 𝑦 𝐿 ans }, the auto-regressive generation loss is formulated as: 
+
+Lvqa = −
+
+> 𝐿 ans
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝑃 ΘSFT (𝑦 𝑡 | X, 𝑦 <𝑡 ) (9) The joint objective seamlessly integrates our proposed masked AAS mechanism to regularize the motion representation: 
+
+LSFT = Lvqa + 𝜆 Lact (10) 
+
+Stage 3: Mixed Preference Optimization (MPO). To rigidly cali-brate the decision boundary against visually deceptive distractors in sports scenarios, we leverage the Mixed Preference Optimiza-tion (MPO) framework natively introduced by our base model, InternVL3.5 [42]. Rather than formulating a novel alignment para-digm, we adopt this established protocol to ensure that the LMM comprehensively learns the relative preference, absolute response quality, and fundamental generative structure simultaneously. For a given context X, we construct preference pairs comprising the ground-truth reasoning process 𝑦 𝑐 ∈ Y 𝑝 (positive set) and a hard-negative response 𝑦 𝑟 ∈ Y 𝑛 (negative set). Following the official InternVL3.5 specification, the total optimization objective is a weighted combination: 
+
+LMPO = L𝑝 + 𝛼 L𝑞 + 𝛽 L𝑔 (11) Specifically, L𝑝 acts as the preference loss (e.g., DPO) which strictly updates the active LoRA parameters 𝜃 𝐿𝑜𝑅𝐴 to optimize the relative margin: 
+
+L𝑝 = − log 𝜎 
+
+
+
+𝜏 log 𝜋 𝜃 LoRA (𝑦 𝑐 | X)
+
+𝜋 ref (𝑦 𝑐 | X) − 𝜏 log 𝜋 𝜃 LoRA (𝑦 𝑟 | X)
+
+𝜋 ref (𝑦 𝑟 | X)
+
+
+
+(12) where 𝜋 ref is the frozen reference model initialized directly from the Stage 2 checkpoint. Concurrently, L𝑞 explicitly evaluates the absolute quality of the response, and L𝑔 enforces auto-regressive MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang 
+
+Figure 3: Word cloud visualization of the generated question-answer pairs from the FineSports dataset, highlighting the diverse tactical and action-oriented vocabulary required for dense sports reasoning. 
+
+generation constraints on the positive samples to prevent format collapse during alignment. 
+
+## 4 Experiments 4.1 Experimental Settings 
+
+Datasets and Annotations. To rigorously evaluate our proposed framework, we conduct extensive experiments on two distinct, densely annotated sports video datasets: SoccerNet (soccer) [3] and FineSports (basketball) [47]. For SoccerNet, we clip short seg-ments around annotated timestamps and uniformly sample sparse keyframes; for FineSports, we directly use the pre-extracted com-plete sequences (containing up to 8 frames per clip) to maximally preserve motion dynamics. Standard Video QA benchmarks often lack the fine-grained interactions present in professional sports. Therefore, we specifically selected these two datasets because they provide comprehensive multi-modal annotations, including precise action labels, spatial bounding boxes, and fine-grained entity at-tributes (e.g., player jersey numbers). Crucially, the action labels serve a dual purpose: they act as the foundation for constructing our action recognition QA pairs and define the ground-truth la-bel space for our Action-Aware Supervision (AAS) module. For 
+
+SoccerNet , which encompasses 17 distinct action categories (e.g., 
+
+Goal , Substitution , Penalty ), we generated a total of 26k QA pairs, split into 25k for training and 1k for testing. Conversely, FineS-ports features 24 basketball-specific action labels (e.g., DribbleMove ,
+
+NoDribbleJumper , Post-Up ). Based on these, we generated 24k QA pairs (23k for training and 1k for testing). Due to the fundamental divergence in action taxonomies and visual scenes, the models for SoccerNet and FineSports are trained independently. 
+
+QA Construction Strategy. Leveraging the rich metadata from both datasets, we programmatically construct diverse 4-option multiple-choice QA pairs designed to holistically probe dense sports reasoning. Rather than isolating distinct tasks, our generation strat-egy seamlessly integrates spatial comprehension and action recog-nition. For FineSports , the questions evaluate multifaceted capabil-ities such as actor grounding, dense disambiguation, shooting state analysis, and interaction role identification. Figure 4 provides con-crete qualitative examples of these sub-tasks, illustrating how the model must accurately distinguish subtle action states amidst heavy occlusion. Similarly, for SoccerNet , the generation engine covers team comparison, player identity, topological location, and action classification. To ensure linguistic diversity and robust grounding, the prompts utilize varied referring expressions to localize the tar-get subject, such as referencing a player’s jersey number, relative on-field position, or distinctive jersey color. Crucially, to prevent the LMM from exploiting textual shortcuts, we strictly exclude any explicit (𝑥, 𝑦 ) bounding box coordinates from the questions in our evaluation sets. This constraint compels the model to genuinely align visual entities with the text rather than trivially matching spatial strings. To illustrate the overall linguistic complexity of our evaluation benchmark, Figure 3 visualizes the word cloud distribu-tion of the generated QA pairs from the FineSports dataset. 
+
+Implementation Details. We instantiate SportsGrounder using InternVL3.5-2B [42] as our base Large Multimodal Model. For the visual representation extraction, the global branch employs the default ViT encoder, while the object-centric local branch utilizes a pre-trained OV-DINO to extract top-𝐾 semantic object tokens. For the object-centric local branch, we empirically set the top-𝐾 
+
+selection hyperparameter to 𝐾 = 15. This value strikes an optimal balance between exhaustively capturing all active players in dense clusters and mitigating the computational overhead caused by ir-relevant background noise (e.g., spectators). Crucially, both visual encoders are kept strictly frozen throughout the entire training process to preserve their robust foundational representations. Our progressive curriculum is efficiently structured into three stages. In Stage 1, since the default ViT connector Pvit is already well-aligned in InternVL3.5, we keep it frozen alongside the LLM. We solely ini-tialize and pre-train the newly introduced object-centric projector (Pdino , implemented as a two-layer MLP) for 1 epoch to align the OV-DINO features with the LLM’s embedding space. Subsequently, the model undergoes 3 epochs of joint Supervised Fine-Tuning (SFT) in Stage 2, followed by 1 epoch of Mixed Preference Optimization (MPO) in Stage 3. During Stage 2 and 3 training, we preserve the pre-trained weights of the LLM backbone and apply Low-Rank Adaptation (LoRA) for parameter-efficient optimization, while fully updating both visual projectors ( Pvit and Pdino ). For the multi-task loss formulation, we empirically set the action supervision weight 
+
+𝜆 = 0.1 to prevent the auxiliary objective from dominating the primary text generation. In the MPO phase, we strictly adhere to the default preference optimization recipe provided by InternVL3.5. Specifically, we set the DPO divergence margin 𝛽 = 0.1 and opti-mize all parameters using the AdamW optimizer coupled with a cosine learning rate decay schedule. 
+
+Baselines and Evaluation Protocol. The evaluation metric across all experiments is the top-1 accuracy (%) on the 4-choice QA tasks. To ensure a rigorous and equitable comparison, we benchmark SportsGrounder against recent state-of-the-art VLMs under two SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Task 1: Dense Disambiguation 
+
+Type : Dense Disambiguation      
+
+> Q: During the highly crowded "Offensive-Rebound" play in the paint area, which specific player successfully executed the action?
+> [] A: #55 Blue Jersey [] B: #34 White Jersey [] C: #34 Blue Jersey [] D: #23 White Jersey
+
+Task 2: Shooting State Analysis 
+
+Type : Action Recognition        
+
+> Q: Focus on a player wearing a white jersey number 35. What precise action is being performed? [] A: FreeThrow [] B: DriveShot [] C: TotoJumper [] D: DribbleJumper
+
+Type : State Analysis        
+
+> [] A: ToBasket [] B: DriversLeft [] C: DriveShot [] D: DribbleJumper
+> Q: Analyze the shooting motion of a player wearing a white jersey number 11.What precise shot state?
+
+Task 3: Spatial Reasoning & Action Anticipation 
+
+Type : Spatial Reasoning      
+
+> Q:Track the driving direction of the player in the white #11 jersey [] C: DrivesLeft [] B: DriveBaseline [] A: DrivesRight [] D: DrivesStraight
+
+Type : Action Anticipation        
+
+> [] A: Fallback [] B: Pass [] C: Other [] D: ToBasket
+> Q: Based on white #11’s body mechanics, what’s his next move?
+
+Task 4: Actor Grounding & Action Recognition 
+
+Type : Action Recognition      
+
+> Q:Analyze white #11’s shooting motion. What’s the shot type? [] C: DrivesLeft [] B: DriveBaseline [] A: DriveShot [] D: DrivesStraight
+
+Type : Actor Grounding        
+
+> [] #11 Blue Jersey
+> Q: Amidst the dynamic play, who is the 'ToShootersLeft' target/executor?
+> [] #11 white Jersey [] #5 Blue Jersey [] #5 white Jersey
+> # 23 # 35 # 34 # 48 # 23 # 11 # 30 # 34 # 11 # 12
+
+Figure 4: Qualitative examples from our curated FineSports QA dataset. The benchmark encompasses diverse fine-grained tasks, such as dense disambiguation, shooting state analysis, spatial reasoning, and actor grounding, requiring the model to possess robust spatio-temporal comprehension and accurate entity localization in highly cluttered scenes. 
+
+settings: (1) Parameter-Efficient SFT , where baselines are fine-tuned directly on our sports datasets using their default global visual inputs; and (2) Prompt Injection , a stronger baseline where we ex-plicitly format the OV-DINO bounding box coordinates as textual prompts and inject them into the baselines’ input context. This allows us to accurately isolate the architectural superiority of our Interleaved Grounding Fusion (IGF) mechanism against merely providing spatial hints. 
+
+## 4.2 Main Results 
+
+Table 1 presents the quantitative comparison of SportsGrounder against various recent state-of-the-art VLMs on the SoccerNet and FineSports datasets. To provide a comprehensive evaluation, we decompose the overall reasoning performance into fine-grained sub-tasks based on their unique cognitive demands. To ensure a strictly fair evaluation, our SportsGrounder is built upon the InternVL3.5-2B backbone [42]. Similarly, all competitive baselines, including Qwen3-VL-2B-Instruct [1], VideoLLaMA3-2B [55], and the larger MiniCPM-V 4.0 [53], are fine-tuned on our curated datasets us-ing Low-Rank Adaptation (LoRA) rather than full-parameter fine-tuning. 
+
+Superiority over Standard SFT. As shown in Table 1, breaking down the Overall performance reveals extreme capability variance across different cognitive dimensions. For tasks demanding rela-tively coarse visual discrimination, such as Team Comparison (distin-guishing contrasting jersey colors), most baselines perform decently (reaching over 60% accuracy). Conversely, fine-grained action recog-nition exhibits severe degradation (hovering around 32%-41%) due to the domain gap of unseen athletic motions. Even more challeng-ing is the Jersey Number query on SoccerNet, where typical 2B models plunge below 33% accuracy. This plunge is logical: spotting blurred numbers on distant, fast-moving players heavily relies on brute-force Optical Character Recognition (OCR) capacities, which scale strongly with parameter size. Consequently, the 4B-parameter MiniCPM-V naturally dominates the OCR-heavy Jersey category. Despite this expected gap in OCR, SportsGrounder explicitly overcomes the fundamental spatial and temporal bottlenecks. By achieving 51.8% Overall accuracy on SoccerNet, our 2B-parameter framework comprehensively outperforms all baselines, including the 4B MiniCPM-V. This demonstrates that dedicated Interleaved Grounding Fusion (IGF) is a far more efficient solution for complex, relationship-heavy topologies ( Spatial Reas. , Dense Disambig. ) than sheer parameter scaling. 
+
+Effectiveness against Prompt Injection. While explicit bounding box coordinate injection naturally inflates straightforward localiza-tion tasks (e.g., Actor Grounding surges significantly), it acts as a double-edged sword. In dense spatial scenarios like Dense Disam-biguation , pure numbers fail to capture visual topologies, yielding diminishing returns. Crucially, overloading the context window with text-based geometry consistently distracts the LLM’s temporal attention, leading to a persistent drop in Action prediction across all baselines. Our framework fundamentally avoids this text-based distraction by weaving spatial clues as native visual tokens, thereby establishing consistent state-of-the-art performance in both overall and sub-task accuracies. 
+
+## 4.3 Ablation Studies 
+
+To systematically validate the contribution of our core designs, we perform ablation studies on the SoccerNet dataset. We investigate the impact of the Action-Aware Supervision (AAS) module and the Mixed Preference Optimization (MPO) training stage. The results are summarized in Table 2. MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang 
+
+Table 1: Main results on SoccerNet and FineSports datasets. All results are reported as Accuracy (%) on 4-option multiple-choice questions. “Size” denotes the number of parameters of the LLM backbone. “Prompt Injection” denotes explicitly feeding bounding box coordinates into the LLM context as text. Best results are in bold. Method Size SoccerNet FineSports Overall Action Team Jersey Spatial Overall Action Ground. Disamb. Spatial 
+
+Standard SFT Baselines (w/ LoRA) 
+
+VideoLLaMA3-2B 2B 38.6 32.5 55.2 24.5 40.0 40.2 33.8 45.2 41.5 44.1 Qwen3-VL-2B-Instruct 2B 42.3 36.4 59.8 29.3 43.0 43.5 37.9 48.6 44.2 47.6 InternVL3.5-2B 2B 43.7 37.8 61.4 31.1 43.8 44.8 38.5 49.9 45.5 48.3 MiniCPM-V 4.0 4B 47.5 41.2 64.1 37.8 46.8 48.2 42.6 53.4 48.7 51.5 
+
+Prompt Injection Baselines (w/ Expert BBoxes as Text) 
+
+VideoLLaMA3-2B + BBox 2B 39.4 32.1 57.6 26.2 41.1 41.6 33.3 49.5 43.8 45.3 Qwen3-VL-2B-Instruct + BBox 2B 43.8 36.0 62.3 30.8 44.3 45.3 37.5 52.8 46.9 48.5 InternVL3.5-2B + BBox 2B 45.2 37.3 63.8 32.5 45.0 46.6 38.2 54.2 48.1 49.5 MiniCPM-V 4.0 + BBox 4B 49.1 40.8 66.5 40.3 48.2 50.4 42.1 57.8 51.5 53.0 
+
+SportsGrounder (Ours) 2B 51.8 42.5 71.2 33.4 54.2 53.6 43.2 59.2 53.1 54.2 Table 2: Ablation study of SportsGrounder on the SoccerNet dataset. “Baseline (IGF only)” indicates the model utilizes the Interleaved Grounding Fusion but is evaluated after Stage 2 standard SFT without the auxiliary AAS loss. Best results are in bold. Model Variant w/ AAS Loss w/ MPO (Stage 3) SoccerNet Acc. (%) Overall Action Team Jersey Spatial Baseline (IGF only) ✗ ✗ 47.2 38.4 66.5 32.1 48.6 + Action Supervision ✓ ✗ 48.9 40.8 68.2 32.3 49.5 + Preference Opt. ✗ ✓ 49.6 39.1 69.4 32.8 53.0 
+
+SportsGrounder (Full) ✓ ✓ 51.8 42.5 71.2 33.4 54.2 
+
+Impact of Action-Aware Supervision (AAS). Removing the AAS branch yields the Baseline variant, which optimizes the LMM solely via text generation. Benefiting from the IGF architecture, this base-line already secures a solid Overall accuracy of 47.2% (outperform-ing standard InternVL3.5). However, its Action recognition remains suppressed at 38.4%. Activating Lact compels the network’s termi-nal state to learn distinct motion dynamics, which independently drives a targeted +2.4% surge in Action accuracy while exerting a mild positive regularization effect on the overall visual representa-tion (Overall rises to 48.9%). 
+
+Impact of the Progressive Training Curriculum. Evaluating the base model before Stage 3 reveals vulnerability when distinguishing visually similar distractors. The introduction of Stage 3 MPO explic-itly calibrates the decision boundaries against hard-negative choices. As evidenced in Table 2, preference optimization profoundly bene-fits relational tasks, significantly boosting Spatial Reasoning (+4.4% on the baseline) and Team Comparison , pushing the Overall accuracy up to 49.6%. Integrating both AAS and MPO achieves compounding gains, propelling the fully equipped SportsGrounder to the optimal 51.8% Overall performance. 
+
+## 5 Conclusion 
+
+In this paper, we introduced SportsGrounder , a novel Large Mul-timodal Model explicitly tailored for fine-grained spatio-temporal reasoning in dense sports video question-answering. To overcome the inherent limitations of holistic visual encoders in cluttered and highly dynamic scenes, we proposed a proposal-aided repre-sentation architecture that synergizes global grid contexts with explicit, object-centric features from a pre-trained open-vocabulary detector. By chronologically weaving these representations via the proposed Interleaved Grounding Fusion (IGF) mechanism, our framework preserves strict temporal alignment without succumb-ing to sequence length explosion. Furthermore, the introduction of the Action-Aware Supervision (AAS) module effectively mitigates language priors, compelling the LMM to ground its predictions in actual motion dynamics. Extensive experiments on the Soccer-Net and FineSports benchmarks demonstrate that our progressive three-stage optimization paradigm establishes a new state-of-the-art. Notably, our visual-level feature integration proves significantly superior to conventional textual prompt injection techniques. We believe SportsGrounder provides a robust and scalable new par-adigm for object-centric multimodal understanding in complex, real-world environments. SportsGrounder: Proposal-Aided Interleaved Grounding for Dense Sports Video Reasoning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil 
+
+## Acknowledgments 
+
+This work was supported by the Zhejiang Provincial Natural Sci-ence Foundation of China (No. LZ24F030005), Fundamental Re-search Funds for the Central Universities (No. 226-2025-00167), National Natural Science Foundation of China (No. 62576308), and Research Fund for International Scientists of National Natural Sci-ence Foundation of China (72350710798). 
+
+## References 
+
+[1] Shuai Bai, Yuxuan Cai, Ruizhe Chen, Keqin Chen, Xionghui Chen, Zesen Cheng, Lianghao Deng, Wei Ding, Chang Gao, Chunjiang Ge, et al. 2025. Qwen3-vl technical report. arXiv preprint arXiv:2511.21631 (2025). [2] Haodong Chen, Haojian Huang, Xinxiang Yin, and Dian Shao. 2025. FineQuest: Adaptive Knowledge-Assisted Sports Video Understanding via Agent-of-Thoughts Reasoning. In Proceedings of the 33rd ACM International Conference on Multimedia .[3] Anthony Cioppa, Adrien Deliège, Silvio Giancola, Bernard Ghanem, and Marc Van Droogenbroeck. 2022. Scaling up SoccerNet with multi-view spatial localiza-tion and re-identification. Scientific Data 9, 1 (2022), 355. [4] Andong Deng, Tongjia Chen, Shoubin Yu, Taojiannan Yang, Lincoln Spencer, Yapeng Tian, Ajmal Saeed Mian, Mohit Bansal, and Chen Chen. 2025. Motion-Grounded Video Reasoning: Understanding and Perceiving Motion at Pixel Level. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recog-nition (CVPR) . 8625–8636. [5] Kaituo Feng, Kaixiong Gong, Bohao Li, Zonghao Guo, Yibing Wang, Tianshuo Peng, Junfei Wu, Xiaoying Zhang, Benyou Wang, and Xiangyu Yue. 2025. Video-R1: Reinforcing Video Reasoning in MLLMs. In Advances in Neural Information Processing Systems (NeurIPS) .[6] Chaoyou Fu, Yuhan Dai, Yongdong Luo, Lei Li, Shuhuai Ren, Renrui Zhang, Zihan Wang, Chenyu Zhou, Yunhang Shen, Mengdan Zhang, Peixian Chen, Yanwei Li, Shaohui Lin, Sirui Zhao, Ke Li, Tong Xu, Xiawu Zheng, Enhong Chen, Caifeng Shan, Ran He, and Xing Sun. 2025. Video-MME: The First-Ever Comprehensive Evaluation Benchmark of Multi-modal LLMs in Video Analysis. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) .24108–24118. [7] Silvio Giancola, Anthony Cioppa, Marc Gutiérrez-Pérez, Jan Held, Carlos Hi-nojosa, Victor Joos, Arnaud Leduc, Floriane Magera, Karen Sanchez, Vladimir Somers, et al. 2025. SoccerNet 2025 Challenges Results. arXiv preprint arXiv:2508.19182 (2025). [8] Sitong Gong, Yunzhi Zhuge, Lu Zhang, Zongxin Yang, Pingping Zhang, and Huchuan Lu. 2025. The Devil is in Temporal Token: High Quality Video Reasoning Segmentation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 29183–29192. [9] Taneesh Gupta, Rahul Madhavan, Xuchao Zhang, Nagarajan Natarajan, Chetan Bansal, and Saravan Rajmohan. 2026. Multi-Preference Optimization: Generaliz-ing DPO via Set-Level Contrasts. In Proceedings of the International Conference on Learning Representations (ICLR) .[10] Jan Held, Hani Itani, Anthony Cioppa, Silvio Giancola, Bernard Ghanem, and Marc Van Droogenbroeck. 2024. X-VARS: Introducing Explainability in Foot-ball Refereeing with Multi-Modal Large Language Models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW) . 3267–3279. [11] Wenyi Hong, Yean Cheng, Zhuoyi Yang, Weihan Wang, Lefan Wang, Xiaotao Gu, Shiyu Huang, Yuxiao Dong, and Jie Tang. 2025. MotionBench: Benchmarking and Improving Fine-grained Video Motion Understanding for Vision Language Models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 8450–8460. [12] Phillip Howard, Kathleen C. Fraser, Anahita Bhiwandiwalla, and Svetlana Kir-itchenko. 2025. Uncovering Bias in Large Vision-Language Models at Scale with Counterfactuals. In Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL) . 5946–5991. [13] Zhenpeng Huang, Jiaqi Li, Zihan Jia, Xinhao Li, Desen Meng, Lingxue Song, Xi Chen, Liang Li, and Limin Wang. 2025. LongVPO: From Anchored Cues to Self-Reasoning for Long-Form Video Preference Optimization. In Advances in Neural Information Processing Systems (NeurIPS) .[14] Minchan Kwon, Hyounguk Shon, and Junmo Kim. 2026. Learning Question-Aware Keyframe Selection with Synthetic Supervision for Video Question An-swering. arXiv preprint arXiv:2603.14953 (2026). [15] Hongyu Li, Jinyu Chen, Ziyu Wei, Shaofei Huang, Tianrui Hui, Jialin Gao, Xi-aoming Wei, and Si Liu. 2025. LLaVA-ST: A Multimodal Large Language Model for Fine-Grained Spatial-Temporal Understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 8592–8603. [16] Haopeng Li, Andong Deng, Qiuhong Ke, Jun Liu, Hossein Rahmani, Yulan Guo, Bernt Schiele, and Chen Chen. 2024. Sports-QA: A Large-Scale Video Question Answering Benchmark for Complex and Professional Sports. arXiv preprint arXiv:2401.01505 (2024). [17] Yixuan Li, Changli Tang, Jimin Zhuang, Yudong Yang, Guangzhi Sun, Wei Li, Zejun Ma, and Chao Zhang. 2025. Improving LLM Video Understanding with 16 Frames Per Second. In Proceedings of the 42nd International Conference on Machine Learning (ICML) , Vol. 267. 35942–35956. [18] Zeqian Li, Shangzhe Di, Zhonghua Zhai, Weilin Huang, Yanfeng Wang, and Weidi Xie. 2025. Universal Video Temporal Grounding with Generative Multi-modal Large Language Models. In Advances in Neural Information Processing Systems (NeurIPS) .[19] Zhaohe Liao, Jiangtong Li, Siyu Sun, Qingyang Liu, Fengshun Xiao, Tianjiao Li, Qiang Zhang, Guang Chen, Li Niu, Changjun Jiang, and Liqing Zhang. 2025. Divide and Conquer: Exploring Language-centric Tree Reasoning for Video Question-Answering. In Proceedings of the 42nd International Conference on Ma-chine Learning (ICML) , Vol. 267. 37511–37527. [20] Xiongkun Linghu, Jiangyong Huang, Ziyu Zhu, Baoxiong Jia, and Siyuan Huang. 2026. SceneCOT: Eliciting Grounded Chain-of-Thought Reasoning in 3D Scenes. In Proceedings of the International Conference on Learning Representations (ICLR) .[21] Sergey Linok, Tatiana Zemskova, Svetlana Ladanova, Roman Titkov, Dmitry A. Yudin, Maxim Monastyrny, and Aleksei Valenkov. 2025. Beyond Bare Queries: Open-Vocabulary Object Grounding with 3D Scene Graph. In Proceedings of the IEEE International Conference on Robotics and Automation (ICRA) . 13582–13589. [22] Zhaoyu Liu, Kan Jiang, Murong Ma, Zhe Hou, Yun Lin, and Jin Song Dong. 2025. F3Set: Towards Analyzing Fast, Frequent, and Fine-grained Events from Videos. In Proceedings of the International Conference on Learning Representations (ICLR) .[23] Olga Loginova, Oleksandr Bezrukov, Ravi Shekhar, and Alexey Kravets. 2025. Addressing Blind Guessing: Calibration of Selection Bias in Multiple-Choice Question Answering by Video Language Models. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (ACL) . 3216–3246. [24] Ziyang Luo, Haoning Wu, Dongxu Li, Jing Ma, Mohan Kankanhalli, and Junnan Li. 2025. VideoAutoArena: An Automated Arena for Evaluating Large Multimodal Models in Video Analysis through User Simulation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 8461–8474. [25] Shehan Munasinghe, Hanan Gani, Wenqi Zhu, Jiale Cao, Eric P. Xing, Fahad Shah-baz Khan, and Salman Khan. 2025. VideoGLaMM: A Large Multimodal Model for Pixel-Level Visual Grounding in Videos. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 19036–19046. [26] Trong-Thuan Nguyen, Pha Nguyen, Jackson Cothren, Alper Yilmaz, and Khoa Luu. 2025. HyperGLM: HyperGraph for Video Scene Graph Generation and Anticipation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 29150–29160. [27] Ming Nie, Dan Ding, Chunwei Wang, Yuanfan Guo, Jianhua Han, Hang Xu, and Li Zhang. 2024. SlowFocus: Enhancing Fine-grained Temporal Understanding in Video LLM. In Advances in Neural Information Processing Systems (NeurIPS) ,Vol. 37. [28] Liangyang Ouyang, Ruicong Liu, Yifei Huang, Ryosuke Furuta, and Yoichi Sato. 2024. ActionVOS: Actions as Prompts for Video Object Segmentation. In Proceed-ings of the European Conference on Computer Vision (ECCV) . 216–235. [29] J. Park, K. J. Jang, B. Alasaly, S. Mopidevi, A. Zolensky, E. Eaton, I. Lee, and K. Johnson. 2025. Assessing Modality Bias in Video Question Answering Bench-marks with Multimodal Large Language Models. In Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 19821–19829. [30] Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D. Manning, Stefano Ermon, and Chelsea Finn. 2023. Direct Preference Optimization: Your Language Model is Secretly a Reward Model. In Advances in Neural Information Processing Systems (NeurIPS) , Vol. 36. 53728–53741. [31] Jiayuan Rao, Zifeng Li, Haoning Wu, Ya Zhang, Yanfeng Wang, and Weidi Xie. 2025. Multi-Agent System for Comprehensive Soccer Understanding. In Proceed-ings of the ACM Multimedia Conference (ACM MM) .[32] Mohammadreza Salehi, Jae Sung Park, Tanush Yadav, Aditya Kusupati, Ranjay Krishna, Yejin Choi, Hannaneh Hajishirzi, and Ali Farhadi. 2024. ActionAtlas: A VideoQA Benchmark for Domain-specialized Action Recognition. In Advances in Neural Information Processing Systems (NeurIPS) , Vol. 37. 137372–137402. [33] Xi Tang, Jihao Qiu, Lingxi Xie, Yunjie Tian, Jianbin Jiao, and Qixiang Ye. 2025. Adaptive Keyframe Sampling for Long Video Understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) .29118–29128. [34] Shengbang Tong, Ellis Brown, Penghao Wu, Sanghyun Woo, Manoj Middepogu, Sai Charitha Akula, Jihan Yang, Shusheng Yang, Adithya Iyer, Xichen Pan, Austin Wang, Rob Fergus, Yann LeCun, and Saining Xie. 2024. Cambrian-1: A Fully Open, Vision-Centric Exploration of Multimodal LLMs. In Advances in Neural Information Processing Systems (NeurIPS) , Vol. 37. [35] Thanh-Dat Truong, Huu-Thien Tran, Jackson Cothren, Bhiksha Raj, and Khoa Luu. 2026. 𝜙 -DPO: Fairness Direct Preference Optimization Approach to Con-tinual Learning in Large Multimodal Models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) .[36] Sethuraman T V, Savya Khosla, et al. 2026. Stress Tests REVEAL Fragile Temporal and Visual Grounding in Video-Language Models. arXiv preprint arXiv:2602.11244 MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil Yizhi Li, Jiawei Jiang, Guanhong Wang, Yingcai Wu, and Gaoang Wang 
+
+(2026). [37] Haochen Wang, Qirui Chen, Cilin Yan, Jiayin Cai, Xiaolong Jiang, Yao Hu, Weidi Xie, and Stratis Gavves. 2025. Object-centric Video Question Answering with Visual Grounding and Referring. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) . 22274–22284. [38] Hao Wang, Pengzhen Ren, Zequn Jie, Xiao Dong, Chengjian Feng, Yinlong Qian, Lin Ma, Dongmei Jiang, Yaowei Wang, Xiangyuan Lan, and Xiaodan Liang. 2024. OV-DINO: Unified Open-Vocabulary Detection with Language-Aware Selective Fusion. arXiv preprint arXiv:2407.07844 (2024). [39] Haibo Wang, Zhiyang Xu, Yu Cheng, Shizhe Diao, Yufan Zhou, Yixin Cao, Qifan Wang, Weifeng Ge, and Lifu Huang. 2025. Grounded-VideoLLM: Sharpening Fine-grained Temporal Grounding in Video Large Language Models. In Findings of the Association for Computational Linguistics: EMNLP .[40] Junjie Wang, Zhihao Yuan, Shuyi Jiang, Jiaqi Mao, Chun-Mei Feng, Shuguang Cui, Na Zhao, and Zhen Li. 2026. Scene-R1: Video-Grounded Large Language Models for 3D Scene Reasoning without 3D Annotations. In Proceedings of the International Conference on Learning Representations (ICLR) .[41] Weiyun Wang, Zhe Chen, Wenhai Wang, Yue Cao, Yangzhou Liu, Zhangwei Gao, Jinguo Zhu, Xizhou Zhu, Lewei Lu, Yu Qiao, and Jifeng Dai. 2024. Enhancing the Reasoning Ability of Multimodal Large Language Models via Mixed Preference Optimization. arXiv preprint arXiv:2411.10442 (2024). [42] Weiyun Wang, Lixin Gu, Hengjun Pu, Long Cui, Xingguang Wei, Zhaoyang Liu, Linglin Jing, Shenglong Ye, Jie Shao, et al. 2025. InternVL3.5: Advancing Open-Source Multimodal Models in Versatility, Reasoning, and Efficiency. arXiv preprint arXiv:2508.18265 (2025). [43] Yuxuan Wang, Yiqi Song, Cihang Xie, Yang Liu, and Zilong Zheng. 2025. VideoL-LaMB: Long Streaming Video Understanding with Recurrent Memory Bridges. In 
+
+Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) .24170–24181. [44] Syed Talal Wasim, Muzammal Naseer, Salman Khan, Ming-Hsuan Yang, and Fahad Shahbaz Khan. 2024. Video-GroundingDINO: Towards Open-Vocabulary Spatio-Temporal Video Grounding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 18909–18918. [45] Haotian Xia, Haonan Ge, Junbo Zou, Hyun Woo Choi, Xuebin Zhang, Danny Suradja, Botao Rui, Ethan Tran, Wendy Jin, Zhen Ye, Xiyang Lin, Christopher Lai, Shengjie Zhang, Junwen Miao, Shichao Chen, Rhys Tracy, Vicente Ordonez, Weining Shen, and Hanjie Chen. 2026. SportR: A Benchmark for Multimodal Large Language Model Reasoning in Sports. In Proceedings of the International Conference on Learning Representations (ICLR) .[46] Haotian Xia, Zhengbang Yang, Junbo Zou, Rhys Tracy, Yuqing Wang, Chi Lu, Christopher Lai, Yanjun He, Xun Shao, Zhuoqing Xie, Yuan fang Wang, Weining Shen, and Hanjie Chen. 2025. SPORTU: A Comprehensive Sports Understand-ing Benchmark for Multimodal Large Language Models. In Proceedings of the International Conference on Learning Representations (ICLR) .[47] Jinglin Xu, Guohao Zhao, Sibo Yin, Wenhao Zhou, and Yuxin Peng. 2024. FineS-ports: A Multi-person Hierarchical Sports Video Dataset for Fine-grained Action Understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 21773–21782. [48] Haolin Yang, Jiayuan Rao, Haoning Wu, and Weidi Xie. 2026. SoccerMaster: A Vision Foundation Model for Soccer Understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) .[49] Jihan Yang, Shusheng Yang, Anjali W. Gupta, Rilyn Han, Li Fei-Fei, and Saining Xie. 2025. Thinking in Space: How Multimodal Large Language Models See, Remember, and Recall Spaces. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 10632–10643. [50] Rui Yang, Qianhui Wu, Zhaoyang Wang, Hanyang Chen, Ke Yang, Hao Cheng, Huaxiu Yao, Baolin Peng, Huan Zhang, Jianfeng Gao, and Tong Zhang. 2026. GUI-Libra: Training Native GUI Agents to Reason and Act with Action-aware Supervision and Partially Verifiable RL. arXiv preprint arXiv:2602.22190 (2026). [51] Xianming Yang, Qi Li, Chengdong Qian, Haitao Wang, Yonghui Wu, and Wei Wang. 2026. Bias Correction and Explainability Framework for Large Language Models: A Knowledge-Driven Approach. Big Data and Cognitive Computing 
+
+(2026). [52] Zuhao Yang, Yingchen Yu, Yunqing Zhao, Shijian Lu, and Song Bai. 2025. TimeEx-pert: An Expert-Guided Video LLM for Video Temporal Grounding. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) . 24286–24296. [53] Yuan Yao, Tianyu Yu, Ao Zhang, Chongyi Wang, Junbo Cui, Hongji Zhu, Tianchi Cai, Haoyu Li, Weilin Zhao, Zhihui He, et al. 2025. MiniCPM-V: A GPT-4V Level MLLM on Your Phone. Nat Commun 16, 5509 (2025) (2025). [54] Jinhui Ye, Zihan Wang, Haosen Sun, Keshigeyan Chandrasegaran, Zane Durante, Cristobal Eyzaguirre, Yonatan Bisk, Juan Carlos Niebles, Ehsan Adeli, Li Fei-Fei, Jiajun Wu, and Manling Li. 2025. Re-thinking Temporal Search for Long-Form Video Understanding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 8579–8591. [55] Boqiang Zhang, Kehan Li, Zesen Cheng, Zhiqiang Hu, Yuqian Yuan, Guanzheng Chen, Sicong Leng, Yuming Jiang, Hang Zhang, Xin Li, et al. 2025. Videollama 3: Frontier multimodal foundation models for image and video understanding. 
+
+arXiv preprint arXiv:2501.13106 (2025). [56] Ruohong Zhang, Liangke Gui, Zhiqing Sun, Yihao Feng, Keyang Xu, Yuanhan Zhang, Di Fu, Chunyuan Li, Alexander G. Hauptmann, Yonatan Bisk, and Yiming Yang. 2025. Direct Preference Optimization of Video Large Multimodal Models from Language Model Reward. In Proceedings of the Conference of the North American Chapter of the Association for Computational Linguistics (NAACL) . 694– 717. [57] Hanyu Zhou and Gim Hee Lee. 2026. LLaVA-4D: A General Large Multimodal Model for 4D Scene Understanding. In Proceedings of the International Conference on Learning Representations (ICLR) .[58] Orr Zohar, Xiaohan Wang, Yann Dubois, Nikhil Mehta, Tong Xiao, Philippe Hansen-Estruch, Licheng Yu, Xiaofang Wang, Felix Juefei-Xu, Ning Zhang, Ser-ena Yeung-Levy, and Xide Xia. 2025. Apollo: An Exploration of Video Under-standing in Large Multimodal Models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . 18891–18901.
