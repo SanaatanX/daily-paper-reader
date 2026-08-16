@@ -1,0 +1,233 @@
+{
+  "date": "20260816",
+  "date_label": "",
+  "generated_at": "2026-08-16 20:42:25 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.10983v1",
+      "route": "202608/16/2608.10983v1-timeroute-time-aware-modality-routing-and-diffusion-for-multi-modal-recommendation",
+      "title": "TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "时间感知模态路由器，解决模态时间尺度不匹配问题",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.11343v1",
+      "route": "202608/16/2608.11343v1-can-frontier-llms-match-natively-multimodal-embeddings-a-comparison-on-hard-negative-text-to-image-retrieval",
+      "title": "Can Frontier LLMs Match Natively Multimodal Embeddings? A Comparison on Hard-Negative Text-to-Image Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "对比原生多模态嵌入与LLM在文图检索中的跨模态对齐能力",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.09928v1",
+      "route": "202608/16/2608.09928v1-multimodal-model-diffing-for-feature-discovery-and-control",
+      "title": "Multimodal Model Diffing for Feature Discovery and Control",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用多模态稀疏自编码器识别与控制跨模态适应后的特征变化，支持多模态表示学习",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10448v1",
+      "route": "202608/16/2608.10448v1-rationale-guided-learning-for-multimodal-emotion-recognition",
+      "title": "Rationale-Guided Learning for Multimodal Emotion Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于双过程理论和理由引导的多模态融合方法用于情感识别",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10484v1",
+      "route": "202608/16/2608.10484v1-lost-in-reconstruction-aligning-action-representations-with-language-in-vision-language-action-models",
+      "title": "Lost in Reconstruction: Aligning Action Representations with Language in Vision-Language-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过附加目标函数在VQ-VAE风格分词器中对齐动作表征与语言语义。",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10635v1",
+      "route": "202608/16/2608.10635v1-medup-awakening-unified-understanding-and-perception-in-medical-vision-language-models",
+      "title": "MedUP: Awakening Unified Understanding and Perception in Medical Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过掩码词元化在共享词元空间中实现区域-语言统一对齐",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10857v1",
+      "route": "202608/16/2608.10857v1-figuro-intrinsic-dimension-estimation-for-multi-modal-data",
+      "title": "FiGuRO: Intrinsic Dimension Estimation for Multi-Modal Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向多模态表示学习的内在维度估计",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.12677v1",
+      "route": "202608/16/2608.12677v1-the-role-of-natural-language-understanding-in-multimodal-video-based-dengue-diagnosis",
+      "title": "The Role of Natural Language Understanding in Multimodal Video-Based Dengue Diagnosis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于CLIP的视频帧与文本提示词之间的跨模态对齐",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.08915v1",
+      "route": "202608/16/2608.08915v1-investigating-multimodal-informativity-under-different-partner-visibility-conditions-in-video-mediated-dialogue",
+      "title": "Investigating Multimodal Informativity under Different Partner Visibility Conditions in Video-Mediated Dialogue",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合文本与手势进行指代识别",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.08935v1",
+      "route": "202608/16/2608.08935v1-integrated-multimodal-ai-system-for-retrieval-augmented-reasoning-object-sensing-and-damage-analysis",
+      "title": "Integrated Multimodal AI System for Retrieval-Augmented Reasoning, Object Sensing, and Damage Analysis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "整合RAG、热感知、视觉与无线信号的多模态统一系统",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.09227v1",
+      "route": "202608/16/2608.09227v1-omni2lora-coherence-preserving-parametric-memory-for-efficient-omni-language-models",
+      "title": "Omni2LoRA: Coherence-Preserving Parametric Memory for Efficient Omni Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "将多模态上下文编码为全秩LoRA适配器作为参数记忆，同时保持跨模态连贯性",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10525v1",
+      "route": "202608/16/2608.10525v1-dynamic-context-adapters-efficiently-infusing-history-into-vision-and-language-models",
+      "title": "Dynamic Context Adapters: Efficiently Infusing History into Vision-and-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向视觉语言模型的适配器上下文注入",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.10720v1",
+      "route": "202608/16/2608.10720v1-ex-omni-2d-expressive-omni-modal-dialogue-models-with-native-visual-presence",
+      "title": "Ex-Omni-2D: Expressive Omni-Modal Dialogue Models with Native Visual Presence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过共享声学-时间接口结合文本、语音和视频的全模态对话",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    },
+    {
+      "paper_id": "2608.11681v1",
+      "route": "202608/16/2608.11681v1-learning-from-multimodal-pseudo-labels-for-robust-open-vocabulary-instance-and-panoptic-segmentation",
+      "title": "Learning from Multimodal Pseudo-Labels for Robust Open-Vocabulary Instance and Panoptic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过CLIP引导的伪标签实现视觉-语言对齐用于分割",
+      "first_seen_at": "2026-08-16 20:42:25 UTC",
+      "updated_at": "2026-08-16 20:42:25 UTC"
+    }
+  ]
+}

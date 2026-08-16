@@ -1,0 +1,602 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-16T20:33:08.373954+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 2,
+    "deep_cap": 7,
+    "deep_selected": 2,
+    "quick_candidates": 14,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2608.10983v1",
+      "source": "arxiv",
+      "title": "TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation",
+      "abstract": "Multi-modal recommenders fuse collaborative signals with item modalities such as text, images, and audio, but the usefulness of each drifts over time and at different rates. For example, chocolate purchases typically guided by textual ingredient cues can shift toward visual packaging and ambient audio around Valentine's Day. This modality time-scale mismatch gives rise to two coupled challenges: (1) users require different modality proportions across temporal contexts, and (2) less relevant modalities are more likely to introduce outdated or misleading signals into the recommender. We address both challenges within a unified diffusion-based recommender, TimeRoute. A temporal-aware modal router maps each user's aggregated behavioral features to a personalized modality distribution, replacing the globally shared fusion weights used in prior work. The diffusion-based graph reconstructor is then conditioned on the same temporal profile through Feature-wise Linear Modulation (FiLM) with dual-stream long- and short-term denoising heads, suppressing outdated modality edges before they enter the propagation graph. Experiments on TikTok, Amazon-Baby, and Amazon-Sports demonstrate consistent improvements of up to 9.8\\% in Recall@K, Precision@K, and NDCG@K over strong baselines across 10-seed paired tests. Code is available at https://anonymous.4open.science/r/TimeRoute.",
+      "authors": [
+        "Pengyu Zhang",
+        "Yangqin Jiang",
+        "Klim Zaporojets",
+        "Congfeng Cao",
+        "Paul Groth"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-08-11T14:36:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.10983v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "temporal-aware modality router addressing modality time-scale mismatch",
+      "llm_evidence_cn": "时间感知模态路由器，解决模态时间尺度不匹配问题",
+      "llm_evidence": "时间感知模态路由器，解决模态时间尺度不匹配问题",
+      "canonical_evidence": "时间感知模态路由器，解决模态时间尺度不匹配问题",
+      "llm_tldr_en": "TimeRoute uses a diffusion-based recommender with a temporal-aware modal router to adapt modality proportions over time, addressing modality time-scale mismatch.",
+      "llm_tldr_cn": "论文提出TimeRoute，一种基于扩散模型的多模态推荐框架，用于解决各模态有用性随时间漂移且变化速率不同的问题。其核心是时间感知的模态路由器，根据用户聚合行为特征动态决定不同时间上下文下文本、图像、音频模态的融合比例。该方法同时减少过时或误导信号对推荐的干扰。实验验证了动态模态权衡能显著改善时序推荐效果。",
+      "llm_tldr": "论文提出TimeRoute，一种基于扩散模型的多模态推荐框架，用于解决各模态有用性随时间漂移且变化速率不同的问题。其核心是时间感知的模态路由器，根据用户聚合行为特征动态决定不同时间上下文下文本、图像、音频模态的融合比例。该方法同时减少过时或误导信号对推荐的干扰。实验验证了动态模态权衡能显著改善时序推荐效果。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.11343v1",
+      "source": "arxiv",
+      "title": "Can Frontier LLMs Match Natively Multimodal Embeddings? A Comparison on Hard-Negative Text-to-Image Retrieval",
+      "abstract": "Multimodal retrieval and classification across different types of media, spanning text, images,video and audio, has traditionally relied on dual-encoder models that align visual and textual representations through contrastive learning. The March 2026 release of Gemini Embedding 2, Google's first natively multimodal embedding model to map text, images, video, audio, and documents into a single shared space, raises competition among multimodal retrieval systems. Simultaneously, frontier Large language models (LLMs) have also demonstrated strong visual understanding, raising the question of whether they can serve as effective zero-shot rankers. Our study provides the first direct comparison of native multimodal embeddings against LLM-based visual ranking on Flickr30k. We observe that GPT-4.1 and Claude Sonnet 4.6 perform on par with Gemini Embedding 2. Additionally, once embeddings are precomputed, multimodal embeddings are better suited for low-latency applications.",
+      "authors": [
+        "Archan Dutta",
+        "Vyanktesh Kanungo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "published": "2026-08-11T18:49:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.11343v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "compares native multimodal embeddings with LLMs for text-to-image retrieval, focusing on cross-modal alignment",
+      "llm_evidence_cn": "对比原生多模态嵌入与LLM在文图检索中的跨模态对齐能力",
+      "llm_evidence": "对比原生多模态嵌入与LLM在文图检索中的跨模态对齐能力",
+      "canonical_evidence": "对比原生多模态嵌入与LLM在文图检索中的跨模态对齐能力",
+      "llm_tldr_en": "First direct comparison of native multimodal embeddings (Gemini Embedding 2) and frontier LLMs as zero-shot rankers on hard-negative text-to-image retrieval, revealing trade-offs in cross-modal alignment and retrieval quality.",
+      "llm_tldr_cn": "多模态检索传统依赖双编码器通过对比学习对齐视觉和文本表示。Gemini Embedding 2作为原生多模态嵌入模型将多模态数据映射到统一空间，而前沿LLM也展现出视觉理解能力。该研究首次直接对比原生多模态嵌入与前沿LLM在硬负例文图检索上的表现，考察它们作为零样本排序器的有效性。结果揭示了二者在跨模态对齐质量和检索效果上的差异与权衡，为检索系统选型提供了实证依据。",
+      "llm_tldr": "多模态检索传统依赖双编码器通过对比学习对齐视觉和文本表示。Gemini Embedding 2作为原生多模态嵌入模型将多模态数据映射到统一空间，而前沿LLM也展现出视觉理解能力。该研究首次直接对比原生多模态嵌入与前沿LLM在硬负例文图检索上的表现，考察它们作为零样本排序器的有效性。结果揭示了二者在跨模态对齐质量和检索效果上的差异与权衡，为检索系统选型提供了实证依据。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.09928v1",
+      "source": "arxiv",
+      "title": "Multimodal Model Diffing for Feature Discovery and Control",
+      "abstract": "Multimodal Large Language Models (MLLMs) exhibit strong visual understanding, yet the internal features that cause these behaviors remain difficult to identify, audit, or control. While applicable to post-hoc inspection, hidden states that are decomposed into interpretable feature directions using sparse autoencoders (SAEs) neither readily isolate which features are changed by multimodal training, nor are they directly useful for targeted control. We introduce MMDiff, a multimodal model-diffing framework that trains multimodal SAEs and turns them into feature-level interfaces for discovering and controlling multimodal behavior. MMDiff supports three uses: (i) feature isolation, by diffing a base-LM SAE against its multimodal-adapted counterpart to identify features altered by multimodal training; (ii) task-specific feature detection, via per-token contrastive firing analysis that isolates causal features; and (iii) feature-level control, by causally removing or steering the discovered feature directions. We train multimodal SAEs for three MLLM families, LLaVA-MORE, PaliGemma 2, and InternVL3.5, and evaluate on visual-spatial understanding, multimodal safety, and OCR. MMDiff discovers sparse, causally specific features whose removal selectively degrades target behaviors by an average of 12% on spatial tasks and 17% on OCR, and reduces attack success rate by 24% on multimodal safety attacks, with no impact on VQA performance. Steering these features improves spatial and OCR accuracy by +3.6% and +1.8% on average over a standard single-layer steering baseline. These results show that multimodal SAEs can serve not only as interpretability tools, but as mechanisms for auditing, steering, and controlling MLLMs behavior toward safer and more capable generations.",
+      "authors": [
+        "Hunar Batra",
+        "Lachin Naghashyar",
+        "Ashkan Khakzar",
+        "Philip Torr",
+        "Christian Schroeder de Witt",
+        "Constantin Venhoff",
+        "Ronald Clark"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-10T17:59:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.09928v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Uses multimodal sparse autoencoders to identify and control features altered by cross-modal adaptation, supporting multimodal representation learning",
+      "llm_evidence_cn": "利用多模态稀疏自编码器识别与控制跨模态适应后的特征变化，支持多模态表示学习",
+      "llm_evidence": "利用多模态稀疏自编码器识别与控制跨模态适应后的特征变化，支持多模态表示学习",
+      "canonical_evidence": "利用多模态稀疏自编码器识别与控制跨模态适应后的特征变化，支持多模态表示学习",
+      "llm_tldr_en": "MMDiff trains multimodal sparse autoencoders and diffs them against base-LM SAEs to isolate features changed by multimodal training, enabling feature-level discovery and targeted control of MLLM behavior.",
+      "llm_tldr_cn": "多模态大模型具有很强的视觉理解能力，但其内部特征难以识别、审计或控制。本文提出MMDiff多模态模型差分框架，训练多模态稀疏自编码器，并与基础语言模型的SAE进行差分，从而定位由多模态训练改变的特征方向，作为特征级接口用于发现和控制多模态行为。该方法支持特征隔离、审计与定向控制，实验表明能有效识别特征变化，为多模态表示的可解释性和可控性提供了新工具。",
+      "llm_tldr": "多模态大模型具有很强的视觉理解能力，但其内部特征难以识别、审计或控制。本文提出MMDiff多模态模型差分框架，训练多模态稀疏自编码器，并与基础语言模型的SAE进行差分，从而定位由多模态训练改变的特征方向，作为特征级接口用于发现和控制多模态行为。该方法支持特征隔离、审计与定向控制，实验表明能有效识别特征变化，为多模态表示的可解释性和可控性提供了新工具。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08915v1",
+      "source": "arxiv",
+      "title": "Investigating Multimodal Informativity under Different Partner Visibility Conditions in Video-Mediated Dialogue",
+      "abstract": "Situated language use is multimodal and embodied. For example, gestures can carry information that is absent or underspecified in the speech signal, yet dialogue models typically rely on transcripts alone. We study how much referential information gestures and their combination with speech carry in multimodal dialogue under different partner visibility conditions. % We build models that identify the intended referent in a video-mediated referential communication game based on either the speech transcript, the skeletal representation of gesture, or both modalities. Our results show that gesture alone is predictive of the intended referent and that multimodal fusion is most beneficial when the transcript-based model is uncertain. Training-only alignment of learned representations with the referent image further improves the fusion model performance. % In a comparison with human interaction data, we further see pragmatic effects of interlocutor visibility on gesture production and informativeness as well as an entrainment effect in speech and multimodal, but not gesture, performance across rounds of repeated interaction. We thus make contributions to the technical modelling of multimodal information in human dialogue and the analysis of human interaction data via trained model representations.",
+      "authors": [
+        "Esam Ghaleb",
+        "Hugh Mee Wong",
+        "Kristina Kobrock"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-09T21:08:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.08915v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal fusion of transcript and gesture for referent identification",
+      "llm_evidence_cn": "融合文本与手势进行指代识别",
+      "llm_evidence": "融合文本与手势进行指代识别",
+      "canonical_evidence": "融合文本与手势进行指代识别",
+      "llm_tldr_en": "Studies how gestures and speech combine in multimodal dialogue, showing gesture is predictive and fusion benefits most when transcript is weak.",
+      "llm_tldr_cn": "对话模型通常仅依赖转录文本，忽略了手势等信息。本文在视频中介的指称游戏中研究手势、语音及两者融合对指代识别的作用。基于骨架手势与转录构建多模态模型，结果发现手势单独具有预测力，多模态融合在转录信息较弱时最有效。该研究对多模态对话建模与信息性分析有重要参考价值。",
+      "llm_tldr": "对话模型通常仅依赖转录文本，忽略了手势等信息。本文在视频中介的指称游戏中研究手势、语音及两者融合对指代识别的作用。基于骨架手势与转录构建多模态模型，结果发现手势单独具有预测力，多模态融合在转录信息较弱时最有效。该研究对多模态对话建模与信息性分析有重要参考价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.10448v1",
+      "source": "arxiv",
+      "title": "Rationale-Guided Learning for Multimodal Emotion Recognition",
+      "abstract": "Multimodal emotion recognition in conversation (MERC) requires understanding complex interactions between verbal and non-verbal cues. However, most existing approaches fundamentally treat this as a direct input-output (multimodal cues-emotion labels) mapping problem, overlooking the causal reasoning that humans use when interpreting emotions. We propose rationale-guided learning (RGL), a novel framework that transforms MERC into a cognitively-inspired reasoning task. Based on dual-process theory, we decompose emotional reasoning into three facets: Intuitive (immediate perception, System 1), Contextual (situational analysis, System 2), and Integrative (synthesis of both). We leverage an MLLM offline to generate structured rationales, which are encoded as memories to guide model training via aligning internal representations with human-like reasoning patterns. Our final model operates without any MLLM overheads at inference time. Experimental results show that RGL achieves state-of-the-art performance on the IEMOCAP and MELD benchmarks. Further, for interpretation, we demonstrate that the model's internal features effectively retrieve semantically correct rationales for unseen test samples, validating its rationale reasoning capabilities.",
+      "authors": [
+        "Sujung Oh",
+        "Jung Uk Kim",
+        "Sangmin Lee"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-11T04:02:03+00:00",
+      "link": "https://arxiv.org/pdf/2608.10448v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal fusion technique using rationale-guided learning with dual-process theory for emotion recognition",
+      "llm_evidence_cn": "基于双过程理论和理由引导的多模态融合方法用于情感识别",
+      "llm_evidence": "基于双过程理论和理由引导的多模态融合方法用于情感识别",
+      "canonical_evidence": "基于双过程理论和理由引导的多模态融合方法用于情感识别",
+      "llm_tldr_en": "Multimodal emotion recognition treats cues-to-label as direct mapping. Rationale-Guided Learning decomposes reasoning into intuitive, contextual, and integrative facets, generating structured rationales via MLLM to improve causal reasoning and fusion.",
+      "llm_tldr_cn": "多模态对话情感识别往往忽视人类理解情感时使用的因果推理，而是把多模态线索直接映射到情感标签，缺乏认知层面的建模。该工作提出理由引导学习(RGL)，基于双过程理论将情感推理解构为直觉、情境和整合三个互补层面，并利用多模态大模型离线生成结构化理由，将其编码为记忆。这些理由辅助模型在融合多模态特征时进行更贴近人类认知的推理。在对话情感识别数据集上的实验显示，RGL显著提升了识别准确率和可解释性，为多模态情感理解提供了新的学习框架。",
+      "llm_tldr": "多模态对话情感识别往往忽视人类理解情感时使用的因果推理，而是把多模态线索直接映射到情感标签，缺乏认知层面的建模。该工作提出理由引导学习(RGL)，基于双过程理论将情感推理解构为直觉、情境和整合三个互补层面，并利用多模态大模型离线生成结构化理由，将其编码为记忆。这些理由辅助模型在融合多模态特征时进行更贴近人类认知的推理。在对话情感识别数据集上的实验显示，RGL显著提升了识别准确率和可解释性，为多模态情感理解提供了新的学习框架。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.08935v1",
+      "source": "arxiv",
+      "title": "Integrated Multimodal AI System for Retrieval-Augmented Reasoning, Object Sensing, and Damage Analysis",
+      "abstract": "This work presents a unified multimodal AI system for damage assessment that integrates retrieval-augmented generation (RAG) models, thermal spectrum perception, vision foundation model pipelines, and exploratory wireless signal sensing. A RAG component is developed to ground a locally hosted language model in project-specific documentation, including specialized damage level classification criteria to mitigate hallucinations during inference. Controlled comparisons against static few-shot prompting demonstrate that dynamic retrieval improves grounding and factual consistency. We further compare vector-based RAG with a knowledge graph variant constructed via entity-relation extraction, and show that graph-based retrieval produces stronger responses for damage assessment queries requiring cross-document reasoning, motivating hybrid dense, sparse, and graph-aware retrieval. To address limitations of EO imagery under adverse lighting and weather conditions, infrared (IR)/thermal sensing is employed for object detection and segmentation. Our detectors generate candidate detections, yielding improved segmentation of a broad array of objects. Paired IR versus visible spectrum tracking experiments reveal failure modes, motivating multimodal fusion for robust object detection and damage analysis. Vision foundation and vision-language models are leveraged to generate synthetic damage imagery and classify damage severity with high accuracy, supporting training and validation of downstream damage assessment models. Finally, exploratory Wireless-based sensing demonstrates potential to detect presence, motion, and post-event environmental changes where EO and IR sensing are ineffective.",
+      "authors": [
+        "Kalelo Dukuray",
+        "Israel Pina",
+        "Evan Perez",
+        "Erika Ardiles-Cruz",
+        "Jie Wei"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-09T21:53:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.08935v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified multimodal AI system integrating RAG, thermal perception, vision pipelines, and wireless sensing",
+      "llm_evidence_cn": "整合RAG、热感知、视觉与无线信号的多模态统一系统",
+      "llm_evidence": "整合RAG、热感知、视觉与无线信号的多模态统一系统",
+      "canonical_evidence": "整合RAG、热感知、视觉与无线信号的多模态统一系统",
+      "llm_tldr_en": "Unified multimodal AI for damage assessment, combining RAG, thermal, vision, and wireless sensing; graph-based retrieval via entity-relation extraction improves grounding and factual consistency.",
+      "llm_tldr_cn": "该论文提出一个面向损伤评估的统一多模态AI系统，集成检索增强生成、热红外感知、视觉基础模型和无线信号感知。系统通过动态检索增强本地语言模型的上下文，并比较向量检索与基于实体关系抽取的知识图谱检索。实验表明动态检索相比静态提示能提升生成的事实一致性，体现了多模态信息融合在垂直领域应用的潜力。",
+      "llm_tldr": "该论文提出一个面向损伤评估的统一多模态AI系统，集成检索增强生成、热红外感知、视觉基础模型和无线信号感知。系统通过动态检索增强本地语言模型的上下文，并比较向量检索与基于实体关系抽取的知识图谱检索。实验表明动态检索相比静态提示能提升生成的事实一致性，体现了多模态信息融合在垂直领域应用的潜力。",
+      "llm_tags": [
+        "query:ml:composite"
+      ],
+      "matched_query_tag": "query:ml:composite",
+      "matched_query_text": "Papers central to 查找多模态学习相关论文 包括模态不平衡 模态融合等, especially work that connects or combines: multimodal learning methods combining different data modalities; addressing modality imbalance in multimodal learning; techniques for multimodal fusion in deep learning; cross-modal alignment representation learning; multimodal representation learning approaches; feature-level fusion methods for multimodal inputs; How to handle modality imbalance in multimodal learning?; Latest techniques for multimodal fusion in neural networks.",
+      "matched_requirement_id": "req-composite-ml",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.10484v1",
+      "source": "arxiv",
+      "title": "Lost in Reconstruction: Aligning Action Representations with Language in Vision-Language-Action Models",
+      "abstract": "Action verbs describe not only the physical outcomes of actions, but also how those actions are performed. Yet action representations in vision-language-action models (VLAs) are typically optimized for reconstruction under L1/L2 losses in raw action space, where numerical proximity need not reflect linguistically meaningful distinctions. On BridgeV2, we show that action trajectories contain verb-grounding information beyond visual state changes, and that reconstruction-only discrete tokenization systematically erodes this information. To address this problem, we introduce SALT, a Semantically ALigned action Tokenizer that augments a VQ-VAE-style tokenizer with an auxiliary objective requiring a frozen vision-language model to recover the episode instruction from quantized action latents. Policies trained with SALT achieve 71.9% average success in SimplerEnv, compared with 42.7% for a reconstruction-only VQ-VAE tokenizer and 31.2% for FAST. SALT also develops verb-specialized codes while maintaining reconstruction fidelity. These results show that robot action trajectories provide a source of language grounding and that preserving this structure in action representations can substantially improve language-conditioned control.",
+      "authors": [
+        "Li Wenjie",
+        "Yash Jangir",
+        "Ignacy Stepka",
+        "Yash Agarwal",
+        "Marion Kipsang",
+        "Yonatan Bisk"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CL"
+      ],
+      "published": "2026-08-11T04:57:17+00:00",
+      "link": "https://arxiv.org/pdf/2608.10484v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Aligns action representations with language via an auxiliary object-level semantic alignment in a VQ-VAE style tokenizer.",
+      "llm_evidence_cn": "通过附加目标函数在VQ-VAE风格分词器中对齐动作表征与语言语义。",
+      "llm_evidence": "通过附加目标函数在VQ-VAE风格分词器中对齐动作表征与语言语义。",
+      "canonical_evidence": "通过附加目标函数在VQ-VAE风格分词器中对齐动作表征与语言语义。",
+      "llm_tldr_en": "Introduces SALT, a semantically aligned action tokenizer that augments discrete action tokenization with an auxiliary semantic alignment objective, preserving verb-grounding information lost by reconstruction-only losses.",
+      "llm_tldr_cn": "针对视觉-语言-动作模型用L1/L2重建损失优化动作表征而丢失语言相关动词语义信息的问题，该文提出语义对齐动作分词器SALT，在VQ-VAE风格分词器上附加冻结视觉语言模型的辅助对齐目标，使离散动作词元保留动词接地信息。在BridgeV2上验证了动作轨迹包含超越视觉状态变化的语言信息，该方法能提升动作表征的语义一致性。通过辅助对齐目标，离散化过程不再仅关注数值重建，而是保留语言可区分的语义特征，为跨模态动作理解提供更好的表征。",
+      "llm_tldr": "针对视觉-语言-动作模型用L1/L2重建损失优化动作表征而丢失语言相关动词语义信息的问题，该文提出语义对齐动作分词器SALT，在VQ-VAE风格分词器上附加冻结视觉语言模型的辅助对齐目标，使离散动作词元保留动词接地信息。在BridgeV2上验证了动作轨迹包含超越视觉状态变化的语言信息，该方法能提升动作表征的语义一致性。通过辅助对齐目标，离散化过程不再仅关注数值重建，而是保留语言可区分的语义特征，为跨模态动作理解提供更好的表征。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09227v1",
+      "source": "arxiv",
+      "title": "Omni2LoRA: Coherence-Preserving Parametric Memory for Efficient Omni Language Models",
+      "abstract": "Omnimodal language models (OLMs) enable unified audio-visual understanding, but processing long joint token sequences makes inference computationally prohibitive. While recent token compression methods attempt to alleviate this burden, compressing modalities in isolation often destroys the temporal cross-modal anchors necessary for coherent reasoning. We introduce Omni2LoRA, a two-stage framework for efficient parametric memory compression via coherence-preserving context distillation that bypasses the token bottleneck entirely. First, a Perceiver hypernetwork processes intermediate representations from a frozen OLM to encode the multimodal context into a full-rank Low-Rank Adaptation (LoRA) adapter in a single forward pass. To prevent the resulting parameter footprint from scaling linearly with recording length, we optimize a discrete rank allocation policy via Group Relative Policy Optimization (GRPO) that uses a modality-ablated counterfactual reward to explicitly penalize the loss of audio-visual coherence, forcing the model to allocate its fixed sub-linear rank budget to synergistic cross-modal anchors rather than isolated visual features. Across three omnimodal backbones, Omni2LoRA operating at a 30% rank budget outperforms direct full-context inference and strong token-compression baselines (OmniZip, OMAC, O-MARC) on four audio-visual question answering benchmarks, improving average accuracy by 8-12% over the strongest baseline and remaining stable under compression ratios as tight as 75%, where token-pruning methods degrade sharply. By converting multimodal memory into a fixed-budget, reusable parameter state, our method drives answer-time multimodal-token load to zero, cutting per-query Time to First Token (TTFT) by up to 12x relative to full-context inference and amortizing to under 0.5s after a handful of queries.",
+      "authors": [
+        "Puneet Mathur",
+        "Manan Suri",
+        "Dinesh Manocha"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-10T07:49:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.09227v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Encodes multimodal context into a full-rank LoRA adapter as parametric memory while preserving cross-modal coherence",
+      "llm_evidence_cn": "将多模态上下文编码为全秩LoRA适配器作为参数记忆，同时保持跨模态连贯性",
+      "llm_evidence": "将多模态上下文编码为全秩LoRA适配器作为参数记忆，同时保持跨模态连贯性",
+      "canonical_evidence": "将多模态上下文编码为全秩LoRA适配器作为参数记忆，同时保持跨模态连贯性",
+      "llm_tldr_en": "Omni2LoRA introduces a two-stage framework to compress long multimodal contexts into a full-rank LoRA adapter via coherence-preserving context distillation, bypassing token bottlenecks. It processes intermediate representations with a Perceiver hypernetwork to generate the adapter in one forward pass, enabling efficient and coherent multimodal reasoning.",
+      "llm_tldr_cn": "针对全模态语言模型处理长联合词元序列时推理开销过大的问题，本文提出Omni2LoRA。它通过保持跨模态一致性的上下文蒸馏，将多模态上下文编码为全秩LoRA适配器，绕过词元瓶颈。Perceiver超网络在前向传播中直接生成适配器，避免了对各模态的孤立压缩，从而在压缩参数记忆的同时保留时序跨模态锚点，实现高效连贯的多模态推理。",
+      "llm_tldr": "针对全模态语言模型处理长联合词元序列时推理开销过大的问题，本文提出Omni2LoRA。它通过保持跨模态一致性的上下文蒸馏，将多模态上下文编码为全秩LoRA适配器，绕过词元瓶颈。Perceiver超网络在前向传播中直接生成适配器，避免了对各模态的孤立压缩，从而在压缩参数记忆的同时保留时序跨模态锚点，实现高效连贯的多模态推理。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.10635v1",
+      "source": "arxiv",
+      "title": "MedUP: Awakening Unified Understanding and Perception in Medical Vision-Language Models",
+      "abstract": "Medical Vision-Language Models (Med-VLMs) excel at verbalizing visual content, yet precise visual perception, segmentation, and grounding remain challenging. Existing approaches either verbalize regions as coordinate strings or rely on external modules that decouple perception from understanding, creating representation gaps for region-language alignment. We present MedUP, a Med-VLM that natively unifies perception and understanding within a shared token space. At its core lies UniMedTok, a region tokenizer that encodes masks as discrete tokens in the LLM vocabulary, enabling the model to seamlessly interleave mask tokens with text. We curate UniMed-Train, a 1.84M-instance corpus spanning text-guided segmentation, region-grounded understanding, medical VQA and CoT-based segmentation, and introduce UniMed-Bench for unified evaluation. Extensive experiments show that MedUP outperforms native, agentic, and dual-decoder Med-VLMs across all tasks while remaining competitive with specialist segmentors, demonstrating the strong potential of unified understanding and perception modeling.",
+      "authors": [
+        "Yuan Wang",
+        "Hualiang Wang",
+        "Yixin Chen",
+        "Songtao Jiang",
+        "Shujian Gao",
+        "Jiaming Lin",
+        "Siming Fu",
+        "Jian Wu",
+        "Zuozhu Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-11T08:22:13+00:00",
+      "link": "https://arxiv.org/pdf/2608.10635v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Unified region-language alignment via mask tokenization in a shared token space",
+      "llm_evidence_cn": "通过掩码词元化在共享词元空间中实现区域-语言统一对齐",
+      "llm_evidence": "通过掩码词元化在共享词元空间中实现区域-语言统一对齐",
+      "canonical_evidence": "通过掩码词元化在共享词元空间中实现区域-语言统一对齐",
+      "llm_tldr_en": "MedUP is a medical vision-language model that unifies perception and understanding by encoding masks as discrete tokens in the LLM vocabulary, enabling seamless interleaving of mask tokens with text. It curates a 1.84M-instance corpus for training and improves region-language alignment across tasks like text-guided segmentation and region grounding.",
+      "llm_tldr_cn": "针对医学视觉语言模型中感知与理解分离、区域-语言对齐存在表达鸿沟的问题，本文提出MedUP。其核心是UniMedTok区域分词器，将掩码编码为LLM词表中的离散词元，使模型能够在共享词元空间内自然交织掩码与文本。利用自建的184万实例语料进行训练，在文本引导分割、区域定位与理解等任务上取得更优性能，为医学多模态表示学习提供了统一范式。",
+      "llm_tldr": "针对医学视觉语言模型中感知与理解分离、区域-语言对齐存在表达鸿沟的问题，本文提出MedUP。其核心是UniMedTok区域分词器，将掩码编码为LLM词表中的离散词元，使模型能够在共享词元空间内自然交织掩码与文本。利用自建的184万实例语料进行训练，在文本引导分割、区域定位与理解等任务上取得更优性能，为医学多模态表示学习提供了统一范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.10525v1",
+      "source": "arxiv",
+      "title": "Dynamic Context Adapters: Efficiently Infusing History into Vision-and-Language Models",
+      "abstract": "Historical context integration presents a fundamental challenge for Vision-Language Models (VLMs) in sequential decision-making tasks. Current VLMs process visual inputs independently, which creates critical limitations for downstream applications that require temporal understanding. Direct incorporation of historical frames into Transformer inputs produces quadratic attention complexity and excessive memory consumption. Existing approaches suffer from significant drawbacks: computational inflation or substantial information loss through temporal compression. To address these challenges, we introduce Dynamic Context Adapter (DCA), a novel context injection approach for pretrained VLMs. Our method employs fixed-size, dynamically compressed memory to preserve historical semantics without frame concatenation. DCA bridges static VLMs and recurrent policies and enables memory capabilities in pretrained models while maintaining computational efficiency. DCA achieves over $25\\%$ reduction in attention FLOPs and $13\\%$ memory savings while improving performance on long-horizon tasks.",
+      "authors": [
+        "Yuhang Song",
+        "Bor-Jiun Lin",
+        "Jiaxu Liu",
+        "Te-Chuan Chiu",
+        "Anh Nguyen",
+        "Chun-Yi Lee"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-11T06:05:05+00:00",
+      "link": "https://arxiv.org/pdf/2608.10525v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "adapter-based context injection for vision-and-language models",
+      "llm_evidence_cn": "面向视觉语言模型的适配器上下文注入",
+      "llm_evidence": "面向视觉语言模型的适配器上下文注入",
+      "canonical_evidence": "面向视觉语言模型的适配器上下文注入",
+      "llm_tldr_en": "Dynamic Context Adapter efficiently injects historical context into VLMs with fixed-size dynamic compression, avoiding quadratic attention and information loss for sequential decision-making.",
+      "llm_tldr_cn": "论文提出动态上下文适配器（DCA），为预训练视觉语言模型高效注入历史上下文，用于序列决策任务。直接拼接历史帧会导致二次复杂度显存爆炸，而简单压缩又会丢失信息。DCA使用固定大小且动态压缩的上下文表示，在与Transformer融合时保持较小开销。该方法在不显著增加计算成本的前提下改进VLM的时序理解能力。",
+      "llm_tldr": "论文提出动态上下文适配器（DCA），为预训练视觉语言模型高效注入历史上下文，用于序列决策任务。直接拼接历史帧会导致二次复杂度显存爆炸，而简单压缩又会丢失信息。DCA使用固定大小且动态压缩的上下文表示，在与Transformer融合时保持较小开销。该方法在不显著增加计算成本的前提下改进VLM的时序理解能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.10857v1",
+      "source": "arxiv",
+      "title": "FiGuRO: Intrinsic Dimension Estimation for Multi-Modal Data",
+      "abstract": "Determining the complexity, or Intrinsic Dimension (ID), of data is fundamental to efficient and interpretable representation learning. This is particularly challenging in multi-modal settings when trying to learn disentangled representations for shared and private information. Existing techniques leave a critical gap: they are often static, uni-modal, or in the case of contrastive methods, adapt only to the shared ID implicitly. We introduce Fidelity-Guided Rank Optimization (FiGuRO), a framework for approximating the ID of uni- and multi-modal data under constraints of model capacity and hyperparameters. FiGuRO learns the dimensions of low-rank projections using truncated singular value decomposition and an algorithm that determines when to reduce or increase dimension and in which latent space. Disentanglement of shared and private information arises as an emergent property of this optimization, eliminating the need for complex auxiliary loss functions. We demonstrate that FiGuRO outperforms existing ID estimation techniques and is more robust to hyperparameter changes. Across simulations and real-world data, FiGuRO captures distinct ID scales and varying subspace ratios, and decomposes shared and private information successfully. Furthermore, we show that FiGuRO can be applied to modern uni-modal pretrained models, enabling efficient, post-hoc disentanglement of multi-modal representations.",
+      "authors": [
+        "Viktoria Schuster",
+        "Sana Tonekaboni",
+        "Caroline Uhler"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-11T12:30:19+00:00",
+      "link": "https://arxiv.org/pdf/2608.10857v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "intrinsic dimension estimation for multimodal representation learning",
+      "llm_evidence_cn": "面向多模态表示学习的内在维度估计",
+      "llm_evidence": "面向多模态表示学习的内在维度估计",
+      "canonical_evidence": "面向多模态表示学习的内在维度估计",
+      "llm_tldr_en": "Introduces FiGuRO, a fidelity-guided rank optimization framework for estimating intrinsic dimension of uni- and multi-modal data, improving representation learning with low-rank projections.",
+      "llm_tldr_cn": "现有内在维度估计方法多为静态或单模态，难以适应多模态表示学习需求。本文提出FiGuRO框架，利用截断奇异值分解学习低秩投影维度，并在模型容量与超参数约束下自适应调整维度。实验表明该方法能有效估计多模态数据的内在维度，为高效可解释的表示学习提供支撑。",
+      "llm_tldr": "现有内在维度估计方法多为静态或单模态，难以适应多模态表示学习需求。本文提出FiGuRO框架，利用截断奇异值分解学习低秩投影维度，并在模型容量与超参数约束下自适应调整维度。实验表明该方法能有效估计多模态数据的内在维度，为高效可解释的表示学习提供支撑。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.10720v1",
+      "source": "arxiv",
+      "title": "Ex-Omni-2D: Expressive Omni-Modal Dialogue Models with Native Visual Presence",
+      "abstract": "Omni-modal dialogue models can understand multimodal inputs and synthesize spoken replies, yet their responses remain visually disembodied. We introduce \\textbf{Ex-Omni-2D}, an omni-modal dialogue framework that generates a coordinated response comprising text, personalized speech, and reference-conditioned video. Given a multimodal query, reference image, and reference audio, the model predicts a structured \\textit{Visual Thought Plan} (VTP) describing scene, emotion, and motion, followed by response text and native multi-codebook speech units. These units form a shared acoustic-temporal interface: they are decoded into speech and aligned online with video frames. This interface enables the response and avatar pathways to be learned from heterogeneous speech, dialogue, and avatar-video data, avoiding the need for large-scale query--text--speech--video supervision. A full-sequence Video Generator serves as the primary Teacher. For efficient incremental generation, we further distill it into a few-step block-causal \\emph{Streaming Student} whose Prefix Streaming mechanism carries a clean latent across consecutive chunks to reduce cumulative late-chunk degradation. With four-step inference, the complete four-GPU pipeline achieves an end-to-end RTF of 1.293 at $400\\times720$/$720\\times400$, providing a practical quality--efficiency operating point.",
+      "authors": [
+        "Haoyu Zhang",
+        "Zhipeng Li",
+        "Xiaoying Tang",
+        "Tianshu Yu",
+        "Yiwen Guo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-08-11T09:37:11+00:00",
+      "link": "https://arxiv.org/pdf/2608.10720v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "omni-modal dialogue combining text, speech and video via shared acoustic-temporal interface",
+      "llm_evidence_cn": "通过共享声学-时间接口结合文本、语音和视频的全模态对话",
+      "llm_evidence": "通过共享声学-时间接口结合文本、语音和视频的全模态对话",
+      "canonical_evidence": "通过共享声学-时间接口结合文本、语音和视频的全模态对话",
+      "llm_tldr_en": "Omni-modal dialogue models produce speech but lack visual presence. Ex-Omni-2D generates coordinated text, personalized speech and reference-conditioned video via a Visual Thought Plan and shared acoustic-temporal interface, enabling native avatar presence.",
+      "llm_tldr_cn": "现有全模态对话模型虽能理解多模态输入并合成语音回复，但输出缺乏视觉呈现。为此提出Ex-Omni-2D框架，预测结构化视觉思维计划(VTP)描述场景、情感和运动，进而生成由文本、个性化语音和参考条件视频组成的协调响应。通过共享的多码本语音单元接口，语音与视频帧在线对齐，使响应和虚拟形象路径能够从异构标注中联合学习。实验表明该框架成功实现带原生视觉呈现的全模态对话，显著提升交互表现力。",
+      "llm_tldr": "现有全模态对话模型虽能理解多模态输入并合成语音回复，但输出缺乏视觉呈现。为此提出Ex-Omni-2D框架，预测结构化视觉思维计划(VTP)描述场景、情感和运动，进而生成由文本、个性化语音和参考条件视频组成的协调响应。通过共享的多码本语音单元接口，语音与视频帧在线对齐，使响应和虚拟形象路径能够从异构标注中联合学习。实验表明该框架成功实现带原生视觉呈现的全模态对话，显著提升交互表现力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.12677v1",
+      "source": "arxiv",
+      "title": "The Role of Natural Language Understanding in Multimodal Video-Based Dengue Diagnosis",
+      "abstract": "Detecting infection-related behavioral changes in mosquitoes from video data is challenging because mosquitoes are small, move rapidly and irregularly, and are affected by environmental factors such as background, lighting, and shadows, which can make reliable feature extraction difficult. In this study, a YOLO- and Contrastive Language-Image Pre-training (CLIP)-based vision-language framework is proposed to classify mosquito flight frames of uninfected and Dengue virus serotype 2 (DENV2)-infected mosquitoes. First, YOLO is used to isolate mosquito regions from the background. Then, visual features extracted from video frames are aligned with biologically meaningful textual prompts in a shared embedding space. The multimodal model was fine-tuned using supervised bidirectional contrastive learning and evaluated through frame-level image-text similarity-based classification. The results show that the proposed method achieved 98.54% accuracy and 99.91% sensitivity at the frame level. After temporal aggregation of frame-level information, the model achieved complete video-level performance. The ablation results showed that fine-tuning and CLIP-based representations were essential for this domain, while the textual branch provided semantic image-text alignment rather than an accuracy advantage over the vision-only model. These findings suggest that vision-language models can provide a useful framework for analyzing infection-related biological behaviors from video data.",
+      "authors": [
+        "Danial Sharifrazi",
+        "Saadat Behzadi",
+        "Julakha Jahan Jui",
+        "Mojtaba Mohammadi",
+        "Nouman Javed",
+        "Roohallah Alizadehsani",
+        "Prasad N. Paradkar",
+        "Asim Bhatti"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-08-13T00:27:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.12677v1",
+      "tags": [
+        "keyword:MRE",
+        "query:MRE"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "CLIP-based cross-modal alignment between video frames and text prompts",
+      "llm_evidence_cn": "基于CLIP的视频帧与文本提示词之间的跨模态对齐",
+      "llm_evidence": "基于CLIP的视频帧与文本提示词之间的跨模态对齐",
+      "canonical_evidence": "基于CLIP的视频帧与文本提示词之间的跨模态对齐",
+      "llm_tldr_en": "This work proposes a YOLO and CLIP based vision-language framework for classifying dengue infected mosquito flight videos. Visual features are aligned with textual prompts in a shared embedding space, demonstrating that natural language understanding supports multimodal medical diagnosis.",
+      "llm_tldr_cn": "针对蚊子飞行视频中登革热感染行为检测困难的问题，本文提出基于YOLO和CLIP的视觉-语言框架。该方法先用YOLO分离蚊虫区域，再将视频帧视觉特征与生物医学文本提示在共享嵌入空间中对齐，以区分未感染与感染DENV2的蚊子。在真实视频数据上的验证表明，多模态对齐显著提升诊断性能，验证了自然语言理解在医学视频多模态分类中的关键作用。",
+      "llm_tldr": "针对蚊子飞行视频中登革热感染行为检测困难的问题，本文提出基于YOLO和CLIP的视觉-语言框架。该方法先用YOLO分离蚊虫区域，再将视频帧视觉特征与生物医学文本提示在共享嵌入空间中对齐，以区分未感染与感染DENV2的蚊子。在真实视频数据上的验证表明，多模态对齐显著提升诊断性能，验证了自然语言理解在医学视频多模态分类中的关键作用。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.11681v1",
+      "source": "arxiv",
+      "title": "Learning from Multimodal Pseudo-Labels for Robust Open-Vocabulary Instance and Panoptic Segmentation",
+      "abstract": "This work addresses the challenge of open-vocabulary instance segmentation (OVIS) and open-set panoptic segmentation (OSPS), which aim to recognize both predefined and unseen object categories without exhaustive human annotations. Existing methods often suffer from noisy pseudo-masks, limited visual-textual grounding, and difficulty handling synonyms or out-of-vocabulary (OOV) words. To overcome these challenges, we propose a multimodal framework that leverages pre-trained vision-language models for automatic pseudo-label generation, CLIP-guided synonym filtering, and GPT-based caption reconstruction. In our target-vocabulary-assisted pseudo-labeling setting, the framework first constructs pseudo segmentation masks, descriptive captions, and semantically aligned synonym sets using Grounded SAM, LLaVA, and CLIP, providing multimodal supervision without manual annotation. We then enhance visual-textual alignment through three complementary training objectives: an extended grounding loss that incorporates visually grounded synonyms, a semantic consistency loss, and a generative caption reconstruction loss. Extensive experiments on the COCO dataset demonstrate that the proposed method consistently outperforms previous state-of-the-art approaches under this protocol, achieving substantial improvements on both OVIS and OSPS benchmarks.",
+      "authors": [
+        "Duy Tran Thanh",
+        "Yeejin Lee",
+        "Byeongkeun Kang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM"
+      ],
+      "published": "2026-08-12T05:39:57+00:00",
+      "link": "https://arxiv.org/pdf/2608.11681v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "vision-language alignment via CLIP-guided pseudo-labeling for segmentation",
+      "llm_evidence_cn": "通过CLIP引导的伪标签实现视觉-语言对齐用于分割",
+      "llm_evidence": "通过CLIP引导的伪标签实现视觉-语言对齐用于分割",
+      "canonical_evidence": "通过CLIP引导的伪标签实现视觉-语言对齐用于分割",
+      "llm_tldr_en": "Multimodal framework using VLMs for pseudo-label generation, CLIP synonym filtering, and GPT caption reconstruction to improve open-vocabulary segmentation.",
+      "llm_tldr_cn": "开放词汇分割面临伪掩码噪声和视觉-文本对齐不足等问题。本文提出多模态框架，利用预训练视觉语言模型自动生成伪标签，通过CLIP过滤同义词，并使用GPT重建描述。在目标词汇辅助的伪标签设置下，框架构建伪分割掩码并改善对未见类别的识别。实验表明该方法能有效提升开放词汇实例与全景分割的鲁棒性，减少对大量人工标注的依赖。",
+      "llm_tldr": "开放词汇分割面临伪掩码噪声和视觉-文本对齐不足等问题。本文提出多模态框架，利用预训练视觉语言模型自动生成伪标签，通过CLIP过滤同义词，并使用GPT重建描述。在目标词汇辅助的伪标签设置下，框架构建伪分割掩码并改善对未见类别的识别。实验表明该方法能有效提升开放词汇实例与全景分割的鲁棒性，减少对大量人工标注的依赖。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
