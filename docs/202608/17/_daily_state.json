@@ -1,0 +1,233 @@
+{
+  "date": "20260817",
+  "date_label": "",
+  "generated_at": "2026-08-17 20:57:12 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.12746v1",
+      "route": "202608/17/2608.12746v1-dual-stream-cross-anchor-correction-grounding-long-form-captions-and-the-domain-limits-of-object-level-anchors",
+      "title": "Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过将对象级视觉锚点注入语言模型微调实现视觉与语言的跨模态对齐",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.13741v1",
+      "route": "202608/17/2608.13741v1-gala-generation-aware-cross-modal-alignment-for-text-to-time-series-synthesis",
+      "title": "GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "文本与时间序列编码器之间的对比跨模态对齐",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.13911v1",
+      "route": "202608/17/2608.13911v1-medmix-specialization-consistent-federated-sparse-moes-under-modality-heterogeneity",
+      "title": "MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "处理联邦多模态学习中客户端和样本层级的模态异构性，属于模态不平衡问题",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.14355v1",
+      "route": "202608/17/2608.14355v1-disentangled-shared-representations-improve-morpho-transcriptomic-integration",
+      "title": "Disentangled Shared Representations Improve Morpho-Transcriptomic Integration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "解缠共享与私有隐成分以对齐跨模态表征",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.13861v1",
+      "route": "202608/17/2608.13861v1-xsa-mad-cross-modal-semantic-alignment-for-morphing-attack-detection",
+      "title": "XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于CLIP的跨模态语义对齐用于形变攻击检测",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.13891v1",
+      "route": "202608/17/2608.13891v1-depressionagent-reading-listening-seeing-and-deliberating-multimodal-evidence-for-depression-risk-assessment",
+      "title": "DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "以证据为中心的多模态融合用于临床风险评估",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.13973v1",
+      "route": "202608/17/2608.13973v1-rethinking-auxiliary-modalities-in-multimodal-zero-shot-anomaly-detection-from-semantic-fusion-to-conditional-modulation",
+      "title": "Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "辅助条件调制用于多模态异常检测",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.14029v1",
+      "route": "202608/17/2608.14029v1-s2dialog-multimodal-dialogue-retrieval-with-semantic-and-acoustic-style-modeling",
+      "title": "S2Dialog: Multimodal Dialogue Retrieval with Semantic and Acoustic-Style Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "结合文本语义与声学风格特征的多模态对话检索",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.09529v1",
+      "route": "202608/17/2608.09529v1-towards-expressive-and-faithful-audio-to-image-generation-a-unified-multimodal-dataset-and-synthesis-framework",
+      "title": "Towards Expressive and Faithful Audio-to-Image Generation: A Unified Multimodal Dataset and Synthesis Framework",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向音频到图像生成的统一多模态数据集与跨模态对齐",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.09931v1",
+      "route": "202608/17/2608.09931v1-perception-before-supervision-self-contained-visual-distillation-from-counterfactual-blind-spots",
+      "title": "Perception Before Supervision: Self-Contained Visual Distillation from Counterfactual Blind Spots",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过稠密token级视觉自蒸馏改进多模态大模型的视觉表征",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.10489v1",
+      "route": "202608/17/2608.10489v1-when-vision-becomes-text-visual-token-pruning-via-cross-modal-residual-guidance-in-vlms",
+      "title": "When Vision Becomes Text: Visual Token Pruning via Cross-Modal Residual Guidance in VLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于跨模态残差引导的视觉标记剪枝方法",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.10497v1",
+      "route": "202608/17/2608.10497v1-sapiensid-20-aligning-human-recognition-foundation-models-with-human-perception",
+      "title": "SapiensID 2.0: Aligning Human Recognition Foundation Models with Human Perception",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "从多模态大语言模型迁移零样本语义知识到判别嵌入空间，增强视觉识别与人类感知的对齐",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.12987v1",
+      "route": "202608/17/2608.12987v1-generative-universal-multimodal-retrieval-with-dual-role-identifiers",
+      "title": "Generative Universal Multimodal Retrieval with Dual-role Identifiers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向文本、图像及混合图文项的统一生成式多模态检索",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    },
+    {
+      "paper_id": "2608.14152v1",
+      "route": "202608/17/2608.14152v1-towards-efficient-multimodal-and-multilingual-opinion-extraction-for-sti-a-qlora-based-fine-tuning-approach",
+      "title": "Towards Efficient Multimodal and Multilingual Opinion Extraction for STI: A QLoRA-Based Fine-Tuning Approach",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以视觉证据为上下文锚点的多模态核心观点抽取框架",
+      "first_seen_at": "2026-08-17 20:57:12 UTC",
+      "updated_at": "2026-08-17 20:57:12 UTC"
+    }
+  ]
+}

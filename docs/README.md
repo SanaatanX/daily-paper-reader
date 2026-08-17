@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-16</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-17</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 14 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-16 20:42:25 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-17 20:57:12 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读14篇，精读2篇聚焦多模态推荐与检索，速读3篇覆盖特征发现、情感识别与动作对齐。</p>
-<p>最值得看的是《TimeRoute》的时间感知路由与扩散推荐，以及 Frontier LLMs 与原生多模态嵌入在硬负样本检索上的对比结论。</p>
-<p>建议优先精读这两篇高分论文，速读部分可重点关注多模态特征发现与模型内部机制方向。</p>
+<p>今日精读14篇大模型中，双流跨锚点校正与文本到时间序列生成两篇最值得深读；速读中多模态抑郁风险评估与异常检测也具参考价值。</p>
+<p>精读方向聚焦于长字幕与跨模态对齐的边界突破，速读则覆盖安全检测和情感计算等偏应用场景。</p>
+<p>建议优先浏览两篇8.0分论文的结论部分，并留意多模态异常检测中的条件调制思路。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation">TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Can Frontier LLMs Match Natively Multimodal Embeddings? A Comparison on Hard-Negative Text-to-Image Retrieval">Can Frontier LLMs Match Natively Multimodal Embeddings? A Comparison on Hard-Negative Text-to-Image Retrieval</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors">Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors</span></li><li><span class="dpr-home-dashboard-paper-title" title="GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis">GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis</span></li><li><span class="dpr-home-dashboard-paper-title" title="MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity">MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>4</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">10 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Model Diffing for Feature Discovery and Control">Multimodal Model Diffing for Feature Discovery and Control</span></li><li><span class="dpr-home-dashboard-paper-title" title="Rationale-Guided Learning for Multimodal Emotion Recognition">Rationale-Guided Learning for Multimodal Emotion Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Lost in Reconstruction: Aligning Action Representations with Language in Vision-Language-Action Models">Lost in Reconstruction: Aligning Action Representations with Language in Vision-Language-Action Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection">XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment">DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment</span></li><li><span class="dpr-home-dashboard-paper-title" title="Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation">Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span></div>
 </section>
 </div>
 

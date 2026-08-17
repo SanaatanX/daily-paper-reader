@@ -1,0 +1,579 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-17T20:46:07.735824+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 4,
+    "deep_cap": 7,
+    "deep_selected": 4,
+    "quick_candidates": 10,
+    "quick_skim_target": 12,
+    "quick_selected": 10
+  },
+  "deep_dive": [
+    {
+      "id": "2608.12746v1",
+      "source": "arxiv",
+      "title": "Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors",
+      "abstract": "Object hallucination in multimodal large language models arises when language priors and corpus co-occurrence bias outweigh the visual evidence, with nothing tying an individual object mention to what the image shows. Most remedies intervene at decoding time without training, yet under a unified protocol their benefit is confined to short captions;supervised fine-tuning (SFT) on a detail- rich corpus lengthens captions, but over forty percent still name absent objects. This paper proposes Dual-Stream Cross-Anchor Correction (DSCC). Unlike work that post-processes decoding, DSCC is the first to inject object-level visual anchors into the language model itself during fine- tuning: a perception stream aligns object-level hidden states at an intermediate layer to frozen text anchors by a bidirectional contrastive objective; a cognition stream lets deeper layers query those anchors by cross-attention at every generation step; and a two-stage curriculum gate couplesthem, making evidence retrieval a structural constraint at each autoregressive step. Under one backbone and one scoring protocol, experiments span long-caption hallucination, object-existence discrimination and cross-domain generalisation, with vanilla SFT on the same corpus and schedule as a length- and density-matched control, so gains are attributed layer by layer. DSCC is the only method reaching the long-caption, low-hallucination region: captions roughly 1.9 times the baseline length at 88.19% precision per object mention, the highest under a density-independent criterion. Ablations expose a synergy: the perception stream alone degrades precision yet reverses sign when stacked on the cognition stream. No universal superiority is claimed: three out-of- domain benchmarks yield a predictable, falsifiable domain-conditionality, the synergy being bound to the anchors' semantic domain and breaking on charts and optical illusions.",
+      "authors": [
+        "LingKai Bu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-08-13T02:52:58+00:00",
+      "link": "https://arxiv.org/pdf/2608.12746v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "cross-modal alignment by injecting object-level visual anchors into language model fine-tuning",
+      "llm_evidence_cn": "通过将对象级视觉锚点注入语言模型微调实现视觉与语言的跨模态对齐",
+      "llm_evidence": "通过将对象级视觉锚点注入语言模型微调实现视觉与语言的跨模态对齐",
+      "canonical_evidence": "通过将对象级视觉锚点注入语言模型微调实现视觉与语言的跨模态对齐",
+      "llm_tldr_en": "Proposes Dual-Stream Cross-Anchor Correction (DSCC) that injects object-level visual anchors into the LLM during fine-tuning, aligning perception and language streams to reduce object hallucination in long-form captions.",
+      "llm_tldr_cn": "针对多模态大模型在长描述中常见对象幻觉、语言先验压过视觉证据的问题，本文提出双流跨锚点校正（DSCC）。该方法首次在微调阶段将对象级视觉锚点注入语言模型，通过感知流与语言流的交叉对齐，使生成的每个对象提及都有图像证据支撑。实验表明，相对于解码期干预和普通SFT，DSCC可显著降低长字幕中的对象幻觉，并讨论了对象级锚点在不同领域的适用边界。这一工作为多模态模型中的视觉-语言表征对齐提供了新思路。",
+      "llm_tldr": "针对多模态大模型在长描述中常见对象幻觉、语言先验压过视觉证据的问题，本文提出双流跨锚点校正（DSCC）。该方法首次在微调阶段将对象级视觉锚点注入语言模型，通过感知流与语言流的交叉对齐，使生成的每个对象提及都有图像证据支撑。实验表明，相对于解码期干预和普通SFT，DSCC可显著降低长字幕中的对象幻觉，并讨论了对象级锚点在不同领域的适用边界。这一工作为多模态模型中的视觉-语言表征对齐提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.13741v1",
+      "source": "arxiv",
+      "title": "GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis",
+      "abstract": "Synthesizing time series from natural language is emerging as the most expressive form of controllable time series generation. However, existing text-conditioned generators either take caption embeddings frozen from off-the-shelf text encoders, or adapt the encoder end-to-end, letting the denoising loss shape the embeddings only as a by-product. In either case, the conditioning representation is never deliberately matched to the signal modality, leaving it ill-suited to guide generation. We address this by introducing GALA: Generation-Aware cross-modaL Alignment for text conditional time series generation. GALA is a two-stage approach that first contrastively couples a pretrained text encoder with a time-series foundation model into a shared embedding space with both encoders adapted to generation by an auxiliary generative loss, and then freezes the resulting caption embedding to drive a flow-matching generator. On TSFragment-600K, spanning four domains and three fragment lengths, GALA sets a new state of the art, ranking first in 30 of 36 metric columns and reaching an average rank of 1.08/1.08/1.42 at lengths 24/48/96 against 1.92/2.00/1.75 for the strongest baseline. We further find that generator-internal text encoders force a trade-off between fidelity and caption adherence, whereas conditioning on the aligned embedding breaks it: FID, CTTP, and JFTSD all improve at once. Ablating the auxiliary loss degrades FID, CTTP and JFTSD together, it indicates the generative term is a necessary component of the alignment rather than an add-on.",
+      "authors": [
+        "Haochen Zhang",
+        "Gengwei Zhang",
+        "Laura Yao",
+        "Nicholas Knoz",
+        "Tianlong Chen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-13T19:57:07+00:00",
+      "link": "https://arxiv.org/pdf/2608.13741v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Contrastive cross-modal alignment between text and time-series encoders",
+      "llm_evidence_cn": "文本与时间序列编码器之间的对比跨模态对齐",
+      "llm_evidence": "文本与时间序列编码器之间的对比跨模态对齐",
+      "canonical_evidence": "文本与时间序列编码器之间的对比跨模态对齐",
+      "llm_tldr_en": "Proposes GALA, a generation-aware cross-modal alignment method that contrastively couples a pretrained text encoder with a time-series foundation model, improving text-conditional time-series synthesis.",
+      "llm_tldr_cn": "GALA针对文本条件时间序列生成中条件表示与信号模态不匹配的问题，提出两阶段生成感知跨模态对齐方法：先通过对比学习将预训练文本编码器与时间序列基础模型耦合到共享嵌入空间。实验表明该方法能更好地引导生成过程，提升文本到时间序列合成的质量。其核心思想可迁移到其他跨模态表示学习任务。",
+      "llm_tldr": "GALA针对文本条件时间序列生成中条件表示与信号模态不匹配的问题，提出两阶段生成感知跨模态对齐方法：先通过对比学习将预训练文本编码器与时间序列基础模型耦合到共享嵌入空间。实验表明该方法能更好地引导生成过程，提升文本到时间序列合成的质量。其核心思想可迁移到其他跨模态表示学习任务。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.13911v1",
+      "source": "arxiv",
+      "title": "MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity",
+      "abstract": "Federated multimodal medical AI faces modality heterogeneity at both the client and sample levels: clients may systematically lack access to specific modality types, while individual records within the same client may contain different partial modality subsets. Sparse Mixture-of-Experts (MoE) architectures are a promising remedy for modality-adaptive computation, but their use in federated learning is fragile under cross-client modality heterogeneity, where locally learned routing policies can diverge across clients and drive experts toward incompatible specializations. Different clients may assign the same observed modality configuration to different experts, or train similarly indexed experts on different missing-modality configurations, causing standard aggregation to misalign or overwrite the expert specialization that sparse MoEs are intended to learn. To address this challenge, we propose MedMix, a semantic-alignment framework for federated multimodal sparse MoEs that coordinates cross-client routing and expert specialization using modality context. At the client side, MedMix uses modality-context-aware routing to guide expert selection using each token's modality identity, position, and incompleteness context. Across clients, it uses consensus-guided routing alignment to construct server-side consensus anchors for shared modality patterns and align local routing distributions across clients. Complementing these routing mechanisms, client-adaptive expert aggregation leverages client-specific modality-pattern prototypes to match and aggregate functionally similar experts across clients. Experiments on real-world multimodal medical datasets show that MedMix achieves the best average F1 across diverse modality heterogeneity and modality incompleteness settings, with especially clear gains under severe heterogeneity.",
+      "authors": [
+        "Adiba Orzikulova",
+        "Dong Min Kim",
+        "Jaehong Yoon",
+        "Sung-Ju Lee"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-14T03:30:33+00:00",
+      "link": "https://arxiv.org/pdf/2608.13911v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "addresses modality heterogeneity at client and sample levels in federated multimodal learning",
+      "llm_evidence_cn": "处理联邦多模态学习中客户端和样本层级的模态异构性，属于模态不平衡问题",
+      "llm_evidence": "处理联邦多模态学习中客户端和样本层级的模态异构性，属于模态不平衡问题",
+      "canonical_evidence": "处理联邦多模态学习中客户端和样本层级的模态异构性，属于模态不平衡问题",
+      "llm_tldr_en": "MedMix proposes specialization-consistent regularization for federated sparse MoE under modality heterogeneity, preventing clients' routing policies from diverging and keeping expert specializations compatible.",
+      "llm_tldr_cn": "联邦多模态医疗AI面临客户端和样本级的模态异质性，客户端可能缺失特定模态，样本也可能拥有不同模态子集，导致稀疏专家模型的路由策略在客户端间分歧。本文提出MedMix，通过特化一致性约束使各客户端的路由决策和专家特化保持一致，避免相似专家在不同模态配置下学习冲突。实验验证该方法在模态高度异质的联邦多模态任务中能稳定训练并提升性能，为模态不平衡下的分布式多模态学习提供了可靠方案。",
+      "llm_tldr": "联邦多模态医疗AI面临客户端和样本级的模态异质性，客户端可能缺失特定模态，样本也可能拥有不同模态子集，导致稀疏专家模型的路由策略在客户端间分歧。本文提出MedMix，通过特化一致性约束使各客户端的路由决策和专家特化保持一致，避免相似专家在不同模态配置下学习冲突。实验验证该方法在模态高度异质的联邦多模态任务中能稳定训练并提升性能，为模态不平衡下的分布式多模态学习提供了可靠方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.14355v1",
+      "source": "arxiv",
+      "title": "Disentangled Shared Representations Improve Morpho-Transcriptomic Integration",
+      "abstract": "Spatial transcriptomics (ST) enables the simultaneous profiling of gene expression and tissue morphology, creating an opportunity to learn multimodal representations capturing shared morpho-transcriptomic structure. However, standard multimodal models often compress modalities into a common latent space without explicitly separating shared and modality-specific sources of variation, which may limit downstream utility. We investigate whether explicit disentanglement of shared and private latent components improves multimodal representation learning for paired Hematoxylin \\& Eosin (H\\&E) and ST data. We compare VAE-based and contrastive approaches, each in standard and disentangled variants, across two cancer cohorts under matched experimental conditions. Representations are evaluated using cross-modal reconstruction, downstream probing and cross-modal probe transfer. The experiments suggest two main trends. First, contrastive objectives yield higher downstream probing performance than VAE-based models. Second, disentangled variants improve the selected reconstruction and probing metrics, although the gains depend on the model family, task, direction, and disentanglement strength. Overall, our results suggest that explicitly factorizing shared and modality-specific information can improve multimodal representation learning for spatial transcriptomics and provides a useful evaluation framework for future foundation models.",
+      "authors": [
+        "Julian Ostermaier",
+        "Swann Ruyter",
+        "Reuben Dorent",
+        "Daniel Racoceanu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T14:56:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.14355v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "disentangled shared and private latent components for cross-modal alignment representation learning",
+      "llm_evidence_cn": "解缠共享与私有隐成分以对齐跨模态表征",
+      "llm_evidence": "解缠共享与私有隐成分以对齐跨模态表征",
+      "canonical_evidence": "解缠共享与私有隐成分以对齐跨模态表征",
+      "llm_tldr_en": "Investigates whether disentangled shared and private latent components improve multimodal representation learning for paired histology and spatial transcriptomics, comparing VAE and contrastive variants.",
+      "llm_tldr_cn": "标准多模态模型将各模态压缩进共同隐空间，未显式分离共享与特有变异，限制下游效果。本文在配对组织学与空间转录组数据上研究解缠共享/私有隐成分的作用，比较标准与解缠的VAE和对比方法。两个癌症队列的实验显示，解缠共享表征能提升多模态整合质量。该工作为多模态表征学习提供了解缠设计原则，证明分离共享与特异信息有实际收益。",
+      "llm_tldr": "标准多模态模型将各模态压缩进共同隐空间，未显式分离共享与特有变异，限制下游效果。本文在配对组织学与空间转录组数据上研究解缠共享/私有隐成分的作用，比较标准与解缠的VAE和对比方法。两个癌症队列的实验显示，解缠共享表征能提升多模态整合质量。该工作为多模态表征学习提供了解缠设计原则，证明分离共享与特异信息有实际收益。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.13861v1",
+      "source": "arxiv",
+      "title": "XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection",
+      "abstract": "Morphing attacks pose a serious threat to face recognition systems. However, existing image-based morphing attack detection (MAD) methods often generalize poorly to unseen generation techniques because they rely solely on visual cues. We propose XSA-MAD, a CLIP-based multimodal framework that explicitly models semantic inconsistencies between bona-fide and morphed faces. Morphing concepts are decomposed into four interpretable attributes, including identity, facial geometry, texture, and consistency, and are encoded as structured and attribute-aware textual representations. The image encoder is progressively aligned with this discriminative textual space, resulting in a unified semantic representation that captures generation-invariant and concept-level discrepancies between bona-fide and morph images. Experiments on MAD22 and MorDIFF, following training on SMDD, demonstrate strong generalization across diverse morphing principles. In particular, XSA-MAD achieves an equal error rate of 2.92% on GAN-based morphs and consistently outperforms existing methods under high-fidelity generative attacks.",
+      "authors": [
+        "Jie Jin",
+        "Mahiro Tokumasu",
+        "Yu Makino",
+        "Masakatsu Nishigaki",
+        "Tetsushi Ohki"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-14T01:16:43+00:00",
+      "link": "https://arxiv.org/pdf/2608.13861v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "CLIP-based cross-modal semantic alignment for morphing attack detection",
+      "llm_evidence_cn": "基于CLIP的跨模态语义对齐用于形变攻击检测",
+      "llm_evidence": "基于CLIP的跨模态语义对齐用于形变攻击检测",
+      "canonical_evidence": "基于CLIP的跨模态语义对齐用于形变攻击检测",
+      "llm_tldr_en": "Proposes XSA-MAD, a CLIP-based multimodal framework that aligns image encoder with textual representations of morphing attributes for robust morphing attack detection.",
+      "llm_tldr_cn": "图像形变攻击检测常因仅依赖视觉线索而对未知生成方式泛化差。提出XSA-MAD，基于CLIP框架显式建模真实人脸与形变人脸之间的语义不一致性，将形变概念分解为身份、几何、纹理和一致性四种属性，并编码为结构化文本表示。图像编码器逐步对齐该文本空间，从而获得生成不变的概念级语义，显著提升检测泛化能力。",
+      "llm_tldr": "图像形变攻击检测常因仅依赖视觉线索而对未知生成方式泛化差。提出XSA-MAD，基于CLIP框架显式建模真实人脸与形变人脸之间的语义不一致性，将形变概念分解为身份、几何、纹理和一致性四种属性，并编码为结构化文本表示。图像编码器逐步对齐该文本空间，从而获得生成不变的概念级语义，显著提升检测泛化能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09529v1",
+      "source": "arxiv",
+      "title": "Towards Expressive and Faithful Audio-to-Image Generation: A Unified Multimodal Dataset and Synthesis Framework",
+      "abstract": "As an important subfield of cross-modal generation, synthesizing static visual content in the form of images from audio, namely audio-to-image (A2I) generation, has attracted increasing research attention in recent years. Nevertheless, despite the remarkable visual quality of modern text-to-image (T2I) models, the performance of A2I remains fundamentally limited by traditional datasets, which often lack both high-fidelity images and precise cross-modal alignment. As a result, existing methods still struggle to achieve high-quality audio-to-image generation through finetuning strong T2I models, thereby constraining practical applications in this area. Motivated by this gap, we introduce A2I-Set, a unified, high-quality tri-modal dataset consisting of 323K paired audio, images, and detailed text captions, specifically designed for audio-visual research, including audio-conditioned image generation. Besides, we developed a new mixed-source test set for the A2I task through human supervision. We further propose an A2I model, AudioCanvas, fine-tuned on our A2I-Set. Experiments show that AudioCanvas achieves more visually expressive as well as cross-modal alignment results that generally outperforming existing approaches. Our dataset and source code are available at https://github.com/gdx012/A2I-Generation.",
+      "authors": [
+        "Dongxu Ge",
+        "Shansong Liu",
+        "Cheng Gong",
+        "Xiao-Lei Zhang",
+        "Chi Zhang",
+        "Xuelong Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-10T12:31:16+00:00",
+      "link": "https://arxiv.org/pdf/2608.09529v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified multimodal dataset and cross-modal alignment for audio-to-image generation",
+      "llm_evidence_cn": "面向音频到图像生成的统一多模态数据集与跨模态对齐",
+      "llm_evidence": "面向音频到图像生成的统一多模态数据集与跨模态对齐",
+      "canonical_evidence": "面向音频到图像生成的统一多模态数据集与跨模态对齐",
+      "llm_tldr_en": "This paper introduces A2I-Set, a unified multimodal dataset and synthesis framework for expressive and faithful audio-to-image generation, addressing the lack of high-fidelity images and precise cross-modal alignment in existing datasets.",
+      "llm_tldr_cn": "音频到图像生成长期受限于传统数据集缺乏高保真图像和精确跨模态对齐。针对该问题，该论文提出统一的高质量多模态数据集A2I-Set及配套合成框架，通过细粒度对齐音频与视觉内容来增强跨模态生成的一致性与表现力。多项生成任务上的实验验证了方法的有效性，为跨模态对齐与多模态生成研究提供了新的数据基座和方法思路。",
+      "llm_tldr": "音频到图像生成长期受限于传统数据集缺乏高保真图像和精确跨模态对齐。针对该问题，该论文提出统一的高质量多模态数据集A2I-Set及配套合成框架，通过细粒度对齐音频与视觉内容来增强跨模态生成的一致性与表现力。多项生成任务上的实验验证了方法的有效性，为跨模态对齐与多模态生成研究提供了新的数据基座和方法思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.13891v1",
+      "source": "arxiv",
+      "title": "DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment",
+      "abstract": "Multimodal depression risk assessment requires jointly interpreting textual, acoustic, and visual cues that are often subtle, non-specific, context-dependent, and potentially inconsistent across modalities. Existing multimodal approaches predominantly learn latent representations through feature fusion, leaving the evidence underlying a prediction and the treatment of cross-modal disagreement largely implicit. We propose DepressionAgent, an evidence-centric agentic framework that transforms multimodal depression assessment from implicit feature fusion into explicit evidence deliberation. DepressionAgent first converts textual, acoustic, and visual inputs into modality-specific evidence, and then organizes self-report and behavioral evidence into parallel support--challenge deliberation branches. Cross-modal arbitration explicitly examines agreement and disagreement between the two branches, with conflict reflection revisiting inconsistent assessments before decision making. A subsequent risk reflection mechanism provides an independent textual second opinion for initially low-risk cases to reduce potentially missed risk signals. Without depression-specific supervised training or parameter fine-tuning, DepressionAgent achieves competitive performance on multiple public benchmarks. Extensive ablations, cross-model evaluations, qualitative analyses, and clinician assessments further demonstrate the effectiveness and inspectability of the proposed framework.",
+      "authors": [
+        "Fangjie Zhu",
+        "Haifeng Lu",
+        "Sicheng Zhao",
+        "Runhao Zeng",
+        "Xiping Hu"
+      ],
+      "primary_category": "cs.HC",
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-08-14T02:44:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.13891v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Evidence-centric multimodal fusion for clinical risk assessment",
+      "llm_evidence_cn": "以证据为中心的多模态融合用于临床风险评估",
+      "llm_evidence": "以证据为中心的多模态融合用于临床风险评估",
+      "canonical_evidence": "以证据为中心的多模态融合用于临床风险评估",
+      "llm_tldr_en": "DepressionAgent transforms implicit feature fusion into explicit evidence deliberation for multimodal depression risk assessment, converting text, acoustic, and visual inputs into modality-specific evidence.",
+      "llm_tldr_cn": "多模态抑郁风险评估需综合文本、声学和视觉线索，而现有方法以隐式特征融合为主，证据和跨模态分歧难以解释。论文提出证据中心的智能体框架DepressionAgent，将各模态输入转为特定证据，再组织自省式审议，把隐式融合改为显式证据推理。该方法能显式处理跨模态不一致，提高评估的可解释性与可靠性，为多模态临床评估提供了新的证据驱动范式。",
+      "llm_tldr": "多模态抑郁风险评估需综合文本、声学和视觉线索，而现有方法以隐式特征融合为主，证据和跨模态分歧难以解释。论文提出证据中心的智能体框架DepressionAgent，将各模态输入转为特定证据，再组织自省式审议，把隐式融合改为显式证据推理。该方法能显式处理跨模态不一致，提高评估的可解释性与可靠性，为多模态临床评估提供了新的证据驱动范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.09931v1",
+      "source": "arxiv",
+      "title": "Perception Before Supervision: Self-Contained Visual Distillation from Counterfactual Blind Spots",
+      "abstract": "Self-improvement for multimodal large language models (MLLMs) is typically driven by reward-based methods that provide only coarse scalar feedback. Distillation offers a richer alternative through dense token-level supervision, but in the visual domain it usually depends on privileged context constructed using external annotations and tools, or stronger models. We introduce \\textbf{CVPD} (Contrastive Counterfactual Visual Process Distillation), which, to the best of our knowledge, is the first fully self-contained framework for dense, on-policy, token-level visual self-distillation for MLLMs. CVPD identifies visual blind spots where zooming into a region changes and sharpens the model's answer distribution, while removing the same region leaves the full-image behavior largely unchanged. Such regions reveal perceptual information that the model can encode but fails to consistently utilize under full-image conditioning. We propose a three-gate Counterfactual Criterion that identifies these regions directly from the model's own responses and converts them into dense contrastive supervision for self-distillation. On Qwen3-VL-8B-Instruct, CVPD outperforms six self-evolving baselines across twelve benchmarks, including methods that rely on external GPT-4o supervision, without a single regression. It achieves gains of $+3.60$ on OCRBench, $+3.38$ on MMStar Fine-Grained Perception, and $+3.08$ on MMStar Logical Reasoning, while maintaining or improving performance on broader multimodal benchmarks.",
+      "authors": [
+        "Shravan Venkatraman",
+        "Omkar Thawakar",
+        "Ritesh Thawkar",
+        "Abdelrahman Shaker",
+        "Rao Muhammad Anwer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-10T17:59:56+00:00",
+      "link": "https://arxiv.org/pdf/2608.09931v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "dense token-level visual self-distillation improves multimodal representation learning",
+      "llm_evidence_cn": "通过稠密token级视觉自蒸馏改进多模态大模型的视觉表征",
+      "llm_evidence": "通过稠密token级视觉自蒸馏改进多模态大模型的视觉表征",
+      "canonical_evidence": "通过稠密token级视觉自蒸馏改进多模态大模型的视觉表征",
+      "llm_tldr_en": "This paper presents CVPD, a self-contained visual process distillation method that distills dense token-level signals from counterfactual visual blind spots, improving multimodal LLM visual perception without external annotations.",
+      "llm_tldr_cn": "多模态大模型的自提升常依赖粗糙的奖励或外部标注的蒸馏。该论文提出CVPD，首个完全自包含的稠密token级视觉过程蒸馏框架：检测放大图像区域会改变并锐化答案分布的视觉盲点，并在这些盲点上进行对比反事实蒸馏。实验证明该方法能有效提升MLLM的视觉感知与推理能力，且无需额外标注或更强教师模型。",
+      "llm_tldr": "多模态大模型的自提升常依赖粗糙的奖励或外部标注的蒸馏。该论文提出CVPD，首个完全自包含的稠密token级视觉过程蒸馏框架：检测放大图像区域会改变并锐化答案分布的视觉盲点，并在这些盲点上进行对比反事实蒸馏。实验证明该方法能有效提升MLLM的视觉感知与推理能力，且无需额外标注或更强教师模型。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.13973v1",
+      "source": "arxiv",
+      "title": "Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation",
+      "abstract": "Recent foundation model-based methods have endowed RGB images with strong zero-shot anomaly detection (ZSAD) through vision-language pretraining. However, RGB observations alone remain limited in perceiving anomalies dominated by geometric deformation, depth variation, or subtle surface changes. Auxiliary modalities can provide complementary structural information, but existing multimodal methods typically fuse them directly into a shared semantic space, which may disturb the text-aligned anomaly semantics established by RGB foundation models and often requires modality-specific architectures. To address this issue, we propose a plug-and-play auxiliary-conditioned enhancement framework for zero-shot anomaly detection. Instead of reconstructing a joint multimodal anomaly semantic space, our framework preserves the original RGB image-text anomaly matching pathway and uses auxiliary observations as conditional signals for RGB feature refinement, allowing auxiliary modalities to seamlessly enhance existing RGB-based zero-shot anomaly detectors. Specifically, a lightweight meta-learning module takes global RGB and auxiliary representations as input and generates sample-adaptive low-rank residual updates to determine how RGB features should be refined. We further construct uncertainty-aware spatial modulation from the initial RGB anomaly response and auxiliary reliability, which determines where local residual updates are strengthened or suppressed. This global-to-local conditional modulation enables selective multimodal enhancement while preserving the original RGB anomaly semantics. Extensive experiments on MVTec 3D-AD and Eyecandies demonstrate that our framework consistently improves multiple popular RGB-based zero-shot anomaly detectors, achieving state-of-the-art performance for multimodal zero-shot anomaly detection.",
+      "authors": [
+        "Peng Wu",
+        "Xin Ge",
+        "Yujia Sun",
+        "Guansong Pang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-14T05:33:45+00:00",
+      "link": "https://arxiv.org/pdf/2608.13973v1",
+      "tags": [
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Auxiliary-conditioned modulation for multimodal anomaly detection",
+      "llm_evidence_cn": "辅助条件调制用于多模态异常检测",
+      "llm_evidence": "辅助条件调制用于多模态异常检测",
+      "canonical_evidence": "辅助条件调制用于多模态异常检测",
+      "llm_tldr_en": "Proposes plug-and-play auxiliary-conditioned enhancement for zero-shot anomaly detection, replacing direct semantic fusion with conditional modulation to preserve text-aligned RGB semantics and use complementary depth/structural cues.",
+      "llm_tldr_cn": "现有零样本异常检测方法将辅助模态直接融合进共享语义空间，容易干扰RGB基础模型已建立的文本对齐语义，且常需特定架构。论文提出即插即用的辅助条件增强框架，以条件调制取代直接语义融合，在不改动主模型的情况下利用深度等辅助信息。该方式保留了基础模型的语义对齐能力，并提升了几何形变与深度变化等异常场景下的检测性能，为多模态异常检测提供了更稳健的辅助模态使用思路。",
+      "llm_tldr": "现有零样本异常检测方法将辅助模态直接融合进共享语义空间，容易干扰RGB基础模型已建立的文本对齐语义，且常需特定架构。论文提出即插即用的辅助条件增强框架，以条件调制取代直接语义融合，在不改动主模型的情况下利用深度等辅助信息。该方式保留了基础模型的语义对齐能力，并提升了几何形变与深度变化等异常场景下的检测性能，为多模态异常检测提供了更稳健的辅助模态使用思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.10489v1",
+      "source": "arxiv",
+      "title": "When Vision Becomes Text: Visual Token Pruning via Cross-Modal Residual Guidance in VLMs",
+      "abstract": "Abundant visual information strengthens vision-language model (VLM) perception, yet massive visual tokens raise inference costs. Existing visual token pruning methods rely on similarity-based guidance, which exploits pairwise text-vision and vision-vision token correlations for compression. However, such methods only capture local layer-level signals and overlook the whole inference process in VLM. In this paper, we revisit VLM inference and present a new efficient guidance scheme that complements similarity-based guidance. In particular, we identify a key observation: as LLM layers deepen, text tokens continuously aggregate visual information via self-attention and progressively absorb partial visual content into textual representations. To quantify this phenomenon, we propose Cross Modal Absorption (CMA) from a geometric representation perspective to measure how much visual information is absorbed by text, revealing that more visual tokens in deeper layers can be approximately explained by the text subspace. We accordingly propose Cross Modal Residual (CMR). It projects visual tokens onto the text subspace via Tikhonov regularized least squares and exploits reconstruction residuals to quantify visual information that cannot be explained by text. Finally, based on CMR, we present SIEVE, a training-free visual token compression method that combines CMR, text-attention relevance, and residual-space diversity to retain task-relevant and complementary tokens. Experiments on diverse VLM architectures verify the effectiveness of SIEVE. For instance, on LLaVA-NeXT-7B, SIEVE keeps only $11.1\\%$ of visual tokens while preserving $97.5\\%$ of the original average performance, achieving $3.62\\times$ prefill speedup, $2.49\\times$ end-to-end speedup, and a $6.02\\times$ KV-cache reduction.",
+      "authors": [
+        "Congyang Ou",
+        "Ruike Song",
+        "Yang Zhou",
+        "Libo Sun",
+        "Haokui Zhang",
+        "Zhenbo Luo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-11T05:04:33+00:00",
+      "link": "https://arxiv.org/pdf/2608.10489v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal guidance for visual token pruning in VLMs",
+      "llm_evidence_cn": "基于跨模态残差引导的视觉标记剪枝方法",
+      "llm_evidence": "基于跨模态残差引导的视觉标记剪枝方法",
+      "canonical_evidence": "基于跨模态残差引导的视觉标记剪枝方法",
+      "llm_tldr_en": "Presents a cross-modal residual guidance scheme for visual token pruning in vision-language models, using the text tokens' progressive absorption of visual information during LLM layers to prune redundant visual tokens and reduce inference cost.",
+      "llm_tldr_cn": "针对视觉语言模型中大量视觉标记导致推理成本高的问题，提出跨模态残差引导的视觉标记剪枝方法，利用大语言模型层中文本标记逐步聚合视觉信息的现象来识别冗余视觉标记。实验表明该方法在保持感知能力的同时显著降低推理开销，是对基于相似度的剪枝方法的有效补充。",
+      "llm_tldr": "针对视觉语言模型中大量视觉标记导致推理成本高的问题，提出跨模态残差引导的视觉标记剪枝方法，利用大语言模型层中文本标记逐步聚合视觉信息的现象来识别冗余视觉标记。实验表明该方法在保持感知能力的同时显著降低推理开销，是对基于相似度的剪枝方法的有效补充。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.14029v1",
+      "source": "arxiv",
+      "title": "S2Dialog: Multimodal Dialogue Retrieval with Semantic and Acoustic-Style Modeling",
+      "abstract": "Multimodal dialogue retrieval aims to retrieve dialogues from multimodal dialogue banks that are similar to a target dialogue in terms of both textual semantics and acoustic conversational styles. Such dialogue-level retrieval is crucial for many dialogue-related tasks, including Emotion Recognition in Conversation, Spoken Dialogue Systems, and Conversational Speech Synthesis, where external dialogue examples can provide valuable semantic and stylistic references. However, existing retrieval methods are still largely limited to utterance-level or unimodal matching, and often fail to capture the global semantic coherence and stylistic consistency of an entire dialogue. To address this gap, we propose S2Dialog, a unified framework for dialogue-level semantic-style retrieval from multimodal dialogue banks. Specifically, S2Dialog consists of a Dialogue-level Textual Retriever and a Dialogue-level Acoustic Retriever, which encode the textual and acoustic modalities of a dialogue into dialogue-level representations, respectively. To further enhance multimodal retrieval, we introduce Dialogue-level Textual-Acoustic Contrastive Learning, which aligns semantically and stylistically similar dialogues while distinguishing unrelated ones. Extensive experiments on the multimodal dialogue dataset DailyTalk demonstrate that S2Dialog achieves outstanding retrieval performance.",
+      "authors": [
+        "Xueqi Wang",
+        "Zhigang Wang",
+        "Runqing Zhang",
+        "Zhenqi Jia",
+        "Junfeng Zhao"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-14T07:19:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.14029v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal dialogue retrieval combining textual semantics and acoustic-style features",
+      "llm_evidence_cn": "结合文本语义与声学风格特征的多模态对话检索",
+      "llm_evidence": "结合文本语义与声学风格特征的多模态对话检索",
+      "canonical_evidence": "结合文本语义与声学风格特征的多模态对话检索",
+      "llm_tldr_en": "S2Dialog is a unified framework for multimodal dialogue retrieval that matches global semantic coherence and acoustic conversational style across entire dialogues, overcoming utterance-level and unimodal limitations.",
+      "llm_tldr_cn": "现有对话检索方法多局限于语句级或单模态匹配，难以刻画整个对话的全局语义一致性和风格一致性。S2Dialog提出统一的多模态对话检索框架，同时建模文本语义与声学对话风格，实现对话级的跨模态匹配。实验证明其在对话级检索基准上优于传统语句级/单模态方法，可服务于情感识别、口语对话系统等多个对话任务，提升了检索的语义和风格保真度。",
+      "llm_tldr": "现有对话检索方法多局限于语句级或单模态匹配，难以刻画整个对话的全局语义一致性和风格一致性。S2Dialog提出统一的多模态对话检索框架，同时建模文本语义与声学对话风格，实现对话级的跨模态匹配。实验证明其在对话级检索基准上优于传统语句级/单模态方法，可服务于情感识别、口语对话系统等多个对话任务，提升了检索的语义和风格保真度。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.10497v1",
+      "source": "arxiv",
+      "title": "SapiensID 2.0: Aligning Human Recognition Foundation Models with Human Perception",
+      "abstract": "While foundation models have significantly advanced human recognition across diverse modalities, they predominantly rely on static, geometric feature extraction. This approach fundamentally diverges from human perception. Consequently, current models often suffer from \"semantic blindness,\" overfitting to transient noise while failing to leverage invariant soft biometrics, and struggle to capture temporal motion signatures. To bridge this gap, we propose SapiensID 2.0, a human recognition framework enriched with both semantic and temporal awareness. To overcome the lack of soft-biometric annotations, we transfer zero-shot semantic knowledge from Multimodal Large Language Models (MLLMs) into a discriminative embedding space. We resolve the dimensional mismatch between these spaces using Invariant Trait Alignment (ITA) to distill core persistent traits, and Transient Noise Disentanglement (TND) to decouple artifacts like clothing. Furthermore, we design a Kinematic Semantic Attention Head (K-SAH) that extends spatial attention across temporal windows. By tracking semantic patches over time, K-SAH captures rich kinematic signatures without requiring large-scale video datasets. Extensive experiments demonstrate that SapiensID 2.0 achieves state-of-the-art performance across image- and video-based person re-identification and gait recognition, while maintaining robust face recognition capabilities.",
+      "authors": [
+        "Yiyang Su",
+        "Jie Zhu",
+        "Feng Liu",
+        "Anil K. Jain",
+        "Xiaoming Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-11T05:13:05+00:00",
+      "link": "https://arxiv.org/pdf/2608.10497v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "transfers zero-shot semantic knowledge from MLLMs into embedding space to align visual recognition with human perception",
+      "llm_evidence_cn": "从多模态大语言模型迁移零样本语义知识到判别嵌入空间，增强视觉识别与人类感知的对齐",
+      "llm_evidence": "从多模态大语言模型迁移零样本语义知识到判别嵌入空间，增强视觉识别与人类感知的对齐",
+      "canonical_evidence": "从多模态大语言模型迁移零样本语义知识到判别嵌入空间，增强视觉识别与人类感知的对齐",
+      "llm_tldr_en": "SapiensID 2.0 transfers zero-shot semantic knowledge from multimodal LLMs into a discriminative embedding space, adding semantic and temporal awareness to human recognition foundation models.",
+      "llm_tldr_cn": "人类识别基础模型依赖静态几何特征，与人类感知方式不符，存在语义盲区，难以利用不变的软生物特征并捕捉时域运动特征。本文提出SapiensID 2.0，将多模态大语言模型的零样本语义知识迁移到判别嵌入空间，从而为模型注入语义与时间感知。该方法缓解了软生物特征标注缺失的困难，并通过特征维度扩充提升识别能力。实验表明，SapiensID 2.0在多种人类识别任务上性能增强，使基础模型更接近人类感知方式。",
+      "llm_tldr": "人类识别基础模型依赖静态几何特征，与人类感知方式不符，存在语义盲区，难以利用不变的软生物特征并捕捉时域运动特征。本文提出SapiensID 2.0，将多模态大语言模型的零样本语义知识迁移到判别嵌入空间，从而为模型注入语义与时间感知。该方法缓解了软生物特征标注缺失的困难，并通过特征维度扩充提升识别能力。实验表明，SapiensID 2.0在多种人类识别任务上性能增强，使基础模型更接近人类感知方式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.12987v1",
+      "source": "arxiv",
+      "title": "Generative Universal Multimodal Retrieval with Dual-role Identifiers",
+      "abstract": "Generative information retrieval (GIR) has emerged as a compelling alternative to the conventional index-retrieve-then-rank retrieval pipeline by training a generator to produce the identifiers of relevant items directly. Despite its promise, a number of open challenges still remain. First, constrained left-to-right decoding is vulnerable to prefix-level errors and local optima. Second, most prior GIR research remains largely unimodal, leaving instruction-aware retrieval across text, image, and mixed image-text items underexplored. Third, although discrete identifier-based GIR offers higher efficiency, its retrieval accuracy still lags behind that of the cutting-edge dense-vector-based retrieval methods. Motivated by these challenges, we propose DrIG, a novel Generative framework for universal multimodal retrieval featuring Dual-role Identifiers, which supports diverse retrieval tasks across multiple modalities and domains. Each candidate is assigned a single residual-quantized identifier that serves two complementary roles. In its sequential role, the identifier is decoded autoregressively, where the first token explicitly models modality and the remaining tokens capture progressively finer semantics. In its set-based role, the same tokens are reinterpreted as an unordered set to provide a prefix-independent relevance prior, which guides constrained beam search and alleviates local-optimum errors. Extensive experiments on the M-BEIR benchmark and the text-to-image evaluation datasets show that:(1)DrIG consistently outperforms state-of-the-art generative multimodal baselines across diverse tasks, while hybrid reranking achieves a favorable efficiency-effectiveness trade-off against strong dense retrievers. (2)Ablation and scaling analyses reveal how the base LMM, beam size, reranking depth, and fusion strategy affect retrieval performance, providing practical guidance for system design.",
+      "authors": [
+        "Kaipeng Li",
+        "Haitao Yu",
+        "Xuanchen Zhou"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-08-13T09:10:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.12987v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "generative universal multimodal retrieval across text, image and mixed items",
+      "llm_evidence_cn": "面向文本、图像及混合图文项的统一生成式多模态检索",
+      "llm_evidence": "面向文本、图像及混合图文项的统一生成式多模态检索",
+      "canonical_evidence": "面向文本、图像及混合图文项的统一生成式多模态检索",
+      "llm_tldr_en": "This paper proposes DrIG, a generative retrieval framework with dual-role identifiers that supports instruction-aware retrieval across text, image, and mixed image-text items, addressing the lack of multimodal GIR.",
+      "llm_tldr_cn": "现有生成式信息检索大多只处理单一模态，难以适应文本、图像和图文混合项的指令化检索。本文提出DrIG框架，设计双角色标识符并让生成器直接输出相关项标识，从而实现统一的多模态生成式检索。实验表明该方法在多种跨模态检索场景中取得了有竞争力的效果，为多模态信息检索提供了新的生成式范式。",
+      "llm_tldr": "现有生成式信息检索大多只处理单一模态，难以适应文本、图像和图文混合项的指令化检索。本文提出DrIG框架，设计双角色标识符并让生成器直接输出相关项标识，从而实现统一的多模态生成式检索。实验表明该方法在多种跨模态检索场景中取得了有竞争力的效果，为多模态信息检索提供了新的生成式范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.14152v1",
+      "source": "arxiv",
+      "title": "Towards Efficient Multimodal and Multilingual Opinion Extraction for STI: A QLoRA-Based Fine-Tuning Approach",
+      "abstract": "Recent advances in large language models (LLMs) have reshaped semantic analysis. Opinion Extraction (OE) for Science and Technology Intelligence (STI) requires concise core opinions from large information streams. Off-the-shelf models struggle to filter noise from these streams and show limited structured-output reliability in zero-shot multilingual and multi-modal settings. To address information overload and extraction defocus, this study proposes a multimodal core-opinion extraction framework in which visual evidence serves as a contextual anchor for textual judgment. Using VideoLLaMA2 (VL2) and VideoLLaMA2.1 (VL2.1) as the base models, we apply Quantized Low-Rank Adaptation (QLoRA) fine-tuning on a curated dataset of 2,194 multilingual and multimodal samples. Under the selected Image-Augmented setting, fine-tuned VL2.1 generates structured JSON core-opinion outputs, achieving 64.98% Precision, 42.15% Recall, 51.14% F1-score, and 74.00% sample-level accuracy. Relative to the zero-shot VL2.1 setting, it raises the F1-scores of Spanish and Russian from 4.83% and 0.45% to 46.05% and 51.93%, respectively. The framework further incorporates a Fuzzy Cumulative Prospect Theory-based post-extraction triage module for case-level value assessment, providing a case-level value signal for downstream STI screening.",
+      "authors": [
+        "Sheng Hong",
+        "Xuanqi Wang",
+        "Jiacheng Wang",
+        "Yuwei Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T10:02:55+00:00",
+      "link": "https://arxiv.org/pdf/2608.14152v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal core-opinion extraction framework using visual evidence as contextual anchor for textual judgment",
+      "llm_evidence_cn": "以视觉证据为上下文锚点的多模态核心观点抽取框架",
+      "llm_evidence": "以视觉证据为上下文锚点的多模态核心观点抽取框架",
+      "canonical_evidence": "以视觉证据为上下文锚点的多模态核心观点抽取框架",
+      "llm_tldr_en": "Proposes a multimodal and multilingual opinion extraction framework with QLoRA fine-tuning, using visual evidence as a contextual anchor to improve extraction accuracy in STI.",
+      "llm_tldr_cn": "面向科技情报的观点抽取需从大量信息流中提炼核心观点，现有多模态模型在零样本情况下结构化输出可靠性不足。提出以视觉证据为文本判断锚点的多模态观点抽取框架，基于VideoLLaMA2系列并采用QLoRA微调。实验显示该方法在过滤噪声和抽取准确性上显著改善，为多模态抽取任务提供了高效方案。",
+      "llm_tldr": "面向科技情报的观点抽取需从大量信息流中提炼核心观点，现有多模态模型在零样本情况下结构化输出可靠性不足。提出以视觉证据为文本判断锚点的多模态观点抽取框架，基于VideoLLaMA2系列并采用QLoRA微调。实验显示该方法在过滤噪声和抽取准确性上显著改善，为多模态抽取任务提供了高效方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
