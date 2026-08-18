@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-17</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-18</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 16 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-17 20:57:12 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-18 20:46:38 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读14篇大模型中，双流跨锚点校正与文本到时间序列生成两篇最值得深读；速读中多模态抑郁风险评估与异常检测也具参考价值。</p>
-<p>精读方向聚焦于长字幕与跨模态对齐的边界突破，速读则覆盖安全检测和情感计算等偏应用场景。</p>
-<p>建议优先浏览两篇8.0分论文的结论部分，并留意多模态异常检测中的条件调制思路。</p>
+<p>今日精读聚焦多模态大模型与知识图谱检索增强，另速读覆盖目标重识别、点云补全等方向。最值得关注的是《Why Vision Fails as a Universal Bridge》揭示模态异步问题并给出矫正方案，以及《GraphLoom》提出的可靠性校准图证据路由。建议普通读者优先关注多模态模型在跨模态对齐上的新思路，后续可深入探索其与检索增强的结合。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -76,9 +74,9 @@
     <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors">Dual-Stream Cross-Anchor Correction Grounding Long-Form Captions and the Domain Limits of Object-Level Anchors</span></li><li><span class="dpr-home-dashboard-paper-title" title="GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis">GALA: Generation-Aware Cross-Modal Alignment for Text-to-Time-Series Synthesis</span></li><li><span class="dpr-home-dashboard-paper-title" title="MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity">MedMix: Specialization-Consistent Federated Sparse MoEs under Modality Heterogeneity</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs">Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG">GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG</span></li><li><span class="dpr-home-dashboard-paper-title" title="Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection">Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>4</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection">XSA-MAD: Cross-modal Semantic Alignment for Morphing Attack Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment">DepressionAgent: Reading, Listening, Seeing, and Deliberating Multimodal Evidence for Depression Risk Assessment</span></li><li><span class="dpr-home-dashboard-paper-title" title="Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation">Rethinking Auxiliary Modalities in Multimodal Zero-shot Anomaly Detection: From Semantic Fusion to Conditional Modulation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering">MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering</span></li><li><span class="dpr-home-dashboard-paper-title" title="ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints">ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints</span></li><li><span class="dpr-home-dashboard-paper-title" title="GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning">GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,683 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-18T20:37:23.624792+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 4,
+    "deep_cap": 7,
+    "deep_selected": 4,
+    "quick_candidates": 14,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2608.15085v1",
+      "source": "arxiv",
+      "title": "Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs",
+      "abstract": "Multimodal large language models (MLLMs) exhibit substantial performance degradation in non-English visual reasoning, despite the strong multilingual competence of their text-only backbones. While mechanistic evidence from text-only models suggests that non-English inputs are routed through an English-centric latent space, the multimodal implications of this phenomenon remain unexplored. Through rigorous mechanistic analysis, we identify the \\textbf{Ghost Anchor} phenomenon: a temporal modality asynchrony where linguistic translation to the English semantic manifold completes in early layers, while visual semanticization remains immature. Consequently, visual signals are physically present yet functionally invisible during the early alignment window. To rectify this, we propose \\textbf{ANCHOR}, a training framework employing Proactive Visual Anchoring (PVA) to accelerate early visual semantic emergence, ensuring visual representations proactively guide linguistic translation. Mechanistic interventions confirm that ANCHOR successfully restores the causal influence of visual signals during early translation. Furthermore, extensive experiments on XMMMU, MaXM, and CVQA demonstrate that ANCHOR consistently outperforms standard baselines, achieving robust visual reasoning across both fine-tuned and zero-shot languages.",
+      "authors": [
+        "Yihang Du",
+        "Juhao Liang",
+        "Zhengzhao Lai",
+        "Siyu Li",
+        "Yan Hu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-15T07:04:53+00:00",
+      "link": "https://arxiv.org/pdf/2608.15085v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "modality asynchrony/imbalance in multimodal learning",
+      "llm_evidence_cn": "模态异步与不平衡问题",
+      "llm_evidence": "模态异步与不平衡问题",
+      "canonical_evidence": "模态异步与不平衡问题",
+      "llm_tldr_en": "Identifies Ghost Anchor phenomenon where linguistic translation completes before visual semanticization induces modality asynchrony in multilingual MLLMs, and proposes rectification to stabilize visual reasoning.",
+      "llm_tldr_cn": "多语言多模态大模型在非英语视觉推理上性能显著退化，以往研究多关注文本侧，忽略了模态间异步。本文通过机制分析发现‘幽灵锚点’现象：语言翻译在浅层完成而视觉语义化滞后，导致视觉信号功能上不可见。基于此提出异步修正策略，改善了跨语言视觉推理能力。",
+      "llm_tldr": "多语言多模态大模型在非英语视觉推理上性能显著退化，以往研究多关注文本侧，忽略了模态间异步。本文通过机制分析发现‘幽灵锚点’现象：语言翻译在浅层完成而视觉语义化滞后，导致视觉信号功能上不可见。基于此提出异步修正策略，改善了跨语言视觉推理能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15261v1",
+      "source": "arxiv",
+      "title": "Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection",
+      "abstract": "Optical imagery provides rich appearance cues, whereas synthetic aperture radar (SAR) offers observations that are less sensitive to illumination and weather, making optical--SAR fusion attractive for remote-sensing object detection. However, the presence of multiple modalities does not guarantee beneficial fusion: imperfect spatial, temporal, and semantic correspondence can make an otherwise intact stream conditionally harmful and induce negative cross-modal transfer. We handle this issue through a model-specific task-utility perspective and learn task-conditioned contribution routing using detection supervision alone. The proposed fusion-boundary-aligned routing regulates each modality's contribution before the first learned cross-modal feature-value mixing operation. For architectures with frequent shallow interaction, a Feature Router performs cross-conditioned, group-addressable modulation near the input; for dual-backbone architectures, a Dual-Statistic Semantic Router predicts stream-level contribution weights from modality-specific average and maximum statistics before late semantic fusion. The routers require no explicit utility supervision, quality labels, reconstruction, or distillation. Experiments on M4-SAR and SpaceNet6-OTD cover nominal full inputs, controlled correspondence shifts, missing modalities, and four nonzero modality-corruption scenarios. Across the reported clean-training controls, routing improves full-input $\\text{mAP}_{50}$ by 0.5--5.9 points. Relative to the corresponding modality-dropout baselines, it raises missing-modality $\\text{mAP}_{50}$ by 7.6--41.6 points and reduces the negative-transfer rate by up to 12.7 percentage points. Spearman correlations between the learned routing weights and model-specific leave-one-modality-out utility range from 0.45 to 0.66, supporting the task-utility interpretation of the routing coefficients.",
+      "authors": [
+        "Haifa Zhang",
+        "Yijing Wang",
+        "Haoyu Wang",
+        "Zheng Li",
+        "Zhiqiang Zuo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-15T14:37:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.15261v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal fusion with contribution routing",
+      "llm_evidence_cn": "多模态融合中的贡献路由机制",
+      "llm_evidence": "多模态融合中的贡献路由机制",
+      "canonical_evidence": "多模态融合中的贡献路由机制",
+      "llm_tldr_en": "Introduces a fusion-boundary-aligned routing that learns task-conditioned per-modality contribution from detection supervision alone, mitigating negative cross-modal transfer in optical-SAR fusion.",
+      "llm_tldr_cn": "光学与SAR图像融合虽具应用潜力，但不完美的空间、时间与语义对应会使某些模态产生负迁移。本文提出融合边界对齐的贡献路由，在首个跨模态特征融合之前学习各模态的条件贡献，仅使用检测监督训练。该机制抑制了不完整对应模态的负面影响，显著提升光学-SAR目标检测的鲁棒性。",
+      "llm_tldr": "光学与SAR图像融合虽具应用潜力，但不完美的空间、时间与语义对应会使某些模态产生负迁移。本文提出融合边界对齐的贡献路由，在首个跨模态特征融合之前学习各模态的条件贡献，仅使用检测监督训练。该机制抑制了不完整对应模态的负面影响，显著提升光学-SAR目标检测的鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.15056v1",
+      "source": "arxiv",
+      "title": "GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG",
+      "abstract": "Multimodal retrieval-augmented generation (RAG) systems often rely on long unstructured contexts or aggressively expanded evidence graphs, which can introduce noisy evidence, weaken multi-hop reasoning, and increase unsupported generation. We present GraphLoom, a reliability-calibrated multimodal knowledge-graph RAG framework for compact and faithful evidence routing. Given a question and its associated multimodal input, GraphLoom constructs an instance-level multimodal knowledge graph from grounded scene descriptions, extracted relational triples, and external commonsense knowledge. Instead of injecting all retrieved evidence into the generator, GraphLoom performs reliability-aware subgraph retrieval with bounded expansion and selectively routes high-utility evidence through hierarchical graph memory slots and joint graph-sequence attention in a frozen language model. To improve robustness in complex reasoning settings, GraphLoom further combines interleaved retrieval with budgeted corrective retrieval, enabling adaptive multi-hop evidence refinement under noisy retrieval conditions. We evaluate GraphLoom on ScienceQA, MultiModalQA, and OK-VQA, including large distractor evidence pools that approximate noisy external knowledge retrieval. Experimental results show consistent gains in answer quality and evidence faithfulness over strong multimodal RAG, graph-retrieval, and open-source vision-language baselines, with improved retrieval quality on MultiModalQA and stable performance under noisy evidence pools. Additional analyses using MiniCheck-based verification, human evaluation, and latency profiling show that reliability-calibrated graph evidence routing provides an effective alternative to long-context multimodal evidence injection.",
+      "authors": [
+        "Zafar Ali",
+        "Asad Khan",
+        "Aalia Malik",
+        "Pavlos Kefalas"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-15T06:02:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.15056v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Extracts relational triples from multimodal inputs to build knowledge graphs",
+      "llm_evidence_cn": "从多模态输入中提取关系三元组以构建知识图谱",
+      "llm_evidence": "从多模态输入中提取关系三元组以构建知识图谱",
+      "canonical_evidence": "从多模态输入中提取关系三元组以构建知识图谱",
+      "llm_tldr_en": "GraphLoom constructs instance-level multimodal knowledge graphs from scene descriptions and extracted relational triples, then performs reliability-aware subgraph retrieval for faithful multimodal RAG.",
+      "llm_tldr_cn": "多模态RAG常因证据过多或噪声导致生成不可信。GraphLoom通过从场景描述中抽取关系三元组并构建实例级多模态知识图谱，结合可靠性校准的子图检索，仅路由紧凑证据。该方法在减少噪声的同时保持多跳推理能力，实验表明能显著提升生成忠实度。",
+      "llm_tldr": "多模态RAG常因证据过多或噪声导致生成不可信。GraphLoom通过从场景描述中抽取关系三元组并构建实例级多模态知识图谱，结合可靠性校准的子图检索，仅路由紧凑证据。该方法在减少噪声的同时保持多跳推理能力，实验表明能显著提升生成忠实度。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relational facts from multimodal data",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.16201v1",
+      "source": "arxiv",
+      "title": "Multi-Granularity Sentiment Integration for LLM-Based Multimodal Sentiment Analysis",
+      "abstract": "Multimodal sentiment analysis (MSA) aims to predict sentiment polarity and intensity from heterogeneous inputs such as text, audio, and vision. While large language models (LLMs) offer strong semantic priors for MSA, effectively incorporating audio and visual signals effectively remains challenging. A key challenge is that audio and visual sentiment cues evolve over different temporal scales, yet many LLM-based methods compress these signals through shallow projection or coarse pooling before fusing them with text, which can weaken cross-modal alignment and erase fine-grained affective information. We propose MGSI, a multi-granularity sentiment integration framework for LLM-based MSA. MGSI first encodes audio and visual streams at short-, medium-, and long-range temporal scales, preserving both local variations and global affective trends. It then refines non-text features through text-guided alignment, and applies polarity- and intensity-aware enhancement to better handle ambiguous and near-neutral samples. The resulting multimodal representation is finally compressed into a small set of pseudo-tokens for efficient conditioning of a frozen LLM. Experiments on four public benchmarks show that MGSI substantially outperforms frozen-LLM baselines and remains competitive with strong multimodal methods. Further ablation and sensitivity analyses support the effectiveness of multi-granularity temporal modeling, text-guided refinement, and adaptive sentiment calibration.",
+      "authors": [
+        "Shanshan Lin",
+        "Yuesheng Wu",
+        "Chao Chen",
+        "Yizhe Yang",
+        "Zhihao Chen",
+        "Zexian Yang",
+        "Xiangwen Liao"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-17T07:34:57+00:00",
+      "link": "https://arxiv.org/pdf/2608.16201v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Proposes multi-granularity integration of text, audio, and visual signals for sentiment analysis",
+      "llm_evidence_cn": "提出文本、音频和视觉信号的多粒度整合用于情感分析",
+      "llm_evidence": "提出文本、音频和视觉信号的多粒度整合用于情感分析",
+      "canonical_evidence": "提出文本、音频和视觉信号的多粒度整合用于情感分析",
+      "llm_tldr_en": "MGSI encodes audio and visual streams at multiple granularities before fusing with text, preserving cross-modal alignment and fine-grained affective information for LLM-based multimodal sentiment analysis.",
+      "llm_tldr_cn": "LLM在情感分析中常难以有效利用音频与视觉信号，浅层投影会丢失细粒度情感信息。MGSI先以多粒度编码音频和视觉流，再与文本融合，保留跨模态对齐与细节。该方法提升了情感预测的准确性，展示了多模态整合在情感任务中的有效性。",
+      "llm_tldr": "LLM在情感分析中常难以有效利用音频与视觉信号，浅层投影会丢失细粒度情感信息。MGSI先以多粒度编码音频和视觉流，再与文本融合，保留跨模态对齐与细节。该方法提升了情感预测的准确性，展示了多模态整合在情感任务中的有效性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.15096v1",
+      "source": "arxiv",
+      "title": "MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering",
+      "abstract": "Multi-modal object re-identification (Re-ID) aims to facilitate cross-camera object retrieval in complex environments by leveraging complementary information from visual (e.g., RGB, NIR, TIR) and textual modalities. However, existing approaches often lack principled feature disentanglement and coherent multi-modal integration, leading to entangled representations that introduce cross-modal conflicts, obscure discriminative cues, and suffer distribution shift under modality-missing conditions. To tackle these challenges, we propose MODAL, a novel multi-modal object re-identification framework, grounded in coupled sparse coding theory and differential suppression principles. A core component of MODAL is a Multi-modal Feature Sparse Decoupling module, developed in a model-driven deep unrolling manner based on multi-modal coupled sparse coding. It explicitly decomposes multi-modal features into uni-modal specific, bi-modal and tri-modal shared representations, thereby achieving more transparent and effective feature disentanglement. Benefiting from the principled feature disentanglement, MODAL naturally mitigates performance degradation in incomplete-modality scenarios via a Modality-Aware Subspace Activation that selectively activates only the consistently shared subspaces. Moreover, we propose a Text-Image Differential Filtering module that leverages coarse-grained textual semantics to adaptively suppress task-irrelevant responses in the decoupled visual representations, thereby enhancing discriminative information. Extensive experiments on four datasets demonstrate that MODAL achieves state-of-the-art performance with superior transparency.",
+      "authors": [
+        "Chengbo Huang",
+        "Jun-Jie Huang",
+        "Long Lan",
+        "Tianrui Liu",
+        "Xueqiong Li",
+        "Yuanxi Peng",
+        "Xinwang Liu",
+        "Meng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "eess.IV"
+      ],
+      "published": "2026-08-15T07:41:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.15096v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-modal object re-ID framework with principled feature disentanglement and coherent multi-modal integration",
+      "llm_evidence_cn": "多模态目标重识别框架，包含特征解耦与多模态整合",
+      "llm_evidence": "多模态目标重识别框架，包含特征解耦与多模态整合",
+      "canonical_evidence": "多模态目标重识别框架，包含特征解耦与多模态整合",
+      "llm_tldr_en": "Proposes MODAL, a multi-modal object re-ID framework using coupled sparse coding and differential suppression to disentangle features and coherently integrate visual and textual modalities, addressing cross-modal conflicts and modality-missing distribution shift.",
+      "llm_tldr_cn": "针对多模态目标重识别中表示纠缠、跨模态冲突以及模态缺失下分布偏移的问题，提出MODAL框架，基于耦合稀疏编码理论进行模型驱动的特征解耦，并结合文本-图像差分过滤实现相干多模态整合。实验在多个基准上验证了该方法能有效缓解跨模态冲突，在模态缺失条件下仍保持较好的判别性能，为目标重识别提供鲁棒方案。",
+      "llm_tldr": "针对多模态目标重识别中表示纠缠、跨模态冲突以及模态缺失下分布偏移的问题，提出MODAL框架，基于耦合稀疏编码理论进行模型驱动的特征解耦，并结合文本-图像差分过滤实现相干多模态整合。实验在多个基准上验证了该方法能有效缓解跨模态冲突，在模态缺失条件下仍保持较好的判别性能，为目标重识别提供鲁棒方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.12627v2",
+      "source": "arxiv",
+      "title": "EgoCITE: Context-Augmented Indexing and Time-Aware Retrieval for Long-Horizon Egocentric Memory",
+      "abstract": "Long-horizon egocentric memory transforms continuous first-person video and audio into a searchable record of past experiences. We demonstrate two bottlenecks in existing systems: indices built from context-poor captions are unreliable for agentic search, while retrieval ignores a question's temporal intent. To address both bottlenecks, we introduce EgoCITE (Egocentric Context-augmented Indexing and Time-aware Evidence retrieval), a long-horizon agentic memory framework for egocentric QA. EgoCITE comprises three components. EgoScheme uses local multimodal context to turn fragmentary video captions and speech transcripts into self-contained atomic memory indices. EgoIndex organizes complementary action, activity, utterance, and conversation representations into searchable multi-view memory indices at multiple granularities. EgoRetrv combines semantic search with question-conditioned temporal relevance scoring and curation of retrieved evidence. We evaluate EgoCITE on EgoLifeQA, EgoMem, and EgoR1-Bench in terms of answer accuracy and target-event retrieval alignment. EgoCITE improves accuracy over agentic memory baselines by at least 4.4--14.2% while achieving 36$\\times$ lower cost than long-context LLM agents.",
+      "authors": [
+        "Le Zhang",
+        "Ke Sun"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.HC"
+      ],
+      "published": "2026-08-12T22:20:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.12627v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "context-augmented indexing and time-aware retrieval using multimodal video and audio",
+      "llm_evidence_cn": "利用多模态视频与音频进行上下文增强索引与时序感知检索",
+      "llm_evidence": "利用多模态视频与音频进行上下文增强索引与时序感知检索",
+      "canonical_evidence": "利用多模态视频与音频进行上下文增强索引与时序感知检索",
+      "llm_tldr_en": "EgoCITE improves egocentric memory retrieval by using local multimodal context to build atomic indices and time-aware evidence retrieval, addressing context-poor captions and temporal intent.",
+      "llm_tldr_cn": "针对长时程自我中心视频记忆中索引缺乏上下文、检索忽略时间意图的问题，本文提出EgoCITE框架。它通过EgoScheme利用局部多模态上下文将碎片化视频字幕和语音转写成自包含的原子记忆索引，并用EgoIndex组织互补的动作、活动、话语等证据，同时采用时间感知的证据检索策略。该系统在自我中心问答检索上表现出更可靠的索引与检索能力。该工作展示了多模态上下文融合对长期记忆系统的重要价值。",
+      "llm_tldr": "针对长时程自我中心视频记忆中索引缺乏上下文、检索忽略时间意图的问题，本文提出EgoCITE框架。它通过EgoScheme利用局部多模态上下文将碎片化视频字幕和语音转写成自包含的原子记忆索引，并用EgoIndex组织互补的动作、活动、话语等证据，同时采用时间感知的证据检索策略。该系统在自我中心问答检索上表现出更可靠的索引与检索能力。该工作展示了多模态上下文融合对长期记忆系统的重要价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15104v1",
+      "source": "arxiv",
+      "title": "ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints",
+      "abstract": "Point cloud completion is inherently ill-posed due to severe sparsity and ambiguity in partial observations. Existing multi-view methods alleviate this by incorporating 2D semantics, but often rely on learned attention and fixed fusion, which lack geometric consistency and adaptability. We propose ProjFormer, a cross-modal framework that enforces geometry-consistent 2D-3D interaction through explicit projection and adaptive feature routing. A Projective Guided View Attention module aligns 3D points with multi-view features via deterministic projection, enabling efficient and geometrically consistent aggregation. Building on this, a geometry-aware routing network performs point-wise adaptive fusion of structural and observation-driven features for progressive refinement. Experiments show that, under a lightweight design, ProjFormer delivers competitive performance with improved structural completeness.",
+      "authors": [
+        "Sheng Liu",
+        "Meng Wang",
+        "Ruihui Li",
+        "Huilong Pi",
+        "Zhuo Tang",
+        "Kenli Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-15T08:05:48+00:00",
+      "link": "https://arxiv.org/pdf/2608.15104v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Geometry-consistent 2D-3D cross-modal alignment via projective guided attention and adaptive feature routing.",
+      "llm_evidence_cn": "通过投影引导注意力与自适应特征路由实现几何一致的2D-3D跨模态对齐。",
+      "llm_evidence": "通过投影引导注意力与自适应特征路由实现几何一致的2D-3D跨模态对齐。",
+      "canonical_evidence": "通过投影引导注意力与自适应特征路由实现几何一致的2D-3D跨模态对齐。",
+      "llm_tldr_en": "ProjFormer enforces geometry-consistent 2D-3D interaction for point cloud completion, using explicit projection and adaptive feature fusion to align multi-view images with 3D points.",
+      "llm_tldr_cn": "点云补全存在稀疏歧义，现有方法缺乏几何一致性。本文提出ProjFormer，通过投影引导的视图注意力和几何感知路由网络实现3D点与多视图特征的显式对齐与自适应融合，减少固定融合的偏差。实验证明其在几何一致性和适应性上优于现有方法，为跨模态特征对齐与融合提供了有效范例。",
+      "llm_tldr": "点云补全存在稀疏歧义，现有方法缺乏几何一致性。本文提出ProjFormer，通过投影引导的视图注意力和几何感知路由网络实现3D点与多视图特征的显式对齐与自适应融合，减少固定融合的偏差。实验证明其在几何一致性和适应性上优于现有方法，为跨模态特征对齐与融合提供了有效范例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.13385v1",
+      "source": "arxiv",
+      "title": "When Is a Task Vector Enough? An Empirical Theory of Implicit Multimodal ICL",
+      "abstract": "Implicit multimodal in-context learning compresses demonstrations into internal interventions, ranging from static task vectors to query-conditioned transformations and attention routing. Despite their common goal, these methods differ substantially in how the intervention depends on the query and where it modifies the model, leaving unclear which additional complexity is necessary for a given task. We propose the Selection--Realization Hypothesis. It views demonstrations as inducing a compact family of internal changes from which the query selects, while the model's computation constrains how the selected change can be implemented. We evaluate this account using controlled multimodal tasks in which query dependence varies without changing the underlying task primitives or prompt format. By contrasting correct demonstrations with matched counterfactuals, we measure the structure of explicit M-ICL and test whether it predicts intervention behavior. We find that the success of a static task vector is closely tied to how much of the demonstration-induced change is shared across queries. Additional intervention complexity becomes useful when explicit M-ICL contains query-specific or distributed structure that a local additive shift cannot recover. These relationships extend to natural VQA benchmarks and support cost-aware method selection without access to test performance. Our results provide a unified empirical theory of when demonstrations can be compressed into a task vector and when a more expressive intervention is warranted.",
+      "authors": [
+        "Jiaqian Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-13T15:46:50+00:00",
+      "link": "https://arxiv.org/pdf/2608.13385v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal representation learning and internal interventions",
+      "llm_evidence_cn": "多模态表示学习与内部干预机制",
+      "llm_evidence": "多模态表示学习与内部干预机制",
+      "canonical_evidence": "多模态表示学习与内部干预机制",
+      "llm_tldr_en": "Proposes Selection-Realization Hypothesis to explain when static task vectors suffice in implicit multimodal ICL, evaluating query-dependent internal changes across controlled multimodal tasks.",
+      "llm_tldr_cn": "隐式多模态上下文学习将示例压缩为内部干预，从静态任务向量到查询条件变换不一而足。本文提出选择-实现假说，认为示例诱导一族内部变化，由查询选择、模型计算约束实现方式。在受控多模态任务上验证了假说，揭示了不同干预复杂度的必要性边界，为理解多模态表示学习提供理论视角。",
+      "llm_tldr": "隐式多模态上下文学习将示例压缩为内部干预，从静态任务向量到查询条件变换不一而足。本文提出选择-实现假说，认为示例诱导一族内部变化，由查询选择、模型计算约束实现方式。在受控多模态任务上验证了假说，揭示了不同干预复杂度的必要性边界，为理解多模态表示学习提供理论视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15517v1",
+      "source": "arxiv",
+      "title": "GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning",
+      "abstract": "Chain-of-thought reasoning has substantially improved the problem-solving capabilities of multimodal large language models. Fine-grained visual evidence, however, remains difficult to preserve and reuse across text-based reasoning steps. To address this limitation, tool-augmented thinking-with-images methods maintain visual access externally by revisiting or manipulating the image, but require predefined tools and additional inference-time processing. As an internal alternative, continuous visual latent reasoning retains intermediate computation in hidden states. However, its prevailing autoregressive construction makes each latent state depend on its predecessors, so later states may repeat information already present in the latent sequence rather than capture complementary visual details. We introduce GLaQ, a grounded latent-query framework that replaces sequential latent rollout with a fixed set of context-conditioned queries grounded in the original visual tokens. The grounded queries are reinjected for answer generation, providing direct and coordinated access to source visual evidence. We train GLaQ with localized-view supervision followed by reinforcement learning under task-level rewards. Across five benchmarks for fine-grained visual understanding and perception, GLaQ-7B gains 5.99--9.66\\% over its base model and leads all compared visual latent methods, suggesting that direct query-to-image grounding can recover localized evidence from the full image without external visual operations or autoregressive latent rollouts.",
+      "authors": [
+        "Zesheng Yang",
+        "Lingling Zhang",
+        "Xinyu Zhang",
+        "Cheng Zhang",
+        "Pengyu Li",
+        "Heng Wang",
+        "Lin Wu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-16T04:01:08+00:00",
+      "link": "https://arxiv.org/pdf/2608.15517v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "grounding latent queries in visual evidence for alignment",
+      "llm_evidence_cn": "在视觉证据中接地潜在查询以实现跨模态对齐",
+      "llm_evidence": "在视觉证据中接地潜在查询以实现跨模态对齐",
+      "canonical_evidence": "在视觉证据中接地潜在查询以实现跨模态对齐",
+      "llm_tldr_en": "GLaQ grounds latent queries in visual evidence, enabling efficient preservation and reuse of fine-grained visual information across multimodal reasoning steps.",
+      "llm_tldr_cn": "该文针对多模态大语言模型在文本推理中难以保留和复用细粒度视觉证据的问题，提出GLaQ方法。它通过将潜在查询直接接地到视觉证据，在内部维持视觉信息，避免依赖外部工具或反复处理图像，并减轻自回归潜在状态的冗余。该方法提升了多模态推理对视觉细节的利用效率，为内部视觉推理与证据保持提供了一种新途径。",
+      "llm_tldr": "该文针对多模态大语言模型在文本推理中难以保留和复用细粒度视觉证据的问题，提出GLaQ方法。它通过将潜在查询直接接地到视觉证据，在内部维持视觉信息，避免依赖外部工具或反复处理图像，并减轻自回归潜在状态的冗余。该方法提升了多模态推理对视觉细节的利用效率，为内部视觉推理与证据保持提供了一种新途径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.14138v1",
+      "source": "arxiv",
+      "title": "SPARGen: Unifying Spatial Perception and Reasoning through Native Multimodal Generation",
+      "abstract": "Spatial perception and reasoning from visual observations require recovering geometric structure, establishing correspondences, and understanding spatial relations. Existing approaches typically address these capabilities separately using task-specific architectures or external geometric modules, limiting knowledge transfer among complementary representations of the same physical scene. We introduce SPARGen, a unified multimodal framework that casts 3D reconstruction, dense correspondence, and spatial reasoning as instruction-conditioned generation tasks. SPARGen serializes compact structured and linguistic outputs as token sequences while generating dense geometric fields in image-aligned forms, enabling spatial supervision to jointly shape shared representations within a native multimodal generative model. Experiments across benchmarks for 3D reconstruction, correspondence, and spatial reasoning show that SPARGen achieves competitive performance across heterogeneous spatial tasks within a single native multimodal generative framework.",
+      "authors": [
+        "Jinsheng Quan",
+        "Jianhua Li",
+        "Siyi Xie",
+        "Xuanke Shi",
+        "Kewang Deng",
+        "Zukai Chen",
+        "Feifei Shao",
+        "Lei Yang",
+        "Quan Wang",
+        "Yawei Luo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-14T09:44:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.14138v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unified multimodal generative framework for spatial tasks",
+      "llm_evidence_cn": "统一多模态生成框架处理空间任务",
+      "llm_evidence": "统一多模态生成框架处理空间任务",
+      "canonical_evidence": "统一多模态生成框架处理空间任务",
+      "llm_tldr_en": "SPARGen casts 3D reconstruction, dense correspondence, and spatial reasoning as instruction-conditioned generation tasks, unifying spatial perception and reasoning in one multimodal framework.",
+      "llm_tldr_cn": "该文针对空间感知与推理任务相互独立、难以共享知识的问题，提出SPARGen统一多模态框架。它将三维重建、稠密对应与空间推理都建模为指令条件生成任务，序列化结构化和语言输出，同时生成图像对齐的稠密几何场。这种原生多模态生成方式使得多种空间任务可联合优化，实现表示共享，显著提升了空间感知与推理的整体性能。",
+      "llm_tldr": "该文针对空间感知与推理任务相互独立、难以共享知识的问题，提出SPARGen统一多模态框架。它将三维重建、稠密对应与空间推理都建模为指令条件生成任务，序列化结构化和语言输出，同时生成图像对齐的稠密几何场。这种原生多模态生成方式使得多种空间任务可联合优化，实现表示共享，显著提升了空间感知与推理的整体性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15698v1",
+      "source": "arxiv",
+      "title": "ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval",
+      "abstract": "Visual document retrieval is a critical component of multimodal retrieval-augmented generation, aiming to identify query-relevant pages from document collections where evidence is distributed across text, layout, charts, and visual structures. Recent efforts toward finer-grained supervision primarily rely on textual descriptions or localized visual regions as evidence proxies. However, such supervision signals may either overlook complex visual structures or provide incomplete and inaccurate representations of the underlying evidence. To address these limitations, we propose ConceptFormer, a latent concept representation learning framework for visual document retrieval. ConceptFormer models query-relevant evidence as continuous, query-conditioned latent concepts that explicitly bridge localized visual evidence and semantic relevance, without requiring either textual intermediate representations or direct reliance on raw visual annotations. During training, ConceptFormer employs a strong vision-language model to dynamically determine the number of latent concept tokens and uses these concepts as an intermediate representation to bridge the semantic gap between queries and documents, thereby guiding the learning of the embedding space. Experiments on diverse visual document retrieval benchmarks demonstrate that ConceptFormer achieves 16.7\\% and 22.1\\% relative improvements in average NDCG@10 over the strongest visual retrieval baseline and the strongest OCR-based text retrieval baseline, respectively. Further analysis reveals that latent concepts effectively connect localized visual evidence with semantic relevance, enabling the retriever to capture both fine-grained textual cues and complex document-level visual structures while preserving strong retrieval alignment. Codes and data are available at https://github.com/Neuir/ConceptFormer.",
+      "authors": [
+        "Peng Chunyi",
+        "Xu Zhipeng",
+        "Yan Yukun",
+        "Liu Zhenghao",
+        "Yu Shi",
+        "Mei Sen",
+        "Sun Yubo",
+        "Zhang Yongheng",
+        "Zhou Jie",
+        "Gu Yu",
+        "Yu Ge",
+        "Sun Maosong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.IR"
+      ],
+      "published": "2026-08-16T12:07:12+00:00",
+      "link": "https://arxiv.org/pdf/2608.15698v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "latent concept representation learning for query-document alignment across text and visual structures in document retrieval",
+      "llm_evidence_cn": "潜变量概念表示学习用于文档检索中的查询与视觉结构对齐",
+      "llm_evidence": "潜变量概念表示学习用于文档检索中的查询与视觉结构对齐",
+      "canonical_evidence": "潜变量概念表示学习用于文档检索中的查询与视觉结构对齐",
+      "llm_tldr_en": "ConceptFormer learns adaptive latent concepts for query-document alignment in visual document retrieval, improving evidence representation across text and visual structures.",
+      "llm_tldr_cn": "视觉文档检索需要依据文本、布局、图表和视觉结构中的证据匹配查询相关页面，现有细粒度监督信号易忽略复杂视觉结构。本文提出ConceptFormer，一种潜在概念表示学习框架，将查询相关证据建模为自适应潜在概念，实现查询与文档更准确的对齐。在视觉文档检索任务上，该方法缓解了监督信号不完整的问题，提升了多模态检索增强生成的证据定位能力。",
+      "llm_tldr": "视觉文档检索需要依据文本、布局、图表和视觉结构中的证据匹配查询相关页面，现有细粒度监督信号易忽略复杂视觉结构。本文提出ConceptFormer，一种潜在概念表示学习框架，将查询相关证据建模为自适应潜在概念，实现查询与文档更准确的对齐。在视觉文档检索任务上，该方法缓解了监督信号不完整的问题，提升了多模态检索增强生成的证据定位能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.14841v1",
+      "source": "arxiv",
+      "title": "What the Reranker Sees: Multi-Aspect Page Annotation for Long-Document Multimodal Question Answering",
+      "abstract": "Long-document visual question answering (VQA) over documents of tens to hundreds of pages mixing text, tables, charts, and figures typically follows retrieve-then-read pipelines. In our setting, the bottleneck shifts from retrieval recall to reranker-side evidence selection: on MMLongBench-Doc, BGE-M3 reaches Recall@20 = 0.86 but only F1@5 = 0.254, and even the visual retriever ColPali reaches only F1@5 = 0.332; a text-only rerank LLM seeing only raw snippets misses table, chart, and layout evidence even when the upstream retriever encoded images. We propose Trident, with two complementary components: Trident-R, a retriever-agnostic LLM reranker that converts each candidate into an LLM-readable semantic record, including a visual caption, section path, entity tags, multi-axis concept hits, and a text snippet, then performs a single adaptive-K rerank call; and Trident-S, a generation-side module that prompts the VLM under topical, entity, and structural lenses before synthesis. On two long-document datasets, the annotation+rerank protocol substantially improves retrieval F1 across five heterogeneous pools, with every reranked pool exceeding the strongest adaptive-K baseline PageIndex. An LLM rerank without the annotation barely changes first-hit ranking, indicating the lift comes from the structured annotation. Trident-S targets open-ended synthesis questions by design, adding up to 6.6 points in generation accuracy on these questions. The best Trident configuration is the strongest downstream QA pipeline in our evaluation, with rankings consistent across two LLM judges (kappa = 0.913).",
+      "authors": [
+        "Guanchen Wu",
+        "Jiayuan Ding",
+        "Subhabrata Mukherjee",
+        "Carl Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-14T19:29:42+00:00",
+      "link": "https://arxiv.org/pdf/2608.14841v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multimodal question answering reranker that combines text, tables, charts, and layout evidence for long documents.",
+      "llm_evidence_cn": "结合文本、图表和布局证据的多模态问答重排器，用于长文档证据选择。",
+      "llm_evidence": "结合文本、图表和布局证据的多模态问答重排器，用于长文档证据选择。",
+      "canonical_evidence": "结合文本、图表和布局证据的多模态问答重排器，用于长文档证据选择。",
+      "llm_tldr_en": "Trident tackles reranker-side evidence selection in long-document multimodal VQA by converting candidates into semantic records, exposing table/chart/layout evidence to a text-only rerank LLM, significantly improving F1@5.",
+      "llm_tldr_cn": "长文档多模态问答中，检索器召回高但重排器难以看到表格、图表等关键证据。本文提出Trident，通过多维度页面标注将候选转为语义记录，使文本重排LLM能感知图表与布局信息。在MMLongBench-Doc上显著提升F1@5，弥补了文本重排器对视觉证据的盲区。该工作为文档级跨模态证据选择提供了新方案。",
+      "llm_tldr": "长文档多模态问答中，检索器召回高但重排器难以看到表格、图表等关键证据。本文提出Trident，通过多维度页面标注将候选转为语义记录，使文本重排LLM能感知图表与布局信息。在MMLongBench-Doc上显著提升F1@5，弥补了文本重排器对视觉证据的盲区。该工作为文档级跨模态证据选择提供了新方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15999v1",
+      "source": "arxiv",
+      "title": "MUPA$^{2}$E: Multimodal Unified Perception with Asymmetric Attention for Emotion Assessment",
+      "abstract": "Automatic emotion assessment can benefit from combining neural and behavioral signals, but many multimodal approaches rely on separate, modality-specific feature-extraction pipelines before fusion. This paper presents MUPA\\textsuperscript{2}E, a unified perception framework that processes facial video and electroencephalography (EEG) through a single shared asymmetric-attention backbone. Facial video is represented through axis-folded frame tokens, while EEG is processed either as a raw multichannel waveform or projected into the spatial domain for multimodal fusion. The framework is evaluated on the DMER dataset under a stratified subject-independent protocol, comparing unimodal video, unimodal EEG, and fused video--EEG configurations with per-channel and merged EEG projections. Using the original recordings, with shorter trials zero-padded to match the longest duration, merged fusion at stride~$30$ achieves the highest validation performance and a test accuracy of $70.07\\%$. Further analysis revealed that recording duration is unevenly distributed across the affective classes, making the padding pattern a potential classification cue. Controlling for this factor by cropping all recordings to a common duration of $20$ seconds yielded a test accuracy of $62.71\\%$, providing a stricter duration-controlled assessment of the framework in which differences in recording length are removed as a potential classification cue. These findings demonstrate the feasibility of processing structurally different neural and visual signals within a compact unified architecture while highlighting the importance of controlling duration-related cues in affective datasets.",
+      "authors": [
+        "Stefanos Gkikas",
+        "Eric Nichols",
+        "Christian Arzate Cruz",
+        "Randy Gomez"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-17T01:26:47+00:00",
+      "link": "https://arxiv.org/pdf/2608.15999v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "unified multimodal perception framework fusing facial video and EEG with shared backbone",
+      "llm_evidence_cn": "统一多模态感知框架，通过共享骨干融合面部视频与脑电信号",
+      "llm_evidence": "统一多模态感知框架，通过共享骨干融合面部视频与脑电信号",
+      "canonical_evidence": "统一多模态感知框架，通过共享骨干融合面部视频与脑电信号",
+      "llm_tldr_en": "MUPA2E processes facial video and EEG through a single shared asymmetric-attention backbone, enabling unified multimodal fusion for emotion assessment without separate modality-specific pipelines.",
+      "llm_tldr_cn": "该论文提出MUPA2E框架，将面部视频和脑电（EEG）通过单个共享的非对称注意力骨干统一处理，无需分离的特征提取流程。面部视频以轴折叠帧令牌表示，EEG可按原始波形或投影到空间域进行融合。在DMER数据集上的受试者独立实验比较了单模态与融合配置，验证了该框架的有效性。",
+      "llm_tldr": "该论文提出MUPA2E框架，将面部视频和脑电（EEG）通过单个共享的非对称注意力骨干统一处理，无需分离的特征提取流程。面部视频以轴折叠帧令牌表示，EEG可按原始波形或投影到空间域进行融合。在DMER数据集上的受试者独立实验比较了单模态与融合配置，验证了该框架的有效性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15601v1",
+      "source": "arxiv",
+      "title": "Quantum Models with Multi-Stage Training for Compositional Concept Generalization",
+      "abstract": "Compositional Concept Generalization (CoCoGen), the ability to systematically recombine learned primitives in novel contexts, is a key challenge for multimodal learning. In this work, we provide a solution using a compositional model of meaning that separates nouns from relations and uses tensors and variational quantum circuits to train them on data. This model enables us to employ a multi stage training paradigm, one that first learns object representations from single-object image-caption pairs, then subsequently transfers these to the relational stage where object parameters are frozen and optimisation is only applied to relational components. This design explicitly enforces compositional factorisation at the circuit, ensuring that relations are learned as transformations over stable primitives. The training paradigm is tested on the CLEVR dataset developed specificially for CoCoGen. For text, we work with vector representations of nouns and higher order tensor representations of relations using a set of different ansatz. For images, we work with quantum encodings of image embeddings dervied from Open AI's Vision Language tool CLIP and contrast amplitude encoding, which preserves the original embedding geometry, with angle encoding, which introduces nonlinear feature transformations. Our results show that multi-staged training combined with structured encodings significantly improves out of distribution relational generalisation, while using orders of magnitude fewer trainable parameters than classical baselines. We find that performance gains arise from the interaction between representation and encoding, with nonlinear quantum encodings enhancing the separability of compositional structure. These findings demonstrate that structured quantum representations and staged learning provide an effective framework for compositional generalisation in multimodal quantum machine learning.",
+      "authors": [
+        "Mina Abbaszadeh",
+        "Matilda Karabina Moore",
+        "Mehrnoosh Sadrzadeh",
+        "Martha Lewis"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-16T07:58:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.15601v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-stage quantum compositional model for multimodal concept generalization from image-caption pairs, separating nouns from relations",
+      "llm_evidence_cn": "利用图文对训练与关系分离的多阶段量子组合模型，提升多模态组合泛化",
+      "llm_evidence": "利用图文对训练与关系分离的多阶段量子组合模型，提升多模态组合泛化",
+      "canonical_evidence": "利用图文对训练与关系分离的多阶段量子组合模型，提升多模态组合泛化",
+      "llm_tldr_en": "Proposes a quantum compositional model with multi-stage training that learns object representations from image-caption pairs and then optimizes relational components for compositional generalization.",
+      "llm_tldr_cn": "组合概念泛化要求系统在新型语境中重组已学基元，是多模态学习的关键挑战。本文提出的量子组合模型将名词与关系分离，并采用张量与变分量子电路进行训练；多阶段训练先基于单物体图文对学习物体表示，再冻结物体参数仅优化关系成分，在电路层面显式施加组合分解约束。实验结果验证了该方法在多模态组合泛化上的有效性，为量子模型在关系建模中的应用提供了示例。",
+      "llm_tldr": "组合概念泛化要求系统在新型语境中重组已学基元，是多模态学习的关键挑战。本文提出的量子组合模型将名词与关系分离，并采用张量与变分量子电路进行训练；多阶段训练先基于单物体图文对学习物体表示，再冻结物体参数仅优化关系成分，在电路层面显式施加组合分解约束。实验结果验证了该方法在多模态组合泛化上的有效性，为量子模型在关系建模中的应用提供了示例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.16015v1",
+      "source": "arxiv",
+      "title": "Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification",
+      "abstract": "Visible-infrared person re-identification (VI-ReID) suffers from cross-modal discrepancies and limited discriminative capabilities, leading to suboptimal recognition performance. Current approaches exhibit limitations in semantic mining, cross-modal fusion and feature constraints. To tackle these challenges, we propose MDCRNet, a Multi-scale Decomposed Convolution Refinement Network that enhances cross-modal feature learning and discriminative metric learning. Specifically, we introduce a Hierarchical Learning Module (HLM) containing four Hierarchical Decomposed Convolution Attention (HDCA) modules, each equipped with lightweight channel attention and multi-scale spatial perception blocks to capture multi-scale spatial dependencies. Moreover, we develop a Joint Discriminative Metric Loss (JDML) incorporating a novel Granularity Discriminative Loss (GDL) that simultaneously optimizes intra-identity compactness and inter-identity separability across modalities. Extensive experiments on SYSU-MM01 and RegDB datasets demonstrate that MDCRNet achieves state-of-the-art performance on both benchmarks. Code is available at https://github.com/Kevin-zms/MDCRNet.",
+      "authors": [
+        "Mingsheng Zheng",
+        "Zirui Jiang",
+        "Bo Liu",
+        "Yupeng Chen",
+        "Jun Zhang",
+        "Kai Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-17T02:17:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.16015v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multi-scale decomposed convolution refinement network with hierarchical attention for cross-modal fusion in visible-infrared person re-identification",
+      "llm_evidence_cn": "提出多尺度分解卷积细化网络，通过层次化注意力增强可见光-红外跨模态融合",
+      "llm_evidence": "提出多尺度分解卷积细化网络，通过层次化注意力增强可见光-红外跨模态融合",
+      "canonical_evidence": "提出多尺度分解卷积细化网络，通过层次化注意力增强可见光-红外跨模态融合",
+      "llm_tldr_en": "MDCRNet improves visible-infrared person re-identification via hierarchical decomposed convolution attention modules that enhance cross-modal fusion and discriminative metric learning.",
+      "llm_tldr_cn": "可见光-红外行人重识别因跨模态差异和判别能力不足而性能受限。为此提出MDCRNet多尺度分解卷积细化网络，通过层次化学习模块和分解卷积注意力捕捉多尺度空间特征，增强跨模态特征学习与判别度量学习。在相关数据集上，该方法能够有效缩小模态差异并提升再识别精度，为跨模态融合提供了新思路。",
+      "llm_tldr": "可见光-红外行人重识别因跨模态差异和判别能力不足而性能受限。为此提出MDCRNet多尺度分解卷积细化网络，通过层次化学习模块和分解卷积注意力捕捉多尺度空间特征，增强跨模态特征学习与判别度量学习。在相关数据集上，该方法能够有效缩小模态差异并提升再识别精度，为跨模态融合提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.16628v1",
+      "source": "arxiv",
+      "title": "Hypergraph-based Multimodal Retrieval-Augmented Generation with Incremental Refinement",
+      "abstract": "Modern Multimodal Retrieval-Augmented Generation (M-RAG) systems are fundamentally limited by the binary connectivity paradigm of traditional simple graphs, which fails to capture the intricate, high-order correlations among heterogeneous entities, such as the N-ary relationships between a visual chart, its scattered textual descriptions, and underlying numerical data. Furthermore, existing refinement strategies often rely on exhaustive, full-page reconstruction to align cross-modal information, leading to prohibitive computational redundancy and the introduction of contextual noise in long-form document processing. In this paper, we propose Hyper-M2RAG, a novel framework that redefines multimodal document retrieval through High-order Hypergraph Representation Learning. We first formalize the document structure as a Multimodal Hypergraph, utilizing hyperedges as unified semantic containers to encapsulate multi-way associations across text, images, and tables, thereby transcending point-to-point modeling. To mitigate semantic fragmentation caused by physical pagination, we introduce an Anchor-driven Incremental Refinement mechanism. Rather than performing a global sweep, our approach identifies boundary-crossing anchor nodes and reconstructs their local hyper-topology using one-hop neighborhood contexts. This targeted refinement effectively bridges cross-page knowledge gaps with minimal computational footprints. Extensive evaluations on multimodal benchmarking datasets demonstrate that Hyper-M2RAG significantly outperforms state-of-the-art methods in both retrieval precision and generation coherence. Our code is available at https://github.com/ShenAoChen2001/MMHRAG.",
+      "authors": [
+        "Shenao Chen",
+        "Yidan Xu",
+        "Xiangmin Han",
+        "Rundong Xue",
+        "Duanpo Wu",
+        "Yuhan Gao",
+        "Chenggang Yan",
+        "Yue Gao"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-17T14:30:09+00:00",
+      "link": "https://arxiv.org/pdf/2608.16628v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Hypergraph-based multimodal RAG capturing high-order cross-modal correlations between charts, text, and numeric data.",
+      "llm_evidence_cn": "基于超图的多模态RAG，捕捉图表、文本与数值数据间的高阶跨模态关联。",
+      "llm_evidence": "基于超图的多模态RAG，捕捉图表、文本与数值数据间的高阶跨模态关联。",
+      "canonical_evidence": "基于超图的多模态RAG，捕捉图表、文本与数值数据间的高阶跨模态关联。",
+      "llm_tldr_en": "Hyper-M2RAG uses hypergraphs to model N-ary relationships across visual and textual document elements, with incremental refinement to reduce redundant reconstruction in multimodal RAG.",
+      "llm_tldr_cn": "传统多模态检索增强生成用简单图建模二值关系，难以捕捉图表、文本与数值间的N元关联。本文提出Hyper-M2RAG，以高阶超图建模跨模态实体关联，并通过增量精炼避免全页重建的冗余和噪声。方法在长文档处理中降低计算开销并提升检索质量，展示了超图在多模态学习中的应用价值。",
+      "llm_tldr": "传统多模态检索增强生成用简单图建模二值关系，难以捕捉图表、文本与数值间的N元关联。本文提出Hyper-M2RAG，以高阶超图建模跨模态实体关联，并通过增量精炼避免全页重建的冗余和噪声。方法在长文档处理中降低计算开销并提升检索质量，展示了超图在多模态学习中的应用价值。",
+      "llm_tags": [
+        "query:ml:composite"
+      ],
+      "matched_query_tag": "query:ml:composite",
+      "matched_query_text": "Papers central to 查找多模态学习相关论文 包括模态不平衡 模态融合等, especially work that connects or combines: multimodal learning methods combining different data modalities; addressing modality imbalance in multimodal learning; techniques for multimodal fusion in deep learning; cross-modal alignment representation learning; multimodal representation learning approaches; feature-level fusion methods for multimodal inputs; How to handle modality imbalance in multimodal learning?; Latest techniques for multimodal fusion in neural networks.",
+      "matched_requirement_id": "req-composite-ml",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

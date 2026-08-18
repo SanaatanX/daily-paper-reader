@@ -1,0 +1,265 @@
+{
+  "date": "20260818",
+  "date_label": "",
+  "generated_at": "2026-08-18 20:46:38 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.15085v1",
+      "route": "202608/18/2608.15085v1-why-vision-fails-as-a-universal-bridge-rectifying-modality-asynchrony-in-multilingual-mllms",
+      "title": "Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "模态异步与不平衡问题",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15056v1",
+      "route": "202608/18/2608.15056v1-graphloom-reliability-calibrated-graph-evidence-routing-for-multimodal-kg-rag",
+      "title": "GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "从多模态输入中提取关系三元组以构建知识图谱",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15261v1",
+      "route": "202608/18/2608.15261v1-boundary-aligned-contribution-routing-for-robust-optical--sar-object-detection",
+      "title": "Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多模态融合中的贡献路由机制",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.16201v1",
+      "route": "202608/18/2608.16201v1-multi-granularity-sentiment-integration-for-llm-based-multimodal-sentiment-analysis",
+      "title": "Multi-Granularity Sentiment Integration for LLM-Based Multimodal Sentiment Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出文本、音频和视觉信号的多粒度整合用于情感分析",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15096v1",
+      "route": "202608/18/2608.15096v1-modal-multi-modal-object-re-id-via-model-driven-sparse-decoupling-and-text-image-differential-filtering",
+      "title": "MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态目标重识别框架，包含特征解耦与多模态整合",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15104v1",
+      "route": "202608/18/2608.15104v1-projformer-point-cloud-completion-via-geometric-projective-transformer-and-cross-modal-semantic-constraints",
+      "title": "ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过投影引导注意力与自适应特征路由实现几何一致的2D-3D跨模态对齐。",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15517v1",
+      "route": "202608/18/2608.15517v1-glaq-grounding-latent-queries-in-visual-evidence-for-multimodal-reasoning",
+      "title": "GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在视觉证据中接地潜在查询以实现跨模态对齐",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15698v1",
+      "route": "202608/18/2608.15698v1-conceptformer-learning-adaptive-latent-concepts-for-query-document-alignment-in-visual-document-retrieval",
+      "title": "ConceptFormer: Learning Adaptive Latent Concepts for Query-Document Alignment in Visual Document Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "潜变量概念表示学习用于文档检索中的查询与视觉结构对齐",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15999v1",
+      "route": "202608/18/2608.15999v1-mupa2e-multimodal-unified-perception-with-asymmetric-attention-for-emotion-assessment",
+      "title": "MUPA$^{2}$E: Multimodal Unified Perception with Asymmetric Attention for Emotion Assessment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "统一多模态感知框架，通过共享骨干融合面部视频与脑电信号",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.16015v1",
+      "route": "202608/18/2608.16015v1-multi-scale-decomposed-convolution-refinement-network-for-visible-infrared-person-re-identification",
+      "title": "Multi-scale Decomposed Convolution Refinement Network for Visible-Infrared Person Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出多尺度分解卷积细化网络，通过层次化注意力增强可见光-红外跨模态融合",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.12627v2",
+      "route": "202608/18/2608.12627v2-egocite-context-augmented-indexing-and-time-aware-retrieval-for-long-horizon-egocentric-memory",
+      "title": "EgoCITE: Context-Augmented Indexing and Time-Aware Retrieval for Long-Horizon Egocentric Memory",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用多模态视频与音频进行上下文增强索引与时序感知检索",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.13385v1",
+      "route": "202608/18/2608.13385v1-when-is-a-task-vector-enough-an-empirical-theory-of-implicit-multimodal-icl",
+      "title": "When Is a Task Vector Enough? An Empirical Theory of Implicit Multimodal ICL",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态表示学习与内部干预机制",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.14138v1",
+      "route": "202608/18/2608.14138v1-spargen-unifying-spatial-perception-and-reasoning-through-native-multimodal-generation",
+      "title": "SPARGen: Unifying Spatial Perception and Reasoning through Native Multimodal Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "统一多模态生成框架处理空间任务",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.14841v1",
+      "route": "202608/18/2608.14841v1-what-the-reranker-sees-multi-aspect-page-annotation-for-long-document-multimodal-question-answering",
+      "title": "What the Reranker Sees: Multi-Aspect Page Annotation for Long-Document Multimodal Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合文本、图表和布局证据的多模态问答重排器，用于长文档证据选择。",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.15601v1",
+      "route": "202608/18/2608.15601v1-quantum-models-with-multi-stage-training-for-compositional-concept-generalization",
+      "title": "Quantum Models with Multi-Stage Training for Compositional Concept Generalization",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用图文对训练与关系分离的多阶段量子组合模型，提升多模态组合泛化",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    },
+    {
+      "paper_id": "2608.16628v1",
+      "route": "202608/18/2608.16628v1-hypergraph-based-multimodal-retrieval-augmented-generation-with-incremental-refinement",
+      "title": "Hypergraph-based Multimodal Retrieval-Augmented Generation with Incremental Refinement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于超图的多模态RAG，捕捉图表、文本与数值数据间的高阶跨模态关联。",
+      "first_seen_at": "2026-08-18 20:46:38 UTC",
+      "updated_at": "2026-08-18 20:46:38 UTC"
+    }
+  ]
+}
