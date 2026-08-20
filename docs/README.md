@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-18</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-20</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 16 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-18 20:46:38 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-20 20:53:19 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读聚焦多模态大模型与知识图谱检索增强，另速读覆盖目标重识别、点云补全等方向。最值得关注的是《Why Vision Fails as a Universal Bridge》揭示模态异步问题并给出矫正方案，以及《GraphLoom》提出的可靠性校准图证据路由。建议普通读者优先关注多模态模型在跨模态对齐上的新思路，后续可深入探索其与检索增强的结合。</p>
+<p>今日共读17篇论文，其中精读7篇、速读10篇，聚焦多模态场景理解与医学影像分割。最值得关注的是开放词汇动态场景图生成（OvDSGG）与深度引导的视听分割，两者均获8分，前者用端到端方式处理动态场景中的开放词汇关系，后者利用深度信息提升音视频分割的协作建模。建议普通读者优先浏览这两篇精读论文的摘要与图表，再按兴趣从速读列表中补充检索相关方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">4 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs">Why Vision Fails as a Universal Bridge: Rectifying Modality Asynchrony in Multilingual MLLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG">GraphLoom: Reliability-Calibrated Graph Evidence Routing for Multimodal KG-RAG</span></li><li><span class="dpr-home-dashboard-paper-title" title="Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection">Boundary-Aligned Contribution Routing for Robust Optical--SAR Object Detection</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="OvDSGG: End-to-End Open-Vocabulary Dynamic Scene Graph Generation">OvDSGG: End-to-End Open-Vocabulary Dynamic Scene Graph Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Audio-Visual Segmentation via Depth-Guided Collaborative Modeling">Audio-Visual Segmentation via Depth-Guided Collaborative Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="Expressivity In Multimodal Contrastive Learning">Expressivity In Multimodal Contrastive Learning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">10 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering">MODAL: Multi-Modal Object Re-ID via Model-Driven Sparse Decoupling and Text-Image Differential Filtering</span></li><li><span class="dpr-home-dashboard-paper-title" title="ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints">ProjFormer: Point Cloud Completion via Geometric-Projective Transformer and Cross-Modal Semantic Constraints</span></li><li><span class="dpr-home-dashboard-paper-title" title="GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning">GLaQ: Grounding Latent Queries in Visual Evidence for Multimodal Reasoning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="When Two Tracers Disagree: An Investigation of Multimodal Fusion for Clinical PET/CT Segmentation">When Two Tracers Disagree: An Investigation of Multimodal Fusion for Clinical PET/CT Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="MAG: MAnifold Guided Semi-Supervised Multi-modal In-Context Learning">MAG: MAnifold Guided Semi-Supervised Multi-modal In-Context Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="UniFed-VLM: Federated Instruction Tuning for Vision-Language Models with Multiple Heterogeneity">UniFed-VLM: Federated Instruction Tuning for Vision-Language Models with Multiple Heterogeneity</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>9</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 

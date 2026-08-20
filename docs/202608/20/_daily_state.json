@@ -1,0 +1,281 @@
+{
+  "date": "20260820",
+  "date_label": "",
+  "generated_at": "2026-08-20 20:53:19 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.14835v1",
+      "route": "202608/20/2608.14835v1-ovdsgg-end-to-end-open-vocabulary-dynamic-scene-graph-generation",
+      "title": "OvDSGG: End-to-End Open-Vocabulary Dynamic Scene Graph Generation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "开放词汇动态场景图生成，利用视觉-语言知识从视频中提取关系三元组",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.16285v1",
+      "route": "202608/20/2608.16285v1-audio-visual-segmentation-via-depth-guided-collaborative-modeling",
+      "title": "Audio-Visual Segmentation via Depth-Guided Collaborative Modeling",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "联合建模音频、视觉和深度的三模态分割框架",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.17203v1",
+      "route": "202608/20/2608.17203v1-expressivity-in-multimodal-contrastive-learning",
+      "title": "Expressivity In Multimodal Contrastive Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "分析多模态对比表示学习的表达能力",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.17490v1",
+      "route": "202608/20/2608.17490v1-when-more-foundation-models-means-less-diagnosing-and-addressing-multi-view-fusion-failure",
+      "title": "When More Foundation Models Means Less: Diagnosing and Addressing Multi-View Fusion Failure",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "深度学习中的多视图融合失败诊断与解决",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.18339v1",
+      "route": "202608/20/2608.18339v1-from-inference-to-adaptation-a-unified-optimal-transport-view-of-vision-language-model",
+      "title": "From Inference to Adaptation: A Unified Optimal Transport View of Vision Language Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用最优传输建模模态间样本级关系，用于视觉-语言模型测试时自适应",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.18386v1",
+      "route": "202608/20/2608.18386v1-ttsd-far-test-time-self-distillation-with-fisher-anchored-restoration-for-missing-modality-emotion-recognition-in-lvlms",
+      "title": "TTSD-FAR: Test-Time Self-Distillation with Fisher-Anchored Restoration for Missing-Modality Emotion Recognition in LVLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "解决多模态情感识别中的模态缺失问题，属于多模态学习中的模态不平衡",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.18734v1",
+      "route": "202608/20/2608.18734v1-cl4d-contrastive-language-4d-pretraining-for-vision-language-reasoning-in-dynamic-scenes",
+      "title": "CL4D: Contrastive Language-4D Pretraining for Vision-Language Reasoning in Dynamic Scenes",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "对比语言-4D预训练将时空几何表示与自然语言描述对齐，属于跨模态对齐表示学习。",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.19063v1",
+      "route": "202608/20/2608.19063v1-when-two-tracers-disagree-an-investigation-of-multimodal-fusion-for-clinical-petct-segmentation",
+      "title": "When Two Tracers Disagree: An Investigation of Multimodal Fusion for Clinical PET/CT Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "PET/CT分割中早期与中期多模态融合策略的比较研究",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.12724v1",
+      "route": "202608/20/2608.12724v1-mag-manifold-guided-semi-supervised-multi-modal-in-context-learning",
+      "title": "MAG: MAnifold Guided Semi-Supervised Multi-modal In-Context Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在多模态图上进行半监督示范选择，用于多模态上下文学习",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.15516v1",
+      "route": "202608/20/2608.15516v1-unifed-vlm-federated-instruction-tuning-for-vision-language-models-with-multiple-heterogeneity",
+      "title": "UniFed-VLM: Federated Instruction Tuning for Vision-Language Models with Multiple Heterogeneity",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "处理视觉-语言模型联邦指令微调中的多模态异构",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.17205v1",
+      "route": "202608/20/2608.17205v1-which-source-wins-task-dependent-reliance-in-vision-language-models",
+      "title": "Which Source Wins? Task-Dependent Reliance in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在图像与文本冲突且受控退化条件下研究VLM的模态依赖转移",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.18504v1",
+      "route": "202608/20/2608.18504v1-umer-unifying-embedding-and-ranking-via-pair-aware-discriminative-reasoning-for-universal-multimodal-retrieval",
+      "title": "UMER: Unifying Embedding and Ranking via Pair-Aware Discriminative Reasoning for Universal Multimodal Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出用于通用多模态检索嵌入与排名的成对感知判别性推理",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.19052v1",
+      "route": "202608/20/2608.19052v1-malformer-a-multi-modal-malware-detector-using-transformers",
+      "title": "Malformer: A Multi-Modal Malware Detector Using Transformers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "融合文本、图像、图谱和音频四种模态表示进行恶意软件检测，展示了多模态Transformer融合技术。",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.19115v1",
+      "route": "202608/20/2608.19115v1-pretraining-reusable-inference-across-views-with-synthetic-task-priors",
+      "title": "Pretraining Reusable Inference Across Views with Synthetic Task Priors",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将多视图学习重构为可复用推理过程而非固定融合函数",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.15060v1",
+      "route": "202608/20/2608.15060v1-egotac-in-the-wild-tactile-prediction-from-egocentric-vision",
+      "title": "EgoTac: In-the-wild Tactile Prediction from Egocentric Vision",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "从第一人称视频直接预测触觉信息，学习图像-触觉联合表示，属于跨模态对齐学习。",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.16628v1",
+      "route": "202608/20/2608.16628v1-hypergraph-based-multimodal-retrieval-augmented-generation-with-incremental-refinement",
+      "title": "Hypergraph-based Multimodal Retrieval-Augmented Generation with Incremental Refinement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于超图的高阶N元关系建模，用于多模态实体联合表示",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    },
+    {
+      "paper_id": "2608.18895v1",
+      "route": "202608/20/2608.18895v1-mediagraph-a-content-aware-data-model-and-query-framework-for-multimodal-knowledge-graphs",
+      "title": "MediaGraph: A Content-Aware Data Model and Query Framework for Multimodal Knowledge Graphs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态知识图谱的内容感知数据模型，支持跨媒体类型推断未物化关系",
+      "first_seen_at": "2026-08-20 20:53:19 UTC",
+      "updated_at": "2026-08-20 20:53:19 UTC"
+    }
+  ]
+}
