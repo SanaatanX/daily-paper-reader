@@ -1,0 +1,89 @@
+{
+  "date": "20260822",
+  "date_label": "",
+  "generated_at": "2026-08-22 20:41:34 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.19942v1",
+      "route": "202608/22/2608.19942v1-dynamic-gated-cross-modal-fusion-with-sarcastic-aware-contrastive-regularization-for-multimodal-sarcasm-detection",
+      "title": "Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "动态门控跨模态融合与讽刺感知对比正则化",
+      "first_seen_at": "2026-08-22 20:41:34 UTC",
+      "updated_at": "2026-08-22 20:41:34 UTC"
+    },
+    {
+      "paper_id": "2608.19971v1",
+      "route": "202608/22/2608.19971v1-robust-incomplete-multimodal-sentiment-analysis-via-iterative-proxy-correction",
+      "title": "Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "针对不完整多模态数据，用迭代代理修正实现稳健融合",
+      "first_seen_at": "2026-08-22 20:41:34 UTC",
+      "updated_at": "2026-08-22 20:41:34 UTC"
+    },
+    {
+      "paper_id": "2608.19492v1",
+      "route": "202608/22/2608.19492v1-beyond-multimodal-alignment-certifying-physical-language-through-response-substitution-and-ordered-execution",
+      "title": "Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "验证独立训练模态编译器之间的语义对齐，面向物理语言",
+      "first_seen_at": "2026-08-22 20:41:34 UTC",
+      "updated_at": "2026-08-22 20:41:34 UTC"
+    },
+    {
+      "paper_id": "2608.19598v1",
+      "route": "202608/22/2608.19598v1-pea-dpo-perception-enhanced-alignment-direct-preference-optimization-for-mllms-alignment",
+      "title": "PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "针对多模态偏好优化中的视觉不敏感问题，提出感知增强的对齐方法，属于模态不平衡处理",
+      "first_seen_at": "2026-08-22 20:41:34 UTC",
+      "updated_at": "2026-08-22 20:41:34 UTC"
+    },
+    {
+      "paper_id": "2608.20019v1",
+      "route": "202608/22/2608.20019v1-contrastive-mixed-prompt-learning-for-incomplete-multimodal-sentiment-analysis-with-unseen-modality-combination",
+      "title": "Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "不完整多模态情感分析中未知模态组合与对比提示学习",
+      "first_seen_at": "2026-08-22 20:41:34 UTC",
+      "updated_at": "2026-08-22 20:41:34 UTC"
+    }
+  ]
+}

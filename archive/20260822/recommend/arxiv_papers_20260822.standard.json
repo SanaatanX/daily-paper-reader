@@ -1,0 +1,235 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-22T20:38:19.983622+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 2,
+    "deep_cap": 7,
+    "deep_selected": 2,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2608.19942v1",
+      "source": "arxiv",
+      "title": "Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection",
+      "abstract": "Multimodal sarcasm detection aims to identify sarcastic intent from multimodal content, where inconsistencies between literal meaning and contextual cues often signal irony. This task has attracted increasing research attention. However, accurate detection remains challenging due to instance-dependent modality contributions and misleading semantic consistency, where surface-level alignment masks underlying contradictory intent. Existing methods often rely on fixed fusion strategies and treat sarcasm as generic cross-modal mismatch, limiting their ability to capture subtle sarcasm cues and instance-specific modality interactions. To address these challenges, we propose a novel MSD framework that integrates Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization (SaCR). Specifically, a bidirectional gated interaction module performs cross-modal feature filtering and adaptively calibrates textual and visual contributions at the instance level. A dynamic fusion gate further balances modality importance to generate more robust multimodal representations. Furthermore, SaCR is introduced as a label-aware contrastive regularization objective that encourages semantic consistency for non-sarcastic samples while suppressing misleading consistency in sarcastic cases. The proposed framework is trained end-to-end with a multi-objective learning strategy that jointly optimizes multimodal classification and auxiliary unimodal supervision. Extensive experiments on MMSD and MMSD2.0 demonstrate that the proposed method consistently outperforms strong baselines.",
+      "authors": [
+        "Hao Guo",
+        "Subin Huang",
+        "Junjie Chen",
+        "Zhifa Geng",
+        "Sanmin Liu",
+        "Chao Kong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-20T12:02:06+00:00",
+      "link": "https://arxiv.org/pdf/2608.19942v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dynamic gated cross-modal fusion and sarcastic-aware contrastive regularization",
+      "llm_evidence_cn": "动态门控跨模态融合与讽刺感知对比正则化",
+      "llm_evidence": "动态门控跨模态融合与讽刺感知对比正则化",
+      "canonical_evidence": "动态门控跨模态融合与讽刺感知对比正则化",
+      "llm_tldr_en": "Proposes a dynamic gated cross-modal fusion framework with sarcastic-aware contrastive regularization for multimodal sarcasm detection, adapting fusion to instance-specific modality interactions.",
+      "llm_tldr_cn": "多模态讽刺检测中，不同实例的模态贡献各异，且表面语义一致性可能掩盖矛盾意图。针对现有固定融合策略的局限，提出动态门控跨模态融合框架，并引入讽刺感知对比正则化。该方法根据输入实例动态调节模态交互权重，利用对比学习突出跨模态不一致线索。实验表明该方法在多个数据集上显著优于现有讽刺检测方法，性能领先。该工作为实例自适应的多模态融合提供了有效方案。",
+      "llm_tldr": "多模态讽刺检测中，不同实例的模态贡献各异，且表面语义一致性可能掩盖矛盾意图。针对现有固定融合策略的局限，提出动态门控跨模态融合框架，并引入讽刺感知对比正则化。该方法根据输入实例动态调节模态交互权重，利用对比学习突出跨模态不一致线索。实验表明该方法在多个数据集上显著优于现有讽刺检测方法，性能领先。该工作为实例自适应的多模态融合提供了有效方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.19971v1",
+      "source": "arxiv",
+      "title": "Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction",
+      "abstract": "Multimodal sentiment analysis aims to infer affective states by integrating language, visual, and acoustic cues. However, real-world multimodal inputs are often incomplete or corrupted, which can weaken cross-modal complementarity and introduce misleading information into downstream fusion. Existing proxy-based methods for incomplete MSA commonly rely on one-shot proxy construction to compensate for degraded language information, but the generated proxy may be coarse or unreliable at initialization. Prematurely injecting such a proxy into multimodal reasoning can propagate initial errors and compromise sentiment prediction. To address this limitation, we propose an iterative proxy correction framework for robust incomplete MSA. Our method constructs a language-oriented proxy from non-language modalities and progressively refines it under multimodal context through gated residual correction. The corrected proxy is then adaptively fused with the observed language representation according to an estimated language reliability score, allowing the model to balance proxy-based compensation and trustworthy linguistic evidence. In addition, we introduce a stage-wise latent correction objective that uses the complete language representation as a training-time semantic anchor to stabilize the proxy refinement trajectory. Extensive experiments on MOSI, MOSEI, and SIMS under diverse missing-modality settings demonstrate that the proposed framework consistently outperforms competitive baselines and achieves robust sentiment prediction under incomplete inputs.",
+      "authors": [
+        "Zhifa Geng",
+        "Subin Huang",
+        "Hao Guo",
+        "Junjie Chen",
+        "Sanmin Liu",
+        "Chao Kong"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-08-20T12:45:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.19971v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "handles incomplete multimodal data with iterative proxy correction for robust fusion",
+      "llm_evidence_cn": "针对不完整多模态数据，用迭代代理修正实现稳健融合",
+      "llm_evidence": "针对不完整多模态数据，用迭代代理修正实现稳健融合",
+      "canonical_evidence": "针对不完整多模态数据，用迭代代理修正实现稳健融合",
+      "llm_tldr_en": "Addresses incomplete multimodal sentiment analysis by iteratively correcting unreliable proxies for degraded modalities, preventing error propagation in fusion and improving sentiment prediction.",
+      "llm_tldr_cn": "实际多模态情感分析常面临模态缺失或损坏，现有代理方法一次性构造的代理不可靠，容易传播初始误差。本文提出迭代代理修正框架，逐步修正语言模态的代理表示，再与视觉和声学线索融合。在多个不完整多模态情感数据集上，该方法显著缓解了误差传播，提升了情感预测的鲁棒性。该工作为不完整多模态学习提供了通用修正策略。",
+      "llm_tldr": "实际多模态情感分析常面临模态缺失或损坏，现有代理方法一次性构造的代理不可靠，容易传播初始误差。本文提出迭代代理修正框架，逐步修正语言模态的代理表示，再与视觉和声学线索融合。在多个不完整多模态情感数据集上，该方法显著缓解了误差传播，提升了情感预测的鲁棒性。该工作为不完整多模态学习提供了通用修正策略。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.19492v1",
+      "source": "arxiv",
+      "title": "Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution",
+      "abstract": "World models increasingly treat compact multimodal representations as interfaces between perception and physical interaction, yet existing probes do not establish whether different sensors carry the same executable meaning or whether that meaning survives a new action composition. We introduce an operational capability hierarchy and the Disjoint-Bridge Operator-Substitution Certificate (DBOSC), which asks whether independently trained modality compilers enter a frozen response chart interchangeably on evidence outside their training panels. On Cluster Haptic, audio and acceleration representations of the same unseen surface are 4.5x closer in response space than wrong-surface pairings, with the gap holding for all 19 held-out surfaces; unsealing withheld responses confirms that every branch predicts the physics better than the population chart. We then test ordered execution in a controlled elastoplastic system with complementary modality blind spots. At the pre-registered budget, the prerequisite refuses the stack because the frozen executor cannot advance even an exact chart coordinate through a held-out program. At a converged budget, the same rank-three chart executes those programs (oracle NMSE 0.18), fusion improves on both modalities, and 14 of 16 registered checks pass; the two failures arise because a diagonal restriction of the fused information matrix performs as well as the full one. Clearing the gate is a property of the executor, not the chart: an executor emitting whole programs instead of shared per-step dynamics is 38x worse than an entity-blind predictor on the same chart. A matching non-identifiability result explains why compression and fusion alone cannot determine an unseen composition law. These results separate attribute access, response substitution, fusion closure, and ordered execution into distinct, separately testable achievements.",
+      "authors": [
+        "Kaizhen Tan",
+        "Xin Xu",
+        "Siru Tao",
+        "Yixiao Li",
+        "Hanzhe Hong",
+        "Yang Feng",
+        "Heqing Du"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-08-19T23:04:53+00:00",
+      "link": "https://arxiv.org/pdf/2608.19492v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "certifies semantic alignment across independently trained modality compilers for physical language",
+      "llm_evidence_cn": "验证独立训练模态编译器之间的语义对齐，面向物理语言",
+      "llm_evidence": "验证独立训练模态编译器之间的语义对齐，面向物理语言",
+      "canonical_evidence": "验证独立训练模态编译器之间的语义对齐，面向物理语言",
+      "llm_tldr_en": "Introduces DBOSC to certify whether independently trained modality compilers are interchangeable in response space; experiments on haptic and acceleration data show cross-modal alignment is 4.5x closer for matching surfaces.",
+      "llm_tldr_cn": "世界模型通常用多模态表示作为感知与物理交互的接口，但现有方法无法验证不同传感器是否携带相同的可执行语义。本文提出断桥算子替换证书（DBOSC），通过响应替换和有序执行检验独立训练模态编译器是否可互换。在触觉与加速度实验中，匹配表面对应的跨模态响应距离比错误表面对近4.5倍。这一证书为多模态表示的语义一致性提供了可操作的验证手段。",
+      "llm_tldr": "世界模型通常用多模态表示作为感知与物理交互的接口，但现有方法无法验证不同传感器是否携带相同的可执行语义。本文提出断桥算子替换证书（DBOSC），通过响应替换和有序执行检验独立训练模态编译器是否可互换。在触觉与加速度实验中，匹配表面对应的跨模态响应距离比错误表面对近4.5倍。这一证书为多模态表示的语义一致性提供了可操作的验证手段。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.19598v1",
+      "source": "arxiv",
+      "title": "PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment",
+      "abstract": "Direct Preference Optimization (DPO) has emerged as an effective approach for aligning large language models (LLMs) with human preferences. However, its adaptation to multimodal settings remains unexplored. Through representational analysis, we identify a key limitation in multimodal preference optimization, which we term visual insensitivity: models often fail to distinguish between images and those with critical visual context removed. Our theoretical analysis further uncovers two manifestations of this problem, namely Across-Image Insensitivity and Within-Image Insensitivity. To address these challenges, we propose Perception-Enhanced Alignment DPO (PEA-DPO), a framework for multimodal LLMs alignment, which explicitly leverages visual preference signals to overcome visual insensitivity. We further provide a theoretical analysis demonstrating that PEA-DPO provably mitigates both failure modes. Empirical results demonstrate that PEA-DPO enhances sensitivity to visual context while preserving the language modeling capacity of the base model. Evaluations across three hallucination benchmarks using MLLMs of varying scales show that PEA-DPO effectively mitigates visual insensitivity, achieves stronger multimodal alignment, and substantially reduces hallucinations.",
+      "authors": [
+        "Jiawei Feng",
+        "Jiancan Wu",
+        "Xingyu Zhu",
+        "Junkang Wu",
+        "Xiang Wang",
+        "Xiangnan He"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.MM"
+      ],
+      "published": "2026-08-20T03:35:07+00:00",
+      "link": "https://arxiv.org/pdf/2608.19598v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Addresses visual insensitivity and perception-enhanced alignment in multimodal preference optimization",
+      "llm_evidence_cn": "针对多模态偏好优化中的视觉不敏感问题，提出感知增强的对齐方法，属于模态不平衡处理",
+      "llm_evidence": "针对多模态偏好优化中的视觉不敏感问题，提出感知增强的对齐方法，属于模态不平衡处理",
+      "canonical_evidence": "针对多模态偏好优化中的视觉不敏感问题，提出感知增强的对齐方法，属于模态不平衡处理",
+      "llm_tldr_en": "PEA-DPO identifies visual insensitivity in multimodal DPO and proposes perception-enhanced alignment that explicitly leverages visual perception to improve LLM multimodal alignment.",
+      "llm_tldr_cn": "多模态偏好优化中模型常对图像内容不敏感，难以区分原始图像与被移除关键视觉上下文的图像，作者称之为视觉不敏感问题并细分为图像间与图像内两类。为此提出PEA-DPO框架，显式利用视觉感知增强直接偏好优化中的多模态对齐。理论分析与实验表明，该方法能够缓解视觉不敏感，提升多模态大模型的偏好对齐效果。这项工作揭示并处理了多模态学习中视觉通道未被充分使用的问题，对模态不平衡研究有借鉴意义。",
+      "llm_tldr": "多模态偏好优化中模型常对图像内容不敏感，难以区分原始图像与被移除关键视觉上下文的图像，作者称之为视觉不敏感问题并细分为图像间与图像内两类。为此提出PEA-DPO框架，显式利用视觉感知增强直接偏好优化中的多模态对齐。理论分析与实验表明，该方法能够缓解视觉不敏感，提升多模态大模型的偏好对齐效果。这项工作揭示并处理了多模态学习中视觉通道未被充分使用的问题，对模态不平衡研究有借鉴意义。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.20019v1",
+      "source": "arxiv",
+      "title": "Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination",
+      "abstract": "Incomplete multimodal sentiment analysis has garnered significant attention in recent years. Existing approaches typically assume that data is missing at random or are designed specifically for certain missing patterns, ignoring the modality combination inconsistency between training and testing phases. However, in real-world scenarios, the testing phase often encounters modal combinations that were not present during the training phase, which leads to insufficient generalization capabilities and unstable performance. In this paper, we introduce the problem of Incomplete Multimodal Sentiment Analysis with Unseen Modality Combinations (IMSAUMC), aiming to enhance model generalization for unseen modality combinations. To address this challenge, we propose the model named $\\textbf{C}$ontrastive $\\textbf{M}$ixed $\\textbf{P}$rompt $\\textbf{L}$earning ($\\textsf{CMPL}$) for IMSAUMC. It introduces a label-guided contrastive feature learning mechanism to learn robust and discriminative cross-modal representations. Additionally, we design modality-combination prompts with a soft router to facilitate better learning of various modality combinations. Furthermore, we introduce three prompt contrastive learning strategies, which enable effective learning of prompts corresponding to unseen modality combinations, thereby significantly strengthening the model's generalization capabilities in diverse testing scenarios. Extensive experiments on three widely used datasets demonstrate that $\\textsf{CMPL}$ achieves more than a 5% improvement in accuracy compared to state-of-the-art approaches.",
+      "authors": [
+        "Kaixin Xu",
+        "NaiJin Liu",
+        "Yulin Kang",
+        "Tangyue Jin",
+        "Zixuan Yu",
+        "Wenxi Zhao",
+        "Yibei Liu",
+        "Qianle Zhang",
+        "Yangyang Wu",
+        "Mengying Zhu",
+        "Meng Xi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-20T13:29:49+00:00",
+      "link": "https://arxiv.org/pdf/2608.20019v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "incomplete multimodal sentiment analysis with unseen modality combinations and contrastive prompt learning",
+      "llm_evidence_cn": "不完整多模态情感分析中未知模态组合与对比提示学习",
+      "llm_evidence": "不完整多模态情感分析中未知模态组合与对比提示学习",
+      "canonical_evidence": "不完整多模态情感分析中未知模态组合与对比提示学习",
+      "llm_tldr_en": "Introduces IMSAUMC for incomplete multimodal sentiment analysis under unseen modality combinations and proposes contrastive mixed prompt learning to enhance generalization and stability.",
+      "llm_tldr_cn": "针对多模态情感分析中测试阶段出现训练未见的模态组合、导致泛化不足与性能不稳定的问题，提出IMSAUMC问题定义，并设计对比混合提示学习方法。该方法利用对比学习将不同模态组合的表示对齐，并以混合提示增强对未知组合的适应性。实验表明该方法在不完整多模态设置和未知模态组合下显著优于现有方法，提升了鲁棒性。该工作为缺失模态场景下的多模态学习提供了通用范式。",
+      "llm_tldr": "针对多模态情感分析中测试阶段出现训练未见的模态组合、导致泛化不足与性能不稳定的问题，提出IMSAUMC问题定义，并设计对比混合提示学习方法。该方法利用对比学习将不同模态组合的表示对齐，并以混合提示增强对未知组合的适应性。实验表明该方法在不完整多模态设置和未知模态组合下显著优于现有方法，提升了鲁棒性。该工作为缺失模态场景下的多模态学习提供了通用范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

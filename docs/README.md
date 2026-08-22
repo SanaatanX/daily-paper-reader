@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-20</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-22</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 17 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-20 20:53:19 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-22 20:41:34 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读17篇论文，其中精读7篇、速读10篇，聚焦多模态场景理解与医学影像分割。最值得关注的是开放词汇动态场景图生成（OvDSGG）与深度引导的视听分割，两者均获8分，前者用端到端方式处理动态场景中的开放词汇关系，后者利用深度信息提升音视频分割的协作建模。建议普通读者优先浏览这两篇精读论文的摘要与图表，再按兴趣从速读列表中补充检索相关方向。</p>
+<p>今日聚焦多模态情感分析，精读两篇高分解法，速读覆盖对齐与不完整模态处理。</p>
+<p>最值得看：讽刺检测的跨模态融合与对比正则、残缺多模态的迭代修正策略。</p>
+<p>下一步建议：优先细读两篇8分论文，掌握处理不完整多模态数据的通用思路。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="OvDSGG: End-to-End Open-Vocabulary Dynamic Scene Graph Generation">OvDSGG: End-to-End Open-Vocabulary Dynamic Scene Graph Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Audio-Visual Segmentation via Depth-Guided Collaborative Modeling">Audio-Visual Segmentation via Depth-Guided Collaborative Modeling</span></li><li><span class="dpr-home-dashboard-paper-title" title="Expressivity In Multimodal Contrastive Learning">Expressivity In Multimodal Contrastive Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection">Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction">Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="When Two Tracers Disagree: An Investigation of Multimodal Fusion for Clinical PET/CT Segmentation">When Two Tracers Disagree: An Investigation of Multimodal Fusion for Clinical PET/CT Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="MAG: MAnifold Guided Semi-Supervised Multi-modal In-Context Learning">MAG: MAnifold Guided Semi-Supervised Multi-modal In-Context Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="UniFed-VLM: Federated Instruction Tuning for Vision-Language Models with Multiple Heterogeneity">UniFed-VLM: Federated Instruction Tuning for Vision-Language Models with Multiple Heterogeneity</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution">Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution</span></li><li><span class="dpr-home-dashboard-paper-title" title="PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment">PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination">Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>9</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 </div>
 
