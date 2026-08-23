@@ -1,0 +1,416 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-23T19:41:48.450485+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 4,
+    "deep_cap": 7,
+    "deep_selected": 4,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2608.19666v1",
+      "source": "arxiv",
+      "title": "MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation",
+      "abstract": "Deep learning-based whole-body PET-CT lesion segmentation can support cancer staging, treatment planning, and response assessment, but generalization is limited by scarce annotations and domain shifts. Self-supervised learning (SSL) can address these challenges but remains underexplored in pan-cancer, multi-tracer PET-CT. In this work, we propose MUST-PET (MUltimodal Self-Supervised learning across Tracers), a multimodal, multi-tracer SSL framework for generalizable whole-body PET-CT lesion segmentation. MUST-PET is trained and validated on a diverse, multi-institutional collection of pan-cancer PET-CT scans acquired with FDG and prostate-specific membrane antigen (PSMA)-targeted radiotracers. MUST-PET uses context-aware masked reconstruction, where one modality is partially masked and reconstructed using complementary information from both PET and CT. The pretrained model is subsequently fine-tuned with labeled samples and evaluated for reconstruction quality, lesion segmentation, label efficiency, and generalizability across independent held-out datasets. MUST-PET reduces reconstruction error, improves lesion segmentation over training from scratch, and performs well with limited labeled data and on unseen external datasets, demonstrating the potential of multi-tracer SSL for label-efficient, generalizable whole-body PET-CT. segmentation.",
+      "authors": [
+        "Bashirul Azam Biswas",
+        "Amartya Bhattacharya",
+        "Biratal Raj Wagle",
+        "Matthew E. Maeder",
+        "James B. Yu",
+        "Indrani Bhattacharya"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-20T06:02:54+00:00",
+      "link": "https://arxiv.org/pdf/2608.19666v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Multimodal self-supervised learning across PET and CT modalities",
+      "llm_evidence_cn": "跨PET与CT模态的多模态自监督学习方法",
+      "llm_evidence": "跨PET与CT模态的多模态自监督学习方法",
+      "canonical_evidence": "跨PET与CT模态的多模态自监督学习方法",
+      "llm_tldr_en": "Proposes MUST-PET, a multimodal self-supervised framework across tracers for whole-body PET/CT lesion segmentation, improving generalization on pan-cancer multi-tracer data.",
+      "llm_tldr_cn": "本文针对全身PET/CT病灶分割中标注稀缺、领域偏移导致泛化困难的问题，提出跨示踪剂多模态自监督学习框架MUST-PET。该方法在包含FDG和PSMA靶向示踪剂的泛癌种多机构PET-CT数据上训练，通过跨模态自监督学习强化对病灶的通用特征表示。实验表明，MUST-PET显著提升了全身病灶分割的跨域泛化性能与准确率，验证了多模态自监督在医学影像任务中的普适价值。",
+      "llm_tldr": "本文针对全身PET/CT病灶分割中标注稀缺、领域偏移导致泛化困难的问题，提出跨示踪剂多模态自监督学习框架MUST-PET。该方法在包含FDG和PSMA靶向示踪剂的泛癌种多机构PET-CT数据上训练，通过跨模态自监督学习强化对病灶的通用特征表示。实验表明，MUST-PET显著提升了全身病灶分割的跨域泛化性能与准确率，验证了多模态自监督在医学影像任务中的普适价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.19726v1",
+      "source": "arxiv",
+      "title": "Projector Is All You Train",
+      "abstract": "The typical training process of a multimodal large language model (MLLM) involves adapting both the language model backbone and the projector between the backbone and a modality-specific encoder. We ask whether fine-tuning the backbone of an MLLM is necessary to adapt it to a new modality. Through experiments on 3D MLLMs, we find that training only the projector is sufficient to achieve strong multimodal performance relative to existing baseline models and our jointly trained MLLMs with the same encoder and backbone. We also show that joint training leads to undesirable drift in existing capabilities of the language model, which projector-only training avoids by definition. Furthermore, projector-only training has approximately twice the training sample throughput of joint training. We validate our findings across different language model backbones via 3D classification and captioning benchmarks as well as standard benchmarks evaluating language, vision, and spatial reasoning capabilities.",
+      "authors": [
+        "Nyx Iskandar",
+        "Saathvik Selvan",
+        "Slater Victoroff"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-20T07:23:35+00:00",
+      "link": "https://arxiv.org/pdf/2608.19726v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies projector-only training for multimodal fusion, avoiding backbone drift",
+      "llm_evidence_cn": "研究仅训练投影器以实现多模态融合，避免主干漂移",
+      "llm_evidence": "研究仅训练投影器以实现多模态融合，避免主干漂移",
+      "canonical_evidence": "研究仅训练投影器以实现多模态融合，避免主干漂移",
+      "llm_tldr_en": "Shows that training only the projector suffices to adapt an MLLM to a new modality, avoiding capability drift and doubling training throughput.",
+      "llm_tldr_cn": "针对多模态大语言模型适配新模态时微调主干的必要性，该文实验发现仅训练投影器即可获得与联合训练相当甚至更优的多模态性能。与联合训练相比，仅训练投影器不仅避免语言模型已有能力的漂移，还将训练吞吐量提升约两倍。该发现为高效多模态适配提供了一种简洁且实用的策略。",
+      "llm_tldr": "针对多模态大语言模型适配新模态时微调主干的必要性，该文实验发现仅训练投影器即可获得与联合训练相当甚至更优的多模态性能。与联合训练相比，仅训练投影器不仅避免语言模型已有能力的漂移，还将训练吞吐量提升约两倍。该发现为高效多模态适配提供了一种简洁且实用的策略。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.19788v1",
+      "source": "arxiv",
+      "title": "MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities",
+      "abstract": "Trustworthy multimodal fusion in clinical settings requires handling incomplete and heterogeneous modality subsets across institutions, where privacy constraints prohibit centralized data sharing. Federated learning (FL) mitigates data-sharing constraints but suffers from client-specific missing modalities, where institutions possess incomplete multimodal subsets, degrading fusion quality and segmentation performance. While FL and weak supervision have been studied separately, their joint use with image-level labels under heterogeneous missing modalities remains unaddressed. We propose \\textbf{MOSAIC}, the first modality-agnostic federated framework for weakly supervised binary tumor segmentation under client-specific missing modalities. We introduce a client-specific modality-alignment module that fuses available channels into a shared latent space without prior knowledge of modality identity, a spectral prototype alignment loss that reconciles cross-client distribution shift using compact non-invertible frequency-domain statistics, and a dedicated federated refinement network that denoises the resulting CAM pseudo-labels into accurate masks, breaking the accuracy ceiling of weak supervision. Experiments on three multi-institutional brain tumor benchmarks (FeTS2022, BraTS-MEN, and BraTS-SSA) demonstrate significant improvements over all image, box, and point-supervised baselines, approaching fully supervised accuracy using only image-level labels and reaching 0.84 Dice on FeTS2022. Dynamic new client addition enables previously unseen institutions to join an already-trained federation within 0.01-0.04 Dice without retraining. Code is available at https://github.com/Tarun2201/MOSAIC.",
+      "authors": [
+        "Tarun Kumar Garg",
+        "Vaanathi Sundaresan"
+      ],
+      "primary_category": "eess.IV",
+      "categories": [
+        "eess.IV",
+        "cs.CV"
+      ],
+      "published": "2026-08-20T08:33:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.19788v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "addresses client-specific missing modalities in multimodal federated learning",
+      "llm_evidence_cn": "处理多模态联邦学习中客户端特定模态缺失问题",
+      "llm_evidence": "处理多模态联邦学习中客户端特定模态缺失问题",
+      "canonical_evidence": "处理多模态联邦学习中客户端特定模态缺失问题",
+      "llm_tldr_en": "MOSAIC is the first modality-agnostic federated framework for weakly supervised tumor segmentation that handles client-specific missing modalities via spectral alignment, preserving multimodal fusion quality without sharing data.",
+      "llm_tldr_cn": "针对联邦学习中各机构存在客户端特定模态缺失、导致多模态融合质量下降的问题，提出首个模态无关联邦框架MOSAIC。该方法通过频谱对齐和图像级弱监督，在隐私保护下联合处理异构缺失模态。实验表明可有效提升不完备多模态场景下的肿瘤分割性能。它为临床多机构、弱监督与模态缺失并存的多模态融合提供了可行范例。",
+      "llm_tldr": "针对联邦学习中各机构存在客户端特定模态缺失、导致多模态融合质量下降的问题，提出首个模态无关联邦框架MOSAIC。该方法通过频谱对齐和图像级弱监督，在隐私保护下联合处理异构缺失模态。实验表明可有效提升不完备多模态场景下的肿瘤分割性能。它为临床多机构、弱监督与模态缺失并存的多模态融合提供了可行范例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.19825v1",
+      "source": "arxiv",
+      "title": "Towards Clinically Faithful Medical Image Captioning via Enhanced Vision-Language Alignment",
+      "abstract": "Medical image captioning is a technique that accelerates early-stage diagnostic workflows and enhances the interpretability of medical diagnostic AI systems. However, unlike general image captioning, clinically reliable captioning remains challenging due to grayscale-based modalities, subtle anatomical cues, specialized medical phrasing, and variations in data quality. Despite recent advances in large vision-language models, fluent outputs do not necessarily guarantee sufficient alignment with clinical concept spaces or evaluation criteria. To address this issue, we propose a framework that strengthens clinical alignment by separating and enhancing training-time alignment and inference-time alignment. We build a medical image captioning pipeline that integrates single/dual vision encoders based on BioMedCLIP and SigLIP2, a Q-Former, and a LLaMA-based decoder, and examine the contribution of auxiliary learning for UMLS concept/type prediction. At inference, we apply single-embedding-based reranking to select the best caption among candidates, while at training we introduce MedPAIR-SCST, which combines clinically relevant rewards to shift the generative distribution toward improved clinical alignment. Our experiments show that complementary visual representations with a multi-encoder design and concept-level auxiliary learning help preserve clinically meaningful information. Furthermore, inference-time reranking provides a practical way to improve semantic and clinical alignment without additional training, whereas MedPAIR-SCST goes beyond selection by directly improving the model's distribution to generate more consistent and clinically grounded captions. These findings suggest that jointly leveraging selection-based alignment and reinforcement-learning-based alignment can promote more trustworthy medical image captioning even in data-constrained settings.",
+      "authors": [
+        "Yunseo Lee",
+        "Hyun Jun Kim",
+        "Heeseung Shin",
+        "Changwon Lim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-08-20T09:25:30+00:00",
+      "link": "https://arxiv.org/pdf/2608.19825v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "explicitly enhances vision-language alignment for medical image captioning; cross-modal alignment representation learning",
+      "llm_evidence_cn": "通过分离训练期与推理期对齐来增强视觉语言对齐，直接对应跨模态对齐表示学习",
+      "llm_evidence": "通过分离训练期与推理期对齐来增强视觉语言对齐，直接对应跨模态对齐表示学习",
+      "canonical_evidence": "通过分离训练期与推理期对齐来增强视觉语言对齐，直接对应跨模态对齐表示学习",
+      "llm_tldr_en": "The paper proposes a framework that strengthens clinical alignment in medical image captioning by separating training-time and inference-time vision-language alignment, improving clinical concept alignment.",
+      "llm_tldr_cn": "医学图像描述面临灰度模态、细微解剖线索和专业术语等挑战，通用视觉语言模型难以保证临床对齐。该论文提出一个框架，将训练期与推理期的视觉语言对齐分离并分别增强，以强化对临床概念空间的对齐。该工作专注于跨模态对齐表示学习，可迁移到其他需要视觉与语言紧密对齐的任务。",
+      "llm_tldr": "医学图像描述面临灰度模态、细微解剖线索和专业术语等挑战，通用视觉语言模型难以保证临床对齐。该论文提出一个框架，将训练期与推理期的视觉语言对齐分离并分别增强，以强化对临床概念空间的对齐。该工作专注于跨模态对齐表示学习，可迁移到其他需要视觉与语言紧密对齐的任务。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.17422v1",
+      "source": "arxiv",
+      "title": "TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection",
+      "abstract": "Zero-Shot Temporal Action Detection (ZSTAD) aims to lo- calize and recognize action instances from unseen action categories in untrimmed videos. Although existing meth- ods have shown effectiveness by advancing architectural text-video alignment, they still struggle with capturing se- mantic distinctions between action classes, resulting in text- irrelevant predictions. To address this issue, we propose a Text-Foreground Concentrated Alignment for zero-shot temporal action DEtector (TF-CADE) that explicitly aligns textual information with action-relevant foreground regions. Specifically, we introduce Action Concentrate Aggregation (ACA), which extracts action concentrate scores to aggregate temporally informative video segments into a foreground- weighted video embedding. This foreground concentrated alignment enhances the semantic consistency between text and video features and improves inter-class discriminabil- ity. In addition, a Certainty-based Confidence Re-weighting (CCR) strategy refines per-snippet confidence scores by lever- aging foreground-aware similarity, effectively suppressing irrelevant action classes during inference. Extensive evalua- tions show that our TF-CADE not only achieves state-of-the- art performance under in-distribution settings but also excels in cross-dataset generalization to unseen action classes.",
+      "authors": [
+        "Yearang Lee",
+        "Ho-Joong Kim",
+        "Seong-Whan Lee"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-18T06:43:45+00:00",
+      "link": "https://arxiv.org/pdf/2608.17422v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "foreground-concentrated text-video alignment for cross-modal semantic correspondence",
+      "llm_evidence_cn": "前景聚焦的文本-视频对齐，用于跨模态语义对应",
+      "llm_evidence": "前景聚焦的文本-视频对齐，用于跨模态语义对应",
+      "canonical_evidence": "前景聚焦的文本-视频对齐，用于跨模态语义对应",
+      "llm_tldr_en": "Proposes TF-CADE for zero-shot temporal action detection, using foreground-concentrated text-video alignment that aggregates temporally informative segments and links textual classes to action-relevant video regions.",
+      "llm_tldr_cn": "零样本时序动作检测需从未见类别中定位并识别动作，但现有文本-视频对齐难以区分动作类别语义。TF-CADE提出前景聚焦对齐，显式将文本信息与动作相关前景区域对齐，并通过动作集中聚合提取时间信息片段。这提高了文本与视频前景的语义一致性，为零样本动作检测提供更准确的跨模态对齐方法。",
+      "llm_tldr": "零样本时序动作检测需从未见类别中定位并识别动作，但现有文本-视频对齐难以区分动作类别语义。TF-CADE提出前景聚焦对齐，显式将文本信息与动作相关前景区域对齐，并通过动作集中聚合提取时间信息片段。这提高了文本与视频前景的语义一致性，为零样本动作检测提供更准确的跨模态对齐方法。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.15064v1",
+      "source": "arxiv",
+      "title": "LongDocBench: Benchmarking TOC Hierarchy and Contextual Relationship Recovery in Long Documents",
+      "abstract": "Parsing visual documents into machine-readable representations is fundamental to document intelligence. Existing benchmarks focus on page-level element recognition, reading order, formula recognition, and table structure. Long documents, however, also require document-level structure recovery. This includes reconstructing cross-page table-of-contents (TOC) hierarchies and identifying typed links from tables and figures to their captions, notes, and sources, often in one-to-many form. Because these structures are covered only partially or subsumed within broader parsing protocols, existing benchmarks cannot directly evaluate two key document-level tasks: \\emph{Table-of-Contents Hierarchy Recovery} and \\emph{Contextual Relationship Recovery}. To benchmark these two tasks, we introduce \\textsc{LongDocBench}, comprising 85 real-world financial reports, textbooks, and academic papers spanning 2,582 pages, with up to 105 pages per document. It provides human-verified annotations for 3,937 heading nodes (mean node depth 3.55; maximum depth 9) and 3,258 contextual relationships annotated across 2,680 table and figure objects. We further evaluate both the downstream utility and recoverability of these structures. Long-document question-answering experiments show that human-verified TOC hierarchies and contextual relationships improve reasoning, with their combination providing complementary benefits. Meanwhile, representative document parsers remain limited on both recovery tasks despite strong page-level performance. To support further progress, we publicly release \\textsc{LongDocBench} and its evaluation protocol and reproducible testbed for advancing document-level structure recovery in long documents.",
+      "authors": [
+        "Yuefeng Zou",
+        "Yichen Lu",
+        "Jingxiao Yang",
+        "Bingtao Fu",
+        "Gaoyang Zhang",
+        "Xiongfei Bai",
+        "Tian Chen",
+        "Xiang Qi"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-15T06:25:26+00:00",
+      "link": "https://arxiv.org/pdf/2608.15064v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark for recovering typed links from figures/tables to captions; image-text relationship recovery",
+      "llm_evidence_cn": "提出长文档中图表与标题链接恢复的基准，涉及图像与文本间关系抽取",
+      "llm_evidence": "提出长文档中图表与标题链接恢复的基准，涉及图像与文本间关系抽取",
+      "canonical_evidence": "提出长文档中图表与标题链接恢复的基准，涉及图像与文本间关系抽取",
+      "llm_tldr_en": "LongDocBench is a benchmark for document-level TOC hierarchy and contextual relationship recovery, including typed links between figures and captions, relevant to image-text relation extraction.",
+      "llm_tldr_cn": "该论文提出LongDocBench基准，聚焦长文档中跨页目录层级恢复以及从表格、图表到标题、注释和来源的带类型链接识别。这些任务需要同时理解视觉布局与文本，可视为一种文档级的多模态关系抽取基准。现有基准仅评估页面级元素，未能覆盖该类文档级结构恢复，因此该工作为图像文本关系抽取研究提供了新的评测场景。",
+      "llm_tldr": "该论文提出LongDocBench基准，聚焦长文档中跨页目录层级恢复以及从表格、图表到标题、注释和来源的带类型链接识别。这些任务需要同时理解视觉布局与文本，可视为一种文档级的多模态关系抽取基准。现有基准仅评估页面级元素，未能覆盖该类文档级结构恢复，因此该工作为图像文本关系抽取研究提供了新的评测场景。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "Locate recent research on image text relation extraction benchmarks",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.18654v1",
+      "source": "arxiv",
+      "title": "Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning",
+      "abstract": "Medical image captioning requires translating heterogeneous visual evidence into concise clinical descriptions, where errors in findings, assertion states, or anatomical relations can alter clinical meaning despite surface-level fluency. Sequence-level policy optimization can directly optimize complete captions, but common rewards rely on global text similarity, direct image-caption compatibility, or unordered concept overlap, leaving visual neighborhoods and clinical-claim structure implicit. We propose a clinically structured surrogate reward framework for post-SFT medical image captioning. The framework combines biomedical semantic and short-range lexical fidelity with two structured rewards: distributional image-neighborhood alignment, which matches the medical-image-bank distributions induced by reference and generated captions, and clinical graph consistency, which applies maximum-weight one-to-one matching to entities, assertion states, and typed relations. The four rewards are independently normalized within each rollout group, combined with fixed relative weights, and optimized with GDPO. Across organizer-evaluated hidden test sets for the Standard and Synthetical ImageCLEFmedical Caption tracks and three vision-language backbones, the method improves Overall, Relevance, and Factuality over matched SFT baselines in all six backbone-track combinations, with average relative gains of 3.4%, 2.1%, and 5.8%, respectively. Ablations and paired diagnostics indicate that the structured rewards provide complementary signals, reducing image-neighborhood divergence and improving entity-assertion-relation consistency.",
+      "authors": [
+        "Hyun Jun Kim",
+        "Heeseung Shin",
+        "Changwon Lim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-19T08:00:24+00:00",
+      "link": "https://arxiv.org/pdf/2608.18654v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "structured rewards with distributional image-neighborhood alignment for medical captioning; cross-modal alignment",
+      "llm_evidence_cn": "利用分布图像邻域对齐等结构化奖励提升医学图像描述，涉及跨模态对齐",
+      "llm_evidence": "利用分布图像邻域对齐等结构化奖励提升医学图像描述，涉及跨模态对齐",
+      "canonical_evidence": "利用分布图像邻域对齐等结构化奖励提升医学图像描述，涉及跨模态对齐",
+      "llm_tldr_en": "The paper proposes a clinically structured surrogate reward framework for medical image captioning, combining semantic fidelity and image-neighborhood alignment to improve clinical claim structure via policy optimization.",
+      "llm_tldr_cn": "医学图像描述中，表面流畅的文本可能改变临床含义，常见奖励依赖全局文本相似度等显式指标，忽略视觉邻域和临床主张结构。论文提出临床结构化代理奖励框架，结合生物医学语义、短期词法保真与分布图像邻域对齐。该框架可用于序列级策略优化，提升跨模态对齐与临床描述可靠性，对视觉语言学习具有方法论价值。",
+      "llm_tldr": "医学图像描述中，表面流畅的文本可能改变临床含义，常见奖励依赖全局文本相似度等显式指标，忽略视觉邻域和临床主张结构。论文提出临床结构化代理奖励框架，结合生物医学语义、短期词法保真与分布图像邻域对齐。该框架可用于序列级策略优化，提升跨模态对齐与临床描述可靠性，对视觉语言学习具有方法论价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.16263v1",
+      "source": "arxiv",
+      "title": "Seeing Before Answering: Training-Free Visual Layer Profiling for Vision-Language Models",
+      "abstract": "LLaVA-style Vision-Language Models (VLMs) pass visual tokens from a fixed late layer of the vision backbone, typically the penultimate one, to the language model. We first show that this hidden convention is fragile: across 2 VLMs and 7 image and video benchmarks, the default layer is sub-optimal in 13 of 14 model-task pairs, and the best layer shifts with both task and visual backbone. Finding that layer by exhaustive layer-wise inference is prohibitively expensive, and no better fixed default exists. We therefore ask whether layer usefulness can instead be predicted from representation geometry. We study matrix-based entropy, introduced for unimodal layer analysis, which we compute over sample-level visual embeddings as Visual Dataset Entropy (VDE); and Gromov-Wasserstein (GW) distance, introduced for encoder-level VLM model selection, which we repurpose as a layer-wise visual--language alignment signal. Transferring these to LLaVA-based models is not obvious a priori: the vision tower is frozen while the multimodal projector is trained, so we profile both sides of the projector. We find that VDE transfers, and GW does not. Computed from 100 unlabeled task samples without downstream inference, pre-projector VDE tracks layer-wise accuracy and its top-ranked layers cover the oracle best layer on every task for the SigLIP-based LLaVA-Video, while giving region-level guidance for the CLIP-based Video-LLaVA. Post-projector profiles show that the projector reshapes visual geometry but does not erase the performance-relevant trend, leaving $\\mathrm{VDE}_{\\mathrm{pre}}$ the stronger signal. GW instead flattens after projection and is best read as an alignment diagnostic rather than a selector. VDE thus offers an interpretable, training-free policy that narrows the visual-layer search to a handful of candidates for limited downstream verification.",
+      "authors": [
+        "Ruchen Liu",
+        "Yi Yang",
+        "Yiming Xu",
+        "Michael Ying Yang",
+        "Monika Sester",
+        "Bodo Rosenhahn"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-17T08:35:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.16263v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "training-free visual layer profiling via matrix-based entropy for VLMs",
+      "llm_evidence_cn": "基于矩阵熵的视觉层剖析以改善跨模态表示",
+      "llm_evidence": "基于矩阵熵的视觉层剖析以改善跨模态表示",
+      "canonical_evidence": "基于矩阵熵的视觉层剖析以改善跨模态表示",
+      "llm_tldr_en": "Seeing Before Answering shows the default visual layer is suboptimal and proposes a training-free profiling method using matrix-based entropy over visual embeddings to predict the best layer, improving VLM performance without exhaustive search.",
+      "llm_tldr_cn": "LLaVA风格视觉语言模型固定使用视觉骨干特定层输出，但该文发现默认层在多数任务上并非最优。通过计算样本级视觉嵌入的矩阵熵，提出免训练的视觉层剖析方法，预测各任务下最合适的视觉层。在多个图像和视频基准上的实验验证了方法的有效性，避免了逐层推理的高开销，为跨模态特征接入提供了几何指导。",
+      "llm_tldr": "LLaVA风格视觉语言模型固定使用视觉骨干特定层输出，但该文发现默认层在多数任务上并非最优。通过计算样本级视觉嵌入的矩阵熵，提出免训练的视觉层剖析方法，预测各任务下最合适的视觉层。在多个图像和视频基准上的实验验证了方法的有效性，避免了逐层推理的高开销，为跨模态特征接入提供了几何指导。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.19669v1",
+      "source": "arxiv",
+      "title": "Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning",
+      "abstract": "Latent reasoning has advanced multimodal reasoning through a two-stage training paradigm: (1) a helper image is encoded into latent tokens to teach visual chain-of-thought during a supervised fine-tuning (SFT) stage, and (2) these latent tokens are further refined with reward feedback during a reinforcement learning (RL) stage. In this paper, we identify two key limitations of this framework, one in each stage. First, the SFT stage typically relies on an off-the-shelf vision encoder to encode the helper image, yielding suboptimal latent representations that may not be well aligned with the downstream reasoning task. Second, existing RL methods treat the latent component only through deterministic regularization, which constrains policy drift but does not create alternative latent trajectories for exploration. To address these limitations, we propose Scaffolding Minds. Our approach learns a dedicated scaffolding encoder that provides an optimized target in latent space, and learns both the mean and variance of the RL sampler. We further show that these two improvements are complementary, together yielding substantial gains over strong baselines. Empirically, our method improves over the strongest latent-reasoning baseline by +9.5% on FrozenLake spatial planning, with the gain widening to +19% at 32x32 grid map, and by +5.2% on average across nine visual-centric reasoning benchmarks.",
+      "authors": [
+        "Haoqiang Kang",
+        "Yinpeng Chen",
+        "Luyang Liu",
+        "Jesper Sparre Andersen",
+        "Abhijit Ogale",
+        "Baochen Sun",
+        "Lichan Hong",
+        "Ed H. Chi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-20T06:04:28+00:00",
+      "link": "https://arxiv.org/pdf/2608.19669v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "optimizes latent visual representations for multimodal reasoning",
+      "llm_evidence_cn": "优化潜在视觉表示以增强多模态推理",
+      "llm_evidence": "优化潜在视觉表示以增强多模态推理",
+      "canonical_evidence": "优化潜在视觉表示以增强多模态推理",
+      "llm_tldr_en": "Identifies limitations in latent reasoning for multimodal chain-of-thought and optimizes latent visual target representations via improved SFT and RL regularization.",
+      "llm_tldr_cn": "针对多模态潜在推理中两阶段训练的不足，指出SFT阶段现成视觉编码器产生的潜在表示与推理任务不对齐，且RL阶段对潜在成分的确定性正则化限制性能。该文提出优化潜在视觉目标表示的方法，结合辅助图像编码与更灵活的RL目标，提升多模态链式推理的准确性和稳定性。实验验证了方法的有效性，为多模态推理表示学习提供了新思路。",
+      "llm_tldr": "针对多模态潜在推理中两阶段训练的不足，指出SFT阶段现成视觉编码器产生的潜在表示与推理任务不对齐，且RL阶段对潜在成分的确定性正则化限制性能。该文提出优化潜在视觉目标表示的方法，结合辅助图像编码与更灵活的RL目标，提升多模态链式推理的准确性和稳定性。实验验证了方法的有效性，为多模态推理表示学习提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.19710v1",
+      "source": "arxiv",
+      "title": "Robust Cross-Modal Foundation Model Perception for Underwater Robots under Degraded Visual Conditions",
+      "abstract": "Reliable underwater robotic perception remains difficult because optical imagery degrades under turbidity, wavelength-dependent attenuation, low illumination, scattering, and blur. Although sonar provides complementary information that is less affected by optical visibility, prior visual-sonar research has largely focused on feature alignment and nominal detection performance. We investigate cross-modal robustness as visual reliability deteriorates and assess whether pretrained visual foundation-model representations can be complemented by sonar under severe degradation. We use frozen DINOv2 as the visual encoder and construct a controlled five-level benchmark ranging from clean to extreme visual conditions. We compare conventional visual detection, frozen foundation-model representations, sonar context, fixed multimodal fusion, clean-trained adaptive gating, and degradation-aware gated fusion. Our method trains the fusion mechanism across the full range of degradation while keeping the visual and sonar encoders frozen, allowing modality contributions to adapt without fine-tuning the pretrained backbone. Under extreme combined degradation, the DINOv2 baseline achieves 0.4610 balanced accuracy, while degradation-aware visual-sonar fusion reaches 0.6152, a 33.5% relative improvement. The learned sonar contribution increases from 14.2% under clean conditions to 41.3% under extreme degradation, demonstrating adaptive redistribution of cross-modal reliance. Fusion provides the largest gains under severe turbidity and blur, whereas color attenuation alone yields little additional benefit. These results show that foundation-model representations remain valuable but insufficient under severe information loss, and that explicitly adapting fusion to modality reliability can improve robust underwater multimodal perception.",
+      "authors": [
+        "Mohammad Arif Ul Alam"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-20T07:09:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.19710v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "cross-modal alignment, multimodal robust perception",
+      "llm_evidence_cn": "跨模态对齐，多模态鲁棒感知",
+      "llm_evidence": "跨模态对齐，多模态鲁棒感知",
+      "canonical_evidence": "跨模态对齐，多模态鲁棒感知",
+      "llm_tldr_en": "Investigates vision-sonar cross-modal robustness for underwater robots using DINOv2 and sonar under a five-level degraded visual benchmark, showing complementary benefits in severe conditions.",
+      "llm_tldr_cn": "针对水下机器人光学视觉在浊度和低光照等条件下严重退化、而声呐受影响较小的问题，研究了视觉-声呐跨模态感知的鲁棒性。使用冻结的DINOv2作为视觉编码器，构建从清晰到极端退化的五级基准，评估视觉基础模型表征在声呐补充下的表现。结果表明在严重退化下声呐信息能有效补充视觉表征，为水下跨模态感知鲁棒性提供了新基准与见解。",
+      "llm_tldr": "针对水下机器人光学视觉在浊度和低光照等条件下严重退化、而声呐受影响较小的问题，研究了视觉-声呐跨模态感知的鲁棒性。使用冻结的DINOv2作为视觉编码器，构建从清晰到极端退化的五级基准，评估视觉基础模型表征在声呐补充下的表现。结果表明在严重退化下声呐信息能有效补充视觉表征，为水下跨模态感知鲁棒性提供了新基准与见解。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

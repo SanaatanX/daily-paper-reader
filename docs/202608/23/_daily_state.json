@@ -1,0 +1,169 @@
+{
+  "date": "20260823",
+  "date_label": "",
+  "generated_at": "2026-08-23 19:49:24 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.19666v1",
+      "route": "202608/23/2608.19666v1-must-pet-multimodal-self-supervised-learning-across-tracers-for-whole-body-petct-based-lesion-segmentation",
+      "title": "MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "跨PET与CT模态的多模态自监督学习方法",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.19726v1",
+      "route": "202608/23/2608.19726v1-projector-is-all-you-train",
+      "title": "Projector Is All You Train",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "研究仅训练投影器以实现多模态融合，避免主干漂移",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.19788v1",
+      "route": "202608/23/2608.19788v1-mosaic-modality-agnostic-spectral-alignment-for-federated-image-level-weakly-supervised-tumor-segmentation-under-client-specific-missing-modalities",
+      "title": "MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "处理多模态联邦学习中客户端特定模态缺失问题",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.19825v1",
+      "route": "202608/23/2608.19825v1-towards-clinically-faithful-medical-image-captioning-via-enhanced-vision-language-alignment",
+      "title": "Towards Clinically Faithful Medical Image Captioning via Enhanced Vision-Language Alignment",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过分离训练期与推理期对齐来增强视觉语言对齐，直接对应跨模态对齐表示学习",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.17422v1",
+      "route": "202608/23/2608.17422v1-tf-cade-foreground-concentrated-text-video-alignment-for-zero-shot-temporal-action-detection",
+      "title": "TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "前景聚焦的文本-视频对齐，用于跨模态语义对应",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.18654v1",
+      "route": "202608/23/2608.18654v1-clinically-structured-surrogate-rewards-for-post-sft-medical-image-captioning",
+      "title": "Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用分布图像邻域对齐等结构化奖励提升医学图像描述，涉及跨模态对齐",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.19669v1",
+      "route": "202608/23/2608.19669v1-scaffolding-minds-optimizing-latent-visual-target-representations-for-multimodal-reasoning",
+      "title": "Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "优化潜在视觉表示以增强多模态推理",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.19710v1",
+      "route": "202608/23/2608.19710v1-robust-cross-modal-foundation-model-perception-for-underwater-robots-under-degraded-visual-conditions",
+      "title": "Robust Cross-Modal Foundation Model Perception for Underwater Robots under Degraded Visual Conditions",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨模态对齐，多模态鲁棒感知",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.15064v1",
+      "route": "202608/23/2608.15064v1-longdocbench-benchmarking-toc-hierarchy-and-contextual-relationship-recovery-in-long-documents",
+      "title": "LongDocBench: Benchmarking TOC Hierarchy and Contextual Relationship Recovery in Long Documents",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提出长文档中图表与标题链接恢复的基准，涉及图像与文本间关系抽取",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    },
+    {
+      "paper_id": "2608.16263v1",
+      "route": "202608/23/2608.16263v1-seeing-before-answering-training-free-visual-layer-profiling-for-vision-language-models",
+      "title": "Seeing Before Answering: Training-Free Visual Layer Profiling for Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于矩阵熵的视觉层剖析以改善跨模态表示",
+      "first_seen_at": "2026-08-23 19:49:24 UTC",
+      "updated_at": "2026-08-23 19:49:24 UTC"
+    }
+  ]
+}

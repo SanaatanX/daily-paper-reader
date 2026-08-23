@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-22</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-23</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-22 20:41:34 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-23 19:49:24 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日聚焦多模态情感分析，精读两篇高分解法，速读覆盖对齐与不完整模态处理。</p>
-<p>最值得看：讽刺检测的跨模态融合与对比正则、残缺多模态的迭代修正策略。</p>
-<p>下一步建议：优先细读两篇8分论文，掌握处理不完整多模态数据的通用思路。</p>
+<p>今日精读2篇、速读6篇，共处理10篇论文，重点聚焦医学影像与多模态学习。最值得关注的是MUST-PET的跨示踪剂自监督分割方法，以及Projector Is All You Train的简洁投影器设计，均获8.0分。建议普通读者优先了解这两个工作，后续可跟进文本-视频对齐和医学影像描述生成方向。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">4 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection">Dynamic Gated Cross-Modal Fusion with Sarcastic-aware Contrastive Regularization for Multimodal Sarcasm Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction">Robust Incomplete Multimodal Sentiment Analysis via Iterative Proxy Correction</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation">MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Projector Is All You Train">Projector Is All You Train</span></li><li><span class="dpr-home-dashboard-paper-title" title="MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities">MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>4</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution">Beyond Multimodal Alignment: Certifying Physical Language through Response Substitution and Ordered Execution</span></li><li><span class="dpr-home-dashboard-paper-title" title="PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment">PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination">Contrastive Mixed Prompt Learning for Incomplete Multimodal Sentiment Analysis with Unseen Modality Combination</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection">TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning">Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning">Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 
