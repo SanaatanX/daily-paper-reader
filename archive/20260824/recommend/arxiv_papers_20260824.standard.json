@@ -1,0 +1,367 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-08-24T20:27:10.082244+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 5,
+    "deep_cap": 7,
+    "deep_selected": 5,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [
+    {
+      "id": "2608.20868v1",
+      "source": "arxiv",
+      "title": "Identify, Locate, Link: End-to-End Key-Value Extraction from Document Images",
+      "abstract": "Document processing pipelines traditionally cascade optical character recognition (OCR) engines with downstream models for structured information extraction, leading to multi-stage error propagation. We fine-tune SmolDocling, a compact 256M-parameter vision-language model (VLM), to perform end-to-end key-value extraction directly from document images, jointly solving identification, localization, and association in a single pass without OCR preprocessing. We extend DocTags with specialized key, value, region, and link tags, enabling many-to-many relationships in a unified output sequence. To address data limitations, we design an augmentation pipeline combining synthetic form filling and graph-based crops that preserve complete key-value subgraphs. We further introduce a layout-aware evaluation framework extending text matching with spatial bounding box verification. On FUNSD, XFUND, and a large-scale private dataset, our model outperforms larger zero-shot VLM baselines under layout-aware evaluation, while being 27 times smaller than Qwen2.5-VL (7B) and over 5 times faster at inference. The model weights will be released publicly after publication.",
+      "authors": [
+        "A. Said Gurbuz",
+        "Ahmed Nassar",
+        "Christoph Auer",
+        "Maksym Lysak",
+        "Lucas Morin",
+        "Matteo Omenetti",
+        "Tim Strohmeyer",
+        "Panagiotis Vagenas",
+        "Nikolaos Livathinos",
+        "Michele Dolfi",
+        "Peter Staar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-08-21T08:36:23+00:00",
+      "link": "https://arxiv.org/pdf/2608.20868v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "end-to-end key-value extraction from document images without OCR, jointly solving identification, localization, and association",
+      "llm_evidence_cn": "无需OCR即可从文档图像端到端抽取键值关系，联合解决识别、定位与关联",
+      "llm_evidence": "无需OCR即可从文档图像端到端抽取键值关系，联合解决识别、定位与关联",
+      "canonical_evidence": "无需OCR即可从文档图像端到端抽取键值关系，联合解决识别、定位与关联",
+      "llm_tldr_en": "End-to-end key-value extraction from document images without OCR by fine-tuning a 256M-parameter VLM. The model jointly identifies, locates, and links keys/values via extended DocTags, supporting many-to-many relationships with augmentation from synthetic forms and graph-based crops.",
+      "llm_tldr_cn": "文档图像结构化信息抽取传统上依赖OCR与下游模型的级联，误差会跨阶段传播。该文微调紧凑型视觉语言模型SmolDocling，直接在单个前向过程中端到端地完成键、值、区域与关联的联合抽取，无需OCR预处理。通过扩展DocTags支持多对多关系，并设计结合合成表单填充与图结构裁剪的数据增强流水线，模型能够一次输出完整的键值关子图，为文档理解提供了高效、鲁棒的无OCR方案。",
+      "llm_tldr": "文档图像结构化信息抽取传统上依赖OCR与下游模型的级联，误差会跨阶段传播。该文微调紧凑型视觉语言模型SmolDocling，直接在单个前向过程中端到端地完成键、值、区域与关联的联合抽取，无需OCR预处理。通过扩展DocTags支持多对多关系，并设计结合合成表单填充与图结构裁剪的数据增强流水线，模型能够一次输出完整的键值关子图，为文档理解提供了高效、鲁棒的无OCR方案。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "relation extraction across visual and textual modalities",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.21099v1",
+      "source": "arxiv",
+      "title": "A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration",
+      "abstract": "Multi-modal object detection is essential for robust scene understanding in challenging conditions, including low-light and adverse environments. Recent vision foundation models (e.g., DINOv3) have exhibited strong representation capabilities, yet adapting them to multi-modal scenarios remains challenging. Existing dense cross-modal fusion strategies often force heterogeneous modalities to interact indiscriminately, which may introduce redundant information and disrupt the valuable pre-trained representations. To address this issue, we revisit multi-modal fusion from the perspective of socialized learning and propose adapter to DINOv3 (A2DINOv3), a multi-expert collaboration framework with a Socialized Collaboration Protocol (SCP). Specifically, RGB and infrared branches are modeled as heterogeneous experts that independently preserve their specialized knowledge while exchanging complementary information through selective and constrained interactions. This design mitigates harmful cross-modal interference and prevents degradation of pre-trained priors during adaptation. Furthermore, a zero-initialization strategy is introduced to gradually activate cross-modal collaboration, enabling a smooth transition from modality-specific learning to cooperative representation learning. Extensive experiments on four multi-modal benchmarks, including aerial detection (GAIIC), autonomous driving (FLIR), low-light surveillance (LLVIP), and diverse real-world scenarios (M3FD), demonstrate that A2DINOv3 consistently achieves state-of-the-art performance in multi-modal object detection.",
+      "authors": [
+        "Jiekang Feng",
+        "Zhihe Fan",
+        "Yunqi Zhu",
+        "Xinjie Yao",
+        "Yueying Zhang",
+        "Yike Gao",
+        "Ranxin Li",
+        "Guanzuo Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-21T13:44:46+00:00",
+      "link": "https://arxiv.org/pdf/2608.21099v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes multi-expert collaboration framework for dense cross-modal fusion in object detection",
+      "llm_evidence_cn": "提出面向目标检测的多专家协作框架改进密集跨模态融合",
+      "llm_evidence": "提出面向目标检测的多专家协作框架改进密集跨模态融合",
+      "canonical_evidence": "提出面向目标检测的多专家协作框架改进密集跨模态融合",
+      "llm_tldr_en": "Revisits multi-modal fusion via socialized learning, proposing A2DINOv3 with a Socialized Collaboration Protocol to adapt DINOv3 to multi-modal object detection, reducing redundant interactions between heterogeneous modalities and preserving pre-trained representations.",
+      "llm_tldr_cn": "多模态目标检测中密集跨模态融合常让异构模态无条件交互，引入冗余并破坏预训练表示。本文从社会化学习视角提出A2DINOv3，包含多专家协作框架与社会化协作协议（SCP）。该协议通过有选择地组织模态交互，将DINOv3适配至多模态检测任务，在低光等恶劣条件下提升鲁棒性。实验验证了该方法在保持预训练能力的同时取得显著性能提升。",
+      "llm_tldr": "多模态目标检测中密集跨模态融合常让异构模态无条件交互，引入冗余并破坏预训练表示。本文从社会化学习视角提出A2DINOv3，包含多专家协作框架与社会化协作协议（SCP）。该协议通过有选择地组织模态交互，将DINOv3适配至多模态检测任务，在低光等恶劣条件下提升鲁棒性。实验验证了该方法在保持预训练能力的同时取得显著性能提升。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.20944v1",
+      "source": "arxiv",
+      "title": "SuppreSensing: Expert-Guided Feature Recalibration and Discrepancy Augmentation for Multimodal Object Detection",
+      "abstract": "Multimodal object detection in remote sensing faces challenges due to semantic heterogeneity and modality-specific noise interference. To this end, we propose SuppreSensing, which reformulates multimodal fusion as a selective collaboration process that jointly models shared information and modality-specific cues. SuppreSensing first designs an Expert-driven Multimodal Feature Recalibration (EMFR) module, which reformulates shared-consensus extraction as an input-adaptive multi-expert selection process to alleviate the symmetry trap in multimodal fusion. Complementing this, a modality-specific attribute augmentation strategy is employed to enhance specific modality features by modeling bidirectional discrepancy patterns, mitigating cross-modal heterogeneity. Furthermore, we propose an Expert-driven Customized Feature Purification (ECFP) module based on a \"specialized inspection-comprehensive analysis-diagnostic update\" physical examination paradigm to iteratively filter redundancies and reinforce task-relevant semantics. Extensive experiments on the DroneVehicle and VEDAI datasets demonstrate that SuppreSensing achieves state-of-the-art detection performance. Cross-domain evaluations on natural scene datasets (FLIR and LLVIP) further validate its superior robustness and generalization capability across diverse environmental conditions.",
+      "authors": [
+        "Xin Wu",
+        "Zhenyu Gao",
+        "Qiankun Zhang",
+        "Shaoyong Guo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-21T10:06:00+00:00",
+      "link": "https://arxiv.org/pdf/2608.20944v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal fusion as selective collaboration with expert-guided feature recalibration",
+      "llm_evidence_cn": "将多模态融合作为选择性协作，包含专家引导特征重校准",
+      "llm_evidence": "将多模态融合作为选择性协作，包含专家引导特征重校准",
+      "canonical_evidence": "将多模态融合作为选择性协作，包含专家引导特征重校准",
+      "llm_tldr_en": "SuppreSensing reformulates multimodal fusion as selective collaboration, using an Expert-driven Multimodal Feature Recalibration module to model shared and specific cues and a discrepancy augmentation strategy to enhance modality-specific features, improving robustness to semantic heterogeneity and noise in multimodal object detection.",
+      "llm_tldr_cn": "多模态目标检测面临语义异质性和模态噪声干扰。SuppreSensing将融合重构成选择性协作过程，设计专家驱动的多模态特征重校准模块，以输入自适应多专家选择缓解融合中的对称陷阱；并采用模态特定属性增广，通过建模双向差异增强单模态特征。在遥感数据集上的实验表明，该方法有效缓解模态噪声影响，显著提升检测精度。",
+      "llm_tldr": "多模态目标检测面临语义异质性和模态噪声干扰。SuppreSensing将融合重构成选择性协作过程，设计专家驱动的多模态特征重校准模块，以输入自适应多专家选择缓解融合中的对称陷阱；并采用模态特定属性增广，通过建模双向差异增强单模态特征。在遥感数据集上的实验表明，该方法有效缓解模态噪声影响，显著提升检测精度。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.20969v1",
+      "source": "arxiv",
+      "title": "Kinematic Knowledge Maps for Pattern Alignment: Structured Latent Representational Learning in Multimodal Gait Analysis",
+      "abstract": "Multimodal clinical AI is limited by weakly aligned inputs and the absence of domain-specific interpretable representations, particularly when learning from dense video stream, structured time-series, and template-based kinematic text. Here we present ScoliDetect, an explainable framework for adolescent idiopathic scoliosis screening from monocular gait video, built around a kinematic knowledge map (KKM) and complementary template-based kinematic text derived from per-sequence pose statics. KKM is a fixed-index structured representation that encodes gait features across absolute motion, self-skeleton configuration and joint-joint signal correlation, providing anchor-referenced multimodal fusion and factor-level interpretation. We integrate video, KKM, and template-based kinematic text through bidirectional cross-attention with latent-bottleneck aggregation. In a multicenter cohort (n = 1,858 after exclusions), prespecified supervised ablations on an external screening cohort show that KKM-mediated multimodal fusion outperforms unimodal models and late concatenation. Under a staged training protocol, trimodal contrastive pretraining is applied after architecture selection as representation initialization, improving external ROC-AUC from 0.961 to 0.972. Furthermore, the structured nature of the KKM provides inherent, factor-level attributions mapped directly to specific kinematic phases and skeletal indices, offering verifiable interpretability. The results demonstrate that embedding explicit structural topologies into latent spaces significantly enhances both the generalization and explainability of multimodal pattern analysis systems.",
+      "authors": [
+        "Chen Dong",
+        "He Zonglin",
+        "Cheung Kenneth M. C"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-21T10:46:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.20969v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "anchor-referenced multimodal fusion with kinematic knowledge maps for weakly aligned multimodal inputs",
+      "llm_evidence_cn": "利用运动学知识图实现锚定参考的多模态融合，应对弱对齐多模态输入",
+      "llm_evidence": "利用运动学知识图实现锚定参考的多模态融合，应对弱对齐多模态输入",
+      "canonical_evidence": "利用运动学知识图实现锚定参考的多模态融合，应对弱对齐多模态输入",
+      "llm_tldr_en": "Presents ScoliDetect, an explainable multimodal gait-analysis framework using kinematic knowledge maps for anchor-referenced fusion of video, time-series, and text, addressing weakly aligned inputs.",
+      "llm_tldr_cn": "该文针对多模态临床数据弱对齐、缺乏可解释表示的问题，提出ScoliDetect框架，基于运动学知识图（KKM）融合视频、时间序列与模板化运动学文本。KKM以固定索引结构编码绝对运动、自骨架构型与关节间相关信号，提供锚定参考的多模态融合与因子化表示。实验表明该框架在青少年特发性脊柱侧凸筛查中有效。其贡献在于为弱对齐多模态学习提供了结构化表示与融合范例。",
+      "llm_tldr": "该文针对多模态临床数据弱对齐、缺乏可解释表示的问题，提出ScoliDetect框架，基于运动学知识图（KKM）融合视频、时间序列与模板化运动学文本。KKM以固定索引结构编码绝对运动、自骨架构型与关节间相关信号，提供锚定参考的多模态融合与因子化表示。实验表明该框架在青少年特发性脊柱侧凸筛查中有效。其贡献在于为弱对齐多模态学习提供了结构化表示与融合范例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.21290v1",
+      "source": "arxiv",
+      "title": "VT-MUSE: Multimodal Unified Sequential Visuotactile Representation Learning for Manipulation",
+      "abstract": "We propose VT-MUSE, a Multimodal Unified SEquential representation learning framework for visuotactilemanipulation. Existing approaches often encode visual and tactile observations independently before fusion, limiting their ability to capture fine-grained cross-modal dependencies. Moreover, most methods focus on observations at the current time step and overlook the temporal evolution of contact. VT-MUSE addresses both limitations through a two-stage representation learning framework. In Stage I, modality specific encoders are jointly adapted via cross-modal temporal alignment and masked-view consistency. In Stage II, a conditional variational latent model processes masked visual sequences together with full tactile histories. Auxiliary decoders reconstruct the masked recent visual observations and predict tactile depth changes, encouraging the latent representation to retain both global visual context and local contact dynamics. The learned representation is subsequently integrated into a lightweight Transformer policy through gated cross-attention. On the simulation benchmark, VT-MUSE outperforms the strongest baseline evaluated on all tasks by 11 percentage points and also achieves substantial improvements in real-world experiments.",
+      "authors": [
+        "Congsheng Xu",
+        "Qiaochu Yang",
+        "Fangyuan Shi",
+        "Yifan Han",
+        "Baijun Chen",
+        "Yiming Wang",
+        "Haonan Zhao",
+        "Daolin Ma",
+        "Xiaokang Yang",
+        "Hesheng Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-08-21T16:50:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.21290v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "multimodal unified sequential representation learning with cross-modal temporal alignment and masked-view consistency",
+      "llm_evidence_cn": "通过跨模态时间对齐和掩码视图一致性进行多模态统一序列表示学习",
+      "llm_evidence": "通过跨模态时间对齐和掩码视图一致性进行多模态统一序列表示学习",
+      "canonical_evidence": "通过跨模态时间对齐和掩码视图一致性进行多模态统一序列表示学习",
+      "llm_tldr_en": "VT-MUSE is a two-stage multimodal sequential representation learning framework for visuotactile manipulation. It aligns modality-specific encoders via cross-modal temporal alignment and masked-view consistency, then uses a conditional variational latent model over masked visual sequences and full tactile histories, improving fine-grained cross-modal dependencies.",
+      "llm_tldr_cn": "视觉触觉操控中，现有方法通常独立编码各模态后再融合，难以捕捉细粒度跨模态依赖，且只关注当前时刻而忽略接触的时序演化。为此提出VT-MUSE，一个两阶段多模态统一序列表示学习框架：第一阶段通过跨模态时间对齐与掩码视图一致性联合适配视觉和触觉编码器；第二阶段由条件变分潜变量模型基于掩码视觉序列与完整触觉历史进行建模。该框架在操控场景中有效提升了视觉触觉协同表示的质量，为多模态操控策略提供了坚实的表示基础。",
+      "llm_tldr": "视觉触觉操控中，现有方法通常独立编码各模态后再融合，难以捕捉细粒度跨模态依赖，且只关注当前时刻而忽略接触的时序演化。为此提出VT-MUSE，一个两阶段多模态统一序列表示学习框架：第一阶段通过跨模态时间对齐与掩码视图一致性联合适配视觉和触觉编码器；第二阶段由条件变分潜变量模型基于掩码视觉序列与完整触觉历史进行建模。该框架在操控场景中有效提升了视觉触觉协同表示的质量，为多模态操控策略提供了坚实的表示基础。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.15605v1",
+      "source": "arxiv",
+      "title": "AlloEgo-VLM: Disambiguating Allocentric and Egocentric Reference Frames in Vision-Language Models",
+      "abstract": "This study investigates the challenge of ambiguity faced by Vision-Language Models (VLMs) in understanding spatial semantics. Spatial cognition, shaped by cognitive psychology, spatial science, and cultural context, often assigns directionality to objects. However, natural language descriptions of spatial relations frequently omit explicit reference frames, leading to semantic ambiguity and potentially serious errors for embodied AI robots. Existing VLMs, due to insufficient training on reference frames and object orientations, often produce inconsistent responses. To address this issue, we construct a new dataset, AlloEgo-View, comprising (image, query, view-specific answer) triplets that capture key object relations from both allocentric and egocentric perspectives. The view-specific descriptions follow a structured spatial representation that annotate detailed scene descriptions, reference and target objects, their orientations, reference frames, and view types. Building on AlloEgo-View, we develop AlloEgo-VLM, a framework to disambiguate allocentric and egocentric reference frames, even under ambiguous queries, and to be easily integrated into existing VLMs via supervised fine-tuning. Furthermore, we deploy our framework onto an embodied robotic platform within NVIDIA Isaac Sim to validate its real-world feasibility in open-ended object searching tasks. Experiments highlight the limitations of current VLMs in handling view-specific queries and demonstrate the strong disambiguation ability of AlloEgo-VLM.",
+      "authors": [
+        "Kuan-Lin Chen",
+        "Tzu-Ti Wei",
+        "Chao-Chi Liao",
+        "Yu-Chee Tseng",
+        "Jen-Jee Chen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-16T08:06:20+00:00",
+      "link": "https://arxiv.org/pdf/2608.15605v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "disambiguates allocentric/egocentric reference frames in VLMs using image-query-answer triplets capturing object spatial relations",
+      "llm_evidence_cn": "构建图像-查询-答案三元组数据集，捕捉物体间空间关系，消除参考系歧义，与跨模态关系抽取相关",
+      "llm_evidence": "构建图像-查询-答案三元组数据集，捕捉物体间空间关系，消除参考系歧义，与跨模态关系抽取相关",
+      "canonical_evidence": "构建图像-查询-答案三元组数据集，捕捉物体间空间关系，消除参考系歧义，与跨模态关系抽取相关",
+      "llm_tldr_en": "Introduces AlloEgo-View dataset and disambiguation method for spatial reference frames in VLMs, addressing ambiguity in object relation descriptions across vision and language, improving embodied AI reliability.",
+      "llm_tldr_cn": "该论文针对视觉-语言模型在理解空间语义时因参考系缺失而产生的歧义问题，构建了包含图像、查询和视图特定答案三元组的AlloEgo-View数据集。通过训练VLM区分异我中心与我中心参考系，使模型能根据对象朝向和空间关系给出更一致的回复。实验表明该方法提升VLM在空间关系理解上的准确性，对具身AI机器人有重要价值。这项研究为跨模态空间关系抽取提供了新数据集与评测视角。",
+      "llm_tldr": "该论文针对视觉-语言模型在理解空间语义时因参考系缺失而产生的歧义问题，构建了包含图像、查询和视图特定答案三元组的AlloEgo-View数据集。通过训练VLM区分异我中心与我中心参考系，使模型能根据对象朝向和空间关系给出更一致的回复。实验表明该方法提升VLM在空间关系理解上的准确性，对具身AI机器人有重要价值。这项研究为跨模态空间关系抽取提供了新数据集与评测视角。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "cross-modal relation extraction using vision and language",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.15869v1",
+      "source": "arxiv",
+      "title": "Beyond Visual CoT: Internalized Visual Thinking for Proactive Video Reasoning",
+      "abstract": "Multimodal large language models increasingly use visual chain-of-thought (Visual CoT) to reason about spatial, temporal, and embodied environments. By generating intermediate reasoning images, Visual CoT provides an intuitive mechanism for visual foresight but introduces substantial inference overhead, which is particularly problematic for proactive video reasoning. We ask whether models can learn to think visually during training while reasoning directly at inference. We introduce Internalized Visual Thinking (IVT), a post-training framework that jointly optimizes textual prediction and next-embedding prediction over unlabeled videos. Given a partially observed video, IVT predicts latent representations of future frames together with the target textual answer, encouraging the model to capture motion, object transitions, interactions, and latent intent. At inference, IVT generates the answer directly without synthesizing or re-encoding future frames. We conduct controlled studies across target representations, decoder designs, prediction horizons, data mixtures, training curricula, and predictive objectives. IVT improves over direct-answer fine-tuning on all six evaluation settings while retaining the same inference pathway. Compared with explicit Visual CoT, IVT achieves comparable or better performance and reduces average end-to-end latency by more than 5x. Together, our findings suggest that explicit pixel-space generation at inference time, as used in visual chain-of-thought, may not be necessary for effective proactive video reasoning. Predictive world modeling can be internalized during training to produce multimodal reasoners that are both more accurate and substantially more efficient.",
+      "authors": [
+        "Xiaoyu Zhu",
+        "Xinke Deng",
+        "Suresh Taddewadikar",
+        "Arnab Kumar Mondal",
+        "Zhongyu Jiang",
+        "Ian Fasel",
+        "Joerg Liebelt"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.MM"
+      ],
+      "published": "2026-08-16T17:35:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.15869v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "jointly optimizes textual prediction and next-embedding prediction for cross-modal alignment",
+      "llm_evidence_cn": "联合优化文本预测与下一嵌入预测，实现跨模态对齐",
+      "llm_evidence": "联合优化文本预测与下一嵌入预测，实现跨模态对齐",
+      "canonical_evidence": "联合优化文本预测与下一嵌入预测，实现跨模态对齐",
+      "llm_tldr_en": "Proposes Internalized Visual Thinking (IVT), a post-training framework that jointly optimizes textual and next-embedding prediction to enable visual thinking during training and direct inference for proactive video reasoning.",
+      "llm_tldr_cn": "该论文针对视觉思维链推理开销大的问题，提出内部化视觉思维（IVT）后训练框架。IVT通过联合优化文本预测与下一嵌入预测，让模型在训练时学习视觉思考，而在推理时直接作答。实验表明该方法在降低推理开销的同时保持视频推理性能。其贡献在于为多模态推理提供了一种高效的跨模态对齐训练范式。",
+      "llm_tldr": "该论文针对视觉思维链推理开销大的问题，提出内部化视觉思维（IVT）后训练框架。IVT通过联合优化文本预测与下一嵌入预测，让模型在训练时学习视觉思考，而在推理时直接作答。实验表明该方法在降低推理开销的同时保持视频推理性能。其贡献在于为多模态推理提供了一种高效的跨模态对齐训练范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.21030v1",
+      "source": "arxiv",
+      "title": "COMET: Contrastive Motion-Enhanced Temporal Reasoning for Video Multimodal Large Language Models",
+      "abstract": "Video multimodal large language models have advanced significantly, yet fine-grained motion-temporal understanding remains fragile. The core bottleneck is not only sparse frame sampling, but also the lack of a complete temporal modeling pipeline for explicitly representing frame-to-frame change, enabling appearance-motion interaction, and optimizing temporal direction sensitivity. We propose COMET, a temporally grounded framework that systematically strengthens video MLLMs through explicit temporal representation, appearance-motion fusion, and direction-aware optimization. Architecturally, COMET introduces a temporal motion branch built on Taylor frame differences and injects its motion evidence into the appearance stream via temporal attention bias-enhanced cross-attention. For optimization, COMET combines temporal prior distillation with a forward-reverse TC-GRPO stage that turns temporal order into a direct learning signal and strengthens the model's use of directional motion patterns encoded by the temporal motion branch. The method achieves consistent overall improvements with a pronounced motion-temporal bias: on Qwen3-VL-8B, action-centric tasks (STAR, SSv2) improve by 4.9% on average, temporal reasoning tasks (NExT-QA, CLEVRER, LLaVA-178K) by 2.1% over BL-GRPO, while static perception tasks (PerceptionTest) remain on par. The same gain pattern also transfers to InternVL2.5-8B, indicating that COMET generalizes across model families.",
+      "authors": [
+        "Chenghua Zhu",
+        "Zhaolu Kang",
+        "Qifan Shi",
+        "Siyan Wu",
+        "Kehan Jiang",
+        "Lei Wei",
+        "Lianyu Hu",
+        "Guangyuan Dong",
+        "Mingbo Yang",
+        "Rui Lu",
+        "Guibo Luo"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-08-21T12:28:36+00:00",
+      "link": "https://arxiv.org/pdf/2608.21030v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "appearance-motion fusion in video MLLMs",
+      "llm_evidence_cn": "视频多模态大模型的外观-运动融合",
+      "llm_evidence": "视频多模态大模型的外观-运动融合",
+      "canonical_evidence": "视频多模态大模型的外观-运动融合",
+      "llm_tldr_en": "Proposes COMET, a temporally grounded framework that strengthens video MLLMs via explicit temporal representation, appearance-motion fusion, and direction-aware optimization.",
+      "llm_tldr_cn": "针对视频多模态大语言模型（MLLM）在细粒度运动-时间理解上表现脆弱的问题，本文提出COMET框架，通过基于泰勒帧差的显式时间表示和运动分支，将运动证据注入外观流，并配合方向感知优化，系统地强化时间建模。实验表明COMET能有效提升视频时间推理性能，为视频MLLM的时间感知提供了一种完整、可复用的建模流程。",
+      "llm_tldr": "针对视频多模态大语言模型（MLLM）在细粒度运动-时间理解上表现脆弱的问题，本文提出COMET框架，通过基于泰勒帧差的显式时间表示和运动分支，将运动证据注入外观流，并配合方向感知优化，系统地强化时间建模。实验表明COMET能有效提升视频时间推理性能，为视频MLLM的时间感知提供了一种完整、可复用的建模流程。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

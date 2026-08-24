@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-23</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-24</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 8 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>4</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-23 19:49:24 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-24 20:33:20 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读2篇、速读6篇，共处理10篇论文，重点聚焦医学影像与多模态学习。最值得关注的是MUST-PET的跨示踪剂自监督分割方法，以及Projector Is All You Train的简洁投影器设计，均获8.0分。建议普通读者优先了解这两个工作，后续可跟进文本-视频对齐和医学影像描述生成方向。</p>
+<p>今日精读聚焦文档图像键值提取与多模态目标检测，速读涉及时空推理与视觉语言对齐。最值得关注的是《Identify, Locate, Link》与《A2DINOv3》两篇高分工作，分别推动端到端文档解析和协作式检测范式。建议优先精读这两篇原文，并顺带浏览视频推理类速读以把握前沿趋势。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">4 篇</strong>
+    <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation">MUST-PET: MUltimodal Self-supervised learning across Tracers for whole-body PET/CT-based lesion segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Projector Is All You Train">Projector Is All You Train</span></li><li><span class="dpr-home-dashboard-paper-title" title="MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities">MOSAIC: Modality-agnostic Spectral Alignment for Federated Image-level Weakly Supervised Tumor Segmentation under Client-specific Missing Modalities</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Identify, Locate, Link: End-to-End Key-Value Extraction from Document Images">Identify, Locate, Link: End-to-End Key-Value Extraction from Document Images</span></li><li><span class="dpr-home-dashboard-paper-title" title="A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration">A2DINOv3: Rethinking Multi-Modal Object Detection via Socialized Collaboration</span></li><li><span class="dpr-home-dashboard-paper-title" title="SuppreSensing: Expert-Guided Feature Recalibration and Discrepancy Augmentation for Multimodal Object Detection">SuppreSensing: Expert-Guided Feature Recalibration and Discrepancy Augmentation for Multimodal Object Detection</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>4</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>4</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection">TF-CADE: Foreground-Concentrated Text-Video Alignment for Zero-Shot Temporal Action Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning">Clinically Structured Surrogate Rewards for Post-SFT Medical Image Captioning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning">Scaffolding Minds: Optimizing Latent Visual Target Representations for Multimodal Reasoning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="AlloEgo-VLM: Disambiguating Allocentric and Egocentric Reference Frames in Vision-Language Models">AlloEgo-VLM: Disambiguating Allocentric and Egocentric Reference Frames in Vision-Language Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Beyond Visual CoT: Internalized Visual Thinking for Proactive Video Reasoning">Beyond Visual CoT: Internalized Visual Thinking for Proactive Video Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="COMET: Contrastive Motion-Enhanced Temporal Reasoning for Video Multimodal Large Language Models">COMET: Contrastive Motion-Enhanced Temporal Reasoning for Video Multimodal Large Language Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 
