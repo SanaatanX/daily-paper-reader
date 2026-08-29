@@ -1,0 +1,282 @@
+Title: HMGCLIP: Heterogeneous Multi-Granularity Contrastive Learning for E-commerce Representation Learning
+
+URL Source: https://arxiv.org/pdf/2608.24467v1
+
+Published Time: Wed, 26 Aug 2026 01:04:13 GMT
+
+Number of Pages: 9
+
+Markdown Content:
+# HMGCLIP: Heterogeneous Multi-Granularity Contrastive Learning for E-commerce Representation Learning 
+
+Qiuyu Zhu Yi Gao Zhichao Wan Mingyang Ma 
+
+{zqy527291,xiheng.gy,wanzhichao.wzc,mingyang.mmy}@alibaba-inc.com 
+
+Alibaba International Digital Commerce Group 
+
+Abstract 
+
+Although recent Multimodal Large Language Models (MLLMs) have advanced general prod-uct understanding, they implicitly encode product information into global embeddings, thereby limiting their ability to capture fine-grained attributes. This limitation hinders per-formance in tasks requiring precise attribute dis-crimination, such as distinguishing subtle ma-terial differences among visually similar prod-ucts. To address this challenge, we propose HMGCLIP, a unified multimodal embedding framework. By constructing a heterogeneous hypergraph, we leverage hypergraph topology to mine structure-aware hard negatives and align multi-granular semantics at both relation and hyperedge levels. This design enables a dual-granularity inference mechanism that dy-namically fuses attribute evidence for both fine-grained and coarse-grained downstream tasks. Furthermore, we release a comprehensive fine-grained e-commerce dataset to facilitate future benchmarking. Extensive experiments on this new dataset and the public MAVE benchmark show that HMGCLIP outperforms strong mul-timodal encoders, MLLMs, and e-commerce baselines, validating the superiority of HMG-CLIP. 
+
+1 Introduction 
+
+Modern e-commerce platforms manage billions of products described by images, titles, structured attributes, and categorical hierarchies. Learning unified representations from heterogeneous signals is fundamental to product search, recommendation, attribute value extraction (PAVE), and duplicate product detection (Radford et al., 2021; Chia et al., 2022). Despite rapid progress in multimodal repre-sentation learning (Lin et al., 2025; Li et al., 2026), three limitations persist in the e-commerce setting. First, general vision-language models such as CLIP (Radford et al., 2021) are trained on web-scale image–text pairs and struggle with the fine-
+
+Figure 1: Comparison of fine-grained attributes among the query, ground-truth product and similar product. 
+
+grained distinctions that e-commerce demands— for instance, differentiating between “mesh” and “leather” uppers, or “air cushion” and “flat rub-ber” soles, requires more than global visual align-ment. Second, standard contrastive learning typ-ically treats negative samples uniformly or sam-ples them randomly from batches. This approach fails to provide the semantically confusable hard negatives necessary for sharpening decision bound-aries at the attribute level (de Souza P. Moreira et al., 2025). Third, existing benchmarks often lack the structural richness of real-world e-commerce data—particularly category taxonomies, attribute key–value constraints, and higher-order product entity groups—making it difficult to evaluate hier-archical and compositional understanding. The core challenge is that e-commerce products are inherently compositional : their semantics arise from the interaction of visual appearance, textual descriptions, and structured attributes. As illus-trated in Figure 1, monolithic encoders may fail to preserve fine-grained product distinctions when trained without explicit structural constraints. For example, a query sneaker with a pink-tinted outsole 
+
+and a mesh upper may receive high similarity to arXiv:2608.24467v1 [cs.AI] 25 Aug 2026 a visually similar but semantically incorrect item, such as a sneaker with a beige outsole and a leather upper , because the two products share coarse vi-sual cues including silhouette, lacing pattern, and overall color distribution. In large-scale retrieval, such global bias leads to ranking errors and re-trieval ambiguity, as the model overlooks decisive attribute-level evidence such as material texture and outsole appearance. To address these limitations, we present HMG-CLIP , a unified framework for multimodal e-commerce representation learning built on three insights: (1) e-commerce data naturally forms a 
+
+heterogeneous hypergraph where products, im-ages, attributes, and categories participate in higher-order relationships that extend beyond pairwise edges; (2) effective contrastive learning requires 
+
+hard negative mining at multiple granularities —from coarse category-level to fine attribute-level; (3) learning a structure-aware unified embed-ding space enables robust zero-shot generalization across diverse downstream tasks, eliminating the need for task-specific fine-tuning. Our main con-tributions are summarized as: • Framework. We present a unified multimodal embedding framework for e-commerce that sup-ports both fine-grained and coarse-grained down-stream tasks, achieving robust generalization without task-specific encoder fine-tuning. • Method. We develop a multi-granularity con-trastive learning paradigm that aligns relation-level and hyperedge-level semantics in a uni-fied embedding space. By exploiting heteroge-neous hypergraph topology, our method mines se-mantically confusable hard negatives and jointly aligns global product representations with local attribute semantics and higher-order groups. • Dataset. We release a fine-grained multimodal e-commerce dataset to fill the gap in existing benchmarks and facilitate future research. • Evaluation. Extensive experiments on our intro-duced dataset and the public MAVE benchmark demonstrate that HMGCLIP achieves strong and often state-of-the-art performance across at-tribute prediction and product classification tasks, validating its robustness and versatility. 
+
+2 Related Work 
+
+E-commerce Representation Learning. Vision-language pre-training models—including CLIP (Radford et al., 2021), ALIGN (Jia et al., 2021), and BLIP-2 (Li et al., 2023)—have demonstrated that large-scale image–text alignment yields trans-ferable representations for retrieval and recog-nition. This paradigm has been adapted to e-commerce through domain-specific contrastive pre-training and knowledge-enhanced multimodal fu-sion (Dong et al., 2022; Zhu et al., 2021b; Jin et al., 2023). Recent MLLM-based e-commerce models improve generative product understanding (Fu et al., 2025), but they are often optimized for task-specific prediction rather than reusable em-bedding spaces. A parallel line of work addresses product attribute value extraction via generative or instruction-following multimodal LLMs (Khandel-wal et al., 2023; Brinkmann et al., 2024). Despite these advances, most methods treat products as iso-lated image–text pairs and underuse structured de-pendencies such as attribute-key/value constraints and co-occurring attributes. In contrast, HMG-CLIP learns a task-agnostic unified space where products, categories, and attributes are represented as reusable nodes for cross-task generalization. 
+
+Contrastive Learning with Hard Negative Min-ing. Prior contrastive learning improves repre-sentation quality through label-aware positives, prototypes, graph augmentations, and hard nega-tive mining (Khosla et al., 2020; Li et al., 2021; Zhu et al., 2021a; Robinson et al., 2021). In e-commerce, however, negatives are not arbi-trary: they are constrained by category hierarchies, attribute-key/value relations, and visual similar-ity. Hypergraphs provide a natural abstraction for modeling higher-order product relations beyond pairwise edges. (Yadati et al., 2019; Huang and Yang, 2021), and recent e-commerce graph meth-ods have demonstrated the value of structured prod-uct relations for retrieval, recommendation, and attribute extraction (Wang et al., 2023; Hu et al., 2025; Hongwimol et al., 2026). Nevertheless, ex-isting methods rarely unify relation-level hard neg-atives, hyperedge-level semantic alignment, and multimodal product representations within a single embedding framework. HMGCLIP addresses it by combining heterogeneous hypergraph-based hard negative mining with hierarchical multi-granularity contrastive learning for diverse e-commerce tasks. 
+
+3 Preliminaries 
+
+Products in e-commerce are compositional entities whose semantics arise from heterogeneous fields, 2including images, text, structured attributes, and category information. For a product p, we denote its multimodal inputs as Xp = {Ip, T p, A p, C p},where Ip is the product image, Tp is the title and de-scription, Ap = {a1, a 2, . . . , a k} is the set of struc-tured aspects, i.e., attribute–value pairs , and Cp is the category. These modalities capture semantic information at different granularities, ranging from fine-grained physical properties to coarse-grained product roles defined by the platform taxonomy. Our goal is to learn a unified multimodal embed-ding function f (·) : X → Rd that captures fine-grained semantics while preserving discriminative boundaries. We evaluate the learned representa-tions on two downstream tasks: attribute predic-tion (Yang et al., 2022), which tests fine-grained discrimination, and product classification, which tests semantic clustering quality. Following prior works (Yang et al., 2022; Khan-delwal et al., 2023), we formulate classification as an embedding-based matching problem. Specif-ically, given a query product p, the predicted at-tribute value or category is defined as the candidate whose embedding is most semantically similar to the product representation: 
+
+y∗ = arg max  
+
+> y∈ˆY
+
+sim( f (p), f (y)) , (1) where ˆY denotes the candidate set of aspects or cat-egories, and sim (·, ·) represents cosine similarity. 
+
+4 Methodology 
+
+As illustrated in Figure 2, HMGCLIP consists of three stages: (1) Heterogeneous Hypergraph Se-mantic Construction , which organizes products, aspects, and categories into a structured semantic graph with pairwise relations and higher-order hy-peredges; (2) Multi-Granularity Contrastive Rep-resentation Learning , which aligns entities at the node, relation, and hyperedge levels to learn a uni-fied semantic space; and (3) Dual-Granularity In-ference , which performs attribute prediction and evidence-fused product classification by retriev-ing from the learned aspect and category libraries. HMGCLIP captures both local semantic relations and higher-order semantic dependencies, enabling discriminative representations for downstream e-commerce tasks such as fine-grained attribute pre-diction and coarse-grained product classification. 
+
+4.1 Heterogeneous Hypergraph Semantic Construction 
+
+We formulate a heterogeneous graph (Wang et al., 2019; Zhu et al., 2025a,b) G = ( V, E) to struc-ture the relationships among products, aspects, and categories, where the node set is defined as V =
+
+P ∪ A ∪ C . Here, product nodes P are connected to aspect nodes A and category nodes C through product-aspect edges (p, a ) ∈ E and product-category edges (p, c ) ∈ E , respectively. However, pairwise relations alone cannot capture the group-level semantic consistency in e-commerce catalogs. For example, products sharing the same aspect, such as “Waterproof,” often form coherent clusters across different categories. To model such higher-order dependencies, we extend the heterogeneous graph G into a hetero-geneous hypergraph (Antelmi et al., 2023; Wang et al., 2019) GH = ( V, E, H), where H denotes the set of hyperedges. Specifically, we define two types of hyperedges: (1) For each aspect node a ∈ A , an aspect-level hyperedge ha =
+
+{a} ∪ { p ∈ P | (p, a ) ∈ E} groups the as-pect with all associated products, capturing fine-grained semantic consistency. (2) Likewise, for each category node c ∈ C , a category-level hyper-edge hc = {c} ∪ { p ∈ P | (p, c ) ∈ E} groups the category with its member products, preserving coarse-grained semantic coherence. By combin-ing pairwise edges and higher-order hyperedges, 
+
+GH provides a structural foundation for subsequent contrastive learning. 
+
+4.2 Multi-Granularity Contrastive Learning 
+
+To learn fine-grained representations, we fine-tune a pre-trained multimodal encoder with e-commerce-specific structural priors through multi-granularity contrastive learning over relation-level and hyperedge-level views. Our method leverages structure-aware sampling to construct informative positive and negative pairs, enabling the model to align pairwise relations and higher-order semantic groups within a unified embedding space. 
+
+4.2.1 Relation-Guided Hard Negative Mining 
+
+Standard in-batch negatives are often semantically distant and provide limited supervision for fine-grained discrimination. To address this, we mine hard negatives for pairwise relations from the het-erogeneous graph. Specifically, for an anchor prod-uct pi and its ground-truth positive aspects A+ 
+
+> i
+
+, we construct a hard negative set A− 
+
+> i
+
+by applying three constraints: (i) the candidate aspect must share the same aspect key as a positive aspect, such as 3Figure 2: Overview of HMGCLIP. (1) Construction of a heterogeneous hypergraph from product data and semantic annotations. (2) Multi-granularity contrastive learning over relation-level and hyperedge-level views to unify the semantic space. (3) Dual-granularity inference via retrieval over learned key-value and category libraries for aspect prediction and evidence-fused product classification. 
+
+“Material” or “Color”; (ii) it must appear in the same category context as pi; and (iii) it must not be a ground-truth aspect of pi. This yields semanti-cally confusable negatives for the product-aspect relation, encouraging the model to learn sharper distinctions among directly related aspects. 
+
+4.2.2 Hyperedge-Guided Group Alignment 
+
+Beyond pairwise supervision, we enforce group-level consistency via hyperedge alignment. For each anchor product, we define positives as co-occurring products within the same hyperedge and negatives as those outside it. This contrastive ob-jective maximizes anchor-positive similarity while minimizing anchor-negative similarity, fostering compact and coherent clustering of semantically related products in the latent space. 
+
+4.3 Joint Relation-Level and Hyperedge-Level Contrastive Optimization 
+
+To jointly capture fine-grained pairwise seman-tics and higher-order group structure, we optimize a unified contrastive objective over relation-level and hyperedge-level supervision. Specifically, we adopt the InfoNCE loss (van den Oord et al., 2018) as the basic optimization framework. For an anchor sample i, let S+ 
+
+> i
+
+and S− 
+
+> i
+
+denote the sets of positive and negative samples, respec-tively. We define the positive and negative partition functions as: 
+
+Z+ 
+
+> i
+
+= X
+
+> j∈S +
+> i
+
+exp( h⊤ 
+
+> i
+
+hj /τ ), (2) 
+
+Z− 
+
+> i
+
+= X
+
+> k∈S −
+> i
+
+exp( h⊤ 
+
+> i
+
+hk/τ ), (3) where τ is the temperature parameter. The loss for a batch of N samples is formulated as: 
+
+Lcontrast = − 1
+
+N
+
+> N
+
+X
+
+> i=1
+
+log Z+
+
+> i
+
+Z+ 
+
+> i
+
++ Z−
+
+> i
+
+. (4) We apply this loss to both relation-level and hyperedge-level views. Specifically, Lrel is com-puted using product-aspect pairs with hard neg-atives, while Lhyper is computed using product groups within semantic hyperedges defined in Sec-tion 4.1. The overall objective is defined as: 
+
+L = Lrel + λLhyper , (5) where λ balances the contribution of the two super-vision signals. 
+
+4.4 Dual-Granularity Inference 
+
+Upon completion of multi-granularity contrastive pre-training, the encoders are frozen. We propose a dual-path inference mechanism that adapts to task granularity by leveraging the aligned embed-ding space for both fine-grained aspect retrieval and coarse-grained category prediction. 44.4.1 Path I: Fine-Grained Retrieval 
+
+For fine-grained aspect prediction, we directly uti-lize the multimodal embedding zq of the query product q to retrieve the best-matching aspect from the vocabulary A. The predicted aspect ˆaq is iden-tified by maximizing the cosine similarity between the query and candidate aspect embeddings: 
+
+ˆaq = arg max 
+
+> j∈A
+
+z⊤ 
+
+> q
+
+aj
+
+∥zq∥∥ aj ∥ , (6) where aj denotes the embedding of aspect can-didate j. This non-parametric nearest-neighbor search leverages the discriminative embedding space to capture fine-grained semantic distinctions without requiring additional classification heads. 
+
+4.4.2 Path II: Evidence-Fused Coarse-Grained Retrieval 
+
+For coarse-grained category retrieval, relying solely on the product’s intrinsic features may lead to am-biguity in distinguishing semantically similar cate-gories. To address this, we construct an enhanced query representation by integrating specific seman-tic evidence into the global context. 
+
+Semantic Anchor-Based Fusion. Initially, we utilize the set of top-K aspects retrieved in Path I to construct a robust semantic anchor. Let 
+
+{a1, a2, . . . , aK } be the embeddings of these re-trieved aspects. We obtain the aggregated aspect representation aagg via mean pooling. This aggre-gated vector serves as a contextual summary of the product’s key aspects. We then fuse the prod-uct’s intrinsic multimodal embedding zq with this semantic summary via linear interpolation: 
+
+zf used = αzq + (1 − α)aagg , (7) where α balances the contribution of intrinsic fea-tures and aggregated semantic evidence. The final category prediction ˆyq is obtained by retrieving the best match from the category candidate set C based on cosine similarity: 
+
+ˆyq = arg max 
+
+> c∈C
+
+(zf used )⊤c
+
+∥zf used ∥∥ c∥ . (8) 
+
+Residual Transformer-based Fusion. To cap-ture fine-grained semantic interactions between product features and aspect evidence, we further in-troduce an evidence-enhanced residual fusion mod-ule. This module injects retrieved aspect evidence into the product representation via a residual con-nection, thereby enriching semantic details while preserving the geometric structure of the learned embedding space. Given the product embedding zq and the set of retrieved aspect embeddings {a1, . . . , aK } defined previously, we form a field-level token sequence by combining the product token with its aspect evidence tokens: X = [ zq, a1, a2, . . . , aK ]. Then, we add learnable type embeddings to distinguish the product token from aspect tokens: 
+
+˜x0 = zq + eprod , (9) 
+
+˜xi = ai + eattr , i = 1 , . . . , K, (10) where eprod and eattr are learnable type embed-dings. The resulting sequence is denoted as: 
+
+˜X = [˜ x0, ˜x1, . . . , ˜xK ]. After that, we apply a lightweight Transformer encoder to model inter-actions between the product representation and the retrieved aspect evidence: 
+
+[h0, h1, . . . , hK ] = TransformerEncoder( ˜X).
+
+(11) Through self-attention, the product token can se-lectively attend to category-relevant aspects, while aspect tokens can also contextualize one another. This enables interaction-aware fusion beyond mean pooling or scalar weighting. Instead of directly replacing the product embed-ding with the transformed token h0, we use it to predict a residual correction, and obtain the final representation through residual composition: 
+
+z = norm( zq + αrfθ(h0)) . (12) where fθ(·) is a lightweight projection module, αr
+
+controls the aspect-aware correction strength, and 
+
+norm( ·) denotes L2 normalization. This residual design keeps the original product embedding as the semantic anchor while allowing retrieved aspect evidence to provide a controlled correction. Thus, the fused representation remains compatible with the learned embedding space and can be directly matched against taxonomy-defined categories. 
+
+5 Experiments and Analysis 
+
+5.1 Datasets MAVE (Yang et al., 2022). From the original 2.2M products, we retain multimodal products with im-ages and structured aspects, prioritizing items with 5Table 1: Performance of aspect (attribute) prediction and product classification tasks on both datasets.                                                                                                                                                                                                
+
+> Model Internal Dataset MAVE Hit@1 /MRR@1 Hit@3 MRR@3 Hit@5 MRR@5 Hit@1 /MRR@1 Hit@3 MRR@3 Hit@5 MRR@5 Aspect Prediction
+> SigLIP2 40.74 76.27 56.64 87.68 59.26 5.73 15.60 9.90 24.42 11.90 FashionCLIP 49.63 81.59 64.00 90.54 66.06 16.71 36.00 25.00 46.92 27.48 InternVL3.5-2B 35.29 72.09 51.59 83.53 54.25 5.29 14.90 9.31 24.30 11.43 Qwen3-VL-2B 37.88 72.86 53.46 84.00 56.03 6.01 14.68 9.64 21.68 11.20 GME-Qwen2VL 40.61 75.58 56.13 86.48 58.65 11.40 26.76 17.98 37.32 20.38 MM-Embed 47.09 79.06 61.32 89.65 63.75 5.48 15.93 9.87 23.43 11.57 CASLIE-S 39.19 74.73 54.99 84.94 57.35 8.13 20.93 13.60 29.94 15.66 Qwen3-VL-Emb 54.10 85.27 68.12 92.74 69.86 15.56 33.33 23.25 45.38 25.97 HMGCLIP 75.38 94.70 84.27 97.61 84.95 24.61 46.16 33.93 58.32 36.69 Product Classification
+> SigLIP2 0.17 0.41 0.28 0.72 0.35 1.05 1.18 1.11 1.23 1.12 FashionCLIP 39.79 60.53 48.94 68.51 50.76 75.66 85.33 80.03 89.20 80.89 InternVL3.5-2B 6.81 15.36 10.47 21.73 11.92 8.99 40.24 24.04 48.27 25.86 Qwen3-VL-2B 0.27 0.78 0.48 1.24 0.59 22.49 34.89 27.99 37.87 28.68 GME-Qwen2VL 24.25 45.14 33.36 55.68 35.78 14.73 25.18 19.12 32.51 20.79 MM-Embed 2.58 4.69 3.48 6.43 3.87 9.54 12.54 10.83 14.37 11.25 CASLIE-S 9.46 19.45 13.72 25.38 15.07 12.32 42.69 26.10 50.97 28.01 Qwen3-VL-Emb 48.30 71.19 58.46 79.79 60.45 61.45 83.63 71.44 89.83 72.87 HMGCLIP 84.23 93.77 88.55 95.75 89.01 96.70 99.15 97.83 99.57 97.93
+
+at least three aspects and adding two-aspect sam-ples under a per-category cap to reduce imbalance. 
+
+Internal dataset. We construct a dataset derived from real-world product listings on a Southeast Asian e-commerce platform. The data encom-passes titles, descriptions, images, category labels, and structured key–value pairs. Reflecting the re-gion’s linguistic diversity, the dataset is multilin-gual, predominantly featuring English alongside Thai, Vietnamese, Indonesian, and Chinese. It is specifically designed to address two core chal-lenges: coarse-grained category understanding and fine-grained aspect discrimination. 
+
+5.2 Baselines and Evaluation Metrics 
+
+All methods are evaluated under the same candidate pools. We report Hit@ K and MRR@ K for both fine-grained aspect prediction and coarse-grained product classification. For our method, Qwen3-VL-Embedding-2B serves as the backbone and is further post-trained with heterogeneous multi-granularity contrastive learning. At inference, as-pect prediction uses direct product-to-aspect match-ing, while category prediction adopts aspect-guided semantic fusion (§4.4.2). 
+
+5.3 Experimental Results 
+
+To evaluate the performance of HMGCLIP, we compare it with all baselines on both tasks across both datasets. The results are presented in Table 1. 
+
+Aspect Prediction. HMGCLIP outperforms all baselines, demonstrating superior fine-grained semantic capture. On the internal dataset, it achieves a Hit@1/MRR@1 of 75.38%, surpass-ing the strongest baseline (Qwen3-VL-Emb) by 21.28%. This margin highlights its enhanced abil-ity to distinguish subtle aspect differences com-pared to general-purpose VLMs. The advantage persists across broader recall scopes, with a Hit@5 of 97.61% (nearly 5% higher than the second-best model). Furthermore, HMGCLIP generalizes well to the heterogeneous MAVE benchmark, achiev-ing a Hit@1/MRR@1 of 24.61% and MRR@5 of 36.69%. By exceeding specialized models like FashionCLIP (Hit@1: 16.71%), our approach proves robust in capturing complex product-aspect correlations in open-world scenarios. In particular, graph-derived hard negatives expose the model to semantically confusable attribute values, leading to sharper product–aspect decision boundaries. 
+
+Product Classification. HMGCLIP consistently dominates baselines in coarse-grained category distinction. On the internal dataset, it achieves a Hit@1 of 84.23%, exceeding the second-best model (Qwen3-VL-Emb, 48.30%) by over 35%. On the MAVE benchmark, it attains a Hit@1 of 96.70% and Hit@5 of 99.57%, outperforming Fash-ionCLIP (Hit@1: 75.66%). These results vali-date our Dual-Granularity Inference built on Resid-ual Transformer Fusion . The low performance of 6Table 2: Qualitative comparison on aspect (attribute) prediction. ✓ denotes correct Top-1; × denotes incorrect.                        
+
+> #Image Product Ground Truth Qwen3-VL-Emb HMGCLIP 1PIN PIN LUCKY CHARM MANEKI-NEKO WHITE SO-LAR CAT DECOR CHARM material: plastic ×material: brass ✓material: plastic 2Summer New Fashion Loose Womens T-shirt Short Sleeve Patchwork Vest Top Bot-tomin. . . clothing decoration: button
+> ×clothing decoration: side slit
+> ✓clothing decoration: button 3Bhuuno Grommet rèm cua so Rèm cua so Phong Cách Trang Trí No . i Thát Tra. . . curtain material: polyester
+> ×curtain material: vinyl
+> ✓curtain material: polyester
+
+Table 3: Qualitative comparison on category classification. ✓ denotes correct Top-1; × denotes incorrect.                                            
+
+> #Image Product Ground Truth Qwen3-VL-Emb HMGCLIP 1DHT11 DHT 11 High Ac-curacy Temperature and Hu-midity Moisture Sensor Detect 3.3V 5V Module. . . Tools &Home Im-provement > Electrical > Electrical Circuitry & Parts
+> ×Home Appliances > Heating, Cooling and Ventilation > Humidi-fiers
+> ✓Tools & Home Im-provement > Electrical > Electrical Circuitry & Parts 2Ke .m hàn cell pin cuo . n ¯ don 1 mét ke .m kích thuóc 0.15*8mm Tools &Home Im-provement >Power Tools & Accessories > Power Tools Parts
+> ×Stationery, Craft & Gift Cards > Pack-aging &Cartons >Packaging Protection > Shrink Wrap
+> ✓Tools & Home Im-provement >Power Tools & Accessories > Power Tools Parts 3Mesh Art Supplies Bag Portable Art Supplies Orga-nizer Large A3 Size Me. . . Stationery, Craft &Gift Cards > School &Office >Storage & Organizers > Filing & Document Presenta-tion
+> ×Bags and Travel > Functional Bags > Li-brary Bag
+> ✓Stationery, Craft & Gift Cards > School &Office >Storage & Organizers > Filing & Document Presenta-tion
+
+SigLIP2 is likely due to its pairwise sigmoid image– text objective and lack of explicit cross-modal fu-sion. By preserving critical semantic signals during multimodal integration, this architecture creates a robust feature space that reinforces category bound-aries through aspect-level consistency. 
+
+5.4 Analysis of Evidence Fusion Strategies 
+
+We study evidence fusion through a progressive design axis, ranging from uniform aggregation to anchor-preserving weighting, instance-adaptive weighting, and interaction-aware residual fusion for coarse-grained category retrieval. First, aspect evidence must be incorporated care-fully: mean pooling slightly improves Hit@1 over the backbone, but degrades Hit@3 and Hit@5, sug-gesting that uniform aggregation can disturb the neighborhood structure of the product embedding space. Second, preserving the product representa-tion as a semantic anchor is important. Manually increasing the product-token weight improves over mean pooling, indicating that aspects should cor-rect rather than replace the global product represen-tation. Third, instance-adaptive weighting further improves performance, showing that different prod-ucts rely on different subsets of evidence. 
+
+5.5 Qualitative Analysis 
+
+To complement our quantitative results, we present qualitative comparisons in Table 2 and Table 3, illustrating how HMGCLIP rectifies errors made by the strongest baseline, Qwen3-VL-Emb. 
+
+Aspect Prediction. Table 2 presents the Hit@1 results, illustrating that HMGCLIP correctly re-trieves the ground truth for semantically ambigu-ous fine-grained aspects where the baseline fails. For instance, it distinguishes material differences (“plastic” vs. “brass” for a charm; “polyester” vs. “vinyl” for curtains) and structural details (“button” vs. “side slit” on a T-shirt). These results validate the efficacy of our heterogeneous multi-granularity contrastive learning, which enhances fine-grained discriminability by aligning visual features with specific aspect granularities, thereby sharpening decision boundaries among confusable values. 
+
+Product Classification. Table 3 demonstrates the advantage of our evidence-fused coarse-grained re-trieval. While Qwen3-VL-Emb misclassifies items into semantically overlapping but functionally dis-tinct categories (e.g., DHT11 sensor as “Humid-7ifiers,” welding tape as “Shrink Wrap”), HMG-CLIP accurately predicts specific sub-categories (“Electrical Circuitry & Parts,” “Power Tools Parts”). This improvement stems from our resid-ual transformer fusion mechanism, which injects retrieved aspect evidence into the classification pro-cess. By leveraging this fused evidence, the model effectively disambiguates products sharing general contextual features, reinforcing category bound-aries through aspect-level consistency. 
+
+6 Conclusion 
+
+In this paper, we present HMGCLIP, a uni-fied multimodal embedding framework for multi-granularity e-commerce representation learning. By leveraging a heterogeneous hypergraph as a structural prior, HMGCLIP establishes a multi-granularity contrastive learning paradigm that aligns relation-level and hyperedge-level semantics within a unified embedding space. This design en-ables a dual-granularity inference mechanism that achieves generalization across both fine-grained and coarse-grained tasks without requiring task-specific fine-tuning. We further release a compre-hensive multimodal e-commerce dataset. Exper-iments on both datasets demonstrate that HMG-CLIP achieves state-of-the-art performance in both tasks, validating its effectiveness and versatility. 
+
+References 
+
+Alessia Antelmi, Gennaro Cordasco, Mirko Polato, Vit-torio Scarano, Carmine Spagnuolo, and Dingqi Yang. 2023. A survey on hypergraph representation learn-ing. ACM Comput. Surv. , 56(1). Alexander Brinkmann, Roee Shraga, and Christian Bizer. 2024. ExtractGPT: Exploring the potential of large language models for product attribute value extraction. In Information Integration and Web Intel-ligence: 26th International Conference, iiWAS 2024, Bratislava, Slovakia, December 2–4, 2024, Proceed-ings, Part I , volume 15342 of Lecture Notes in Com-puter Science , pages 38–52. Springer. Patrick John Chia, Giuseppe Attanasio, Federico Bianchi, Silvia Terragni, Ana Rita Magalhães, Diogo Goncalves, Ciro Greco, and Jacopo Tagliabue. 2022. Contrastive language and vision learning of general fashion concepts. Scientific Reports , 12:18958. Gabriel de Souza P. Moreira, Radek Osmulski, Mengyao Xu, Ronay Ak, Benedikt Schifferer, and Even Oldridge. 2025. Nv-retriever: Improving text em-bedding models with effective hard-negative mining. 
+
+Preprint , arXiv:2407.15831. Xiao Dong, Xunlin Zhan, Yangxin Wu, Yunchao Wei, Michael C. Kampffmeyer, Xiaoyong Wei, Min-long Lu, Yaowei Wang, and Xiaodan Liang. 2022. M5Product: Self-harmonized contrastive learning for e-commercial multi-modal pretraining. In Pro-ceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 11589–11598. Chenghan Fu, Daoze Zhang, Yukang Lin, Zhanheng Nie, Xiang Zhang, Jianyu Liu, Yueran Liu, Wanx-ian Guan, Pengjie Wang, Jian Xu, and Bo Zheng. 2025. MOON embedding: Multimodal represen-tation learning for e-commerce search advertising. 
+
+CoRR , abs/2511.11305. Pollawat Hongwimol, Haoning Shang, Chutong Wang, Zhichao Wan, Yi Gao, Yuanming Li, Lin Gui, Wen-hao Sun, and Cheng Yu. 2026. AutoPKG: An auto-mated framework for dynamic e-commerce product-attribute knowledge graph construction. Preprint ,arXiv:2604.16950. Jiazhen Hu, Jiaying Gong, Hongda Shen, and Hoda Eldardiry. 2025. Hypergraph-based zero-shot multi-modal product attribute value extraction. In Proceed-ings of the ACM on Web Conference 2025 , pages 4853–4862. ACM. Jing Huang and Jie Yang. 2021. UniGNN: A unified framework for graph and hypergraph neural networks. In Proceedings of the 30th International Joint Con-ference on Artificial Intelligence , pages 2563–2569. International Joint Conferences on Artificial Intelli-gence Organization. Chao Jia, Yinfei Yang, Ye Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc V. Le, Yunhsuan Sung, Zhen Li, and Tom Duerig. 2021. Scaling up vi-sual and vision-language representation learning with noisy text supervision. In Proceedings of the 38th International Conference on Machine Learning , vol-ume 139 of Proceedings of Machine Learning Re-search , pages 4904–4916. PMLR. Yang Jin, Yongzhi Li, Zehuan Yuan, and Yadong Mu. 2023. Learning instance-level representation for large-scale multi-modal pretraining in e-commerce. In Proceedings of the IEEE/CVF Conference on Com-puter Vision and Pattern Recognition , pages 11060– 11069. Anant Khandelwal, Happy Mittal, Shreyas Sunil Kulka-rni, and Deepak Gupta. 2023. Large scale generative multimodal attribute extraction for e-commerce at-tributes. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Vol-ume 5: Industry Track) , pages 277–287. Association for Computational Linguistics. Prannay Khosla, Piotr Teterwak, Chen Wang, Aaron Sarna, Yonglong Tian, Phillip Isola, Aaron Maschinot, Ce Liu, and Dilip Krishnan. 2020. Su-pervised contrastive learning. In Advances in Neural Information Processing Systems , volume 33, pages 18661–18673. Curran Associates, Inc. 
+
+8Junnan Li, Dongxu Li, Silvio Savarese, and Steven Hoi. 2023. BLIP-2: Bootstrapping language-image pre-training with frozen image encoders and large lan-guage models. In Proceedings of the 40th Interna-tional Conference on Machine Learning , volume 202 of Proceedings of Machine Learning Research , pages 19730–19742. PMLR. Junnan Li, Pan Zhou, Caiming Xiong, and Steven C. H. Hoi. 2021. Prototypical contrastive learning of un-supervised representations. In International Confer-ence on Learning Representations .Mingxin Li, Yanzhao Zhang, Dingkun Long, Keqin Chen, Sibo Song, Shuai Bai, Zhibo Yang, Pengjun Xie, An Yang, Dayiheng Liu, Jingren Zhou, and Junyang Lin. 2026. Qwen3-VL-Embedding and Qwen3-VL-Reranker: A unified framework for state-of-the-art multimodal retrieval and ranking. Preprint ,arXiv:2601.04720. Sheng-Chieh Lin, Chankyu Lee, Mohammad Shoeybi, Jimmy Lin, Bryan Catanzaro, and Wei Ping. 2025. Mm-embed: Universal multimodal retrieval with multimodal llms. In International Conference on Learning Representations , volume 2025, pages 44215–44234. Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sas-try, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. 2021. Learn-ing transferable visual models from natural language supervision. In Proceedings of the 38th International Conference on Machine Learning , volume 139 of 
+
+Proceedings of Machine Learning Research , pages 8748–8763. PMLR. Joshua Robinson, Ching-Yao Chuang, Suvrit Sra, and Stefanie Jegelka. 2021. Contrastive learning with hard negative samples. In International Conference on Learning Representations .Aäron van den Oord, Yazhe Li, and Oriol Vinyals. 2018. Representation learning with contrastive predictive coding. CoRR , abs/1807.03748. Xiao Wang, Houye Ji, Chuan Shi, Bai Wang, Yanfang Ye, Peng Cui, and Philip S Yu. 2019. Heteroge-neous graph attention network. In The World Wide Web Conference , WWW ’19, pages 2022–2032, New York, NY, USA. Association for Computing Machin-ery. Xiaodan Wang, Chengyu Wang, Lei Li, Zhixu Li, Ben Chen, Linbo Jin, Jun Huang, Yanghua Xiao, and Ming Gao. 2023. FashionKLIP: Enhancing e-commerce image-text retrieval with fashion multi-modal conceptual knowledge graph. In Proceed-ings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 5: Industry Track) , pages 149–158. Association for Computa-tional Linguistics. Naganand Yadati, Madhav Nimishakavi, Prateek Ya-dav, Vikram Nitin, Anand Louis, and Partha Taluk-dar. 2019. HyperGCN: A new method for training graph convolutional networks on hypergraphs. In 
+
+Advances in Neural Information Processing Systems ,volume 32, pages 1511–1522. Curran Associates, Inc. Li Yang, Qifan Wang, Zac Yu, Anand Kulkarni, Sumit Sanghai, Bin Shu, Jon Elsas, and Bhargav Kanagal. 2022. MAVE: A product dataset for multi-source attribute value extraction. In Proceedings of the Fif-teenth ACM International Conference on Web Search and Data Mining , pages 772–781. ACM. Qiuyu Zhu, Liang Zhang, Qianxiong Xu, Kaijun Liu, Cheng Long, and Xiaoyang Wang. 2025a. HHGT: Hierarchical heterogeneous graph transformer for het-erogeneous graph representation learning. In Pro-ceedings of the Eighteenth ACM International Con-ference on Web Search and Data Mining , WSDM ’25, pages 318–326, New York, NY, USA. Association for Computing Machinery. Qiuyu Zhu, Liang Zhang, Qianxiong Xu, and Cheng Long. 2025b. HierPromptLM: A pure plm-based framework for representation learning on heterogeneous text-rich networks. Preprint ,arXiv:2501.12857. Yanqiao Zhu, Yichen Xu, Feng Yu, Qiang Liu, Shu Wu, and Liang Wang. 2021a. Graph contrastive learning with adaptive augmentation. In Proceedings of the Web Conference 2021 , pages 2069–2080. ACM. Yushan Zhu, Huaixiao Zhao, Wen Zhang, Ganqiang Ye, Hui Chen, Ningyu Zhang, and Huajun Chen. 2021b. Knowledge perceived multi-modal pretraining in e-commerce. In Proceedings of the 29th ACM Interna-tional Conference on Multimedia , pages 2744–2752. ACM. 
+
+9

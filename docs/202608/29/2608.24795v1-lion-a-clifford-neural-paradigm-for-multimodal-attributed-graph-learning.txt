@@ -1,0 +1,1502 @@
+Title: LION: A Clifford Neural Paradigm for Multimodal-Attributed Graph Learning
+
+URL Source: https://arxiv.org/pdf/2608.24795v1
+
+Published Time: Wed, 26 Aug 2026 01:32:04 GMT
+
+Number of Pages: 19
+
+Markdown Content:
+> IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 1
+
+# LION: A Clifford Neural Paradigm for Multimodal-Attributed Graph Learning 
+
+Xunkai Li †,∗, Zekai Chen †,∗, Zhengyu Wu †, Henan Sun †, Daohan Su †, Guang Zeng #, Hongchao Qin †,Rong-Hua Li †, Guoren Wang †† Beijing Institute of Technology, Beijing, China; ∗ Equal contribution.  
+
+> #
+
+Ant Group, Hangzhou, China cs.xunkai.li@gmail.com, zackchen02@163.com, jeremywzy96@outlook.com, magneto0617@foxmail.com, dhsu@bit.edu.cn, zengguang 77@qq.com, qhc.neu@gmail.com, lironghuabit@126.com, wanggrbit@126.com 
+
+Abstract —Recently, the rapid advancement of multimodal domains has driven a data-centric paradigm shift in graph ML, transitioning from text-attributed to multimodal-attributed graphs. This advancement significantly enhances data representation and expands the scope of graph downstream tasks, such as modality-oriented tasks, thereby improving the practical utility of graph ML. Despite its promise, limitations exist in the current neural paradigms: (1) Neglect Context in Modality Alignment: Most existing methods adopt topology-constrained or modality-specific operators as tokenizers. These aligners inevitably neglect graph context and inhibit modality interaction, resulting in suboptimal alignment. (2) Lack of Adaptation in Modality Fusion: Most existing methods are simple adaptations for 2-modality graphs and fail to adequately exploit aligned tokens equipped with topology priors during fusion, leading to poor generalizability and performance degradation. To address the above issues, we propose LION (cLIffOrd Neural paradigm) based on the Clifford algebra and decoupled graph neural paradigm (i.e., propagation-then-aggregation) to implement alignment-then-fusion in multimodal-attributed graphs. Specifically, we first construct a modality-aware geometric mani-fold grounded in Clifford algebra. This geometric-induced high-order graph propagation efficiently achieves modality interaction, facilitating modality alignment. Then, based on the topology-aware Clifford components of aligned tokens, we propose adaptive holographic aggregation. This module integrates component-wise energy and propagation-scale information with learnable parameters to improve modality fusion. Extensive experiments on 9 text-image MAG datasets demonstrate that LION significantly outperforms SOTA baselines across 3 graph and 3 modality downstream tasks. 
+
+Index Terms —Multimodal-attributed graph learning, Clifford algebra, modality alignment, modality fusion. 
+
+I. I NTRODUCTION 
+
+With the proliferation of multimodal data (e.g., images and texts) and vision-language models [1]–[3], multimodal-attributed graphs (MAGs) have recently emerged as a research frontier in the graph ML community. In MAG, nodes denote real-world entities described by multimodal data, which sub-stantially expands the semantic dimensionality of node features and elevates the upper bound of representation learning capa-bility [4]–[7]. This means that MAG not only offers immense potential for enhancing traditional graph-based tasks (e.g., node classification and link prediction) [8]–[10] but also broadens the task spectrum to encompass modality-oriented retrieval and generation [11]–[13], thereby enhancing practical utility. Consequently, developing effective MAG neural paradigms (i.e., MAGNNs) has become an urgent necessity [14]–[17]. Despite the remarkable progress made by recent studies, some inherent limitations still exist. Our in-depth analysis is as follows. 
+
+Limitation: Neglect MAG-Context in Modality Alignment. 
+
+We argue that most existing methods inherit unnecessary entity isolation, at the node and modality levels, from conventional graph-agnostic modality alignment strategies. Specifically, (1) some methods employ topology-constrained aligners [11]– [13], [18]. While they aim to mitigate the receptive field limitations of the target nodes (i.e., single-entity) in MAG by incorporating broader node contexts, their scope remains restricted to 1-hop neighbors. Consequently, they still fail to capture the long-range dependencies, which have been proven to be highly beneficial in graphs [19]–[24]. (2) While other methods explicitly leverage graph topology to facilitate global alignment, they remain restricted to modality-specific scenarios and rely on the same topology to apply identical alignment across different modalities [25]–[28]. This coarse-grained alignment overlooks beneficial intra- and inter-modal interactions, thereby negatively impacting modality fusion. 
+
+Key Insight . It is imperative to leverage modality-aware, high-quality topology to dissolve entity semantic boundaries in MAGs, thereby fostering beneficial, profound modality interactions and understanding for better alignment. 
+
+Solution and Evaluation . To this end, we propose Clifford Geometric Propagation (CGP) to achieve topology-aware modality interaction for better alignment. Specifically, we first construct a MAG-specific geometric manifold where structural relationships are modeled as spatial rotations, and distinct modalities are represented as orthogonal geometric base vectors rather than modality-specific scale vectors. We then introduce a topology-aware geometric potential to characterize local semantic compatibility and regulate the contribution of neighboring signals during geometric transport. Together, the geometric potential and spatial rotor induce curvature-adaptive high-order graph propagation, enabling intra- and inter-modality interactions to facilitate modality alignment. To evaluate CGP, we illustrate the performance gains in Fig. 1(a) by employing CGP as a plug-and-play module to replace existing modality aligners. Despite several deeply coupled architectures that arXiv:2608.24795v1 [cs.LG] 25 Aug 2026 IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 248        
+
+> 50
+> 52
+> 54
+> 56
+> 58
+> (a) Movies (Node Classification) (b) Goodreads (Node Classification)
+> 40
+> 50
+> 60
+> 70
+> 80
+> 200 100 300 400 500
+> Test Accuracy  (%)
+> Test Accuracy  (%)
+> Fig. 1. Empirical evaluations of CGP (a) and AHA (b), where the x-axis for AHA (b) is training time in seconds.
+
+prevent broader plug-and-play evaluation, the consistent gains across these four representative cases support the effectiveness of CGP. 
+
+Limitation: Lack of MAG-Adaptation in Modality Fusion. 
+
+Given that enriched context, MAG significantly increases both the quantity and information density of aligned tokens, thereby presenting unique challenges. Specifically, (1) some methods directly employ Q-Former [29] to handle input scenarios involving topology-driven tokens (i.e., 1-hop neighbor tokens) by adaptive queries [11]–[13], [18]. Despite their simplicity and intuitiveness, these methods fail to explicitly leverage semantic-aware topology priors within the aligned tokens. (2) Although other methods attempt to enhance fusion by partitioning tokens into multiple topology- and modality-specific views and achieving fine-grained integration, such approaches offer only limited exploration of suboptimal aligned tokens and fail to deeply capture their intricate dependencies. [25]–[28], [30]. 
+
+Key Insight . It is imperative to reveal the intricate depen-dency among aligned tokens and design a comprehensive fusion mechanism to unleash their representation potential. 
+
+Solution and Evaluation . After obtaining the propagated features in the geometric manifold (i.e., aligned tokens) via the CGP, we clarify that they naturally possess geometric grade properties, which encode the topology and modality insights. Based on this, we propose Adaptive Holographic Aggregation (AHA), which employs learnable parameters to explicitly model the energy and scale inherent in these geometric grades. This strategy functions as a dynamic filter, capturing the most relevant topology and modality insights for task-adaptive fusion representation. To substantiate our claims, we present comprehensive results in Fig. 1(b), where LION demonstrates superior convergence and performance compared to the SOTA baselines. Furthermore, the complete LION (i.e., LION w/ AHA) significantly outperforms the LION w/o AHA variant, thereby validating the advantages of modality fusion in the holographic perspective. 
+
+Contributions . (1) New Perspective . We reveal the lim-itations of modality alignment and fusion in MAGs and introduce a mathematical framework grounded in Clifford algebra to address them. (2) Innovative Method . We propose LION (cLIffOrd Neural paradigm) based on this mathemat-ical framework, which achieves alignment-then-fusion by propagation(CGP)-then-aggregation(AHA). Specifically, CGP first constructs a MAG-specific geometric manifold to enable curvature-adaptive high-order graph propagation, achieving efficient modality interaction for better alignment. Subsequently, AHA captures the energy of topology-aware Clifford compo-nents and their scale-dependent representations via learnable weights to facilitate modality fusion. (3) SOTA Performance .Evaluations from 6 domains demonstrate that LION achieves average improvements of 5.24% and 7.68% over SOTA baselines in graph and modality tasks. II. P RELIMINARIES 
+
+A. Notations and Problem Formulation 
+
+MAG is defined as G = ( V, E, {X(m)}m∈M ) where V is the set of nodes, E is the set of edges, and M is the set of available modalities (e.g., texts and images). For each node vi and modality m, modality-specific attribute vector 
+
+x(m) 
+
+> i
+
+∈ Rdm constitutes complete X ∈ RN ×d. The modality-shared topology is described by the same adjacency matrix 
+
+A, and D is the corresponding diagonal degree matrix. We further define the symmetric normalized graph Laplacian as 
+
+˜L = I − ˜D−1/2 ˜A ˜D−1/2 with self-loop ( ˜A = I + A), which captures structural smoothness in graph signal processing [31], [32]. This formulation separates modality-specific attributes from the modality-shared topology, allowing us to analyze alignment and fusion as two coupled but distinct operations. It also clarifies the role of graph structure: topology is not merely an auxiliary input, but a shared geometric prior that regulates how multimodal signals interact across nodes. Accordingly, the learned representation should preserve both modality-specific semantics and topology-induced relational context. 
+
+Graph Tasks . (1) Node Classification: predict the specific label class of unlabeled nodes [33]–[35]; (2) Link Prediction: predict if (u, v ) ∈ E exists in the edge sets [36], [37]; (3) Node Clustering: partition all nodes into clusters using off-the-shelf clustering algorithms applied to the learned representations [38], [39]. These graph-centric tasks examine whether learned representations preserve structural proximity, class-level semantics, and community-level organization. They therefore provide a direct test of whether multimodal attributes can enhance classical graph learning beyond purely topology-driven modeling. 
+
+Multimodal Tasks . (1) Modality Retrieval: given a query in a specific modality (e.g., text), retrieve the corresponding cross-modal representation; (2) Text Generation: generate text responses conditioned on the target node, instructions, and graph contexts; (3) Image Generation: generate visual responses using diffusion models conditioned on the target node’s textual descriptions and the graph contexts. Compared with graph-centric tasks, these modality-oriented tasks require the model to preserve fine-grained cross-modal semantics while respecting graph-induced dependencies. This dual requirement makes MAG learning fundamentally different from applying a graph encoder after independent multimodal feature extraction. 
+
+B. MAG Neural Paradigm 
+
+Conventional Methods. These approaches typically adapt previous multimodal architectures to MAGs by treating struc-tural information as auxiliary tokens. The core idea is lin-earizing neighborhoods into sequences [11], [12] or projecting topology priors into soft tokens [13], [18]. While leveraging IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 3
+
+pre-trained knowledge, these methods rely on concatenation or rigid alignment, lacking a unified integration where topology and modality are unified in a continuous space. As a result, the graph often functions as an external context provider rather than a principle that governs modality interaction. Such a design is effective for injecting local context, but it may underuse topology when long-range or cross-modality dependencies are required. 
+
+Graph-enhanced Methods. These approaches explicitly design specialized model architectures for MAGs-such as refined message-passing [25], [26], [40], spectral graph fil-tering [27], [30]–[32], and structure-conditioned modules [28], [41]-to capture topology and modality insights. However, these approaches often treat multimodal attributes and graph topology as separate semantic spaces, relying on well-designed but suboptimal alignment and fusion components. This motivates a paradigm that represents modalities and topology within a shared geometric space, so that alignment and fusion can be derived from the same underlying operators. III. M ETHODOLOGY 
+
+A. Clifford Algebra and Geometric Manifold 
+
+In this paper, we construct a mathematical framework specifically tailored for MAGs based on Clifford algebra [42]– [44], which extends the modality-specific graph operations to modality-aware high-dimensional geometric manifold spaces. Let Cln denote the Clifford algebra defined over an n-dimensional space. By equipping each node with a local tangent space isomorphic to Cln and modeling edges as geodesic connections between them, we conceptualize the MAG as a discrete geometric manifold. The fundamental graph operation is the geometric product, which unifies spatial rotations (topology) with orthogonal geometric base vectors (modality). Specifically, for any two connected nodes u, v with attribute vectors xu, x v , their topology-aware modality interaction (i.e., transform modality-aware geometric base vectors via spatial rotations in the geometric manifolds) is formalized as xuxv =
+
+xu ·xv +xu ∧xv . This geometric product explicitly decomposes the multimodal interaction: (1) The symmetric inner product (xu · xv ) induces a modality-specific projection, facilitating intra-modality interaction. (2) The antisymmetric outer product (xu ∧xv ) instantiates a bi-vector plane that encodes the topology curvature induced by cross-modality discrepancies, facilitating inter-modality interaction. This geometric manifold, spanned by Clifford algebra, provides a mathematical framework for topology-aware intra- and inter-modality interaction. Based on this, it enables modality alignment through topology-driven, curvature-induced spatial rotations (i.e., graph propagation) and facilitates modality fusion by capturing the geometric grade properties of aligned tokens (i.e., message aggregation). 
+
+B. Clifford Geometric Propagation 
+
+Motivation. In order to achieve efficient modality alignment via the CGP (i.e., modality-aware, curvature-adaptive high-order graph propagation within the geometric manifold), it is essential to capture topology insights from the curved manifold to facilitate multimodal interactions. Consequently, we introduce parallel transport, which aligns the distinct semantic spaces of multiple modalities within connected nodes by rotating modality-aware orthogonal geometric basis vectors along the topology curvature. This high-dimensional transformation models modality interactions in a shared Clifford space and is mathematically formulated via the spatial rotor R and geo-metric potential Φ. Collectively, they modulate the principles of intra- and inter-modality interaction within a modality-aware geometric manifold. The rotor provides norm-preserving local transport, while the geometric potential controls the contribution of transported signals, together enabling stable modality alignment for MAGs. 
+
+Modality-oriented Clifford Initialization. To begin with, we need to initialize X to support CGP. Since modality attributes may have unequal dimensions dk, a modality-specific encoder/projection gk : Rdk → Rd first maps them into a shared feature dimension, i.e., ¯x(k) 
+
+> u
+
+= gk(x(k) 
+
+> u
+
+); gk is the identity when the dimensions already match. We then use stabilized per-modality normalization ˆx(k) 
+
+> u
+
+= ¯ x(k) 
+
+> u
+
+/ max( ∥¯x(k) 
+
+> u
+
+∥2, ϵ x) and assign modality k to the orthogonal Grade-1 basis ek ∈ C lK :
+
+H(0)  
+
+> u
+
+∈ Rd×2K
+
+:= 1
+
+√K
+
+> K
+
+X
+
+> k=1
+
+ˆx(k) 
+
+> u
+
+ek, ∥H(0)  
+
+> u
+
+∥Cl ≤ 1. (1) This definition also makes the interaction semantics explicit. For feature coordinate j, let hu,j = K−1/2 P 
+
+> k
+
+ˆx(k) 
+
+> u,j
+
+ek. Its geometric product satisfies 
+
+⟨hu,j hv,j ⟩0 = 1
+
+K
+
+X
+
+> k
+
+ˆx(k) 
+
+> u,j
+
+ˆx(k) 
+
+> v,j
+
+,
+
+⟨hu,j hv,j ⟩2 = 1
+
+K
+
+X
+
+> p<q
+
+(ˆ x(p) 
+
+> u,j
+
+ˆx(q) 
+
+> v,j
+
+− ˆx(q) 
+
+> u,j
+
+ˆx(p) 
+
+> v,j
+
+)epeq .
+
+(2) Thus, Grade-0 aggregates same-modality compatibility, whereas each Grade-2 coefficient represents an oriented pairwise cross-modality discrepancy; an ordered modality pair is not identified one-to-one with a Clifford basis component. The formulation is algebraically defined for K modalities, while all experiments in this paper use the prevalent K = 2 text-image setting; empirical generality beyond two modalities is not claimed. 
+
+Topology-oriented Geometric Potential. After Clifford initialization, we capture the semantic curvature between connected nodes through feature-wise geometric interactions. For each feature coordinate j ∈ { 1, . . . , d } and edge (u, v ) ∈ E ,define Suv,j = ⟨hu,j hv,j ⟩0 ,
+
+Buv,j = ⟨hu,j hv,j ⟩2 . (3) Here Suv,j measures same-modality compatibility, whereas 
+
+Buv,j characterizes the oriented pairwise cross-modality dis-crepancy defined in Eq. (2). Based on these quantities, the modality-adaptive geometric potential for coordinate j is 
+
+Φuv,j = exp 
+
+
+
+− ∥B uv,j ∥2
+
+> Cl
+
+|S uv,j | + ϵ
+
+
+
+, (u, v ) ∈ E . (4) The scalar term measures semantic compatibility, while the bi-vector norm measures the magnitude of the corresponding IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 4
+
+cross-modality interaction plane. The exponential decay kernel therefore converts their relative discrepancy into a bounded feature-wise propagation weight. This construction provides the topology-aware interaction statistics used by the subsequent parallel transport. 
+
+Training-free Geometric Propagation. Based on the above feature-wise geometric statistics, we extend conventional graph propagation to Clifford-valued parallel transport. Specifically, 
+
+Suv,j measures local semantic compatibility, while Buv,j de-termines the oriented interaction plane for geometric transport. For each edge (u, v ) and feature coordinate j, let 
+
+bBuv,j = Buv,j 
+
+p∥B uv,j ∥2 
+
+> Cl
+
++ ϵ2
+
+> r
+
+,θuv,j = atan2 ( ∥B uv,j ∥Cl, |S uv,j | + ϵr ) ,
+
+Ruv,j = exp − θuv,j bBuv,j 
+
+2
+
+!
+
+.
+
+(5) Here, atan2( ·, ·) denotes the two-argument arctangent used to determine a stable rotation magnitude. The stabilized rotor continuously approaches the identity as ∥B uv,j ∥Cl → 0.The rotor determines how a neighboring representation is geometrically transported, while the geometric potential controls its contribution. We further introduce a self-loop potential ¯Φuu,j = 1 and set ¯Φuv,j = Φ uv,j for (u, v ) ∈ E .Feature-wise row normalization gives 
+
+eΦuv,j = ¯Φuv,j 
+
+P  
+
+> w∈N (u)∪{ u}
+
+¯Φuw,j 
+
+. (6) Define the feature-wise transport 
+
+Tuv,j (h) = Ruv,j hR−1 
+
+> uv,j
+
+, (7) with Tuu,j being the identity. Accordingly, the CGP update is 
+
+h(l) 
+
+> u,j
+
+= X 
+
+> v∈N (u)∪{ u}
+
+eΦuv,j Tuv,j 
+
+
+
+h(l−1) 
+
+> v,j
+
+
+
+, j = 1 , . . . , d. 
+
+(8) Equivalently, Eq. (8) defines a block-diagonal connection operator over the direct-sum feature space 
+
+H =
+
+> d
+
+M
+
+> j=1
+
+Cl(1)  
+
+> K
+
+. (9) Thus, each feature coordinate is transported by its own curvature-dependent Clifford connection, while all coordinates share the same graph topology. The normalized connection average keeps the propagation bounded, and the rotor sandwich preserves the Grade-1 state space, providing topology-aware modality components for the subsequent AHA module. 
+
+Theoretical Analysis. We first establish the geometric stability bound of the Clifford construction (Theorem III.1; Supplementary Appendix A). We then analyze the normalized CGP operator in Eq. (8) under standard fixed-connection assumptions (Theorem III.2; Supplementary Appendix B). 
+
+Theorem III.1. (Stability Bound of Clifford Manifold). Let 
+
+f obtain H and AG = {Φ, R} . Assume the modality en-coders/projections are bounded Lipschitz maps and ϵx, ϵ r > 0
+
+are fixed. For bounded perturbations of (X, A),
+
+∥H − H′∥Cl + ∥A G − A ′G ∥Cl
+
+≤ Kmap (∥X − X′∥Cl + γ∥A − A′∥Cl). (10) 
+
+where Kmap and γ depend on the encoder/projection bounds, graph degree, and stabilizers ϵx, ϵ r .Proof Sketch. Stabilized normalization is Lipschitz for fixed 
+
+ϵx > 0; the orthogonal Grade-1 lift is linear and norm bounded. The geometric product is bilinear, its grade projections are non-expansive, and the stabilized atan2 rotor is continuous and Lipschitz on the resulting bounded domain, including the near-degenerate case. Combining these bounds with the edge perturbation term yields Eq. (10); details are in Supplementary Appendix A. 
+
+Theorem III.2. (Conditional Spectral Contraction of CGP). 
+
+Assume an undirected graph, feature-wise symmetric potentials 
+
+Φuv,j = Φ vu,j , reciprocal isometric transports Tvu,j = T −1 
+
+> uv,j
+
+,and fixed edge operators during one cached propagation stage. Let PG denote the block-diagonal normalized connection operator induced by Eq. (8) on H = Ldj=1 Cl(1)  
+
+> K
+
+. Let Π be the orthogonal projection onto its unit-eigenspace, and let 
+
+ρ < 1 denote the spectral radius of PG restricted to the complementary invariant subspace. Then 
+
+H(l) − ΠH(0) 
+
+> D, Cl
+
+≤ ρl H(0) − ΠH(0) 
+
+> D, Cl
+
+. (11) 
+
+Proof Sketch. For each feature coordinate, symmetry of the potential and reciprocity of the rotor transport induce a self-adjoint normalized connection averaging operator in the corresponding degree-weighted inner product. Their direct sum therefore defines a self-adjoint block-diagonal operator 
+
+PG on H . Decomposing H(0) into the unit-eigenspace and its orthogonal complement yields Eq. (11). The statement is conditional on fixed reciprocal transports and on ρ < 1
+
+on the complementary invariant subspace; it does not claim an unconditional contraction rate for arbitrary time-varying connections. Supplementary Appendix B provides the complete derivation. 
+
+C. Adaptive Holographic Aggregation 
+
+Motivation. To unleash the representation potential of geometrically propagated features (i.e., aligned tokens), it is imperative to reveal their intricate dependencies. Unfortunately, prevalent message aggregation (e.g., simple concatenation or mean pooling) indiscriminately compresses modality-aware components and ignores receptive fields, leading to poor generalizability and performance degradation. We clarify that CGP maintains the propagated node states in the Grade-1 subspace because rotor sandwich transport preserves vector grade. The Grade-0 and Grade-2 quantities in Eq. (2) are therefore edgewise interaction statistics that parameterize the geometric potential and spatial rotor, rather than additional propagated state channels. Consequently, the propagated Grade-1 components encode modality-specific states that have already been modulated by topology-aware intra- and inter-modality interactions during CGP. Based on this observation, we propose IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 5
+
+Adaptive Holographic Aggregation (AHA), which adaptively filters these propagated Clifford components according to their energy and subsequently reconciles their representations across propagation scales. 
+
+Energy-aware Component Filtering. Since H(0)  
+
+> u
+
+lies in the Grade-1 subspace and rotor sandwich transport preserves grade, the normalized CGP update in Eq. (8) satisfies 
+
+H(l) 
+
+> u
+
+=
+
+> K
+
+X
+
+> k=1
+
+H(l)
+
+> u,k
+
+ek ∈ C l(1)  
+
+> K
+
+, l = 0 , . . . , L. (12) Here H(l) 
+
+> u,k
+
+∈ Rd denotes the propagated component associated with modality axis ek. Although the propagated state remains Grade-1, each component has been transformed by the geo-metric potential and rotor constructed from the Grade-0 and Grade-2 interaction statistics in Eq. (2). We quantify the information density of the active Clifford components by 
+
+E(l) 
+
+> u
+
+=
+
+h
+
+∥H(l)
+
+> u, 1
+
+∥22, . . . , ∥H(l) 
+
+> u,K
+
+∥22
+
+i⊤
+
+∈ RK . (13) A learnable gate then adaptively modulates these propagated modality components: 
+
+α(l) 
+
+> u
+
+= σ
+
+
+
+WG Norm( E(l) 
+
+> u
+
+) + bG
+
+
+
+, eH(l) 
+
+> u
+
+=
+
+> K
+
+X
+
+> k=1
+
+α(l)
+
+> u,k
+
+H(l)
+
+> u,k
+
+ek,
+
+(14) where α(l) 
+
+> u
+
+∈ (0 , 1) K . The soft gate attenuates less infor-mative propagated components rather than removing them deterministically. Importantly, AHA does not identify the 
+
+K propagated modality axes with the K2 ordered modality interactions. Instead, cross-modality interactions affect these propagated states through the scalar and bi-vector statistics used to construct CGP, while AHA determines how the resulting topology-aware modality components contribute to downstream fusion. 
+
+Scale-aware Resonance Fusion. After obtaining the energy-filtered topology-aware modality components, their validity varies across topology scales corresponding to the propagation depth L within each channel. To reconcile these receptive fields and facilitate fusion, we first generate Hctx  
+
+> u
+
+by learnable Wτ
+
+to capture the consensus profile across all scales: 
+
+Hctx  
+
+> u
+
+∈ Rd×2K
+
+:= Norm 
+
+> L
+
+X
+
+> l=0
+
+h
+
+W(l) 
+
+> τ
+
+˜H(l) 
+
+> u
+
++ b(l)
+
+> τ
+
+i!
+
+. (15) Subsequently, we employ a resonance attention mechanism to compute the scale validity score βu,l , where a learnable attention score a⊤ 
+
+> S
+
+projects the interaction between the current representation and consensus profile into a scalar space. Based on this, AHA aggregates the grade-filtered and scale-weighted tokens, and the df -dimension fusion representation Zu is obtained by projecting it back into Euclidean space via a Clifford linear layer parameterized by Wout :
+
+Zu ∈ Rdf := Wout 
+
+> L
+
+X
+
+> l=0
+
+βu,l · ˜H(l)
+
+> u
+
+!
+
++ bout ,βu,l = exp( a⊤ 
+
+> S
+
+· tanh( WS [Hctx  
+
+> u
+
+∥ ˜H(l) 
+
+> u
+
+])) 
+
+PLk=0 exp( a⊤ 
+
+> S
+
+· tanh( WS [Hctx  
+
+> u
+
+∥ ˜H(k) 
+
+> u
+
+])) .
+
+(16) 
+
+Theoretical Analysis. We characterize the sensitivity intro-duced by AHA without assuming that the consensus profile is an unknown downstream optimum. Let fcll denote the affine Clifford projection in Eq. (16), whose linear part has operator norm at most ω, and let Zraw  
+
+> u
+
+= fcll (P 
+
+> l
+
+βu,l H(l) 
+
+> u
+
+).
+
+Theorem III.3. (AHA Stability and Consensus Bound). Since 
+
+βu,l ≥ 0 and P 
+
+> l
+
+βu,l = 1 ,
+
+∥Zu − Zraw  
+
+> u
+
+∥2 ≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l ∥(1 − α(l) 
+
+> u
+
+) ⊙ H(l) 
+
+> u
+
+∥Cl,
+
+∥Zu − fcll (Hctx  
+
+> u
+
+)∥2 ≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l ∥ ˜H(l) 
+
+> u
+
+− Hctx  
+
+> u
+
+∥Cl.
+
+(17) These inequalities separately bound the representation change introduced by grade gating and the deviation from the learned multiscale consensus. They do not assume that suppressed components are noise or that Hctx  
+
+> u
+
+is the downstream-optimal representation. Both bounds follow from the linear part of the affine projection, the convex scale weights, and the triangle inequality; Supplementary Appendix C provides the complete proof. 
+
+Proof Sketch. The first inequality compares the gated and ungated convex scale aggregates and applies the operator-norm bound of fcll . The second inserts the learned consensus profile inside the same convex aggregate and applies the triangle inequality. No assumption is made about whether an attenuated component is signal or noise. The complete proof is provided in Supplementary Appendix C. 
+
+D. Algorithm and Complexity Analysis 
+
+Algorithm Details . For a more comprehensive presentation, we provide the complete LION in Algorithm 1. Specifically, our framework transforms raw multimodal inputs into a unified representation space via two decoupled phases: Clifford Geometric Propagation (CGP) for modality alignment and Adaptive Holographic Aggregation (AHA) for modality fusion. CGP first lifts raw modalities into the Clifford manifold, constructs the geometric potential and spatial rotor from topology-aware interactions, and performs training-free high-order propagation to generate aligned multiscale tokens. AHA then filters topology-aware modality components by energy and fuses propagation depths by resonance with a consensus profile. This design makes the expensive topology-aware geometric computation independent of iterative parameter learning, while retaining task-adaptive fusion in the trainable stage. More specifically, the Clifford lifting step assigns each modality to an orthogonal basis vector, which preserves modality identity while enabling explicit geometric products between modalities. The scalar and bi-vector components of the edgewise geometric products instantiate the intra- and inter-modality interaction statistics that parameterize CGP. After CGP, AHA operates on the resulting topology-aware Clifford token components and propagation depths to decide which components and receptive fields should dominate the final representation. In this sense, Algorithm 1 separates representation construction from task-specific optimization while keeping both stages connected IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 6
+
+TABLE I THE STATISTICAL INFORMATION OF THE EXPERIMENTAL DATASETS . T HE “T ASKS ” COLUMN SUMMARIZES APPLICABLE TASK TYPES ; EVALUATED DATASET -TASK PAIRS ARE SPECIFIED BY THE RESULT -TABLE HEADERS .Datasets # Modalities # Nodes # Edges # Classes Tasks Description RedditS Text, Image 15,894 566,160 20 Graph (Node, Link) Social Network Movies Text, Image 16,672 218,390 20 Graph (Node, Link) Movie Network Grocery Text, Image 17,074 171,340 20 Graph (Node, Link), Modality Recommendation SemArt Text, Image 21,382 1,216,432 - Graph (Link), Modality Art Network Flickr30k Text, Image 31,783 181,151 - Graph (Link), Modality Image Network Sports Text, Image 50,250 356,202 - Graph (Link), Modality Recommendation Ele-fashion Text, Image 97,766 199,602 12 Graph (Node, Link), Modality Recommendation Cloth Text, Image 125,839 951,271 - Graph (Link), Modality Recommendation Goodreads Text, Image 685,294 7,235,048 11 Graph (Node, Link) Book Network TABLE II PERFORMANCE COMPARISON ON GRAPH DOWNSTREAM TASKS . T HE BEST /SECOND RESULT IS BOLD /UNDERLINE .
+
+Tasks Node Classification Link Prediction Node Clustering Movies Goodreads Sports Cloth RedditS Grocery Methods Datasets 
+
+Acc F1-Score Acc F1-Score MRR Hits@3 MRR Hits@3 NMI ARI NMI ARI GCN 39.12 ±1.33 36.17 ±1.41 56.03 ±1.52 50.14 ±1.21 46.23 ±0.28 58.09 ±0.73 40.52 ±0.37 48.15 ±0.44 62.18 ±0.62 64.07 ±0.51 38.13 ±0.43 29.54 ±0.38 
+
+MMGCN 44.87 ±1.42 39.92 ±1.37 58.54 ±0.87 52.36 ±1.53 48.44 ±0.34 60.52 ±0.58 42.83 ±0.41 50.94 ±0.56 72.10 ±0.55 70.08 ±0.62 45.84 ±0.49 32.26 ±0.41 
+
+GAT 40.25 ±1.48 36.43 ±1.52 57.12 ±1.08 51.08 ±1.24 47.19 ±0.43 59.14 ±0.77 41.26 ±0.49 49.34 ±0.58 65.45 ±0.68 66.28 ±0.63 39.42 ±0.45 28.75 ±0.47 
+
+MGAT 43.14 ±1.37 38.09 ±1.44 59.88 ±0.91 53.75 ±1.38 49.82 ±0.36 62.03 ±0.54 43.91 ±0.45 52.54 ±0.51 73.33 ±0.53 69.14 ±0.59 43.08 ±0.43 31.15 ±0.46 
+
+MLaGA 48.37 ±1.02 42.08 ±1.64 66.42 ±1.25 60.29 ±1.13 54.33 ±0.62 68.41 ±0.88 49.12 ±0.73 58.37 ±0.80 82.58 ±1.15 82.14 ±1.12 51.92 ±0.83 37.58 ±0.89 
+
+GraphGPT-O 49.12 ±1.90 42.94 ±1.13 64.25 ±0.92 58.76 ±1.30 55.82 ±0.68 69.17 ±0.75 51.43 ±0.66 60.18 ±0.73 79.33 ±1.02 80.41 ±0.96 50.64 ±0.69 38.83 ±0.62 
+
+Graph4MM 49.76 ±1.85 43.22 ±1.95 67.18 ±0.78 61.35 ±0.83 53.94 ±0.71 67.58 ±0.83 50.84 ±0.68 59.43 ±0.63 84.14 ±0.92 83.25 ±0.90 51.20 ±0.78 38.92 ±0.75 
+
+InstructG2I 50.57 ±1.74 44.08 ±1.38 65.84 ±0.90 59.93 ±1.02 56.75 ±0.83 70.12 ±0.93 52.28 ±0.80 61.54 ±0.86 82.83 ±1.09 81.58 ±1.05 49.87 ±0.92 35.28 ±0.82 
+
+DMGC 51.73 ±1.95 46.84 ±1.59 63.42 ±1.27 61.18 ±1.63 56.47 ±0.54 69.83 ±0.49 51.87 ±0.61 60.84 ±0.57 89.62 ±0.73 89.14 ±0.80 56.13 ±0.66 41.82 ±0.60 
+
+DGF 52.94 ±1.64 45.13 ±1.70 66.83 ±1.61 62.54 ±1.12 55.93 ±0.51 69.17 ±0.54 51.24 ±0.63 60.13 ±0.59 88.87 ±0.70 88.42 ±0.76 55.88 ±0.63 42.25 ±0.68 
+
+MIG-GT 53.17 ±2.02 47.60 ±1.89 68.24 ±0.90 64.87 ±1.24 59.13 ±0.47 71.94 ±0.44 55.12 ±0.56 63.24 ±0.53 86.25 ±0.82 84.89 ±0.88 51.62 ±0.70 38.18 ±0.66 
+
+NTSFormer 53.89 ±2.16 46.94 ±1.93 71.19 ±0.93 65.80 ±0.80 60.52 ±0.44 72.28 ±0.41 54.83 ±0.53 62.94 ±0.50 85.81 ±0.78 84.14 ±0.83 52.33 ±0.68 37.81 ±0.63 
+
+UniGraph2 52.92 ±1.79 46.28 ±1.66 72.82 ±0.82 65.32 ±0.96 59.84 ±0.49 71.26 ±0.47 55.31 ±0.54 63.18 ±0.52 86.56 ±0.68 85.24 ±0.73 54.42 ±0.64 40.86 ±0.62 
+
+LION (Ours) 58.61 ±1.28 51.73 ±1.75 78.54 ±0.70 68.91 ±1.13 62.31 ±0.55 73.87 ±0.39 58.47 ±0.85 66.58 ±0.48 90.53 ±0.89 90.17 ±1.08 58.54 ±0.72 46.12 ±0.89 
+
+through the same Clifford token space. The propagated tokens can be shared by node-, edge-, and modality-level heads, which makes the framework naturally adaptable to heterogeneous MAG tasks. Detailed algorithmic interpretation and complexity derivations are provided in Supplementary Appendix E. 
+
+Theoretical Time-Space Complexity. Let N = |V| , M =
+
+|E| , L be the propagation depth, and D = 2 K d be the Clifford multi-vector dimension. The one-time CGP pre-processing costs 
+
+O(M ·2K ·D +L·M ·D), while the trainable AHA phase costs 
+
+O(L · N · D) per epoch. The cached multiscale representations require O(L·N ·D) memory, and the learnable projection/gating parameters occupy O(D2) space. Since CGP is parameter-free and cached offline, LION avoids recursive neighborhood expansion during training and remains asymptotically linear in graph size for the practical MAG settings considered here. This decoupled computation is particularly useful for large MAGs because propagation results can be reused across epochs and downstream heads. The trainable AHA module therefore operates on fixed multiscale Clifford tokens, which substantially reduces repeated graph traversal while preserving the ability to learn task-specific fusion weights. The memory overhead is dominated by cached propagated features, but this cost is predictable and can be controlled by the propagation depth 
+
+L and latent dimension d. This trade-off favors stable and efficient training when the same graph is evaluated across multiple downstream tasks. 
+
+TABLE III PERFORMANCE COMPARISON ON MODALITY -LEVEL TASKS .
+
+Tasks Modal Retrieval G2Text G2Image Ele-fashion Flickr30k SemArt Methods Datasets 
+
+MRR Hits@3 BLEU-4 CIDEr CLIP-S DINOv2-S GCNII 77.24 70.15 5.42 39.54 50.52 35.81 MMGCN 81.85 74.58 6.15 44.82 54.88 39.87 GATv2 78.53 71.32 5.56 40.24 51.25 36.54 MGAT 82.41 75.26 6.28 45.56 55.43 40.52 MLaGA 87.65 79.85 9.54 71.58 68.52 53.15 GraphGPT-O 88.45 80.50 9.89 72.58 70.84 54.29 Graph4MM 86.25 78.42 10.42 74.82 67.21 52.56 InstructG2I 89.12 81.24 9.68 71.98 69.92 55.43 DMGC 91.20 83.12 7.83 61.82 61.54 47.26 DGF 91.55 83.47 7.92 62.20 61.98 47.68 MIG-GT 92.54 84.51 8.15 63.57 63.82 48.94 NTSFormer 92.88 84.93 8.24 64.12 63.26 48.56 Unigraph2 93.13 85.45 8.56 65.28 64.56 49.83 LION (Ours) 94.67 86.92 11.54 78.92 74.21 58.30 
+
+IV. E XPERIMENTS 
+
+In this section, we first introduce the experimental setup, and additional details for reproducibility are provided in the supplementary material. Then, we provide a comprehensive evaluation to address the following questions: Q1 (Effective-ness) . How does LION perform as a new neural paradigm for MAG? Q2 (Ablation) . If LION is effective, what contributes to its performance? Q3 (Interpretability) . In depth, how do IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 7
+
+Algorithm 1 LION: cLIffOrd Neural Paradigm for Multimodal-Attributed Graphs 
+
+Require: Multimodal-Attributed Graph G =(V, E, {X(m)}m∈M ), Model Layers L (Graph Propagation Depth). 
+
+Ensure: Learned Node- or Modality-level Representations Z. 
+
+> 1:
+
+/* Step 1: Clifford Geometric Propagation for Modality Alignment  
+
+> 2:
+
+// CGP obtains graph propagated features, which are equiv-alent to generating aligned tokens by modality alignment.  
+
+> 3:
+
+Lift Euclidean modality-attributed features X into the Clifford manifold to obtain H(0) via Eq. (1).  
+
+> 4:
+
+Capture intricate semantic curvature to instantiate AG := 
+
+{Φ, R} and then facilitate multimodal interactions via Eq. (4).  
+
+> 5:
+
+Perform modality-aware, curvature-adaptive high-order graph propagation to obtain {H(1) , . . . , H(L)} via Eq. (8).  
+
+> 6:
+
+/* Step 2: Adaptive Holographic Aggregation for Modality Fusion  
+
+> 7:
+
+// AHA follows CGP to obtain node- or modality-level outputs for specific tasks, which is equivalent to modality fusion.  
+
+> 8:
+
+Quantify the information density of modality interaction channels within the propagated features via Eq. (13).  
+
+> 9:
+
+Dynamically modulate these channels based on the com-puted information density and a learnable gate via Eq. (14).  
+
+> 10:
+
+// This module facilitates adaptive integration of modality interaction channels by energy-based information density.  
+
+> 11:
+
+Capture the consensus profile across propagation depths via Eq. (15).  
+
+> 12:
+
+Dynamically modulate the contribution of each depth based on the consensus profile via Eq. (16).  
+
+> 13:
+
+// This module facilitates the adaptive integration of multi-scale receptive fields by semantic consensus.  
+
+> 14:
+
+Return The task-adaptive fusion representation in Eu-clidean space. these components exert their influence? Q4 (Robustness) .How robust is LION when dealing with sparse scenarios? 
+
+Q5 (Scalability) . What are the time overhead, space overhead, and convergence efficiency of LION? 
+
+A. Experimental Setup 
+
+Datasets . In our experiments, we evaluate LION across 9 publicly available MAG datasets from 6 domains, achieving a comprehensive validation. Specifically, these datasets include social network (RedditS) [45], movie network (Movies) [46], 4 recommendation networks (Grocery, Sports, Ele-fashion, Cloth) [46], [47], art network (SemArt) [48], image network (Flickr30k) [49], and book network (Goodreads) [50], [51]. The dataset statistics are summarized in Table I. These datasets cover social, movie, recommendation, art, image, and book networks, supporting both graph-centric and modality-oriented tasks. Their graph scales range from medium-sized image-text and product graphs to the large Goodreads network with more than 0.68M nodes and 7.23M edges, which allows us to evaluate both representation quality and scalability. Their task coverage also spans supervised, unsupervised, retrieval, and generation settings, preventing the evaluation from being biased toward a single form of multimodal supervision. Detailed descriptions of each dataset are provided in Supplementary Appendix F. 
+
+Baselines . To achieve a comprehensive comparison, we utilize (i) Single-modality GNN: GCN, GAT, GCNII, GATv2; (ii) Simple MAGNN: MMGCN [14], MGAT [15]; (iii) Conventional MAGNN: MLaGA [18], GraphGPT-O [12], Graph4MM [11], InstructG2I [13]; (iv) Graph-enhanced MAGNN: DMGC [27], DGF [41], MIG-GT [25], NTS-Former [26], UniGraph2 [28]. For fair comparison, all baselines are evaluated under the same dataset splits and task protocols whenever their original implementations support the corre-sponding downstream task. Details are shown in Supplementary Appendix G. 
+
+Evaluation Protocols . Fundamentally, the research moti-vation for MAG is to enhance data quality for traditional graph tasks and expand the graph downstream task spectrum to improve practical utility. Therefore, evaluation involves (i) Prevalent graph tasks: node classification, link prediction, node clustering; (ii) Novel graph-oriented modality tasks: modality retrieval, Graph-to-Text (G2Text), Graph-to-Image (G2Image). Given the complexity of the evaluation pipelines, hyperparameter settings, and quantitative metrics, please refer to Supplementary Appendix H for comprehensive details. All nine benchmarks provide text and image attributes. Graph-task and ablation entries shown with “ ±” are mean ±std over five independent runs; modality retrieval/generation entries without “±” follow their benchmark single-run protocols. 
+
+Experiment Environment . Experiments are conducted on a workstation equipped with Intel Xeon Scalable processors and NVIDIA RTX 6000 Ada Generation GPUs with 96GB of VRAM, supported by 256GB of system RAM. The com-putational environment utilizes CUDA 12.9, while software implementations are developed using Python 3.10.18 and PyTorch 2.8. 
+
+B. Performance Comparison 
+
+Graph Tasks . To answer Q1 , we first report performance comparison on graph tasks. As shown in Table II, LION consistently achieves superior performance across all datasets, tasks, and metrics. Specifically, in node classification, LION outperforms the leading NTSFormer and Unigraph2 by a significant average margin of 5.84%. This success highlights the capacity of LION to capture topology and modality insights through the Clifford geometric manifold. The gains are consistent across both classification and link-level prediction, in-dicating that LION does not merely improve a single supervised objective but learns transferable graph representations. This is important for MAGs because downstream labels are often sparse, while relational and multimodal cues are available at different granularities. By aligning modality attributes through topology-aware geometric propagation, LION can exploit these cues before the task-specific training stage. IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 8
+
+TABLE IV ABLATION STUDY .                                                                                                                        
+
+> Tasks Node Classification Link Prediction RedditS Grocery Flickr30k SemArt Methods Datasets
+> Acc F1 Acc F1 MRR Hits@3 MRR Hits@3 LION (Ours) 94.8 ±0.490.6 ±0.588.3 ±0.778.1 ±0.968.4 ±0.576.5 ±0.485.2 ±0.389.6 ±0.2
+> w/o Rotor 93.9 ±0.389.4 ±0.487.4 ±0.677.6 ±0.867.8 ±0.576.0 ±0.484.7 ±0.389.1 ±0.2
+> w/o Potential 93.4 ±0.488.7 ±0.586.6 ±0.776.8 ±0.867.2 ±0.475.7 ±0.584.3 ±0.388.8 ±0.2
+> w/o Energy 92.8 ±0.588.3 ±0.686.2 ±0.875.9 ±1.066.5 ±0.674.5 ±0.583.5 ±0.487.5 ±0.3
+> w/o Consen. 92.6 ±0.488.5 ±0.685.9 ±0.776.6 ±0.967.0 ±0.574.8 ±0.582.9 ±0.487.9 ±0.3
+> w/o Scale 91.7 ±0.686.8 ±0.784.5 ±0.975.5 ±1.166.8 ±0.773.5 ±0.682.5 ±0.586.7 ±0.4
+> Tasks Node Clustering Multimodal Retrieval Movies Ele-Fashion Sports Cloth Methods Datasets
+> NMI ARI NMI ARI MRR Hits@3 MRR Hits@3 LION (Ours) 24.6 ±0.410.6 ±0.456.8 ±0.648.9 ±0.895.2 ±0.288.7 ±0.192.5 ±0.189.1 ±0.2
+> w/o Rotor 23.7 ±0.310.0 ±0.356.0 ±0.547.9 ±0.794.3 ±0.288.1 ±0.191.8 ±0.188.6 ±0.2
+> w/o Potential 23.5 ±0.49.4 ±0.355.9 ±0.548.1 ±0.793.9 ±0.287.9 ±0.190.5 ±0.187.8 ±0.2
+> w/o Energy 22.8 ±0.58.9 ±0.454.6 ±0.746.9 ±0.993.8 ±0.387.0 ±0.290.9 ±0.287.1 ±0.3
+> w/o Consen. 23.2 ±0.48.7 ±0.354.8 ±0.646.5 ±0.893.5 ±0.386.4 ±0.290.4 ±0.287.3 ±0.3
+> w/o Scale 22.9 ±0.58.2 ±0.254.2 ±0.845.9 ±1.093.0 ±0.486.3 ±0.390.1 ±0.386.8 ±0.4
+
+Regarding the baselines, graph-enhanced methods like NTS-Former generally outperform conventional methods such as MLaGA, yet they remain inferior to LION primarily due to their reliance on suboptimal Euclidean spaces. Furthermore, most approaches fail to maintain consistent dominance across all three tasks and six metrics. For instance, while clustering-specific DMGC and DGF exhibit competitiveness performance, they fail to generalize effectively to the node classification task. Meanwhile, there are currently no specialized models designed for the link-level task. These observations suggest that simply attaching graph modules to multimodal encoders is insufficient for a general MAG neural paradigm. A unified representation space is needed so that the same model can support node-, edge-, and cluster-level reasoning without redesigning task-specific interaction modules. 
+
+Modality Tasks . Table III further validates the superiority of LION in modality tasks, encompassing prevalent retrieval and generation, where it achieves SOTA performance across all evaluation metrics. A notable performance gain is ob-served on the SemArt dataset for the G2Image task, where LION outperforms the leading baselines, GraphGPT-O and InstructG2I, by 4.76% in CLIP-S and 5.18% in DINOv2-S. These results demonstrate that our alignment-then-fusion MAG neural paradigm effectively preserves the semantic integrity of multimodal attributes. This strategy facilitates more coherent and accurate content generation compared to existing methods that treat modality and topology as separate spaces. Notably, modality-agnostic prevalent GNNs and early MMGNNs fail to achieve competitive performance due to their outdated model architecture designs. The retrieval and generation results further show that topology is useful not only for graph prediction but also for modality-level semantic grounding. In retrieval tasks, aligned Clifford tokens improve cross-modal matching by reducing the discrepancy between visual and textual neighborhoods. In generation tasks, topology-aware fusion supplies structured context that guides the decoder or diffusion backbone toward outputs that are semantically compatible with the graph. Therefore, LION turns graph structure into a reusable multimodal prior rather than treating it as an additional feature appended to the input. 
+
+C. Ablation Study 
+
+To answer Q2 , we conduct an ablation study to investigate the contribution of each module within LION. As detailed in Sec. III, LION consists of two core modules, namely CGP and AHA. To evaluate their impact, we define five module variants. For CGP in Eq. (8), (1) w/o Rotor and (2) w/o Potential remove the spatial rotor R and geometric potential Φ . For AHA in Eq. (14), Eq. (15), and Eq. (16), (3) w/o Energy, (4) w/o Consen., and (5) w/o Scale omit the energy-aware gating, consensus profile, and scale-aware resonance fusion. Based on this, Table IV confirms the necessity of module design. Regarding the CGP, removing the spatial rotor and geometric potential leads to a significant performance drop. This verifies that modeling topology as geometric rotations and differentiating interaction principles via semantic curvature is crucial for effective alignment. The two CGP variants also reveal complementary roles of the rotor and potential. The rotor determines how neighbor semantics are transported into the target tangent space, while the potential controls the strength of curvature-aware interaction. Removing either component weakens the geometric interpretation of propagation and reduces the quality of aligned tokens. Regarding the AHA, the w/o Energy variant exhibits poor performance. This demonstrates that indiscriminately aggregating all propagated modality components introduces redundancy and confirms that component-wise filtering based on information density is critical. Furthermore, the performance degradation in w/o Scale and w/o Consen. confirms that adaptive fusion guided by the consensus profile allows the model to reconcile receptive fields, which is beneficial for different propagated representations. These results support the view that modality fusion should consider both channel reliability and topology scale, rather than relying on a fixed pooling operation over all propagated features. 
+
+D. In-depth Analysis 
+
+CGP Module . To answer Q3 , we provide a visual analysis to intuitively interpret the underlying mechanisms of the CGP and AHA modules. First of all, we plot the intra-and inter-modality interaction strength (y-axis) against con-nected node feature similarity (x-axis). For CGP, the plot-ted quantities are Iintra = ∥⟨ huhv ⟩0∥/(∥hu∥∥ hv ∥ + ϵ) and 
+
+Iinter = ∥⟨ huhv ⟩2∥/(∥hu∥∥ hv ∥ + ϵ); for baselines, we use the corresponding normalized message/attention coefficient, with zero only when no cross-modal message is defined. As evident in Fig. 2 (a)-(b) for Flickr30k and Fig. 2 (e)-(f) for SemArt, the modality interaction baselines exhibit a sharp decay in interaction strength as node feature similarity decreases, which reveals a heavy reliance on the homophily assumption. Notably, the modality interactions in graph-enhanced methods occur exclusively within modality-specific views, resulting in an inter-modality interaction strength of zero. In contrast, CGP breaks the node homophily assumption by modality-aware geometric manifolds and topology-adaptive high-order graph propagation. Specifically, by harmonizing modality interaction principles (Sec. III-B), CGP effectively facilitates both intra- and inter-modality interactions. Based IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 9(a) Intra -modality  (b) Inter -modality 
+
+Text -neighbor Text -only  Image -only  Image -neighbor 
+
+(c) Before  Alignment  (d) After  CGP Alignment                     
+
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 1.0
+> 0.8
+> 0.6
+> 0.4
+> 0.2
+> 0.0
+> 0.8
+> 0.6
+> 0.4
+> 0.2
+> 0.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Interaction  Strength
+> 1.0
+> 0.8
+> 0.6
+> 0.4
+> 0.2
+> 0.0
+> Interaction  Strength
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.8
+> 0.6
+> 0.4
+> 0.2
+> 0.0
+> 0.0 0.2 0.4 0.6 0.8 1.0
+
+(e) Intra -modality  (f) Inter -modality  (g) Before  Alignment  (h) After  CGP Alignment 
+
+Fig. 2. (a)-(d) The G2Text visualization of CGP modality interaction and alignment (i.e., geometric-induced adaptive graph propagation) on Flickr30k. (e)-(h) The G2Image visualization of CGP modality interaction and alignment on SemArt. (a) Flickr30k (Multimodal  Retrieval)  (a) SemArt (Multimodal  Retrieval) 
+
+Fig. 3. Hyperparameter analysis of CGP depth. 
+
+on this, we visualize the token latent space before and after alignment as an interpretive diagnostic of how curvature-aware multimodality interaction reshapes the representation; the task results and ablations provide the quantitative performance evidence. The visualization also helps explain why the proposed propagation differs from conventional homophily smoothing. Instead of forcing all neighboring nodes to become similar in a scalar space, CGP transports modality-aware geometric bases according to the learned curvature. This allows semantically compatible signals to be aligned while preserving the distinction between different interaction channels. Prior to alignment, the latent spaces of modalities appear disjointed. After CGP, a distinct trend emerges where entity representations transcend modality boundaries to capture high-level semantic dependencies. This strategy effectively gath-ers semantically related modalities while distancing others. Meanwhile, G2Text and G2Image tasks exhibit enhanced text and image compactness, reflecting an adaptive alignment that conforms to the specific downstream requirements. This result intuitively demonstrates that our spatial rotor and geometric potential successfully guide the parallel transport of modality attribute vectors for efficient alignment. Furthermore, Fig. 3 illustrates the impact of varying CGP propagation depths on model performance. Experimental results suggest that a smaller Energy  and  Scale 
+
+> Weight
+
+(b) Ele -fashion (Link  Prediction)       
+
+> 0.6
+> 0.5
+> 0.4
+> 0.3
+> I-I
+> I-TT-IT-T012345
+
+(a) Goodreads (Link  Prediction)     
+
+> T-T
+> T-II-TI-I0123
+> 5
+> 4
+> 0.5
+> 0.4
+> 0.3
+> 0.2
+> Energy  and  Scale
+> Weight
+
+Fig. 4. AHA visualization. T and I are text and image; T-T, T-I, I-T, and I-I denote ordered modality-pair diagnostics rather than one-to-one Clifford basis blades. TABLE V EPOCH -B ATCH EFFICIENCY ON GOODREADS (C LASSIFICATION ).                                                   
+
+> Method Pre-process (s) E-Train. (s) E-Infer. (s) B-GPU Mem. Param.
+> MLaGA -112.4 ±1.05 45.2 ±0.93 22.8G 125M GraphGPT-O -125.6 ±1.70 48.9 ±1.45 24.5G 140M Graph4MM 45.2 ±1.03 28.5 ±0.85 10.4 ±0.42 17.2G 96M InstructG2I -168.2 ±2.50 75.6 ±1.10 32.1G 180M DMGC -9.2 ±0.15 4.1 ±0.08 3.8G 2.4M DGF -10.8 ±0.20 3.6 ±0.10 4.1G 2.6M MIG-GT 63.7 ±1.16 5.4 ±0.12 2.5 ±0.05 2.2G 1.8M NTSFormer 75.8 ±1.25 4.1 ±0.10 1.9 ±0.04 2.5G 2.1M LION (Ours) 92.4 ±1.49 3.2 ±0.09 1.2 ±0.04 2.9G 1.5M
+
+propagation depth is preferable for dense graphs, while sparse graphs benefit from increased depth to capture a sufficient receptive field. 
+
+AHA Module . First of all, we clarify the modality fusion mechanism implemented from a holographic perspective in-volving both energy and scale (Sec. III-C). In Fig. 4, modality channels are primarily filtered via energy-initialized adaptive gating to select the informative and beneficial interaction subspaces. Then, propagation depth determines the manner in which multi-scale structural contexts are integrated within these interaction channels. Based on this, we reveal that LION IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 10 (a) Node  Clustering  (b) Graph -to -Text  (c) Graph -to -Image  (d) Node  Classification  
+
+> Fig. 5. Performance of LION under different sparsity levels on the Grocery dataset.
+
+dynamically assigns varying importance to channels (energy) and depth (scale) according to the specific scenarios. For instance, a distinct modality-aware preference emerges where the model assigns significantly higher weights to text-related subspaces on Goodreads while shifting its focus toward image-related subspaces on Ele-Fashion. Meanwhile, their optimal receptive fields also vary across these datasets to ensure optimal modality fusion. This adaptive behavior is consistent with the heterogeneous nature of MAGs. Some domains depend more heavily on textual semantics, such as book summaries and reviews, whereas fashion-related graphs often require visual compatibility cues. A fixed fusion rule would obscure such domain-specific preferences, but the energy-scale design allows LION to allocate capacity to the most informative channels and propagation ranges. 
+
+E. Robustness Analysis 
+
+To answer Q4 , we investigate the robustness of LION in sparse scenarios. This stems from the fact that MAGs often suffer from data incompleteness. As shown in Fig. 5, LION demonstrates remarkable robustness across all sparsity scenarios. Meanwhile, LION consistently outperforms other methods in all downstream tasks. This superiority is attributed to the Clifford geometric manifold, which can mitigate missing data through high-order graph propagation. This indicates that our alignment-then-fusion mechanism effectively exploits the complementary nature of topology and modality, allowing the model to learn high-quality representations even when raw information is severely corrupted. In sparse scenarios, local attributes alone become unreliable because either modality content or neighborhood evidence may be partially absent. CGP alleviates this issue by propagating curvature-aware context from broader graph neighborhoods, while AHA filters noisy channels before final prediction. As a result, the model remains stable even when the input graph provides incomplete or imbalanced multimodal evidence. 
+
+F. Running Efficiency 
+
+To answer Q5 , we provide the computational overhead and convergence curves of LION. As summarized in Table V, LION demonstrates superior efficiency compared to other baselines. This advantage is primarily attributed to our decoupled graph neural paradigm, which separates intensive geometric computa-tions from the training loop. Specifically, the construction of the spatial rotor and geometric potential within the CGP is relegated Test Accuracy  (%)   
+
+> (a) Sports (Link Prediction) (b) Movies (Node Clustering)
+> Fig. 6. The convergence efficiency curves.
+
+to a one-time pre-processing. Consequently, the training phase focuses exclusively on the AHA and avoids the need for recursive neighborhood expansion. Fig. 6 illustrates that LION exhibits a rapid convergence rate, consistently reaching peak performance in significantly fewer epochs than other baselines. This empirical training curve is consistent with using stable cached CGP tokens, while Theorem III.2 concerns spectral contraction of the fixed CGP propagation operator rather than the convergence rate of the downstream optimizer. By reducing repeated structural computation in the trainable loop, LION facilitates efficient adaptation. The convergence behavior also reflects the benefit of decoupling propagation from trainable aggregation. Since CGP produces stable multiscale tokens before optimization, the trainable module does not need to repeatedly discover structural context from scratch. Instead, it focuses on selecting informative interaction channels and receptive fields, which explains the lower epoch-level training and inference cost in Table V. V. C ONCLUSION 
+
+With the rapid advancement of multimodal domains, MAG has emerged as a critical frontier for enhancing graph repre-sentation and downstream utility. In this work, we propose LION, which unifies topology with modality by constructing the geometric manifold grounded in Clifford algebra. Our theoretical analysis establishes bounded geometric sensitivity, conditional spectral contraction of CGP, and stability bounds for AHA. Extensive experiments across a broad spectrum of supervised and unsupervised tasks demonstrate that LION significantly outperforms SOTA baselines, confirming its superiority in both graph and modality tasks. Although the manifold dimension scales exponentially with the number of modalities, this overhead remains marginal in practice, as the modality count is typically limited. Future work includes the IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 11 
+
+integration of LION into broader applications such as Graph QA. Furthermore, enhancing the utility of Multimodal Large Models within LION to exploit cross-modal semantics under topology priors is also a compelling direction. IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 12 
+
+APPENDIX APROOF OF GEOMETRIC STABILITY IN THEOREM 1This section proves the stability statement in Theorem 1 using the same initialization, potential, and stabilized rotor as the main paper. 
+
+Proof. For modality k, let ¯x(k) 
+
+> u
+
+= gk(x(k) 
+
+> u
+
+) ∈ Rd and ˆx(k) 
+
+> u
+
+=¯x(k) 
+
+> u
+
+/ max( ∥¯x(k) 
+
+> u
+
+∥2, ϵ x) with fixed ϵx > 0. Assume each gk is Lipschitz on the bounded input domain. The initialization is 
+
+H(0)  
+
+> u
+
+= 1
+
+√K
+
+> K
+
+X
+
+> k=1
+
+ˆx(k) 
+
+> u
+
+ek, ∥H(0)  
+
+> u
+
+∥Cl ≤ 1. (18) Stabilized normalization is Lipschitz, and the orthogonal Clifford lift is linear; hence for some LH < ∞,
+
+∥H − H′∥Cl ≤ LH ∥X − X′∥Cl ≡ δH . (19) For an edge, the geometric product is bilinear. Because both lifted representations have norm at most one, 
+
+∥HuHv − H′
+
+> u
+
+H′ 
+
+> v
+
+∥Cl ≤ 2δH , (20) and the Grade-0 and Grade-2 projections are non-expansive. Let Suv = ⟨HuHv ⟩0 and Buv = ⟨HuHv ⟩2. The rotor used in the main paper is 
+
+bBuv = Buv 
+
+p∥B uv ∥2 + ϵ2
+
+> r
+
+,θuv = atan2( ∥B uv ∥, ∥S uv ∥ + ϵr ),
+
+Ruv = exp( −θuv bBuv /2) .
+
+(21) With fixed ϵr > 0, both stabilized normalization and atan2 
+
+are Lipschitz on the bounded domain, including ∥B uv ∥ → 0;the exponential is Lipschitz on the resulting compact set. Thus 
+
+∥R − R ′∥ ≤ LRδH . The potential in the main paper contains a positive stabilizer ϵ and is likewise Lipschitz, ∥Φ − Φ′∥ ≤ 
+
+LΦδH .Writing AG = A ◦ (Φ , R), bounded degree and the product rule give 
+
+∥A G − A ′G ∥Cl ≤ C1δH + C2∥A − A′∥Cl. (22) Combining the two inequalities yields 
+
+∥H − H′∥Cl + ∥A G − A ′G ∥Cl
+
+≤ Kmap (∥X − X′∥Cl + γ∥A − A′∥Cl). (23) where Kmap and γ depend on the encoder/projection bounds, graph degree, and fixed stabilizers. This proves Theorem 1 without requiring the bi-vector norm to be bounded away from zero. APPENDIX BPROOF OF SPECTRAL EVIDENCE IN THEOREM 2We analyze exactly the normalized CGP update defined in the main paper. During one cached propagation stage, assume an undirected graph, symmetric potentials Φuv = Φ vu , reciprocal isometric transports Tvu = T −1 
+
+> uv
+
+, and fixed edge operators. Define ¯Φuu = 1 , ¯Φuv = Φ uv , du = P  
+
+> k∈N (u)∪{ u}
+
+¯Φuk , and 
+
+˜Φuv = ¯Φuv /d u. Then the main-paper propagation is 
+
+H(l) 
+
+> u
+
+= X 
+
+> v∈N (u)∪{ u}
+
+˜Φuv Tuv (H(l−1)  
+
+> v
+
+) ≡ (PG H(l−1) )u. (24) The corresponding unnormalized connection Dirichlet energy is 
+
+EDir (H) = 12
+
+X
+
+> (u,v )∈E
+
+Φuv ∥Hu − T uv (Hv )∥2
+
+> Cl
+
+. (25) Symmetry, reciprocity, and isometry make the associated connection Laplacian positive semidefinite. After degree nor-malization, PG is the connection averaging operator asso-ciated with this Laplacian (including the stated self loop) and is self-adjoint under the degree-weighted inner product 
+
+⟨X, Y⟩D = P 
+
+> u
+
+du⟨Xu, Yu⟩Cl. Let Π be the corresponding orthogonal projection onto the unit-eigenspace of PG . Decom-pose H(0) = Π H(0) + ( I − Π) H(0) . Because PG Π = Π ,
+
+H(l) − ΠH(0) = Pl 
+
+> G
+
+(I − Π) H(0) . (26) If the spectral radius of PG on the complementary invariant subspace is ρ < 1, operator submultiplicativity gives 
+
+∥H(l) − ΠH(0) ∥D, Cl ≤ ρl∥H(0) − ΠH(0) ∥D, Cl, (27) This is the contraction statement in Theorem 2. The assump-tions are explicit: the result applies to the fixed reciprocal transport operator used for cached CGP and does not claim the same spectral rate for arbitrary time-varying edge operators. Because each Tuv is a rotor sandwich map, it is isometric and does not collapse the orthogonal Clifford basis merely by transport. APPENDIX CPROOF OF AHA S TABILITY AND CONSENSUS BOUND IN 
+
+THEOREM 3This section proves the AHA stability inequalities in Theo-rem 3. Importantly, the proof only uses the linear part of the affine Clifford projection and does not assume that the learned consensus profile is a downstream-optimal representation. 
+
+Proof. Let the affine Clifford projection used in the main paper be 
+
+fcll (X) = Wout X + bout , (28) and assume 
+
+∥Wout ∥2→2 ≤ ω. (29) Define 
+
+Zu = fcll 
+
+> L
+
+X
+
+> l=0
+
+βu,l eH(l)
+
+> u
+
+!
+
+,
+
+Zraw  
+
+> u
+
+= fcll 
+
+> L
+
+X
+
+> l=0
+
+βu,l H(l)
+
+> u
+
+!
+
+.
+
+(30) Since the bias term cancels when two affine outputs are subtracted, we obtain 
+
+Zu − Zraw  
+
+> u
+
+= Wout 
+
+> L
+
+X
+
+> l=0
+
+βu,l 
+
+ eH(l) 
+
+> u
+
+− H(l)
+
+> u
+
+
+
+. (31) IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 13 
+
+Using eH(l) 
+
+> u
+
+= α(l) 
+
+> u
+
+⊙ H(l) 
+
+> u
+
+, the operator-norm inequality and triangle inequality yield 
+
+∥Zu − Zraw  
+
+> u
+
+∥2 ≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l 
+
+ eH(l) 
+
+> u
+
+− H(l)
+
+> u
+
+
+
+> Cl
+
+≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l (1 − α(l) 
+
+> u
+
+) ⊙ H(l) 
+
+> uCl
+
+.
+
+(32) This proves the first inequality and quantifies the representation change introduced by the soft component gate. No assumption is made that an attenuated component is noise. For the consensus bound, because PLl=0 βu,l = 1 ,
+
+Zu − fcll 
+
+ Hctx 
+
+> u
+
+
+
+= Wout 
+
+" LX
+
+> l=0
+
+βu,l eH(l) 
+
+> u
+
+− Hctx 
+
+> u
+
+#
+
+= Wout 
+
+> L
+
+X
+
+> l=0
+
+βu,l 
+
+ eH(l) 
+
+> u
+
+− Hctx 
+
+> u
+
+
+
+.
+
+(33) Therefore, 
+
+Zu − fcll (Hctx  
+
+> u
+
+) 2 ≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l 
+
+ eH(l) 
+
+> u
+
+− Hctx 
+
+> u
+
+
+
+> Cl
+
+≤ ω
+
+> L
+
+X
+
+> l=0
+
+βu,l eH(l) 
+
+> u
+
+− Hctx  
+
+> uCl
+
+.
+
+(34) This proves the second inequality. The result is a consensus-deviation bound and does not identify Hctx  
+
+> u
+
+with the unknown downstream-optimal representation. APPENDIX DTHEORETICAL FOUNDATIONS OF LION The preceding analyses establish three scoped properties of LION. Theorem 1 bounds the sensitivity of the Clifford construction under bounded encoders/projections and fixed numerical stabilizers. Theorem 2 gives a conditional spectral contraction result for the same normalized, fixed reciprocal CGP operator used in the main paper. Theorem 3 bounds the representation change introduced by AHA gating and its deviation from the learned multiscale consensus. These results support stability and operator consistency; they do not assume that attenuated grades are necessarily noise, that the consensus is a downstream optimum, or that the fixed-operator spectral rate describes the downstream neural optimizer. APPENDIX EALGORITHM AND COMPLEXITY DETAILS 
+
+We provide additional details for the algorithmic flow and computational complexity of LION. The data flow begins with the initialization of the Clifford geometric manifold. Given a multimodal-attributed graph G, the modality-oriented isomorphic lifting map projects raw scalar features X into the Grade-1 subspace of the Clifford algebra ClK . Assigning each modality to a unique orthogonal basis vector ek preserves the independence of modality axes while unifying them in the multi-vector representation H(0) . Topology modeling is then performed by computing the geometric product between connected nodes, whose Grade-0 and Grade-2 projections provide the same-modality compatibility and oriented cross-modality discrepancy statistics defined in the main paper. These edgewise statistics instantiate the topology-oriented geometric potential Φ and spatial rotor R, which jointly encode semantic curvature on the Clifford manifold. Guided by these operators, CGP conducts training-free high-order propagation through potential-gated parallel transport, producing aligned curvature-adaptive tokens {H(1) , . . . , H(L)}.For the two-modality case, the text and visual attributes may have different raw dimensions dt and di; modality-specific projections first map both to the shared dimension d before the Grade-1 lift. The Cl 2 storage then uses the basis slots 
+
+{1, e 1, e 2, e 12 }, with the normalized text and image features assigned to e1 and e2. The scalar and bi-vector quantities used by CGP are edgewise geometric-product statistics; they are not four ordered modality-pair channels stored one-to-one in these basis slots. Accordingly, the T-T, T-I, I-T, and I-I labels in the visualization denote diagnostic ordered-pair contributions rather than Clifford basis labels. AHA quantifies the information density of the resulting Clifford token components, applies a soft learnable gate, and fuses different propagation depths through resonance scores against the consensus profile Hctx .The final representation is obtained by projecting the filtered and scale-weighted Clifford multi-vector back into Euclidean space. We further detail the time-space complexity. Let N = |V| 
+
+and M = |E| denote the numbers of nodes and edges, L the propagation depth, and D = 2 K d the Clifford multi-vector dimension for K modalities. Manifold initialization via the lifting map requires O(N · D). Constructing the geometric potential and spatial rotor requires evaluating the geometric product on each edge, leading to O(M · 2K · D). For K > 2,the scalar component aggregates same-modality compatibility and the  K
+
+> 2
+
+ Grade-2 coefficients encode oriented pairwise cross-modality discrepancies as defined in the main paper; higher grades are available algebraically but are not empirically evaluated here. Curvature-adaptive high-order propagation costs 
+
+O(L · M · D). Since CGP is training-free and parameter-independent, this phase is executed once and cached. During training, LION optimizes only AHA: energy-aware grade filter-ing and scale-aware resonance fusion both scale as O(L·N ·D).Therefore, the total computational cost can be summarized as 
+
+O(L(M · D + N · 2K · D)) , while remaining linear in graph size for fixed K and L. The cached multiscale propagated features require O(L · N · D) memory, and the learnable projection, gating, and attention parameters require O(D2)
+
+space. This decoupled design avoids recursive neighborhood expansion during back propagation and enables scalable mini-batch training. APPENDIX FDATASET DETAILS 
+
+All nine benchmarks used in this paper provide text and image attributes; although the Clifford formulation is defined for 
+
+K modality axes, empirical claims in this work are restricted to IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 14 
+
+the K = 2 text-image setting. Dataset-task assignments follow Table I and the headers of the corresponding result tables in the main paper. Graph construction uses only benchmark relations or source metadata available independently of the downstream target split; class labels, held-out links, retrieval correspondences, and generation references are excluded from edge construction to avoid target leakage. 
+
+RedditS [45] is a social network from Reddit where nodes represent posts and edges denote threading relationships (e.g., comments and replies). Textual features are encoded from titles and body content, while visual features are extracted from embedded images. This dataset is used for node clustering in the reported graph-task comparison. 
+
+Movies [46] is sourced from Amazon’s Movies and TV category. Nodes correspond to DVD/Blu-ray products, and edges reflect consumer co-purchasing behavior. Node attributes include textual plot synopses and customer reviews, alongside visual features derived from official cover art. This dataset is used for node classification in the reported graph-task comparison. 
+
+Grocery [46] originates from Amazon’s Grocery and Gourmet Food segment. Edges indicate complementary pur-chasing habits derived from ”also-bought” metadata. Textual features are encoded from product titles and nutritional de-scriptions, while visual features are extracted from packaging images. This dataset is used for node clustering in the reported graph-task comparison. 
+
+SemArt [48] is a fine-art dataset where nodes represent paintings and edges are established based on shared metadata such as artist, period, or school. Node features include expert historical commentary and stylistic visual attributes from digital images. This dataset is used for Graph-to-Image (G2Image) in the reported modality-task comparison, with its paired textual and visual attributes retained as node modalities. 
+
+Flickr30k [49] is a canonical image-text reasoning dataset. In the OpenMAG setting, we follow the released benchmark graph relations, which are fixed before the downstream split; held-out target captions used for evaluation are not used to construct edges. This dataset is utilized for Graph-to-Text (G2Text) tasks, evaluating the model’s ability to generate descriptive captions from graph-structured visual-textual context. 
+
+Sports [46], [47] is an Amazon-based graph of athletic gear where edges denote functional complementarity. It incorporates technical specifications (text) and product images (visual) to capture design and utility. This dataset is primarily utilized for link prediction, aiming to forecast potential product associations by modeling the geometric compatibility between sports-related modalities. 
+
+Ele-fashion [46], [47] is a heterogeneous graph merging Amazon’s Electronics and Fashion categories. Nodes are connected via cross-category co-purchasing links, revealing latent consumer preferences across disparate domains. Features combine technical specs with style descriptions and product imagery. This dataset is used for modality retrieval in the reported modality-task comparison. 
+
+Cloth [46], [47] is a large-scale Amazon fashion graph linking items via visual compatibility or co-purchase history. It utilizes material compositions (text) and high-resolution model images (visual). The dataset is used for link prediction in the reported graph-task comparison, where visual and textual compatibility provides a test for modality fusion and alignment. 
+
+Goodreads [50], [51] is a book review graph where edges represent co-shelving relationships. Node features are derived from book summaries, editorial reviews, and cover art. The dataset is used for node classification in the reported graph-task comparison, requiring the synthesis of aesthetic cover cues with the semantic depth of textual summaries. APPENDIX GBASELINES DETAILS 
+
+GCN [8] utilizes a localized first-order approximation of spectral graph convolutions based on the renormalization trick. It scales linearly with the number of edges and learns hidden representations that jointly capture graph topology structure and node attribute features via a layer-wise propagation rule. 
+
+GCNII [52] extends the conventional GCN by incorporating two key techniques: initial residual connections and identity mapping. These mechanisms effectively simulate lazy random walks and are theoretically and empirically shown to alleviate the over-smoothing issue, allowing the model to stack deep architectures without performance degradation. 
+
+GAT [10] introduces masked self-attention layers to assign learnable importance scores to neighbors during aggregation. This strategy enables the model to handle anisotropic graphs by implicitly assigning varying weights to different nodes, thereby capturing complex local structural patterns without relying on a fixed, predefined graph Laplacian. 
+
+GATv2 [53] implements a dynamic graph attention mech-anism that strictly improves upon the static attention of the original GAT. By modifying the order of operations in the attention scoring function, it achieves universal approximation capability, offering enhanced representation expressiveness and increased robustness against graph noise and irrelevant connections. 
+
+MMGCN [14] is a pioneering framework for micro-video recommendation that explicitly models user preferences across visual, acoustic, and textual modalities. It constructs separate modality-specific bipartite graphs and aggregates high-order connectivity within each graph before combining them through a structured fusion layer, effectively capturing the user-item interactions inherent in each sensory channel. 
+
+MGAT [15] employs a gated attention mechanism within parallel multimodal interaction graphs for recommendation. It adaptively identifies the importance of specific modalities to disentangle granular personal interests, effectively acting as a denoising filter to reduce the influence of noisy or conflicting multimodal signals during preference learning. 
+
+MLaGA [18] enables Large Language Models (LLMs) to reason over MAGs via a coherent two-stage alignment strategy. It first aligns visual and textual features with the graph structure through contrastive graph pre-training, and subsequently performs instruction tuning to seamlessly integrate graph connectivity priors into the LLM’s generative reasoning process. 
+
+GraphGPT-O [12] is a comprehensive multimodal LLM designed for joint comprehension and generation tasks on IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 15 
+
+MAGs. It addresses the challenge of encoding non-Euclidean dependencies and scalability by employing personalized PageR-ank sampling and a hierarchical aligner equipped with both node-level and graph-level Q-Formers to bridge structural tokens with the LLM semantic space. 
+
+Graph4MM [11] integrates multi-hop structural information directly into the self-attention mechanism via a hop-diffused attention strategy. It utilizes a specialized MM-QFormer for principled cross-modal fusion, demonstrating that treating graph topology as a guided interaction modality significantly outperforms approaches that treat the graph merely as an auxiliary input feature. 
+
+InstructG2I [13] is a graph-conditioned diffusion model specifically designed for MAGs. It utilizes semantic neighbor sampling to construct contextual prompts and employs a Graph-QFormer to encode these prompts, offering fine-grained controllability over the generative process through a novel graph classifier-free guidance mechanism. 
+
+DMGC [27] addresses complex hybrid neighborhood pat-terns by explicitly disentangling the graph into cross-modality homophily-enhanced and modality-specific heterophily-aware components. It utilizes a dual-frequency fusion mechanism, which acts as coupled low-pass and high-pass filters to simul-taneously capture both intra-class commonalities (smoothness) and inter-class distinctions (boundaries). 
+
+DGF [41] proposes a cross-contrastive clustering framework that utilizes a dual graph filtering scheme to systematically denoise features extracted from MAG. It employs a tri-cross contrastive objective spanning modalities, topology neigh-borhoods, and semantic communities to learn discriminative clustering representations robust to outliers. 
+
+MIG-GT [25] utilizes modality-independent GNNs with adaptive receptive fields to accommodate the unique propa-gation requirements and noise levels of distinct modalities. To complement local aggregation, it integrates a sampling-based global transformer, enabling the model to capture long-range semantic dependencies and global context that standard message passing often fails to preserve. 
+
+NTSFormer [26] introduces a self-teaching graph trans-former tailored for isolated cold-start node classification. It employs a stochastic cold-start attention mask to supervise a student prediction (based solely on self-information) with a teacher prediction (which is neighbor-aware), thereby ensuring robust performance and generalization even when structural connections or modal attributes are partially missing. 
+
+UniGraph2 [28] is a cross-domain graph foundation model that integrates diverse modalities into a unified embedding space. It leverages frozen pre-trained encoders and a mixture-of-experts (MoE) module for scalable alignment, followed by a universal GNN for structural aggregation, facilitating the learning of generalizable representations that transfer effectively across various downstream tasks and domains. 
+
+a) Baseline adaptation and tuning protocol.: We retain each baseline’s released backbone and modality preprocessing whenever available and evaluate it on the same dataset split and downstream metric. If a released implementation lacks the required task head, only the task head is adapted while the representation module is kept unchanged. Hyperparameters and early stopping are selected using validation data only, never the test set. Shared task-side dimensions and stopping rules are used when the original method permits them; otherwise, the authors’ recommended method-specific settings are retained. Graph edges follow the target-independent construction protocol described in Appendix F. APPENDIX HEVALUATION PROTOCOLS 
+
+To ensure a rigorous and standardized evaluation across di-verse MAG learning models, we implement specific experimen-tal configurations for three primary graph-centric downstream tasks: supervised node classification, supervised link prediction, and unsupervised node clustering. For node classification and node clustering, the learning rate is established at 5 × 10 −3
+
+with a batch size of 512 and a weight decay of 1 × 10 −5.While 100 training epochs are sufficient for convergence in the node classification task, node clustering requires an extended duration of 500 epochs to stabilize the underlying self-supervised objectives. In contrast, the link prediction task utilizes an adjusted learning rate of 1×10 −3 and a significantly larger batch size of 2048 to facilitate the efficient processing of extensive edge-pair samples. To maintain architectural consistency and ensure a fair comparison, we standardize core parameters by employing CLIP-ViT-Large-Patch14 as the default frozen feature encoder, with feature dimensions unified at 768 across all tasks. For graph-task comparisons and ablations, results are obtained from five independent runs and reported as mean ±standard deviation, matching entries marked with “ ±” in the main paper. 
+
+Node Classification is the fundamental supervised task in graph learning. Given a MAG, the model encodes each node into a low-dimensional embedding. These representations are subsequently processed by a projection head and a Softmax layer to generate class probabilities. Optimization is performed by minimizing the cross-entropy loss between the predicted distributions and ground-truth labels. Model performance is quantified using Accuracy (Acc) and the F1-score. Specifically, Acc measures the proportion of correctly pre-dicted samples over the evaluation set: Acc = 1
+
+> N
+
+PNi=1 I(ˆ yi =
+
+yi), where N is the sample size, yi is the ground-truth, ˆyi is the prediction, and I(·) is the indicator function. F1-score is the harmonic mean of Precision and Recall, providing a robust evaluation under class imbalance common in real-world graphs: F1 = 2 ( ·Precision · Recall ) / (Precision + Recall ).
+
+Link Prediction measures the model’s capacity to infer missing or potential edges. The model computes similarity scores between node pairs (e.g., via dot product) and assigns higher scores to true edges than to negative samples. In multimodal settings, this requires aligning structural proximity with cross-modal semantic similarity. Evaluation relies on ranking-based metrics: Mean Reciprocal Rank (MRR) and Hits@K. Specifically, MRR assesses the model’s ability to prioritize the correct target at the top of a candidate list: MRR =
+
+> 1
+> |Q|
+
+P|Q|  
+
+> i=1 1
+> rank i
+
+, where rank i denotes the rank of the first correct result for query i. Hits@K reflects the recall performance at a IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 16 
+
+fixed cutoff K, indicating the practical utility of the retrieval results: Hits@K = 1
+
+> |Q|
+
+P|Q| 
+
+> i=1
+
+I(rank i ≤ K).
+
+Node Clustering evaluates representation quality in an unsupervised setting, following the protocol in [27]. The model partitions nodes into semantic groups without label supervision. This involves disentangling the graph into homophilous and heterophilous views, followed by a dual-frequency fusion of filtered signals. The model is optimized via a joint objective comprising reconstruction, contrastive alignment, and clustering losses. Model performance is quantified using Normalized Mutual Information (NMI) and Adjusted Rand Index (ARI). Specifically, NMI quantifies the mutual dependence be-tween predicted clusters C and ground-truth labels Y ,independent of label permutations: NMI (Y, C ) = 2 ·
+
+I(Y, C )/ (H(Y ) + H(C)) , where I(·) and H(·) denote mutual information and entropy, respectively. ARI evaluates clustering similarity by considering all sample pairs and adjusting for chance grouping: ARI =
+
+P
+
+> ij
+
+ nij 
+
+> 2
+
+ − [P
+
+> i
+
+ ai
+
+> 2
+
+ P 
+
+> j
+
+ bj
+
+> 2
+
+]/ n
+
+> 2
+
+ 
+
+> 12
+
+[P
+
+> i
+
+ ai
+
+> 2
+
+ + P
+
+> j
+
+ bj
+
+> 2
+
+] − [P
+
+> i
+
+ ai
+
+> 2
+
+ P 
+
+> j
+
+ bj
+
+> 2
+
+]/ n
+
+> 2
+
+ ,
+
+(35) where nij represents the overlap between ground-truth cluster 
+
+i and predicted cluster j.For the modality retrieval task, which evaluates the model’s capability to search for relevant instances across image and text modalities within a shared latent space, we employ contrastive learning objectives integrated with a temperature scaling factor of τ = 0.07 . These retrieval models are trained for 500 epochs using a learning rate of 1 × 10 −3 and a batch size of 256. To effectively mitigate over-fitting and ensure the generalizability of the learned representations, we implement an early stopping mechanism with a patience period ranging from 10 to 25 epochs. For modality generation tasks, the configurations are specifically tailored to accommodate high-dimensional generative processes and complex many-to-many relationships within the graph. In the Graph-to-Text (G2Text) task, we set the learning rate to 1 × 10 −3 with a weight decay of 1 × 10 −2 and a batch size of 8, training the model for 15 epochs. We utilize the Self-Attention with Embeddings (SA-E) strategy to sample four multimodal neighbors and employ Graph Neural Networks (GNNs) for structural position encoding. The decoder backbone is powered by the pre-trained Facebook OPT-125M, and to ensure parameter efficiency during adaptation, we support both Prefix Tuning and Low-Rank Adaptation (LoRA) with a rank of r = 64 . In the Graph-to-Image (G2Image) task, we employ a learning rate of 1 × 10 −4
+
+and a batch size of 16 for a duration of 20 epochs. Following the InstructG2I framework, we adopt Semantic Personalized PageRank (PPR)-based neighbor sampling, selecting between 0 and 6 informative neighbors to provide structural context. The image resolution is standardized at 256 to condition the Stable Diffusion v1.5 backbone through a Graph Classifier-Free Guidance mechanism. To ensure experimental fairness and minimize performance variance, we standardize core architectural parameters across all task configurations. Unless otherwise specified, we employ CLIP-ViT-L/14 as the default feature encoder, with node embedding dimensions unified at 768 across all downstream tasks. All optimization processes are performed using the Adam or AdamW optimizers. For graph-task comparisons and ablations, we use five independent runs and report mean ±standard deviation. Modality retrieval and generation follow the corresponding benchmark protocols; entries without “±” in the main paper are single-run evaluations and are not presented as five-run averages. 
+
+Modality Retrieval evaluates the model’s capability to retrieve relevant instances across disparate modalities, specif-ically focusing on image-to-text and text-to-image retrieval within the LION. Given a query from a source modality, the model projects both the query and the candidate set from the target modality into a unified, high-dimensional latent space for direct comparison. Pairwise similarity scores are subsequently computed to rank candidates in descending order of predicted relevance. This task serves as a rigorous assessment of the robustness of cross-modal alignment and the discriminative power of the learned representations for information retrieval. To provide a comprehensive quantitative evaluation, model performance is measured using standard ranking metrics, including Mean Reciprocal Rank (MRR) and Hits@K. 
+
+Graph-to-Text (G2Text) is a generative task requiring the model to synthesize natural language descriptions con-ditioned on graph-structured multimodal inputs. Diverging from traditional one-to-one multimodal mappings, G2Text addresses complex many-to-many relationships where target nodes interact with diverse multimodal neighborhoods. Fol-lowing the MMGL framework [54], the process involves three stages: (i) Neighbor Encoding, which maps diverse modalities into a compatible embedding space; (ii) Graph Structure Encoding, which captures topology context via GNNs or Laplacian position encodings; (iii) Integration, where structure-aware signals are infused into a pre-trained LLM. This task evaluates the faithful translation of structured graph information into coherent text. Model performance is evaluated by using standard NLG metrics, including BLEU-4, ROUGE-L, and CIDEr. Specifically, BLEU-4 evaluates lexical accuracy and fluency by calculating the geometric mean of modified n-gram preci-sions ( pn) up to length 4: BLEU-4 = BP · exp 
+
+> 4
+
+X
+
+> n=1
+
+wn log pn
+
+!
+
+. (36) ROUGE-L measures sentence-level recall based on the longest common subsequence, ensuring the output covers the compre-hensive information content of the ground truth: ROUGE-L = (1 + β2)Rlcs Plcs 
+
+Rlcs + β2Plcs 
+
+. (37) CIDEr measures the consensus between generated captions and human references using TF-IDF weighting, emphasizing the semantic importance and distinctiveness of the generated terms: CIDEr n(c, r ) = 1
+
+M
+
+> M
+
+X
+
+> i=1
+
+gn(c) · gn(ri)
+
+|gn(c)|| gn(ri)| . (38) IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 17 
+
+Graph-to-Image (G2Image) focuses on synthesizing images conditioned on MAG, requiring visual content to reflect both textual prompts and complex graph-based associations. Follow-ing the InstructG2I framework [13], the workflow consists of: (i) Semantic PPR-based Sampling, which selects informative neighbors; (ii) Graph-QFormer Encoding, which transforms neighbors into graph conditioning tokens; (iii) Conditional Generation, where a latent diffusion model is guided by these tokens via a graph classifier-free guidance mechanism. This task evaluates the model’s ability to generate images consistent with the styles or categories defined by the graph structure. Model performance is quantified by using CLIP-Score and DINOv2-Score for instance-level consistency. Specifically, CLIP-Score quantifies cross-modal semantic consistency. Building upon the textual encoder ( ET ) and visual encoder ( EI ) in pre-trained CLIP, this metric determines whether generated images faithfully preserve the semantic content of corresponding graph descriptions: CLIP-Score (I, T ) = max (100 · cos( EI (I), E T (T )) , 0) .
+
+(39) DINOv2-Score assesses visual fidelity and structural consis-tency using feature embeddings from a pre-trained DINOv2 encoder, ensuring high perceptual quality and structural resem-blance to reference samples: DINOv2-Score (Igen , I ref ) = cos( DINO (Igen ), DINO (Iref )) .
+
+(40) REFERENCES [1] A. Radford, J. W. Kim, C. Hallacy, A. Ramesh, G. Goh, S. Agarwal, G. Sastry, A. Askell, P. Mishkin, J. Clark et al. , “Learning transferable visual models from natural language supervision,” in International Conference on Machine Learning, ICML , 2021. [2] S. Zhang, S. Roller, N. Goyal, M. Artetxe, M. Chen, S. Chen, C. Dewan, M. Diab, X. Li, X. V. Lin et al. , “Opt: Open pre-trained transformer language models,” arXiv preprint arXiv:2205.01068 , 2022. [3] R. Rombach, A. Blattmann, D. Lorenz, P. Esser, and B. Ommer, “High-resolution image synthesis with latent diffusion models,” in 
+
+Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, CVPR , 2022. [4] H. Yan, C. Li, J. Yin, Z. Yu, W. Han, M. Li, Z. Zeng, H. Sun, and S. Wang, “When graph meets multimodal: benchmarking and meditating on multimodal attributed graph learning,” in Proceedings of the ACM SIGKDD Conference on Knowledge Discovery and Data Mining, KDD ,2025. [5] J. Zhu, Y. Zhou, S. Qian, Z. He, T. Zhao, N. Shah, and D. Koutra, “Mosaic of modalities: A comprehensive benchmark for multimodal graph learning,” in Proceedings of the Computer Vision and Pattern Recognition Conference, CVPR , 2025. [6] J. Liu, D. Fan, J. Shen, C. Ji, D. Zha, and Q. Tan, “Graph-mllm: Harnessing multimodal large language models for multimodal graph learning,” arXiv preprint arXiv:2506.10282 , 2025. [7] X. Wang, Z. Zhang, L. Xiao, H. Chen, C. Ge, and W. Zhu, “Towards multi-modal graph large language model,” arXiv preprint arXiv:2506.09738 ,2025. [8] T. N. Kipf and M. Welling, “Semi-supervised classification with graph convolutional networks,” in International Conference on Learning Representations, ICLR , 2017. [9] W. Hamilton, Z. Ying, and J. Leskovec, “Inductive representation learning on large graphs,” Advances in neural information processing systems, NeurIPS , 2017. [10] P. Veliˇ ckovi´ c, G. Cucurull, A. Casanova, A. Romero, P. Lio, and Y. Bengio, “Graph attention networks,” in International Conference on Learning Representations, ICLR , 2018. [11] X. Ning, D. Fu, T. Wei, W. Xu, and J. He, “Graph4mm: Weaving multimodal learning with structural information,” in Proceedings of the International Conference on Machine Learning, ICML , 2025. [12] Y. Fang, B. Jin, J. Shen, S. Ding, Q. Tan, and J. Han, “Graphgpt-o: Synergistic multimodal comprehension and generation on graphs,” in 
+
+Proceedings of the Computer Vision and Pattern Recognition Conference, CVPR , 2025, pp. 19 467–19 476. [13] B. Jin, Z. Pang, B. Guo, Y.-X. Wang, J. You, and J. Han, “Instructg2i: Synthesizing images from multimodal attributed graphs,” Advances in Neural Information Processing Systems, NeurIPS , 2024. [14] J. Hu, Y. Liu, J. Zhao, and Q. Jin, “Mmgcn: Multimodal fusion via deep graph convolution network for emotion recognition in conversation,” in 
+
+Proceedings of the Annual Meeting of the Association for Computational Linguistics, ACL , 2021. [15] Z. Tao, Y. Wei, X. Wang, X. He, X. Huang, and T.-S. Chua, “Mgat: Multimodal graph attention network for recommendation,” Information Processing & Management , vol. 57, no. 5, p. 102277, 2020. [16] Y. Li, Z. Tang, J. Zhuang, Z. Yang, F. Ameri, and J. Zhang, “C-mag: Cascade multimodal attributed graphs for supply chain link prediction,” in Proceedings of the 1st Workshop on ”AI for Supply Chain: Today and Future” in ACM SIGKDD Conference on Knowledge Discovery and Data Mining, KDD , 2025. [17] J. Cai, X. Wang, H. Li, Z. Zhang, and W. Zhu, “Multimodal graph neural architecture search under distribution shifts,” in Proceedings of the AAAI Conference on Artificial Intelligence, AAAI , 2024. [18] D. Fan, Y. Fang, J. Liu, D. Difallah, and Q. Tan, “Mlaga: Multimodal large language and graph assistant,” arXiv preprint arXiv:2506.02568 ,2025. [19] J. Klicpera, A. Bojchevski, and S. G¨ unnemann, “Predict then propagate: Graph neural networks meet personalized pagerank,” in International Conference on Learning Representations, ICLR , 2019. [20] E. Chien, J. Peng, P. Li, and O. Milenkovic, “Adaptive universal generalized pagerank graph neural network,” in International Conference on Learning Representations, ICLR , 2021. [21] F. Frasca, E. Rossi, D. Eynard, B. Chamberlain, M. Bronstein, and F. Monti, “Sign: Scalable inception graph neural networks,” arXiv preprint arXiv:2004.11198 , 2020. [22] W. Zhang, M. Yang, Z. Sheng, Y. Li, W. Ouyang, Y. Tao, Z. Yang, and B. Cui, “Node dependent local smoothing for scalable graph learning,” 
+
+Advances in Neural Information Processing Systems, NeurIPS , 2021. [23] X. Li, J. Ma, Z. Wu, D. Su, W. Zhang, R.-H. Li, and G. Wang, “Rethinking node-wise propagation for large-scale graph learning,” in Proceedings of the ACM Web Conference, WWW , 2024. [24] H. Liu, N. Liao, and S. Luo, “Sigma: An efficient heterophilous graph neural network with fast global aggregation,” in IEEE International Conference on Data Engineering, ICDE , 2025. [25] J. Hu, B. Hooi, B. He, and Y. Wei, “Modality-independent graph neural networks with global transformers for multimodal recommendation,” in 
+
+Proceedings of the AAAI Conference on Artificial Intelligence, AAAI ,2025. [26] J. Hu, Y. He, Y. Li, B. Hooi, and B. He, “Ntsformer: A self-teaching graph transformer for multimodal isolated cold-start node classification,” in Proceedings of the AAAI Conference on Artificial Intelligence, AAAI ,2025. [27] Z. Guo, Z. Shen, X. Xie, L. Wen, and Z. Kang, “Disentangling homophily and heterophily in multimodal graph clustering,” in Proceedings of the ACM International Conference on Multimedia, MM , 2025. [28] Y. He, Y. Sui, X. He, Y. Liu, Y. Sun, and B. Hooi, “Unigraph2: Learning a unified embedding space to bind multimodal graphs,” in Proceedings of the ACM on Web Conference, WWW , 2025. [29] J. Li, D. Li, S. Savarese, and S. Hoi, “Blip-2: Bootstrapping language-image pre-training with frozen image encoders and large language models,” in International Conference on Machine Learning, ICML , 2023. [30] L. Shen, Z. Chen, M. Song, Z. Su, J. Liu, X. Liu et al. , “Decoupling and damping: Structurally-regularized gradient matching for multimodal graph condensation,” arXiv preprint arXiv:2511.20222 , 2025. [31] J. Bruna, W. Zaremba, A. Szlam, and Y. LeCun, “Spectral networks and locally connected networks on graphs,” 2014. [Online]. Available: https://arxiv.org/abs/1312.6203 [32] M. Defferrard, X. Bresson, and P. Vandergheynst, “Convolutional neural networks on graphs with fast localized spectral filtering,” Advances in Neural Information Processing Systems, NeurIPS , 2016. [33] Z. Yang, W. W. Cohen, and R. Salakhutdinov, “Revisiting semi-supervised learning with graph embeddings,” in Proceedings of the International Conference on Machine Learning, ICML , 2016, p. 40–48. [34] O. Shchur, M. Mumme, A. Bojchevski, and S. G¨ unnemann, “Pitfalls of graph neural network evaluation,” arXiv preprint arXiv:1811.05868 ,2018. IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 18 
+
+[35] W. Hu, M. Fey, M. Zitnik, Y. Dong, H. Ren, B. Liu, M. Catasta, and J. Leskovec, “Open graph benchmark: Datasets for machine learning on graphs,” Advances in neural information processing systems, NeurIPS ,vol. 33, pp. 22 118–22 133, 2020. [36] M. Zhang and Y. Chen, “Link prediction based on graph neural networks,” 
+
+Advances in neural information processing systems, NeurIPS , 2018. [37] L. Cai, J. Li, J. Wang, and S. Ji, “Line graph neural networks for link prediction,” IEEE Transactions on Pattern Analysis and Machine Intelligence , 2021. [38] V. D. Blondel, J.-L. Guillaume, R. Lambiotte, and E. Lefebvre, “Fast unfolding of communities in large networks,” Journal of statistical mechanics: theory and experiment , vol. 2008, no. 10, p. P10008, 2008. [39] G. Karypis and V. Kumar, “A fast and high quality multilevel scheme for partitioning irregular graphs,” SIAM Journal on scientific Computing ,vol. 20, no. 1, pp. 359–392, 1998. [40] J. Gilmer, S. S. Schoenholz, P. F. Riley, O. Vinyals, and G. E. Dahl, “Neural message passing for quantum chemistry,” in International conference on machine learning . PMLR, 2017, pp. 1263–1272. [41] H. Zheng, R. Yang, H. Wang, and J. Xu, “Cross-contrastive clustering for multimodal attributed graphs with dual graph filtering,” in Proceedings of the ACM SIGKDD Conference on Knowledge Discovery and Data Mining, KDD , 2025. [42] D. Hestenes and G. Sobczyk, Clifford algebra to geometric calculus: a unified language for mathematics and physics . Springer Science & Business Media, 2012, vol. 5. [43] P. Lounesto, “Clifford algebras and spinors,” in Clifford algebras and their applications in mathematical physics . Springer, 2001, pp. 25–37. [44] L. Dorst, D. Fontijne, and S. Mann, Geometric algebra for computer science (revised edition): An object-oriented approach to geometry .Morgan Kaufmann, 2009. [45] K. Desai, G. Kaul, Z. T. Aysola, and J. Johnson, “Redcaps: Web-curated image-text data created by the people, for the people,” in Advances in Neural Information Processing Systems, NeurIPS, Datasets and Benchmarks Track, NeurIPS DB Track , 2021. [46] J. Ni, J. Li, and J. McAuley, “Justifying recommendations using distantly-labeled reviews and fine-grained aspects,” in Proceedings of the Conference on Empirical Methods in Natural Language Processing and the International Joint Conference on Natural Language Processing, EMNLP-IJCNLP , 2019. [47] Y. Hou, J. Li, Z. He, A. Yan, X. Chen, and J. McAuley, “Bridging language and items for retrieval and recommendation,” arXiv preprint arXiv:2403.03952 , 2024. [48] N. Garcia and G. Vogiatzis, “How to read paintings: semantic art understanding with multi-modal retrieval,” in Proceedings of the European Conference on Computer Vision Workshops, ECCV , 2018. [49] B. A. Plummer, L. Wang, C. M. Cervantes, J. C. Caicedo, J. Hocken-maier, and S. Lazebnik, “Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models,” in Proceedings of the IEEE International Conference on Computer Vision, ICCV , 2015. [50] M. Wan and J. McAuley, “Item recommendation on monotonic behavior chains,” in Proceedings of the ACM Conference on Recommender Systems, RecSys , 2018. [51] M. Wan, R. Misra, N. Nakashole, and J. McAuley, “Fine-grained spoiler detection from large-scale review corpora,” in Proceedings of the Annual Meeting of the Association for Computational Linguistics, ACL , 2019. [52] M. Chen, Z. Wei, Z. Huang, B. Ding, and Y. Li, “Simple and deep graph convolutional networks,” in International Conference on Machine Learning, ICML , 2020. [53] S. Brody, U. Alon, and E. Yahav, “How attentive are graph attention networks?” International Conference on Learning Representations, ICLR ,2022. [54] M. Yoon, J. Y. Koh, B. Hooi, and R. Salakhutdinov, “Multimodal graph learning for generative tasks,” arXiv preprint arXiv:2310.07478 , 2023. 
+
+Xunkai Li is currently working toward the PhD degree with the School of Computer Science, Beijing Institute of Technology. He received the BS degree in computer science from Shandong University in 2022. His research interests include data-centric graph intelligence, with a focus on graph databases and machine learning, multimodal understanding and generation, and AI for Science (AI4Science). He has published more than 20 papers in lead-ing ML/DB/DM/AI conferences, including ICML, NeurIPS, VLDB, WWW, and AAAI. 
+
+Zekai Chen is currently pursuing his Master’s degree in Computer Science at Beijing Institute of Technology under the supervision of Professor Rong-Hua Li. He obtained his Bachelor degree in Computer Science from the same institution in 2024. His research focuses on Graph Machine Learning and AI for Science (AI4Science). 
+
+Zhengyu Wu is currently pursuing his PhD degree in Beijing Institute of Technology (BIT), Beijing, China. His research interests include Federated Graph Learning, directed graph learning, and social network analysis. He has co-authored papers published in top ML/DB/DM/AI conferences such as ICML, VLDB, WWW, AAAI. 
+
+Henan Sun received his Bachelor degree and Master degree from the College of Information Science, Northwest A&F University in 2022, and the School of Computer Science & Technology, Beijing Institute of Technology in 2024, respectively. His research interests include graph neural networks and graph out-of-distribution learning. He has published several academic papers in the ML community, such as ICDE, CEA and COMPSAC. 
+
+Daohan Su is currently working toward the master’s degree in the School of Computer Science & Tech-nology, Beijing Institute of Technology. He received his bachelor’s degree from the same institution in 2024. His research interests lie in the areas of graph neural networks and large language models. IEEE TRANSACTIONS ON KNOWLEDGE AND DATA ENGINEERING 19 
+
+Guang Zeng graduated from Northeastern University (Computer Science) in 2017 and currently works as an Algorithm Engineer at Ant Group. Specializing in time series forecasting, causal effect estimation, and graph computing, she has authored multiple academic papers and continues to explore innovative applications of cutting-edge technologies in real-world business scenarios. 
+
+Hongchao Qin is currently an Assistant Professor with Beijing Institute of Technology, China. He received the B.S. degree in mathematics, M.E. de-gree, and Ph.D. degree in computer science from Northeastern University, China in 2013, 2015, and 2020, respectively. His research interests include com-munity detection, graph mining, knowledge graphs, financial fraud detection, vector databases, and RAG-based intelligent question answering systems. 
+
+Rong-Hua Li received his PhD degree from the Department of Systems Engineering and Engineering Management, The Chinese University of Hong Kong, in 2013, and joined the School of Computer and Software, Shenzhen University this year. He joined the School of Computer Science & Technology, Beijing Institute of Technology in 2018 as a professor. His research interests include graph theory, graph computing systems, spectral graph theory, graph neural networks, and knowledge graphs. He is a committee member of VLDB 2024, KDD 2023, and WWW 2023. 
+
+Guoren Wang received his BS, MS, and PhD degrees from Northeastern University in 1988, 1991, and 1996. He joined the School of Computer Science & Technology, Beijing Institute of Technology in 2018 as a professor. He is a member of the Discipline Evaluation Group of the State Council and the Expert Review Group of the Information Science Depart-ment of the National Natural Science Foundation of China. His research interests include uncertain data management, data-intensive computing, visual media data analysis, and bioinformatics.
