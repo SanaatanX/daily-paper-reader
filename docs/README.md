@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-29</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-30</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 19 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-29 22:55:31 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-08-30 22:17:14 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读7篇、速读12篇，多模态学习仍是焦点；最高分《CAT-GS》凭校准门控与融合策略拿下满分。值得关注多模态对齐与层次表征方向，速读中图像检索、音视频统一框架亦有亮点。普通读者可从评分最高的多模态融合论文入手，快速了解当前研究热点。</p>
+<p>今日共读19篇，精读聚焦多模态大模型上下文剪枝与视觉证据保留，及视觉语言模型的关系推理。</p>
+<p>最值得看的方向：MLLM Agent通过保留视觉证据缓解文本债务（8.0分）；医学VQA轻量化与多模态分割结合效果突出（8.0分）。</p>
+<p>下一步建议：优先精读这两篇高分类论文，再扩展浏览医学VQA与美学表征速读，理解多模态推理与落地应用。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,9 +76,9 @@
     <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CAT-GS: Balanced Multimodal Learning via Calibrated Gating and Fusion Surgery">CAT-GS: Balanced Multimodal Learning via Calibrated Gating and Fusion Surgery</span></li><li><span class="dpr-home-dashboard-paper-title" title="Adaptive Hierarchical Representation Alliance for Multimodal Learning">Adaptive Hierarchical Representation Alliance for Multimodal Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report">WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Buried in Textual Debt: Context Pruning with Visual Evidence Preservation for MLLM Agents">Buried in Textual Debt: Context Pruning with Visual Evidence Preservation for MLLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Investigating Relational Reasoning in VLMs">Investigating Relational Reasoning in VLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios">Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,7 +89,7 @@
     <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Training-Free Pseudo-Fusion for Composed Image Retrieval with Diffusion Models and Multimodal Large Language Models">Training-Free Pseudo-Fusion for Composed Image Retrieval with Diffusion Models and Multimodal Large Language Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Task-disentangled Low-Rank Adaptation for Versatile Audio-visual Multi-modal Learning Tasks within a Unified Framework">Task-disentangled Low-Rank Adaptation for Versatile Audio-visual Multi-modal Learning Tasks within a Unified Framework</span></li><li><span class="dpr-home-dashboard-paper-title" title="HMGCLIP: Heterogeneous Multi-Granularity Contrastive Learning for E-commerce Representation Learning">HMGCLIP: Heterogeneous Multi-Granularity Contrastive Learning for E-commerce Representation Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MedFG-VQA: Low-Frequency Memory and Graph Attention for Lightweight Medical VQA">MedFG-VQA: Low-Frequency Memory and Graph Attention for Lightweight Medical VQA</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Reasoning to Pixels: Grounded Medical Multimodal LLMs for VQA and Segmentation">From Reasoning to Pixels: Grounded Medical Multimodal LLMs for VQA and Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="How AI Experiences Art: Emergent Aesthetic Structure in a Self-Supervised Multimodal Embedding Space">How AI Experiences Art: Emergent Aesthetic Structure in a Self-Supervised Multimodal Embedding Space</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>

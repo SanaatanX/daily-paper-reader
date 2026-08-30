@@ -1,0 +1,313 @@
+{
+  "date": "20260830",
+  "date_label": "",
+  "generated_at": "2026-08-30 22:17:14 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.22963v2",
+      "route": "202608/30/2608.22963v2-buried-in-textual-debt-context-pruning-with-visual-evidence-preservation-for-mllm-agents",
+      "title": "Buried in Textual Debt: Context Pruning with Visual Evidence Preservation for MLLM Agents",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过剪枝文本保留视觉证据，解决MLLM智能体中的模态不平衡问题",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.23518v1",
+      "route": "202608/30/2608.23518v1-investigating-relational-reasoning-in-vlms",
+      "title": "Investigating Relational Reasoning in VLMs",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "探究VLM中的关系推理，是多模态关系抽取的核心",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.24091v1",
+      "route": "202608/30/2608.24091v1-native-multimodal-representation-learning-for-click-through-rate-prediction-in-e-commerce-scenarios",
+      "title": "Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将多模态表示学习直接融入点击率预测模型",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.24934v1",
+      "route": "202608/30/2608.24934v1-fusing-perceptual-vision-experts-with-multimodal-large-language-models-for-explainable-plant-disease-diagnosis-from-benchmark-imagery-to-real-world-robotic-field-validation",
+      "title": "Fusing Perceptual Vision Experts with Multimodal Large Language Models for Explainable Plant Disease Diagnosis: From Benchmark Imagery to Real-World Robotic Field Validation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将视觉专家模型与多模态大语言模型进行决策级融合，实现可解释诊断",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.25520v1",
+      "route": "202608/30/2608.25520v1-asymmetric-cross-modal-fine-grained-visual-categorization-acf-net-and-the-birdpro-benchmark",
+      "title": "Asymmetric Cross-Modal Fine-Grained Visual Categorization: ACF-Net and the BirdPro Benchmark",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "非对称音视频对应下的跨模态对齐与表示学习",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.25575v1",
+      "route": "202608/30/2608.25575v1-mllmclip-feature-level-distillation-of-mllm-for-robust-vision-language-representations",
+      "title": "MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过特征级蒸馏改进视觉语言表示中的跨模态对齐和关系组合性",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.26820v1",
+      "route": "202608/30/2608.26820v1-llavaflow-preserving-latent-alignment-flow-for-parameter-efficient-multimodal-fine-tuning",
+      "title": "LLaVAFlow: Preserving Latent Alignment Flow for Parameter-Efficient Multimodal Fine-Tuning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过信息论蒸馏保留多模态微调中的潜在跨模态对齐流，防止灾难性遗忘",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.26848v1",
+      "route": "202608/30/2608.26848v1-medfg-vqa-low-frequency-memory-and-graph-attention-for-lightweight-medical-vqa",
+      "title": "MedFG-VQA: Low-Frequency Memory and Graph Attention for Lightweight Medical VQA",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出低频记忆增强与图注意力跨注意力机制进行视觉-文本对齐",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.26856v1",
+      "route": "202608/30/2608.26856v1-from-reasoning-to-pixels-grounded-medical-multimodal-llms-for-vqa-and-segmentation",
+      "title": "From Reasoning to Pixels: Grounded Medical Multimodal LLMs for VQA and Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将语言推理与像素级空间定位对齐",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.27121v1",
+      "route": "202608/30/2608.27121v1-how-ai-experiences-art-emergent-aesthetic-structure-in-a-self-supervised-multimodal-embedding-space",
+      "title": "How AI Experiences Art: Emergent Aesthetic Structure in a Self-Supervised Multimodal Embedding Space",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将文本、音频、图像和视频投影到共享嵌入空间，以自监督聚类发现审美结构",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.22996v1",
+      "route": "202608/30/2608.22996v1-encore-entropy-guided-cropping-and-attention-regularization-for-robust-vision--language-understanding",
+      "title": "ENCORE: Entropy-Guided Cropping and Attention Regularization for Robust Vision--Language Understanding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用跨模态注意力熵指导裁剪和正则化，提升视觉-语言对齐与鲁棒性",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.23921v1",
+      "route": "202608/30/2608.23921v1-hap-head-adaptive-visual-token-pruning-via-cross-modal-alignment",
+      "title": "HAP: Head-Adaptive Visual Token Pruning via Cross-Modal Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "量化提示与图像区域之间的跨模态对齐质量",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.24845v1",
+      "route": "202608/30/2608.24845v1-laion-bvd-a-10-million-hour-open-video-dataset-for-multimodal-pre-training",
+      "title": "LAION-BVD: A 10-Million-Hour Open Video Dataset for Multimodal Pre-training",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "大规模开放视频数据集，支持视频、音频、图像多模态预训练",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.25305v1",
+      "route": "202608/30/2608.25305v1-mulvec-fine-grained-role-aware-matching-for-training-free-zero-shot-composed-image-retrieval",
+      "title": "MulVec: Fine-Grained Role-Aware Matching for Training-Free Zero-Shot Composed Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "文本查询与图像表征之间的结构化角色感知匹配",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.25381v1",
+      "route": "202608/30/2608.25381v1-motif-motivation-guided-topology-inference-for-cold-start-multimodal-recommendation",
+      "title": "MOTIF: Motivation-guided Topology Inference for Cold-start Multimodal Recommendation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "结合多模态特征进行冷启动推荐；学习鲁棒多模态图嵌入",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.21762v1",
+      "route": "202608/30/2608.21762v1-learning-to-look-again-loss-gap-supervision-for-free-form-crop-routing-in-vision-language-models",
+      "title": "Learning to Look Again: Loss-Gap Supervision for Free-form Crop Routing in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "选择性视觉重读机制用于从图像中寻找局部证据，可迁移到图文结合的关系抽取等任务",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.23176v1",
+      "route": "202608/30/2608.23176v1-evaluating-modern-rag-textual-multimodal-dense-and-late-interaction-pipelines",
+      "title": "Evaluating Modern RAG: Textual, Multimodal, Dense, and Late Interaction Pipelines",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "评估联合编码图像与文本信号的多模态RAG流水线",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.26095v1",
+      "route": "202608/30/2608.26095v1-a-visual-dependence-aware-framework-for-multimodal-unsupervised-continual-post-training",
+      "title": "A Visual Dependence-Aware Framework for Multimodal Unsupervised Continual Post-Training",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过视觉依赖与最优传输进行多模态表示学习",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    },
+    {
+      "paper_id": "2608.26194v1",
+      "route": "202608/30/2608.26194v1-a-reranker-for-orchestrating-heterogeneous-speech-and-text-retrievers",
+      "title": "A Reranker for Orchestrating Heterogeneous Speech and Text Retrievers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "聚合语音与文本检索器以支持多模态检索增强生成",
+      "first_seen_at": "2026-08-30 22:17:14 UTC",
+      "updated_at": "2026-08-30 22:17:14 UTC"
+    }
+  ]
+}
