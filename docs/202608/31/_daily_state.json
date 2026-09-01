@@ -1,0 +1,169 @@
+{
+  "date": "20260831",
+  "date_label": "",
+  "generated_at": "2026-09-01 00:40:52 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.25412v1",
+      "route": "202608/31/2608.25412v1-adaptiveembed-sample-adaptive-multi-vector-representation-for-multimodal-retrieval",
+      "title": "AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态检索的样本自适应多向量表示学习",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.27950v1",
+      "route": "202608/31/2608.27950v1-information-guided-selective-modality-interest-alignment-for-multimodal-recommendation",
+      "title": "Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "信息引导的选择性模态-兴趣对齐用于多模态推荐",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.27971v1",
+      "route": "202608/31/2608.27971v1-gaat-geometry-aware-alignment-transformer-for-multimodal-uav-perception",
+      "title": "GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态无人机感知的几何感知对齐Transformer，解决跨模态对齐",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.25773v1",
+      "route": "202608/31/2608.25773v1-drift-aware-multimodal-user-representation-learning-via-multi-scale-temporal-modeling-and-sparse-mixture-of-experts",
+      "title": "Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "漂移感知的多模态用户表示学习，结合时间建模和稀疏专家混合",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.25780v1",
+      "route": "202608/31/2608.25780v1-puma-post-hoc-sparsification-of-universal-multimodal-embeddings-for-efficient-retrieval",
+      "title": "PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对通用多模态嵌入进行事后稀疏化以提升检索效率，属于多模态表示学习",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.25986v1",
+      "route": "202608/31/2608.25986v1-multi-granularity-context-enhanced-rag-over-multimodal-knowledge-graphs",
+      "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在多模态知识图谱上实现跨模态知识融合的检索增强生成方法",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.26925v1",
+      "route": "202608/31/2608.26925v1-mapping-written-words-to-spoken-words-in-a-different-language-using-only-visual-grounding",
+      "title": "Mapping Written Words to Spoken Words in a Different Language Using Only Visual Grounding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "借助视觉锚定对齐英文书写词与印地语语音词，属于跨模态对齐表示学习",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.27785v1",
+      "route": "202608/31/2608.27785v1-compositional-failure-in-audio-visual-llms-late-layer-prior-dominance-under-cross-modal-conflict",
+      "title": "Compositional Failure in Audio-Visual LLMs: Late-Layer Prior Dominance Under Cross-modal Conflict",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分析音视频大模型在跨模态冲突下的先验主导现象，与多模态融合和对齐相关",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.27885v1",
+      "route": "202608/31/2608.27885v1-there-and-back-again-bidirectional-diffusion-bridges-for-multimodality-translation",
+      "title": "There and Back Again: Bidirectional Diffusion Bridges for Multimodality Translation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "提出用于多模态翻译的双向图文扩散桥",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    },
+    {
+      "paper_id": "2608.28058v1",
+      "route": "202608/31/2608.28058v1-dynamic-alignment-compensation-for-hallucination-mitigation-in-large-vision-language-models",
+      "title": "Dynamic Alignment Compensation for Hallucination Mitigation in Large Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "针对大型视觉语言模型中的跨模态对齐补偿，缓解幻觉",
+      "first_seen_at": "2026-09-01 00:40:52 UTC",
+      "updated_at": "2026-09-01 00:40:52 UTC"
+    }
+  ]
+}

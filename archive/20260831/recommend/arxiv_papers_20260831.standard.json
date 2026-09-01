@@ -1,0 +1,438 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-01T00:34:22.676539+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 7,
+    "quick_skim_target": 12,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2608.25412v1",
+      "source": "arxiv",
+      "title": "AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval",
+      "abstract": "Multi-vector representations have emerged as an effective paradigm for multimodal retrieval, representing each sample with multiple complementary embeddings to capture fine-grained cross-modal information. However, existing approaches typically employ a fixed representation capacity, assigning the same number of vectors to all samples regardless of their individual retrieval demands. Such a fixed-capacity formulation overlooks the fact that different samples may require different amounts of representation capacity for effective retrieval. In this work, we introduce \\emph{Sample-Adaptive Multi-Vector Representation} (SAMVR), a new problem setting for multimodal retrieval that studies how multi-vector representation capacity can be allocated at the sample level. Under SAMVR, each sample is represented by a \\emph{content-adaptive embedding set} (CAES), whose capacity is determined according to the sample-specific retrieval utility of additional representation vectors. To instantiate SAMVR, we propose \\emph{AdaptiveEmbed}, a unified framework for learning sample-adaptive multi-vector representations. AdaptiveEmbed learns structured multi-vector representations through \\emph{Multi-Group Contrastive Learning} (MGCL) with the symmetric \\emph{set-to-set similarity} (SetSim), and further employs \\emph{Utility Policy Optimization} (UPO) to determine sample-specific representation capacity via \\emph{Marginal Utility Allocation} (MUA). Experiments across multimodal retrieval benchmarks involving image, text, video, and audio show that sample-adaptive capacity allocation achieves overall better retrieval performance than fixed-capacity multi-vector representations, validating the effectiveness of SAMVR for multimodal retrieval. These results establish SAMVR as a viable formulation for adaptive capacity allocation in multi-vector multimodal retrieval.",
+      "authors": [
+        "Xinze Liu",
+        "Lei Yang",
+        "Dayan Wu",
+        "Hengjie Zhu",
+        "Zihao Zhang",
+        "Hanqi Wu",
+        "Tianzhu Hu",
+        "Peng Fu",
+        "Zheng Lin",
+        "Weiping Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-26T06:15:22+00:00",
+      "link": "https://arxiv.org/pdf/2608.25412v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "sample-adaptive multi-vector representation for multimodal retrieval",
+      "llm_evidence_cn": "面向多模态检索的样本自适应多向量表示学习",
+      "llm_evidence": "面向多模态检索的样本自适应多向量表示学习",
+      "canonical_evidence": "面向多模态检索的样本自适应多向量表示学习",
+      "llm_tldr_en": "AdaptiveEmbed introduces sample-adaptive multi-vector representation (SAMVR), allocating variable vector counts per sample based on retrieval demand, improving multimodal retrieval.",
+      "llm_tldr_cn": "该文提出自适应多向量表示（SAMVR），一种针对多模态检索的新问题设定。与给所有样本分配相同向量数的固定容量方法不同，SAMVR根据每个样本的具体检索需求动态分配表示容量，从而更精细地捕获跨模态信息。实验表明，这种样本自适应机制在多个多模态检索基准上显著提升了检索效果。",
+      "llm_tldr": "该文提出自适应多向量表示（SAMVR），一种针对多模态检索的新问题设定。与给所有样本分配相同向量数的固定容量方法不同，SAMVR根据每个样本的具体检索需求动态分配表示容量，从而更精细地捕获跨模态信息。实验表明，这种样本自适应机制在多个多模态检索基准上显著提升了检索效果。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.27950v1",
+      "source": "arxiv",
+      "title": "Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation",
+      "abstract": "Multimodal recommendation (MMRec) aims to enhance recommendation performance by leveraging rich item content from multiple modalities. However, directly incorporating all modality information does not necessarily lead to better preference modeling, since user interests are often more related to a subset of modality signals, while other signals may be weakly aligned with user preferences or even introduce noise. Although recent MMRec methods improve modality utilization through invariant learning, attention mechanisms, graph refinement, or contrastive learning, their alignment processes are often implicit or heuristic and lack a clear objective for selecting modality signals that better match user interests.   In this paper, we propose AMUR, an information-guided selective modality-interest alignment framework for multimodal recommendation. Inspired by an information-theoretic view, AMUR aims to enhance modality information that is more related to user interests while reducing the influence of less aligned signals. Specifically, AMUR first refines modality graph structures towards user behavior, and then selectively aligns shared interest-related semantics across modalities. This enables AMUR to improve modality-interest alignment while preserving useful modality-specific complementary information. Extensive experiments on three real-world datasets demonstrate the effectiveness of AMUR over competitive baselines. The code is available at https://github.com/Wenze1/AMUR.",
+      "authors": [
+        "Wenze Ma",
+        "Chenyu Sun",
+        "Yanmin Zhu",
+        "Qiwen Gu",
+        "Xuhao Zhao"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-08-28T05:46:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.27950v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Information-guided selective modality-interest alignment for multimodal recommendation",
+      "llm_evidence_cn": "信息引导的选择性模态-兴趣对齐用于多模态推荐",
+      "llm_evidence": "信息引导的选择性模态-兴趣对齐用于多模态推荐",
+      "canonical_evidence": "信息引导的选择性模态-兴趣对齐用于多模态推荐",
+      "llm_tldr_en": "Proposes information-guided selective alignment to pick user-relevant modality signals for multimodal recommendation, improving representation alignment with clear objectives.",
+      "llm_tldr_cn": "多模态推荐中并非所有模态信号都有利于用户偏好建模。该论文提出信息引导的选择性模态-兴趣对齐方法，以明确目标筛选与用户兴趣匹配的模态信息，替代隐式或启发式对齐。该方法能减少噪声模态干扰，提升推荐表征的判别性与可解释性。",
+      "llm_tldr": "多模态推荐中并非所有模态信号都有利于用户偏好建模。该论文提出信息引导的选择性模态-兴趣对齐方法，以明确目标筛选与用户兴趣匹配的模态信息，替代隐式或启发式对齐。该方法能减少噪声模态干扰，提升推荐表征的判别性与可解释性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.27971v1",
+      "source": "arxiv",
+      "title": "GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception",
+      "abstract": "Unmanned aerial vehicle (UAV) multimodal perception integrates visible (RGB), infrared (IR), synthetic aperture radar (SAR), and depth sensors for scene understanding under diverse conditions. However, differences in optics, resolution, and mounting often limit practical systems to global or image-center alignment. After tokenization, parallax, platform motion, and lens distortion can shift corresponding patch centers across modalities, weakening the spatial correspondence assumed by dense contrastive learning and cross-modal fusion. We propose GAAT (Geometry-Aware Alignment Transformer), an alignment-first pretrained model that estimates local correspondence reliability before cross-modal interaction. GAAT introduces syncPATC, which learns patch-center consistency under synchronized view transformations without correspondence annotations. It emits geometric priors, including token and query confidence, query centers, and sub-token offsets, that identify reliable local anchors across residual misalignment. Guided by these priors, MG-Sparse-MMA performs query-mediated sparse fusion over top-K_s reliable regions, replacing dense all-patch interaction with geometry-calibrated local updates. RA-QCGCL aligns pretraining supervision with this sparse query bottleneck through reliable patch-to-patch, patch-to-query, and query-to-query contrastive branches. We introduce UAVMeta and StateBench, which provide four acquisition-state scores derived from platform telemetry and image statistics: camera reliability, observation scale, viewpoint stability, and flight maneuver complexity. Extensive experiments across six downstream tasks demonstrate consistently superior transfer performance, establishing GAAT as a state-of-the-art multimodal foundation model for UAV perception. StateBench further enables a systematic diagnosis of real-world acquisition conditions.",
+      "authors": [
+        "Jingpu Yang",
+        "Debin Tang",
+        "Yilin Sun",
+        "Fengxian Ji",
+        "Jiahua Zhu",
+        "Wenrui Ding",
+        "Yufeng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-28T06:36:17+00:00",
+      "link": "https://arxiv.org/pdf/2608.27971v1",
+      "tags": [
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Geometry-aware alignment transformer for multimodal UAV perception; cross-modal alignment",
+      "llm_evidence_cn": "面向多模态无人机感知的几何感知对齐Transformer，解决跨模态对齐",
+      "llm_evidence": "面向多模态无人机感知的几何感知对齐Transformer，解决跨模态对齐",
+      "canonical_evidence": "面向多模态无人机感知的几何感知对齐Transformer，解决跨模态对齐",
+      "llm_tldr_en": "UAV multimodal perception suffers from misalignment across sensors. GAAT estimates local correspondence reliability before fusion, improving alignment and downstream performance.",
+      "llm_tldr_cn": "无人机多模态感知集成RGB、红外、SAR和深度传感器，但传感器差异导致全局对齐不足以应对局部偏移。提出GAAT，一种对齐优先的预训练模型，在跨模态交互前估计局部对应可靠性，并引入syncPATC学习补丁中心对齐。通过几何感知对齐提升了密集对比学习和跨模态融合的效果，为多模态感知提供了更鲁棒的表示。",
+      "llm_tldr": "无人机多模态感知集成RGB、红外、SAR和深度传感器，但传感器差异导致全局对齐不足以应对局部偏移。提出GAAT，一种对齐优先的预训练模型，在跨模态交互前估计局部对应可靠性，并引入syncPATC学习补丁中心对齐。通过几何感知对齐提升了密集对比学习和跨模态融合的效果，为多模态感知提供了更鲁棒的表示。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.25773v1",
+      "source": "arxiv",
+      "title": "Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts",
+      "abstract": "Understanding user preferences from noisy and temporally evolving social media behaviors is fundamentally challenging due to interest drift, where user preferences shift across time and exhibit both multi-scale temporal patterns and diverse co-existing interests. To address this, we propose DUMoE, a unified framework for drift-aware multimodal user representation learning. Our model consists of (i) a temporal dynamics-aware backbone that captures and integrates static profiles, short-term behavioral signals, and long-term dependencies into a coherent representation, and (ii) a sparse mixture-of-experts (MoE) interest adapter that disentangles multiple latent interests via expert specialization and adaptive routing. Each expert models a distinct interest subspace, while a gating network dynamically selects and aggregates a sparse subset of relevant experts for each user. To enable stable and effective optimization, we further introduce a three-stage training strategy that decouples backbone learning, expert specialization, and gating optimization. Extensive experiments on real-world social media datasets show that DUMoE consistently outperforms state-of-the-art methods on both user interest prediction and interaction prediction tasks.",
+      "authors": [
+        "Ziqing Qian",
+        "Haohang Chen",
+        "Shengqi Dang",
+        "Yuhan Xiong",
+        "Canyu Shen",
+        "Jiaying Lei",
+        "Nan Cao"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-26T13:15:17+00:00",
+      "link": "https://arxiv.org/pdf/2608.25773v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Drift-aware multimodal user representation learning with temporal and MoE components",
+      "llm_evidence_cn": "漂移感知的多模态用户表示学习，结合时间建模和稀疏专家混合",
+      "llm_evidence": "漂移感知的多模态用户表示学习，结合时间建模和稀疏专家混合",
+      "canonical_evidence": "漂移感知的多模态用户表示学习，结合时间建模和稀疏专家混合",
+      "llm_tldr_en": "User preferences drift over time. DUMoE uses temporal backbone and sparse MoE to capture multi-scale patterns and diverse interests, improving user representation.",
+      "llm_tldr_cn": "社交媒体行为中的用户兴趣漂移具有多尺度时间模式和多样化共存兴趣，给多模态表示学习带来挑战。提出DUMoE统一框架，包含时间动态感知骨干，整合静态画像、短期行为与长期依赖，以及稀疏专家混合兴趣适配器，通过专家专业化和自适应路由分离潜在兴趣。该模型能够捕捉复杂的时间漂移并生成鲁棒的用户表示，适用于个性化等下游任务。",
+      "llm_tldr": "社交媒体行为中的用户兴趣漂移具有多尺度时间模式和多样化共存兴趣，给多模态表示学习带来挑战。提出DUMoE统一框架，包含时间动态感知骨干，整合静态画像、短期行为与长期依赖，以及稀疏专家混合兴趣适配器，通过专家专业化和自适应路由分离潜在兴趣。该模型能够捕捉复杂的时间漂移并生成鲁棒的用户表示，适用于个性化等下游任务。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.25780v1",
+      "source": "arxiv",
+      "title": "PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval",
+      "abstract": "Universal multimodal embedders enable retrieval across text, image, and combined queries, but their dense representations incur high memory and inference costs. Post-hoc sparsification could reduce these costs but remains underexplored for multimodal retrieval. We introduce PUMA, a sparse autoencoder recipe that maps universal multimodal embeddings to compact sparse codes without retraining the backbone: a pretraining stage preserves dense dot-product geometry, after which the sparse encoder is fine-tuned for retrieval. We evaluate on five benchmarks covering text-to-image and composed image retrieval. On Qwen3-VL-Embedding-2B, PUMA is statistically indistinguishable from or improves over dense retrieval on four of five datasets. We further identify two failure modes of post-hoc sparsification: insufficient pre-TopK support and retrieval-misaligned active support. PUMA reduces vector storage by 8-16x (FP32) and is up to 25x faster than exact dense scoring on larger candidate pools, enabling efficient multimodal retrieval.",
+      "authors": [
+        "Matteo Attimonelli",
+        "Alessandro De Bellis",
+        "Franco Maria Nardini",
+        "Claudio Pomo",
+        "Cosimo Rulli",
+        "Rossano Venturini",
+        "Tommaso Di Noia"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-08-26T13:26:39+00:00",
+      "link": "https://arxiv.org/pdf/2608.25780v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Post-hoc sparsification of universal multimodal embeddings for efficient retrieval",
+      "llm_evidence_cn": "对通用多模态嵌入进行事后稀疏化以提升检索效率，属于多模态表示学习",
+      "llm_evidence": "对通用多模态嵌入进行事后稀疏化以提升检索效率，属于多模态表示学习",
+      "canonical_evidence": "对通用多模态嵌入进行事后稀疏化以提升检索效率，属于多模态表示学习",
+      "llm_tldr_en": "Universal multimodal embeddings are dense and costly. PUMA uses a sparse autoencoder to map them to compact sparse codes without retraining, preserving geometry and improving retrieval efficiency.",
+      "llm_tldr_cn": "通用多模态嵌入模型支持文本、图像及组合查询检索，但稠密表示带来高内存和推理开销。论文提出PUMA，一种稀疏自编码器方案，在不重训骨干的情况下将通用多模态嵌入映射为紧凑稀疏编码：预训练阶段保持点积几何，之后微调稀疏编码器用于检索。在五个基准上，PUMA在四个数据集上与稠密检索统计无差异甚至更优。该方法为多模态表示的高效存储与推理提供了新范式。",
+      "llm_tldr": "通用多模态嵌入模型支持文本、图像及组合查询检索，但稠密表示带来高内存和推理开销。论文提出PUMA，一种稀疏自编码器方案，在不重训骨干的情况下将通用多模态嵌入映射为紧凑稀疏编码：预训练阶段保持点积几何，之后微调稀疏编码器用于检索。在五个基准上，PUMA在四个数据集上与稠密检索统计无差异甚至更优。该方法为多模态表示的高效存储与推理提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.25986v1",
+      "source": "arxiv",
+      "title": "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs",
+      "abstract": "Retrieval-augmented generation (RAG) is widely used to mitigate hallucination issues in large language models (LLMs) and multimodal large language models (MLLMs). In particular, knowledge graph (KG)-based RAG leverages structured knowledge to provide (M)LLMs with high-quality external information. Building on these works, recent studies have explored multimodal knowledge graphs (MMKGs) as knowledge bases for GraphRAG. This enables Graph RAG to integrate knowledge across multiple modalities, thereby further enhancing its performance. However, existing MMKG-based RAG methods generally follow a common pipeline in which different modalities are largely processed independently before being fusion. As a result, textual context is only used to a limited extent during visual information extraction and subsequent multimodal knowledge fusion. This brings a semantic gap between images and text which limits the multimodal GraphRAG performance. To address this issue, we propose a novel framework for constructing a Context-Enhanced MMKG (CEMMKG) to better support multimodal GraphRAG. The proposed CEMMKG enriches each image with complementary textual context at both local and global scopes. Local context goes beyond the surrounding text by incorporating sentences that are semantically related to the image, while global context provides a summary of the entire passage. We further introduce a multi-granularity design for the local context, allowing it to capture semantically relevant information at different levels of detail. Extensive experiments on the selected vision-centric dataset validate that CEMMKG is effective in leveraging contextual information to improve MMKG-based RAG performance. Moreover, its effectiveness across different MMKG-based RAG methods demonstrates its broad applicability.",
+      "authors": [
+        "Zongyu Wu",
+        "Yilong Wang",
+        "Xiaochen Wang",
+        "Minhua Lin",
+        "Zhichao Xu",
+        "Fenglong Ma",
+        "Xiang Zhang",
+        "Suhang Wang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-26T16:38:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.25986v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "integrates multimodal knowledge graphs in RAG to enable cross-modal knowledge fusion",
+      "llm_evidence_cn": "在多模态知识图谱上实现跨模态知识融合的检索增强生成方法",
+      "llm_evidence": "在多模态知识图谱上实现跨模态知识融合的检索增强生成方法",
+      "canonical_evidence": "在多模态知识图谱上实现跨模态知识融合的检索增强生成方法",
+      "llm_tldr_en": "Proposes a multi-granularity context-enhanced RAG approach over multimodal knowledge graphs, integrating knowledge across modalities to improve generation grounding.",
+      "llm_tldr_cn": "基于知识图谱的检索增强生成可缓解多模态大模型幻觉，但现有方法常把不同模态独立处理后简单融合，文本上下文利用有限。本文提出多粒度上下文增强的多模态知识图谱RAG，更充分地利用文本上下文并整合多模态知识。该方法在下游生成任务上增强了知识利用与生成质量，为多模态知识图谱与RAG结合提供了有效方案。",
+      "llm_tldr": "基于知识图谱的检索增强生成可缓解多模态大模型幻觉，但现有方法常把不同模态独立处理后简单融合，文本上下文利用有限。本文提出多粒度上下文增强的多模态知识图谱RAG，更充分地利用文本上下文并整合多模态知识。该方法在下游生成任务上增强了知识利用与生成质量，为多模态知识图谱与RAG结合提供了有效方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.26925v1",
+      "source": "arxiv",
+      "title": "Mapping Written Words to Spoken Words in a Different Language Using Only Visual Grounding",
+      "abstract": "In many low-resource settings, even just eliciting speech for data collection is difficult. One promising approach has been to ask speakers to describe images. But how do we build models from such visually grounded speech data? Given a dataset of images with Hindi spoken captions, we consider how we can map a written English keyword to spoken realisations of that word in Hindi. Previous work trained end-to-end multimodal neural models. Instead, we explore a simpler alignment-based approach built on self-supervised speech representations. Written English tags are automatically obtained from images using off-the-shelf image captioning systems. Hindi utterances associated with the same keyword are then aligned (using self-supervised features), and alignment evidence is aggregated to identify recurring speech segments corresponding to the target word. Experiments evaluating keyword spotting and localization show that our alignment-based approach outperforms a previous attention-based neural model. We also show the benefit of incorporating negative examples during alignment. Our work demonstrates that cross-lingual word-to-speech mappings can be learned directly from visual grounding without transcriptions or explicit model training.",
+      "authors": [
+        "Gabriel Pirlogeanu",
+        "Dan Oneata",
+        "Horia Cucu",
+        "Herman Kamper"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "eess.AS"
+      ],
+      "published": "2026-08-27T10:22:07+00:00",
+      "link": "https://arxiv.org/pdf/2608.26925v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "aligns written English and spoken Hindi via shared visual grounding and self-supervised speech features",
+      "llm_evidence_cn": "借助视觉锚定对齐英文书写词与印地语语音词，属于跨模态对齐表示学习",
+      "llm_evidence": "借助视觉锚定对齐英文书写词与印地语语音词，属于跨模态对齐表示学习",
+      "canonical_evidence": "借助视觉锚定对齐英文书写词与印地语语音词，属于跨模态对齐表示学习",
+      "llm_tldr_en": "This paper maps written English keywords to spoken Hindi realizations using only visually grounded data, leveraging self-supervised speech representations and automatic image captioning in a simple alignment-based approach.",
+      "llm_tldr_cn": "面向低资源场景，该研究仅利用图像及其印地语口述描述，将英文书写关键词映射到印地语的语音实现。与端到端多模态模型不同，作者采用基于自监督语音表示的简单对齐方法：先由图像标题系统获得英文标签，再在对应语音单元间进行对齐。结果显示这种轻量对齐策略能够有效完成跨语言、跨模态的词级映射，为无文本数据环境提供可行方案。",
+      "llm_tldr": "面向低资源场景，该研究仅利用图像及其印地语口述描述，将英文书写关键词映射到印地语的语音实现。与端到端多模态模型不同，作者采用基于自监督语音表示的简单对齐方法：先由图像标题系统获得英文标签，再在对应语音单元间进行对齐。结果显示这种轻量对齐策略能够有效完成跨语言、跨模态的词级映射，为无文本数据环境提供可行方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.27785v1",
+      "source": "arxiv",
+      "title": "Compositional Failure in Audio-Visual LLMs: Late-Layer Prior Dominance Under Cross-modal Conflict",
+      "abstract": "We study audio-visual conflict as a compositional generalization test for AV-LLMs: the model must combine synchronized but semantically incompatible audio and video evidence and decide whether the pair matches. On VideoLLaMA 2-7B-AV, three alignment configurations remain nearchance on the scored exact-string Yes/No subset of AVHBench, even though their output priors shift substantially. Similarly, off-the-shelf InternVideo2 experienced a 32.3% accuracy decrease specifically under cross-modal conflict, accompanied by a 17.3% instruction-following failure. We call this failure mode prior dominance: late-layer commitment to an internally preferred answer pattern that is weakly grounded in the conflicting inputs. To explain this behavior, we conduct a mechanistic interpretability analysis and find that commitment remains concentrated at 25.5 $\\pm$ 1 layers. We show that stronger temporal alignment changes answer bias, but do not improve compositional conflict resolution. Code and data to reproduce our mechanistic audit and behavioral evaluations are available at https://github.com/AdarshSudheer09/AVHBench-dmai.",
+      "authors": [
+        "Adarsh Sudheer",
+        "David Li",
+        "Omar Elbanna",
+        "Ishaan Kodarapu",
+        "Arjun Bahuguna",
+        "Vasu Sharma"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-08-27T23:48:10+00:00",
+      "link": "https://arxiv.org/pdf/2608.27785v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "analyzes cross-modal conflict and prior dominance in audio-visual LLMs, relevant to multimodal fusion and alignment",
+      "llm_evidence_cn": "分析音视频大模型在跨模态冲突下的先验主导现象，与多模态融合和对齐相关",
+      "llm_evidence": "分析音视频大模型在跨模态冲突下的先验主导现象，与多模态融合和对齐相关",
+      "canonical_evidence": "分析音视频大模型在跨模态冲突下的先验主导现象，与多模态融合和对齐相关",
+      "llm_tldr_en": "Reveals prior dominance in audio-visual LLMs under cross-modal conflict, leading to near-chance performance and instruction-following failures, and highlights feature-level fusion challenges.",
+      "llm_tldr_cn": "音频-视觉大模型需要组合语义不匹配的音视频证据，但模型常依赖内部偏好的答案先验，造成组合性泛化失败。本文系统分析跨模态冲突下VideoLLaMA与InternVideo2的表现，发现晚期层先验主导是核心原因，并伴随显著的指令遵循失败。该研究揭示了多模态融合中对齐与冲突处理的深层缺陷，为构建更鲁棒的音视频模型提供了诊断与改进方向。",
+      "llm_tldr": "音频-视觉大模型需要组合语义不匹配的音视频证据，但模型常依赖内部偏好的答案先验，造成组合性泛化失败。本文系统分析跨模态冲突下VideoLLaMA与InternVideo2的表现，发现晚期层先验主导是核心原因，并伴随显著的指令遵循失败。该研究揭示了多模态融合中对齐与冲突处理的深层缺陷，为构建更鲁棒的音视频模型提供了诊断与改进方向。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.27885v1",
+      "source": "arxiv",
+      "title": "There and Back Again: Bidirectional Diffusion Bridges for Multimodality Translation",
+      "abstract": "Multimodality translation (e.g., text-to-image) is a core generative AI task. However, existing approaches (1) follow generative paths that do not directly represent the source modality, limiting the flexibility of some sampling algorithms; and (2) are unidirectional, preventing inversion (e.g., image-to-text). We propose BIT: Bidirectional Image-Text Diffusion Bridges. In contrast to previous approaches, BIT starts directly from text and interpolates into images, providing (1) a source-aware generative path that enables diverse and flexible sampling algorithms; and (2) an endpoint-conditioned process that can be traversed from image to text, providing a unified, bidirectional generative framework. BIT is derived through stochastic calculus, yielding SDE forms amenable to simulation and tractable loss functions that scale to high dimensions. Our experiments show that BIT is competitive with denoising-diffusion and deterministic-flow baselines, and outperforms them on several vision--language and natural-science evaluations.",
+      "authors": [
+        "Gabe Guo",
+        "Elon Litman",
+        "Thanawat Sornwanee",
+        "Jose Blanchet",
+        "Stefano Ermon"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-08-28T03:43:53+00:00",
+      "link": "https://arxiv.org/pdf/2608.27885v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "proposes bidirectional image-text diffusion bridges for multimodality translation",
+      "llm_evidence_cn": "提出用于多模态翻译的双向图文扩散桥",
+      "llm_evidence": "提出用于多模态翻译的双向图文扩散桥",
+      "canonical_evidence": "提出用于多模态翻译的双向图文扩散桥",
+      "llm_tldr_en": "Proposes BIT, a bidirectional image-text diffusion bridge that starts from text and interpolates to images, enabling source-aware generation and image-to-text inversion in a unified framework.",
+      "llm_tldr_cn": "针对现有文本到图像和多模态翻译方法路径不直接表示源模态且单向不可逆的问题，提出双向图文扩散桥BIT。该方法直接从文本出发插值到图像，支持源感知的多样灵活采样，并能从图像端反推回文本，实现统一的双向生成框架。基于随机微积分推导，BIT为多模态生成和翻译提供了新范式。",
+      "llm_tldr": "针对现有文本到图像和多模态翻译方法路径不直接表示源模态且单向不可逆的问题，提出双向图文扩散桥BIT。该方法直接从文本出发插值到图像，支持源感知的多样灵活采样，并能从图像端反推回文本，实现统一的双向生成框架。基于随机微积分推导，BIT为多模态生成和翻译提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2608.28058v1",
+      "source": "arxiv",
+      "title": "Dynamic Alignment Compensation for Hallucination Mitigation in Large Vision-Language Models",
+      "abstract": "Large Vision-Language Models (LVLMs) remain prone to hallucinations, producing responses that are irrelevant or inconsistent with the multimodal input. Existing mitigation methods mainly rely on external supervision, output calibration, or attention regulation, leaving the internal representation dynamics of autoregressive generation underexplored. We identify an inference-time failure mode in which cross-modal representations degrade across decoder layers and drift across generation steps, destabilizing token prediction and increasing hallucination risk. We propose \\emph{Dynamic Alignment Compensation} (DAC), a training-free inference-time method that detects representation divergence and selectively applies lightweight residual compensation. DAC combines Layer-wise Semantic Compensation to mitigate inter-layer degradation with Sequential Semantic Correction to constrain temporal drift. Experiments on nine hallucination-focused and general-purpose multimodal benchmarks across multiple LVLM backbones show that DAC consistently reduces hallucinations while maintaining strong overall performance.",
+      "authors": [
+        "Kairong Yu",
+        "Zixin Zhu",
+        "Le Yu",
+        "Hongwei Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-08-28T08:21:31+00:00",
+      "link": "https://arxiv.org/pdf/2608.28058v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal alignment compensation for hallucination mitigation in LVLMs",
+      "llm_evidence_cn": "针对大型视觉语言模型中的跨模态对齐补偿，缓解幻觉",
+      "llm_evidence": "针对大型视觉语言模型中的跨模态对齐补偿，缓解幻觉",
+      "canonical_evidence": "针对大型视觉语言模型中的跨模态对齐补偿，缓解幻觉",
+      "llm_tldr_en": "Large vision-language models hallucinate due to cross-modal representation drift. Dynamic Alignment Compensation detects representation divergence across layers and steps, applying lightweight residual corrections without training, reducing hallucination risk.",
+      "llm_tldr_cn": "大型视觉语言模型常生成与多模态输入不一致的内容，现有方法依赖外部监督或注意力调控，未深入内部表示动态。论文发现推理时跨模态表征在解码层间退化并随生成步漂移，导致预测不稳定。提出动态对齐补偿(DAC)，一种无需训练的推理时方法，检测表示分歧并选择性地施加轻量残差校正。从而稳定令牌预测，降低幻觉风险，为多模态对齐表示学习提供新思路。",
+      "llm_tldr": "大型视觉语言模型常生成与多模态输入不一致的内容，现有方法依赖外部监督或注意力调控，未深入内部表示动态。论文发现推理时跨模态表征在解码层间退化并随生成步漂移，导致预测不稳定。提出动态对齐补偿(DAC)，一种无需训练的推理时方法，检测表示分歧并选择性地施加轻量残差校正。从而稳定令牌预测，降低幻觉风险，为多模态对齐表示学习提供新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

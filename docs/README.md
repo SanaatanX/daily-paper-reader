@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-30</span>
+      <span class="dpr-home-dashboard-kicker">2026-08-31</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>7</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-08-30 22:17:14 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-01 00:40:52 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读19篇，精读聚焦多模态大模型上下文剪枝与视觉证据保留，及视觉语言模型的关系推理。</p>
-<p>最值得看的方向：MLLM Agent通过保留视觉证据缓解文本债务（8.0分）；医学VQA轻量化与多模态分割结合效果突出（8.0分）。</p>
-<p>下一步建议：优先精读这两篇高分类论文，再扩展浏览医学VQA与美学表征速读，理解多模态推理与落地应用。</p>
+<p>今日聚焦多模态检索与推荐，精读两篇高影响力论文，另速读多模态嵌入高效化、用户建模与知识图谱RAG方向。</p>
+<p>最值得关注的是样本自适应多向量表示（AdaptiveEmbed）与信息引导的模态对齐方法，二者均获8.0高分，直击多模态语义对齐与检索效率痛点。</p>
+<p>下一步建议普通读者优先精读这两篇高分工作，并延伸关注速读中的后训练稀疏化（PUMA）与多粒度RAG方案。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Buried in Textual Debt: Context Pruning with Visual Evidence Preservation for MLLM Agents">Buried in Textual Debt: Context Pruning with Visual Evidence Preservation for MLLM Agents</span></li><li><span class="dpr-home-dashboard-paper-title" title="Investigating Relational Reasoning in VLMs">Investigating Relational Reasoning in VLMs</span></li><li><span class="dpr-home-dashboard-paper-title" title="Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios">Native Multimodal Representation Learning for Click-Through Rate Prediction in E-Commerce Scenarios</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval">AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation">Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception">GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MedFG-VQA: Low-Frequency Memory and Graph Attention for Lightweight Medical VQA">MedFG-VQA: Low-Frequency Memory and Graph Attention for Lightweight Medical VQA</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Reasoning to Pixels: Grounded Medical Multimodal LLMs for VQA and Segmentation">From Reasoning to Pixels: Grounded Medical Multimodal LLMs for VQA and Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="How AI Experiences Art: Emergent Aesthetic Structure in a Self-Supervised Multimodal Embedding Space">How AI Experiences Art: Emergent Aesthetic Structure in a Self-Supervised Multimodal Embedding Space</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts">Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts</span></li><li><span class="dpr-home-dashboard-paper-title" title="PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval">PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs">Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
 </div>
 
