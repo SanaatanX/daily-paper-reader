@@ -1,0 +1,919 @@
+Title: Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation
+
+URL Source: https://arxiv.org/pdf/2608.29410v1
+
+Published Time: Tue, 01 Sep 2026 00:54:44 GMT
+
+Number of Pages: 13
+
+Markdown Content:
+# Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation 
+
+# Jinfeng Xu 
+
+The University of Hong Kong Hong Kong SAR, China jinfeng@connect.hku.hk 
+
+# Zheyu Chen 
+
+Beijing Institute of Technology Beijing, China zheyu.chen@bit.edu.cn 
+
+# Shuo Yang 
+
+The University of Hong Kong Hong Kong SAR, China shuoyang.ee@gmail.com 
+
+# Jinze Li 
+
+The University of Hong Kong Hong Kong SAR, China lijinze-hku@connect.hku.hk 
+
+# Puzhen Wu 
+
+The University of Hong Kong Hong Kong SAR, China puzhenwu8@connect.hku.hk 
+
+# Zewei Liu 
+
+The University of Hong Kong Hong Kong SAR, China zewliu@hku.hk 
+
+# Zheng Lin 
+
+The University of Hong Kong Hong Kong SAR, China linzheng@eee.hku.hk 
+
+# Jianheng Tang 
+
+Peking University Beijing, China tangentheng@gmail.com 
+
+# Jing Yang 
+
+Universiti Malaya Kuala Lumpur, Malaysia s2147529@siswa.um.edu.my 
+
+# Wei Wang 
+
+Macao Polytechnic University Macao SAR, China weiwang@mpu.edu.mo 
+
+# Xiping Hu 
+
+Beijing Institute of Technology Beijing, China huxp@bit.edu.cn 
+
+# Edith Ngai ∗
+
+The University of Hong Kong Hong Kong SAR, China chngai@eee.hku.hk 
+
+## Abstract 
+
+Online platforms increasingly rely on multimodal recommender systems to rank products, media, and other Web content. Exist-ing methods usually inject visual and textual features into item representations or build homogeneous graphs from modality-level similarity, but the resulting signals can remain misaligned with the recommendation objective. We study this semantic gap from a knowledge-integration perspective: multimodal content should be interpreted together with user behavior before it is used to construct recommendation graphs or adjust rankings. We propose AgentMMRec, an agent-based multimodal recom-mendation framework with two coordinated roles. The Integrator Agent infers behavior- and multimodal-aware user preferences and item properties from training interactions and item content, then stores them in a reusable knowledge memory. The Utilizer Agent consumes this memory to refine modality-specific item-item graphs, construct behavior-aware homogeneous graphs, and rerank candidate lists under a frozen evaluation-time memory. This design differs from direct LLM feature augmentation and pure LLM rerank-ing because the generated knowledge is first converted into graph structure and model representations before recommendation. Ex-periments on three Amazon multimodal recommendation datasets show that AgentMMRec consistently improves Recall and NDCG over recent multimodal baselines, remains effective under spar-sity and item cold-start settings, and can transfer its constructed knowledge to existing backbones. 
+
+## Keywords 
+
+Recommender Systems, Multimodal Recommendation, Agent, Knowl-edge Memory 
+
+> ∗Corresponding Author.
+
+## 1 Introduction 
+
+The growth of online product catalogs has made multimodal recom-mendation a central Web application: items are described by text, images, brands, categories, and user interaction histories, while rec-ommenders must convert these heterogeneous signals into ranked lists. Recent multimodal recommenders enrich item representations with visual and textual features or build homogeneous graphs from modality-level similarity [37, 38, 41, 46, 50, 52]. These designs im-prove the representation space, but they do not fully resolve the semantic gap between multimodal content and the recommendation objective [19, 43]. Item images and descriptions may encode color, style, material, or marketing language that is visually or textually salient but weakly related to why users interact with the item. A graph constructed from such features can therefore connect items that look similar while missing behaviorally relevant relations. LLM-based recommendation provides a new way to interpret item content together with behavioral context [1, 8, 27, 34, 38, 39]. Existing studies mainly use LLMs for data augmentation [34, 36], as fine-tuned recommendation backbones [1, 48], or as list rerankers [13, 14, 47]. These paradigms are useful but incomplete for multi-modal recommendation. Augmentation still produces content-side features, fine-tuning is costly and data hungry, graph construc-tion is often decoupled from reusable user/item memory, and pure reranking only adjusts a late-stage candidate list. What remains missing is a mechanism that converts LLM-derived semantic knowl-edge into reusable recommendation structure while preserving a standard recommender training and evaluation protocol. We propose AgentMMRec, a two-agent framework that treats LLM-derived knowledge as an intermediate memory rather than as a direct replacement for the recommender. The Integrator Agent extracts behavior- and multimodal-aware user preferences and arXiv:2608.29410v1 [cs.IR] 29 Aug 2026 Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+item properties from training interactions and item content, then stores them in a key-value knowledge memory. The Utilizer Agent uses this memory to refine modality-specific item-item graphs, construct behavior-aware homogeneous graphs, and rerank rec-ommendation candidates. The key distinction is not the use of an LLM alone, but the role assigned to its output: the same frozen memory is converted into graph structure, representation input, and controlled candidate reranking. This design separates Agent-MMRec from LLM-generated profiling, graph-only enhancement, and LLM-only reranking baselines. Experiments on real-world datasets show that AgentMMRec im-proves over recent multimodal recommendation baselines across all metrics. The gains persist in sparsity and item cold-start settings, and the compatibility study shows that the constructed graphs and knowledge memory can improve several existing multimodal rec-ommenders. We further analyze memory updating, LLM backbone choice, self-supervised objectives, template robustness, and cost. The main contributions are: 
+
+• We identify the semantic gap between multimodal item content and recommendation objectives, and we distinguish this gap from the feature augmentation and pure reranking views adopted by existing LLM-based recommenders. 
+
+• We propose AgentMMRec, which uses an Integrator Agent to con-struct behavior-aware knowledge memory and a Utilizer Agent to transform that memory into refined homogeneous graphs, representation enhancement, and candidate reranking. 
+
+• We evaluate AgentMMRec on multiple multimodal recommen-dation datasets and analyze transferability, sparsity, cold-start behavior, memory updating, LLM backbone choice, SSL compati-bility, template robustness, and computational cost. 
+
+## 2 Related Work 2.1 Multimodal Recommendation 
+
+Multimodal recommendation uses item text, images, and interac-tions to alleviate sparsity and improve ranking. VBPR [11] incorpo-rated visual content into matrix factorization [28], and later models combined visual and textual modalities to enrich item representa-tions [2–4, 18, 20, 44]. Graph-based methods further exploit user-item connectivity and modality similarity. MMGCN [35] extracts modality-specific signals through graph convolution, DualGNN [32] and LATTICE [45] introduce user-user or item-item graphs, and FREEDOM [52] improves representation stability by freezing item semantic graphs and denoising the user-item graph. Recent methods also use self-supervised learning and cross-modal align-ment. MMSSL [33], BM3 [53], and MENTOR [42] align multimodal inputs with collaborative signals, while LGMRec [10] and COHE-SION [40] model higher-order or composite graph structure. These methods show that modality information is useful, but they still rely heavily on feature-level similarity. Recent surveys identify the semantic gap between multimodal data and recom-mendation tasks as a persistent challenge [19, 43]. AgentMMRec addresses this gap by interpreting multimodal content through be-havioral context before using it to build homogeneous graphs and enhanced representations. 
+
+## 2.2 LLM-based Recommendation 
+
+LLMs have been used to enhance recommendation through con-tent understanding, user profiling, item attribute extraction, and list reranking [1, 13, 17, 26, 30, 34, 36, 47–49]. TALLRec [1] uses instruc-tion tuning with LLaMA [31], LEARN [49] converts item attributes into prompts and uses LLM hidden states as item embeddings, and LLMRank [13] reranks retrieved items conditioned on interaction history. KAR [36] and LLMRec [34] use LLM-derived user prefer-ences and item attributes to address sparse feedback and weak side information. UR4Rec [47] further retrieves user preferences and item knowledge for candidate-aware reranking. Recent multimodal studies are closer to our setting because they use LLMs or MLLMs to reason over item modalities and behav-ior. DOGE [22] builds an LLM-enhanced hyper-knowledge graph for multimodal recommendation, while MLLMRec [6] introduces MLLM-driven preference reasoning and graph refinement. Agent-MMRec differs in the way the generated knowledge is organized and reused. Instead of treating LLM output only as augmented text, item embeddings, a graph-construction signal, or a final reranking score, AgentMMRec stores preference and property knowledge in a memory that is used for three linked operations: behavior-aware homogeneous graph construction, representation enhancement, and frozen-memory candidate reranking. This design lets the same knowledge benefit standard multimodal recommenders while keep-ing the recommender backbone and the LLM components modular. 
+
+## 3 Methodology 
+
+As illustrated in Figure 1 and Algorithm 1, AgentMMRec contains an Integrator Agent (IAgent (·) ), a Utilizer Agent (UAgent (·) ), and a knowledge memory. The Integrator Agent interprets item multi-modal content under user-behavior context and writes behavior-aware user preferences and item properties into memory. The Uti-lizer Agent consumes the stored knowledge to refine modality-specific item-item graphs, build behavior- and multimodal-aware homogeneous graphs, enhance recommender representations, and rerank candidate lists. In this framework, an agent is an LLM/VLM module with a defined input state, prompt-guided action, memory read/write scope, and stopping rule. The two-agent design separates knowledge construction from knowledge use: extracted knowledge is reusable across training epochs and can be transferred to other multimodal recommendation backbones. 
+
+## 3.1 Problem Definition 
+
+Formally, let U = {𝑢 1, . . . , 𝑢 | U | } and I = {𝑖 1, . . . , 𝑖 | I | } be the user and item sets. Each item 𝑖 contains textual fields, includ-ing title 𝑇 𝑡𝑖𝑡𝑙𝑒 𝑖 , brand 𝑇 𝑏𝑟𝑎𝑛𝑑 𝑖 , categories 𝑇 𝑐𝑎𝑡𝑒𝑔𝑜𝑟𝑖𝑒𝑠 𝑖 , and description 
+
+𝑇 𝑑𝑒𝑠𝑐𝑟𝑖𝑝𝑡𝑖𝑜𝑛 𝑖 , together with an image 𝑉 𝑖 . Following representative multimodal recommendation models [4, 10, 43, 52], we use the MM-Rec encoders [51] for fair comparison: a text encoder 𝑡 𝜃 (·) and a vi-sual encoder 𝑣 𝜃 (·) . The textual representation is e𝑖 𝑡 = 𝑡 𝜃 (𝑇 𝑖 ), where 
+
+𝑇 𝑖 = (𝑇 title  
+
+> 𝑖
+
+|𝑇 brand  
+
+> 𝑖
+
+|𝑇 categories  
+
+> 𝑖
+
+|𝑇 description  
+
+> 𝑖
+
+) and | denotes concatena-tion. The visual representation is e𝑖 𝑣 = 𝑣 𝜃 (𝑉 𝑖 ). Item representations for modality 𝑚 ∈ { 𝑡, 𝑣 } are denoted by E𝑖 𝑚 ∈ R𝑑 𝑚 × | I | , and user representations are randomly initialized as E𝑢 𝑚 ∈ R𝑑 𝑚 × | U | . The interaction matrix is R ∈ { 0, 1}| U | × | I | , where R𝑢,𝑖 = 1 indicates an Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY User  U Item  I Textual 𝑻𝑻𝒊𝒊  Visual 𝑽𝑽𝒊𝒊 Title 
+
+> Brand
+> Categories
+> Description
+
+𝑬𝑬𝒊𝒊𝒗𝒗 𝑬𝑬𝒊𝒊𝒕𝒕 
+
+> Random
+
+𝑬𝑬𝒖𝒖𝒎𝒎  𝑬𝑬𝒊𝒊𝒎𝒎 
+
+> Integrator Agent
+> [ IAgent( ⋅) ]
+> Utilizer Agent
+> [ UAgent( ⋅) ]
+> Knowledge Memory
+> [ KMemory( ⋅) ]
+
+Model Optimization 
+
+Re-Ranking Final Item List 
+
+Building Behavior - a nd Multimodal-Aware  Homogeneous  Graphs 
+
+𝑷𝑷𝒖𝒖 𝒕𝒕 
+
+𝑷𝑷𝒖𝒖 𝒗𝒗 
+
+𝑷𝑷 𝒖𝒖 𝒎𝒎 
+
+( , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒕𝒕
+
+)    
+
+> {,,,}
+
+( , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒗𝒗
+
+)
+
+( , , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒎𝒎
+
+)             
+
+> {,,,}
+> Randomly select 𝜰𝜰 𝒊𝒊 from | 𝓝𝓝 (𝒖𝒖 )|
+> (𝒊𝒊 ∈ 𝓝𝓝 𝒖𝒖 >𝜰𝜰 )
+> item 𝒊𝒊
+> (number of 𝒊𝒊 )
+> 𝜰𝜰
+
+(𝑲𝑲 𝒑𝒑 𝑲𝑲 : ( 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒖𝒖 ),𝑽𝑽𝑽𝑽𝑽𝑽 𝒖𝒖𝒑𝒑 : ( 𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷 𝒖𝒖 𝒎𝒎 ))
+
+�𝑺𝑺𝒖𝒖 ,𝒗𝒗 𝒃𝒃 𝒎𝒎 𝒖𝒖 = 𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒 (𝒖𝒖 , 𝒗𝒗 ) 𝑺𝑺𝒖𝒖 ,𝒗𝒗 𝒃𝒃 𝒎𝒎 𝒖𝒖  
+
+> Top-k
+> User-User Graph
+
+𝑷𝑷𝒊𝒊 𝒕𝒕 
+
+𝑷𝑷𝒊𝒊 𝒗𝒗 
+
+𝑷𝑷 𝒊𝒊 𝒎𝒎 
+
+( , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒕𝒕
+
+)    
+
+> {,,,}
+
+( , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒗𝒗
+
+)
+
+( , , ,P 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑  
+
+> 𝒎𝒎
+
+)           
+
+> {,,,}
+> Randomly select 𝜰𝜰 𝒊𝒊 from | 𝓝𝓝 2(𝒊𝒊 )|
+> (𝒊𝒊 ∈ 𝓝𝓝 ^𝟐𝟐 (𝒊𝒊 ) > 𝜰𝜰 )
+> item 𝒊𝒊
+> (number of 𝒊𝒊 )
+> 𝜰𝜰
+
+(𝑲𝑲 𝒑𝒑 𝑲𝑲 : ( 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒊𝒊 ),𝑽𝑽𝑽𝑽𝑽𝑽 𝒖𝒖𝒑𝒑 : ( 𝑷𝑷𝒊𝒊 𝒕𝒕 |𝑷𝑷𝒊𝒊 𝒗𝒗 |𝑷𝑷 𝒊𝒊 𝒎𝒎 ))
+
+�𝑺𝑺𝒊𝒊 ,𝒋𝒋 𝒃𝒃 𝒎𝒎𝒊𝒊  = 𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒𝐒 (𝒊𝒊 , 𝒋𝒋 ) 
+
+> Item-Item Graph
+
+𝓖𝓖 𝒃𝒃 𝒎𝒎𝒖𝒖 
+
+𝑺𝑺𝒊𝒊 ,𝒋𝒋 𝒃𝒃 𝒎𝒎𝒊𝒊 
+
+𝓔𝓔 𝒃𝒃 𝒎𝒎𝒖𝒖  𝓔𝓔 𝒃𝒃 𝒎𝒎 𝒊𝒊 
+
+> Top-k
+
+𝓖𝓖 𝒃𝒃 𝒎𝒎𝒊𝒊 
+
+Refining Traditional Item-Item Graphs 
+
+�𝑺𝑺𝒖𝒖 ,𝒗𝒗 𝒖𝒖 ∪ �𝑺𝑺𝒊𝒊 ,𝒋𝒋 𝒊𝒊 
+
+> Top-k
+> [k-2k]
+
+† 𝑺𝑺 𝒊𝒊 ,𝒋𝒋 𝒊𝒊 ,𝒎𝒎 
+
+† �𝑺𝑺𝒊𝒊 ,∗ 
+
+> 𝒑𝒑𝒕𝒕𝒊𝒊
+
+( ,{† 𝑺𝑺 𝒊𝒊 ,∗𝒊𝒊 ,𝒎𝒎 }∗∈ I, 𝒎𝒎∈𝒕𝒕 ,𝒗𝒗 ,(𝑷𝑷𝒊𝒊 𝒕𝒕 |𝑷𝑷𝒊𝒊 𝒗𝒗 |𝑷𝑷 𝒊𝒊 𝒎𝒎 ),{( 𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷 𝒖𝒖 𝒎𝒎 )} 𝒖𝒖∈ 𝓝𝓝 (𝒊𝒊 )|P 𝒑𝒑𝒑𝒑 )
+
+𝓖𝓖 𝒑𝒑𝒕𝒕𝒊𝒊  (𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒊𝒊 ) (𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒖𝒖 )
+
+> 𝓖𝓖 𝒑𝒑𝒕𝒕𝒊𝒊
+
+{( 𝑷𝑷𝒊𝒊 𝒕𝒕 |𝑷𝑷𝒊𝒊 𝒗𝒗 |𝑷𝑷𝒊𝒊 𝒎𝒎 )} 𝒊𝒊∈ I{( 𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷𝒖𝒖 𝒎𝒎 )} 𝒖𝒖∈ U
+
+> (𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒊𝒊 )(𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒖𝒖 )
+
+𝑬𝑬𝒖𝒖𝒎𝒎  𝑬𝑬𝒊𝒊𝒎𝒎 
+
+�𝑬𝑬𝒖𝒖𝒎𝒎  �𝑬𝑬𝒊𝒊𝒎𝒎    
+
+> 𝓖𝓖 𝒃𝒃 𝒎𝒎𝒊𝒊
+> 𝓖𝓖 𝒃𝒃 𝒎𝒎𝒖𝒖
+> Encoder 𝒕𝒕𝜽𝜽 Encoder 𝒕𝒕𝜽𝜽
+
+�𝑬𝑬𝒖𝒖𝒎𝒎 
+
+�𝑬𝑬𝒖𝒖 𝒃𝒃 𝒎𝒎𝒖𝒖  �𝑬𝑬𝒊𝒊 
+
+> 𝒑𝒑𝒕𝒕𝒊𝒊
+
+�𝑬𝑬𝒊𝒊𝒎𝒎  �𝑬𝑬𝒊𝒊 𝒃𝒃 𝒎𝒎𝒊𝒊 BPR Loss 
+
+> Eval( ⋅): NDCG −𝑢𝑢 @N
+
+I𝒖𝒖      
+
+> (N =|I𝒖𝒖 |)
+> (,I𝒖𝒖 )(,�I𝒖𝒖 )
+
+( , I𝒖𝒖 ,(𝑷𝑷 𝒖𝒖  
+
+> 𝒕𝒕
+
+|𝑷𝑷 𝒖𝒖 
+
+> 𝒗𝒗
+
+|𝑷𝑷  𝒖𝒖 
+
+> 𝒎𝒎
+
+),{( 𝑷𝑷𝒊𝒊 𝒕𝒕 |𝑷𝑷𝒊𝒊 𝒗𝒗 |𝑷𝑷 𝒊𝒊 𝒎𝒎 )} 𝒊𝒊∈ I𝒖𝒖  |P 𝒑𝒑𝑽𝑽 𝒓𝒓𝒓𝒓 )�I𝒖𝒖 
+
+( , �I𝒖𝒖 ,(𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷 𝒖𝒖 𝒎𝒎 ),{( 𝑷𝑷𝒊𝒊 𝒕𝒕 |𝑷𝑷𝒊𝒊 𝒗𝒗 |𝑷𝑷 𝒊𝒊 𝒎𝒎 )} 𝒊𝒊∈ �
+
+I𝒖𝒖 
+
+|P 𝒖𝒖 𝒑𝒑 𝒖𝒖 𝑽𝑽𝒕𝒕𝒑𝒑 )(𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷 𝒖𝒖 𝒎𝒎 )
+
+�I𝒖𝒖  Ground Truth 
+
+Yes  No 
+
+(𝑲𝑲 𝒑𝒑 𝑲𝑲 : ( 𝒑𝒑𝒑𝒑𝒑𝒑𝒑𝒑 |𝒖𝒖 ),𝑽𝑽𝑽𝑽𝑽𝑽 𝒖𝒖𝒑𝒑 : ( 𝑷𝑷𝒖𝒖 𝒕𝒕 |𝑷𝑷𝒖𝒖 𝒗𝒗 |𝑷𝑷 𝒖𝒖 𝒎𝒎 )) 
+
+> Update
+> U-I Graph U-I Graph
+
+𝓔𝓔 𝒑𝒑𝒕𝒕𝒊𝒊 
+
+Figure 1: Overview of AgentMMRec. The Integrator Agent builds behavior-aware knowledge memory from training interactions and item content, while the Utilizer Agent converts this memory into graph refinement, representation enhancement, and candidate reranking. 
+
+observed interaction. It induces the bipartite graph G = (U , I, E) 
+
+with bidirectional edges for observed pairs. Because the studied multimodal recommendation setting has no temporal behavior se-quence, the central challenge is to infer user preferences and item properties from sparse interactions and multimodal item content. 
+
+## 3.2 Building Behavior- and Multimodal-Aware Homogeneous Graphs 
+
+The Integrator Agent extracts user preferences and item properties by combining training interactions with multimodal data, then stores the extracted knowledge in memory. The stored knowledge is used to build a behavior- and multimodal-aware user-user graph and a behavior- and multimodal-aware item-item graph. 
+
+3.2.1 Behavior-Aware User-User Graph. Users usually lack direct multimodal profiles, so prior multimodal recommenders either omit user-user homogeneous graphs or build them only from interaction patterns [32, 40, 43, 50]. The Integrator Agent instead generates behavior- and multimodal-aware preferences 𝑃 𝑢 for each user 𝑢 ∈U by interpreting the multimodal content of training items that 𝑢 
+
+interacted with. Formally: 
+
+𝑃 𝑡 𝑢 ← IAgent (𝑢, {𝑇 t
+
+𝑖 ,𝑇 b
+
+𝑖 ,𝑇 c
+
+𝑖 ,𝑇 d
+
+𝑖 }𝑖 ∈ N ( 𝑢 ) |P 𝑡 𝑝𝑟𝑒 𝑓 ), (1) 
+
+𝑃 𝑣 𝑢 ← IAgent (𝑢, {𝑉 𝑖 }𝑖 ∈ N ( 𝑢 ) |P 𝑣 𝑝𝑟𝑒 𝑓 ), (2) 
+
+𝑃 𝑚 𝑢 ← IAgent (𝑢, {𝑇 t
+
+𝑖 ,𝑇 b
+
+𝑖 ,𝑇 c
+
+𝑖 ,𝑇 d
+
+𝑖 , 𝑉 𝑖 }𝑖 ∈ N ( 𝑢 ) |P 𝑚 𝑝𝑟𝑒 𝑓 ), (3) where N ( 𝑢 ) denotes user 𝑢 ’s observed training interactions. For users with more than Υ interacted items, we sample Υ items to control LLM context length and inference cost. Users may express modality-specific preferences, such as brand or color, and cross-modal preferences, such as a brand-color combination. We there-fore extract textual, visual, and cross-modal preferences with three prompt templates; the full templates are provided with the anony-mous code package. The extracted preferences are stored in the knowledge memory as key-value entries: KMemory (Key : (𝑝𝑟𝑒 𝑓 |𝑢 ), Value : (𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 )) . (4) Subsequently, we use pre-trained encoder 𝑡 𝜃 (·) to compute the representation of user preferences and construct a top-𝑘 behavior-and multimodal-aware user-user graph G𝑏𝑚𝑢 = (U , E𝑏𝑚𝑢 ) based on cosine similarity. Formally: 
+
+S𝑏𝑚𝑢 𝑢,𝑣 =
+
+ 1 if ¯S𝑏𝑚𝑢 𝑢,𝑣 ∈ top-𝑘   ¯S𝑏𝑚𝑢 𝑢, ∗
+
+
+
+0 otherwise , (5) ¯S𝑏𝑚𝑢 𝑢,𝑣 = 𝑡 𝜃 (𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 )𝑇 𝑡 𝜃 (𝑃 𝑡 𝑣 |𝑃 𝑣 𝑣 |𝑃 𝑚 𝑣 )∥𝑡 𝜃 (𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 )∥∥ 𝑡 𝜃 (𝑃 𝑡 𝑣 |𝑃 𝑣 𝑣 |𝑃 𝑚 𝑣 )∥ . (6) Then, we build row-wise top-𝑘 directed edges (𝑢, 𝑣 ) ∈ E 𝑏𝑚𝑢 ,where S𝑏𝑚𝑢 𝑢,𝑣 = 1. During representation enhancement, D𝑏𝑚𝑢 de-notes the row-degree matrix of this adjacency. 
+
+3.2.2 Behavior-Aware Item-Item Graph. Many existing multimodal recommendation models construct item-item graphs based on mul-timodal data. Our AgentMMRec also incorporates a refined tra-ditional item-item graph (refer to Section 3.3). However, directly constructing an item-item graph using item features focuses only on the multimodal data itself, without considering the specific re-quirements of the recommendation task. Users who interact with the same items often share preference signals, and their co-purchased items can reveal behavior-aware item properties. For item 𝑖 , the Integrator Agent interprets the multimodal data of other training items purchased by users who interacted with 𝑖 and generates behavior- and multimodal-aware properties 𝑃 𝑖 . Formally: 
+
+𝑃 𝑡 𝑖 ← IAgent (𝑖, {𝑇 t
+
+𝑖 ,𝑇 b
+
+𝑖 ,𝑇 c
+
+𝑖 ,𝑇 d
+
+𝑖 }𝑖 ∈ N 2 (𝑖 ) |P 𝑡 𝑝𝑟𝑜𝑝 ), (7) Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+𝑃 𝑣 𝑖 ← IAgent (𝑖, {𝑉 𝑖 }𝑖 ∈ N 2 (𝑖 ) |P 𝑣 𝑝𝑟𝑜𝑝 ), (8) 
+
+𝑃 𝑚 𝑖 ← IAgent (𝑖, {𝑇 t 
+
+> 𝑗
+
+,𝑇 b 
+
+> 𝑗
+
+,𝑇 c 
+
+> 𝑗
+
+,𝑇 d 
+
+> 𝑗
+
+, 𝑉 𝑗 }𝑗 ∈ N 2 (𝑖 ) |P 𝑚 𝑝𝑟𝑜𝑝 ), (9) where N 2 (𝑖 ) denotes other training items purchased by users who interacted with item 𝑖 . If |N 2 (𝑖 )| > Υ, we sample Υ items. As with user preferences, the Integrator Agent extracts textual, visual, and cross-modal properties, and the complete prompt templates are included with the code (The code will be made publicly available upon acceptance of the paper). The item properties are stored as: KMemory (Key : (𝑝𝑟𝑜𝑝 |𝑖 ), Value : (𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 )) . (10) Subsequently, we use pre-trained encoder 𝑡 𝜃 (·) to compute the representation of item properties and construct a top-𝑘 behavior-and multimodal-aware item-item graph G𝑏𝑚𝑖 = (I , E𝑏𝑚𝑖 ) based on cosine similarity. Formally, this process can be expressed as: 
+
+S𝑏𝑚𝑖 𝑖,𝑗 =
+
+(
+
+1 if ¯S𝑏𝑚𝑖 𝑖,𝑗 ∈ top-𝑘 
+
+ ¯S𝑏𝑚𝑖 𝑖, ∗
+
+
+
+0 otherwise , (11) ¯S𝑏𝑚𝑖 𝑖,𝑗 = 𝑡 𝜃 (𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 )𝑇 𝑡 𝜃 (𝑃 𝑡 𝑗 |𝑃 𝑣 𝑗 |𝑃 𝑚 𝑗 )∥𝑡 𝜃 (𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 )∥∥ 𝑡 𝜃 (𝑃 𝑡 𝑗 |𝑃 𝑣 𝑗 |𝑃 𝑚 𝑗 )∥ . (12) Then, we build row-wise top-𝑘 directed edges (𝑖, 𝑗 ) ∈ E 𝑏𝑚𝑖 ,where S𝑏𝑚𝑖 𝑖,𝑗 = 1. During representation enhancement, D𝑏𝑚𝑖 de-notes the row-degree matrix of this adjacency. 
+
+Discussion. The behavior- and multimodal-aware homoge-neous graphs are constructed before recommender training, so graph construction does not add per-epoch graph-building cost. The LLM call volume is reported separately in Section 4.9. The threshold Υ controls both context length and inference cost, and its sensitivity is analyzed in Section 4.7. 
+
+## 3.3 Refining Traditional Item-Item Graphs 
+
+Traditional multimodal recommendation models [40, 46, 52] con-struct modality-specific item-item graphs based on item represen-tations to enhance modality representations. However, this process exacerbates the isolation between modalities [41] and lacks consid-eration of user preferences. Utilizer Agent leverages the behavior-and multimodal-aware preferences and properties stored in the con-structed knowledge memory to refine and merge modality-specific item-item graphs into a unified item-item graph. Specifically, origi-nal modality-specific item-item graphs are constructed as: 
+
+†S 𝑖,𝑚 𝑖,𝑗 =
+
+(
+
+1 if † ¯S𝑖,𝑚 𝑖,𝑗 ∈ top-𝑘 
+
+
+
+† ¯S𝑖,𝑚 𝑖, ∗
+
+
+
+0 otherwise , (13) 
+
+† ¯S𝑖,𝑚 𝑖,𝑗 = (e𝑖 𝑚 )𝑇 e𝑗 𝑚 
+
+∥e𝑖 𝑚 ∥∥ e𝑗 𝑚 ∥ , (14) where 𝑚 ∈ { 𝑡, 𝑣 }. For each modality, we construct a top-𝑘 modality-specific item-item graph. For item 𝑖 , the Utilizer Agent then com-bines its text and visual neighbors, item properties, and the prefer-ences of users who purchased it. Guided by P𝑟𝑒 , the Utilizer Agent reselects the top-𝑘 items and constructs a unified item-item graph 
+
+G𝑟𝑡𝑖 = (I , E𝑟𝑡𝑖 ):
+
+{†S 𝑟𝑡𝑖 𝑖, ∗ }∗∈ I ← UAgent  
+
+𝑖, {†S 𝑖,𝑚 𝑖, ∗ } ∗∈ I  
+
+> 𝑚 ∈ { 𝑡,𝑣 }
+
+, (𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 ),
+
+{( 𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 )} 𝑢 ∈ N ( 𝑖 ) | P 𝑟𝑒 
+
+,
+
+(15) where N ( 𝑖 ) denotes the purchased user set for item 𝑖 and the num-ber of selected neighbors is constrained by Í𝑗 ∈ I †S 𝑟𝑡𝑖 𝑖,𝑗 = 𝑘 . We also adopt Υ to constrain the size of the purchased user set N ( 𝑖 ). Then, we build row-wise directed edges (𝑖, 𝑗 ) ∈ E 𝑟𝑡𝑖 , where †S 𝑟𝑡𝑖 𝑖,𝑗 = 1. The implementation asks the Utilizer Agent to return a ranked item-id list; invalid ids are discarded before the adjacency is saved. 
+
+Discussion. The refined item-item graph is also constructed before recommender training. This keeps the training loop close to standard graph-based recommenders, while the offline LLM cost is measured separately. 
+
+## 3.4 Representation Enhancement and Model Optimization 
+
+We enhance user and item representations by leveraging encoded behavior- and multimodal-aware preferences and properties. Fol-lowing the paradigm adopted by most previous studies [43, 50], we apply LightGCN [12] to propagate messages and perform readout over the user-item interaction graph G. Formally, the embeddings for user 𝑢 and item 𝑖 in the 𝑙 -th layer are: 
+
+ˆe(𝑙 ) 
+
+> 𝑢
+
+= 1
+
+N ( 𝑢 )∑︁ 𝑗 | ( 𝑢,𝑗 ) ∈ E 
+
+1
+
+N ( 𝑗 ) ˆe(𝑙 −1) 
+
+> 𝑗
+
+,
+
+ˆe(𝑙 ) 
+
+> 𝑖
+
+= 1
+
+N ( 𝑖 )∑︁ 𝑣 | ( 𝑖,𝑣 ) ∈ E 
+
+1
+
+N ( 𝑣 ) ˆe(𝑙 −1) 
+
+> 𝑣
+
+.
+
+(16) The initial enhanced user and item representations are: 
+
+ˆe(0) 
+
+> 𝑢
+
+= (e𝑢 𝑡 |e𝑢 𝑣 |𝑡 𝜃 (( 𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 ))) ,
+
+ˆe(0) 
+
+> 𝑖
+
+= (e𝑖 𝑡 |e𝑖 𝑣 |𝑡 𝜃 (( 𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 ))) . (17) Here | denotes the concatenation operation. After 𝐿 layers of graph convolution, the final representations are: 
+
+ˆe𝑢 =
+
+> 𝐿
+
+∑︁ 
+
+> 𝑙 =0
+
+ˆe(𝑙 ) 
+
+> 𝑢
+
+, ˆe𝑖 =
+
+> 𝐿
+
+∑︁ 
+
+> 𝑙 =0
+
+ˆe(𝑙 ) 
+
+> 𝑖
+
+. (18) Here, we fix 𝐿 = 3 for all experiments, which is the best setting in most multimodal recommendation models [43]. Entire user and item representations can be formulated as ˆE𝑢 and ˆE𝑖 , respectively. Fur-thermore, we adopt constructed behavior- and multimodal-aware homogeneous graphs and refined unified item-item graph to en-hance user and item representations. For the user side, we only have the constructed behavior- and multimodal-aware user-user graph E𝑏𝑚𝑢 with similarity matrix 
+
+S𝑏𝑚𝑢 . Therefore, user side representation enhancement can be expressed as: 
+
+¯E𝑢 = ˆE𝑢 + ˆE𝑢 ((D 𝑏𝑚𝑢 )− 12 S𝑏𝑚𝑢 (D 𝑏𝑚𝑢 )− 12 ), (19) where D𝑏𝑚𝑢 is the diagonal degree matrix of S𝑏𝑚𝑢 . This normaliza-tion aims to mitigate the issues of gradient explosion or vanishing. For the item side, we have the constructed behavior- and multimodal-aware item-item graph E𝑏𝑚𝑖 with similarity matrix S𝑏𝑚𝑖 and the refined unified item-item graph E𝑟𝑡𝑖 with similarity matrix †S 𝑟𝑡𝑖 .Thus, item side representation enhancement can be expressed as: 
+
+¯E𝑖 = ˆE𝑖 + ˆE𝑖 
+
+ (D 𝑏𝑚𝑖 )− 12 S𝑏𝑚𝑖 (D 𝑏𝑚𝑖 )− 12 
+
++ ˆE𝑖 
+
+ (D 𝑟𝑡𝑖 )− 12 † S 𝑟𝑡𝑖 (D 𝑟𝑡𝑖 )− 12 ,
+
+(20) Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+where D𝑏𝑚𝑖 and D𝑟𝑡𝑖 are the diagonal row-degree matrices of S𝑏𝑚𝑖 
+
+and †S 𝑟𝑡𝑖 , respectively. These normalizations also aim to mitigate the issues of gradient explosion or vanishing. For efficiency, all homogeneous graphs use a single graph-convolution layer. Consistent with almost all existing multimodal recommendation studies [19, 43, 50], we use BPR for model optimization. Specifically, we compute the inner product of user and item representations to calculate predicted scores and adopt the BPR loss function: 
+
+L𝑏𝑝𝑟 =∑︁ 
+
+> (𝑢,𝑝,𝑛 ) ∈ D
+
+− log 𝜎  ¯e⊤ 
+
+> 𝑢
+
+¯e𝑝 − ¯e⊤ 
+
+> 𝑢
+
+¯e𝑛 
+
+, (21) where 𝜎 (·) is the sigmoid function, and 𝑝 and 𝑛 denote positive and negative items for user 𝑢 . AgentMMRec can also be combined with self-supervised tasks [33, 42, 53]; the default model omits them for efficiency, and Section 4.8 reports the compatibility analysis. 
+
+## 3.5 Reranking Final Item List 
+
+For each user 𝑢 , the backbone recommender first retrieves a can-didate list I𝑢 of size 𝑀 , where 𝑀 ≥ 𝑁 in the top-𝑁 evaluation. In our implementation, candidates are drawn from the saved top-50 backbone list, so the reranker operates on a larger candidate pool than the reported 𝑁 ∈ { 10 , 20 }. The Utilizer Agent reranks this candidate list by combining 𝑢 ’s behavior- and multimodal-aware preferences with the properties of candidate items. The top-𝑁 prefix of the reranked list is used to compute Recall@ 𝑁 and NDCG@ 𝑁 ,which is why reranking can affect both metrics when 𝑀 > 𝑁 . This process is guided by P𝑟𝑎𝑛𝑘 :¯I𝑢 ← UAgent  𝑢, I𝑢 , (𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 ),
+
+{( 𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 )} 𝑖 ∈ I 𝑢 | P 𝑟𝑎𝑛𝑘 
+
+, (22) where ¯I𝑢 is the reranked candidate list. During training, we de-fine Eval (𝑢, I𝑢 ) as the per-user NDCG@ 𝑁 on the supervision split available to the training procedure. If Eval (𝑢, ¯I𝑢 ) < Eval (𝑢, I𝑢 ),the reranking step has hurt the training signal, and the Integrator Agent updates 𝑢 ’s memory from the available ground-truth training items ˆI𝑢 :
+
+(𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 ) ← IAgent  𝑢, ˆI𝑢 , (𝑃 𝑡 𝑢 |𝑃 𝑣 𝑢 |𝑃 𝑚 𝑢 ),
+
+{( 𝑃 𝑡 𝑖 |𝑃 𝑣 𝑖 |𝑃 𝑚 𝑖 )} 𝑖 ∈ ˆI𝑢 | P 𝑢𝑝𝑑𝑎𝑡𝑒 
+
+. (23) After updating 𝑢 ’s preferences, the model reranks the candidate list again. The loop stops when reranking no longer hurts the training feedback or when the configured update budget is reached. For efficiency, updates are attempted every 𝐸 epochs. At validation and test time, the learned knowledge memory is frozen; no validation or test ground-truth items are used to update memory, construct graphs, revise prompts, or decide whether a reranked list is benefi-cial. The templates P𝑟𝑎𝑛𝑘 and P𝑢𝑝𝑑𝑎𝑡𝑒 are included with the code (The code will be made publicly available upon acceptance of the paper). 
+
+## 3.6 Algorithm Overview 
+
+Algorithm 1 summarizes the training and inference protocol. 
+
+Table 1: Statistics of all evaluation datasets. 
+
+Datasets #Users #Items #Interactions Sparsity Baby 19,445 7,050 160,792 99.88% Sports 35,598 18,357 296,337 99.95% Clothing 39,387 23,033 278,677 99.97% 
+
+## 4 Experiment 4.1 Experiment Setup 
+
+4.1.1 Datasets. The experiments are conducted on three real-world Amazon datasets with text and image modalities: Baby, Sports, and Clothing [21]. The textual features are derived from item descrip-tions, and the visual features are derived from product images. We follow the MMRec preprocessing protocol [51] and apply 5-core filtering to remove infrequent users and items. Table 1 summa-rizes the filtered datasets. The processed interactions are split into training, validation, and test sets in an 8:1:1 ratio. 
+
+4.1.2 Evaluation Metrics. Following previous multimodal recom-mendation studies [43, 52, 53], we report Recall@ 𝑁 and NDCG@ 𝑁 
+
+for 𝑁 = 10 and 𝑁 = 20. For reranking, the backbone first retrieves a candidate list of size 𝑀 = 50, and the Utilizer Agent reorders this list before the top-𝑁 prefix is evaluated. All reported test metrics are computed after freezing the knowledge memory and model parameters. Significance markers in Table 2 compare AgentMMRec with the strongest baseline under frozen test rankings. 
+
+4.1.3 Baselines. We compare AgentMMRec with 17 representative multimodal recommendation baselines. The main paper lists the baselines by family, with method-level descriptions provided in Ap-pendix A. Graph- and fusion-based baselines include MMGCN [35], DualGNN [32], LATTICE [45], FREEDOM [52], LGMRec [10], CO-HESION [40], and HPMRec [5]. SSL- or denoising-oriented base-lines include SLMRec [29], BM3 [53], MMSSL [33], DiffMM [15], SMORE [23], BeFA [7], MENTOR [42], EVEN [25], and FreRec [24]. We also include LLMRec [34] as the LLM-enhanced baseline. 
+
+4.1.4 Implementation Details. We keep the standard settings of the baselines and fix the batch size at 2048. Hyperparameters are tuned according to the optimal configurations reported in the cor-responding papers. All baselines are implemented in PyTorch with Adam [16] and Xavier initialization [9]. To isolate the effect of the agent-memory design from stronger encoders, AgentMMRec uses the same MMRec text and vision encoders 𝑡 𝜃 (·) and 𝑣 𝜃 (·) as the baselines [43]. The default Integrator and Utilizer backbone is Qwen2.5-VL-7B; Appendix C studies Qwen2.5-VL-32B and GPT-4o-2024-08-06. We set 𝑘 = 20, Υ = 5, the memory update interval to 
+
+𝐸 = 10, the learning rate to 10 −3, and the early-stopping patience to 20 validation checks. The LLM decoding temperature is 0.7 with a maximum output length of 2,000 tokens. All results are from the mean of 5 runs of random seeds. 
+
+4.1.5 Leakage Control. All preference extraction, property extrac-tion, graph construction, graph refinement, reranking feedback, and memory updates use only the training split. The validation split is used for model selection and hyperparameter tuning after the memory has been constructed from training data. During test evaluation, the knowledge memory and homogeneous graphs are Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+Algorithm 1: Training and inference process of AgentMMRec 
+
+Input: split graphs G𝑡𝑟𝑎𝑖𝑛 , G𝑣𝑎𝑙 , G𝑡𝑒𝑠𝑡 ; item text and image fields; encoders 𝑡 𝜃 (·) , 𝑣 𝜃 (·) ; agents IAgent (·) , UAgent (·) ; knowledge memory KMemory (·) ; prompts; update interval 𝐸 and budget 𝐵 .
+
+Output: frozen knowledge memory and test recommendation lists. 
+
+Phase I: Knowledge extraction and graph construction 1 Encode items Obtain E𝑖𝑡 and E𝑖𝑣 with 𝑡 𝜃 (·) and 𝑣 𝜃 (·) ; initialize E𝑢𝑡 and E𝑢𝑣 .
+
+2 User memory For each user 𝑢 , extract (𝑃 𝑡 𝑢 , 𝑃 𝑣 𝑢 , 𝑃 𝑚 𝑢 ) from training items {𝑇 𝑖 , 𝑉 𝑖 }𝑖 ∈N 𝑡𝑟𝑎𝑖𝑛 (𝑢 ) and write the preferences into KMemory .
+
+3 User graph Encode stored user preferences and construct the behavior- and multimodal-aware user-user graph G𝑏𝑚𝑢 .
+
+4 Item memory For each item 𝑖 , extract (𝑃 𝑡 𝑖 , 𝑃 𝑣 𝑖 , 𝑃 𝑚 𝑖 ) from training co-purchased items {𝑇 𝑗 , 𝑉 𝑗 }𝑗 ∈N 2   
+
+> 𝑡𝑟𝑎𝑖𝑛 (𝑖 )
+
+and write the properties into 
+
+KMemory .
+
+5 Item graphs Construct G𝑏𝑚𝑖 from stored item properties; refine modality-specific item graphs {†S 𝑖,𝑚 }𝑚 ∈{ 𝑡,𝑣 } into G𝑟𝑡𝑖 with UAgent .
+
+Phase II: Training with knowledge-enhanced reranking 6 Optimize Train the backbone recommender with knowledge-enhanced user/item representations and BPR loss until convergence. 
+
+7 Update memory Every 𝐸 epochs, rerank each candidate list with UAgent . If reranking lowers training feedback, update that user’s memory from training ground-truth items only, stopping when feedback recovers or the budget 𝐵 is reached. 
+
+Phase III: Frozen validation and testing 8 Select Freeze KMemory and select hyperparameters on G𝑣𝑎𝑙 without memory updates. 
+
+9 Test Generate and rerank test candidates on G𝑡𝑒𝑠𝑡 using the frozen KMemory only. 
+
+Table 2: Performance comparison of baselines and AgentMMRec in terms of Recall and NDCG. ∗ indicates that the t-tests validate the significance of performance improvements with 𝑝 -value < 0.05. 
+
+Datasets Baby Sports Clothing Metrics R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 MMGCN (MM’19) 0.0378 0.0615 0.0200 0.0261 0.0370 0.0605 0.0193 0.0254 0.0218 0.0345 0.0110 0.0142 DualGNN (TMM’21) 0.0448 0.0716 0.0240 0.0309 0.0568 0.0859 0.0310 0.0385 0.0454 0.0683 0.0241 0.0299 LATTICE (MM’21) 0.0547 0.0850 0.0292 0.0370 0.0620 0.0953 0.0335 0.0421 0.0492 0.0733 0.0268 0.0330 SLMRec (TMM’22) 0.0529 0.0775 0.0290 0.0353 0.0663 0.0990 0.0365 0.0450 0.0452 0.0675 0.0247 0.0303 FREEDOM (MM’23) 0.0627 0.0992 0.0330 0.0424 0.0717 0.1089 0.0385 0.0481 0.0629 0.0941 0.0341 0.0420 BM3 (WWW’23) 0.0564 0.0883 0.0301 0.0383 0.0656 0.0980 0.0355 0.0438 0.0422 0.0621 0.0231 0.0281 MMSSL (WWW’23) 0.0613 0.0971 0.0326 0.0420 0.0693 0.1013 0.0369 0.0474 0.0531 0.0797 0.0291 0.0359 LLMRec (WSDM’24) 0.0621 0.0983 0.0324 0.0422 0.0682 0.1000 0.0363 0.0459 0.0540 0.0808 0.0294 0.0365 LGMRec (AAAI’24) 0.0639 0.0989 0.0337 0.0430 0.0719 0.1068 0.0387 0.0477 0.0555 0.0828 0.0302 0.0371 DiffMM (MM’24) 0.0623 0.0975 0.0328 0.0411 0.0671 0.1017 0.0377 0.0458 0.0531 0.0797 0.0291 0.0359 SMORE (WSDM’25) 0.0680 0.1035 0.0365 0.0457 0.0762 0.1142 0.0408 0.0506 0.0659 0.0987 0.0360 0.0443 FreRec (MM’25) 0.0662 0.1011 0.0348 0.0437 0.0754 0.1147 0.0410 0.0508 0.0674 0.0977 0.0363 0.0447 EVEN (AAAI’25) 0.0667 0.1031 0.0355 0.0448 0.0759 0.1143 0.0411 0.0510 0.0662 0.0978 0.0356 0.0436 BeFA (AAAI’25) 0.0555 0.0884 0.0299 0.0383 0.0649 0.0985 0.0346 0.0432 0.0568 0.0857 0.0307 0.0381 MENTOR (AAAI’25) 0.0678 0.1048 0.0362 0.0450 0.0763 0.1139 0.0409 0.0511 0.0668 0.0989 0.0360 0.0441 COHESION (SIGIR’25) 0.0680 0.1052 0.0354 0.0454 0.0752 0.1137 0.0409 0.0503 0.0665 0.0983 0.0358 0.0438 HPMRec (CIKM’25) 0.0667 0.1033 0.0357 0.0451 0.0751 0.1129 0.0410 0.0507 0.0658 0.0963 0.0351 0.0429 AgentMMRec (Qwen) 0.0705 ∗ 0.1079 ∗ 0.0380 ∗ 0.0475 ∗ 0.0838 ∗ 0.1231 ∗ 0.0454 ∗ 0.0557 ∗ 0.0740 ∗ 0.1071 ∗ 0.0404 ∗ 0.0490 ∗
+
+frozen, and the Utilizer Agent receives only the candidate items and the frozen preference/property entries. Test interactions are never used to update memory, construct graphs, revise prompts, or se-lect reranking updates. Algorithm 1 summarizes the same protocol across training, validation, and testing. 
+
+## 4.2 Overall Performance 
+
+We evaluate the effectiveness of AgentMMRec on multiple real-world datasets in multimodal recommendation scenarios. From Table 2, we find the following observations: 
+
+• AgentMMRec improves over all baselines across datasets. The re-sult supports the central design choice: user and item knowledge extracted from multimodal content becomes more useful when it is injected into graph construction, representation learning, and reranking rather than used only as augmented text. Baby Sports Clothing              
+
+> 0.07 0.08 0.09 0.10 0.11 0.12 0.13
+> Score
+> Recall@20
+> Baby Sports Clothing
+> 0.030 0.035 0.040 0.045 0.050 0.055 0.060 NDCG@20
+> w/obmh w/obmu w/obmi w/orti w/orerank AgentMMRec
+
+Figure 2: Ablation study across all datasets. 
+
+• Strong baselines such as SMORE, MENTOR, COHESION, and HPMRec remain close to one another despite different architec-tures. This pattern suggests that feature-level multimodal fusion faces a shared bottleneck. Section 4.4 tests this explanation by transferring AgentMMRec’s behavior-aware graphs and rerank-ing memory to these backbones. Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+Table 3: Compatibility analysis of AgentMMRec with suboptimal baselines. 
+
+Models Datasets Baby Sports Clothing Metrics R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 SMORE Original 0.0680 0.1035 0.0365 0.0457 0.0762 0.1142 0.0408 0.0506 0.0659 0.0987 0.0360 0.0443 
+
++𝐺𝑟𝑎𝑝ℎ 0.0691 0.1055 0.0371 0.0466 0.0799 0.1190 0.0437 0.0532 0.0709 0.1041 0.0388 0.0473 
+
++𝑅𝑒𝑟𝑎𝑛𝑘 0.0686 0.1047 0.0369 0.0463 0.0785 0.1170 0.0431 0.0527 0.0688 0.1021 0.0377 0.0462 MENTOR Original 0.0678 0.1048 0.0362 0.0450 0.0763 0.1139 0.0409 0.0511 0.0668 0.0989 0.0360 0.0441 
+
++𝐺𝑟𝑎𝑝ℎ 0.0693 0.1061 0.0370 0.0461 0.0792 0.1180 0.0434 0.0532 0.0707 0.1035 0.0383 0.0466 
+
++𝑅𝑒𝑟𝑎𝑛𝑘 0.0685 0.1053 0.0366 0.0453 0.0778 0.1164 0.0427 0.0528 0.0689 0.1024 0.0370 0.0455 COHESION Original 0.0680 0.1052 0.0354 0.0454 0.0752 0.1137 0.0409 0.0503 0.0665 0.0983 0.0358 0.0438 
+
++𝐺𝑟𝑎𝑝ℎ 0.0695 0.1066 0.0365 0.0460 0.0780 0.1174 0.0430 0.0525 0.0697 0.1033 0.0380 0.0462 
+
++𝑅𝑒𝑟𝑎𝑛𝑘 0.0686 0.1059 0.0358 0.0458 0.0773 0.1159 0.0423 0.0519 0.0681 0.1015 0.0370 0.0453 HPMRec Original 0.0667 0.1033 0.0357 0.0451 0.0751 0.1129 0.0410 0.0507 0.0658 0.0963 0.0351 0.0429 
+
++𝐺𝑟𝑎𝑝ℎ 0.0682 0.1054 0.0366 0.0459 0.0785 0.1174 0.0432 0.0530 0.0698 0.1025 0.0375 0.0449 
+
++𝑅𝑒𝑟𝑎𝑛𝑘 0.0677 0.1042 0.0360 0.0454 0.0776 0.1162 0.0427 0.0525 0.0684 0.1004 0.0362 0.0440 (0-5] (5-10] (10-15](15-20](20-25]        
+
+> Sparsity Degree
+> 0.08 0.09 0.10 0.11
+> Recall@20
+> Baby
+> (0-5] (5-10] (10-15](15-20](20-25]
+> Sparsity Degree
+> 0.09 0.10 0.11 0.12
+> Sports
+> (0-5] (5-10] (10-15](15-20](20-25]
+> Sparsity Degree
+> 0.08 0.10
+> Clothing
+> LGMRec SMORE MENTOR COHESION HPMRec AgentMMRec
+
+Figure 3: Sparsity analysis across all datasets. 
+
+## 4.3 Ablation Study 
+
+To validate the effectiveness of AgentMMRec, we conduct exper-iments to justify the importance of key components. We design the following variants: (1) 𝑤 /𝑜 bmh, which removes both behavior-and multimodal-aware user-user and item-item graphs. (2) 𝑤 /𝑜 
+
+bmu, which removes the behavior- and multimodal-aware user-user graph. (3) 𝑤 /𝑜 bmi, which removes the behavior- and multimodal-aware item-item graph. (4) 𝑤 /𝑜 rti, which directly uses traditional item-item graphs to replace the unified item-item graph. (5) 𝑤 /𝑜 
+
+rerank, which removes the rerank and feedback process. Notably, for variants (1)-(3), Integrator Agent still extracts and stores behavior-and multimodal-aware user preferences and item properties. Figure 2 shows that each component contributes to the perfor-mance improvement of AgentMMRec. We provide the following in-depth observations: 
+
+• Behavior-aware homogeneous graphs. Removing both behavior-and multimodal-aware graphs leads to consistent degradation, showing that the extracted knowledge contributes beyond the LLM text itself. The drop is larger on Sports and Clothing, where sparser interactions make supplementary graph connectivity more valuable. 
+
+• User-user and item-item graphs. The item-item graph con-tributes more on Sports and Clothing, while the user-user graph is relatively more useful on Baby. This is consistent with the dataset structure: Baby has fewer items and denser user interac-tions, whereas the larger Sports and Clothing catalogs benefit more from item-property relations. 
+
+• Graph refinement. Replacing the refined unified item-item graph with traditional modality-specific graphs hurts perfor-mance across datasets. The result indicates that content-only neighbors are insufficient when modality similarity conflicts with behavior-aware item relevance. 
+
+• Reranking and feedback. Removing reranking and feedback yields a smaller but consistent drop. The result suggests that the main gains come from graph and representation enhancement, while reranking provides an additional late-stage adjustment. In Section 4.4, we further explore whether the key components of AgentMMRec can be transferred to existing models to break through their performance bottlenecks. 
+
+## 4.4 Compatibility Analysis 
+
+We conduct two compatibility experiments to test whether Agent-MMRec’s constructed knowledge benefits existing models. The +𝐺𝑟𝑎𝑝ℎ variant transfers AgentMMRec’s behavior- and multimodal-aware homogeneous graphs to selected baselines. The + 𝑅𝑒𝑟𝑎𝑛𝑘 vari-ant lets the Utilizer Agent rerank each baseline’s output with the knowledge memory optimized by AgentMMRec. We select SMORE, MENTOR, COHESION, and HPMRec from Table 2. For + 𝐺𝑟𝑎𝑝ℎ , we follow previous studies [40, 52] and run graph convolution with the transferred graphs. Results in Table 3 lead to several important findings: 
+
+• Graph transfer. The + 𝐺𝑟𝑎𝑝ℎ variant improves all four baselines on all datasets. The gains are largest on Sports, where Recall@20 increases by 4.2% for SMORE, 3.6% for MENTOR, 3.3% for COHE-SION, and 4.0% for HPMRec. This pattern supports the claim that behavior-aware graph structure addresses a bottleneck shared by different multimodal backbones. 
+
+• Knowledge-enhanced reranking. The + 𝑅𝑒𝑟𝑎𝑛𝑘 variant also improves the baselines, but usually less than graph transfer be-cause it changes only the final candidate order. The result still shows that the memory contains user preference and item prop-erty information that complements the baseline rankings. 
+
+• Transfer across architectures. SMORE, MENTOR, COHESION, and HPMRec use different fusion mechanisms, yet all benefit from AgentMMRec’s knowledge. The compatibility result indi-cates that the proposed memory is not tied to a single backbone implementation. 
+
+## 4.5 Sparsity Analysis 
+
+We evaluate AgentMMRec under different user sparsity levels by grouping users according to their number of training interactions. Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+Table 4: Item cold-start analysis across all datasets. 
+
+Datasets Baby Sports Clothing Metrics R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 R@10 R@20 N@10 N@20 MMGCN 0.0103 0.0186 0.0062 0.0098 0.0106 0.0178 0.0060 0.0094 0.0069 0.0101 0.0039 0.0050 DualGNN 0.0132 0.0200 0.0077 0.0110 0.0166 0.0242 0.0096 0.0132 0.0134 0.0198 0.0082 0.0113 LATTICE 0.0175 0.0256 0.0099 0.0138 0.0266 0.0340 0.0139 0.0189 0.0168 0.0249 0.0095 0.0135 SLMRec 0.0172 0.0259 0.0101 0.0140 0.0281 0.0354 0.0142 0.0194 0.0141 0.0208 0.0084 0.0118 FREEDOM 0.0348 0.0588 0.0195 0.0257 0.0389 0.0640 0.0231 0.0289 0.0339 0.0585 0.0190 0.0252 BM3 0.0180 0.0262 0.0100 0.0133 0.0210 0.0294 0.0128 0.0180 0.0125 0.0189 0.0077 0.0104 MMSSL 0.0280 0.0351 0.0144 0.0192 0.0299 0.0370 0.0152 0.0203 0.0200 0.0294 0.0108 0.0157 LLMRec 0.0380 0.0605 0.0203 0.0255 0.0361 0.0600 0.0208 0.0261 0.0298 0.0539 0.0169 0.0226 LGMRec 0.0371 0.0592 0.0208 0.0261 0.0380 0.0629 0.0226 0.0281 0.0303 0.0551 0.0173 0.0235 DiffMM 0.0336 0.0552 0.0193 0.0238 0.0355 0.0589 0.0202 0.0254 0.0266 0.0510 0.0150 0.0221 SMORE 0.0370 0.0595 0.0202 0.0251 0.0404 0.0661 0.0245 0.0302 0.0360 0.0602 0.0195 0.0259 BeFA 0.0188 0.0262 0.0104 0.0149 0.0220 0.0303 0.0134 0.0182 0.0232 0.0367 0.0131 0.0200 MENTOR 0.0395 0.0628 0.0212 0.0268 0.0402 0.0661 0.0249 0.0297 0.0369 0.0610 0.0201 0.0264 COHESION 0.0399 0.0631 0.0211 0.0263 0.0410 0.0665 0.0246 0.0300 0.0369 0.0611 0.0199 0.0256 HPMRec 0.0378 0.0603 0.0204 0.0256 0.0398 0.0653 0.0241 0.0292 0.0360 0.0600 0.0192 0.0255 AgentMMRec 0.0458 0.0733 0.0248 0.0317 0.0454 0.0711 0.0272 0.0324 0.0406 0.0662 0.0228 0.0282 
+
+We compare against LGMRec, SMORE, MENTOR, COHESION, and HPMRec on the derived sub-datasets. Figure 3 shows that AgentMMRec outperforms these baselines across sparsity groups: 
+
+• Sparse users. The largest gains appear in 0–5 interaction group, where collaborative evidence is weakest and behavior-aware knowledge extracted from few observed items is most useful. 
+
+• Denser users. The gains narrow as interaction counts increase, but remain positive in the 20–25 group. This suggests that the graph and memory components add information beyond com-pensating for user sparsity. 
+
+• Dataset differences. Sports and Clothing have larger item cat-alogs and higher sparsity than Baby, and the item-side graph contributes more on these datasets. This is consistent with the ablation trend in Figure 2. 
+
+## 4.6 Cold-Start Analysis 
+
+For item cold-start analysis, we follow prior settings [43, 46]: 20% of items are removed from training and split evenly into validation and test sets. The removed target items are excluded from the training interaction graph, while their text and image fields remain avail-able as item content. As shown in Table 4, AgentMMRec achieves the best performance across the three datasets. The gain indicates that behavior-aware knowledge helps align cold-start item content with the recommendation task when direct interaction evidence is limited. Additional analyses in Appendix B, Appendix C, Appen-dix D, Appendix E, and Appendix F cover memory updating, LLM backbone choice, SSL compatibility, efficiency and LLM cost, and template robustness. 
+
+## 4.7 Hyperparameter Analysis 
+
+We study the threshold Υ and the knowledge update interval 𝐸 in Figure 4. The best result of each curve is marked. Lower Υ reduces LLM cost but can sample less representative histories, while larger Υ uses more context and increases inference cost. Smaller 𝐸 updates the memory more frequently but can in-troduce noisier feedback and more LLM calls. We use Υ = 5 and 
+
+𝐸 = 10 in the main experiments to balance accuracy and cost rather than reporting only the best hyperparameter setting. 1 5 10 20 
+
+> Threshold
+> 0.1050 0.1075 0.1100 0.1125 0.1150 0.1175 0.1200 0.1225
+> Recall@20
+> Baby Sports Clothing
+
+(a) ThresholdR20 1 5 10 20  
+
+> Threshold
+> 0.048 0.050 0.052 0.054 0.056
+> NDCG@20
+> Baby Sports Clothing
+
+(b) ThresholdN20 1 5 10 20  
+
+> Knowledge Update Interval E
+> 0.1075 0.1100 0.1125 0.1150 0.1175 0.1200 0.1225
+> Recall@20
+> Baby Sports Clothing
+
+(c) IntervalR20 1 5 10 20   
+
+> Knowledge Update Interval E
+> 0.048 0.050 0.052 0.054 0.056
+> NDCG@20
+> Baby Sports Clothing
+
+(d) IntervalN20 
+
+Figure 4: Effect of Threshold Υ and Knowledge Update Inter-val 𝐸 .
+
+## 4.8 Compatibility with Extra Modality-alignment SSL Tasks 
+
+We test whether AgentMMRec benefits from extra modality-alignment SSL. SSL is widely used in multimodal recommendation to align rep-resentations across modalities without additional labels [33, 42, 53]. We incorporate two representative objectives: InfoNCE contrastive learning and distribution alignment (DisAlign). Appendix D and Table 7 show the detailed results: 
+
+• Positive but limited gains. InfoNCE and DisAlign consistently improve AgentMMRec, but the average gains are modest, about 0.3%–0.5% in Recall@20 and NDCG@20. This indicates that the agent-memory component is compatible with representation-level alignment, while much of the cross-modal signal may al-ready be captured by behavior-aware knowledge extraction. 
+
+• Objective differences. InfoNCE is slightly better on Baby Re-call@20, DisAlign is stronger on Clothing Recall@20, and the Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+two objectives tie on Sports Recall@20. The differences are small, so we treat SSL as a complementary option. 
+
+• Efficiency. Because SSL objectives add augmentation, additional forward passes, and extra loss computation, the default Agent-MMRec configuration omits them and uses the agent-memory design as the main source of multimodal alignment. 
+
+## 4.9 Efficiency Study 
+
+Appendix E reports recommender training cost and the offline LLM call calculation. Since the agent-generated graphs are precomputed, AgentMMRec keeps the per-epoch recommender training loop close to standard graph-based multimodal recommenders. Prompt-template robustness and the location of the full template files are described in Appendix F. 
+
+## 5 Conclusion 
+
+We presented AgentMMRec, a two-agent framework for bridging the semantic gap between multimodal item content and recommen-dation objectives. The Integrator Agent builds behavior-aware user and item knowledge from training interactions, and the Utilizer Agent converts this memory into refined graph structure, enhanced representations, and candidate reranking. The memory is frozen during validation and test evaluation, keeping ground-truth feed-back out of the reported test results. Experiments on three multi-modal recommendation datasets show consistent gains over recent baselines, with additional evidence from compatibility, sparsity, item cold-start, memory updating, backbone, SSL, template, and cost analyses. These results suggest that multimodal recommenda-tion can benefit from treating LLM-derived semantics as reusable task-aware structure, not only as augmented features or final-stage ranking text. 
+
+## References 
+
+[1] Keqin Bao, Jizhi Zhang, Yang Zhang, Wenjie Wang, Fuli Feng, and Xiangnan He. 2023. Tallrec: An effective and efficient tuning framework to align large language model with recommendation. In Proceedings of the 17th ACM conference on recommender systems . 1007–1014. [2] Weixin Chen, Li Chen, Yongxin Ni, and Yuhan Zhao. 2025. Causality-inspired fair representation learning for multimodal recommendation. ACM Transactions on Information Systems 43, 6 (2025), 1–29. [3] Xu Chen, Hanxiong Chen, Hongteng Xu, Yongfeng Zhang, Yixin Cao, Zheng Qin, and Hongyuan Zha. 2019. Personalized fashion recommendation with visual explanations based on multimodal attention network: Towards visually explainable recommendation. In Proceedings of the 42nd International ACM SIGIR Conference on Research and Development in Information Retrieval . 765–774. [4] Zheyu Chen, Jinfeng Xu, and Haibo Hu. 2025. Don’t Lose Yourself: Boosting Multimodal Recommendation via Reducing Node-neighbor Discrepancy in Graph Convolutional Network. In ICASSP 2025-2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) . IEEE, 1–5. [5] Zheyu Chen, Jinfeng Xu, Hewei Wang, Shuo Yang, Zitong Wan, and Haibo Hu. 2025. Hypercomplex Prompt-aware Multimodal Recommendation. In Proceed-ings of the 34th ACM International Conference on Information and Knowledge Management . 403–414. [6] Yunkai Dang et al. 2026. MLLMRec: A Preference Reasoning Paradigm with Graph Refinement for Multimodal Recommendation. In Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval . 257–267. [7] Qile Fan, Penghang Yu, Zhiyi Tan, Bing-Kun Bao, and Guanming Lu. 2025. BeFA: A General Behavior-driven Feature Adapter for Multimedia Recommendation. In 
+
+Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 11634–11644. [8] Maria Lucia Fioretti, Nicola Laterza, Alessia Preziosa, Daniele Malitesta, Claudio Pomo, Fedelucio Narducci, and Tommaso Di Noia. 2025. How Powerful are LLMs to Support Multimodal Recommendation? A Reproducibility Study of LLMRec. In 
+
+Proceedings of the Nineteenth ACM Conference on Recommender Systems . 774–782. [9] Xavier Glorot and Yoshua Bengio. 2010. Understanding the difficulty of training deep feedforward neural networks. In Proceedings of the thirteenth international conference on artificial intelligence and statistics . JMLR Workshop and Conference Proceedings, 249–256. [10] Zhiqiang Guo, Jianjun Li, Guohui Li, Chaoyang Wang, Si Shi, and Bin Ruan. 2024. LGMRec: Local and Global Graph Learning for Multimodal Recommendation. In 
+
+Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 38. 8454–8462. [11] Ruining He and Julian McAuley. 2016. VBPR: visual bayesian personalized ranking from implicit feedback. In Proceedings of the AAAI conference on artificial intelligence , Vol. 30. [12] Xiangnan He, Kuan Deng, Xiang Wang, Yan Li, Yongdong Zhang, and Meng Wang. 2020. Lightgcn: Simplifying and powering graph convolution network for recommendation. In Proceedings of the 43rd International ACM SIGIR conference on research and development in Information Retrieval . 639–648. [13] Yupeng Hou, Junjie Zhang, Zihan Lin, Hongyu Lu, Ruobing Xie, Julian McAuley, and Wayne Xin Zhao. 2023. Large language models are zero-shot rankers for recommender systems. arXiv preprint arXiv:2305.08845 (2023). [14] Yupeng Hou, Junjie Zhang, Zihan Lin, Hongyu Lu, Ruobing Xie, Julian McAuley, and Wayne Xin Zhao. 2024. Large language models are zero-shot rankers for recommender systems. In European Conference on Information Retrieval . Springer, 364–381. [15] Yangqin Jiang, Lianghao Xia, Wei Wei, Da Luo, Kangyi Lin, and Chao Huang. 2024. Diffmm: Multi-modal diffusion model for recommendation. In Proceedings of the 32nd ACM international conference on multimedia . 7591–7599. [16] Diederik P Kingma and Jimmy Ba. 2014. Adam: A method for stochastic opti-mization. arXiv preprint arXiv:1412.6980 (2014). [17] Dong-Ho Lee, Adam Kraft, Long Jin, Nikhil Mehta, Taibai Xu, Lichan Hong, Ed H Chi, and Xinyang Yi. 2024. Star: A simple training-free approach for recommendations using large language models. arXiv preprint arXiv:2410.16458 
+
+(2024). [18] Xixun Lin, Rui Liu, Yanan Cao, Lixin Zou, Qian Li, Yongxuan Wu, Yang Liu, Dawei Yin, and Guandong Xu. 2025. Contrastive modality-disentangled learning for multimodal recommendation. ACM Transactions on Information Systems 43, 3 (2025), 1–31. [19] Qidong Liu, Jiaxi Hu, Yutian Xiao, Xiangyu Zhao, Jingtong Gao, Wanyu Wang, Qing Li, and Jiliang Tang. 2024. Multimodal recommender systems: A survey. 
+
+Comput. Surveys 57, 2 (2024), 1–17. [20] Shang Liu, Zhenzhong Chen, Hongyi Liu, and Xinghai Hu. 2019. User-video co-attention network for personalized micro-video recommendation. In The world wide web conference . 3020–3026. [21] Julian McAuley, Christopher Targett, Qinfeng Shi, and Anton Van Den Hengel. 2015. Image-based recommendations on styles and substitutes. In Proceedings of the 38th international ACM SIGIR conference on research and development in information retrieval . 43–52. [22] Chang Meng et al. 2025. DOGE: LLMs-Enhanced Hyper-Knowledge Graph Recommender for Multimodal Recommendation. In Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 12399–12407. [23] Rongqing Kenneth Ong and Andy WH Khong. 2025. Spectrum-based modality representation fusion graph convolutional network for multimodal recommen-dation. In Proceedings of the Eighteenth ACM International Conference on Web Search and Data Mining . 773–781. [24] Feiyu Peng, Chaobo He, Junwei Cheng, Huijuan Hu, Wenkai Zhang, and Youda Mo. 2025. Frequency-refined Graph Convolution Network with Cross-modal Wavelet Denoising for Recommendation. In Proceedings of the 33rd ACM Interna-tional Conference on Multimedia . 1559–1568. [25] Yuxin Qi, Quan Zhang, Xi Lin, Xiu Su, Jiani Zhu, Jingyu Wang, and Jianhua Li. 2025. Seeing beyond noise: Joint graph structure evaluation and denoising for multimodal recommendation. In Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 12461–12469. [26] Xubin Ren and Chao Huang. 2025. Easyrec: Simple yet effective language models for recommendation. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing . 17728–17743. [27] Xubin Ren, Wei Wei, Lianghao Xia, Lixin Su, Suqi Cheng, Junfeng Wang, Dawei Yin, and Chao Huang. 2024. Representation learning with large language models for recommendation. In Proceedings of the ACM web conference 2024 . 3464–3475. [28] Steffen Rendle, Christoph Freudenthaler, Zeno Gantner, and Lars Schmidt-Thieme. 2009. BPR: Bayesian personalized ranking from implicit feedback. In Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence . 452–461. [29] Zhulin Tao, Xiaohao Liu, Yewei Xia, Xiang Wang, Lifang Yang, Xianglin Huang, and Tat-Seng Chua. 2022. Self-supervised learning for multimedia recommenda-tion. IEEE Transactions on Multimedia (2022). [30] Yijun Tian, Huan Song, Zichen Wang, Haozhu Wang, Ziqing Hu, Fang Wang, Nitesh V Chawla, and Panpan Xu. 2023. Graph neural prompting with large language models. arXiv preprint arXiv:2309.15427 (2023). [31] Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yas-mine Babaei, Nikolay Bashlykov, Soumya Batra, Prajjwal Bhargava, Shruti Bhos-ale, et al. 2023. Llama 2: Open foundation and fine-tuned chat models. arXiv preprint arXiv:2307.09288 (2023). Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+[32] Qifan Wang, Yinwei Wei, Jianhua Yin, Jianlong Wu, Xuemeng Song, and Liqiang Nie. 2021. Dualgnn: Dual graph neural network for multimedia recommendation. 
+
+IEEE Transactions on Multimedia (2021). [33] Wei Wei, Chao Huang, Lianghao Xia, and Chuxu Zhang. 2023. Multi-Modal Self-Supervised Learning for Recommendation. In Proceedings of the ACM Web Conference 2023 . 790–800. [34] Wei Wei, Xubin Ren, Jiabin Tang, Qinyong Wang, Lixin Su, Suqi Cheng, Jun-feng Wang, Dawei Yin, and Chao Huang. 2024. Llmrec: Large language models with graph augmentation for recommendation. In Proceedings of the 17th ACM International Conference on Web Search and Data Mining . 806–815. [35] Yinwei Wei, Xiang Wang, Liqiang Nie, Xiangnan He, Richang Hong, and Tat-Seng Chua. 2019. MMGCN: Multi-modal graph convolution network for personalized recommendation of micro-video. In Proceedings of the 27th ACM international conference on multimedia . 1437–1445. [36] Yunjia Xi et al. 2023. Towards Open-World Recommendation with Knowledge Augmentation from Large Language Models. arXiv preprint arXiv:2306.10933 
+
+(2023). [37] Jinfeng Xu, Zheyu Chen, Jinze Li, Shuo Yang, Hewei Wang, Yijie Li, Mengran Li, Puzhen Wu, and Edith CH Ngai. 2025. Mdvt: Enhancing multimodal recommen-dation with model-agnostic multimodal-driven virtual triplets. In Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining V. 2 .3378–3389. [38] Jinfeng Xu, Zheyu Chen, Jinze Li, Shuo Yang, Wei Wang, Xiping Hu, Raymond Chi-Wing Wong, and Edith CH Ngai. 2025. Enhancing Robustness and General-ization Capability for Multimodal Recommender Systems via Sharpness-Aware Minimization. IEEE Transactions on Knowledge and Data Engineering (2025). [39] Jinfeng Xu, Zheyu Chen, Jinze Li, Shuo Yang, Wei Wang, Hewei Wang, Yijie Li, Xiping Hu, and Edith Ngai. 2026. DGGVAE: Dual-Granularity Graph Variational Auto-Encoder for Group Recommendation. ACM Transactions on Information Systems 44, 2 (2026), 1–30. [40] Jinfeng Xu, Zheyu Chen, Wei Wang, Xiping Hu, Sang-Wook Kim, and Edith CH Ngai. 2025. COHESION: Composite Graph Convolutional Network with Dual-Stage Fusion for Multimodal Recommendation. In Proceedings of the 48th In-ternational ACM SIGIR Conference on Research and Development in Information Retrieval . 1830–1839. [41] Jinfeng Xu, Zheyu Chen, Shuo Yang, Jinze Li, and Edith CH Ngai. 2025. The Best is Yet to Come: Graph Convolution in the Testing Phase for Multimodal Recommendation. In Proceedings of the 33rd ACM International Conference on Multimedia . 6325–6334. [42] Jinfeng Xu, Zheyu Chen, Shuo Yang, Jinze Li, Hewei Wang, and Edith CH Ngai. 2025. Mentor: multi-level self-supervised learning for multimodal recommen-dation. In Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 12908–12917. [43] Jinfeng Xu, Zheyu Chen, Shuo Yang, Jinze Li, Wei Wang, Xiping Hu, Steven Hoi, and Edith Ngai. 2026. A survey on multimodal recommender systems: Recent advances and future directions. IEEE Transactions on Multimedia (2026). [44] Penghang Yu, Zhiyi Tan, Guanming Lu, and Bing-Kun Bao. 2023. Multi-view graph convolutional network for multimedia recommendation. In Proceedings of the 31st ACM International Conference on Multimedia . 6576–6585. [45] Jinghao Zhang, Yanqiao Zhu, Qiang Liu, Shu Wu, Shuhui Wang, and Liang Wang. 2021. Mining latent structures for multimedia recommendation. In Proceedings of the 29th ACM International Conference on Multimedia . 3872–3880. [46] Jinghao Zhang, Yanqiao Zhu, Qiang Liu, Mengqi Zhang, Shu Wu, and Liang Wang. 2022. Latent structure mining with contrastive modality fusion for multimedia recommendation. IEEE Transactions on Knowledge and Data Engineering 35, 9 (2022), 9154–9167. [47] Xiaoying Zhang et al. 2025. UR4Rec: User-Retrieval for Large Language Models Powered Recommendation. In Proceedings of the 31st International Conference on Computational Linguistics . 720–730. [48] Yang Zhang, Fuli Feng, Jizhi Zhang, Keqin Bao, Qifan Wang, and Xiangnan He. 2025. Collm: Integrating collaborative embeddings into large language models for recommendation. IEEE Transactions on Knowledge and Data Engineering (2025). [49] Zijian Zhang, Shuchang Liu, Ziru Liu, Rui Zhong, Qingpeng Cai, Xiangyu Zhao, Chunxu Zhang, Qidong Liu, and Peng Jiang. 2025. Llm-powered user simulator for recommender system. In Proceedings of the AAAI Conference on Artificial Intelligence , Vol. 39. 13339–13347. [50] Hongyu Zhou, Xin Zhou, Zhiwei Zeng, Lingzi Zhang, and Zhiqi Shen. 2023. A comprehensive survey on multimodal recommender systems: Taxonomy, evalua-tion, and future directions. arXiv preprint arXiv:2302.04473 (2023). [51] Xin Zhou. 2023. MMRec: Simplifying Multimodal Recommendation. arXiv preprint arXiv:2302.03497 (2023). [52] Xin Zhou and Zhiqi Shen. 2023. A tale of two graphs: Freezing and denoising graph structures for multimodal recommendation. In Proceedings of the 31st ACM International Conference on Multimedia . 935–943. [53] Xin Zhou, Hongyu Zhou, Yong Liu, Zhiwei Zeng, Chunyan Miao, Pengwei Wang, Yuan You, and Feijun Jiang. 2023. Bootstrap latent representations for multi-modal recommendation. In Proceedings of the ACM Web Conference 2023 . 845–854. Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+## A Baseline Details 
+
+This section expands the compact baseline list in Section 4. We compare AgentMMRec with graph-based, self-supervised, denoising, fusion-oriented, and LLM-enhanced multimodal recommenders: 
+
+• MMGCN [35]: MMGCN applies graph convolutional networks to model user-item interactions with modality-specific item features. It represents an early graph-based multimodal recommender that propagates visual and textual signals through the interaction graph. 
+
+• DualGNN [32]: DualGNN jointly models user-item interactions and an auxiliary user-user graph. The user-user graph captures behavioral similarity among users and provides a reference point for evaluating whether AgentMMRec’s behavior-aware user graph brings additional benefit. 
+
+• LATTICE [45]: LATTICE constructs item-item semantic graphs from multimodal item features and injects the learned item relations into recommendation. It is a strong comparison for item graph construction because AgentMMRec also builds item-side structure but conditions it on stored user and item knowledge. 
+
+• SLMRec [29]: SLMRec introduces self-supervised learning for multi-modal recommendation through feature perturbation and modality-pattern discovery tasks. It evaluates whether auxiliary self-supervision alone can close the semantic gap between multimodal content and rec-ommendation behavior. 
+
+• FREEDOM [52]: FREEDOM denoises the user-item graph and uses a frozen item-item graph built from original modality features. It is relevant because it separates graph construction from online training and therefore provides a close comparison for precomputed item relations. 
+
+• BM3 [53]: BM3 simplifies multimodal self-supervised learning by using dropout-based representation perturbation instead of heavy contrastive augmentations. It tests whether lightweight representation regularization can achieve the same gains as explicit knowledge memory. 
+
+• MMSSL [33]: MMSSL learns modality-aware interactive structures with adversarial perturbation and cross-modal contrastive learning. It distin-guishes modality-common and modality-specific signals, making it a representative alignment-oriented baseline. 
+
+• LLMRec [34]: LLMRec uses LLM-based graph augmentation strategies to enrich recommendation signals. It is the closest baseline among the compared methods in terms of using LLM-derived knowledge, while AgentMMRec further stores the generated knowledge as reusable memory for graph construction, representation enhancement, and reranking. 
+
+• LGMRec [10]: LGMRec combines local topological information and global embedding information through a hypergraph structure. It com-pares against AgentMMRec’s homogeneous graph enhancement from the perspective of higher-order relation modeling. 
+
+• DiffMM [15]: DiffMM integrates a modality-aware graph diffusion model with cross-modal contrastive learning. It is included to assess whether diffusion-based denoising and representation refinement can match the behavior-aware knowledge construction in AgentMMRec. 
+
+• SMORE [23]: SMORE reduces modality noise by exploiting discriminative spectrum properties and global frequency-domain information. It is a recent strong baseline for multimodal noise reduction and is also used in the compatibility analysis. 
+
+• BeFA [7]: BeFA corrects multimodal features according to user behavior. It provides a behavior-aware feature correction baseline, while AgentMM-Rec converts behavior-aware knowledge into both memory and graph structure. 
+
+• MENTOR [42]: MENTOR designs multi-level cross-modal alignment tasks to improve the final user and item representations. It is a strong alignment baseline and tests whether explicit preference and property memory adds information beyond representation alignment. 
+
+• COHESION [40]: COHESION introduces a dual-stage fusion mechanism for composite graphs. It is included because it directly studies graph fusion quality, making it a natural comparison for AgentMMRec’s behavior- and multimodal-aware graph construction. 
+
+• HPMRec [5]: HPMRec uses hypercomplex operations to enrich feature diversity and bridge semantic gaps across modalities. It provides a high-capacity fusion baseline and is useful for testing whether AgentMMRec’s gains come from knowledge organization rather than simply richer fea-ture interaction. 
+
+• EVEN [25]: EVEN evaluates and denoises multimodal content together with observed interactions. It represents recent work on identifying unreliable multimodal signals before recommendation. 
+
+• FreRec [24]: FreRec addresses modality noise and limited fusion from a frequency-domain perspective. It complements SMORE by adding another recent frequency-based multimodal baseline. 
+
+## B Knowledge Memory Continuous Updating 
+
+The knowledge memory is decoupled from the backbone recommender, so it can be updated and reintegrated before evaluation. Table 5 expands the analysis by dataset and reports Recall@20 and NDCG@20, together with the change against the default AgentMMRec memory on the same dataset. This layout keeps the table in one column while preserving dataset-level variation. Multiple AgentMMRec update rounds improve the memory at first and then plateau: ‘2 Extra AgentMMRec’ and ‘3 Extra AgentMMRec’ produce identical results across datasets and metrics. The third round does not trigger further changes because the reranked training lists already satisfy the feedback criterion. Relay updating is less stable for weaker models, whose early candidate lists provide poor feedback. Stronger multimodal models such as SMORE, MENTOR, and COHESION provide more useful relay feedback and improve the memory more consistently than a single extra AgentMMRec update. The relay results also show that the memory update is not a monotonic post-processing trick. MMSSL and DiffMM relays slightly reduce several dataset-level scores, while LLMRec and LGMRec remain close to the default memory. This pattern is consistent with the feedback mechanism: a relay model needs sufficiently reliable candidate lists before its errors become useful signals for memory correction. We omit relay rows without valid update results from Table 5. 
+
+## C LLM Backbone Analysis 
+
+We test whether stronger LLM backbones improve AgentMMRec. The main experiments use Qwen2.5-VL-7B; this analysis additionally evaluates Qwen2.5-VL-32B and GPT-4o-2024-08-06. Table 6 shows that stronger backbones can improve performance: 
+
+• Within-family scaling. The 32B Qwen2.5-VL backbone improves over the 7B backbone by 0.9% in Recall@20 and 1.3% in NDCG@20 on aver-age. This suggests that finer multimodal interpretation can improve the extracted memory. 
+
+• Cross-backbone gains. GPT-4o obtains the best results, but its average Recall@20 gain over Qwen2.5-VL-32B is smaller than the 32B-over-7B gain. This trend suggests diminishing returns from backbone scaling in the current design. 
+
+• Dataset variation. Sports benefits most from stronger backbones, while Baby and Clothing show smaller gains. The result indicates that the value of LLM capacity depends on the diversity and ambiguity of the item domain. 
+
+## D SSL Compatibility Details 
+
+The main model does not require a self-supervised modality-alignment objective, but such objectives can still be attached to the representation learner. Table 7 compares the default AgentMMRec with InfoNCE and DisAlign variants. Both objectives improve most metrics, but the gains are small. The result suggests that behavior-aware knowledge extraction already Conference acronym ’XX, June 03–05, 2018, Woodstock, NY Xu et al. 
+
+Table 7: Compatibility with extra modality-alignment SSL tasks. 
+
+Dataset Method R@10 R@20 N@10 N@20 Baby AgentMMRec 0.0705 0.1079 0.0380 0.0475 + InfoNCE 0.0707 ↑ 0.1082 ↑ 0.0383 ↑ 0.0480 ↑
+
++ DisAlign 0.0708 ↑ 0.1081 ↑ 0.0384 ↑ 0.0478 ↑
+
+Sports AgentMMRec 0.0838 0.1231 0.0454 0.0557 + InfoNCE 0.0841 ↑ 0.1235 ↑ 0.0456 ↑ 0.0560 ↑
+
++ DisAlign 0.0842 ↑ 0.1235 ↑ 0.0458 ↑ 0.0560 ↑
+
+Clothing AgentMMRec 0.0740 0.1071 0.0404 0.0490 + InfoNCE 0.0744 ↑ 0.1074 ↑ 0.0406 ↑ 0.0494 ↑
+
++ DisAlign 0.0742 ↑ 0.1077 ↑ 0.0407 ↑ 0.0496 ↑
+
+Table 5: Knowledge memory continuous updating analysis by dataset. Δ is measured against the default AgentMMRec memory on the same dataset. 
+
+Dataset Update source R@20 ΔR@20 N@20 ΔN@20 Baby AgentMMRec 0.1079 – 0.0475 –Extra x1 0.1086 +0.0007 0.0481 +0.0006 Extra x2 0.1089 +0.0010 0.0486 +0.0011 
+
+Extra x3 0.1089 +0.0010 0.0486 +0.0011 
+
+FREEDOM relay 0.1081 +0.0002 0.0478 +0.0003 MMSSL relay 0.1075 -0.0004 0.0472 -0.0003 LLMRec relay 0.1080 +0.0001 0.0475 +0.0000 LGMRec relay 0.1079 +0.0000 0.0475 +0.0000 DiffMM relay 0.1071 -0.0008 0.0472 -0.0003 SMORE relay 0.1084 +0.0005 0.0483 +0.0008 MENTOR relay 0.1085 +0.0006 0.0480 +0.0005 COHESION relay 0.1088 +0.0009 0.0483 +0.0008 HPMRec relay 0.1082 +0.0003 0.0476 +0.0001 Sports AgentMMRec 0.1231 – 0.0557 –Extra x1 0.1239 +0.0008 0.0564 +0.0007 Extra x2 0.1244 +0.0013 0.0568 +0.0011 
+
+Extra x3 0.1244 +0.0013 0.0568 +0.0011 
+
+FREEDOM relay 0.1233 +0.0002 0.0558 +0.0001 MMSSL relay 0.1226 -0.0005 0.0553 -0.0004 LLMRec relay 0.1232 +0.0001 0.0552 -0.0005 LGMRec relay 0.1233 +0.0002 0.0560 +0.0003 DiffMM relay 0.1229 -0.0002 0.0554 -0.0003 SMORE relay 0.1237 +0.0006 0.0563 +0.0006 MENTOR relay 0.1241 +0.0010 0.0566 +0.0009 COHESION relay 0.1236 +0.0005 0.0565 +0.0008 HPMRec relay 0.1231 +0.0000 0.0557 +0.0000 Clothing AgentMMRec 0.1071 – 0.0490 –Extra x1 0.1078 +0.0007 0.0497 +0.0007 Extra x2 0.1081 +0.0010 0.0500 +0.0010 
+
+Extra x3 0.1081 +0.0010 0.0500 +0.0010 
+
+FREEDOM relay 0.1066 -0.0005 0.0491 +0.0001 MMSSL relay 0.1070 -0.0001 0.0486 -0.0004 LLMRec relay 0.1071 +0.0000 0.0490 +0.0000 LGMRec relay 0.1068 -0.0003 0.0489 -0.0001 DiffMM relay 0.1068 -0.0003 0.0487 -0.0003 SMORE relay 0.1076 +0.0005 0.0497 +0.0007 MENTOR relay 0.1075 +0.0004 0.0494 +0.0004 COHESION relay 0.1080 +0.0009 0.0498 +0.0008 HPMRec relay 0.1071 +0.0000 0.0494 +0.0004 
+
+Table 6: Performance comparison of AgentMMRec with dif-ferent LLM backbones.                                          
+
+> Dataset Backbone R@10 R@20 N@10 N@20 Baby Qwen2.5-VL-7B 0.0705 0.1079 0.0380 0.0475 Qwen2.5-VL-32B 0.0712 ↑0.1086 ↑0.0385 ↑0.0482 ↑
+> GPT-4o 0.0716 ↑0.1088 ↑0.0388 ↑0.0488 ↑
+> Sports Qwen2.5-VL-7B 0.0838 0.1231 0.0454 0.0557 Qwen2.5-VL-32B 0.0845 ↑0.1238 ↑0.0458 ↑0.0565 ↑
+> GPT-4o 0.0848 ↑0.1244 ↑0.0461 ↑0.0570 ↑
+> Clothing Qwen2.5-VL-7B 0.0740 0.1071 0.0404 0.0490 Qwen2.5-VL-32B 0.0745 ↑0.1079 ↑0.0408 ↑0.0498 ↑
+> GPT-4o 0.0748 ↑0.1084 ↑0.0411 ↑0.0503 ↑
+
+captures much of the cross-modal signal that these auxiliary objectives encourage at the representation level. InfoNCE and DisAlign show no consistent dominance. InfoNCE gives the strongest Baby Recall@20, while DisAlign gives the strongest Clothing Recall@20, and both tie on Sports Recall@20. We therefore treat SSL as a compatible optional component rather than a necessary part. 
+
+## E Efficiency and LLM Cost Details 
+
+Table 8 reports recommender training time and GPU memory. AgentMM-Rec stays close to LGMRec and SMORE in per-epoch runtime because the agent-generated graphs are precomputed and the homogeneous graph enhancement uses a single graph-convolution layer. HPMRec remains sub-stantially more expensive on all three datasets, while COHESION is the fastest among the compared strong baselines. Table 9 separates the offline LLM calls from recommender training. The call count scales with users and items during knowledge extraction and with items during graph refinement. This accounting makes the cost source explicit: recommender training remains conventional after preprocessing, while deployment cost depends on the chosen LLM backend, batching strategy, and provider pricing. The offline call count is computed directly from the agent workflow. The Integrator Agent extracts textual, visual, and cross-modal preferences for each user and textual, visual, and cross-modal properties for each item, giving 
+
+𝐶 int = 3| U | + 3| I | . (24) The Utilizer Agent refines the item graph once for each item: 
+
+𝐶 ref = | I | . (25) Thus the deterministic preprocessing cost is 
+
+𝐶 off = 𝐶 int + 𝐶 ref = 3| U | + 4| I | . (26) For the three datasets, this yields 86,535 calls on Baby, 180,222 calls on Sports, and 210,293 calls on Clothing. Training-time reranking and preference updating are event-driven rather than deterministic preprocessing; they are attempted every 𝐸 epochs and can be capped by the update budget used in implementation. 
+
+## F Template Dependency Analysis 
+
+Prompt-based methods can be sensitive to surface wording, so we test whether AgentMMRec depends on a single hand-written template. We regenerate each template five times with GPT-5, Claude-Sonnet-4.5, and Gemini-2.5-Pro while preserving the same analytical dimensions, output fields, and multimodal integration plan. Table 10 reports Recall@20 means and standard deviations. The regen-erated templates remain close to the original template on all datasets. The standard deviations are also small, ranging from 0.0006 to 0.0015. These results indicate that AgentMMRec depends more on the template plan and memory schema than on a specific sentence wording. The full templates for preference extraction, property extraction, graph refinement, reranking, and preference updating are included as a one-template-per-page PDF under the Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation Conference acronym ’XX, June 03–05, 2018, Woodstock, NY 
+
+Table 8: Efficiency analysis across all datasets. 
+
+Dataset Method Time (s/epoch) Memory (GB) Baby LGMRec 5.93 2.41 SMORE 6.55 3.31 MENTOR 7.03 7.12 COHESION 4.47 2.89 HPMRec 21.03 8.58 AgentMMRec 6.04 3.07 Sports LGMRec 8.98 3.67 SMORE 9.29 5.02 MENTOR 9.62 8.44 COHESION 7.91 4.20 HPMRec 30.85 10.19 AgentMMRec 9.13 4.48 Clothing LGMRec 10.02 4.81 SMORE 11.05 6.89 MENTOR 11.90 12.99 COHESION 9.05 5.73 HPMRec 40.23 14.95 AgentMMRec 10.65 5.72 
+
+Table 9: Offline LLM call counts for preprocessing. 
+
+Stage Baby Sports Clothing Integrator extraction, 3 | U | + 3| I | 79,485 161,865 187,260 Utilizer refinement, | I | 7,050 18,357 23,033 Total 86,535 180,222 210,293 
+
+Table 10: Template robustness of AgentMMRec. Values are Recall@20 mean and standard deviation over five regener-ated template sets. 
+
+Generator Baby Sports Clothing Original 0.1079 ( −) 0.1231 ( −) 0.1071 ( −)GPT-5 0.1082 (0.0012) 0.1228 (0.0015) 0.1070 (0.0010) Claude-Sonnet-4.5 0.1077 (0.0008) 0.1230 (0.0008) 0.1074 (0.0012) Gemini-2.5-Pro 0.1080 (0.0013) 0.1228 (0.0011) 0.1068 (0.0006) 
+
+code/Prompt/ folder in the code (The code will be made publicly available upon acceptance of the paper).

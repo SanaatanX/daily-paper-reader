@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-08-31</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-05</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-01 00:40:52 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-05 22:24:07 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日聚焦多模态检索与推荐，精读两篇高影响力论文，另速读多模态嵌入高效化、用户建模与知识图谱RAG方向。</p>
-<p>最值得关注的是样本自适应多向量表示（AdaptiveEmbed）与信息引导的模态对齐方法，二者均获8.0高分，直击多模态语义对齐与检索效率痛点。</p>
-<p>下一步建议普通读者优先精读这两篇高分工作，并延伸关注速读中的后训练稀疏化（PUMA）与多粒度RAG方案。</p>
+<p>今日共读19篇多模态论文，精读7篇、速读12篇，聚焦编码器与表示学习新进展。最值得关注NeoMME单塔多模态原生编码器的高效微调推理设计，以及多视角渐进融合的实体表示方法。下一步可深入对比这两类架构在多语言、缺失模态场景下的实际效果。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval">AdaptiveEmbed: Sample-Adaptive Multi-Vector Representation for Multimodal Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation">Information-Guided Selective Modality-Interest Alignment for Multimodal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception">GAAT: Geometry-Aware Alignment Transformer for Multimodal UAV Perception</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference">NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference</span></li><li><span class="dpr-home-dashboard-paper-title" title="More Perspectives, Stronger Signals: Multi-Perspective Enhancement and Progressive Fusion for Multimodal Entity Representation Learning">More Perspectives, Stronger Signals: Multi-Perspective Enhancement and Progressive Fusion for Multimodal Entity Representation Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="3D-MRL: Nested Multimodal 3D Representations via Matryoshka Representation Learning">3D-MRL: Nested Multimodal 3D Representations via Matryoshka Representation Learning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts">Drift-Aware Multimodal User Representation Learning via Multi-Scale Temporal Modeling and Sparse Mixture-of-Experts</span></li><li><span class="dpr-home-dashboard-paper-title" title="PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval">PUMA: Post-Hoc Sparsification of Universal Multimodal Embeddings for Efficient Retrieval</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs">Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Test-Time Logit Prompting for Source-Free Missing Modality Adaptation">Test-Time Logit Prompting for Source-Free Missing Modality Adaptation</span></li><li><span class="dpr-home-dashboard-paper-title" title="CORE: Improving Compositional Reasoning in MLLM Embedding via Reranker Distillation">CORE: Improving Compositional Reasoning in MLLM Embedding via Reranker Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Acoustically Grounded Cost Learning for Open-Vocabulary Audio-Visual Semantic Segmentation">Acoustically Grounded Cost Learning for Open-Vocabulary Audio-Visual Semantic Segmentation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 

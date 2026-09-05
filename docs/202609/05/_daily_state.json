@@ -1,0 +1,313 @@
+{
+  "date": "20260905",
+  "date_label": "",
+  "generated_at": "2026-09-05 22:24:07 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.01657v1",
+      "route": "202609/05/2609.01657v1-neomme-a-single-tower-multimodal-native-multilingual-foundation-encoder-for-efficient-fine-tuning-and-inference",
+      "title": "NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出单塔多模态原生多语言编码器，在单一Transformer中联合建模文本与图像patch",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29139v1",
+      "route": "202609/05/2608.29139v1-more-perspectives-stronger-signals-multi-perspective-enhancement-and-progressive-fusion-for-multimodal-entity-representation-learning",
+      "title": "More Perspectives, Stronger Signals: Multi-Perspective Enhancement and Progressive Fusion for Multimodal Entity Representation Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出多视角增强与渐进融合框架，直接面向多模态实体表示学习",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29285v1",
+      "route": "202609/05/2608.29285v1-3d-mrl-nested-multimodal-3d-representations-via-matryoshka-representation-learning",
+      "title": "3D-MRL: Nested Multimodal 3D Representations via Matryoshka Representation Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过将点云与冻结的CLIP图像与文本嵌入对齐，学习嵌套式多模态三维表示",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29313v1",
+      "route": "202609/05/2608.29313v1-hyper3-clip-hierarchy-conditioned-hyperbolic-vision-language-training",
+      "title": "Hyper3-CLIP: Hierarchy-Conditioned Hyperbolic Vision-Language Training",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过双曲几何和条件对比学习进行跨模态对齐表征学习，编码层级关系结构",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29410v1",
+      "route": "202609/05/2608.29410v1-agents-as-knowledge-integrator-and-utilizer-in-multimodal-recommendation",
+      "title": "Agents as Knowledge Integrator and Utilizer in Multimodal Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过智能体整合多模态内容与用户行为的推荐方法",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.30563v1",
+      "route": "202609/05/2608.30563v1-modality-disentangled-learning-for-incomplete-multimodal-emotion-recognition-a-primitive-memory-distillation-perspective",
+      "title": "Modality Disentangled Learning for Incomplete Multimodal Emotion Recognition: A Primitive Memory Distillation Perspective",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过模态解缠学习处理多模态情感识别中的模态缺失，应对模态不平衡",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.01607v1",
+      "route": "202609/05/2609.01607v1-uncovering-understanding-generation-synergy-in-native-unified-multimodal-models-from-representation-task-to-system",
+      "title": "Uncovering Understanding-Generation Synergy in Native Unified Multimodal Models: From Representation, Task to System",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "研究原生统一多模态模型中表征层面的理解-生成协同与视觉语言对齐",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.02039v1",
+      "route": "202609/05/2609.02039v1-test-time-logit-prompting-for-source-free-missing-modality-adaptation",
+      "title": "Test-Time Logit Prompting for Source-Free Missing Modality Adaptation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "直接面向视觉语言模型中的缺失模态输入，提出测试时自适应方法",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.04083v1",
+      "route": "202609/05/2609.04083v1-core-improving-compositional-reasoning-in-mllm-embedding-via-reranker-distillation",
+      "title": "CORE: Improving Compositional Reasoning in MLLM Embedding via Reranker Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过重排序器蒸馏改进多模态大模型嵌入表示的方法",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29121v1",
+      "route": "202609/05/2608.29121v1-acoustically-grounded-cost-learning-for-open-vocabulary-audio-visual-semantic-segmentation",
+      "title": "Acoustically Grounded Cost Learning for Open-Vocabulary Audio-Visual Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过声学基础代价学习实现音频、视觉与文本表征的跨模态对齐",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29220v1",
+      "route": "202609/05/2608.29220v1-sgpdfuse-semantically-guided-physics-disentanglement-general-multi-modal-image-fusion",
+      "title": "SGPDFuse: Semantically-Guided Physics-Disentanglement General Multi-Modal Image Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态图像融合；用语义引导的物理解耦替代盲目特征聚合",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.00505v1",
+      "route": "202609/05/2609.00505v1-vital-x-video-text-alignment-with-cross-modal-temporal-edits",
+      "title": "ViTAL-X: Video-Text Alignment with Cross-Modal Temporal Edits",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "视频-文本跨模态对齐,用同步跨模态变换生成时间负样本并引入基准",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.01103v1",
+      "route": "202609/05/2609.01103v1-when-modality-gap-reduction-fails-prediction-level-hubness-in-clip",
+      "title": "When Modality Gap Reduction Fails: Prediction-Level Hubness in CLIP",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "CLIP图像文本表示的跨模态对齐与模态差距分析",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.01147v1",
+      "route": "202609/05/2609.01147v1-on-the-design-fundamentals-of-pixel-text-representation-learning",
+      "title": "On the Design Fundamentals of Pixel Text Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究像素文本表示学习的设计原则，涉及图文接地与多模态预训练",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2609.01406v1",
+      "route": "202609/05/2609.01406v1-contribution-aware-bandwidth-allocation-for-multimodal-split-learning",
+      "title": "Contribution-Aware Bandwidth Allocation for Multimodal Split Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "按各模态对融合预测的贡献分配带宽与压缩率，而非同等对待，缓解模态间不平衡",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.28383v1",
+      "route": "202609/05/2608.28383v1-semantic-head-specialization-guides-hybrid-vit-attention-for-multimodal-llms",
+      "title": "Semantic Head Specialization Guides Hybrid ViT Attention for Multimodal LLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过语义头特化指导多模态大模型的混合ViT注意力设计",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29088v1",
+      "route": "202609/05/2608.29088v1-hania-planner-guided-multimodal-graph-evidence-selection-for-grounded-question-answering",
+      "title": "HANIA: Planner-Guided Multimodal Graph Evidence Selection for Grounded Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以规划器引导图文多模态图证据选择，为问答提取关系证据，涉及多模态融合与推理",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29114v1",
+      "route": "202609/05/2608.29114v1-cgfm-nav-cognitive-graph-field-memory-for-semantic-guided-lifelong-multimodal-embodied-navigation",
+      "title": "CGFM-Nav: Cognitive Graph-Field Memory for Semantic-Guided Lifelong Multimodal Embodied Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在具身导航中耦合显式多模态关系记忆与空间线索，属跨文本-视觉-空间组合方法",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    },
+    {
+      "paper_id": "2608.29235v1",
+      "route": "202609/05/2608.29235v1-uncertainty-aware-multimodal-anti-uav-detection-via-evidential-fusion-and-conflict-discounted-belief-aggregation",
+      "title": "Uncertainty-Aware Multimodal Anti-UAV Detection via Evidential Fusion and Conflict-Discounted Belief Aggregation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向RGB-热成像多模态融合，用证据融合和冲突折扣信念聚合表达不确定性",
+      "first_seen_at": "2026-09-05 22:24:07 UTC",
+      "updated_at": "2026-09-05 22:24:07 UTC"
+    }
+  ]
+}
