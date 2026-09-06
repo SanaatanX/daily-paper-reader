@@ -1,0 +1,169 @@
+{
+  "date": "20260906",
+  "date_label": "",
+  "generated_at": "2026-09-06 22:23:39 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.30726v1",
+      "route": "202609/06/2608.30726v1-multimodal-adaptive-expert-selection-with-text-routing-and-ordinal-prototype-optimization-for-sentiment-analysis",
+      "title": "Multimodal Adaptive Expert Selection with Text Routing and Ordinal Prototype Optimization for Sentiment Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过文本路由和序数原型优化完成多模态融合的自适应专家选择方法",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.02152v1",
+      "route": "202609/06/2609.02152v1-beyond-modality-harmony-orthogonal-purification-and-topology-guided-moe-for-conflict-aware-multimodal-recommendation",
+      "title": "Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "针对模态冲突与噪声而非和谐假设，用正交纯化抑制伪相关、用拓扑引导MoE融合",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.02204v1",
+      "route": "202609/06/2609.02204v1-tame-temporal-aware-mixture-of-experts-for-text-video-retrieval",
+      "title": "TAME: Temporal-Aware Mixture-of-Experts for Text-Video Retrieval",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在CLIP双编码器中加入稀疏混合专家并按帧路由，学习视频时间感知表征以进行文本-视频检索",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2608.29604v1",
+      "route": "202609/06/2608.29604v1-repair-turning-retrieval-failures-into-counterfactual-hard-pairs",
+      "title": "RePair: Turning Retrieval Failures into Counterfactual Hard Pairs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "从视觉-语言检索失败中构造反事实困难对，改进跨模态对齐表征",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.01092v1",
+      "route": "202609/06/2609.01092v1-it-textfusion-iterative-text-image-interaction-with-text-guided-residual-refinement-for-degradation-aware-image-fusion",
+      "title": "IT-TextFusion: Iterative Text-Image Interaction with Text-Guided Residual Refinement for Degradation-Aware Image Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "结合交叉注意力与门控融合的迭代图文融合",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.01649v1",
+      "route": "202609/06/2609.01649v1-a-data-driven-multimodal-method-for-early-detection-of-coordinated-abnormal-behaviors-in-live-streaming-platforms",
+      "title": "A Data-Driven Multimodal Method for Early Detection of Coordinated Abnormal Behaviors in Live-Streaming Platforms",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将视频、文本、音频与用户行为做跨模态时间对齐到统一语义空间，以支持多模态检测",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2608.29088v1",
+      "route": "202609/06/2608.29088v1-hania-planner-guided-multimodal-graph-evidence-selection-for-grounded-question-answering",
+      "title": "HANIA: Planner-Guided Multimodal Graph Evidence Selection for Grounded Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "结合图像与文本证据，通过多模态图和规划器进行关系推理的问答方法",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2608.29923v1",
+      "route": "202609/06/2608.29923v1-towards-continual-test-time-adaptation-of-vision-language-models-in-open-vocabulary-semantic-segmentation",
+      "title": "Towards Continual Test-Time Adaptation of Vision-Language Models in Open-Vocabulary Semantic Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用跨模态锚点一致性约束维护图文对齐，属于跨模态对齐表示学习的适应方法",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.00591v1",
+      "route": "202609/06/2609.00591v1-a-glance-is-all-you-need-single-pass-fine-grained-image-captioning-with-simloss",
+      "title": "A Glance Is All You Need: Single-Pass Fine-Grained Image Captioning with SimLoss",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于InfoNCE的嵌入空间跨模态表征对齐",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    },
+    {
+      "paper_id": "2609.02663v1",
+      "route": "202609/06/2609.02663v1-characterizing-text-branch-sensitivity-in-medical-vision-language-segmentation-via-evidence-decoupling",
+      "title": "Characterizing Text Branch Sensitivity in Medical Vision-Language Segmentation via Evidence Decoupling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分析医学视觉语言分割中的常见融合策略并用证据解耦刻画文本分支的作用",
+      "first_seen_at": "2026-09-06 22:23:39 UTC",
+      "updated_at": "2026-09-06 22:23:39 UTC"
+    }
+  ]
+}

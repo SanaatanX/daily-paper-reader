@@ -1,0 +1,439 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-06T22:19:29.853880+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 7,
+    "quick_skim_target": 12,
+    "quick_selected": 7
+  },
+  "deep_dive": [
+    {
+      "id": "2608.30726v1",
+      "source": "arxiv",
+      "title": "Multimodal Adaptive Expert Selection with Text Routing and Ordinal Prototype Optimization for Sentiment Analysis",
+      "abstract": "Multimodal Sentiment Analysis (MSA) is a fundamental component of affective computing that aims to decipher complex emotional states by integrating verbal content with non-verbal cues including vocal intonation and facial micro-expressions. While recent disentanglement-based approaches have advanced the field, their potential is hindered by two methodological challenges. First, static computation graphs process all samples indiscriminately regardless of semantic complexity, which leads to suboptimal representation for diverse emotional expressions and contextual scenarios. Second, generic contrastive objectives often neglect the intrinsic ordinal hierarchy of sentiment intensities. To systematically address these limitations, we introduce Multimodal Adaptive Expert Selection with Text Routing and Ordinal prototype optimization (MAESTRO), a novel framework designed to dynamically orchestrate and refine multimodal representations. Drawing inspiration from an orchestra conductor, we design a Text-Guided Hybrid Mixture-of-Experts (MoE) mechanism. Unlike static fusion, this module utilizes linguistic context as a routing signal to dynamically activate specific audio-visual experts, thereby resolving cross-modal ambiguity through adaptive feature enhancement. Furthermore, to capture fine-grained sentiment gradations, we propose an Ordinal-aware Prototype Contrastive Learning (O-PCL). By incorporating distance-based penalties into the prototype learning objective, O-PCL enforces a structured latent space that preserves the natural order of emotion. Extensive experiments on the CMU-MOSI and CMU-MOSEI benchmarks demonstrate that MAESTRO achieves state-of-the-art performance, and qualitative analysis further confirms the interpretability of our dynamic routing paradigm.",
+      "authors": [
+        "Xiaode Chen",
+        "Jiakang Yu",
+        "Hongtao Deng",
+        "Huina Qu",
+        "Xun Zhu",
+        "Yinxia Lou"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-31T12:59:37+00:00",
+      "link": "https://arxiv.org/pdf/2608.30726v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "novel multimodal fusion via adaptive expert selection with text routing and ordinal prototype optimization",
+      "llm_evidence_cn": "通过文本路由和序数原型优化完成多模态融合的自适应专家选择方法",
+      "llm_evidence": "通过文本路由和序数原型优化完成多模态融合的自适应专家选择方法",
+      "canonical_evidence": "通过文本路由和序数原型优化完成多模态融合的自适应专家选择方法",
+      "llm_tldr_en": "For multimodal sentiment analysis, the paper proposes adaptive expert selection with text routing, letting samples of different semantic complexity use different computation paths, while ordinal prototype optimization models sentiment intensity hierarchy. This improves multimodal fusion and representation, yielding stronger sentiment recognition across verbal and non-verbal cues.",
+      "llm_tldr_cn": "多模态情感分析旨在整合文本、语音和面部表情等线索推断情感。本文指出静态计算图对所有样本一视同仁、通用对比目标忽略情感强度序数结构这两大问题，提出多模态自适应专家选择方法：利用文本路由为不同语义复杂度的样本动态选择融合路径，并引入序数原型优化以保持情感强度的层级关系。实验结果表明，该模型能有效提升多模态情感分析的准确率和情感强度区分能力，为任务感知的多模态融合提供了新的可行方案。",
+      "llm_tldr": "多模态情感分析旨在整合文本、语音和面部表情等线索推断情感。本文指出静态计算图对所有样本一视同仁、通用对比目标忽略情感强度序数结构这两大问题，提出多模态自适应专家选择方法：利用文本路由为不同语义复杂度的样本动态选择融合路径，并引入序数原型优化以保持情感强度的层级关系。实验结果表明，该模型能有效提升多模态情感分析的准确率和情感强度区分能力，为任务感知的多模态融合提供了新的可行方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.02152v1",
+      "source": "arxiv",
+      "title": "Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation",
+      "abstract": "Multimodal Recommender Systems (MRSs) typically rely on a flawed \"modality harmony\" assumption, presuming that multimodal features are inherently beneficial and strictly aligned with users' collaborative interaction patterns. However, modality-topology conflicts are ubiquitous in real-world scenarios due to deceptive visual clickbaits and mismatched semantics. Blindly integrating these noisy modalities inevitably pollutes the pristine collaborative space, causing severe representation distortion. To address this, we propose Orthogonal purification and topology-guided MoE for conflict-aware multimodal Recommendation (OrthoRec). At its core, OrthoRec introduces Collaborative-Guided Orthogonal Purification (CGOP), which geometrically decouples multimodal features into directions parallel and orthogonal to a pure collaborative anchor. By adaptively truncating the orthogonal noise with an energy-preserving normalization, CGOP rectifies deceptive semantic directions while preserving the modality's intrinsic representation capacity. Furthermore, we design a Topology-Aware Routing Mixture-of-Experts (TAR-MoE). Guided by the collaborative topology, TAR-MoE employs decoupled sigmoid gating to break the zero-sum bottleneck of traditional softmax attention, autonomously determining the injection scale for each purified modality. Finally, a safe-SSL objective is introduced to dynamically penalize the forced contrastive alignment of contradictory pairs. Experiments on three real-world Amazon datasets show that OrthoRec consistently outperforms competitive recent baselines and exhibits improved robustness under modality noise and item sparsity.",
+      "authors": [
+        "Jialin Liu",
+        "Zhaorui Zhang",
+        "Ray C. C. Cheung"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.AI"
+      ],
+      "published": "2026-09-02T06:06:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.02152v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "handles noisy/conflicting modalities instead of assuming modality harmony; proposes orthogonal purification and topology-guided MoE for robust multimodal fusion",
+      "llm_evidence_cn": "针对模态冲突与噪声而非和谐假设，用正交纯化抑制伪相关、用拓扑引导MoE融合",
+      "llm_evidence": "针对模态冲突与噪声而非和谐假设，用正交纯化抑制伪相关、用拓扑引导MoE融合",
+      "canonical_evidence": "针对模态冲突与噪声而非和谐假设，用正交纯化抑制伪相关、用拓扑引导MoE融合",
+      "llm_tldr_en": "Proposes OrthoRec, which replaces the modality harmony assumption with conflict-aware fusion: collaborative-guided orthogonal purification strips modality noise and topology-guided MoE learns robust multimodal user/item representations, preventing collaborative space corruption.",
+      "llm_tldr_cn": "多模态推荐通常假设各模态特征天生与用户协作模式一致，然而点击诱饵和语义错配带来的模态-拓扑冲突普遍存在，盲目融合会污染协同表示。OrthoRec针对这一缺陷，提出协作引导的正交纯化算法消除模态内噪声，并用拓扑引导的混合专家完成冲突感知融合。该方法强调建模模态间的冲突与质量差异，能够有效缓解模态不均衡导致的表示失真，并提升多模态推荐的鲁棒性。",
+      "llm_tldr": "多模态推荐通常假设各模态特征天生与用户协作模式一致，然而点击诱饵和语义错配带来的模态-拓扑冲突普遍存在，盲目融合会污染协同表示。OrthoRec针对这一缺陷，提出协作引导的正交纯化算法消除模态内噪声，并用拓扑引导的混合专家完成冲突感知融合。该方法强调建模模态间的冲突与质量差异，能够有效缓解模态不均衡导致的表示失真，并提升多模态推荐的鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.02204v1",
+      "source": "arxiv",
+      "title": "TAME: Temporal-Aware Mixture-of-Experts for Text-Video Retrieval",
+      "abstract": "Text-Video Retrieval (TVR) retrieves videos that match a natural-language query, but extending image-text models such as CLIP to videos is fundamentally limited by the lack of temporal modeling. Videos exhibit frame-wise heterogeneity in appearance and motion, and compressing all frames into a single representation often obscures temporal structure and semantic transitions. To address this, we propose Temporal-Aware Mixture-of-Experts for Text-Video Retrieval (TAME), a CLIP-based framework that jointly models frame-level structure and temporal relations. First, we integrate sparse Mixture-of-Experts (MoE) layers into both CLIP encoders and apply frame-consistent routing on the vision branch so that experts specialize according to frame-level visual patterns while preserving the original vision-language alignment. Second, we introduce Frame-Temporal (FT) tokens that aggregate global cross-frame information and feed it back to each frame, enabling the visual encoder to capture long-range temporal dependencies without harming local details. Third, we design a Cross-Temporal Interaction and Aggregation (CTIA) module that refines frame-wise sentence-video similarities through staged temporal filtering and fusion. Experiments on standard TVR benchmarks show that TAME consistently improves over CLIP-based baselines. On MSR-VTT, it improves R@1 by 4.0 over CLIP4Clip, and also achieves consistent gains on DiDeMo, MSVD, LSMDC, and ActivityNet. The code is available at https://github.com/sejong-rcv/TAME.",
+      "authors": [
+        "Uicheol Jung",
+        "Juyoung Hong",
+        "Hojung Kwon",
+        "Yukyung Choi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T07:12:50+00:00",
+      "link": "https://arxiv.org/pdf/2609.02204v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "CLIP-based multimodal representation learning with sparse mixture-of-experts and frame-consistent routing for text-video retrieval",
+      "llm_evidence_cn": "在CLIP双编码器中加入稀疏混合专家并按帧路由，学习视频时间感知表征以进行文本-视频检索",
+      "llm_evidence": "在CLIP双编码器中加入稀疏混合专家并按帧路由，学习视频时间感知表征以进行文本-视频检索",
+      "canonical_evidence": "在CLIP双编码器中加入稀疏混合专家并按帧路由，学习视频时间感知表征以进行文本-视频检索",
+      "llm_tldr_en": "TAME extends CLIP for text-video retrieval by inserting sparse Mixture-of-Experts into both encoders and applying frame-consistent routing on the vision branch, letting experts specialize on frame patterns and jointly capturing frame structure and temporal relations. This temporal-aware MoE design outperforms image-text CLIP transfer baselines.",
+      "llm_tldr_cn": "视频检索中直接将CLIP等图像文本模型迁移到视频会受限于时间建模不足。针对压缩所有帧成单一表征而丢失时间结构的问题，论文提出TAME框架，在CLIP的视觉和文本编码器中引入稀疏混合专家层，并在视觉分支采用帧一致路由，让专家按帧级视觉模式与时间关系分工。实验表明TAME能有效建模帧结构与语义转移，在文本-视频检索任务上优于现有CLIP扩展基线，验证了时间感知专家机制对跨模态视频表示学习的价值。",
+      "llm_tldr": "视频检索中直接将CLIP等图像文本模型迁移到视频会受限于时间建模不足。针对压缩所有帧成单一表征而丢失时间结构的问题，论文提出TAME框架，在CLIP的视觉和文本编码器中引入稀疏混合专家层，并在视觉分支采用帧一致路由，让专家按帧级视觉模式与时间关系分工。实验表明TAME能有效建模帧结构与语义转移，在文本-视频检索任务上优于现有CLIP扩展基线，验证了时间感知专家机制对跨模态视频表示学习的价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2608.29604v1",
+      "source": "arxiv",
+      "title": "RePair: Turning Retrieval Failures into Counterfactual Hard Pairs",
+      "abstract": "Vision-language retrieval with CLIP-style dual encoders achieves strong cross-modal performance, yet practical accuracy often hinges on localized semantic distinctions where top-ranked near misses differ from the true match by a single critical detail. Hard-sample mining can select confusable candidates but cannot construct corrected counterparts; synthetic augmentation can generate novel samples but, without conditioning on actual model failures, targets irrelevant dimensions of hardness. We observe that a top-ranked false positive is a counterfactual scaffold---sharing most of the query's semantics while differing in a localized failure-causing residual. Minimally correcting this residual yields a hard positive of the ground truth in the same modality; the corrected and unedited versions form a hard negative pair that straddles the decision boundary, producing complementary pull--push supervision. We introduce RePair, guided by three principles---Validity, Minimality, and Locality---which mines false positives bidirectionally, applies LLM-guided counterfactual editing, and trains with a local hard-pair contrastive objective. On Flickr30K and COCO30K, RePair outperforms controlled augmentation baselines with only 107K synthetic samples---26\\%--75\\% fewer than comparable methods---confirming failure-conditioned repair is more data-efficient than error-agnostic augmentation.",
+      "authors": [
+        "Siyi Liu",
+        "Xiaorong Zhu",
+        "Enjun Du",
+        "Xinyu Zuo",
+        "Lisheng Duan",
+        "Haijin Liang",
+        "Jin Ma",
+        "Junfu Pu",
+        "Yongqi Zhang"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR",
+        "cs.CV"
+      ],
+      "published": "2026-08-30T06:47:38+00:00",
+      "link": "https://arxiv.org/pdf/2608.29604v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "constructs counterfactual hard pairs from vision-language retrieval failures to improve cross-modal alignment",
+      "llm_evidence_cn": "从视觉-语言检索失败中构造反事实困难对，改进跨模态对齐表征",
+      "llm_evidence": "从视觉-语言检索失败中构造反事实困难对，改进跨模态对齐表征",
+      "canonical_evidence": "从视觉-语言检索失败中构造反事实困难对，改进跨模态对齐表征",
+      "llm_tldr_en": "RePair treats top-ranked false positives as counterfactual scaffolds in CLIP-style retrieval, minimally edits failure-causing residuals to form hard positives, producing targeted hard pairs that improve fine-grained cross-modal alignment and retrieval accuracy.",
+      "llm_tldr_cn": "CLIP式双编码器在视觉-语言检索中常因局部关键细节差异而误判，已有困难样本挖掘无法构造校正样本，合成增广又不针对真实失败。论文将排序中靠前的假阳性视为反事实支架，在保持大部分语义的前提下对失败残差进行最小修正，生成与真值同模态的硬正样本。这些困难对直接将检索失败变成训练信号，有助于增强细粒度跨模态对齐并提升检索准确率。",
+      "llm_tldr": "CLIP式双编码器在视觉-语言检索中常因局部关键细节差异而误判，已有困难样本挖掘无法构造校正样本，合成增广又不针对真实失败。论文将排序中靠前的假阳性视为反事实支架，在保持大部分语义的前提下对失败残差进行最小修正，生成与真值同模态的硬正样本。这些困难对直接将检索失败变成训练信号，有助于增强细粒度跨模态对齐并提升检索准确率。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.29088v1",
+      "source": "arxiv",
+      "title": "HANIA: Planner-Guided Multimodal Graph Evidence Selection for Grounded Question Answering",
+      "abstract": "Multimodal question answering remains sensitive to noisy, incomplete, and weakly grounded evidence. Long unstructured contexts can introduce redundancy and encourage unsupported generation, while flat retrieval may overlook relations needed for multi-step reasoning. We present HANIA, a planner-guided multimodal graph framework for evidence-grounded question answering. HANIA processes the supplied image and text using a frozen vision-language model to extract concise question-relevant visual evidence with explicit abstention. It then constructs an input-grounded multimodal graph and applies a two-group finite-state planner to coordinate descriptive and relational evidence. Coverage-aware pruning retains a compact evidence set based on relevance, graph confidence, concept coverage, and modality diversity. The selected passages, visual statements, and graph triples are provided to a frozen instruction-tuned decoder. We evaluate HANIA on ScienceQA using answer accuracy, evidence-filtering quality, evidence-budget sensitivity, and efficiency. The results show that structured evidence planning and compact graph-guided retrieval can support competitive multimodal question answering without target-dataset fine-tuning or iterative retrieval. The code is available at https://github.com/Zafar-southeast/HANIA.",
+      "authors": [
+        "Zafar Ali",
+        "Asad Khan",
+        "Nimbeshaho Thierry",
+        "Nabila Amir",
+        "Adam A. Q. Mohammed",
+        "Pavlos Kefalas"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-08-29T06:38:21+00:00",
+      "link": "https://arxiv.org/pdf/2608.29088v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "planner-guided multimodal graph method that combines image and text evidence with relational reasoning for QA",
+      "llm_evidence_cn": "结合图像与文本证据，通过多模态图和规划器进行关系推理的问答方法",
+      "llm_evidence": "结合图像与文本证据，通过多模态图和规划器进行关系推理的问答方法",
+      "canonical_evidence": "结合图像与文本证据，通过多模态图和规划器进行关系推理的问答方法",
+      "llm_tldr_en": "HANIA handles noisy multimodal QA by extracting concise visual evidence with frozen vision-language models, constructing a multimodal graph, and using a group planner plus coverage-aware pruning to select compact relation-rich evidence for grounded answering.",
+      "llm_tldr_cn": "多模态问答对证据噪声、信息不完整和弱依据支持很敏感，长文本既制造冗余又助长无依据生成，而扁平检索通常会漏掉多步推理所需要的关系。HANIA用冻结的视觉语言模型先提取与问题相关、可显式弃权的视觉证据，再在输入图片与文本之上构造多模态图，并通过两组有限状态规划器协调描述性证据与关系证据。覆盖感知剪枝能保留紧凑且更相关的证据集合，从而抑制弱依据生成，提升有依据问答中关系推理的证据质量。",
+      "llm_tldr": "多模态问答对证据噪声、信息不完整和弱依据支持很敏感，长文本既制造冗余又助长无依据生成，而扁平检索通常会漏掉多步推理所需要的关系。HANIA用冻结的视觉语言模型先提取与问题相关、可显式弃权的视觉证据，再在输入图片与文本之上构造多模态图，并通过两组有限状态规划器协调描述性证据与关系证据。覆盖感知剪枝能保留紧凑且更相关的证据集合，从而抑制弱依据生成，提升有依据问答中关系推理的证据质量。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01092v1",
+      "source": "arxiv",
+      "title": "IT-TextFusion: Iterative Text-Image Interaction with Text-Guided Residual Refinement for Degradation-Aware Image Fusion",
+      "abstract": "Text-guided image fusion has recently emerged as an effective paradigm for integrating multi-modal information while enabling flexible and task-oriented fusion control. However, existing text-guided fusion methods often rely on shallow semantic-visual interaction and limited attention mechanisms, which restrict their ability to robustly handle complex degradations and fully exploit textual guidance. In this paper, we propose an iterative text-guided image fusion framework that incorporates text-conditioned feature interaction across multiple fusion and refinement stages. The proposed method integrates deepest-level Cross-Attention, multi-scale Cross-Gate Fusion, and stage-specific text-conditioned modulation, allowing the global text embedding to condition hierarchical feature fusion and residual refinement. By repeatedly injecting the pooled text embedding across hierarchical decoder and refinement stages, the proposed framework provides degradation-aware global semantic conditioning while preserving complementary information from the visible and infrared modalities. Experiments on several benchmark datasets show that the proposed method improves several information-preservation and perceptual-quality metrics, while exhibiting metric-dependent trade-offs on some datasets.",
+      "authors": [
+        "Siyang Liu",
+        "Peiyi Zhou",
+        "Tianle Jin",
+        "Rongrong Bian",
+        "Zheke Jin",
+        "Mengze Gao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T11:33:20+00:00",
+      "link": "https://arxiv.org/pdf/2609.01092v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "iterative text-image fusion with cross-attention and gated fusion",
+      "llm_evidence_cn": "结合交叉注意力与门控融合的迭代图文融合",
+      "llm_evidence": "结合交叉注意力与门控融合的迭代图文融合",
+      "canonical_evidence": "结合交叉注意力与门控融合的迭代图文融合",
+      "llm_tldr_en": "Presents IT-TextFusion, an iterative text-guided image fusion framework with deepest cross-attention, multi-scale cross-gate fusion, and stage-specific text-conditioned modulation for robust degradation-aware fusion.",
+      "llm_tldr_cn": "现有文本引导图像融合方法常依赖较浅的语义-视觉交互和有限注意力，难以处理复杂退化。本文提出迭代式文本引导图像融合框架，在多个融合与细化阶段引入文本条件特征交互，集成深层交叉注意力、多尺度交叉门融合与阶段特定文本调制。该方法能够充分利用文本指导并应对复杂退化，实现灵活可控的图像融合。",
+      "llm_tldr": "现有文本引导图像融合方法常依赖较浅的语义-视觉交互和有限注意力，难以处理复杂退化。本文提出迭代式文本引导图像融合框架，在多个融合与细化阶段引入文本条件特征交互，集成深层交叉注意力、多尺度交叉门融合与阶段特定文本调制。该方法能够充分利用文本指导并应对复杂退化，实现灵活可控的图像融合。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.29923v1",
+      "source": "arxiv",
+      "title": "Towards Continual Test-Time Adaptation of Vision-Language Models in Open-Vocabulary Semantic Segmentation",
+      "abstract": "Open-vocabulary semantic segmentation (OVSS) relies on vision-language alignment to recognize arbitrary text-defined categories, yet this alignment is fragile under continual test-time distribution shift. Our diagnostic analysis reveals that entropy minimization drives patch-level class collapse, continual updates erode vision-language alignment, and redundant gradients from low-shift samples waste computation. We propose Diversify, Anchor, and Filter (DAF), a stabilization framework that augments entropy-based adaptation with a marginal diversity loss that resists collapse, a cross-modal anchor consistency loss that constrains feature drift relative to a frozen source model, and feature salience filtering that skips low-value backward passes to offset part of the source-anchor overhead. We evaluate on five datasets spanning natural scenes, autonomous driving, underwater imagery, and remote sensing with their corrupted variants. Across the evaluated continual shifts, DAF remains stable where entropy minimization collapses, improving mIoU by over 8 points on Pascal VOC20-C, over 9 points on LoveDA, and over 3 points on Foggy Cityscapes compared to the source model, and is robust to aggressive adaptation and learning rate choices.",
+      "authors": [
+        "Chandler Timm C. Doloriel",
+        "Yunbei Zhang",
+        "Sarthak Kumar Maharana",
+        "Muhammad Salman Siddiqui",
+        "Tor Kristian Stevik",
+        "Fadi Al Machot",
+        "Kristian Hovde Liland",
+        "Habib Ullah"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-08-30T17:39:14+00:00",
+      "link": "https://arxiv.org/pdf/2608.29923v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal anchor consistency loss maintains vision-language alignment under distribution shift",
+      "llm_evidence_cn": "利用跨模态锚点一致性约束维护图文对齐，属于跨模态对齐表示学习的适应方法",
+      "llm_evidence": "利用跨模态锚点一致性约束维护图文对齐，属于跨模态对齐表示学习的适应方法",
+      "canonical_evidence": "利用跨模态锚点一致性约束维护图文对齐，属于跨模态对齐表示学习的适应方法",
+      "llm_tldr_en": "DAF applies marginal diversity, cross-modal anchor consistency, and salience filtering to stabilize continual test-time adaptation of vision-language segmentation models.",
+      "llm_tldr_cn": "开放词汇语义分割在连续测试时分布漂移下容易出现补丁级类别坍缩和视觉-语言对齐退化。本文提出DAF稳定框架，通过边际多样性损失抵抗坍缩、跨模态锚点一致性损失约束模型相对冻结源模型的特征漂移，并用特征显著性过滤跳过漂移干扰样本。实验表明DAF能持续稳定地保持跨模态对齐，在多个分割基准上显著缓解分布漂移带来的性能下降。",
+      "llm_tldr": "开放词汇语义分割在连续测试时分布漂移下容易出现补丁级类别坍缩和视觉-语言对齐退化。本文提出DAF稳定框架，通过边际多样性损失抵抗坍缩、跨模态锚点一致性损失约束模型相对冻结源模型的特征漂移，并用特征显著性过滤跳过漂移干扰样本。实验表明DAF能持续稳定地保持跨模态对齐，在多个分割基准上显著缓解分布漂移带来的性能下降。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01649v1",
+      "source": "arxiv",
+      "title": "A Data-Driven Multimodal Method for Early Detection of Coordinated Abnormal Behaviors in Live-Streaming Platforms",
+      "abstract": "With the rapid growth of live-streaming e-commerce and digital marketing, abnormal marketing behaviors have become increasingly concealed and coordinated across heterogeneous modalities, challenging platform governance and early risk identification. We propose MM-FGDNet, a data-driven multimodal framework for detecting abnormal behavior in large-scale live-streaming environments from complementary temporal-evolution and group-structure perspectives. A cross-modal temporal alignment module maps video, text, audio, and user behavior into a unified temporal semantic space. A temporal fraud-pattern module captures the progression from weak early signals to abrupt outbreaks, while a cooperative manipulation module identifies coordinated interactions among organized user groups and automated accounts. Experiments on real-world multi-platform live-streaming e-commerce datasets show that MM-FGDNet outperforms representative baselines, achieving an AUC of 0.927, F1 of 0.847, precision of 0.861, recall of 0.834, and an Early Detection Score of 0.689, while reducing false alarms. Ablation studies validate the contribution of each module, and cross-domain experiments demonstrate stable generalization to new streamers, product categories, and platforms. These results indicate that MM-FGDNet provides an effective and scalable solution for proactive detection of coordinated abnormal behavior in live-streaming systems.",
+      "authors": [
+        "Jingwen Luo",
+        "Pinrui Zhu",
+        "Yiyan Wang",
+        "Zilin Xiao",
+        "Jingqi Li",
+        "Xuebei Kong",
+        "Yan Zhan"
+      ],
+      "primary_category": "cs.SI",
+      "categories": [
+        "cs.SI",
+        "cs.AI"
+      ],
+      "published": "2026-08-30T09:56:28+00:00",
+      "link": "https://arxiv.org/pdf/2609.01649v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "cross-modal temporal alignment unifies video/text/audio/user behavior in one semantic space for multimodal detection",
+      "llm_evidence_cn": "将视频、文本、音频与用户行为做跨模态时间对齐到统一语义空间，以支持多模态检测",
+      "llm_evidence": "将视频、文本、音频与用户行为做跨模态时间对齐到统一语义空间，以支持多模态检测",
+      "canonical_evidence": "将视频、文本、音频与用户行为做跨模态时间对齐到统一语义空间，以支持多模态检测",
+      "llm_tldr_en": "MM-FGDNet is a multimodal framework for early detection of coordinated abnormal live-streaming behavior; it aligns video, text, audio and user behavior in a unified temporal space and models fraud pattern evolution and group manipulation.",
+      "llm_tldr_cn": "直播电商中异常营销趋于跨视频、文本、音频与用户行为等异构模态协同且隐蔽。该文提出MM-FGDNet，以跨模态时间对齐模块将这些模态映射到统一的时序语义空间，再由时序欺诈模式模块刻画从弱信号到异常爆发的演化，协同操纵模块识别群体结构。框架强调时间对齐与群体视角而非简单特征拼接，为平台治理中的多模态早期风险识别提供了一种可借鉴的表示与建模方式。",
+      "llm_tldr": "直播电商中异常营销趋于跨视频、文本、音频与用户行为等异构模态协同且隐蔽。该文提出MM-FGDNet，以跨模态时间对齐模块将这些模态映射到统一的时序语义空间，再由时序欺诈模式模块刻画从弱信号到异常爆发的演化，协同操纵模块识别群体结构。框架强调时间对齐与群体视角而非简单特征拼接，为平台治理中的多模态早期风险识别提供了一种可借鉴的表示与建模方式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.00591v1",
+      "source": "arxiv",
+      "title": "A Glance Is All You Need: Single-Pass Fine-Grained Image Captioning with SimLoss",
+      "abstract": "An image may be worth a thousand words, but most captioning models describe it in only a few. Modern vision-language models produce fluent high-level captions, yet routinely miss the attributes, counts, textures, materials, and spatial relations that make an image visually specific. Recent multi-stage systems recover some of these details through generation, decomposition, verification, and rewriting, but they do so at the expense of substantially higher inference latency.   We propose SimLoss, a reference-free embedding-space objective for single-pass fine-grained image captioning. SimLoss trains a vision-language model to align its projected hidden-state representation with a frozen image embedding through an InfoNCE contrastive loss, supplying a dense visual supervision signal before any text is decoded, and requiring neither human-written fine-grained captions nor pseudo-captions from a multi-stage pipeline. We instantiate it as SimLoss FFT, which backpropagates through a locally available embedding model, and SimLoss GRPO, which treats that model as a black-box reward.   Compared with single-pass, multi-stage verification, reward-optimized, and perception-aware baselines, the fully differentiable fine-tuning variant, SimLoss FFT, achieves the highest precision while nearly matching the F1 score of the multi-stage method, all while retaining single-pass inference and running roughly 20 times faster than the multi-stage pipeline.   The reward-based variant SimLoss GRPO attains the strongest recall. Together, these results show that embedding-space supervision can recover the quality of multi-stage verification at the latency of a single-pass captioner.",
+      "authors": [
+        "Suryaansh Jain",
+        "Rahasya Barkur",
+        "Vishal G",
+        "Ryan Rossi",
+        "Franck Dernoncourt",
+        "Jack Wang",
+        "Koustava Goswami",
+        "Nedim Lipka",
+        "Puneet Mathur",
+        "Samyadeep Basu",
+        "Seunghyun Yoon"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T02:31:34+00:00",
+      "link": "https://arxiv.org/pdf/2609.00591v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal representation alignment with InfoNCE in embedding space",
+      "llm_evidence_cn": "基于InfoNCE的嵌入空间跨模态表征对齐",
+      "llm_evidence": "基于InfoNCE的嵌入空间跨模态表征对齐",
+      "canonical_evidence": "基于InfoNCE的嵌入空间跨模态表征对齐",
+      "llm_tldr_en": "Proposes SimLoss, a reference-free embedding-space objective aligning projected hidden states with a frozen image embedding via InfoNCE, enabling single-pass fine-grained image captioning without multi-stage refinement.",
+      "llm_tldr_cn": "当代视觉-语言模型能生成流畅的高层描述，但常忽略属性、数量、纹理、材质和空间关系等细节，多阶段改写系统虽能恢复细节却推理延迟高。本文提出SimLoss，在嵌入空间中用冻结图像嵌入与投影隐状态进行InfoNCE对比对齐，无需外部参考标注即可训练单次精细图像描述生成。方法在生成细节丰富的描述同时保持高效，为细粒度视觉语言对齐提供了轻量训练信号。",
+      "llm_tldr": "当代视觉-语言模型能生成流畅的高层描述，但常忽略属性、数量、纹理、材质和空间关系等细节，多阶段改写系统虽能恢复细节却推理延迟高。本文提出SimLoss，在嵌入空间中用冻结图像嵌入与投影隐状态进行InfoNCE对比对齐，无需外部参考标注即可训练单次精细图像描述生成。方法在生成细节丰富的描述同时保持高效，为细粒度视觉语言对齐提供了轻量训练信号。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.02663v1",
+      "source": "arxiv",
+      "title": "Characterizing Text Branch Sensitivity in Medical Vision-Language Segmentation via Evidence Decoupling",
+      "abstract": "Pretrained vision-language models (VLMs) have shown promising performance in medical image segmentation by incorporating clinical text. However, it remains unclear how much textual information actually contributes to pixel-level predictions. In this work, we systematically investigate the role of text in multimodal medical image segmentation. We first analyze several commonly used fusion strategies and find that segmentation performance is largely insensitive to the choice of fusion module. To further understand modality interactions, we propose an Evidence Decoupling Decoder (EDD) based on evidential deep learning and deep supervision. EDD serves as an internal representation analysis tool that decomposes image evidence and text-modulated evidence throughout the decoding process while maintaining competitive segmentation performance. Experimental results show that the sensitivity to text perturbation varies substantially across datasets. On BUSI and BTMRI, removing text causes catastrophic performance drops, indicating strong model reliance on textual input. On ISIC and Kvasir-SEG, text exerts relatively marginal influence. We further find that text affects predictions mainly through global semantic modulation rather than independent spatial localization, and that the specific semantic components driving text sensitivity differ across datasets. These findings provide a deeper understanding of modality interaction in multimodal medical image segmentation and offer practical insights for future model design.",
+      "authors": [
+        "Ziquan Liu",
+        "Zhewei Zhu",
+        "Xuyang Shi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T14:38:52+00:00",
+      "link": "https://arxiv.org/pdf/2609.02663v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Analyzes common fusion strategies and decomposes modality evidence in medical vision-language segmentation to characterize text contribution",
+      "llm_evidence_cn": "分析医学视觉语言分割中的常见融合策略并用证据解耦刻画文本分支的作用",
+      "llm_evidence": "分析医学视觉语言分割中的常见融合策略并用证据解耦刻画文本分支的作用",
+      "canonical_evidence": "分析医学视觉语言分割中的常见融合策略并用证据解耦刻画文本分支的作用",
+      "llm_tldr_en": "Investigates how much clinical text truly contributes to multimodal medical image segmentation; analyzes common fusion strategies, finds performance is largely insensitive to fusion module choice, and proposes an evidence-decoupling decoder based on evidential deep learning to decompose modality evidence and understand text branch sensitivity.",
+      "llm_tldr_cn": "预训练视觉语言模型用于医学图像分割时常引入临床文本，但其对像素级预测的真实贡献尚不清楚。论文系统分析多种常用融合策略，发现分割性能对融合模块的选择基本不敏感。为进一步理解模态交互，作者提出基于证据深度学习与深度监督的证据解耦解码器EDD，将图像证据解耦并分析文本分支敏感性。该工具可帮助研究者定位文本在分割中何时真正起作用，并指导融合设计。",
+      "llm_tldr": "预训练视觉语言模型用于医学图像分割时常引入临床文本，但其对像素级预测的真实贡献尚不清楚。论文系统分析多种常用融合策略，发现分割性能对融合模块的选择基本不敏感。为进一步理解模态交互，作者提出基于证据深度学习与深度监督的证据解耦解码器EDD，将图像证据解耦并分析文本分支敏感性。该工具可帮助研究者定位文本在分割中何时真正起作用，并指导融合设计。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

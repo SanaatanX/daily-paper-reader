@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-05</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-06</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>7</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-05 22:24:07 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-06 22:23:39 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读19篇多模态论文，精读7篇、速读12篇，聚焦编码器与表示学习新进展。最值得关注NeoMME单塔多模态原生编码器的高效微调推理设计，以及多视角渐进融合的实体表示方法。下一步可深入对比这两类架构在多语言、缺失模态场景下的实际效果。</p>
+<p>今日聚焦多模态学习，精读3篇、速读7篇，覆盖情感分析、推荐系统与图像融合等前沿方向。</p>
+<p>最值得关注两项8分工作：一是多模态情感分析中的文本路由与序数原型优化，二是冲突场景下多模态推荐的解冲突与专家混合机制，均针对模态异质性问题给出新解法。</p>
+<p>建议从“多模态如何应对冲突与缺失”入手，先精读两篇高分论文，再顺藤摸瓜探索速读中的反事实样本构造与直播异常检测应用。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference">NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference</span></li><li><span class="dpr-home-dashboard-paper-title" title="More Perspectives, Stronger Signals: Multi-Perspective Enhancement and Progressive Fusion for Multimodal Entity Representation Learning">More Perspectives, Stronger Signals: Multi-Perspective Enhancement and Progressive Fusion for Multimodal Entity Representation Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="3D-MRL: Nested Multimodal 3D Representations via Matryoshka Representation Learning">3D-MRL: Nested Multimodal 3D Representations via Matryoshka Representation Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Adaptive Expert Selection with Text Routing and Ordinal Prototype Optimization for Sentiment Analysis">Multimodal Adaptive Expert Selection with Text Routing and Ordinal Prototype Optimization for Sentiment Analysis</span></li><li><span class="dpr-home-dashboard-paper-title" title="Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation">Beyond Modality Harmony: Orthogonal Purification and Topology-Guided MoE for Conflict-Aware Multimodal Recommendation</span></li><li><span class="dpr-home-dashboard-paper-title" title="TAME: Temporal-Aware Mixture-of-Experts for Text-Video Retrieval">TAME: Temporal-Aware Mixture-of-Experts for Text-Video Retrieval</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Test-Time Logit Prompting for Source-Free Missing Modality Adaptation">Test-Time Logit Prompting for Source-Free Missing Modality Adaptation</span></li><li><span class="dpr-home-dashboard-paper-title" title="CORE: Improving Compositional Reasoning in MLLM Embedding via Reranker Distillation">CORE: Improving Compositional Reasoning in MLLM Embedding via Reranker Distillation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Acoustically Grounded Cost Learning for Open-Vocabulary Audio-Visual Semantic Segmentation">Acoustically Grounded Cost Learning for Open-Vocabulary Audio-Visual Semantic Segmentation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="RePair: Turning Retrieval Failures into Counterfactual Hard Pairs">RePair: Turning Retrieval Failures into Counterfactual Hard Pairs</span></li><li><span class="dpr-home-dashboard-paper-title" title="IT-TextFusion: Iterative Text-Image Interaction with Text-Guided Residual Refinement for Degradation-Aware Image Fusion">IT-TextFusion: Iterative Text-Image Interaction with Text-Guided Residual Refinement for Degradation-Aware Image Fusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Data-Driven Multimodal Method for Early Detection of Coordinated Abnormal Behaviors in Live-Streaming Platforms">A Data-Driven Multimodal Method for Early Detection of Coordinated Abnormal Behaviors in Live-Streaming Platforms</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>7</strong></span></div>
 </section>
 </div>
 

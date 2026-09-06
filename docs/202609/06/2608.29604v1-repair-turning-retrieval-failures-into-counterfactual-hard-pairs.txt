@@ -1,0 +1,1373 @@
+Title: RePair: Turning Retrieval Failures into Counterfactual Hard Pairs
+
+URL Source: https://arxiv.org/pdf/2608.29604v1
+
+Published Time: Tue, 01 Sep 2026 01:28:42 GMT
+
+Number of Pages: 27
+
+Markdown Content:
+# RePair: Turning Retrieval Failures into Counterfactual Hard Pairs 
+
+Siyi Liu 1, † Xiaorong Zhu 1, † Enjun Du 1,2,3 Xinyu Zuo 2 Lisheng Duan 2
+
+Haijin Liang 2 Jin Ma 2 Junfu Pu 4 Yongqi Zhang 1, *1The Hong Kong University of Science and Technology (Guangzhou) 
+
+2Tencent Yuanbao 3The University of Hong Kong 4ARC Lab, Tencent 
+
+ssui.liu1022@gmail.com xrzhulalala@163.com yongqizhang@hkust-gz.edu.cn 
+
+Abstract 
+
+Vision-language retrieval with CLIP-style dual encoders achieves strong cross-modal perfor-mance, yet practical accuracy often hinges on localized semantic distinctions where top-ranked near misses differ from the true match by a single critical detail. Hard-sample mining can select confusable candidates but cannot construct corrected counterparts; synthetic augmentation can generate novel samples but, without conditioning on actual model failures, targets irrelevant dimensions of hardness. We observe that a top-ranked false positive is a counterfactual scaffold—sharing most of the query’s semantics while differing in a localized failure-causing residual. Minimally correcting this residual yields a hard positive of the ground truth in the same modality; the corrected and unedited versions form a hard negative pair that straddles the decision boundary, producing complementary pull–push supervision. We introduce RePair, guided by three principles— Validity, Minimality, and Locality—which mines false positives bidirectionally, applies LLM-guided counterfactual editing, and trains with a local hard-pair contrastive objective. On Flickr30K and COCO30K, RePair outperforms controlled augmentation baselines with only 107K synthetic samples—26%–75% fewer than comparable methods—confirming failure-conditioned repair is more data-efficient than error-agnostic augmentation. 
+
+1 Introduction 
+
+Vision-language retrieval has become a standard interface for cross-modal search, with CLIP-style dual encoders serving as the dominant architecture (Radford et al., 2021; Jia et al., 2021). While these models are effective at matching high-level visual and textual concepts, practical retrieval often hinges on localized semantic distinctions— attribute binding, relations, and word order—on 
+
+> †
+
+Equal contribution. 
+
+> *
+
+Corresponding author. Scaffold     
+
+> Query: A girl in a red shirt is on a tire swing.
+> Residual
+> Edit
+> Before repair
+> Correct region
+> False positive Ground truth
+> Same semantics as GT
+> Repair signal After repair
+> Correct region Correct region
+> Pull
+> Boundary shift
+> Edited
+> Edit
+> Push
+> FP Zone
+> Ideal Boundary
+> Incorrect region
+> Model Boundary
+> FP Zone
+> Repaired Model Boundary
+> Incorrect region
+> Ground truth sample False positive sample
+> Incorrect region
+> Edited sample
+
+Figure 1: The RePair operator. Top: For a text query q, the retrieval system returns a near-miss false positive pfp that shares the query’s scaffold (green: “a girl in a red shirt”) but differs on the failure-causing residual (red: wrong swing type). RePair minimally edits only the residual to produce pedit , which carries the same semantics as the ground truth pgt . Bottom: 
+
+Before repair, pfp falls in the FP zone between the ideal boundary and the model’s learned boundary. The repair signal pulls pedit toward pgt and pushes pfp away, shifting the model boundary to eliminate the FP zone. 
+
+which diagnostic benchmarks document persistent failures (Thrush et al., 2022; Yuksekgonul et al., 2023). The critical details can be subtle: whether a person is alone or in a group, whether an object is a projector or a skateboard, or who is performing versus receiving an action. Under such demands, the most consequential errors are not obviously unrelated candidates, but top-ranked near misses that satisfy most of the query while missing the detail that makes the match correct (see Fig. 1, top, for an example). These near misses are especially informative because they reveal precisely where the retriever’s semantic understanding breaks down. Near misses therefore provide a natural handle for refining retrieval models. Standard contrastive fine-tuning relies largely on random in-batch negatives, many of which are too easy to sharpen 1arXiv:2608.29604v1 [cs.IR] 30 Aug 2026 such fine-grained boundaries (Robinson et al., 2021). Hard-sample mining moves closer to the boundary by retrieving confusable candidates from the training corpus, and has become a common way to strengthen contrastive supervision (Karpukhin et al., 2020; Xiong et al., 2021). However, mining— like reweighting (Robinson et al., 2021; Chuang et al., 2020)—remains a selection-only mechanism: both families select or reweight existing items rather than altering pair content. Mining can identify what the model should push away, but it cannot construct the corrected neighbor in the same semantic region. As a result, the model receives repulsive supervision from hard negatives, but lacks a matched attractive signal that specifies how the boundary should be repaired. Synthetic augmentation offers a complementary route (Liu et al., 2024, 2025): instead of only selecting existing candidates, it can generate hard positives or hard negatives (Cioni et al., 2023; Yoon et al., 2024; Alimisis et al., 2025). Yet most existing pipelines are not conditioned on the retriever’s own failures. They perturb captions, rewrite texts, synthesize images, or compose counterfactuals according to predefined templates or external generators, without asking which semantic factor actually caused the current model to fail (Yuksekgonul et al., 2023; Fan et al., 2023; Patel et al., 2024; Tian et al., 2023). Consequently, the generated samples may be plausible hard cases in general, but not necessarily hard for the model being trained. They may alter irrelevant details while missing the true confusion factor, leading to low hit rates and large synthesis volumes (Chuang et al., 2020). Our key observation is that a top-ranked false positive is a useful counterfactual scaffold, not merely a negative. It preserves much of the query’s semantic structure, explaining why the model retrieved it, while containing a localized failure-causing residual, explaining why it is wrong. This scaffold–residual view suggests a simple operator over a retrieval error: given a query q and its retrieved false positive pfp , minimally correct only the failure-causing residual of pfp while preserving its shared scaffold. As illustrated in Fig. 1, because the corrected result pedit now carries the same semantic content as the ground truth pgt , it forms a hard positive of pgt in the same modality; meanwhile, pedit and the unedited pfp form a hard negative pair that straddles the decision boundary with minimal perceptual difference. Training can therefore pull pedit toward the query alongside pgt 
+
+and push pfp away, shifting the model boundary to eliminate the FP zone where the failure occurred (Fig. 1, bottom). We instantiate this idea as RePair . The name reflects two coupled operations: RePair re-pairs 
+
+each retrieval error with a minimal counterfactual counterpart, and training on the resulting contrast 
+
+repairs the local retrieval boundary by pulling the corrected counterpart toward the query alongside the ground truth while pushing the original error away. To make this operation reliable, RePair follows three design principles. Validity ensures that a mined near miss is a genuine retrieval failure rather than annotation noise or a benign alternative match. Minimality ensures that counterfactual editing changes only the failure-causing residual while preserving the shared semantic scaffold. 
+
+Locality ensures that the original failure and its corrected counterpart are contrasted within the same boundary neighborhood. Operationally, RePair mines top-ranked false positives in both retrieval directions and verifies each with an LLM-based semantic auditor ( Validity ). It then generates minimal edit instructions and selects the least-disruptive valid edit ( Minimality ). Finally, it trains the resulting hard pairs with a local contrastive objective that couples pull and push signals within the same boundary neighborhood ( Locality ). We evaluate RePair on Flickr30K and COCO30K under a unified CLIP fine-tuning setting. RePair achieves the strongest top-rank (R@1) retrieval performance among controlled augmentation baselines while using substantially fewer synthetic samples. Ablations confirm that failure conditioning, quality control, and paired pull–push supervision drive the gains rather than synthesis volume alone. These results support the central premise of RePair: retrieval failures are not just mistakes to be discarded or negatives to be mined, but compact opportunities for counterfactual boundary repair. In summary, we make the following contributions: • We introduce RePair , a failure-conditioned counterfactual training framework that re-pairs a retriever’s own false positives with minimal counterfactual counterparts, converting each retrieval error into a hard positive of the ground truth and a grounded hard negative pair for local boundary repair. • We instantiate RePair through three design 2principles—Validity, Minimality, and Locality— using LLM-based semantic auditing, minimal counterfactual editing with post-edit selection, bidirectional hard-pair construction, and local hard-pair contrastive training. • We show that RePair improves vision-language retrieval more data-efficiently than error-agnostic augmentation under a unified CLIP fine-tuning setting, with ablations isolating the roles of failure conditioning, quality control, and paired pull–push supervision. 
+
+2 Related Work 
+
+2.1 Hard-sample Aware Contrastive Vision-Language Learning 
+
+In contrastive vision-language learning (Radford et al., 2021; Jia et al., 2021), the training signal is dominated by hard negatives —samples that are semantically distinct yet close in the em-bedding space—while simply increasing batch size yields diminishing returns (Robinson et al., 2021; Kalantidis et al., 2020; Wu et al., 2017). Modern strategies such as hard negative mining, filtering, and distillation improve data efficiency and robustness (Faghri et al., 2018; Radenovic et al., 2023; Wang et al., 2025). Despite these advances, most existing approaches improve hard signals at the distribution or strategy level, but do not condition on the model’s current retrieval failures as explicit anchors for failure-conditioned synthesis. 
+
+2.2 Synthetic Hard Samples for Vision-Language Models 
+
+To address the scarcity of naturally occurring hard samples, recent work leverages generative models to synthesize hard samples across modal-ities. On the text side, NegCLIP (Yuksekgonul et al., 2023) and SugarCrepe (Hsieh et al., 2023) generate hard negative captions via compositional perturbation (Ma et al., 2023; Dönmez et al., 2023; Zhang et al., 2024), while LaCLIP (Fan et al., 2023) produces hard positive captions through paraphras-ing. On the image side, StableRep (Tian et al., 2023) and ALiA (Dunlap et al., 2023) generate synthetic positive images (Jin et al., 2024), while COCO-CF (Le et al., 2023) and TripletCLIP (Patel et al., 2024) construct counterfactual or hard negative images (Koohpayegani et al., 2025; Huang et al., 2025; Zhang et al., 2025). However, most methods operate in a single modality and skew toward negatives without a mechanism to balance repulsion from hard negatives with attraction to hard positives (Kamath et al., 2024). 
+
+3 Method 
+
+We consider bidirectional image–text retrieval 
+
+with a dual-encoder architecture. Given a paired dataset D = {(Ii, T i)}Ni=1 , image and text encoders produce ℓ2-normalized embeddings, respectively 
+
+zI (I) ∈ RD and zT (T ) ∈ RD, which are instantiated using the CLIP dual-encoder backbone. The scaled logit is ℓ(I, T ) = α z I (I)⊤zT (T ),where α > 0 is a learnable logit scale ( τ = 1 /α is the temperature). Our framework, RePair , preserves the standard CLIP contrastive objective but fundamentally changes how training pairs are constructed. Build-ing on the scaffold–residual view of retrieval failures (Section 1), RePair follows three design principles. Validity : we mine the model’s top-
+
+Kmine false positives in both retrieval directions and verify each as a genuine confusion via LLM-based quality control (Section 3.1). Minimality :we apply counterfactual editing that changes only the failure-causing residual while preserving the shared scaffold, and select the least-disruptive edit (Section 3.2). Locality : we organize the resulting hard pairs into local contrastive grids that confine pull–push supervision to the same boundary neighborhood (Section 3.3). Figure 2 illustrates the pipeline. 
+
+3.1 Failure-Driven Mining and Validation (V ALIDITY )
+
+Not all retrieval errors are equally useful for training. High-scoring false positives may arise from annotation noise, where the ground truth is mismatched with the query, or from benign mismatches, where the false positive is actually a valid alternative match. The V ALIDITY principle ensures that only genuine model confusions—cases where the retriever is systematically wrong—serve as seeds for counterfactual editing. We adopt a model-in-the-loop strategy: query-ing the current retrieval system and treating high-scoring mismatched results as failure anchors. Each top-ranked false positive pfp preserves much of the query’s semantic structure—the shared scaffold that explains its high ranking—while differing in a localized failure-causing residual. This scaffold–residual structure makes pfp an ideal 3Figure 2: RePair pipeline overview. Validity (Mining & Validation) : A retriever mines top-Kmine false positives (pfp  
+
+> I
+
+/pfp  
+
+> T
+
+) in both T2I and I2T directions; a pre-edit verifier filters annotation noise and benign mismatches, ensuring only genuine failures serve as editing seeds. Minimality (Counterfactual Editing) : An instruction generator produces a minimal edit instruction τedit conditioned on (q, p fp ); a modality-specific editor applies τedit to pfp , and post-edit selection picks the candidate closest to pfp , yielding a hard positive pedit (edited) and a hard negative pfp 
+
+(original). The resulting pairs are organized into local contrastive grids for training (L OCALITY ; see Figure 3). 
+
+seed for counterfactual editing (Section 3.2). Given a query q, let P(q) denote all its annotated positives and let C(q) denote the cross-modal candidate set (all images when q is text, all captions when q is an image). Excluding all annotated positives, we rank the remaining candidates by similarity and keep the top Kmine as the false-positive pool :
+
+F(q) = Kmine 
+
+Top 
+
+> p∈C (q)\P (q)
+
+ℓ(q, p ), (1) where Top n returns the n candidates with the highest scores. From this pool, we retain the top-d
+
+most confusable false positives: 
+
+{pfp  
+
+> i
+
+}di=1 = d
+
+Top 
+
+> p∈F (q)
+
+ℓ(q, p ), (2) where ℓ(q, p fp 1 ) ≥ · · · ≥ ℓ(q, p fp  
+
+> d
+
+). The retrieval pool size satisfies Kmine ≥ d, so that the pool always supplies the d retained false positives. The retention count d is direction-dependent: text editing via an LLM is cheap and deterministic, permitting a larger d, whereas image editing via a diffusion model is expensive and stochastic, favoring a smaller d combined with multiple candidate generations (Section 3.2) for diversity. 
+
+Pre-Edit Quality Control. We prompt an LLM to evaluate two criteria in a single pass (see Appendix N): Criterion 1 verifies query–ground-truth consistency; Criterion 2 checks whether the false positive constitutes a valid alternative match. We retain a triplet only when the query–ground-truth pair is confirmed valid and the false positive is not a valid alternative match, ensuring that only genuine model confusions are forwarded to the editing stage. 
+
+3.2 Minimal Counterfactual Editing (M INIMALITY )
+
+The M INIMALITY principle requires that counter-factual editing changes only the failure-causing residual while preserving the shared scaffold between the false positive and the query. This ensures that the resulting hard positive pedit is perceptually near-identical to the original false positive pfp , differing in exactly the semantic attribute that caused the retrieval error. 
+
+Edit-Instruction Generation. For each veri-fied failure, an instruction generator G(·) pro-duces a counterfactual editing instruction τedit =
+
+G(q, p fp ), specifying how to minimally modify pfp 
+
+to match query q.
+
+Counterfactual Editing and Post-Edit Selection. 
+
+A modality-specific editor E(·)—an LLM for text, a diffusion model for images—generates M edited candidates {pedit  
+
+> m
+
+}Mm=1 = {E(pfp , τ edit ; ξm)}Mm=1 
+
+by varying stochastic factors ξm. From the M
+
+candidates, we select the final hard example by the 4minimal-change principle: 
+
+pedit = arg max  
+
+> m∈{ 1,...,M }
+
+cos  z(pfp ), z (pedit  
+
+> m
+
+). (3) The edit instruction encourages query alignment, while the minimal-change selection encourages scaffold preservation. Together they balance semantic correction with structural fidelity. We term this selection step post-edit quality control (PQC) .Because the edit instruction targets only the failure-causing residual, the edited counterpart 
+
+pedit shares the same scaffold as the original pfp .The corrected pedit carries the same semantic con-tent as the ground truth pgt , forming a hard positive of pgt in the same modality; at the same time, pedit 
+
+and pfp form a hard negative pair whose hardness is grounded in their minimal residual contrast. The synthesis pipeline outputs a grounded tuple 
+
+(q, p gt , p fp , p edit ). The full synthesis procedure is in Algorithm 1 (Appendix E). 
+
+3.3 Local Hard-Pair Contrastive Training (L OCALITY )
+
+The synthesis stages above produce hard pairs that are semantically proximate by construction—each pair shares a scaffold and differs only in the failure-causing residual. However, random batching does not guarantee that such a pair appears in the same minibatch, diluting the paired pull–push signal. The L OCALITY principle addresses this by organizing synthesized examples into structured local neighborhoods where the hard positive and its counterfactual hard negative are always contrasted together. 
+
+Bidirectional Hard-Pair Construction. The synthesis pipeline of Sections 3.1–3.2 is applied in both retrieval directions. For a T2I false positive (image Ifp retrieved for text query T ), the corrected result I+ forms a hard positive of the ground-truth image in the same modality, while I+ and Ifp 
+
+form a hard negative pair. Symmetrically, for an I2T false positive (caption T fp retrieved for image query I), the corrected T + forms a hard positive of the ground-truth caption, with T + and T fp forming a hard negative pair. This bidirectional process produces complementary hard pairs across both modalities. 
+
+Grid Construction. Starting from a ground-truth anchor pair (Ia, T a), we incorporate the mined Ia I+(T hn ) Ihn 
+
+> A smiling boy plays on a blue baby walker.
+> A child with a shaved head is riding a bouncy sea-horse.
+> A smiling boy plays on a green plastic swing-toy.
+> Ta
+> Thn
+> T+(I hn )
+
+Figure 3: The 3 × 3 local confusion grid. Diagonal entries are positive pairs; off-diagonal entries serve as hard negatives. 
+
+false-positive image Ihn 1 for T a (T2I failure) and the false-positive text T hn for Ia (I2T failure). Each false positive is associated with a semantically matching counterpart in its cross-modal partner: 
+
+I+(T hn ) denotes the image that semantically matches T hn , and T +(Ihn ) denotes the caption that semantically matches Ihn —each obtained either from the dataset’s own annotations or via counterfactual editing. The three resulting pairs form the grid; only diagonal entries are treated as positives, while the six off-diagonal pairs serve as hard negatives. The grid is 
+
+I = [ Ia, I +(T hn ), I hn ],
+
+T = [ T a, T hn , T +(Ihn )] . (4) 
+
+Training Strategy. Directly mixing synthesized hard examples into the global batch risks degrading feature-space uniformity (Wang and Isola, 2020). The decoupled grid confines hard-pair interactions to a local neighborhood, preserving global uni-formity while sharpening local alignment. We therefore design a dual-objective framework :the global contrastive loss Lglobal , the standard symmetric InfoNCE loss, operates exclusively on original anchor pairs, while synthesized hard exam-ples participate only in the local grid objective. 
+
+Local 3 × 3 Grid Loss. For each grid b ∈{1, . . . , B }, let S(b) ∈ R3×3 be the pairwise logit matrix within that grid. Let Q denote the set                 
+
+> 1We write Ihn /Thn instead of Ifp /Tfp to mark the shift from synthesis role (edit seed) to training role (hard negative for the grid anchor). When obtained via editing, I+(Thn )and
+> T+(Ihn )are the post-edit-selected outputs of the synthesis records in which Thn and Ihn themselves served as queries (cf. Algorithm 2).
+
+5of diagonal positive pairs, which is the same for every grid. The local loss forces the model to discriminate anchor and hard positives from hard negatives within the grid: 
+
+Lgrid = 1
+
+B
+
+> B
+
+X
+
+> b=1
+
+12|Q| 
+
+X
+
+> (i,j )∈Q
+
+J (b) 
+
+> ij
+
+, (5) where 
+
+J (b) 
+
+> ij
+
+= − log eS(b)
+
+> ij
+
+P3 
+
+> k=1
+
+eS(b)
+
+> ik
+
+− log eS(b)
+
+> ij
+
+P3 
+
+> k=1
+
+eS(b)
+
+> kj
+
+.
+
+The final objective is a weighted sum: 
+
+L = Lglobal + λLgrid , (6) where λ ≥ 0 balances the global and local supervision. The full training procedure is in Algorithm 2 (Appendix E). 
+
+4 Experiments 
+
+4.1 Experimental Setup Datasets. We evaluate on Flickr30K (Plummer et al., 2017) and MS-COCO (Lin et al., 2014). To align the training scale with Flickr30K (29k training images), we construct COCO30K by uniformly sampling from the COCO training split while maintaining the original image–caption pair-ing (see Appendix A). For evaluation, we strictly follow the standard Karpathy split (Karpathy and Fei-Fei, 2015) for both datasets. 
+
+Evaluation Protocol. We perform full-rank re-trieval on the test set for both Image-to-Text (I2T) and Text-to-Image (T2I) directions. Detailed protocol settings are provided in Appendix B. 
+
+Baselines. We compare our approach against three categories of strong baselines: (a) Text-side synthesis/rewrites : NegCLIP (Yuksekgonul et al., 2023), SugarCrepe (Hsieh et al., 2023), and LaCLIP (Fan et al., 2023); (b) Image-side augmentation/synthesis : SimCLR (Chen et al., 2020), StableRep (Tian et al., 2023), and ALiA (Dunlap et al., 2023); (c) Pair-level / pipeline : COCO-CF (Le et al., 2023) and TripletCLIP (Patel et al., 2024). We also evaluate representative composed baselines (e.g., La + SC; CF + AL + La, with La = LaCLIP, SC = SugarCrepe, CF = COCO-CF, AL = ALiA) to analyze comple-mentarity. Implementation recipes for all baselines are detailed in Appendix C. 
+
+Metrics. We report Recall@K ( K ∈ { 1, 5, 10 })and Mean Reciprocal Rank (MRR) for both I2T and T2I. Full results including R@10 and MRR are provided in Appendix F. 
+
+Implementation Details. We use the CLIP ViT-B/32 (Radford et al., 2021) backbone for all main experiments unless otherwise noted. For the synthesis pipeline, we employ Gemini 2.5 Flash (Gemini Team, Google, 2025) for quality control, instruction generation, and I2T caption editing, while Flux2-9B (Black Forest Labs, 2026) is used for image editing. We set Kmine =100 
+
+for the retrieval pool (Eq. 1) and use asymmetric retention counts (Eq. 2): dI2T =5 (retaining the 5 highest-scoring false-positive captions) and dT2I =1 
+
+(retaining the single top-ranked false-positive image). The asymmetric d reflects the modality cost structure discussed in Section 3.1. This yields approximately 47k I2T and 60k T2I synthesis instances (totaling 107k). For post-edit selection (PQC, Eq. 3), we generate M =3 candidates and retain the one closest to pfp in embedding space. We set λ = 0 .5 for the 3 × 3 grid loss. Additional hyperparameters and training details are provided in Appendix D. 
+
+4.2 Main Results 
+
+Table 1 presents the retrieval performance com-parison on Flickr30K and COCO30K. We eval-uate three variants of our framework: RePair-I2T (applying synthesis only to Image-to-Text failures), RePair-T2I (applying synthesis only to Text-to-Image failures), and RePair (Full) (the complete bidirectional framework). Our approach demonstrates three key advantages over existing augmentation strategies. • Data-efficient superiority. With only 107K 
+
+synthetic samples—26%–75% fewer than the 145K–435K used by baselines—RePair (Full) achieves the best R@1 across both datasets and both retrieval directions (e.g., Flickr30K I2T: 90.13 vs. SugarCrepe’s 88.95). These gains confirm that failure-conditioned synthesis targeting the model’s error space yields higher-quality supervision than scaling volume. These gains are most pronounced at R@1, the regime most sensitive to the near-miss confusions that failure conditioning targets. • Bidirectional complementarity. Each single-direction variant improves both retrieval di-6Method Samples (k) Aug. Type Flickr30K COCO30K                                                                                                                                                                       
+
+> I+I−T+T−I2T T2I I2T T2I R@1 R@5 R@1 R@5 R@1 R@5 R@1 R@5 Vanilla –87.87 98.22 74.60 92.87 60.54 83.86 44.15 71.97 NegCLIP 205 ✓88.07 98.13 74.38 92.78 61.06 84.00 44.37 72.29 SugarCrepe 145 ✓88.95 98.62 74.64 92.98 61.92 85.02 45.09 72.94 LaCLIP 145 ✓86.69 97.83 74.46 92.60 60.96 84.30 44.99 72.70 SimCLR 145 ✓88.26 98.32 74.30 92.78 61.34 84.14 45.13 72.77 StableRep 145 ✓87.67 98.22 74.64 92.72 61.76 84.98 44.61 72.95 ALiA 145 ✓87.67 98.22 74.36 92.88 61.62 84.40 44.93 72.87 COCO-CF 145 ✓✓87.97 97.44 74.64 92.98 60.32 84.92 44.55 72.61 TripletCLIP 145 ✓✓85.11 97.44 73.47 92.13 56.06 84.40 43.20 71.23
+> Combined Baselines
+> La + SC 290 ✓✓88.07 97.34 74.24 92.62 60.10 84.96 44.57 72.63 CF + AL + La 435 ✓✓✓✓86.88 97.63 74.14 92.84 59.74 83.98 44.56 72.59 RePair-I2T 47 ✓✓88.75 98.12 76.07 93.73 62.06 84.84 45.69 73.31 RePair-T2I 60 ✓✓89.44 98.32 75.93 93.47 61.78 85.24 45.87 73.53 RePair (Full) 107 ✓✓✓✓90.13 98.71 76.35 93.67 62.64 85.72 46.11 73.59
+
+Table 1: Retrieval performance on Image-to-Text (I2T) and Text-to-Image (T2I) on Flickr30K and COCO30K. The best and second-best results are marked in bold and underlined, respectively. Augmentation modality and polarity are marked by I+/I− (image hard positive/negative) and T +/T − (text hard positive/negative). 
+
+rections, lifting cross-direction R@1 by more than a point in every case—indicating that denser supervision on one confusion boundary indirectly sharpens the shared embedding space. Combining both directions lifts R@1 in all four dataset–direction settings; the two directions therefore supply complementary supervision. • Precision over volume. Composite baselines using 290K–435K samples fail to improve consistently over Vanilla and can degrade below it (e.g., CF + AL + La on Flickr30K I2T R@1: 86.88 vs. 87.87), demonstrating that error-agnostic synthesis introduces noise that pollutes contrastive gradients. In contrast, RePair’s failure-conditioned refinement avoids such nega-tive transfer. A sample-size analysis (Appendix I) and generation-cost comparison (Appendix J.1) further quantify RePair’s efficiency advantage. 
+
+4.3 Ablation and Analysis 
+
+Table 2 reports a component-wise ablation on 
+
+COCO30K . We fix the synthesis budget, training schedule, and all hyperparameters, toggling one design choice at a time. • (i) Failure conditioning (V ALIDITY ) is the dominant factor. Replacing failure-mined seeds with error-agnostic sampling ( w/o Fail-ure ) causes the largest drop (I2T: −2.10 , T2I: 
+
+−2.42 ), identifying the V ALIDITY principle— targeting the model’s current error regions rather than generic samples—as the primary driver of RePair’s gains. A characterization of failure types is provided in Appendix L. Conversely, using the mined false positives directly as hard negatives without editing ( w/o Repair ) yields only marginal gains over Vanilla (Table 2); the repair step—the corrected hard positive and its minimal contrast against the FP—contributes the bulk of the improvement, confirming that mining and repairing are both necessary. • (ii) Seed validation (V ALIDITY ) and minimal-change selection (M INIMALITY ) are both necessary. Removing seed-level filtering ( w/o QC ) or post-edit minimal-change selection ( w/o PQC ) consistently hurts both directions (Table 2), with larger T2I degradations suggesting image-side edits are more prone to semantic drift. QC reliability evaluation is provided in Appendix K. • (iii) Local paired supervision (L OCALITY ) is essential. Discarding the local grid ( Full Matrix )produces the largest single-component drop after failure conditioning (Table 2)—evidence that mixing synthetic items into the global batch dilutes paired pull–push supervision. Retaining the grid but removing hard-positive supervision (Hard Neg Only ) further shows that push-only training is insufficient—the model requires the complementary pull signal from counterfactual hard positives. 7Category Ablation setting R@1 I2T R@1 T2I                                     
+
+> RePair -62.64 46.11 Failure Cond. (V AL .) w/o Failure 60 .54 -2.10 43 .69 -2.42
+> Repair Op. (M IN .+LOC .) w/o Repair (FP-as-HN) 60 .83 -1.81 44 .20 -1.91
+> Seed Valid. (V AL .) w/o QC 61 .98 -0.66 44 .87 -1.24
+> Min.-Change (M IN .) w/o PQC 62 .12 -0.52 45 .33 -0.78
+> Local Training (L OC .) Full Matrix 61 .42 -1.22 44 .36 -1.75
+> Hard Neg Only 61 .64 -1.00 44 .92 -1.19
+> Image Editing Model Flux2-4B 61 .82 -0.82 45 .01 -1.10
+> InstructPix2Pix 61 .07 -1.57 43 .86 -2.25
+> Gemini 2.5 Flash Image 62 .86 +0.22 46 .35 +0.24
+> LLM GPT-4o 61 .98 -0.66 44 .73 -1.38
+> Backbone (ViT-L/14) Vanilla 72.00 55.19 RePair 73.48 55.94
+
+Table 2: Ablation and sensitivity analysis on COCO30K. Top: core design ablations (one design choice toggled at a time), each defined where it is discussed in Section 4.3. Bottom: external component sensitivity. Subscripts show ∆R@1 vs. the full method. 
+
+Sensitivity to external components. Swapping the image editor introduces notable variance— InstructPix2Pix (Brooks et al., 2023) degrades markedly while Gemini 2.5 Flash Image yields slight gains—indicating that RePair is plug-and-play but its ceiling scales with editor fidelity. The characteristic failure mode of image editing is scaf-fold drift, found only in T2I; better editors directly reduce this failure mode, raising RePair’s ceiling (Appendices L.3 and L.4). Replacing the LLM with GPT-4o (OpenAI, 2024) degrades R@1 modestly (Table 2)—well under half the drop caused by removing failure mining entirely—confirming the core gain comes from failure-conditioned synthesis, not specific LLM capability. On ViT-L/14, RePair improves both COCO30K directions (Table 2); the gains persist on this stronger backbone, though narrower margins are expected as the baseline leaves fewer near-miss errors to repair. Multi-round re-mining yields additional but diminishing gains, suggesting one round captures most informative failures (Appendix M). 
+
+Post-edit quality. The ablations above test these components through downstream accuracy, not through whether the retained pairs are correct. We verify 800 retained post-edit records by hand—200 per dataset × direction split—against five binary criteria (Appendix K.3): over 92% form valid hard contrasts , with near-perfect FP validity. Consistent with the editor sensitivity above, quality is higher on the I2T side; directional breakdowns and failure-mode classification are in Appendix L.3. Method Accuracy P@1 VG-Attr VG-Rel COCO-Ord Flk-Ord Vanilla 62.6 51.6 25.4 31.1 NegCLIP 62.0 49.3 26.7 31.5 SugarCrepe 62.1 51.3 26.6 32.1 LaCLIP 62.8 49.7 27.1 32.0 SimCLR 62.5 53.7 27.0 32.8 StableRep 62.3 52.8 27.4 32.4 ALiA 62.4 54.2 27.1 32.3 COCO-CF 61.6 48.7 27.1 32.1 TripletCLIP 61.7 50.1 26.5 32.7 RePair (Full) 64.8 53.0 27.5 33.2 
+
+Table 3: Compositional evaluation on ARO (Yuksek-gonul et al., 2023). All values in %; best and second-best in bold and underlined. 
+
+4.4 Generalization: Scale and Compositionality Training scale. When the training corpus grows 
+
+3.9× from COCO30K (29K images) to full MS-COCO (113K), RePair still improves over Vanilla on all four metrics under the same unified setting (e.g., T2I R@1 +0 .93 , R@5 +0 .80 ). The gains are consistent but smaller in magnitude, as on ViT-L/14 (Table 2): scaling the corpus and repairing failures address overlapping near-miss errors. Notably, the improvements persist, indicating that failure-conditioned repair captures error patterns that additional data alone does not fully resolve. 
+
+Compositional benchmarks. Table 3 evaluates the COCO30K-finetuned CLIP ViT-B/32 check-points on ARO (Yuksekgonul et al., 2023) under the unified setting of Table 1. ARO probes attribute binding, relation reasoning, and word-order sensitivity—the localized distinctions that motivate RePair (Section 1). RePair improves over Vanilla on all four metrics and ranks first among all ten systems on three—without tem-plated compositional hard negatives. Notably, methods that explicitly construct compositional hard negatives (NegCLIP, SugarCrepe) fall below Vanilla on VG-Attribution, which RePair improves, while the only methods above RePair on VG-Relation (ALiA, SimCLR) remain at Vanilla-level VG-Attribution ( 62 .4–62 .5 vs. 64 .8). The relative margins are consistent with the mined failure distribution: relation errors are among the less frequent categories (Appendix L). 8edit         
+
+> paried
+> look at their hands while hanging out in the yard.
+> examining his own hands near another boy outside in a garden.
+> Anchor Caption
+> Man sitting down playing a game of chess alone.
+> Crowd behind man working projector.
+> A man spinning a skateboard in his hands while people watch.
+> Text to Image Image to Text
+> Hard Negative
+> Hard Positive
+> Hard Positive
+> Hard Negative
+> q
+> Ifp Iedit
+> Igt q
+> Tfp Tedit
+> Tgt
+> edit
+> paired
+> Two young guys with shaggy hair look at their hands while hanging out in the yard.
+> Two young guys with shaggy hair are hugging each other while hanging out in the yard.
+> Two young guys with short hair, one gesturing with outstretched hands and the other eating while hanging out in the yard.
+> IAnchor
+> TAnchor
+> Ihn
+> Thn T+(I hn )
+> I+(T hn )
+> Text Mo
+> hugging each other while hanging out in the yard.
+> A man crouching
+> next to a
+> projector while people watch.
+
+Figure 4: Case study of RePair’s synthesis on T2I (left) and I2T (right). In T2I, the query q (“playing chess alone” )retrieves a near-miss image Ifp depicting multiple players; RePair edits only the failure-causing residual to produce 
+
+Iedit , which matches the query and serves as a hard positive alongside Igt , while the unedited Ifp becomes the paired hard negative. Symmetrically in I2T, a false-positive caption T fp sharing the query’s scaffold ( “people watch” ) but with a mismatched residual ( “skateboard” ) is corrected to a faithful description T edit . Igt and T gt 
+
+denote the ground truth. 
+
+4.5 Case Study 
+
+Figure 4 illustrates RePair’s counterfactual synthe-sis on representative Flickr30K failures. In the T2I case, a query about “playing chess alone” retrieves a near-miss image whose scaffold (outdoor scene, chess board, seated person) matches the query but whose residual (multiple players instead of solitary) causes the failure; RePair edits only this residual (multi-person → solitary), producing 
+
+Iedit that matches the query, with the unedited 
+
+Ifp as the paired hard negative. Symmetrically, in the I2T case a false-positive caption preserves the scaffold ( “people watch” ) but contains a mismatched residual ( “skateboard” instead of 
+
+“projector” ); RePair corrects only the residual while keeping the scaffold intact. In both directions, each mined failure produces a tightly controlled pair that concentrates the contrastive gradient on the model’s actual confusion boundary. 
+
+5 Conclusion 
+
+We presented RePair , a failure-conditioned coun-terfactual training framework grounded in the scaffold–residual view of retrieval failures. By observing that a top-ranked false positive preserves most of the query’s semantic structure (the scaffold) while differing in a localized failure-causing residual, RePair converts each retrieval error into a hard positive and grounded hard negative through minimal counterfactual editing. Three principles— 
+
+Validity , Minimality , and Locality —govern seed selection, editing, and training. Experiments on Flickr30K and COCO30K demonstrate that RePair consistently outperforms error-agnostic baselines, particularly at R@1, while using only 107k synthetic samples (26%–75% fewer than existing methods), confirming that failure-conditioned coun-terfactual repair is more data-efficient than brute-force scaling. 
+
+Limitations 
+
+RePair has several limitations. First, the synthesis pipeline relies on external editors (an LLM for text, a diffusion model for images) and an LLM-based quality control module. The framework is modular and editor-agnostic—any component can be swapped without architectural changes—so it naturally benefits from advances in the underlying models, but its ceiling is set by their current fidelity. Second, we mine and repair failures from a single retrieval snapshot; iterative re-mining over successive checkpoints, evaluation on web-scale noisy corpora, and cross-dataset transfer are natural extensions. Third, the current framework is evaluated on dual-encoder CLIP models; its applicability to cross-attention or fusion-based retrieval architectures remains unexplored. 
+
+Ethics Statement 
+
+This work focuses on improving image–text re-trieval through counterfactual data augmentation. We discuss the ethical aspects of our research below. 9Potential Risks and Misuse. Our method syn-thesizes hard negative pairs by editing existing captions and images. While the edits are designed for retrieval training, the underlying text and image editing techniques could be misused to generate misleading content. However, our pipeline oper-ates on well-established public benchmarks (MS-COCO and Flickr30K) and produces training data rather than user-facing content, which limits the scope of potential misuse. 
+
+Data and Bias. We use publicly available datasets (MS-COCO and Flickr30K) that are widely adopted in the research community. These datasets may contain societal biases present in their source images and annotations. Our method does not address or amplify such biases, as the counterfactual edits target fine-grained semantic distinctions (e.g., attributes, relations, actions) rather than sensitive demographic attributes. 
+
+Environmental Impact. Our approach is com-putationally efficient—it does not require training large generative models from scratch but instead leverages existing pre-trained models for data synthesis. We fine-tune the retrieval model on standard hardware with moderate computational cost. 
+
+Use of AI Assistants. We use a large language model (LLM) as part of our synthesis pipeline for caption editing and quality filtering. In preparing the manuscript, we additionally used AI assistants for language editing and proofreading. All research ideas, experimental design, analyses, and claims are the authors’ own. 
+
+Acknowledgments 
+
+This work was sponsored by the CCF-Tencent Rhino-Bird Open Research Fund (No. CCF-Tencent RAGR20250119), and was also supported by the Guangdong Basic and Applied Basic Research Foundation (No. 2025A1515010304), the Guangdong Province Project (No. 2024QN11X088), and the Guangzhou Science and Technology Planning Project (No. 2025A03J4491). 
+
+References 
+
+Panagiotis Alimisis, Ioannis Mademlis, Panagiotis Radoglou-Grammatikis, Panagiotis Sarigiannidis, and Georgios Th Papadopoulos. 2025. Advances in diffusion models for image data augmentation: A review of methods, models, evaluation metrics and future research directions. Artificial Intelligence Review , 58(4):112. Black Forest Labs. 2026. FLUX.2 [klein]: Towards Interactive Visual Intelligence. Black Forest Labs blog. Open-weight FLUX.2 [klein] 9B checkpoint: Hugging Face. Tim Brooks, Aleksander Holynski, and Alexei A Efros. 2023. InstructPix2Pix: Learning to follow image editing instructions. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 18392–18402. Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. 2020. A simple framework for contrastive learning of visual representations. In 
+
+International conference on machine learning , pages 1597–1607. PMLR. Ching-Yao Chuang, Joshua Robinson, Yen-Chen Lin, Antonio Torralba, and Stefanie Jegelka. 2020. Debiased contrastive learning. Advances in neural information processing systems , 33:8765–8775. Dario Cioni, Lorenzo Berlincioni, Federico Becattini, and Alberto Del Bimbo. 2023. Diffusion based augmentation for captioning and retrieval in cultural heritage. In Proceedings of the IEEE/CVF international conference on computer vision , pages 1707–1716. Esra Dönmez, Pascal Tilli, Hsiu-Yu Yang, Ngoc Thang Vu, and Carina Silberer. 2023. HNC: Leveraging hard negative captions towards models with fine-grained visual-linguistic comprehension capabilities. In Proceedings of the 27th Conference on Computa-tional Natural Language Learning (CoNLL) , pages 364–388, Singapore. Association for Computational Linguistics. Lisa Dunlap, Alyssa Umino, Han Zhang, Jiezhi Yang, Joseph E. Gonzalez, and Trevor Darrell. 2023. Diversify your vision datasets with automatic diffusion-based augmentation. In Proceedings of the 37th International Conference on Neural Information Processing Systems , NIPS ’23, Red Hook, NY, USA. Curran Associates Inc. Fartash Faghri, David J Fleet, Jamie Ryan Kiros, and Sanja Fidler. 2018. VSE++: Improving visual-semantic embeddings with hard negatives. In Proceedings of the British Machine Vision Conference (BMVC) .Lijie Fan, Dilip Krishnan, Phillip Isola, Dina Katabi, and Yonglong Tian. 2023. Improving CLIP training with language rewrites. In Thirty-seventh Conference on Neural Information Processing Systems .Gemini Team, Google. 2025. Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities. 
+
+arXiv preprint arXiv:2507.06261 .
+
+10 Cheng-Yu Hsieh, Jieyu Zhang, Zixian Ma, Aniruddha Kembhavi, and Ranjay Krishna. 2023. SugarCrepe: Fixing hackable benchmarks for vision-language compositionality. In Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track .Xin Huang, Ruibin Li, Tong Jia, Wei Zheng, and Ya Wang. 2025. Visual perturbation and adaptive hard negative contrastive learning for compositional reasoning in vision-language models. In Proceedings of the Thirty-Fourth International Joint Conference on Artificial Intelligence, IJCAI-25 , pages 5435– 5443. International Joint Conferences on Artificial Intelligence Organization. Main Track. Chao Jia, Yinfei Yang, Ye Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc Le, Yun-Hsuan Sung, Zhen Li, and Tom Duerig. 2021. Scaling up visual and vision-language representation learning with noisy text supervision. In International conference on machine learning , pages 4904–4916. PMLR. Xiaomeng Jin, Jeonghwan Kim, Yu Zhou, Kuan-Hao Huang, Te-Lin Wu, Nanyun Peng, and Heng Ji. 2024. ARMADA: Attribute-based multimodal data augmentation. In Proceedings of the First Workshop on Advancing Natural Language Processing for Wikipedia , pages 112–125, Miami, Florida, USA. Association for Computational Linguistics. Yannis Kalantidis, Mert Bulent Sariyildiz, Noe Pion, Philippe Weinzaepfel, and Diane Larlus. 2020. Hard negative mixing for contrastive learning. In 
+
+Proceedings of the 34th International Conference on Neural Information Processing Systems , NIPS ’20, Red Hook, NY, USA. Curran Associates Inc. Amita Kamath, Cheng-Yu Hsieh, Kai-Wei Chang, and Ranjay Krishna. 2024. The hard positive truth about vision-language compositionality. In 
+
+European Conference on Computer Vision , pages 37–54. Springer. Andrej Karpathy and Li Fei-Fei. 2015. Deep visual-semantic alignments for generating image descriptions. In Proceedings of the IEEE conference on computer vision and pattern recognition , pages 3128–3137. Vladimir Karpukhin, Barlas Oguz, Sewon Min, Patrick Lewis, Ledell Wu, Sergey Edunov, Danqi Chen, and Wen-tau Yih. 2020. Dense passage retrieval for open-domain question answering. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP) , pages 6769–6781, Online. Association for Computational Linguistics. Soroush Abbasi Koohpayegani, Anuj Singh, Navaneet K L, Hamed Pirsiavash, and Hadi J. Rad. 2025. GeNIe: Generative hard negative images through diffusion. 
+
+Transactions on Machine Learning Research .J Richard Landis and Gary G Koch. 1977. The measurement of observer agreement for categorical data. Biometrics , 33(1):159–174. Tiep Le, Vasudev Lal, and Phillip Howard. 2023. COCO-Counterfactuals: Automatically constructed counterfactual examples for image-text pairs. Ad-vances in Neural Information Processing Systems ,36:71195–71221. Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C. Lawrence Zitnick. 2014. Microsoft COCO: Common objects in context. In European Conference on Computer Vision (ECCV) .Siyi Liu, Yang Li, Jiang Li, Shan Yang, and Yunshi Lan. 2024. Unleashing the power of large language models in zero-shot relation extraction via self-prompting. In Findings of the Association for Computational Linguistics: EMNLP 2024 , pages 13147–13161, Miami, Florida, USA. Association for Computational Linguistics. Siyi Liu, Yujia Zheng, and Yongqi Zhang. 2025. StructSynth: Leveraging LLMs for structure-aware tabular data synthesis in low-data regimes. arXiv preprint arXiv:2508.02601 .Zixian Ma, Jerry Hong, Mustafa Omer Gul, Mona Gandhi, Irena Gao, and Ranjay Krishna. 2023. CREPE: Can vision-language foundation models reason compositionally? In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 10910–10921. OpenAI. 2024. GPT-4o system card. Preprint ,arXiv:2410.21276. Maitreya Patel, Naga Sai Abhiram kusumba, Sheng Cheng, Changhoon Kim, Tejas Gokhale, Chitta Baral, and Yezhou Yang. 2024. TripletCLIP: Improving compositional reasoning of CLIP via synthetic vision-language negatives. In The Thirty-eighth Annual Conference on Neural Information Processing Systems .Bryan A. Plummer, Liwei Wang, Chris M. Cervantes, Juan C. Caicedo, Julia Hockenmaier, and Svetlana Lazebnik. 2017. Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models. International Journal of Computer Vision (IJCV) .Filip Radenovic, Abhimanyu Dubey, Abhishek Kadian, Todor Mihaylov, Simon Vandenhende, Yash Patel, Yi Wen, Vignesh Ramanathan, and Dhruv Mahajan. 2023. Filtering, distillation, and hard negatives for vision-language pre-training. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , pages 6967–6977. Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, Gretchen Krueger, and Ilya Sutskever. 2021. Learning transferable visual models from natural language supervision. In International conference on machine learning , pages 8748–8763. PMLR. 
+
+11 Joshua David Robinson, Ching-Yao Chuang, Suvrit Sra, and Stefanie Jegelka. 2021. Contrastive learning with hard negative samples. In International Conference on Learning Representations .Tristan Thrush, Ryan Jiang, Max Bartolo, Amanpreet Singh, Adina Williams, Douwe Kiela, and Candace Ross. 2022. Winoground: Probing vision and language models for visio-linguistic compositionality. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 5238–5248. Yonglong Tian, Lijie Fan, Phillip Isola, Huiwen Chang, and Dilip Krishnan. 2023. StableRep: Synthetic images from text-to-image models make strong visual representation learners. Advances in Neural Information Processing Systems , 36:48382–48402. Haonan Wang, Minbin Huang, Runhui Huang, Lanqing Hong, Hang Xu, Tianyang Hu, Xiaodan Liang, Zhenguo Li, Hong Cheng, and Kenji Kawaguchi. 2025. Getting more juice out of your data: Hard pair refinement enhances visual-language models without extra data. In Proceedings of the 2025 Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers) , pages 7854–7873. Tongzhou Wang and Phillip Isola. 2020. Understanding contrastive representation learning through alignment and uniformity on the hypersphere. In International conference on machine learning , pages 9929–9939. PMLR. Chao-Yuan Wu, R Manmatha, Alexander J Smola, and Philipp Krahenbuhl. 2017. Sampling matters in deep embedding learning. In Proceedings of the IEEE international conference on computer vision , pages 2840–2848. Lee Xiong, Chenyan Xiong, Ye Li, Kwok-Fung Tang, Jialin Liu, Paul N. Bennett, Junaid Ahmed, and Arnold Overwijk. 2021. Approximate nearest neighbor negative contrastive learning for dense text retrieval. In International Conference on Learning Representations .Yejun Yoon, Seunghyun Yoon, and Kunwoo Park. 2024. Assessing news thumbnail representativeness: Counterfactual text can enhance the cross-modal matching ability. In Findings of the Association for Computational Linguistics: ACL 2024 , pages 9009–9024, Bangkok, Thailand. Association for Computational Linguistics. Mert Yuksekgonul, Federico Bianchi, Pratyusha Kalluri, Dan Jurafsky, and James Zou. 2023. When and why vision-language models behave like bags-of-words, and what to do about it? In The Eleventh International Conference on Learning Representations .Jianrui Zhang, Mu Cai, Tengyang Xie, and Yong Jae Lee. 2024. CounterCurate: Enhancing physical and semantic visio-linguistic compositional reasoning via counterfactual examples. In Findings of the Association for Computational Linguistics: ACL 2024 , pages 15481–15495, Bangkok, Thailand. Association for Computational Linguistics. Jusheng Zhang, Kaitong Cai, Yijia Fan, Jian Wang, and Keze Wang. 2025. CF-VLM: Counterfactual vision-language fine-tuning. In The Thirty-ninth Annual Conference on Neural Information Processing Systems .
+
+Code Availability 
+
+Our code is available at: https://github.com/ ssui-liu/RePair .
+
+A Dataset Construction Details 
+
+A.1 Flickr30K 
+
+We use the standard Flickr30K (Plummer et al., 2017) dataset, containing 31,783 images collected from Flickr, each associated with 5 human-annotated captions. We follow the standard split defined by Karpathy and Fei-Fei (2015), using 29,000 images for training, 1,014 for validation, and 1,000 for testing. All images are resized to 
+
+224 × 224 resolution during training and inference. Captions are tokenized using the standard CLIP tokenizer with a maximum sequence length of 77. 
+
+A.2 COCO30K Sampling Protocol 
+
+To ensure a fair comparison with Flickr30K-trained models, we construct COCO30K , a subset of the MS-COCO (Lin et al., 2014) dataset aligned with Flickr30K in terms of training scale. The construction protocol is as follows: • Source: We sample from the MS-COCO 2014 training split. • Sampling Unit: Sampling is performed at the image level to preserve the original image– caption pairing (5 captions per image). • Scale Alignment: We uniformly sample 29,000 images to exactly match the number of training images in Flickr30K. This results in approxi-mately 145,000 training captions. • Random Seed: The sampling is performed with a fixed random seed ( seed=42 ) to ensure reproducibility. • Validation/Test: We evaluate models trained on COCO30K using the standard MS-COCO 5K test split. No images from the test split are included in the training subset. 12 A.3 Dataset Summary Statistics 
+
+Table 4 summarizes the split sizes and preprocess-ing settings of the two datasets. Dataset # Train # Val # Test Caps/Img Resolution Flickr30K 29,000 1,014 1,000 5 224 2     
+
+> COCO30K 29,000 5,000 5,000 5224 2
+> Table 4: Summary of dataset statistics and preprocessing details.
+
+B Evaluation Protocol Details 
+
+B.1 Retrieval Evaluation 
+
+We report Recall@K (R@1, R@5, R@10) on the standard test sets. • Flickr30K: Evaluated on the 1,000-image Karpa-thy test split. • MS-COCO: Evaluated on the 5,000-image Karpathy test split. Retrieval is performed by computing the cosine similarity between the query embedding and all candidate embeddings in the test set (Full Ranking). 
+
+Candidate Pool Size: For Flickr30K, the pool size is 1,000 images (or 5,000 texts). For MS-COCO, the pool size is 5,000 images (or 25,000 texts). 
+
+C Baseline Implementation Notes 
+
+We compare our method against representative baselines covering hard-negative mining, language augmentation, and visual synthesis. All baselines share the same backbone architecture and are trained under the unified budget described in Appendix D. Crucially, for all baselines involving image generation or synthesis (ALiA, COCO-CF, TripletCLIP, and composed baselines), we utilize the same Flux2-9B model with identical generation parameters (8 inference steps, 512 ×512 
+
+resolution) to ensure a strictly fair comparison of the underlying methodologies. • Vanilla: The backbone model is fine-tuned using the standard CLIP objective (InfoNCE loss) with random in-batch negatives. • NegCLIP: We implement the NegCLIP strategy by constructing hard negative captions through rule-based compositional perturbation of the original caption. Following the official protocol, we generate up to 5 hard-negative variants per caption; captions without sufficient hard negatives are skipped, yielding 205K variants in total. • SugarCrepe-style: We adopt the hard-negative generation strategy from SugarCrepe. We use a Large Language Model (LLM) to generate compositional hard negatives (e.g., swapping objects, changing attributes) for the training captions. We generate 1 hard-negative variant per caption. • LaCLIP: We implement LaCLIP by generat-ing rewritten captions using an LLM. During training, we randomly sample either the original caption or a rewritten version to encourage invariance to linguistic variations. We generate 1 rewritten variant per caption. • ALiA: Following ALiA, we generate synthetic images using a text-to-image diffusion model (Flux2-9B, 8 steps, 512 × 512 ). The prompts are generated by an LLM to encompass coun-terfactual scenarios or attribute changes. These synthetic images serve as data augmentation. We generate 5 synthetic variants per image. • COCO-CF & TripletCLIP: We utilize the pro-vided counterfactual data and training strategies from COCO-CF and TripletCLIP, incorporating their respective synthetic negative pairs into the contrastive loss. For each sample, we generate 1 caption variant and 1 corresponding synthetic image (using Flux2-9B with identical settings). • LaCLIP + SugarCrepe (Composed Baseline): 
+
+To ensure a fair comparison with our RePair framework, we combine LaCLIP and Sugar-Crepe. Specifically, we apply LaCLIP’s text rewriting augmentation while simultaneously employing SugarCrepe’s hard-negative genera-tion capability. We carefully tune the ratio of rewritten texts to ensure the total number of training pairs seen by the model aligns with our computational budget. • COCO-CF + ALiA + LaCLIP (Composed Baseline): We further evaluate a stronger naive composition that aggregates (i) COCO-CF’s counterfactual negative pairs ( I−, T −), (ii) ALiA’s diffusion-based image augmentation (I+), and (iii) LaCLIP’s rewrites ( T +). We construct the composed training set by merging the three sources and sampling to match the 13 total sample count reported in the Samples (k) column of Table 1, without additional error-aware filtering or model-in-the-loop conditioning. All image synthesis is performed using the shared Flux2-9B setup. 
+
+D Full Training Hyperparameters 
+
+All experiments are conducted using the PyTorch framework. We initialize the dual-encoder back-bone with the pre-trained CLIP weights (ViT-B/32). To ensure optimal performance, we performed a grid search for key hyperparameters; the optimal configuration for each dataset was selected from the ranges listed below. The default training configuration and search spaces are detailed in Table 5.                  
+
+> Hyperparameter Value / Search Range
+> Optimization
+> Optimizer AdamW Learning Rate {1e-5, 5e-6, 2e-6, 1e-6} Weight Decay 0.1 LR Scheduler Cosine Annealing Warmup Ratio 0.1
+> Training Loop
+> Batch Size {64, 128, 256, 512, 1024} Training Epochs {3, . . . , 10} Precision Mixed Precision (FP16)
+> Loss & Regularization
+> λ(Grid Loss Weight) {0.1, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0} Seed Average over 3 seeds
+> Image Generation (Flux2-9B)
+> Diffusion Model Flux2-9B Inference Steps 8Output Resolution 512 ×512
+
+Table 5: Hyperparameter Settings and Grid Search Ranges. 
+
+E Algorithm and Notation Details 
+
+This section provides a comprehensive reference for the algorithmic details and mathematical notation used throughout the paper. We first present a summary of the notation in Table 6. Subsequently, we provide the formal pseudocode for our failure-driven counterfactual synthesis pipeline (Algorithm 1) and the 3 × 3 grid training procedure (Algorithm 2). 
+
+Detailed Grid and Loss Definitions. For grid b,with image and text lists Ib, Tb as in Eq. 4, the logit 
+
+Algorithm 1 Failure-Driven Counterfactual Syn-thesis 
+
+Require: Paired dataset D = {(Ii, T i)}Ni=1 ;retrieval pool size Kmine ; retention counts 
+
+dI2T , d T2I ; verifiers VGT , V FP ; instruction generator G; editor E; number of edit candidates M .
+
+Ensure: Curated records R, each containing 
+
+(q, p gt , p fp , p edit ). 
+
+> 1:
+
+R ← ∅  
+
+> 2:
+
+for each direction dir ∈ { T2I , I2T } do  
+
+> 3:
+
+A ← query set of dir ; d ← ddir {distinct captions for T2I, distinct images for I2T}  
+
+> 4:
+
+for each query q ∈ A do  
+
+> 5:
+
+pgt ← an annotated positive of q 
+
+> 6:
+
+if VGT (q, p gt ) = 0 then  
+
+> 7:
+
+continue {Discard noisy supervision}  
+
+> 8:
+
+end if  
+
+> 9:
+
+F(q) ← Top Kmine  
+
+> p∈C (q)\P (q)
+
+ℓ(q, p ) {Eq. 1}  
+
+> 10:
+
+{pfp  
+
+> j
+
+}dj=1 ← Top dp∈F (q) ℓ(q, p ) {Eq. 2}  
+
+> 11:
+
+for each pfp ∈ { pfp  
+
+> j
+
+}dj=1 do  
+
+> 12:
+
+if VFP (q, p fp ) = 1 then  
+
+> 13:
+
+continue {Skip benign mismatch}  
+
+> 14:
+
+end if  
+
+> 15:
+
+τedit ← G(q, p fp ) {Generate edit instruction}  
+
+> 16:
+
+Generate candidates {pedit  
+
+> m
+
+}Mm=1 where 
+
+pedit  
+
+> m
+
+← E(pfp , τ edit ; ξm) 
+
+> 17:
+
+pedit ←
+
+arg max 1≤m≤M cos  z(pfp ), z (pedit  
+
+> m
+
+)
+
+{Minimal-change selection}  
+
+> 18:
+
+R ← R ∪ { (q, p gt , p fp , p edit )} 
+
+> 19:
+
+end for  
+
+> 20:
+
+end for  
+
+> 21:
+
+end for  
+
+> 22:
+
+return R
+
+14 Symbol Meaning 
+
+D = {(Ii, T i)}Ni=1 Paired image–text dataset 
+
+I, T An image / a text (generic) 
+
+zI (I), z T (T ) ℓ2-normalized embeddings 
+
+s(I, T ) = zI (I)⊤zT (T ) Cosine similarity 
+
+ℓ(I, T ) = α s (I, T ) Training/retrieval logit 
+
+α (or τ = 1 /α ) Logit scale (or temperature) 
+
+q Query (either T for T2I or I for I2T) 
+
+A Query set of a retrieval direction 
+
+p A candidate item scored against q
+
+C(q), P(q) Cross-modal candidate set / anno-tated positives of q
+
+Top n The n candidates with the highest scores 
+
+Kmine Size of the mined false-positive pool 
+
+F(q) False-positive pool of q (Eq. 1) 
+
+d False positives retained per query (Eq. 2) 
+
+pgt Ground-truth paired match of qpfp Retrieved false positive (FP) for qVGT , V FP ∈ { 0, 1} QC verifiers: query–GT consis-tency (Criterion 1) and query–FP validity (Criterion 2) 
+
+G(q, p fp ) Instruction generator (LLM) 
+
+τedit Edit instruction (output of G)
+
+E(pfp , τ edit ; ξ) Editor with randomness ξ
+
+{pedit  
+
+> m
+
+}Mm=1 M edited candidates 
+
+pedit Selected counterfactual edit 
+
+Ia, T a Anchor matched pair in 3 × 3 grid 
+
+Ihn , T hn Hard-negative image/text 
+
+I+(T hn ), T +(Ihn ) Positive counterparts for hard negatives 
+
+L ∈ RNI ×NT Full logit matrix over batch 
+
+S(b) ∈ R3×3 the 3 × 3 logit matrix of grid b
+
+Pa Set of positive anchor pairs over batch 
+
+G Set of the B grids built from a batch 
+
+Q Set of positive pairs in 3 × 3 local confusion grid 
+
+J (b) 
+
+> ij
+
+Per-pair loss term within grid b
+
+(Eq. 5) 
+
+Lglobal Symmetric CLIP/InfoNCE loss 
+
+Lgrid local 3-way grid loss 
+
+λ Weight for Lgrid 
+
+Table 6: Notation used in failure-driven counterfactual synthesis and 3 × 3 grid training. 
+
+matrix S(b) ∈ R3×3 is defined element-wise as 
+
+S(b) 
+
+> ij
+
+= ℓ(Ib[i], Tb[j]) = α z I (Ib[i]) ⊤zT (Tb[j]) , (7) for i, j ∈ { 1, 2, 3}. The global contrastive loss is the standard symmetric InfoNCE loss computed exclusively over the original anchor pairs. Let L ∈
+
+RNI ×NT denote the full logit matrix over a batch, where Lij = ℓ(Ia 
+
+> i
+
+, T a 
+
+> j
+
+), and let Pa be the set of matched anchor pairs: 
+
+Lglobal = 12|P a|
+
+X
+
+> (i,j )∈P a
+
+− log eLij 
+
+PNT 
+
+> k=1
+
+eLik 
+
+− log eLij 
+
+PNI 
+
+> k=1
+
+eLkj 
+
+!
+
+.
+
+(8) 
+
+Algorithm 2 3 × 3 Local Confusion Grid Construction and Dual-Objective Training 
+
+Require: Dataset D; curated records R (for each anchor, provide Ihn , T hn and selected edits 
+
+I+(T hn ), T +(Ihn )); scale α; local weight λ ≥
+
+0.
+
+Ensure: Updated embeddings (zI , z T ).
+
+1: Sample a minibatch of B anchor pairs 
+
+{(Ia 
+
+> b
+
+, T a 
+
+> b
+
+)}Bb=1 from D
+
+2: Initialize grid set G ← ∅ 
+
+3: for b = 1 , . . . , B do 
+
+4: Retrieve from R:
+
+Ihn  
+
+> b
+
+, T hn  
+
+> b
+
+, I + 
+
+> b
+
+(T hn  
+
+> b
+
+), T + 
+
+> b
+
+(Ihn  
+
+> b
+
+)
+
+5: Set Ib ← [ Ia 
+
+> b
+
+, I + 
+
+> b
+
+(T hn  
+
+> b
+
+), I hn  
+
+> b
+
+]
+
+6: Set Tb ← [ T a 
+
+> b
+
+, T hn  
+
+> b
+
+, T + 
+
+> b
+
+(Ihn  
+
+> b
+
+) ] 
+
+7: G ← G ∪ { (Ib, Tb)}
+
+8: end for 
+
+9: Compute anchor embeddings Za 
+
+> I
+
+=
+
+{zI (Ia 
+
+> b
+
+)}Bb=1 , Za 
+
+> T
+
+= {zT (T a 
+
+> b
+
+)}Bb=1 
+
+10: Form La = α Za 
+
+> I
+
+(Za 
+
+> T
+
+)⊤ ∈ RB×B
+
+11: Pa ← { (b, b )}Bb=1 
+
+12: Lglobal ← 12|P a|
+
+P
+
+> (i,j )∈P a
+
+
+
+−log eLa  
+
+> ij
+> PBk=1 eLa
+> ik
+
+−
+
+log eLa 
+
+> ij
+> PBk=1 eLa
+> kj
+
+
+
+13: Lgrid ← 0; Q ← { (1 , 1) , (2 , 2) , (3 , 3) }
+
+14: for each grid (Ib, Tb) ∈ G do 
+
+15: Compute grid embeddings z(b) 
+
+> I
+
+=
+
+{zI (Ib[i]) }3
+
+> i=1
+
+, z(b) 
+
+> T
+
+= {zT (Tb[j]) }3
+
+> j=1
+
+16: Compute S(b) 
+
+> ij
+
+= α z(b) 
+
+> I
+
+[i]⊤z(b) 
+
+> T
+
+[j] ∈ R3×3
+
+17: J (b) ← 12|Q| 
+
+P
+
+> (i,j )∈Q
+
+
+
+− log eS(b) 
+
+> ij
+> P3
+> k=1 eS(b)
+> ik
+
+−
+
+log eS(b) 
+
+> ij
+> P3
+> k=1 eS(b)
+> kj
+
+
+
+18: Lgrid ← L grid + J (b)
+
+19: end for 
+
+20: Lgrid ← L grid /B 
+
+21: L ← L global + λLgrid 
+
+22: Update (zI , z T ) by minimizing L
+
+15 F Full Experimental Results 
+
+This section provides the complete retrieval results that complement the condensed comparison in the main paper (Table 1). Whereas the main text reports only R@1 and R@5 for brevity, Tables 7 and 8 below list the full metric suite—R@1, R@5, R@10, and Mean Reciprocal Rank (MRR)—for both Image-to-Text (I2T) and Text-to-Image (T2I) retrieval on Flickr30K and COCO30K, respectively. These expanded results show that RePair’s advan-tage over the baselines is concentrated in R@1 and MRR, and holds on both datasets. 
+
+G Qualitative Examples of 3 × 3 Grid Samples 
+
+To concretely illustrate the 3 × 3 grid structure defined in Eq. 4, we present two real-world examples from our experiments on Flickr30K and COCO30K. Each grid is constructed around a failure anchor (Ia, T a)—a ground-truth pair where the model initially retrieved a high-ranking false positive. The grid incorporates these hard negatives along with their synthesized or paired positive counterparts to form a dense, discriminative neighborhood. In the Flickr30K example (Figure 5), the confusion boundary lies in the specific activity and subject composition. The hard negative T hn 
+
+shares the high-level semantic scaffold of “children playing outdoors” but hallucinates the sport ( soccer 
+
+instead of cricket ) and generalizes the subjects (two kids instead of boy and girl ). By including the edited counterpart T +(Ihn ), which keeps the “cricket” context but aligns the subject description to the hard-negative image, the grid enforces a multi-axis discrimination task: the model must simultaneously verify the activity type and the subject demographics to maximize the diagonal scores. The two edit instructions—one per direction—that seed this grid are:   
+
+> Flickr30K I2T Edit Instruction
+> "edit_instruction" :“[Action Error, Object Error]: The image shows a boy and a girl playing cricket in a grassy meadow, not two kids playing soccer in a field. Therefore, replace ‘Two kids’ with ‘A boy and a girl’, replace ‘soccer’ with ‘cricket’, and replace ‘in a field’ with ‘in a meadow’.”
+> Flickr30K T2I Edit Instruction
+> "edit_instruction" :“Change the two boys to a boy and a girl. Replace the park background with a natural green meadow without paths or benches, keeping the cricket activity and overall outdoor composition.”
+
+Similarly, the COCO30K example (Figure 6) illustrates a failure driven by attribute binding. All images in the grid depict kitchens, resulting in high baseline similarity. The confusion arises because the model mixes up specific attributes: 
+
+red applies to stools in the anchor but to cabinets 
+
+in the hard negative. RePair’s counterfactual synthesis produces a hard positive T +(Ihn ) that precisely describes the wooden counter and black chairs of the hard-negative image Ihn . This forces the embedding space to resolve the binding of color ( red vs. black ) and object ( stools vs. chairs )rather than relying on the generic “kitchen” scene detection. The two edit instructions—one per direction—that seed this grid are:   
+
+> COCO30K I2T Edit Instruction
+> "edit_instruction" :“[Object Error, Attribute Error]: The image shows a grey counter top with a row of red stools, not a table with four chairs. The red color applies to bar stools along the counter, not to kitchen cabinets. Therefore, replace ‘a set table and four chairs’ with ‘a counter top with a line of red stools’, and remove ‘red kitchen cabinets and stainless appliances’.”
+> COCO30K T2I Edit Instruction
+> "edit_instruction" :“Replace the wooden counter top with a grey counter top. Remove the black chairs and glass table, and add a row of red bar stools along the counter. Maintain the kitchen environment, lighting, and overall layout.”
+
+Both cases demonstrate the core advantage of the RePair framework: hard negatives are not random samples but genuine retrieval failures, and the synthesized positives are minimal edits designed to be maximally confusable yet semantically distinct. This structured 3 × 3 grid supervision concentrates the gradient on the most challenging boundaries of the manifold. 
+
+H Statistical Analysis of RePair Synthetic Samples 
+
+This section provides a statistical characterization of the synthetic data generated by the RePair pipeline. We analyze the distribution of synthesized hard positives (HP) and mined hard negatives (HN) across image and caption anchors to understand the 16 Method Samples (k) Aug. Type I2T T2I                                                                                                                                                                    
+
+> I+I−T+T−R@1 R@5 R@10 MRR R@1 R@5 R@10 MRR Vanilla –87.87 98.22 99.30 0.9247 74.60 92.87 96.21 0.8262 NegCLIP 205 ✓88.07 98.13 99.51 0.9235 74.38 92.78 96.19 0.8264 SugarCrepe 145 ✓88.95 98.62 99.51 0.9273 74.64 92.98 96.25 0.8284 LaCLIP 145 ✓86.69 97.83 99.21 0.9157 74.46 92.60 96.13 0.8257 SimCLR 145 ✓88.26 98.32 99.41 0.9245 74.30 92.78 96.11 0.8258 StableRep 145 ✓87.67 98.22 99.41 0.9233 74.64 92.72 96.02 0.8276 ALiA 145 ✓87.67 98.22 99.21 0.9214 74.36 92.88 96.29 0.8258 COCO-CF 145 ✓✓87.97 97.44 99.21 0.9198 74.64 92.98 96.45 0.8275 TripletCLIP 145 ✓✓85.11 97.44 98.52 0.9035 73.47 92.13 95.60 0.8169
+> Combined Baselines
+> La + SC 290 ✓✓88.07 97.34 98.82 0.9212 74.24 92.62 96.09 0.8276 CF + AL + La 435 ✓✓✓✓86.88 97.63 98.72 0.8970 74.14 92.84 96.15 0.8097 RePair-I2T 47 ✓✓88.75 98.12 99.21 0.9350 76.07 93.73 96.42 0.8383
+> RePair-T2I 60 ✓✓89.44 98.32 99.21 0.9325 75.93 93.47 96.52 0.8355 RePair (Full) 107 ✓✓✓✓90.13 98.71 99.30 0.9286 76.35 93.67 96.54 0.8370
+
+Table 7: Full retrieval performance on Image-to-Text (I2T) and Text-to-Image (T2I) on Flickr30K . The best and second-best results are marked in bold and underlined, respectively. Augmentation modality and polarity are marked by I+/I− (image hard positive/negative) and T +/T − (text hard positive/negative). Combined baseline abbreviations: La = LaCLIP, SC = SugarCrepe, CF = COCO-CF, AL = ALiA. 
+
+coverage and structural properties of the failure-driven augmentation. 
+
+Hard-Positive Distribution. The top row of Figures 7 and 8 reveals a distinct asymmetry between modalities. For I2T synthesis (Top-Left), most image anchors receive between 1 and 5 hard-positive captions, consistent with the retention count dI2T =5 (Eq. 2). In contrast, for T2I synthesis (Top-Right), the distribution is strictly binary or sparse, with most caption anchors receiving exactly one hard-positive image, reflecting dT2I =1 and the higher computational cost of image generation. 
+
+Hard-Negative Distribution. The bottom row displays the connectivity of mined hard negatives on a logarithmic scale. Both datasets exhibit a heavy-tailed distribution: while the median anchor is associated with a moderate number of hard negatives (typically 10–50), a small fraction of “hub” anchors attract a disproportionately large number of negatives (up to ∼250 for Flickr30K and ∼400 for COCO30K). These hubs correspond to semantically dense regions of the embedding space—such as generic “kitchen” scenes or “people playing sports”—where many distinct instances share high visual-semantic overlap, making them frequent false positives for numerous queries. 
+
+Cross-Dataset Comparison. Comparing the two datasets, COCO30K exhibits wider tails in its hard-negative distributions (Bottom-Left/Right) than Flickr30K. This is attributable to the broader diversity of scenes in MS-COCO. However, the hard-positive distributions (Top-Left/Right) remain remarkably consistent across both datasets. This stability suggests that the synthesis pipeline’s behavior is governed more by the model’s error rate and the synthesis protocol than by the underlying dataset size, ensuring scalable performance. 
+
+Implications. The combination of sparse, high-precision hard positives and dense, long-tail hard negatives validates the “precision over volume” philosophy of RePair. Rather than uniformly augmenting every training sample, the framework concentrates its generative capacity on the specific anchors that sit at the intersection of multiple confusion boundaries (the hubs), thereby efficiently densifying the supervision where the model is most uncertain. 
+
+I Influence of Synthetic Sample Size 
+
+Figure 9 reports Recall@1 as the synthesis budget varies from 20k to 100k on Flickr30K. RePair traces the upper envelope of performance in both I2T and T2I across the entire range: it already delivers clear gains at low budgets (20–40k) and continues to improve steadily as more samples are added, exhibiting a predictable scaling curve. This confirms that error-driven counterfactual synthesis yields a higher density of useful supervision per 17 Method Samples (k) Aug. Type I2T T2I                                                                                                                                                                    
+
+> I+I−T+T−R@1 R@5 R@10 MRR R@1 R@5 R@10 MRR Vanilla –60.54 83.86 90.94 0.7070 44.15 71.97 81.74 0.5679 NegCLIP 205 ✓61.06 84.00 91.24 0.7134 44.37 72.29 81.95 0.5710 SugarCrepe 145 ✓61.92 85.02 91.14 0.7167 45.09 72.94 82.69 0.5778 LaCLIP 145 ✓60.96 84.30 91.00 0.7267 44.99 72.70 82.32 0.5778 SimCLR 145 ✓61.34 84.14 90.86 0.7190 45.13 72.77 82.24 0.5775 StableRep 145 ✓61.76 84.98 91.02 0.7196 44.61 72.95 82.47 0.5765 ALiA 145 ✓61.62 84.40 90.58 0.7212 44.93 72.87 82.38 0.5773 COCO-CF 145 ✓✓60.32 84.92 91.60 0.7192 44.55 72.61 82.51 0.5773 TripletCLIP 145 ✓✓56.06 84.40 90.96 0.7183 43.20 71.23 82.63 0.5780
+> Combined Baselines
+> La + SC 290 ✓✓60.10 84.96 91.46 0.7225 44.57 72.63 82.55 0.5816 CF + AL + La 435 ✓✓✓✓59.74 83.98 91.04 0.7045 44.56 72.59 81.49 0.5586 RePair-I2T 47 ✓✓62.06 84.84 91.10 0.7224 45.69 73.31 82.61 0.5826 RePair-T2I 60 ✓✓61.78 85.24 91.32 0.7217 45.87 73.53 82.93 0.5841 RePair (Full) 107 ✓✓✓✓62.64 85.72 91.64 0.7271 46.11 73.59 83.11 0.5863
+
+Table 8: Full retrieval performance on Image-to-Text (I2T) and Text-to-Image (T2I) on COCO30K . The best and second-best results are marked in bold and underlined, respectively. Augmentation modality and polarity are marked by I+/I− (image hard positive/negative) and T +/T − (text hard positive/negative). Combined baseline abbreviations: La = LaCLIP, SC = SugarCrepe, CF = COCO-CF, AL = ALiA. 
+
+sample (see Appendix H for a detailed statistical analysis of the synthesized samples). In contrast, non-failure-driven baselines (La-CLIP, ALiA, COCO-CF, SugarCrepe, StableRep) exhibit early saturation or occasional regression at higher budgets, indicating that error-agnostic syn-thetic data can introduce redundant or misaligned training signals that offset marginal gains. The divergence between RePair and these baselines widens with budget size, reinforcing that targeting the model’s actual error space matters more than simply scaling synthetic volume. 
+
+J Synthesis Pipeline Efficiency Analysis 
+
+The RePair synthesis pipeline involves three LLM-based stages: (1) Quality Control, (2) Edit Instruction Generation, and (3) Editing (caption editing for I2T; image editing via Flux2-9B for T2I). Only stages involving LLM calls (Gemini 2.5 Flash) incur token costs; T2I image editing uses Flux2-9B and does not consume LLM tokens. The reported token usage is based on processing 
+
+1,000 mined failure cases per direction (I2T and T2I) for each dataset (Flickr30K and COCO30K), a fixed measurement sample used for all cost comparisons. Table 9 reports token usage in thousands (K) broken down by dataset, direction, and stage. 
+
+Per-Stage Analysis. The data reveals that Qual-ity Control is the most token-intensive stage (Flickr30K: ∼1,953K; COCO30K: ∼1,930K com-bined), as it requires the LLM to assess both GT-query consistency and FP-query validity for every mined failure triplet. Instruction Generation is the second largest consumer (Flickr30K: ∼1,348K; COCO30K: ∼973K), reflecting the detailed error diagnosis and structured edit command generation. 
+
+Editing (caption editing only; I2T direction) is the lightest stage (Flickr30K: ∼644K; COCO30K: 
+
+∼407K), as it only rewrites the false-positive caption following the already-generated instruction. T2I editing is handled by Flux2-9B and incurs zero LLM tokens (shown as “-” in the table). 
+
+Directional and Dataset Comparison. Compar-ing directions, I2T consumes more total LLM tokens than T2I (Flickr30K: 2,475K vs 1,470K) because I2T requires all three LLM stages, whereas T2I skips the text-based editing stage. T2I’s image editing cost is instead reflected in GPU compute for Flux2-9B inference (8 steps, 512 × 512 ). Across datasets, Flickr30K and COCO30K exhibit very similar QC token usage ( ∼1,953K vs ∼1,930K), as QC is run on the same fixed budget of 1,000 cases per direction for both datasets, with per-case prompts of comparable length. However, Flickr30K shows higher Instruction Generation and Editing costs than COCO30K, likely due to a higher yield of verified failures passing QC on 18 edit  
+
+> paired
+> edit
+> paired
+> A boy and a girl play cricket in a meadow.
+> Two kids play soccer in a field.
+> Two boys play cricket in a park.
+> IAnchor
+> TAnchor
+> Ihn
+> Thn T+(I hn )
+> I+(T hn )
+
+Figure 5: A representative 3 × 3 grid from Flickr30K centered on an outdoor sports scenario. The anchor pair 
+
+(Ia, T a) depicts “a boy and a girl play cricket,” but the model retrieves a hard-negative text T hn describing “two kids play soccer.” RePair synthesizes a corrected counterpart T +(Ihn ) (“Two boys play cricket”) and retrieves the matched image I+(T hn ), creating a grid that forces the model to distinguish between fine-grained activities (cricket vs. soccer) and subjects (boy/girl vs. two boys).                                                                                         
+
+> Quality Control Instruction Generation Editing Total Dataset Dir In Out Tot In Out Tot In Out Tot In Out Tot Flickr30K I2T 707 .380 .3787 .6981 .461 .71,043 .1597 .945 .9643 .82,286 .6187 .92,474 .5
+> T2I 1,064 .6101 .01,165 .6279 .025 .8304 .8---1,343 .6126 .81,470 .4
+> Combined 1,771 .9181 .31,953 .21,260 .387 .51,347 .8597 .945 .9643 .83,630 .2314 .73,944 .9
+> COCO30K I2T 701 .969 .5771 .4706 .731 .1737 .8382 .225 .2407 .41,790 .8125 .81,916 .6
+> T2I 1,063 .395 .31,158 .6214 .920 .6235 .5---1,278 .2115 .91,394 .1
+> Combined 1,765 .2164 .81,930 .0921 .551 .8973 .3382 .225 .2407 .43,069 .0241 .73,310 .7
+
+Table 9: Token usage (K tokens) by dataset, direction, and stage. “Total” sums over Stage 1–3; “Combined” sums I2T and T2I. 
+
+Flickr30K. 
+
+Conclusion. These results underscore that Re-Pair’s failure-driven synthesis is not only data-efficient (107K samples vs. 145K–435K for base-lines, a 26%–75% reduction) but also computation-ally inexpensive: using Gemini 2.5 Flash pricing, the total LLM cost is ∼$1.88 for Flickr30K and 
+
+∼$1.53 for COCO30K per 1K failure cases per direction. Since cost scales linearly with the number of processed failures, a full single round (47K I2T and 60K T2I instances) costs ∼$98 and 
+
+∼$80 respectively, keeping the approach practical for iterative refinement and multi-round synthesis at various scales. 
+
+J.1 Unified Generation Overhead Comparison 
+
+To enable a fair, apple-to-apple comparison of gen-eration overhead, we measure the total number of LLM API calls and image-generation invocations for each method under our unified experimental setting (same ViT-B/32 backbone, same Flux2-9B image generator). For baselines with native quality-control mechanisms (SugarCrepe, ALiA, COCO-CF), we apply a standardized 3-candidates-to-1-selected alignment matching RePair’s M =3 post-edit selection protocol. Table 10 reports the results. RePair’s per-sample call count is detailed in Table 11: I2T requires 5 LLM calls per sample (1 QC + 1 instruction generation + 3 text edits for 
+
+M =3 candidates), while T2I requires 2 LLM calls + 3 Flux image edits. 19 edit   
+
+> paired
+> edit
+> paired
+> A grey counter top in a kitchen with a line of red stools.
+> View of a modern kitchen with a set table and four chairs, red kitchen cabinets and stainless appliances.
+> A wooden counter top in a kitchen with black chairs around a glass table.
+> IAnchor
+> TAnchor
+> Ihn
+> Thn T+(I hn )
+> I+(T hn )
+> edit
+> paired
+> edit
+> paired
+> A boy and a girl play cricket in a meadow.
+> Two kids play soccer in a field.
+> Two boys play cricket in a park.
+> IAnchor
+> TAnchor
+> Ihn
+> Thn T+(I hn )
+> I+(T hn )
+
+Figure 6: A 3 × 3 grid from COCO30K capturing a kitchen scene. The anchor (Ia, T a) features a “grey counter top” with “red stools,” while the hard negative T hn describes a “modern kitchen” with “red cabinets” and “stainless appliances.” The synthesized positive T +(Ihn ) corrects the attributes to match the hard-negative image Ihn 
+
+(“wooden counter top,” “black chairs”), ensuring that the model learns to disentangle compositional attributes like color and material within the shared kitchen domain. 
+
+Four conclusions emerge from Table 10. First, 
+
+RePair’s LLM overhead is moderate : 355K calls is lower than SugarCrepe (435K–1.3M), COCO-CF (435K), and the composite baseline CF+ALiA+LaCLIP (725K), and is higher only than methods that make at most one LLM call per sample (NegCLIP, LaCLIP, TripletCLIP, ALiA). Second, RePair has the lowest image-generation cost among quality-controlled generation-based methods : 180K invocations vs. 435K for ALiA and COCO-CF, and 870K for the composite baseline. Third, higher total overhead does not translate to better performance : CF+ALiA+LaCLIP con-sumes 2 × the LLM calls and 4.8 × the image calls of RePair, yet degrades below Vanilla (Table 1: 86.88 vs. 87.87 Flickr30K I2T). This confirms that RePair’s efficiency stems from precision-targeted synthesis, not volume. Fourth, all pipeline complexity is offline : training and inference are identical to vanilla CLIP fine-tuning, with zero deployment-time overhead. 
+
+K Validation of Synthesized Supervision 
+
+This section provides a direct evaluation of the Quality Control (QC) module beyond the ablation evidence in Table 2. We analyze (1) the filtering statistics of each QC criterion across all experimen-tal settings, (2) agreement between QC decisions and human annotators, and (3) verification by human annotators of the edited pairs that are retained for training. 
+
+K.1 QC Filtering Statistics 
+
+Our QC module applies two complementary criteria to each mined failure triplet (q, p gt , p fp )
+
+before synthesis: • Criterion 1 (Query–GT Consistency): Verifies that the query q and its paired ground truth pgt 
+
+are semantically consistent. Inconsistent pairs (e.g., a Flickr caption that poorly describes its image) are discarded to avoid noisy supervision. • Criterion 2 (Query–FP Validity): Checks whether the false positive pfp is already a valid alternative match for q (a “benign” FP). If so, treating it as a hard negative would inject incorrect contrastive signal, so the triplet is skipped. Table 12 reports the relative contribution of each criterion to the total filtered samples across all four settings. 20 0 1 2 3 4 5           
+
+> Link Count
+> 02000 4000 6000 8000 10000 12000
+> Anchor Count
+> HP Caption per Image
+> 01
+> Link Count
+> 020000 40000 60000 80000
+> Anchor Count
+> HP Image per Caption
+> 080 160 240 320 400
+> Link Count
+> 10 0
+> 10 1
+> 10 2
+> 10 3
+> 10 4
+> Anchor Count (log)
+> HN Image per Image
+> 015 30 45 60 75
+> Link Count
+> 10 0
+> 10 1
+> 10 2
+> 10 3
+> 10 4
+> 10 5
+> Anchor Count (log)
+> HN Caption per Caption
+
+Figure 7: Distribution of synthesized and mined samples for COCO30K. The four panels show: (Top-Left) Number of hard-positive captions generated per image anchor; (Top-Right) Number of hard-positive images generated per caption anchor; (Bottom-Left) Distribution of hard-negative images linked to each image anchor; (Bottom-Right) Distribution of hard-negative captions linked to each caption anchor. Note the long-tail distribution in hard negatives (log scale) versus the controlled sparsity of hard positives. 0 1 2 3 4 5          
+
+> Link Count
+> 02000 4000 6000 8000 10000 12000 14000
+> Anchor Count
+> HP Caption per Image
+> 01
+> Link Count
+> 010000 20000 30000 40000 50000 60000 70000 80000
+> Anchor Count
+> HP Image per Caption
+> 050 100 150 200 250
+> Link Count
+> 10 0
+> 10 1
+> 10 2
+> 10 3
+> 10 4
+> Anchor Count (log)
+> HN Image per Image
+> 015 30 45 60
+> Link Count
+> 10 0
+> 10 1
+> 10 2
+> 10 3
+> 10 4
+> 10 5
+> Anchor Count (log)
+> HN Caption per Caption
+
+Figure 8: Distribution of synthesized and mined samples for Flickr30K. The layout follows Figure 7. While the overall patterns are similar to COCO30K, the tail of the hard-negative distribution is shorter (max ∼250 vs. ∼400). 
+
+Three observations emerge. First, both cri-teria contribute non-trivially in every setting 
+
+(range: 25.85%–74.15%), confirming they capture different noise types. This is consistent with the ablation: removing the full QC ( −0.66/ −1.24) causes larger degradation than removing only post-edit selection ( −0.52/ −0.78), validating the complementary necessity of both criteria. Second, 
+
+benign FP filtering (Criterion 2) dominates T2I (67.61%–74.15%). Retrieved FP images are often visually close to the query text—they appear “roughly correct” but lack fine-grained alignment. Without filtering, these benign FPs would dilute the contrastive training signal as false hard negatives. Third, filtering behavior is con-sistent with dataset characteristics : COCO30K shows systematically higher Criterion 2 rates than Flickr30K, reflecting its denser semantic space (80 object categories). Flickr30K I2T is the only setting where Criterion 1 dominates (57.61%). These dataset-consistent patterns indicate that QC captures genuine quality signals rather than performing arbitrary filtering. 
+
+K.2 Agreement between QC Decisions and Human Annotators 
+
+To verify QC reliability against human annotators, we conduct an evaluation on COCO30K. We sample 200 QC-accepted and 200 QC-rejected triplets (total N =400 ), and ask human annotators to judge whether each QC decision is correct. The high precision (90.2%) indicates that the vast majority of QC-accepted samples are gen-uinely valid failures, ensuring synthesis quality. The slightly lower recall (83.9%) reflects a con-servative filtering strategy: QC occasionally rejects valid failures, but this is preferable to admitting noisy samples. Cohen’s κ=0 .58 indicates moder-ate agreement (Landis and Koch, 1977), a strong result given the inherent subjectivity in judging whether a near-miss retrieval result is “sufficiently similar” to the query. Importantly, even without QC, RePair still leads all baselines on COCO30K I2T (61.98 vs. SugarCrepe 61.92), confirming that QC raises the performance ceiling but is not a fundamental prerequisite. 21 20 40 60 80 100 
+
+> Number of Samples (k)
+> 87 88 89 90
+> Recall@1 (%)
+
+(a) Image-to-Text     
+
+> 20 40 60 80 100
+> Number of Samples (k)
+> 74 75 76
+> Recall@1 (%)
+
+(b) Text-to-Image       
+
+> RePair LaCLIP ALiA COCO-CF SugarCrepe StableRep Vanilla
+
+Figure 9: Effect of synthetic sample budget on Recall@1 for Flickr30K. (a) Image-to-Text and (b) Text-to-Image retrieval across 20k–100k synthesized samples. RePair consistently outperforms all baselines at every budget level, while error-agnostic methods saturate or regress as sample count grows. 
+
+Method QC? Samples (K) LLM (K) Image (K) LLM ratio Image ratio NegCLIP No 205 0 0 0× 0×
+
+LaCLIP No 145 145 0 0.41 × 0×
+
+TripletCLIP No 145 145 145 0.41 × 0.81 ×
+
+SugarCrepe Yes 145 435–1,305 0 1.23–3.68 × 0×
+
+ALiA Yes 145 145 435 0.41 × 2.42 ×
+
+COCO-CF Yes 145 435 435 1.23 × 2.42 ×
+
+CF+ALiA+LaCLIP Partial 435 725 870 2.04 × 4.83 ×
+
+RePair-I2T Yes 47 235 0 0.66 × 0×
+
+RePair-T2I Yes 60 120 180 0.34 × 1.00 ×
+
+RePair (Full) Yes 107 355 180 1.00 × 1.00 ×
+
+Table 10: Unified generation overhead comparison. “LLM (K)” and “Image (K)” denote total LLM API calls and image-generation invocations in thousands. Baselines with native QC are aligned at 3-candidates-to-1-selected to match RePair’s M =3 protocol. Ratios are relative to RePair (Full).                 
+
+> Variant Samples LLM/sample Image/sample Total LLM / Image RePair-I2T 47K 50235K / 0 RePair-T2I 60K 23120K / 180K
+> Full 107K ——355K / 180K
+
+Table 11: RePair per-sample call breakdown. 
+
+Dataset Direction Criterion 1 (%) Criterion 2 (%) Flickr30K T2I 32.39 67.61 
+
+Flickr30K I2T 57.61 42.39 COCO30K T2I 25.85 74.15 
+
+COCO30K I2T 27.93 72.07 
+
+Table 12: Distribution of QC-filtered samples by criterion. Each row sums to 100% of total filtered samples for that setting. 
+
+Metric Value Precision 90.2% Recall 83.9% Accuracy 82.0% Cohen’s κ 0.58 
+
+Table 13: Agreement between QC decisions and human annotators ( N =400 , COCO30K). 
+
+K.3 Post-Edit Verification by Human Annotators 
+
+The study above validates the input to synthesis— whether a mined triplet is a genuine retrieval failure—but not its output . We therefore ask human annotators to re-verify the edited pairs retained for training. 
+
+Protocol. We sample 800 retained post-edit records, stratified as 200 per dataset × direction split (COCO30K I2T, COCO30K T2I, Flickr30K I2T, Flickr30K T2I). Annotators review records on side-by-side sheets and judge each on five binary criteria: (1) the original false positive is genuinely wrong for the query; (2) the edited sample matches the query; (3) the shared scaffold is preserved; (4) the edit is minimal, i.e. confined to the failure-causing residual; and (5) the original and edited items form a valid hard contrast. Overall, 92.5% of retained pairs form valid hard contrasts . Two patterns organize the remainder. First, quality is direction-dependent: the I2T–T2I gap is 6.0 pp on the final criterion 22 Criterion Overall I2T T2I Original FP genuinely wrong 99.5 99.0 100.0 Edited sample matches query 95.8 96.5 95.0 Scaffold preserved 97.0 99.3 94.8 Edit is minimal 93.3 96.8 89.8 Valid hard contrast 92.5 95.5 89.5         
+
+> Table 14: Verification of retained post-edit pairs by human annotators (%; N=800 , 200 per dataset ×
+> direction split).
+> COCO30K Flickr30K I2T (text edit) 98.5 92.5 T2I (image edit) 92.0 87.0
+> Table 15: Valid hard-contrast rate (%) by dataset and direction.
+
+and concentrates in scaffold preservation ( −4.5 pp) and minimality ( −7.0 pp), the two criteria most sensitive to how much of an image a diffusion editor rewrites. Second, a dataset effect of comparable size acts independently (Table 15): COCO30K exceeds Flickr30K by 6.0 pp for I2T and 5.0 pp for T2I, consistent with Flickr30K’s greater scene and caption diversity. The best and worst splits differ by 11.5 pp, with the two factors each accounting for roughly half of the spread. Appendix L.3 classifies the remaining 60 records. Two further points connect this study to the rest of the pipeline. The 99.5% rate on the first criterion exceeds the 90.2% QC precision in Table 13 because the two are measured on different populations: Table 13 covers all QC-accepted triplets, whereas this study covers the narrower set for which an edit was produced and retained by post-edit selection. And the 93.3% minimality rate corroborates the embedding-proximity criterion used for that selection—the cosine-similarity proxy in Table 17 and judgments from human annotators independently indicate that retained edits stay confined to the residual. 
+
+L Failure Characterization 
+
+RePair does not treat all retrieval failures as uniform. In a dedicated analysis pass over the generated edit instructions, we annotate each mined failure with one or more of six semantic error categories— Object , Action , Attribute , Count ,
+
+Relation , and Hallucination —the same taxonomy used in the edit-instruction prompt (Appendix N). The annotation is multi-label : a single false positive may exhibit multiple error types simul-taneously, so category percentages sum to more than 100%. 
+
+L.1 Error Type Distribution 
+
+Table 16 reports the error type distribution for COCO30K across both retrieval directions.                   
+
+> Error Type I2T (%) T2I (%) Object Error 44.0 48.3
+> Hallucination 36.9 0.5 Action Error 34.1 26.6 Attribute Error 33.7 10.7 Count Error 18.8 12.4 Relation Error 12.1 15.8 Multi-label density 179.6 114.3
+> Table 16: Error type distribution on COCO30K (multi-label; percentages sum to >100%). Column maxima and the I2T Hallucination rate are shown in bold .
+
+Three observations emerge. First, Hallucination exhibits an extreme directional asymmetry :36.9% for I2T versus only 0.5% for T2I—a roughly 74 × difference. This is intuitive: false-positive captions naturally “hallucinate” details not present in the query image (fabricated objects, actions, or attributes), whereas false-positive images are real photographs whose content physically exists and cannot be hallucinated. This stark contrast directly validates RePair’s bidirectional independent min-ing design—I2T editing must frequently remove hallucinated content, while T2I editing never encounters this failure mode. A unified strategy for both directions would severely misallocate synthesis effort. Second, I2T failures are multi-dimensional while T2I failures are more focused . The multi-label density for I2T (179.6%, i.e., ∼1.8 error types per sample) substantially exceeds T2I (114.3%, ∼1.1 types per sample). False-positive captions tend to err across multiple semantic axes simultaneously (e.g., wrong object and wrong attribute and hallucinated action), whereas false-positive images typically deviate on only one or two dimensions. This supports RePair’s holistic editing strategy: rather than designing type-specific correction pipelines, the LLM adaptively diagnoses and addresses whichever combination of errors is present. Third, Object Error is the most prevalent failure mode in both directions (I2T: 44.0%, T2I: 48.3%), indicating that object-level confusion is CLIP’s most common retrieval failure. Count Error 23 (12.4%–18.8%) and Relation Error (12.1%–15.8%) are comparatively rare, suggesting that CLIP’s failures are driven more by entity-level mismatches than by compositional reasoning errors. 
+
+L.2 Editing Quality by Error Type 
+
+To assess whether counterfactual editing is equally effective across error types, we measure the cosine similarity between the original false positive and its edited counterpart in CLIP embedding space for COCO30K T2I (Table 17). Higher similarity indicates a more minimal, controlled edit.                   
+
+> Error Type Mean Std Median Attribute Error 0.912 0.063 0.932
+> Relation Error 0.882 0.086 0.904 Action Error 0.875 0.093 0.901 Count Error 0.873 0.100 0.899 Object Error 0.860 0.104 0.891
+> Table 17: Editing quality by error type (COCO30K T2I, cosine similarity between original FP and edited counterpart). Hallucination is omitted due to insufficient T2I samples ( n=3 ).
+
+Two findings stand out. First, editing is effective across all error types : every category achieves a mean cosine similarity ≥0.86 and a median ≥0.89, with no systematic failures for any type. This confirms the universality of counterfactual editing— no type-specific editing strategies are needed. Second, editing quality correlates with operation granularity : Attribute edits are the most precise (mean 0.912, lowest std 0.063), as modifying a color or size involves minimal embedding perturbation. Object replacements show the largest drift (mean 0.860, highest std 0.104), consistent with entity substitution being the most “aggressive” edit operation. Crucially, even Object edits remain well-controlled—RePair’s post-edit selection mechanism ( M =3 candidates, selecting the highest cosine similarity) effectively bounds semantic drift for all error types. Appendix K.3 provides a direct human check on the same property: 93 .3% of retained edits are judged minimal. 
+
+L.3 Editing Failure Modes 
+
+We classify each of the 60 records ( 7.5% of 800) that were not rated as unequivocally valid hard contrasts in Appendix K.3 into one of four modes: 
+
+semantic mismatch (the edit does not fully satisfy the query, e.g. a count error or an incomplete object replacement), scaffold drift (the edit rebuilds the scene rather than changing the residual), artifact 
+
+(a visible generation artifact), and ambiguous FP 
+
+(the original false positive is debatably correct).                                 
+
+> Failure Mode COCO30K Flickr30K Total I2T T2I I2T T2I Semantic mismatch 2812 12 34
+> Scaffold drift 08013 21
+> Artifact 00011
+> Ambiguous FP 10304
+> Total 316 15 26 60
+> Table 18: Editing failure modes among the 60 shortfall records from the post-edit verification ( N=800 ).
+
+Three findings follow from Table 18. First, scaf-fold drift is exclusive to T2I (21 of 21 cases). Text edits never rewrite the scaffold, whereas diffusion-based image editing occasionally regenerates the entire scene instead of the residual. This is the concrete mechanism behind the directional gap in Table 14 and behind the editor-sensitivity results in Table 2, where a weaker image editor degrades T2I most. Second, semantic mismatch is the largest mode (34 of 60) and is more frequent on Flickr30K (24 vs. 10 on COCO30K), affecting both directions—Flickr30K’s more varied scenes and free-form captions make the target semantics harder to realize. Third, visible artifacts are rare 
+
+(1 of 800): selecting among M =3 candidates by embedding proximity removes most artifact-laden edits before training. The four ambiguous-FP cases all occur in I2T, where whether a caption is genuinely wrong can itself be a judgment call. 
+
+L.4 Editor Sensitivity 
+
+Table 2 swaps the image editor while holding the rest of the pipeline fixed. Three observations follow. First, every swap moves T2I more than I2T: 
+
+−2.25 vs. −1.57 for InstructPix2Pix and −1.10 
+
+vs. −0.82 for Flux2-4B. That T2I responds most is expected, since this component edits only images. That I2T responds at all is not: I2T captions are produced by the LLM and are untouched by the swap. The effect transfers through joint bidirectional training—degraded T2I pairs perturb the shared embedding space, which the I2T direction inherits. It is the same coupling that produces the positive cross-direction transfer in Table 1, where image-side-only training (RePair-T2I) lifts COCO30K I2T R@1 from 60 .54 to 
+
+61 .78 .24 Second, the spread across editors is large relative to the effect being measured: 2.49 R@1 points on COCO30K T2I between InstructPix2Pix ( 43 .86 )and Gemini 2.5 Flash Image ( 46 .35 ), against a RePair-over-Vanilla gain of 1.96 . RePair is editor-agnostic in that it needs no editor-specific tuning, but the ceiling it can reach is set by the editor. Third, a sufficiently weak editor pushes the T2I direction below the untuned baseline: In-structPix2Pix reaches 43 .86 against Vanilla’s 44 .15 .I2T remains above Vanilla for all three editors. Appendix L.3 identifies the mechanism—scaffold drift, the edit regenerating the scene rather than the residual, occurs only in T2I—so a weaker editor degrades exactly the property that the MINIMALITY principle relies on. 
+
+M Multi-round Failure-conditioned Synthesis 
+
+RePair supports multi-round synthesis as a self-bootstrapping error-mining loop: at each iteration, we re-run retrieval with the current checkpoint, harvest newly exposed failures, and synthesize targeted counterfactual hard samples around these failures for the next training stage. We evaluate this iterative process on COCO30K . As shown in Table 19, this iterative densification consistently improves retrieval in both directions, yielding monotonic Recall@1 gains across iterations. The key takeaway is that even after one refinement round, the model still contains structured, mine-able failure modes; re-mining under a stronger model surfaces “harder” near-miss errors that were previously masked, and converting them into supervision continues to calibrate the confusion boundary. Iteration NI2T NT2I R@1 I2T R@1 T2I             
+
+> Iter0 47 .0k 60 .0k 62 .64 46 .11
+> Iter1 58 .1k +11.1k 81 .7k +21.7k 63 .02 +0.38 46 .32 +0.21
+> Iter2 62 .3k +4.2k 92 .3k +10.6k 63 .11 +0.09 46 .40 +0.08
+
+Table 19: Multi-round synthesis: Recall@1 evolution on I2T and T2I retrieval. 
+
+At the same time, the process exhibits a clear convergence pattern with diminishing marginal re-turns. The incremental R@1 gains shrink markedly from Iter0 →1 to Iter1 →2, while the volume of newly synthesized samples also drops. This is consistent with an “error-space contraction” effect: as training corrects dominant failures, remaining errors become rarer and harder, so further synthesis yields limited additional benefit. Practically, this suggests a simple stopping criterion—terminate when the marginal improvement falls below a threshold—balancing compute cost against satu-rated returns. 25 N Prompt Templates 
+
+This section presents the prompt templates used in our RePair synthesis pipeline. The pipeline consists of three stages, each with task-specific variations for I2T (Image-to-Text) and T2I (Text-to-Image) synthesis. 
+
+Prompt for Quality Control 
+
+System Prompt: 
+
+You are a strict Data Quality Assurance Expert for a multimodal dataset. Your task is to: 1. Verify if the provided Ground Truth (GT) Image and Text correspond to each other. 2. Determine if a "False Positive" (FP) candidate is already TOO SIMILAR to the Query, making it unsuitable for an editing task. Ignore minor missing details. Focus on MAJOR mismatches (e.g., wrong gender, wrong main object, completely different scene). Return your analysis in valid JSON format. 
+
+User Template (I2T Task): 
+
+Image Query: [Provided Image] Ground Truth Caption: "{gt_caption}" False Positive Caption: "{fp_caption}" Step 1: Does the GT caption accurately describe the image? Step 2: Is the FP caption already a sufficiently good description of the image? Return JSON: {"gt_valid": true/false, "gt_reason": "explanation", "fp_too_similar": true/false, "fp_reason": "explanation" }
+
+User Template (T2I Task): 
+
+Text Query: "{query_text}" Ground Truth Image: [Provided Image] False Positive Image: [Provided Image] Step 1: Does the text accurately describe the GT image? Step 2: Is the FP image already a sufficiently good result for the query? Return JSON: {"gt_valid": true/false, "gt_reason": "explanation", "fp_too_similar": true/false, "fp_reason": "explanation" }
+
+Prompt for Edit Instruction Generation 
+
+Shared System Context: 
+
+You are an expert Visual-Semantic Auditor / Failure Analyst. Your task is to generate a structured editing instruction that corrects a false-positive result based on a query. 
+
+I2T Specific Template (Image Query → Text Edit): 
+
+### Inputs: - Query Image: [The image is attached below] - False Positive Caption: "{fp_caption}" 
+
+26 ### Task: Generate a **single string** value for the key "edit_instruction" that strictly follows: 
+
+`[Error Type]: Diagnosis of the visual discrepancy. Therefore, specific editing command. `
+
+### Constraints: 1. **Error Types**: Choose strictly from [Object Error, Action Error, Attribute Error, Count Error, Relation Error, Hallucination]. 2. **Action**: Provide a minimal "Replace A with B" or "Remove X" command. ### Examples: Case 1 (Object Error): - Image: A photo of a **cat** sleeping on a rug. - Caption: "A dog sleeping on a rug." - Output: {{"edit_instruction": "[Object Error]: The image clearly shows a cat, not a dog. Therefore, replace 'dog' with 'cat'."}} Case 2 (Action Error): - Image: A man **running** to catch a bus. - Caption: "A man waiting for a bus." - Output: {{"edit_instruction": "[Action Error]: The man is depicted in motion running. Therefore, change 'waiting for' to 'running to catch'."}} ... [Additional examples for Attribute and Combined errors] 
+
+T2I Specific Template (Text Query → Image Edit): 
+
+- User Query: "{query_text}" - Incorrect Image (False Positive): [Image is attached] Based on your analysis, provide a clear, step-by-step instruction for an AI image editing tool to modify the attached image so that it accurately represents the query. The instruction should: - Be specific about what needs to change - Describe the subject modifications needed - Maintain overall image style where possible Return a JSON object with a single key: "edit_instruction". Example: {{"edit_instruction": "Change the dog to a cat, and modify the running pose to a sitting position"}} 
+
+Prompt for Synthesis Editing 
+
+I2T: Caption Editing Prompt 
+
+You are an expert caption editor. You are given: 1. An original caption that was retrieved but is not fully correct. 2. An editing instruction that explains how the caption should be modified. Original caption: "{original_caption}" Editing instruction: "{edit_instruction}" Your task: - Rewrite the caption so that it becomes accurate and faithful to the image, strictly following the editing instruction. - The style should be natural, concise, and fluent English. - DO NOT return JSON. Only output the final corrected caption as plain text. 
+
+T2I: Image Editing Prompt 
+
+Instruction: {edit_instruction} Use the provided image as reference. Generate an edited image that follows the instruction while preserving overall style and quality. 
+
+27
