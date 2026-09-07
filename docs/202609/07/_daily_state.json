@@ -1,0 +1,233 @@
+{
+  "date": "20260907",
+  "date_label": "",
+  "generated_at": "2026-09-07 22:50:15 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.04781v1",
+      "route": "202609/07/2609.04781v1-comlp-cooperatively-gated-mlps-for-fine-grained-cross-modal-information-fusion-in-medical-image-segmentation",
+      "title": "CoMLP: Cooperatively-Gated MLPs for Fine-Grained Cross-Modal Information Fusion in Medical Image Segmentation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "提出CoMLP协同门控MLP实现医学分割中细粒度跨模态信息融合，直接对应特征级融合方法",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04512v1",
+      "route": "202609/07/2609.04512v1-explainable-multimodal-deep-learning-integrating-imaging-and-clinical-data-for-oral-potentially-malignant-disorder-detection",
+      "title": "Explainable Multimodal Deep Learning Integrating Imaging and Clinical Data for Oral Potentially Malignant Disorder Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出多模态可解释深度学习框架，融合口腔图像与结构化临床数据进行检测",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04947v1",
+      "route": "202609/07/2609.04947v1-mcpo-modality-contrastive-preference-optimization-for-multimodal-chain-of-thought-compression",
+      "title": "MCPO: Modality-Contrastive Preference Optimization for Multimodal Chain-of-Thought Compression",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "提出模态对比偏好优化方法，缓解压缩多模态思维链时的视觉惰性与模态失衡",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2608.29601v1",
+      "route": "202609/07/2608.29601v1-mathcaln0-foundation-towards-the-age-of-tactile-intelligence",
+      "title": "$\\mathcal{N}_0$-Foundation: Towards the Age of Tactile Intelligence",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "构建大规模视觉-触觉多模态表征学习体系，配合同步RGB与触觉数据进行表示学习",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.00550v1",
+      "route": "202609/07/2609.00550v1-same-semantics-different-outcome-on-the-modality-robustness-of-multimodal-llms-under-knowledge-conflict",
+      "title": "Same Semantics, Different Outcome: On the Modality Robustness of Multimodal LLMs under Knowledge Conflict",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究多模态大语言模型在知识冲突下的模态偏好不一致与模态失衡问题",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04574v1",
+      "route": "202609/07/2609.04574v1-mural-multimodal-uncertainty-aware-recommendation-via-adaptive-edge-learning",
+      "title": "MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向多模态图推荐的噪声模态融合与自适应边学习方法",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04645v1",
+      "route": "202609/07/2609.04645v1-latent-aligned-reasoning-for-multimodal-recommendation",
+      "title": "Latent-Aligned Reasoning for Multimodal Recommendation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出将可学习潜在token插入链式推理并与冻结视觉编码器显式对齐，缓解多模态大模型中的跨模态信号稀释",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04690v1",
+      "route": "202609/07/2609.04690v1-enhancing-multimodal-emotion-recognition-via-multi-feature-encoding-and-attention-based-fusion",
+      "title": "Enhancing Multimodal Emotion Recognition via Multi-Feature Encoding and Attention-Based Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "结合音频多特征与视频时空特征的注意力融合方法用于多模态情绪识别",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2608.29974v1",
+      "route": "202609/07/2608.29974v1-spancalib-vlm-calibrated-hallucination-span-detection-in-vision-language-models",
+      "title": "SpanCalib-VLM: Calibrated Hallucination Span Detection in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过交叉注意力融合文本与视觉特征，并用校准融合策略结合系统输出，是多模态融合的具体应用",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2608.30233v1",
+      "route": "202609/07/2608.30233v1-semantic-spatial-discriminability-enhancement-for-generalized-visual-grounding",
+      "title": "Semantic-Spatial Discriminability Enhancement for Generalized Visual Grounding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过语义-空间判别性增强提升语言指代表达到图像区域的跨模态对齐表示",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.00272v1",
+      "route": "202609/07/2609.00272v1-crossfeat-bridging-imaging-modalities-in-feature-descriptor-space",
+      "title": "CrossFeat: Bridging Imaging Modalities in Feature Descriptor Space",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨成像模态的特征描述符对齐与桥接方法",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.00551v1",
+      "route": "202609/07/2609.00551v1-em2mem-event-centric-multimodal-memory-for-large-language-models",
+      "title": "EM^2Mem: Event-Centric Multimodal Memory for Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以事件为中心对齐多模态记录、时间上下文与关系事实，实现大语言模型可读的跨模态记忆",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.04281v1",
+      "route": "202609/07/2609.04281v1-when-seeing-overrides-knowing-visual-dominance-and-deferral-based-method-for-personalized-safety-in-vlms",
+      "title": "When Seeing Overrides Knowing: Visual Dominance and Deferral-Based Method for Personalized Safety in VLMs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "研究多模态交互中视觉主导的不平衡并提出延迟式处理方法",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    },
+    {
+      "paper_id": "2609.05149v1",
+      "route": "202609/07/2609.05149v1-from-vision-to-language-investigating-causal-information-flow-in-multimodal-decision-making",
+      "title": "From Vision to Language: Investigating Causal Information Flow in Multimodal Decision-Making",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过逐层因果干预研究视频-文本注意力通路上的跨模态信息流",
+      "first_seen_at": "2026-09-07 22:50:15 UTC",
+      "updated_at": "2026-09-07 22:50:15 UTC"
+    }
+  ]
+}
