@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-07</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-08</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>11</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-07 22:50:15 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-08 22:56:13 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读医疗图像分割与口腔病变检测两篇多模态融合研究，并速读触觉智能、知识冲突与推荐系统等主题，共筛选14篇论文。</p>
-<p>最值得关注：CoMLP以协同门控MLP实现细粒度跨模态融合，获9.0分最高评价；结合影像与临床数据的可解释口腔癌前病变检测也获8.0高分。</p>
-<p>建议先读CoMLP理解医疗分割中的模态交互设计，再结合速读中多模态大模型的知识冲突一文，警惕跨模态信息不一致的风险。</p>
+<p>今日精读1篇、速读2篇，聚焦多模态专家协作与融合生成技术。最值得关注的是基于残差最优传输的红外-可见光目标检测（8.0分），以及地球观测中的紧凑多模态专家混合模型（7.0分）。普通读者可优先关注红外-可见光融合在检测中的表现，而隐私保护的多模态合成可留作延伸了解。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="CoMLP: Cooperatively-Gated MLPs for Fine-Grained Cross-Modal Information Fusion in Medical Image Segmentation">CoMLP: Cooperatively-Gated MLPs for Fine-Grained Cross-Modal Information Fusion in Medical Image Segmentation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Explainable Multimodal Deep Learning Integrating Imaging and Clinical Data for Oral Potentially Malignant Disorder Detection">Explainable Multimodal Deep Learning Integrating Imaging and Clinical Data for Oral Potentially Malignant Disorder Detection</span></li><li><span class="dpr-home-dashboard-paper-title" title="MCPO: Modality-Contrastive Preference Optimization for Multimodal Chain-of-Thought Compression">MCPO: Modality-Contrastive Preference Optimization for Multimodal Chain-of-Thought Compression</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection">Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">11 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="$\mathcal{N}_0$-Foundation: Towards the Age of Tactile Intelligence">$\mathcal{N}_0$-Foundation: Towards the Age of Tactile Intelligence</span></li><li><span class="dpr-home-dashboard-paper-title" title="Same Semantics, Different Outcome: On the Modality Robustness of Multimodal LLMs under Knowledge Conflict">Same Semantics, Different Outcome: On the Modality Robustness of Multimodal LLMs under Knowledge Conflict</span></li><li><span class="dpr-home-dashboard-paper-title" title="MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning">MURAL: Multimodal Uncertainty-aware Recommendation via Adaptive edge Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation">MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Differentially Private Paired Table-Image Multimodal Synthesis">Differentially Private Paired Table-Image Multimodal Synthesis</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>11</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 </div>
 

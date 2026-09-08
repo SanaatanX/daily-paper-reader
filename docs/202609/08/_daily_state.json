@@ -1,0 +1,57 @@
+{
+  "date": "20260908",
+  "date_label": "",
+  "generated_at": "2026-09-08 22:56:13 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.03516v1",
+      "route": "202609/08/2609.03516v1-residual-optimal-transport-based-experts-collaboration-towards-modality-aware-infrared-visible-object-detection",
+      "title": "Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "应对可见光与红外模态缺失或间歇失效，通过自适应融合路径与强度处理模态不平衡问题",
+      "first_seen_at": "2026-09-08 22:56:13 UTC",
+      "updated_at": "2026-09-08 22:56:13 UTC"
+    },
+    {
+      "paper_id": "2609.05351v1",
+      "route": "202609/08/2609.05351v1-meox-compact-multimodal-mixture-of-experts-for-earth-observation",
+      "title": "MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "提出传感器适配器和共享稀疏专家块后的学习式逐块融合，属于典型的深度多模态融合方法",
+      "first_seen_at": "2026-09-08 22:56:13 UTC",
+      "updated_at": "2026-09-08 22:56:13 UTC"
+    },
+    {
+      "paper_id": "2609.00708v1",
+      "route": "202609/08/2609.00708v1-differentially-private-paired-table-image-multimodal-synthesis",
+      "title": "Differentially Private Paired Table-Image Multimodal Synthesis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "成对表格-图像多模态合成，通过条件生成保持跨模态依赖",
+      "first_seen_at": "2026-09-08 22:56:13 UTC",
+      "updated_at": "2026-09-08 22:56:13 UTC"
+    }
+  ]
+}

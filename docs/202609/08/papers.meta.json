@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-08",
+  "date": "2026-09-08",
+  "generated_at": "2026-09-08T22:56:15",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/08/2609.03516v1-residual-optimal-transport-based-experts-collaboration-towards-modality-aware-infrared-visible-object-detection",
+      "section": "deep",
+      "title_en": "Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection",
+      "authors": "Yue Zhao, Hua Yu, Yukun Zhao, Yuzhi Zhang, Maoguo Gong, Xin Mei, Zhuping Hu, Yanchi Li, A. K. Qin",
+      "date": "2026-09-03",
+      "pdf": "https://arxiv.org/pdf/2609.03516v1",
+      "score": "8.0",
+      "evidence": "应对可见光与红外模态缺失或间歇失效，通过自适应融合路径与强度处理模态不平衡问题",
+      "tldr": "红外-可见光目标检测在模态缺失或间歇时，现有固定融合方法失效，且异质光谱分布使语义对齐困难。本文提出一种柔性融合框架：其专家协作机制按模态可用性在跨模态融合与自融合间动态切换，灵活分配集成路径与融合强度；并采用残差自步更新改进熵最优传输，替代固定稀疏系数，优先对齐可靠匹配，再逐步优化困难匹配。完整与缺失模态实验下，该方法在任意模态组合中均保持一致且优异的检测性能，为复杂环境下的多模态目标检测提供了统一自适应方案。",
+      "tags": "query:ml",
+      "abstract_en": "Infrared-visible object detection (IVOD) integrates complementary evidence from visible and infrared sensors for reliable perception in challenging scenes. In practice, sensors may fail or drop frames, leaving one modality unavailable or intermittent. Existing methods for IVOD assume both modalities are always present, and fixed fusion collapses when one stream is missing. Furthermore, it remains a critical challenge to reliably estimate semantic correlation across heterogeneous modalities, especially under spectral distribution discrepancy. We present FlexibleFusion, a unified and adaptive method that flexibly allocates integration pathways and fusion strength, operating seamlessly across complete and missing-modality regimes. At its core, the Modality-Aware Experts Collaboration (MAEC) mechanism selectively activates and aggregates cross-modal or intra-modal expert pathways. It allows cross-modal fusion when full modalities are available and falls back to self-fusion under missing conditions. Additionally, we design Residual Self-Paced Entropic Optimal Transport (RSPEOT) to align heterogeneous feature distributions from a transport perspective. Instead of relying on the fixed sparsity coefficient in standard entropic optimal transport (EOT), RSPEOT introduces a residual-driven self-paced update that prioritizes reliable matches and progressively refines harder ones. This design alleviates the additional optimization burden of standard EOT while preserving reliable semantic alignment. Comprehensive experiments under complete and missing-modality protocols show consistent performance across arbitrary modality configurations. Code will be released upon publication.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/08/2609.05351v1-meox-compact-multimodal-mixture-of-experts-for-earth-observation",
+      "section": "quick",
+      "title_en": "MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation",
+      "authors": "Mohanad Albughdadi",
+      "date": "2026-09-04",
+      "pdf": "https://arxiv.org/pdf/2609.05351v1",
+      "score": "7.0",
+      "evidence": "提出传感器适配器和共享稀疏专家块后的学习式逐块融合，属于典型的深度多模态融合方法",
+      "tldr": "地球观测表示学习常通过更大架构处理异构传感器与缺失观测。MEOX采用仅295万参数的紧凑多模态掩码自编码器：传感器适配器、显式有效性信号和共享稀疏专家块保留模态特定处理，元数据令牌融合后经后续编码器。在MEarth64上预训练，冻结迁移至GEO-Bench，分割与分类指标超过CSMoE，以极小参数实现传感器的灵活表示学习与任务迁移。",
+      "tags": "query:ml",
+      "abstract_en": "Recent advances in Earth Observation representation learning accommodate heterogeneous sensors and missing observations, often through larger architectures. We present MEOX (Multimodal Earth Observation with eXperts), a multimodal masked autoencoder with a 2.939 million-parameter encoder and 3.115 million parameters in total. Sensor-specific adapters, explicit validity signals, and a shared sparse-expert block preserve modality-dependent processing before a learned patch-wise fusion. Four metadata tokens then accompany a single spatial sequence through fourteen further encoder blocks. Shared expert projections with private low-rank residuals constrain parameter growth, while rotary attention supports downstream spatial grids different from pretraining. The model is pretrained on 1.228 million MMEarth64 samples using modality-balanced masked reconstruction and structured sensor dropout. Frozen transfer is evaluated on six GEO-Bench tasks at both 64 and 224 pixels. The model reaches 64.42% mean intersection-over-union on cashew segmentation at 64 pixels and 90.56% average accuracy on EuroSAT at 224 pixels, exceeding the corresponding reported CSMoE results. BigEarthNet finetuning reaches 72.95% micro-average precision. Routing diagnostics distinguish expert participation, spatial dependence, modality association, and functional contribution. A held-out WorldCover probe measures a 0.64-percentage-point benefit from metadata, while retrieval separates same-sensor semantics from cross-sensor alignment. These results demonstrate sensor-flexible representation learning and strong task transfer using a compact parameter budget.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/08/2609.00708v1-differentially-private-paired-table-image-multimodal-synthesis",
+      "section": "quick",
+      "title_en": "Differentially Private Paired Table-Image Multimodal Synthesis",
+      "authors": "Kai Chen, Josephine Lamp, Somesh Jha, Tianhao Wang",
+      "date": "2026-09-01",
+      "pdf": "https://arxiv.org/pdf/2609.00708v1",
+      "score": "6.0",
+      "evidence": "成对表格-图像多模态合成，通过条件生成保持跨模态依赖",
+      "tldr": "真实数据常包含图片与表格配对，但现有差分隐私合成研究多针对单一模态。本文提出DP-TabImage框架，将联合分布分解为私有概率图模型建模表格，及用DP-SGD训练的条件扩散模型建模图像。为应对剪裁噪声，又利用私有表格-图像原型进行预热。在三个真实数据集上兼顾表格保真度、图像保真度与跨模态对齐，并揭示不同预热策略的作用。",
+      "tags": "query:ml",
+      "abstract_en": "Differentially private (DP) synthesis has been extensively studied for tabular and image data separately, yet many real-world datasets contain images paired with multivariate tabular records. Synthesizing such data is particularly challenging under DP, as the two modalities favor different private learning mechanisms while their dependence must also be preserved. To address this challenge, we propose DP-TabImage, a modality-specialized framework for private paired synthesis. DP-TabImage instantiates the factorization $p(x,y)=p_T(y)p_I(x\\;|\\;y)$ using a private Probabilistic Graphical Model for the multivariate table distribution and a table-conditioned diffusion model trained with DP-SGD for the conditional image distribution. To facilitate conditional learning under clipped and noisy gradients, we further pretrain the model on private table-image prototypes, pairing privately constructed attribute-conditioned images with tabular vectors derived from the already private tabular model at no additional privacy cost. Experiments on three real-world datasets show that DP-TabImage achieves a strong balance among tabular fidelity, image fidelity, and cross-modal alignment. Our analysis further reveals that visual warm-up primarily improves marginal image fidelity, whereas aligned table-image warm-up is critical for improving cross-modal correspondence. Our source code is available in the GitHub repository, https://github.com/KaiChen9909/TabImage_Syn.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
