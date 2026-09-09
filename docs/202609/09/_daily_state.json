@@ -1,0 +1,313 @@
+{
+  "date": "20260909",
+  "date_label": "",
+  "generated_at": "2026-09-09 22:02:49 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.05937v1",
+      "route": "202609/09/2609.05937v1-beyond-classification-structured-supervision-aligns-visual-evidence-with-medical-semantics",
+      "title": "Beyond Classification: Structured Supervision Aligns Visual Evidence with Medical Semantics",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用图像-文本对进行交叉模态语义接地，使视觉证据与医学语义对齐，契合对齐表示学习。",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06188v1",
+      "route": "202609/09/2609.06188v1-mvfa-a-multi-view-text-guided-multimodal-fusion-llm-adapter-for-sentiment-analysis-and-emotion-recognition",
+      "title": "MVFA: A Multi-View Text-Guided Multimodal Fusion LLM Adapter for Sentiment Analysis and Emotion Recognition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多视图文本引导的多模态融合LLM适配器，以参数高效方式融合文本、声学与视觉特征",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06497v1",
+      "route": "202609/09/2609.06497v1-vision-guided-text-prompt-tuning-for-multimodal-sentiment-analysis",
+      "title": "Vision-Guided Text Prompt Tuning for Multimodal Sentiment Analysis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用视觉线索引导文本提示调优，控制多模态融合噪声，兼顾参数高效性",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06504v1",
+      "route": "202609/09/2609.06504v1-cam-question-answering-on-entity-centric-videos-with-continuous-extraction-and-adaptive-querying",
+      "title": "CAM: Question Answering on Entity-Centric Videos with Continuous Extraction and Adaptive Querying",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "从视频中持续抽取实体与关系作为记忆，属于跨模态关系事实抽取",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06668v1",
+      "route": "202609/09/2609.06668v1-towards-unified-multimodal-graph-foundation-model-a-bridge-router-adapter-based-approach",
+      "title": "Towards Unified Multimodal Graph Foundation Model: A Bridge-Router-Adapter Based Approach",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "以桥-路由-适配器联合建模文本与图像节点属性及关系结构，学习统一多模态图表示",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06733v1",
+      "route": "202609/09/2609.06733v1-lassnet-level-aware-availability-conditioned-spatial-semantic-fusion-for-brain-tumor-segmentation-with-missing-mri-modalities",
+      "title": "LASSNet: Level-Aware Availability-Conditioned Spatial-Semantic Fusion for Brain Tumor Segmentation with Missing MRI Modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用模态可用性条件化融合处理MRI部分缺失，是模态不平衡/缺失场景的直接技术方案",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.06967v1",
+      "route": "202609/09/2609.06967v1-re-calibrated-contrastive-loss-for-transformation-aware-prompt-conditioning-in-vision-language-models",
+      "title": "Re-calibrated Contrastive Loss for Transformation-Aware Prompt Conditioning in Vision-Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "通过变换感知的文本提示和再校准对比损失增强视觉-语言跨模态对齐表示",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07540v1",
+      "route": "202609/09/2609.07540v1-temo-temperature-modulation-for-multimodal-contrastive-learning",
+      "title": "TeMo: Temperature Modulation for Multimodal Contrastive Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态对比学习的温度自适应调节方法，直接改进跨模态对齐表示学习",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07815v1",
+      "route": "202609/09/2609.07815v1-vot-vision-of-thought-for-unified-multimodal-representation-alignment",
+      "title": "VoT: Vision-of-Thought for Unified Multimodal Representation Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "引入离散视觉思考层以对齐高层语言语义与低层视觉信号",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.08242v1",
+      "route": "202609/09/2609.08242v1-cs-clip-compositional-scene-graph-guided-clip-for-robust-compositional-reasoning",
+      "title": "CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "用场景图构造结构化负样本以增强CLIP跨模态组合式对齐",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.08663v1",
+      "route": "202609/09/2609.08663v1-moemb-scaling-universal-multimodal-embeddings-with-efficient-mixture-of-experts-models",
+      "title": "MoEMB: Scaling Universal Multimodal Embeddings with Efficient Mixture-of-Experts Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向通用多模态嵌入表示学习的混合专家扩展方法",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.05583v1",
+      "route": "202609/09/2609.05583v1-an-overview-of-3d-vision-language-models",
+      "title": "An overview of 3D Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "综述CLIP式3D视觉语言对齐与跨模态检索方法，属跨模态表示学习范畴",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07009v1",
+      "route": "202609/09/2609.07009v1-neucme-toward-dynamic-multimodal-continual-learning-via-neural-combinatorics-of-multiple-experts",
+      "title": "NeuCME: Toward Dynamic Multimodal Continual Learning via Neural Combinatorics of Multiple Experts",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向动态模态变化的持续学习提出自适应多模态融合方法",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07010v1",
+      "route": "202609/09/2609.07010v1-fine-grained-visual-preprocessing-and-dual-stream-temporal-modeling-for-multimodal-sentiment-analysis-on-social-media",
+      "title": "Fine-Grained Visual Preprocessing and Dual-Stream Temporal Modeling for Multimodal Sentiment Analysis on Social Media",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "针对多模态学习中文本主导、视觉模态贡献不足问题，提出视觉预处理与多模态融合",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07229v1",
+      "route": "202609/09/2609.07229v1-proximity-clip-text-guided-semantic-proximity-learning-for-zero-shot-anomaly-detection",
+      "title": "Proximity-CLIP: Text-Guided Semantic Proximity Learning for Zero-Shot Anomaly Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在CLIP视觉语言空间中用文本原型与视觉校准学习语义边界，涉及跨模态表示对齐",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07409v1",
+      "route": "202609/09/2609.07409v1-rafm-ser-a-lightweight-multimodal-emotion-recognition-framework-for-real-time-behavioral-monitoring-in-surveillance-systems",
+      "title": "RAFM-SER++: A Lightweight Multimodal Emotion Recognition Framework for Real-Time Behavioral Monitoring in Surveillance Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向多模态语音情感识别的轻量化不对称残差注意力融合与跨模态对齐",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07525v1",
+      "route": "202609/09/2609.07525v1-when-semantically-consistent-encoding-meets-view-label-heterogeneity-modeling-a-unified-framework-for-incomplete-multi-view-multi-label-learning",
+      "title": "When Semantically Consistent Encoding Meets View-Label Heterogeneity Modeling: A Unified Framework for Incomplete Multi-View Multi-Label Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向不完整多视角输入的统一语义聚合与标签感知视角融合，与多模态特征级融合相关",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.07874v1",
+      "route": "202609/09/2609.07874v1-influencefield-a-differentiable-field-with-interventionally-identifiable-causal-structure-for-multimodal-world-modeling",
+      "title": "InfluenceField: A Differentiable Field with Interventionally Identifiable Causal Structure for Multimodal World Modeling",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "在视觉编码器与语言解码器间提出干预感知的连续表示场，属于多模态表示学习方法",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    },
+    {
+      "paper_id": "2609.02232v1",
+      "route": "202609/09/2609.02232v1-fairness-aware-multimodal-transformer-modeling-for-real-time-student-attention-estimation",
+      "title": "Fairness-Aware Multimodal Transformer Modeling for Real-Time Student Attention Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合面部图像与可穿戴传感器信号，采用残差融合Transformer估计注意力",
+      "first_seen_at": "2026-09-09 22:02:49 UTC",
+      "updated_at": "2026-09-09 22:02:49 UTC"
+    }
+  ]
+}

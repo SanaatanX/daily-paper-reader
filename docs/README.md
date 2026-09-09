@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-08</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-08 22:56:13 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 22:02:49 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读1篇、速读2篇，聚焦多模态专家协作与融合生成技术。最值得关注的是基于残差最优传输的红外-可见光目标检测（8.0分），以及地球观测中的紧凑多模态专家混合模型（7.0分）。普通读者可优先关注红外-可见光融合在检测中的表现，而隐私保护的多模态合成可留作延伸了解。</p>
+<p>今日共读19篇论文，精读7篇、速读12篇，其中《Beyond Classification》与《MVFA》获最高8.0分。最值得关注医学图像语义结构化对齐，以及多视图文本引导的情感与情绪识别融合方法。建议进一步追踪多模态对比学习中的温度调制与视觉思维对齐技术的应用场景。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">7 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection">Residual Optimal Transport-Based Experts Collaboration Towards Modality-Aware Infrared-Visible Object Detection</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Classification: Structured Supervision Aligns Visual Evidence with Medical Semantics">Beyond Classification: Structured Supervision Aligns Visual Evidence with Medical Semantics</span></li><li><span class="dpr-home-dashboard-paper-title" title="MVFA: A Multi-View Text-Guided Multimodal Fusion LLM Adapter for Sentiment Analysis and Emotion Recognition">MVFA: A Multi-View Text-Guided Multimodal Fusion LLM Adapter for Sentiment Analysis and Emotion Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Vision-Guided Text Prompt Tuning for Multimodal Sentiment Analysis">Vision-Guided Text Prompt Tuning for Multimodal Sentiment Analysis</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation">MEOX: Compact Multimodal Mixture-of-Experts for Earth Observation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Differentially Private Paired Table-Image Multimodal Synthesis">Differentially Private Paired Table-Image Multimodal Synthesis</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="TeMo: Temperature Modulation for Multimodal Contrastive Learning">TeMo: Temperature Modulation for Multimodal Contrastive Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="VoT: Vision-of-Thought for Unified Multimodal Representation Alignment">VoT: Vision-of-Thought for Unified Multimodal Representation Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning">CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
 </section>
 </div>
 
