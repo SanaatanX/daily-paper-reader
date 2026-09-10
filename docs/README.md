@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 4 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 22:02:49 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 21:14:57 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读19篇论文，精读7篇、速读12篇，其中《Beyond Classification》与《MVFA》获最高8.0分。最值得关注医学图像语义结构化对齐，以及多视图文本引导的情感与情绪识别融合方法。建议进一步追踪多模态对比学习中的温度调制与视觉思维对齐技术的应用场景。</p>
+<p>今日完成4篇多模态方向论文筛选，精读1篇、速读3篇，主题覆盖人机协作、情感识别与视觉语言模型。</p>
+<p>最值得看的是8.0分的《A Confidence-Aware Multimodal Fusion Framework for Industrial Human-Robot Collaboration》，用置信度引导多模态融合以提升工业人机协作可靠性，其次是7.0分的对话情感识别类自适应模态融合方法。</p>
+<p>普通读者可先读精读那篇了解融合框架思路，再按兴趣挑一篇速读，重点关注模态间信息不均衡时的处理方式。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Classification: Structured Supervision Aligns Visual Evidence with Medical Semantics">Beyond Classification: Structured Supervision Aligns Visual Evidence with Medical Semantics</span></li><li><span class="dpr-home-dashboard-paper-title" title="MVFA: A Multi-View Text-Guided Multimodal Fusion LLM Adapter for Sentiment Analysis and Emotion Recognition">MVFA: A Multi-View Text-Guided Multimodal Fusion LLM Adapter for Sentiment Analysis and Emotion Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Vision-Guided Text Prompt Tuning for Multimodal Sentiment Analysis">Vision-Guided Text Prompt Tuning for Multimodal Sentiment Analysis</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="A Confidence-Aware Multimodal Fusion Framework for Industrial Human-Robot Collaboration">A Confidence-Aware Multimodal Fusion Framework for Industrial Human-Robot Collaboration</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="TeMo: Temperature Modulation for Multimodal Contrastive Learning">TeMo: Temperature Modulation for Multimodal Contrastive Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="VoT: Vision-of-Thought for Unified Multimodal Representation Alignment">VoT: Vision-of-Thought for Unified Multimodal Representation Alignment</span></li><li><span class="dpr-home-dashboard-paper-title" title="CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning">CS-CLIP: Compositional Scene Graph-guided CLIP for Robust Compositional Reasoning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Emotion Recognition in Conversations via Class-Wise Adaptive Modality Fusion and Affective Geometry">Multimodal Emotion Recognition in Conversations via Class-Wise Adaptive Modality Fusion and Affective Geometry</span></li><li><span class="dpr-home-dashboard-paper-title" title="UOT-Gap: A Variational Principle for the Modality Gap in Vision-Language Models via Unbalanced Optimal Transport">UOT-Gap: A Variational Principle for the Modality Gap in Vision-Language Models via Unbalanced Optimal Transport</span></li><li><span class="dpr-home-dashboard-paper-title" title="Studying Image Tokenizers as Visual Languages in Unified Multimodal Models">Studying Image Tokenizers as Visual Languages in Unified Multimodal Models</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>12</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 </div>
 

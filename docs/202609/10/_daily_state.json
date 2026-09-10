@@ -1,0 +1,73 @@
+{
+  "date": "20260910",
+  "date_label": "",
+  "generated_at": "2026-09-10 21:14:57 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.10339v1",
+      "route": "202609/10/2609.10339v1-a-confidence-aware-multimodal-fusion-framework-for-industrial-human-robot-collaboration",
+      "title": "A Confidence-Aware Multimodal Fusion Framework for Industrial Human-Robot Collaboration",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向四种异构模态的置信度感知多模态融合",
+      "first_seen_at": "2026-09-10 21:14:57 UTC",
+      "updated_at": "2026-09-10 21:14:57 UTC"
+    },
+    {
+      "paper_id": "2609.09924v1",
+      "route": "202609/10/2609.09924v1-multimodal-emotion-recognition-in-conversations-via-class-wise-adaptive-modality-fusion-and-affective-geometry",
+      "title": "Multimodal Emotion Recognition in Conversations via Class-Wise Adaptive Modality Fusion and Affective Geometry",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "面向多模态情感识别的类别自适应模态融合",
+      "first_seen_at": "2026-09-10 21:14:57 UTC",
+      "updated_at": "2026-09-10 21:14:57 UTC"
+    },
+    {
+      "paper_id": "2609.10224v1",
+      "route": "202609/10/2609.10224v1-uot-gap-a-variational-principle-for-the-modality-gap-in-vision-language-models-via-unbalanced-optimal-transport",
+      "title": "UOT-Gap: A Variational Principle for the Modality Gap in Vision-Language Models via Unbalanced Optimal Transport",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "诊断视觉语言模型模态间隙与跨模态对齐",
+      "first_seen_at": "2026-09-10 21:14:57 UTC",
+      "updated_at": "2026-09-10 21:14:57 UTC"
+    },
+    {
+      "paper_id": "2609.09143v1",
+      "route": "202609/10/2609.09143v1-studying-image-tokenizers-as-visual-languages-in-unified-multimodal-models",
+      "title": "Studying Image Tokenizers as Visual Languages in Unified Multimodal Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "图文联合建模的多模态可学习性",
+      "first_seen_at": "2026-09-10 21:14:57 UTC",
+      "updated_at": "2026-09-10 21:14:57 UTC"
+    }
+  ]
+}
