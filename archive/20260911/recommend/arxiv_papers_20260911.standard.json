@@ -1,0 +1,337 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-11T21:47:11.292406+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 2,
+    "deep_cap": 7,
+    "deep_selected": 2,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2609.10798v1",
+      "source": "arxiv",
+      "title": "RiVaT-Fuse: Reliability-Calibrated Variational Tensor Fusion for Multimodal Prediction under Modality Uncertainty",
+      "abstract": "Image-metadata prediction requires fusing heterogeneous evidence whose reliability can vary across samples and latent factors. Existing representation-level fusion methods typically choose an aggregation architecture, such as concatenation, gating, conditional modulation, or attention, without explicitly defining what the fused representation should mean under modality uncertainty. We propose RiVaT-Fuse, a reliability-calibrated variational tensor fusion framework that defines fusion as sample-wise latent-state estimation. Rather than producing a fused vector by direct aggregation, RiVaT-Fuse estimates a consensus latent state through a variational objective that balances image evidence, metadata evidence, structured cross-modal interaction, and stability. The resulting framework replaces scalar modality confidence with matrix-valued trust geometry, decomposes interaction into additive, multiplicative, and relational components, and couples the latent state with conditional robustness and structured multi-task prediction. We provide well-posedness and stability interpretations of the latent solve and instantiate the framework with efficient low-rank-plus-diagonal trust operators. On an image-level image-metadata prediction benchmark, RiVaT-Fuse achieves the strongest overall predictive rank among direct representation-level baselines while improving probability and label stability under perturbation.",
+      "authors": [
+        "Yingfan Xu",
+        "Tieming Liu",
+        "Ye Liang",
+        "Taiping Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CV"
+      ],
+      "published": "2026-09-09T19:59:49+00:00",
+      "link": "https://arxiv.org/pdf/2609.10798v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "reliability-calibrated variational tensor fusion for multimodal prediction",
+      "llm_evidence_cn": "面向多模态预测的可靠性校准变分张量融合",
+      "llm_evidence": "面向多模态预测的可靠性校准变分张量融合",
+      "canonical_evidence": "面向多模态预测的可靠性校准变分张量融合",
+      "llm_tldr_en": "RiVaT-Fuse proposes a reliability-calibrated variational tensor fusion framework that treats fusion as sample-wise latent-state estimation, balancing image and metadata evidence under modality uncertainty for robust multimodal prediction.",
+      "llm_tldr_cn": "现有多模态融合方法多依赖拼接、门控或注意力等聚合结构，却未明确在模态不确定性下融合表示的含义。本文提出RiVaT-Fuse，将融合建模为逐样本的隐状态估计，通过变分目标在图像与元数据证据间取得共识并校准可靠性。实验表明该方法在多模态预测中能更稳健地应对模态不确定性，为不确定性感知融合提供了新范式。",
+      "llm_tldr": "现有多模态融合方法多依赖拼接、门控或注意力等聚合结构，却未明确在模态不确定性下融合表示的含义。本文提出RiVaT-Fuse，将融合建模为逐样本的隐状态估计，通过变分目标在图像与元数据证据间取得共识并校准可靠性。实验表明该方法在多模态预测中能更稳健地应对模态不确定性，为不确定性感知融合提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.11247v1",
+      "source": "arxiv",
+      "title": "The Illusion of Balanced Multimodal Sentiment Analysis: Beyond the Limits of Optimization-Based Methods",
+      "abstract": "Multimodal Sentiment Analysis (MSA) remains constrained by modality imbalance, yet the field continues to rely on optimization-based balancing methods that promise more than they deliver. We provide three contributions: 1) a unified evaluation framework testing gradient and loss-based balancing strategies under controlled settings; 2) a theoretical diagnosis explaining why these methods fail, as they conflate fitting speed with discriminative contribution; and 3) a research agenda toward held-out discriminative modality valuation. Experiments on CMU-MOSI and CMU-MOSEI reveal three shortcomings: no strategy reliably outperforms Late Concatenation; performance is sensitive to hyperparameters; and even ratio calibration fails to yield consistent gains. The core issue is fundamental: loss is not utility, and gradients are not importance. Modality imbalance remains unresolved, motivating utility estimation from held-out performance.",
+      "authors": [
+        "Ioanna Kaffeza",
+        "Efthymios Georgiou",
+        "Alexandros Potamianos"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-10T08:44:51+00:00",
+      "link": "https://arxiv.org/pdf/2609.11247v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "diagnosing modality imbalance and optimization-based balancing limits",
+      "llm_evidence_cn": "诊断模态不平衡与优化式平衡方法的局限",
+      "llm_evidence": "诊断模态不平衡与优化式平衡方法的局限",
+      "canonical_evidence": "诊断模态不平衡与优化式平衡方法的局限",
+      "llm_tldr_en": "Multimodal sentiment analysis is constrained by modality imbalance, yet optimization-based balancing methods overpromise. The paper offers a unified evaluation framework, a theoretical diagnosis, and a research agenda on modality valuation.",
+      "llm_tldr_cn": "多模态情感分析长期受模态不平衡制约，但学界仍依赖优化式平衡方法，其效果被高估。本文提出统一的评估框架，在受控设定下系统测试基于梯度与损失的平衡策略，并从理论上诊断其失败原因，指出这些方法混淆了拟合速度与判别贡献。在CMU-MOSI与CMU-MOSEI上的实验显示，没有策略能稳定超越晚期拼接，且性能对超参敏感。该工作为模态不平衡处理提供了更严谨的评估与研究议程。",
+      "llm_tldr": "多模态情感分析长期受模态不平衡制约，但学界仍依赖优化式平衡方法，其效果被高估。本文提出统一的评估框架，在受控设定下系统测试基于梯度与损失的平衡策略，并从理论上诊断其失败原因，指出这些方法混淆了拟合速度与判别贡献。在CMU-MOSI与CMU-MOSEI上的实验显示，没有策略能稳定超越晚期拼接，且性能对超参敏感。该工作为模态不平衡处理提供了更严谨的评估与研究议程。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.10950v1",
+      "source": "arxiv",
+      "title": "Robust Multimodal Sentiment Analysis with Incomplete Modalities via Semantic-aware Completeness based Reconstruction",
+      "abstract": "Recent multimodal sentiment analysis studies increasingly adopt text-centric fusion approaches to exploit the rich sentiment information inherent in the textual modality. However, these approaches often suffer from performance degradation during inference due to partially missing or noisy data in real-world scenarios, especially when sentiment-related cues are missing. To address this issue, we introduce a new completeness estimation approach that quantifies the degree of sentiment-relevant information preserved in incomplete data to guide the reconstruction of missing semantics. Furthermore, we propose a training strategy that stabilizes multi-task learning while jointly optimizing sentiment prediction and completeness estimation. Extensive experiments and in-depth analyses on three benchmark datasets demonstrate that the proposed approach enables more accurate semantic reconstruction, leading to more precise sentiment prediction.",
+      "authors": [
+        "Han-Jun Choi",
+        "Byunggill Joe",
+        "Saim Shin",
+        "Jin Yea Jang"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-09-10T01:16:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.10950v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "handling incomplete/noisy modalities in multimodal fusion",
+      "llm_evidence_cn": "处理多模态融合中的模态缺失与噪声",
+      "llm_evidence": "处理多模态融合中的模态缺失与噪声",
+      "canonical_evidence": "处理多模态融合中的模态缺失与噪声",
+      "llm_tldr_en": "To handle missing or noisy modalities in multimodal sentiment analysis, this work estimates sentiment-relevant completeness to guide reconstruction of missing semantics and stabilizes multi-task training.",
+      "llm_tldr_cn": "针对多模态情感分析中文本中心融合方法在模态缺失或含噪时性能下降的问题，本文提出一种完整性估计方法，量化不完整数据中保留的情感相关信息，以指导缺失语义的重建。作者进一步设计稳定多任务学习的训练策略，联合优化情感预测与重建任务。实验表明该方法在模态不完整条件下具有更强的鲁棒性。该工作为真实场景中缺失模态下的多模态融合提供了可行方案。",
+      "llm_tldr": "针对多模态情感分析中文本中心融合方法在模态缺失或含噪时性能下降的问题，本文提出一种完整性估计方法，量化不完整数据中保留的情感相关信息，以指导缺失语义的重建。作者进一步设计稳定多任务学习的训练策略，联合优化情感预测与重建任务。实验表明该方法在模态不完整条件下具有更强的鲁棒性。该工作为真实场景中缺失模态下的多模态融合提供了可行方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.09728v1",
+      "source": "arxiv",
+      "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+      "abstract": "Source-level analysis of interictal epileptiform discharges (IEDs) is relevant to presurgical evaluation and treatment planning because it helps characterize where epileptiform activity is likely to arise. Beyond detecting whether an IED is present, this setting requires assigning IED-positive activity to clinically meaningful brain-region categories. This setting is challenging because source-region evidence in short electroencephalography (EEG) windows can be subtle, partial, and affected by subject variability, class imbalance, and imperfect multimodal context. We present EEGBind, an EEG-centric multimodal binding framework for five-class source-level IED classification. EEGBind treats EEG as the primary modality and binds synchronized video-context features around an EEG-centric representation. Instead of relying on early or overly strong multimodal fusion, which may perturb the source-sensitive EEG representation, EEGBind uses video context as auxiliary evidence for robust classification. A view-consistent repair stage is further used to improve hidden-set robustness while preserving the learned source-class boundary. On the NeuroMM 2026 Grand Challenge Track 3 NMM-Source-IED benchmark, EEGBind achieves 0.8395 on weighted-F1 and outperforms strong competitors. These results support EEG-centric multimodal binding as a practical strategy for source-level IED classification. The open-source code is available at https://github.com/HKUSTGZ-ML4Health-Lab/NeuroMM2026_IED_Detection.",
+      "authors": [
+        "Muchen Li",
+        "Anglin Liu",
+        "Xuetian Gao",
+        "Ruijian Xu",
+        "Jintai Chen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.MM",
+        "q-bio.NC"
+      ],
+      "published": "2026-09-09T05:15:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.09728v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "EEG-centric multimodal binding handling imperfect multimodal context",
+      "llm_evidence_cn": "以脑电为中心的多模态绑定，处理不完善的多模态语境",
+      "llm_evidence": "以脑电为中心的多模态绑定，处理不完善的多模态语境",
+      "canonical_evidence": "以脑电为中心的多模态绑定，处理不完善的多模态语境",
+      "llm_tldr_en": "EEGBind is an EEG-centric multimodal binding framework for five-class source-level interictal epileptiform discharge classification, treating EEG as the primary modality and coping with class imbalance and imperfect multimodal context.",
+      "llm_tldr_cn": "源水平发作间期癫痫样放电分析对术前评估很重要，但短脑电窗口中源区证据微弱、受个体差异与类别不平衡影响，且多模态语境不完善。本文提出EEGBind，以脑电为主模态进行多模态绑定，实现五类源水平分类。该方法在不完善模态条件下提升了检测与定位性能，为以单一主模态为核心的多模态融合提供了范例。",
+      "llm_tldr": "源水平发作间期癫痫样放电分析对术前评估很重要，但短脑电窗口中源区证据微弱、受个体差异与类别不平衡影响，且多模态语境不完善。本文提出EEGBind，以脑电为主模态进行多模态绑定，实现五类源水平分类。该方法在不完善模态条件下提升了检测与定位性能，为以单一主模态为核心的多模态融合提供了范例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.11372v1",
+      "source": "arxiv",
+      "title": "RAMamba-Net: A Reliability-Aware and Mamba-Based Multimodal Fusion Network for Auditory Attention Detection",
+      "abstract": "Auditory attention decoding (AAD) identifies the attended speaker from physiological signals, supporting neuro-steered hearing devices and natural human-machine interaction. Electroencephalography (EEG) is the dominant modality for AAD but provides incomplete evidence in naturalistic audio-visual scenes, motivating EEG and electrooculography (EOG) fusion. Existing approaches remain limited by weak cross-modal interaction, inefficient temporal modeling, and low robustness to sample variations. To address the limitations, we propose RAMamba-Net, a reliability-aware Mamba-based multimodal fusion network for AAD. RAMamba-Net employs a Mamba-enhanced band-aware convolutional Transformer to capture band-specific EEG patterns and long-range temporal dynamics. A dual-branch temporal-spatial encoder models EOG temporal and inter-channel dependencies. Cross-modal attention enables explicit modality interaction. Then, a reliability-aware module is introduced to estimate sample-wise modality weights for feature and prediction consistency, thereby enhancing multimodal fusion. Experiments on two AAD benchmarks demonstrate that RAMamba-Net effectively exploits complementary EEG-EOG information, yielding accuracy gains of 5.76% over unimodal baselines, together with more robust decoding and discriminative representations. Further analyses show that explicit cross-modal interaction improves multimodal alignment, while the reliability-aware module suppresses unreliable modality evidence and is robust to signal perturbation and parameter variation.",
+      "authors": [
+        "Xingyi He",
+        "Ziwei Wang",
+        "Dongrui Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-10T11:08:15+00:00",
+      "link": "https://arxiv.org/pdf/2609.11372v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "reliability-aware Mamba-based multimodal fusion network",
+      "llm_evidence_cn": "可靠性感知的Mamba多模态融合网络",
+      "llm_evidence": "可靠性感知的Mamba多模态融合网络",
+      "canonical_evidence": "可靠性感知的Mamba多模态融合网络",
+      "llm_tldr_en": "RAMamba-Net fuses EEG and EOG for auditory attention detection using a reliability-aware Mamba-based architecture with a band-aware convolutional Transformer, improving cross-modal interaction and robustness to sample variations.",
+      "llm_tldr_cn": "听觉注意解码中脑电证据在自然视听场景下不完整，促使脑电与眼电融合，但现有方法跨模态交互弱、时序建模低效且对样本变化鲁棒性差。本文提出RAMamba-Net，一种可靠性感知的Mamba多模态融合网络，用Mamba增强的频带感知卷积Transformer捕捉脑电模式。方法提升了跨模态交互与时序建模能力，为神经引导助听等应用提供了更稳健的融合方案。",
+      "llm_tldr": "听觉注意解码中脑电证据在自然视听场景下不完整，促使脑电与眼电融合，但现有方法跨模态交互弱、时序建模低效且对样本变化鲁棒性差。本文提出RAMamba-Net，一种可靠性感知的Mamba多模态融合网络，用Mamba增强的频带感知卷积Transformer捕捉脑电模式。方法提升了跨模态交互与时序建模能力，为神经引导助听等应用提供了更稳健的融合方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.11040v1",
+      "source": "arxiv",
+      "title": "Toward Interpretable Multimodal Fusion: Heat Conduction Modeling for Hyperspectral and LiDAR Joint Classification",
+      "abstract": "The fusion of hyperspectral (HS) and Light Detection and Ranging (LiDAR) data plays a crucial role in enhancing land-cover classification by jointly exploiting spectral, spatial, and structural cues. However, existing multimodal fusion methods still struggle to model long-range dependencies and complex anisotropic interactions while maintaining computational efficiency. This paper introduces M2Heat, a physics-inspired framework that investigates multimodal fusion through the lens of heat conduction. At its core, a physics-driven visual heat conduction module (vHeat) and enhanced Frequency Value Embeddings (FVEs) simulate anisotropic information flow, enabling the capture of global dependencies with sub-quadratic complexity and physical interpretability. This mechanism, combined with a hybrid spatial-frequency fusion strategy named Cross-Frequency Fusion (CFF) module, produces highly discriminative and robust feature representations. M2Heat achieves competitive overall performance on three benchmarks, i.e., Trento, Houston2013, and Augsburg, while providing an interpretable heat-conduction-guided perspective for multimodal feature fusion. These results indicate the potential of heat-conduction-guided neural operators for efficient and interpretable RS multimodal fusion. The source code is publicly available at https: /github.com/Weikan0425/M2Heat_HSI_LiDAR.",
+      "authors": [
+        "Kan Wei",
+        "Jiahui Cui",
+        "Jing Yao",
+        "Xinyu Zhao",
+        "Lei Wang",
+        "Pedram Ghamisi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-10T03:38:49+00:00",
+      "link": "https://arxiv.org/pdf/2609.11040v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "physics-inspired multimodal fusion via heat conduction modeling",
+      "llm_evidence_cn": "基于热传导建模的物理启发多模态融合",
+      "llm_evidence": "基于热传导建模的物理启发多模态融合",
+      "canonical_evidence": "基于热传导建模的物理启发多模态融合",
+      "llm_tldr_en": "M2Heat is a physics-inspired framework modeling multimodal fusion as heat conduction with a visual heat module and frequency value embeddings for hyperspectral-LiDAR classification.",
+      "llm_tldr_cn": "针对高光谱与LiDAR数据融合中现有方法难以在保持计算效率的同时建模长程依赖与复杂各向异性交互的问题，论文提出物理启发的M2Heat框架，通过视觉热传导模块vHeat与增强频率值嵌入模拟各向异性信息流。实验表明该方法在亚二次复杂度下捕捉全局依赖并提升联合分类性能，为可解释多模态融合提供新视角。",
+      "llm_tldr": "针对高光谱与LiDAR数据融合中现有方法难以在保持计算效率的同时建模长程依赖与复杂各向异性交互的问题，论文提出物理启发的M2Heat框架，通过视觉热传导模块vHeat与增强频率值嵌入模拟各向异性信息流。实验表明该方法在亚二次复杂度下捕捉全局依赖并提升联合分类性能，为可解释多模态融合提供新视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.11341v1",
+      "source": "arxiv",
+      "title": "Exploring Diffusion Transformers for Cross-Modal Augmentation in Multimodal Brain State Decoding",
+      "abstract": "Multimodal brain state decoding has largely focused on fusing paired modalities for prediction, but has rarely explored how their correspondence can be further exploited to enrich training data and improve multimodal representation learning. To address this gap, we propose CoMA-DiT, a bidirectional cross-modal Diffusion Transformer for latent augmentation that treats paired modalities as sources of mutual generative supervision rather than merely as inputs to be fused. CoMA-DiT conditions velocity prediction on the paired modality through cross-modal attention and adaptively injects the resulting variation via a reliability-gated residual mechanism. Experiments on multimodal auditory attention decoding and emotion recognition showed that CoMA-DiT consistently outperformed 20 representative baselines, achieving absolute gains of 4.28% and 6.70% in accuracy and macro-F1 over the no-augmentation baseline, respectively. Extensive ablation, sensitivity, visualization, and interpretability analyses further demonstrated its robustness, generalizability, and ability to capture functionally relevant cross-modal interactions. These findings support a broader view of multimodal learning: Paired modalities can serve not only as inputs for fusion but also as supervision sources that augment one another.",
+      "authors": [
+        "Ziwei Wang",
+        "Xingyi He",
+        "Hongbin Wang",
+        "Tianwang Jia",
+        "Bohan Fang",
+        "Dongrui Wu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-10T10:20:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.11341v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal augmentation for multimodal representation learning",
+      "llm_evidence_cn": "面向多模态表示学习的跨模态增强",
+      "llm_evidence": "面向多模态表示学习的跨模态增强",
+      "canonical_evidence": "面向多模态表示学习的跨模态增强",
+      "llm_tldr_en": "CoMA-DiT exploits the correspondence between paired modalities as mutual generative supervision, using a bidirectional cross-modal diffusion transformer to augment latent data and improve multimodal representation learning.",
+      "llm_tldr_cn": "多模态脑状态解码多聚焦于融合成对模态做预测，却很少利用其对应关系来扩充训练数据、改进表示学习。本文提出CoMA-DiT，把成对模态视为相互生成监督源，用双向跨模态扩散Transformer进行潜空间增强，并通过可靠性门控残差自适应注入变化。在听觉注意解码与情感识别任务上验证了有效性，为跨模态表示学习提供了新途径。",
+      "llm_tldr": "多模态脑状态解码多聚焦于融合成对模态做预测，却很少利用其对应关系来扩充训练数据、改进表示学习。本文提出CoMA-DiT，把成对模态视为相互生成监督源，用双向跨模态扩散Transformer进行潜空间增强，并通过可靠性门控残差自适应注入变化。在听觉注意解码与情感识别任务上验证了有效性，为跨模态表示学习提供了新途径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.11514v1",
+      "source": "arxiv",
+      "title": "Prototype Matters: Modality-unified Prototype Self-distillation for Unsupervised Visible-infrared Person Re-identification",
+      "abstract": "Estimating reliable cross-modality association is crucial to unsupervised visible-infrared person re-ID. While optimal transport is shown to be a practical solution for cross-modality association, it suffers from the rigidness of hard label assignment without considering the impact of cluster noise. Moreover, enforcing only cross-modality contrast is also suboptimal, as it fails to jointly optimize the similarity relation within and across modality. In this paper, we propose a novel framework for cross-modality learning by well exploitation of prototypes: First, instead of contrasting with cross-modality prototypes, we show that modality-unified prototypical contrast facilitates better modality invariance by jointly and simultaneously optimizing similarity relation within and across-modality. Taking self-prototype as a steady teacher, we further refine the instance-prototype online relation through prototype-guided self-distillation. The two components are optimized in a unified framework, leading to a simple yet effective model. On standard VI-ReID benchmarks, we perform extensive comparison and analysis, validating the effectiveness of our proposed method. Code is available at: https://github.com/Terminator8758/PoSeD.",
+      "authors": [
+        "Menglin Wang",
+        "Xiaojin Gong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-10T13:19:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.11514v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "modality-unified prototypical contrast for cross-modality learning",
+      "llm_evidence_cn": "模态统一原型对比，跨模态学习",
+      "llm_evidence": "模态统一原型对比，跨模态学习",
+      "canonical_evidence": "模态统一原型对比，跨模态学习",
+      "llm_tldr_en": "This work tackles unreliable cross-modality association in unsupervised visible-infrared person re-ID, proposing modality-unified prototype self-distillation that better learns modality-invariant features than cross-modality contrast alone.",
+      "llm_tldr_cn": "无监督可见光—红外行人重识别依赖可靠的跨模态关联，但现有最优传输方法受硬标签分配刚性影响且忽略聚类噪声，仅用跨模态对比也未联合优化模态内与模态间相似关系。本文提出基于原型的跨模态学习框架，采用模态统一原型对比与自蒸馏，联合优化模态内外相似性。实验表明该方法能学习更好的模态不变表示，对跨模态对齐与模态不平衡研究具有借鉴意义。",
+      "llm_tldr": "无监督可见光—红外行人重识别依赖可靠的跨模态关联，但现有最优传输方法受硬标签分配刚性影响且忽略聚类噪声，仅用跨模态对比也未联合优化模态内与模态间相似关系。本文提出基于原型的跨模态学习框架，采用模态统一原型对比与自蒸馏，联合优化模态内外相似性。实验表明该方法能学习更好的模态不变表示，对跨模态对齐与模态不平衡研究具有借鉴意义。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

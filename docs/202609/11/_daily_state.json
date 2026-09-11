@@ -1,0 +1,137 @@
+{
+  "date": "20260911",
+  "date_label": "",
+  "generated_at": "2026-09-11 21:52:34 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.10798v1",
+      "route": "202609/11/2609.10798v1-rivat-fuse-reliability-calibrated-variational-tensor-fusion-for-multimodal-prediction-under-modality-uncertainty",
+      "title": "RiVaT-Fuse: Reliability-Calibrated Variational Tensor Fusion for Multimodal Prediction under Modality Uncertainty",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向多模态预测的可靠性校准变分张量融合",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.11247v1",
+      "route": "202609/11/2609.11247v1-the-illusion-of-balanced-multimodal-sentiment-analysis-beyond-the-limits-of-optimization-based-methods",
+      "title": "The Illusion of Balanced Multimodal Sentiment Analysis: Beyond the Limits of Optimization-Based Methods",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "诊断模态不平衡与优化式平衡方法的局限",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.10950v1",
+      "route": "202609/11/2609.10950v1-robust-multimodal-sentiment-analysis-with-incomplete-modalities-via-semantic-aware-completeness-based-reconstruction",
+      "title": "Robust Multimodal Sentiment Analysis with Incomplete Modalities via Semantic-aware Completeness based Reconstruction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "处理多模态融合中的模态缺失与噪声",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.11372v1",
+      "route": "202609/11/2609.11372v1-ramamba-net-a-reliability-aware-and-mamba-based-multimodal-fusion-network-for-auditory-attention-detection",
+      "title": "RAMamba-Net: A Reliability-Aware and Mamba-Based Multimodal Fusion Network for Auditory Attention Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "可靠性感知的Mamba多模态融合网络",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.09728v1",
+      "route": "202609/11/2609.09728v1-eegbind-detecting-source-level-interictal-epileptiform-discharges-via-eeg-centric-multimodal-binding",
+      "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以脑电为中心的多模态绑定，处理不完善的多模态语境",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.11040v1",
+      "route": "202609/11/2609.11040v1-toward-interpretable-multimodal-fusion-heat-conduction-modeling-for-hyperspectral-and-lidar-joint-classification",
+      "title": "Toward Interpretable Multimodal Fusion: Heat Conduction Modeling for Hyperspectral and LiDAR Joint Classification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "基于热传导建模的物理启发多模态融合",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.11341v1",
+      "route": "202609/11/2609.11341v1-exploring-diffusion-transformers-for-cross-modal-augmentation-in-multimodal-brain-state-decoding",
+      "title": "Exploring Diffusion Transformers for Cross-Modal Augmentation in Multimodal Brain State Decoding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态表示学习的跨模态增强",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    },
+    {
+      "paper_id": "2609.11514v1",
+      "route": "202609/11/2609.11514v1-prototype-matters-modality-unified-prototype-self-distillation-for-unsupervised-visible-infrared-person-re-identification",
+      "title": "Prototype Matters: Modality-unified Prototype Self-distillation for Unsupervised Visible-infrared Person Re-identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "模态统一原型对比，跨模态学习",
+      "first_seen_at": "2026-09-11 21:52:34 UTC",
+      "updated_at": "2026-09-11 21:52:34 UTC"
+    }
+  ]
+}
