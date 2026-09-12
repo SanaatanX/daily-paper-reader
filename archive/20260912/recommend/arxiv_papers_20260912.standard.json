@@ -1,0 +1,286 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-12T20:53:23.770172+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.05755v1",
+      "source": "arxiv",
+      "title": "Emotion as a Distribution: Joint Valence-Arousal Probability Learning for Speaker-Independent Multimodal Emotion Recognition",
+      "abstract": "Human emotion is graded and frequently mixed, yet most multimodal recognizers collapse it onto a single hard label. We argue the recognizer should instead expose a distribution over affective space. Our text+speech system, alongside its categorical decision, emits a $9\\times9$ probability matrix over the Valence-Arousal plane, trained with a two-dimensional Gaussian soft target under a Kullback-Leibler/cross-entropy objective, aimed at counseling support. Evaluation is strict: speaker-independent 5-fold leave-one-session-out IEMOCAP with rotating-session inner validation, headline metrics only on the held-out session. Within one fixed encoder-fusion-head pipeline we compare Transformer and state-space (Mamba-1/2/3) backbones at matched depth and width, at two operating points ($T\\approx550$, $T\\approx2750$). The featured dual-head system reaches 73.0% $\\pm$ 0.3 unweighted accuracy over three seeds (separate rerun: 72.1%), exceeding the Transformer fusion baseline by 3.0 UA points (95% session-bootstrap CI [1.0,4.7]; significant under paired t-test and session-level bootstrap), with no latency or memory advantage at these lengths; swapping the ~1M trainable front-end for frozen WavLM-Large features (learnable layer weights) lifts the same architecture to 76.6% $\\pm$ 1.3. Pre-specified controls scope the claims honestly: simpler valence-arousal auxiliaries reproduce the classification lift within noise, and a dedicated regression head tracks the continuous ratings slightly better, so the head's specific value is the normalized affect distribution itself. That distribution recovers the circumplex: its center of mass tracks valence and arousal (CCC 0.66/0.66; predominantly between-class structure, weaker within-class tracking), and its entropy is weakly but consistently linked to categorical rater ambiguity, not dimensional spread.",
+      "authors": [
+        "Tingyi Lin",
+        "Wen-Ren Yang",
+        "Kuanwei Chen"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "cs.CL"
+      ],
+      "published": "2026-09-04T22:34:14+00:00",
+      "link": "https://arxiv.org/pdf/2609.05755v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal text+speech fusion for recognition",
+      "llm_evidence_cn": "文本与语音的多模态融合识别",
+      "llm_evidence": "文本与语音的多模态融合识别",
+      "canonical_evidence": "文本与语音的多模态融合识别",
+      "llm_tldr_en": "Human emotion is graded and often mixed, yet most multimodal recognizers collapse it into a single hard label. This text+speech system emits a 9x9 probability matrix over the valence-arousal plane, trained with a 2D Gaussian soft target under KL/cross-entropy, evaluated speaker-independently on IEMOCAP.",
+      "llm_tldr_cn": "人类情绪往往是渐变的且常呈混合状态，但现有多模态识别器大多将其压缩为单一硬标签。本文提出识别器应输出情绪空间上的分布，构建文本加语音的多模态系统，在效价-唤醒平面上给出9x9概率矩阵，并以二维高斯软目标和KL/交叉熵目标联合训练。系统在IEMOCAP上以说话人无关的留一会话协议评估，同时给出类别决策与连续情绪分布，面向心理支持等应用。",
+      "llm_tldr": "人类情绪往往是渐变的且常呈混合状态，但现有多模态识别器大多将其压缩为单一硬标签。本文提出识别器应输出情绪空间上的分布，构建文本加语音的多模态系统，在效价-唤醒平面上给出9x9概率矩阵，并以二维高斯软目标和KL/交叉熵目标联合训练。系统在IEMOCAP上以说话人无关的留一会话协议评估，同时给出类别决策与连续情绪分布，面向心理支持等应用。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.05916v1",
+      "source": "arxiv",
+      "title": "STAR-Pro: Stage-Wise Token Adaptive Reduction with Progressive Refinement for Efficient Large Vision-Language Models",
+      "abstract": "Large vision-language models (LVLMs) achieve strong multimodal understanding, but the hundreds to thousands of visual tokens they process impose substantial computational overhead, motivating training-free visual token pruning. In this work, we conduct two complementary analyses of visual token pruning. First, we measure the feature-space coverage of tokens retained before cross-modal fusion and find that aggressive pruning discards substantial visual information. Second, we track text-to-visual attention across decoder layers and find that the visual tokens considered important change substantially with depth, making one-shot pruning decisions unreliable. Together, these findings show that effective pruning should preserve broad visual coverage before fusion and progressively refine the retained tokens as cross-modal evidence evolves during fusion. We therefore propose STAR-Pro (STage-Wise Adaptive Token Reduction with Progressive Refinement), a training-free two-stage framework. Its Adaptive Stage applies pivoted QR to construct an over-budget feature-coverage candidate pool, while its Progressive Stage uses evolving text-to-visual attention at selected decoder layers to prune a nested survivor set under a target layer-average token budget. Extensive experiments across seven LVLMs spanning multiple architectures and 18 image and video benchmarks demonstrate the effectiveness of STAR-Pro under aggressive pruning. On LLaVA-Video-7B, STAR-Pro reduces visual tokens by 90.5%, retains 92.7% of baseline performance, and achieves a $2.24\\times$ measured inference speedup. Code is available at https://github.com/EasonAI-5589/starpro.",
+      "authors": [
+        "Yichen Guo",
+        "Tinghao Wang",
+        "Qizhe Zhang",
+        "Lingbei Meng",
+        "Yuan Zhang",
+        "Jiajun Cao",
+        "Hao Jiang",
+        "Chenwei Wu",
+        "Jixian Wu",
+        "Sixiang Chen",
+        "Tao Luo",
+        "Hongyang Cheng",
+        "Kai Tang",
+        "Chenxi Li",
+        "Renyuan Li",
+        "Xiande Huang",
+        "Wenya Wang",
+        "Shanghang Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-05T06:18:28+00:00",
+      "link": "https://arxiv.org/pdf/2609.05916v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "visual token pruning before cross-modal fusion in LVLMs",
+      "llm_evidence_cn": "视觉语言模型中跨模态融合前的视觉令牌剪枝",
+      "llm_evidence": "视觉语言模型中跨模态融合前的视觉令牌剪枝",
+      "canonical_evidence": "视觉语言模型中跨模态融合前的视觉令牌剪枝",
+      "llm_tldr_en": "STAR-Pro analyzes visual token pruning in LVLMs and proposes stage-wise adaptive token reduction with progressive refinement, showing that important visual tokens shift with depth and one-shot pruning is unreliable.",
+      "llm_tldr_cn": "针对大型视觉语言模型处理海量视觉令牌带来高开销、激进剪枝丢失信息的问题，本文对视觉令牌剪枝展开分析并提出STAR-Pro分阶段令牌自适应缩减与渐进细化方法。分析发现重要视觉令牌随层深显著变化，一次性剪枝不可靠。实验表明该方法在保持效率的同时减少信息损失，为跨模态融合的效率优化提供新思路。",
+      "llm_tldr": "针对大型视觉语言模型处理海量视觉令牌带来高开销、激进剪枝丢失信息的问题，本文对视觉令牌剪枝展开分析并提出STAR-Pro分阶段令牌自适应缩减与渐进细化方法。分析发现重要视觉令牌随层深显著变化，一次性剪枝不可靠。实验表明该方法在保持效率的同时减少信息损失，为跨模态融合的效率优化提供新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "Latest techniques for multimodal fusion in neural networks",
+      "matched_requirement_id": "req-17",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.06011v1",
+      "source": "arxiv",
+      "title": "Tri-PvP: Exposing Modality Bias in Omni-Modal Large Language Models through Perceptual-Propositional Evidence Conflicts",
+      "abstract": "Omni-modal large language models (OLLMs) jointly process vision, audio, and text, yet their modality bias under cross-modal conflict remains underexplored. Existing benchmarks conflate two distinct forms of evidence within a single modality: perceptual signals (e.g., a photograph or recording of a dog) and propositional signals (e.g., the declarative claim \"this is a dog\"), such that any measured modality bias is inherently confounded with evidence-form bias, precluding clean attribution to either source. To address this, we introduce Tri-PvP, an 8,000-sample tri-modal conflict benchmark crossing vision, audio, and text, where vision and audio each take perceptual or propositional form. Evaluating five OLLMs, we find robust visual bias across most models and evidence-type conditions. Crucially, we reveal a systematic asymmetry in evidence-form bias: models exhibit a stronger bias toward perceptual signal in vision but propositional in audio. Further analyses via layer-wise linear probing and contrastive decoding reveal that modality bias is already linearly decodable from early representation layers and can only be partially mitigated, calling for mitigation strategies beyond surface-level interventions.",
+      "authors": [
+        "Yen-Ting Piao",
+        "Shu-Yun Chen",
+        "Chin-Hui Chu",
+        "Chun-Wei Chen",
+        "Shih-Yun Shan Kuan",
+        "Hung-yi Lee",
+        "Yun-Nung Chen"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV",
+        "cs.SD"
+      ],
+      "published": "2026-09-05T10:33:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.06011v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "benchmark exposing modality bias under cross-modal conflict",
+      "llm_evidence_cn": "揭示跨模态冲突下模态偏置的基准",
+      "llm_evidence": "揭示跨模态冲突下模态偏置的基准",
+      "canonical_evidence": "揭示跨模态冲突下模态偏置的基准",
+      "llm_tldr_en": "Tri-PvP is an 8000-sample tri-modal conflict benchmark that decouples modality bias from evidence-form bias in omni-modal LLMs, relevant to modality imbalance analysis.",
+      "llm_tldr_cn": "针对全模态大模型在跨模态冲突下模态偏置难以归因的问题，本文指出现有基准混淆了感知信号与命题信号。作者提出Tri-PvP，一个8000样本、交叉视觉音频文本的三模态冲突基准，其中视觉与音频均取感知或命题形式。评测五种全模态模型显示该设计可将模态偏置与证据形式偏置解耦，为分析模态不平衡提供更干净的诊断工具。",
+      "llm_tldr": "针对全模态大模型在跨模态冲突下模态偏置难以归因的问题，本文指出现有基准混淆了感知信号与命题信号。作者提出Tri-PvP，一个8000样本、交叉视觉音频文本的三模态冲突基准，其中视觉与音频均取感知或命题形式。评测五种全模态模型显示该设计可将模态偏置与证据形式偏置解耦，为分析模态不平衡提供更干净的诊断工具。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.08188v1",
+      "source": "arxiv",
+      "title": "Bridging the Semantic-Utility Gap in Multimodal RAG via Generator-in-the-Loop Alignment",
+      "abstract": "Vision-language models (VLMs) augmented with retrieval-augmented generation (RAG) benefit from access to external evidence. However, standard retrievers and rerankers optimize for semantic similarity rather than answer utility, creating a preference gap: documents that appear relevant may not help the generator produce a correct answer. Motivated by this, we propose a two-stage generator-in-the-loop alignment framework that closes this gap without human document-level relevance annotations. Our framework consists of two stages: in Stage 1, a VLM generates a hypothetical text passage from the image-query pair, which is used as the retrieval query for dense text search, bridging the image-to-text modality gap. In Stage 2, a cross-encoder reranker adapted with low-rank adaptation (LoRA) is fine-tuned using answer-supervised preference pairs mined from the frozen VLM: given the dataset answer label, a candidate document is labeled positive if the VLM produces the correct answer when given that document as context, and negative otherwise. This generator-guided signal is compatible with multiple alignment loss functions, including contrastive (triplet) loss, pairwise direct preference optimization (DPO), and supervised fine-tuning (SFT), and supports periodic re-mining to refresh preference pairs as the reranker improves. Experiments on VQA-X and A-OKVQA with Qwen3.5-2B and Qwen3-VL-4B-Instruct show that our proposed framework consistently outperforms rank-order, random, and REPLUG-style likelihood baselines under various alignment losses and pool size settings, suggesting that answer-level generator feedback is an effective supervision signal for preference alignment.",
+      "authors": [
+        "Zhan-Lun Chang",
+        "Dong-Jun Han",
+        "Seyyedali Hosseinalipour",
+        "Mung Chiang",
+        "Christopher G. Brinton"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.IR"
+      ],
+      "published": "2026-09-08T03:18:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.08188v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "bridging image-to-text modality gap via cross-modal alignment",
+      "llm_evidence_cn": "通过跨模态对齐弥合图像到文本的模态差距",
+      "llm_evidence": "通过跨模态对齐弥合图像到文本的模态差距",
+      "canonical_evidence": "通过跨模态对齐弥合图像到文本的模态差距",
+      "llm_tldr_en": "A two-stage generator-in-the-loop alignment framework for multimodal RAG bridges the image-to-text modality gap with hypothetical passages and cross-encoder utility alignment, removing the need for human relevance labels.",
+      "llm_tldr_cn": "视觉语言模型结合检索增强生成可获取外部证据，但标准检索器与重排器只优化语义相似度而非答案效用，形成偏好差距。本文提出两阶段生成器在环对齐框架：第一阶段由视觉语言模型从图像-查询对生成假设文本以桥接模态差距，第二阶段用交叉编码器对齐效用。该方法无需人工文档级相关性标注即可缩小差距。工作为跨模态检索与对齐提供了以生成效用为导向的方案。",
+      "llm_tldr": "视觉语言模型结合检索增强生成可获取外部证据，但标准检索器与重排器只优化语义相似度而非答案效用，形成偏好差距。本文提出两阶段生成器在环对齐框架：第一阶段由视觉语言模型从图像-查询对生成假设文本以桥接模态差距，第二阶段用交叉编码器对齐效用。该方法无需人工文档级相关性标注即可缩小差距。工作为跨模态检索与对齐提供了以生成效用为导向的方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.10292v1",
+      "source": "arxiv",
+      "title": "Isotropic Embedding Perturbations for Robust Vision Language Encoders",
+      "abstract": "Data augmentation is fundamental to training modern deep vision and multimodal models. While individual methods, such as RandAug, CutMix, Mixup, RandErase, and DropPath, offer strong regularization effects, their combined use has saturated in performance due to overlapping functionalities, and aggressive pixel-level manipulations may disrupt delicate cross-modal alignment. This saturation motivates the search for a new augmentation axis within the embedding space rather than the input space. We introduce Aether, a simple plug-in method that applies diffusion-style random perturbations in the embedding space via controlled alpha-mixing, specifically designed to provide isotropic regularization that remains semantically consistent. Inspired by feature-space perturbations in language models and image degradation in generative pretraining, Aether induces mild yet effective perturbations that smooth the representations without compromising the fine-grained structural information required for strong vision-language encoders. Across diverse architectures and across multiple recognition tasks, Aether delivers consistent gains over the advanced recipe combining CutMix, Mixup, DropPath, and RandAug---a level of improvement rarely observed with modern augmentation alternatives. Notably, Aether demonstrates superior effectiveness in multi-modal alignment, succeeding where traditional pixel-space augmentations fail by providing a stable, isotropic regularization signal that respects the integrity of the high-dimensional feature space.",
+      "authors": [
+        "Hyesong Choi",
+        "Daeun Kim",
+        "Song Park",
+        "Taekyung Kim",
+        "Byeongho Heo",
+        "Sangdoo Yun",
+        "Dongbo Min",
+        "Dongyoon Han"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-09T15:08:05+00:00",
+      "link": "https://arxiv.org/pdf/2609.10292v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "embedding-space augmentation preserving cross-modal alignment for vision-language encoders",
+      "llm_evidence_cn": "在嵌入空间增强以保持视觉语言跨模态对齐",
+      "llm_evidence": "在嵌入空间增强以保持视觉语言跨模态对齐",
+      "canonical_evidence": "在嵌入空间增强以保持视觉语言跨模态对齐",
+      "llm_tldr_en": "Aether applies diffusion-style random perturbations in the embedding space to regularize vision-language encoders, avoiding pixel-level augmentations that disrupt delicate cross-modal alignment.",
+      "llm_tldr_cn": "针对像素级数据增强饱和且易破坏跨模态对齐的问题，本文提出Aether，一种在嵌入空间通过受控alpha混合施加扩散式随机扰动的即插即用方法，提供语义一致的各向同性正则。该方法为视觉语言编码器训练提供了新的增强维度，缓解了多模态对齐受损，属于跨模态对齐表示学习范畴。",
+      "llm_tldr": "针对像素级数据增强饱和且易破坏跨模态对齐的问题，本文提出Aether，一种在嵌入空间通过受控alpha混合施加扩散式随机扰动的即插即用方法，提供语义一致的各向同性正则。该方法为视觉语言编码器训练提供了新的增强维度，缓解了多模态对齐受损，属于跨模态对齐表示学习范畴。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.11164v1",
+      "source": "arxiv",
+      "title": "Multimodal Temporal Modeling for Continuous Group Emotion Recognition in Multi-party Dialogues",
+      "abstract": "To realize natural behavior in dialogue agents in multi-party dialogue scenarios, it is important to understand group emotion such as valence and arousal as a whole. Most prior work addressed this task at the utterance level or using a coarse-grained time window, which is not sufficient to capture emotional dynamics. In this study, we formulate continuous recognition of the Group Emotion at a one-second resolution. Moreover, we also introduce the Mixed state, which captures the emotional divergence among participants in the group. We constructed a dataset with frame-level soft labels based on the TEIDAN corpus and propose a multimodal temporal framework that integrates audio and video information using a sliding-window context. Experimental results demonstrate that the temporal Transformer outperforms simple baselines and shows stronger temporal agreement with the ground-truth labels than the LLM-based model. The effect of context length is limited, whereas audio-visual input outperforms either unimodal input on the continuous-label metrics. Additionally, our analysis shows larger Group Emotion recognition errors in intervals with high Mixed values, exposing emotional divergence as a key challenge for group emotion recognition.",
+      "authors": [
+        "Soma Iwata",
+        "Koji Inoue",
+        "Muyun Wu",
+        "Taiga Mori",
+        "Divesh Lala",
+        "Tatsuya Kawahara"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-09-10T07:09:57+00:00",
+      "link": "https://arxiv.org/pdf/2609.11164v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal audio-video fusion framework",
+      "llm_evidence_cn": "音视频多模态融合框架",
+      "llm_evidence": "音视频多模态融合框架",
+      "canonical_evidence": "音视频多模态融合框架",
+      "llm_tldr_en": "Group emotion dynamics are hard to capture at utterance level or with coarse windows. This paper formulates one-second continuous group emotion recognition, introduces a Mixed state for emotional divergence, and proposes a sliding-window multimodal framework fusing audio and video, with a frame-level soft-label dataset from TEIDAN.",
+      "llm_tldr_cn": "针对多方对话中群体情绪动态难以用话语级或粗时间窗刻画的问题，本文把群体情绪识别定义为秒级连续任务，并引入刻画成员情绪分歧的Mixed状态。作者基于TEIDAN语料构建带帧级软标签的数据集，提出用滑动窗口融合音视频信息的多模态时序框架。该工作实现了更细粒度的群体情绪动态捕捉，为对话智能体的自然行为提供了新的建模基准。",
+      "llm_tldr": "针对多方对话中群体情绪动态难以用话语级或粗时间窗刻画的问题，本文把群体情绪识别定义为秒级连续任务，并引入刻画成员情绪分歧的Mixed状态。作者基于TEIDAN语料构建带帧级软标签的数据集，提出用滑动窗口融合音视频信息的多模态时序框架。该工作实现了更细粒度的群体情绪动态捕捉，为对话智能体的自然行为提供了新的建模基准。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

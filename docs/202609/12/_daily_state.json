@@ -1,0 +1,105 @@
+{
+  "date": "20260912",
+  "date_label": "",
+  "generated_at": "2026-09-12 20:56:08 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.05755v1",
+      "route": "202609/12/2609.05755v1-emotion-as-a-distribution-joint-valence-arousal-probability-learning-for-speaker-independent-multimodal-emotion-recognition",
+      "title": "Emotion as a Distribution: Joint Valence-Arousal Probability Learning for Speaker-Independent Multimodal Emotion Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "文本与语音的多模态融合识别",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    },
+    {
+      "paper_id": "2609.05916v1",
+      "route": "202609/12/2609.05916v1-star-pro-stage-wise-token-adaptive-reduction-with-progressive-refinement-for-efficient-large-vision-language-models",
+      "title": "STAR-Pro: Stage-Wise Token Adaptive Reduction with Progressive Refinement for Efficient Large Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "视觉语言模型中跨模态融合前的视觉令牌剪枝",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    },
+    {
+      "paper_id": "2609.06011v1",
+      "route": "202609/12/2609.06011v1-tri-pvp-exposing-modality-bias-in-omni-modal-large-language-models-through-perceptual-propositional-evidence-conflicts",
+      "title": "Tri-PvP: Exposing Modality Bias in Omni-Modal Large Language Models through Perceptual-Propositional Evidence Conflicts",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "揭示跨模态冲突下模态偏置的基准",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    },
+    {
+      "paper_id": "2609.08188v1",
+      "route": "202609/12/2609.08188v1-bridging-the-semantic-utility-gap-in-multimodal-rag-via-generator-in-the-loop-alignment",
+      "title": "Bridging the Semantic-Utility Gap in Multimodal RAG via Generator-in-the-Loop Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过跨模态对齐弥合图像到文本的模态差距",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    },
+    {
+      "paper_id": "2609.10292v1",
+      "route": "202609/12/2609.10292v1-isotropic-embedding-perturbations-for-robust-vision-language-encoders",
+      "title": "Isotropic Embedding Perturbations for Robust Vision Language Encoders",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在嵌入空间增强以保持视觉语言跨模态对齐",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    },
+    {
+      "paper_id": "2609.11164v1",
+      "route": "202609/12/2609.11164v1-multimodal-temporal-modeling-for-continuous-group-emotion-recognition-in-multi-party-dialogues",
+      "title": "Multimodal Temporal Modeling for Continuous Group Emotion Recognition in Multi-party Dialogues",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "音视频多模态融合框架",
+      "first_seen_at": "2026-09-12 20:56:08 UTC",
+      "updated_at": "2026-09-12 20:56:08 UTC"
+    }
+  ]
+}
