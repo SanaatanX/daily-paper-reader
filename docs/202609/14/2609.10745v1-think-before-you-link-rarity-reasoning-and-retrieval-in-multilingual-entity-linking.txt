@@ -1,0 +1,615 @@
+Title: Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking
+
+URL Source: https://arxiv.org/pdf/2609.10745v1
+
+Published Time: Fri, 11 Sep 2026 00:09:58 GMT
+
+Number of Pages: 23
+
+Markdown Content:
+# Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking 
+
+Parinthapat Pengpun Simran Khanuja Graham Neubig 
+
+{ppengpun, skhanuja, gneubig}@andrew.cmu.edu 
+
+Carnegie Mellon University 
+
+https://neulab.github.io/think-before-you-link/ 
+
+Abstract 
+
+Multimodal entity linking grounds entity men-tions in text and images to knowledge-base entries. These systems degrade on rare en-tities, but prior work measures rarity pri-marily through popularity-based metrics such as pageviews. We broaden this view using knowledge-graph structural metrics that cap-ture how well an entity is documented and con-nected. These metrics identify many rare en-tities that popularity metrics miss. Across the resulting rare-entity slices, state-of-the-art ac-curacy drops by 15.4–39.9%, showing that dif-ferent rarity definitions expose different failure modes. To address these failures, we introduce a simple, training-free framework in which a reasoning-capable vision-language model iter-atively searches and reasons over Wikipedia, gathering evidence dynamically. Controlled ex-periments show that reasoning and retrieval are complementary. Reasoning alone does not sig-nificantly improve accuracy on rare entities. Re-trieval without reasoning improves rare-entity accuracy but can hurt overall accuracy. Their combination performs best. On MERLIN, a multilingual multimodal entity linking bench-mark over five languages (Hindi, Indonesian, Japanese, Tamil, Vietnamese), our best system improves over the state of the art by 6.9% over-all and by up to 23.3% on rare-entity slices. We release MERLIN-Rare, rare-entity test slices for targeted evaluation, with our framework. 
+
+1 Introduction 
+
+Entity linking, or the task of grounding textual men-tions to knowledge base entries, is foundational for knowledge-intensive NLP applications (Sevgili et al., 2022; Shen et al., 2015). As vision-language models become increasingly capable, there is grow-ing interest in multimodal entity linking, where visual context can help disambiguate mentions that would be ambiguous from text alone (Shi et al., 2024; Moon et al., 2018). This is particularly valu-able in multilingual settings, where images provide  
+
+> Figure 1: Multimodal entity linking. The Japanese text men-tions a generic “cruise ship,” which cannot be resolved from text alone. The accompanying image shows the vessel with its name “Diamond Princess” written on the hull, enabling a targeted search to link to the correct entity.
+
+language-agnostic signal that can bridge gaps in textual coverage (Ramamoorthy et al., 2025). Currently, entity linking models perform well on common, frequently-referenced entities but de-grade sharply on the long tail (Boscariol et al., 2025; Hoveyda et al., 2024; Ilievski et al., 2018). This problem is especially severe for culturally niche entities, or those well-known within specific language communities but sparsely represented in cross-lingual knowledge bases (Veselovsky et al., 2025; Naous et al., 2024), as opposed to entities that are merely unpopular. Prior work, however, has gauged entity rarity through popularity-based proxies such as Wikipedia pageviews and incom-1arXiv:2609.10745v1 [cs.CL] 9 Sep 2026 Hindi Indonesian Japanese Tamil Vietnamese Avg. 65 70 75 80 85 90 95 100         
+
+> Accuracy (%)  +10.0 +10.0 +2.1 +9.3 +2.9 +6.9
+> (a) Full test set
+> CulturalPangea (SOTA) Ours (8B-Think+Embed)
+> Qualifiers Statements WD Out-Links Lang. Editions Pageviews 0510 15 20 25
+> Advantage over SOTA (%)
+> 23.3 22.1 21.7 16.3 14.1
+> (b) Rare entity slices
+> Pangea Ours (8B-Th+Em) 020 40 60 80 100
+> Accuracy (%)  81.1 87.9
+> 47.6 63.9 33
+> 24
+> (c) Full vs. rare (Lang. Ed.)
+> Full Rare
+
+Figure 2: Our best system (8B-Think+Embed) vs. baselines. (a) Full test set accuracy across five languages: +6.9% average over SOTA. (b) Advantage over Pangea on bottom-5% rare entity slices reaches +23.3% . (c) On rare entities in the bottom 5% by language editions, Pangea reaches 47.6% while our system reaches 63.9%. 
+
+ing link counts (Graciotti et al., 2025; Mallen et al., 2023; Chen et al., 2021), which capture access fre-quency but may not reflect cultural specificity. We study this problem on MERLIN (Ramamoor-thy et al., 2025), a multilingual multimodal entity linking benchmark spanning five languages (Hindi, Indonesian, Japanese, Tamil, and Vietnamese). We propose a broader characterization of entity rarity that distinguishes cultural specificity from mere unpopularity. Using knowledge-graph structural metrics, we show that structural sparsity is associ-ated with substantial degradation on entities that popularity-based metrics often miss. The bottom-5% entity sets overlap by only 37% on average, and accuracy declines toward the structurally sparse end of the distribution. Intuitively, different rarity definitions reveal dif-ferent failure modes. An entity may receive little traffic despite rich documentation, or it may be pop-ular within one community but have sparse cross-lingual and graph coverage. A single popularity metric cannot distinguish these cases. Hence, we consider multiple definitions of rarity to identify failure modes hidden by aggregate evaluation. On the current state-of-the-art (de Dieu Nyandwi et al., 2025) model, accuracy drops by 15.4–39.9% across the bottom-5% slices. Structural metrics reveal drops of up to 37.0%, similar to 37.7% for pageviews, but identify largely different entities. Thus, standard popularity metrics miss many rare entities on which the model fails. Rare entities are unlikely to be well-represented in model weights, motivating retrieval-augmented approaches that access external knowledge at infer-ence time (Ding et al., 2025; Pons et al., 2024; Liu et al., 2024). However, retrieval alone may be insuf-ficient as entity disambiguation often involves con-textual reasoning. We investigate whether a simple framework combining reasoning-capable vision-language models with retrieval over Wikipedia can address rare entity failures. Using this framework, we find that reasoning and retrieval play complementary roles. Reasoning alone does not significantly improve accuracy on rare entities. Retrieval improves performance on rare entities even without reasoning, but it hurts the non-reasoning model on the full test set. Their com-bination gives the strongest performance, which suggests that reasoning helps the model use re-trieved evidence more effectively. As shown in Figure 2, our best system achieves improvements of +2.1% to +10.0% over the SOTA baseline across languages. The gains are larger on rare entities with the full-dataset advantage of 
+
++6.9% growing to +23.3% on the hardest rare en-tity slices. In summary, our contributions are: • Rarity characterization: We propose a mul-tidimensional characterization of entity rarity using Wikidata structural metrics, showing that different rarity definitions identify dis-tinct entity sets and failure modes. We release MERLIN -R ARE , a set of rare entity test slices for targeted evaluation. • Framework: We present a simple framework combining reasoning-capable VLMs with it-erative retrieval over Wikipedia, achieving 
+
++6.9% over the state-of-the-art on MERLIN and up to +23.3% on the rare entity slices. • Analysis: We provide a detailed analysis of model behavior showing that, retrieval hurts non-reasoning models on common entities but helps on rare ones. We also show that retrieval 2failure accounts for 72% of residual errors, and that reasoning models make fewer but more targeted retrieval calls. 
+
+2 Related Work 
+
+Entity Linking with Large Language Models. 
+
+Entity linking has shifted from classification over candidate sets to direct generation, beginning with GENRE’s (Cao et al., 2021a) autoregressive entity retrieval and extended via context enrichment and adaptive routing (Ding et al., 2024, 2025; Xin et al., 2025; Liu et al., 2024; Li et al., 2025). LELA (Haf-foudhi et al., 2026) retrieves once then reasons with self-consistency voting; ELA (Luo et al., 2025) uses a single retrieval call with no query refine-ment. All operate text-only and predominantly in English; none investigate iterative evidence gather-ing for culturally niche entities. 
+
+Multimodal and Multilingual Entity Linking. 
+
+Multimodal EL leverages visual context to dis-ambiguate text-ambiguous mentions (Moon et al., 2018; Wang et al., 2022; Shi et al., 2024; Liu et al., 2025), while multilingual EL has advanced via autoregressive and end-to-end methods (Cao et al., 2021b; Limkonchotiwat et al., 2023). MER-LIN (Ramamoorthy et al., 2025) is one of the first benchmarks at this intersection; Cultural Pangea (de Dieu Nyandwi et al., 2025) establishes the SOTA by fine-tuning a multilingual VLM on culturally grounded data, yet still degrades sharply on structurally rare entities (Section 4). 
+
+Entity Rarity and Cultural Representation. 
+
+EL systems degrade on rare entities (Ilievski et al., 2018; Hoveyda et al., 2024; Boscariol et al., 2025), with rarity typically equated with low popular-ity (Mallen et al., 2023; Kandpal et al., 2023; Chen et al., 2021). However, unpopularity is not the same as cultural specificity. LLMs exhibit Western-centric entity bias (Naous et al., 2024), VLM performance correlates with per-language Wikipedia size (Bugliarello et al., 2022), and local-ized cultural knowledge is poorly represented cross-lingually (Veselovsky et al., 2025; Tao et al., 2024; Adilazuarda et al., 2024). We distinguish these through a multidimensional rarity characterization separating structural sparsity from popularity. 
+
+Retrieval-Augmented Reasoning. ReAct (Yao et al., 2023) and IRCoT (Trivedi et al., 2023) in-terleave reasoning with retrieval; reasoning-native models trained via RL (Guo et al., 2025; Team, 2025; Jin et al., 2025; Feng et al., 2025) learn to call search within their thinking, and inference-time compute can substitute for parameters (Snell et al., 2024). This paradigm has not been applied to entity linking, which is the gap we close. 
+
+3 Task Definition 
+
+Entity linking is the task of mapping textual en-tity mentions to entries in a knowledge base (Shen et al., 2015). We study a multilingual, multimodal formulation of this task, focusing on entity linking given a marked mention. We utilize MERLIN (Ra-mamoorthy et al., 2025) as our evaluation set. We follow MERLIN’s setup. Given a text pas-sage T in a source language, an accompanying image I, and a marked entity mention m ∈ T ,the task is to predict the English Wikipedia title of the entity referenced by m. We evaluate using exact-match accuracy against gold annotations. 
+
+4 Entity Rarity Analysis 
+
+Before presenting our methodology, we character-ize the rarity problem that motivates our approach. We define entity rarity along multiple dimensions and show that the current state-of-the-art fails on rare entities. 
+
+4.1 Defining Entity Rarity 
+
+Prior work commonly defines entity rarity using popularity signals such as Wikipedia pageviews or incoming link counts (Graciotti et al., 2025; Xin et al., 2025; Mallen et al., 2023; Ilievski et al., 2018). However, popularity is only one dimension of rarity. Intuitively, an entity can receive substan-tial public attention but still have limited structured or cross-lingual information. Wikipedia content metrics measure how much an entity has been doc-umented, while Wikidata metrics measure its struc-tural connectivity and coverage across languages. These dimensions can reflect different sources of difficulty for entity linking. Limited documenta-tion reduces the available textual evidence, sparse knowledge-graph structure provides fewer relations between entities, and low cross-lingual coverage makes it harder to connect a source-language men-tion to an English knowledge-base entry. Prior work also shows that Wikipedia attention can dif-fer from Wikidata structure (Erenrich, 2024), and that culturally contextual content often has limited coverage across language editions (Miquel-Ribé and Laniado, 2018). Popularity-based definitions 3may miss entities that receive attention but remain poorly represented in the resources used by multi-lingual EL systems. We consider multiple defini-tions of rarity to identify model failure modes that popularity-based metrics may not reveal. 
+
+Rarity Metrics. We collect two families of metrics via the Wikipedia and Wikidata APIs. 
+
+Wikipedia-based metrics reflect editorial atten-tion and documentation depth: pageviews (90-day), backlinks, article size, revision count, unique edi-tors, category count, external links, reference count, and image count. Wikidata-based metrics reflect structural connectivity and cross-lingual coverage: incoming links, outgoing links, language editions (number of Wikipedia languages with an article), statement count, qualifier count, and entity age. 
+
+Definitions. An entity e is rare on metric m if 
+
+m(e) falls in the bottom q% of the test-set distribu-tion ( q=5 in the main text). An entity is unpopular 
+
+if it is rare on access-frequency metrics (pageviews, backlinks), and structurally rare if it is rare on Wikidata metrics (language editions, statements, qualifiers, links). We use rare as an umbrella for these metric-specific tails, which include unpopular entities with low access frequency, under-documented entities with limited Wikipedia content, and structurally sparse entities with limited Wikidata coverage. We use the bottom 5% in the main analysis because it balances rarity severity with enough examples for reliable evaluation. Appendix A.7 shows that the findings remain stable at 1%, 5%, and 10%, and Appendix A.8 shows the same gradient across rarity deciles. These dimensions are complementary. An entity could be popular yet structurally rare. For example, the entity 2016 Indian banknote demonetisation is editorially rich but structurally sparse, while the 
+
+Muttahida Qaumi Movement is the reverse, a thin English article atop a dense knowledge graph. Em-pirically, the bottom-5% entity sets for different metrics share only 37% of their entities on average (Appendix A.1), with some pairs overlapping as little as 10%. We further note that cross-lingual knowl-edge base coverage tracks cultural representa-tion in models. VLM accuracy on multilingual benchmarks scales with per-language Wikipedia size (Bugliarello et al., 2022), LLMs default to English-centric outputs even when prompted in other languages (Veselovsky et al., 2025; Naous et al., 2024), and digitally underrepresented cul-tures receive “thin descriptions” that amplify down-stream bias (Adilazuarda et al., 2024). We therefore treat structural sparsity in cross-lingual signals as a culturally meaningful rarity signal. 
+
+4.2 Baseline Degradation on Rare Entities 
+
+We evaluate Cultural Pangea (de Dieu Nyandwi et al., 2025), the current state-of-the-art on MER-LIN (81.1% avg), on bottom-5% entity slices for each metric. Crucially, Cultural Pangea was explic-itly trained on culturally-grounded data, making it a strong test case for examining whether rarity remains problematic for models designed to handle diverse entities. For each rarity metric, we compute accuracy for both systems on the same bottom-5% entity set. Figure 3 summarizes CulturalPangea’s degrada-tion across all rare-entity subsets. Relative to its 81.1% full-set accuracy, its drop ranges from 15.4% to 39.9% across the bottom-5% subsets. This degra-dation is not confined to popularity-based tails. Ac-curacy drops by 37.7% on the pageview slice and by 37.0% on the Wikidata statement-count slice. Since the metric-defined tails overlap by only 37% on average (Appendix A.1), popularity-only evalu-ation would miss many structurally sparse entities on which the baseline suffers comparable degrada-                                                                                      
+
+> Evaluation Slice Hi Id Ja Ta Vi
+> Full Test Set 77.0 80.6 85.8 76.2 85.7
+> Wikipedia-based metrics (Bottom 5%)
+> Pageviews (90d) 42.0 52.9 41.9 30.6 49.2 Backlinks 56.7 55.9 39.5 43.5 54.0 Article Size 34.8 62.9 48.8 40.3 48.4 Revision Count 34.8 55.7 44.2 35.5 53.1 Unique Editors 37.7 55.7 42.4 35.5 51.6 Category Count 24.1 55.4 41.1 40.0 45.3 External Links 32.8 60.0 41.9 33.9 50.8 Reference Count 32.8 59.7 47.6 38.6 56.3 Image Count 53.4 62.7 52.6 43.6 56.7
+> Wikidata-based metrics (Bottom 5%)
+> Incoming Links 62.1 65.2 51.2 52.6 56.5 Outgoing Links 45.2 44.1 47.4 43.5 42.6 Language Editions 46.4 50.0 44.2 48.3 49.2 Statement Count 41.8 46.3 47.6 41.7 42.9 Qualifier Count 44.1 47.6 50.0 39.5 44.4 Entity Age 72.5 77.3 69.8 40.3 68.4
+> Table 1: Cultural Pangea accuracy (%) on the full MERLIN test set and bottom-5% slices for each rarity metric. Pastel orange cells indicate lower accuracy, while pastel blue cells indicate higher accuracy.
+
+440 30 20 10 0
+
+> Accuracy change from full test set (%)
+> Category Count Pageviews (90d) External Links Statement Count Unique Editors WD Outgoing Links Revision Count Qualifier Count Reference Count Article Size Language Editions Wikipedia Backlinks Image Count WD Incoming Links Entity Age
+> -39.9 -37.7 -37.2 -37.0 -36.5 -36.5 -36.4 -35.9 -34.1 -34.0 -33.4 -31.1 -27.3 -23.6 -15.4
+> Accuracy Drop on Rare-Entity Slices
+> Wikipedia-based Wikidata-based
+
+Figure 3: Cultural Pangea accuracy change (%) on bottom-5% slices relative to the full test set. Negative values indicate degradation. 
+
+tion. Table 1 provides a per language breakdown of this degradation. GEMEL and mGENRE show the same overall pattern in Appendix A.2. 
+
+5 Methodology 
+
+Culturally niche entities are those least likely to be well-represented in model parameters, since training data skews toward well-documented en-tities. Furthermore, disambiguating rare entities may require multi-step reasoning (Trivedi et al., 2023). Hence, we propose a simple framework with a reasoning-capable VLM with iterative re-trieval over external knowledge sources. 
+
+5.1 Reasoning with Retrieval Model Selection. We use the Qwen3-VL model family (Team, 2025), one of the best-performing open-source VLMs, in both Thinking (reasoning-native) and Instruct variants at 2B, 4B, and 8B parameter sizes. This family uniquely provides matched architecture across reasoning and non-reasoning variants at multiple scales, enabling con-trolled comparisons that isolate the contributions of reasoning, retrieval, and model size. 
+
+Retrieval System. While rare entities are un-likely to be encoded in model parameters, they may still be documented in external knowledge sources. Retrieval-augmented approaches can bridge this 
+
+Text T + Image I + Mention m
+
+Module 1: Reasoning VLM 
+
+> (iterative, up to 20 searches)
+
+Wikipedia 
+
+> BM25 / Embed
+
+Module 2: Title Extraction 
+
+> (re-prompt for exact title)
+
+English Wikipedia Title 
+
+> reasoning trace
+
+Figure 4: Two-module pipeline. Module 1 performs iterative reasoning with retrieval access over Wikipedia. Module 2 re-prompts the model to extract the final title from the reasoning. 
+
+gap by accessing such sources at inference time. We use English Wikipedia as our retrieval corpus and evaluate two retrieval strategies. 
+
+BM25 (Lexical). We built a retrieval system using the wikimedia/structured-wikipedia 
+
+dataset from Hugging Face, which provides pre-processed Wikipedia dumps for the English lan-guage. We indexed articles using BM25 (Lù, 2024), a lexical retrieval method that matches query terms against document terms. BM25 is fast and effective when query terms overlap with target titles, how-ever it has a clear flaw when entity mentions appear in non-Latin scripts and must be transliterated to match English Wikipedia titles for searching. 
+
+Embedding (Semantic). To address the cross-lingual limitation of BM25, we also evaluate semantic retrieval using 
+
+intfloat/multilingual-e5-large-instruct 
+
+(Wang et al., 2024), a multilingual embedding model. We embed each English Wikipedia title-description pair into a FAISS index (Douze et al., 2024). The search string is the query, and the top-k nearest pairs are returned as snippets. 
+
+Implementation. The pipeline is summarized in Figure 4. Given an input image I, text passage T ,and entity mention m, the model performs iterative reasoning with retrieval access. At each step, the model will: 1. Analyze the visual and textual context to iden-tify disambiguating signals 2. Issue a search query to the retrieval system 3. Incorporate retrieved Wikipedia snippets into its reasoning 4. Repeat until confident in a final answer We force the first search call in every RAG config-uration. In preliminary runs, the 2B models often produced an answer without calling the tool despite 5Model RAG Hindi Indo. Japan. Tamil Viet. Avg.                                                                                                                                                                     
+
+> Prior work
+> GEMEL —55.5 71.6 73.2 23.9 69.4 58.7 mGENRE —59.4 84.3 76.7 68.1 75.7 72.9 CulturalPangea-7B —77.0 80.6 85.8 76.2 85.7 81.1
+> Retrieval-aware baseline
+> CulturalPangea-RAG Embed 67.7 80.0 86.3 55.4 83.1 74.5
+> Ours
+> 2B-Instr —62.2 74.7 64.4 50.4 65.8 63.5 2B-Instr BM25 47.7 63.3 54.4 41.7 60.9 53.6 2B-Instr Embed 54.8 62.1 55.6 43.1 55.7 54.3 2B-Think —62.5 74.2 63.6 45.6 67.7 62.7 2B-Think BM25 62.8 68.2 62.1 45.7 63.3 60.4 2B-Think Embed 59.1 69.3 59.3 46.0 61.6 59.1 4B-Instr —75.4 79.7 75.6 71.2 78.9 76.2 4B-Instr BM25 74.1 79.0 67.6 70.6 72.3 72.7 4B-Instr Embed 76.7 83.8 70.7 73.4 76.1 76.1 4B-Think —77.9 83.5 79.8 72.7 84.2 79.6 4B-Think BM25 78.9 85.6 80.5 73.9 84.6 80.7 4B-Think Embed 83.0 89.6 82.9 76.4 86.7 83.7 8B-Instr —81.4 86.6 83.0 80.6 85.7 83.5 8B-Instr BM25 77.4 80.8 79.4 75.4 79.8 78.6 8B-Instr Embed 80.0 86.4 86.1 77.3 84.9 82.9 8B-Think —81.7 86.8 84.2 82.0 86.1 84.2 8B-Think BM25 82.8 88.0 86.6 84.4 87.4 85.8 8B-Think Embed 87.0 90.6 87.9 85.5 88.6 87.9
+> ∆best vs. Pangea +10.0 +10.0 +2.1 +9.3 +2.9 +6.9
+> Table 2: Accuracy (%) on the full MERLIN test set. Bold = best per column, underline = second best. Our best system (8B-Think+Embed) outperforms Cultural Pangea by +6.9% on average. Reasoning models consistently outperform instruct models. Embedding retrieval outperforms BM25. BM25 hurts instruct models but helps reasoning models.
+
+explicit instructions to search. Without this control, a nominal RAG configuration could behave like No RAG. After the first call, tool use is automatic, and the model decides whether and how to continue searching. The model is allowed up to 20 retrieval iterations per example. It produces a freeform ex-planation of its reasoning process, including which candidate entities it considered and why it selected the final answer. A second pass then re-prompts the model with its own complete reasoning trace and instructs it to output only the final Wikipedia title. 
+
+6 Experimental Setup 
+
+Model variants. We evaluate Qwen3-VL (Team, 2025) in two variants: Thinking (reasoning-native, trained with reinforcement learning to produce ex-tended reasoning traces) and Instruct (standard instruction-tuned). Both share the same base ar-chitecture and are evaluated at 2B, 4B, and 8B parameter sizes. 
+
+Retrieval methods. Each model variant is evalu-ated under three retrieval conditions: (1) No RAG :the model relies solely on parametric knowledge, (2) BM25 : lexical retrieval over English Wikipedia, and (3) Embedding : semantic retrieval using mul-tilingual embeddings with FAISS. This yields 6 configurations per model size (18 total). The re-sulting factorial design isolates the contributions of model scale, reasoning, and retrieval to overall and rare-entity accuracy. 
+
+Baselines. We compare against four baselines in total. Three published baselines on MER-LIN: GEMEL (Shi et al., 2024) (58.7%), agenerative multimodal entity linking approach; 
+
+mGENRE (Cao et al., 2021b) (72.9%), which per-forms multilingual autoregressive entity retrieval with constrained beam search over Wikipedia ti-tles; and Cultural Pangea (de Dieu Nyandwi et al., 2025) (81.1%), the current SOTA on MERLIN. We also create an additional retrieval-aware baseline using our embedding retrieval. Since CulturalPangea does not support tool calling, 
+
+CulturalPangea-RAG prepends the top-5 re-trieved (title, description) pairs to Pangea’s input. 67 Results 
+
+We evaluate our framework on both the full MER-LIN test set and the rare entity slices defined in §4. We then address three research questions: (RQ1) How does the advantage over existing methods scale with entity rarity? (RQ2) What drives the gains on rare entities: reasoning, retrieval, or their combination? (RQ3) Can smaller reasoning mod-els with retrieval match larger ones? 
+
+7.1 Main Results 
+
+Table 2 presents accuracy on the full MERLIN test set. Our best system, 8B-Think+Embed, achieves 87.9% average accuracy, outperforming Cultural Pangea by +6.9% , with gains of +10.0% on Hindi and Indonesian. Reasoning models consistently beat their instruct counterparts under retrieval; 4B-Think+Embed (83.7%) matches 8B-Instr (83.5%) with half the parameters, though it uses ∼2.8 ×
+
+more inference tokens than 8B-Instr no-RAG (Ap-pendix A.14, Table 17). The trade is fewer parame-ters for more compute per example. The advantage remains 4.9% under redirect-aware scoring (Appendix A.4). 
+
+RQ1: How Does the Advantage Scale with Entity Rarity? Across all 15 rare-entity slices, gains range from +5.5% to +23.3%. The largest gains occur for qualifiers (+23.3%), statements (+22.1%), and Wikidata outgoing links (+21.7%), compared with +6.9% on the full dataset. Fourteen of the 15 rare-entity gains exceed the full-dataset gain. Appendix A.3 reports all 15 slices. The largest gains occur on Wikidata structural metrics, especially qualifiers, statements, and out-going links (Table 3).                     
+
+> Split (Bottom 5%) Ours ∆vs Pangea
+> Full dataset 87.9 +6.9
+> Wikidata structural
+> WD Out-Links 66.3 +21.7 Statements 66.1 +22.1 Qualifiers 68.4 +23.3
+> Lang. Editions 63.9 +16.3 WD In-Links 69.0 +11.5
+> Wikipedia engagement
+> Pageviews 57.5 +14.1 Categories 59.5 +18.3
+> Table 3: 8B-Think+Embed accuracy (%) and advantage over Pangea on rare entity slices. The advantage reaches +23.3% on rare entity slices, compared with +6.9% on the full dataset.
+
+RQ2: What Drives the Gains: Reasoning, Re-trieval, or Their Combination? Table 4 reveals that the benefit of retrieval grows dramatically on rare entities. For 8B-Think+Embed, the RAG delta grows from +3.8% on the full dataset to +18.8% on language editions, a 5.0 × increase. On common entities, the model may already know the answer parametrically, so retrieval is redundant. On rare entities, parametric knowledge fails and retrieval becomes essential.                       
+
+> Split Th+Em Th+BM In+BM
+> Full dataset +3.8 +1.7 −4.9
+> Lang. Ed. +18.8 +12.2 +12.6 Statements +16.6 +12.1 +10.1 WD Out-Links +15.8 +12.1 +9.0 Qualifiers +15.7 +12.5 +8.1 Categories +8.6 +2.0 +0.4
+> Table 4: RAG delta (%) vs. no-RAG baseline computed as per-language macro-average. Th+Em = 8B-Think+Embed, Th+BM = 8B-Think+BM25, In+BM = 8B-Inst+BM25.
+
+The Instruct Reversal. On the full dataset, BM25 retrieval hurts the instruct model by −4.9% 
+
+(Table 4). Yet on the structural rare-entity slices shown in Table 4, the same BM25 retrieval helps by +8.1% to +12.6%. This reversal occurs because instruct models issue searches 3.2-3.7 searches per example with no deliberation between them, flood-ing their context with retrieved results they cannot effectively filter. On common entities this noise overwhelms the correct parametric answer. On rare entities any retrieval signal helps because paramet-ric knowledge is absent. Their queries degrade over successive iterations, with verbatim repeti-tion climbing to 34% by search number 15+ (Ap-pendix A.13). Thinking models avoid all of this. Think+BM25 shows consistent positive deltas on both full (+1.7%) and rare (+12%) data. 
+
+Reasoning alone does not help on rare entities. 
+
+The reasoning effect (Think vs. Inst, both without RAG) is not significant on any rare split ( p > 0.5
+
+across all slices; Table 8). Think and Inst models perform similarly on rare splits without retrieval. The main advantage comes from the combination of reasoning and retrieval. Reasoning enables ef-fective use of retrieved information, while retrieval provides information that reasoning alone lacks. 
+
+How reasoning models use retrieval differently. 
+
+Thinking models make fewer but more deliberate searches (1.0–2.2 as opposed to 3.2-5.2 per ex-7Error Category N %               
+
+> Completely Wrong 436 51.8 Name Format 180 21.4 Disambiguation (Specificity) 112 13.3 Wikipedia Variant 55 6.5 Concept Granularity 45 5.4 Empty (Pipeline Error) 13 1.5 Total 841 100.0
+> Table 5: Error taxonomy for 8B-Think+Embed on the full MERLIN test set across all languages.
+
+ample for instruct models). They also generate 1,454–1,534 tokens between consecutive searches. This deliberation manifests in query strategy. 56– 58% of 8B-Think model’s search transitions are refinements that add disambiguation context to the previous query, compared to 35–40% for Instruct variant (Appendix A.15). 
+
+RQ3: Can Smaller Reasoning Models Match Larger Ones? Accuracy across model sizes (Fig-ure 9, Appendix A.11) shows two patterns. First, Embed-Think leads at 4B and 8B. At 4B it al-ready surpasses 8B-Instr, however at 2B the no-RAG baselines outperform all retrieval-augmented configurations. Further analysis reveals that 2B-Think issues only one (forced) search on 97% of examples. It cannot effectively use the tool at all, indicating that effective tool use is an emergent capability requiring sufficient model scale (Ap-pendix A.13). Second, the Think–Instruct gap is substantially wider under retrieval (both BM25 and embedding) than without, suggesting that reason-ing and retrieval are complementary. 4B-Think+Embed and 8B-Inst are virtually iden-tical on the full dataset (+0.3%), but on rare entities the smaller reasoning model wins by +5 to +7% (Appendix A.11). This demonstrates that reasoning with retrieval compensates for pure model size. 
+
+7.2 Error Analysis 
+
+We analyzed 8B-Think+Embed’s 841 errors (Ta-ble 5) to provide a taxonomy and inform future work. Further error analysis can be found in Ap-pendix A.9 and A.10. Detailed search behav-ior analysis, computational cost breakdowns, and query content analysis are in Appendices A.13– A.15. We additionally decompose errors by pipeline stage (Appendix A.10). The dominant bottleneck is retrieval: in 72% of errors, the correct entity was never surfaced by search. Even the deliber-ate query refinement that Thinking models em-ploy (Appendix A.15) cannot always bridge cross-lingual gaps between non-Latin mentions and En-glish Wikipedia titles. A further 23.5% of errors involve the model engaging with the correct entity in its reasoning but ultimately rejecting it, indi-cating that disambiguation remains an open chal-lenge even for reasoning-native models. Across configurations (Appendix A.9), Think+Embed has the fewest total errors (841 vs. 1,493 for 8B-Inst+BM25) but the highest proportion of Com-pletely Wrong cases. Retrieval and reasoning re-solve the easier categories, thus concentrating resid-ual errors on genuinely hard cases. 
+
+Worked examples. 
+
+1. Japanese mention 米 (Bei): a newspaper ab-breviation of 米 国 (Beikoku, “the United States”). The model read it as a surname, searched “Mi surname,” and predicted Mi (sur-name) ; “United States” was never queried. The same pattern recurs for 英 (“the United Kingdom”). Category: completely wrong (re-trieval failure). 2. Hindi mention i-lAEmk pr \prA (“Islamic tradition”): search returned the gold title Is-lamic culture at rank 2, but the model an-swered Islamic family law , a neighboring con-cept in the same domain, not the target. Cate-gory: concept granularity. 3. Indonesian mention Kinabalu: the search “Kinabalu” retrieved the gold Kinabalu (fed-eral constituency) at rank 9, while the city 
+
+Kota Kinabalu sat at rank 1; the model chose the city. Category: disambiguation. 
+
+Errors on head versus rare entities. An entity is rare if it falls in the bottom 5% of any of the 15 rarity metrics (§4), and head otherwise. The error rate is far higher on rare than head entities: 31.1%, versus 8.4%. The error mix also shifts significantly (χ2 = 40 .84 , p = 1 .0 × 10 −7). As shown in Table 6, disambiguation errors become less com-mon on rare entities, while concept-granularity and name-format errors become more common. 
+
+Effect of Writing Script. We compare Latin-script mentions (Indonesian, Vietnamese) with non-Latin ones (Hindi, Tamil, Japanese) for our best embedding system (Table 7). First-search hit rates are similar across scripts, but retrieval failure is a larger share of errors on non-Latin inputs, and embedding’s advantage over BM25 is largest on 8Error Category Head Rare                       
+
+> Completely Wrong 48.9% 56.1% Name Format 20.3% 23.0% Disambiguation 16.3% 9.0% Wikipedia Variant 9.1% 2.9% Concept Granularity 3.0% 8.7% Empty 2.4% 0.3%
+> Table 6: Share of errors (%) by category, for 8B-Think+Embed, on head entities versus rare entities. Rare-entity errors shift toward completely-wrong and concept-granularity and name-format, away from disambiguation.
+
+non-Latin inputs and on rare subsets.                             
+
+> Measure (Embed) Latin Non-Latin
+> First-search hit rate 37.0% 39.2% Retrieval failure share of errors 62.5% 76.8% Gain over BM25 (full set) +1.9% +2.2% Gain over BM25 (rare subsets) +6.3% +6.9%
+> Table 7: Embedding retrieval statistics for Latin-script (Id, Vi) versus non-Latin-script (Hi, Ta, Ja) inputs, 8B-Think+Embed.
+> Split ∆(%) p-value
+> RAG effect (Think+Embed vs Think)
+> Lang. Ed. +18.8 <0.001 Statements +16.6 <0.001 WD Out-Links +15.8 <0.001
+> Reasoning effect (Think vs Inst, no RAG)
+> Lang. Ed. −1.40.575 Statements +0.9 0.766 WD Out-Links +0.3 >0.999
+> Table 8: Statistical significance (McNemar’s and bootstrap tests) computed on examples pooled across languages. RAG effects are significant on all rare splits. Reasoning alone has no significant effect.
+
+8 Conclusion 
+
+We showed that unpopularity is not the same as rar-ity. Entities with sparse Wikidata structure and few Wikipedia language editions cause a more severe performance drop than pageview-based analyses would suggest. This indicates that prior work has underestimated the difficulty of the cultural long tail. Our simple framework, in which a reasoning-capable VLM iteratively searches and reasons over Wikipedia, achieves +6.9% over the state of the art on MERLIN and up to +23.3% on the hard-est rare-entity slices. The largest gains come from combining reasoning and retrieval. Reasoning with-out retrieval has no significant effect on rare enti-ties. Retrieval can help rare entities without rea-soning, but pairing it with reasoning produces the strongest overall system. For the 8B reasoning model, the retrieval gain increases from +3.8% on the full dataset to +18.8% on structurally sparse entities, a 5.0 × increase. A 4B reasoning model with retrieval matches an 8B instruct model overall and outperforms it by +5 to +7% on rare entities, suggesting an alternative to scaling. Retrieval failure accounts for 72% of residual errors, making cross-lingual retrieval a useful di-rection for future work. Even with retrieval, dis-ambiguation on the long tail still remains an open problem for reasoning models as well. 9Limitations 
+
+Our controlled factorial experiments use Qwen3-VL (Team, 2025), chosen because it supports com-parisons across reasoning variants and scales (Sec-tion 5). The GLM check in Appendix A.16 shows that adding retrieval in thinking mode improves all 15 rare-entity slices. However, GLM’s non-thinking mode could not sustain the retrieval loop. Thus, the cross-family evidence supports the rare-entity retrieval benefit but does not establish that the full reasoning-by-retrieval interaction general-izes across model families. We evaluate on five languages from the MER-LIN benchmark and target English Wikipedia as the knowledge base. All MERLIN entities have English articles by construction, but this constraint limits applicability to entities without English cov-erage. Generalization to languages with even sparser Wikipedia representation, such as African languages, remains unknown and would test the limits of retrieval-augmented approaches for the cultural long tail. Retrieval is the dominant bottleneck in our pipeline, accounting for 72% of errors. Embedding retrieval partially addresses cross-lingual mismatch for non-Latin scripts, but neither retrieval method guarantees recall when transliterations diverge sub-stantially between the source language and English Wikipedia titles. Improving cross-lingual retrieval in the context of LLM tool use remains the most impactful direction for future work. We follow MERLIN’s standard exact-match evaluation protocol, which penalizes predictions that produce valid but non-canonical title strings (e.g., redirects or common abbreviations) identi-cally to genuinely incorrect predictions. This is consistent with all prior work on MERLIN and ensures comparability across systems. 
+
+Ethical Considerations 
+
+This work uses publicly available data: the MER-LIN benchmark (Ramamoorthy et al., 2025), Wikipedia, and Wikidata. No personal data or hu-man subjects are involved. Our system inherits biases present in Wikipedia’s coverage, which is known to underrepresent non-Western entities and perspectives (Hecht and Gergle, 2010). While our rarity characterization helps surface these gaps, the system itself cannot correct underlying knowledge base biases. We note that entity linking systems, in-cluding ours, may perform less reliably on entities from marginalized communities that are systemati-cally underrepresented in Wikipedia. 
+
+Acknowledgments 
+
+We thank Ibrahim AlRayes for his help with this project, and Jean de Dieu Nyandwi and Zaid Sheikh for sharing resources that supported this work. We also thank the members of NeuLab for their helpful feedback. This work was supported in part by a research grant from the Defence Science and Technology Agency (DSTA), Singapore. 10 References 
+
+Muhammad Farid Adilazuarda, Sagnik Mukherjee, Pradhyumna Lavania, Siddhant Singh, Alham Fikri Aji, Jacki O’Neill, Ashutosh Modi, and Monojit Choudhury. 2024. Towards measuring and mod-eling" culture" in llms: A survey. arXiv preprint arXiv:2403.15412 .Marta Boscariol, Luana Bulla, Lia Draetta, Beatrice Fi-umanò, Emanuele Lenzi, and Leonardo Piano. 2025. Evaluation of llms on long-tail entity linking in his-torical documents. Preprint , arXiv:2505.03473. Emanuele Bugliarello, Fangyu Liu, Jonas Pfeiffer, Siva Reddy, Desmond Elliott, Edoardo Maria Ponti, and Ivan Vuli´ c. 2022. IGLUE: A benchmark for transfer learning across modalities, tasks, and languages. In 
+
+Proceedings of the 39th International Conference on Machine Learning , volume 162 of Proceedings of Machine Learning Research , pages 2370–2392. PMLR. Nicola De Cao, Gautier Izacard, Sebastian Riedel, and Fabio Petroni. 2021a. Autoregressive entity retrieval. 
+
+Preprint , arXiv:2010.00904. Nicola De Cao, Ledell Wu, Kashyap Popat, Mikel Artetxe, Naman Goyal, Mikhail Plekhanov, Luke Zettlemoyer, Nicola Cancedda, Sebastian Riedel, and Fabio Petroni. 2021b. Multilingual autoregressive entity linking. Preprint , arXiv:2103.12528. Anthony Chen, Pallavi Gudipati, Shayne Longpre, Xiao Ling, and Sameer Singh. 2021. Evaluating entity disambiguation and the role of popularity in retrieval-based NLP. In Proceedings of the 59th Annual Meet-ing of the Association for Computational Linguistics and the 11th International Joint Conference on Natu-ral Language Processing (Volume 1: Long Papers) ,pages 4472–4485, Online. Association for Computa-tional Linguistics. Jean de Dieu Nyandwi, Yueqi Song, Simran Khanuja, and Graham Neubig. 2025. Grounding multilingual multimodal llms with cultural knowledge. Preprint ,arXiv:2508.07414. Yifan Ding, Amrit Poudel, Qingkai Zeng, Tim Weninger, Balaji Veeramani, and Sanmitra Bhat-tacharya. 2025. Entgpt: Entity linking with generative large language models. Preprint ,arXiv:2402.06738. Yifan Ding, Qingkai Zeng, and Tim Weninger. 2024. ChatEL: Entity linking with chatbots. In Proceedings of the 2024 Joint International Conference on Compu-tational Linguistics, Language Resources and Eval-uation (LREC-COLING 2024) , pages 3086–3097, Torino, Italia. ELRA and ICCL. Matthijs Douze, Alexandr Guzhva, Chengqi Deng, Jeff Johnson, Gergely Szilvasy, Pierre-Emmanuel Mazaré, Maria Lomeli, Lucas Hosseini, and Hervé Jégou. 2024. The faiss library. Daniel Erenrich. 2024. Psychiq and wwwyzzerdd: Wikidata completion using wikipedia. Semantic Web ,15:2145–2158. Jiazhan Feng, Shijue Huang, Xingwei Qu, Ge Zhang, Yujia Qin, Baoquan Zhong, Chengquan Jiang, Jinxin Chi, and Wanjun Zhong. 2025. Retool: Reinforce-ment learning for strategic tool use in llms. Preprint ,arXiv:2504.11536. Arianna Graciotti, Nicolas Lazzari, Valentina Presutti, and Rocco Tripodi. 2025. Musical heritage historical entity linking. Artificial Intelligence Review , 58(5). Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang, Shirong Ma, Xiao Bi, Xiaokang Zhang, Xingkai Yu, Yu Wu, Z. F. Wu, Zhibin Gou, Zhihong Shao, Zhu-oshu Li, Ziyi Gao, Aixin Liu, and 175 others. 2025. Deepseek-r1 incentivizes reasoning in llms through reinforcement learning. Nature , 645(8081):633–638. Samy Haffoudhi, Fabian M. Suchanek, and Nils Holzen-berger. 2026. Lela: an llm-based entity linking ap-proach with zero-shot domain adaptation. Preprint ,arXiv:2601.05192. Brent Hecht and Darren Gergle. 2010. The tower of babel meets web 2.0: user-generated content and its applications in a multilingual context. In Proceed-ings of the SIGCHI Conference on Human Factors in Computing Systems , CHI ’10, page 291–300. ACM. Mohanna Hoveyda, Arjen Vries, Faegheh Hasibi, and Maarten de Rijke. 2024. Real world conversational entity linking requires more than zero-shots. In Find-ings of the Association for Computational Linguistics: ACL 2024 , pages 13938–13946, Bangkok, Thailand. Association for Computational Linguistics. Filip Ilievski, Piek Vossen, and Stefan Schlobach. 2018. Systematic study of long tail phenomena in entity linking. In Proceedings of the 27th International Conference on Computational Linguistics , pages 664– 674, Santa Fe, New Mexico, USA. Association for Computational Linguistics. Bowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan Arik, Dong Wang, Hamed Zamani, and Jiawei Han. 2025. Search-r1: Training llms to reason and leverage search engines with reinforcement learning. 
+
+Preprint , arXiv:2503.09516. Nikhil Kandpal, Haikang Deng, Adam Roberts, Eric Wallace, and Colin Raffel. 2023. Large lan-guage models struggle to learn long-tail knowledge. 
+
+Preprint , arXiv:2211.08411. Yajie Li, Albert Galimov, Mitra Datta Ganapaneni, Pu-jitha Thejaswi, De Meng, Priyanshu Kumar, and Sa-loni Potdar. 2025. Leveraging the power of large language models in entity linking via adaptive rout-ing and targeted reasoning. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: Industry Track , pages 871– 882, Suzhou (China). Association for Computational Linguistics. 
+
+11 Peerat Limkonchotiwat, Weiwei Cheng, Christos Christodoulopoulos, Amir Saffari, and Jens Lehmann. 2023. mReFinED: An efficient end-to-end multilin-gual entity linking system. In Findings of the As-sociation for Computational Linguistics: EMNLP 2023 , pages 15080–15089, Singapore. Association for Computational Linguistics. Xukai Liu, Ye Liu, Kai Zhang, Kehang Wang, Qi Liu, and Enhong Chen. 2024. Onenet: A fine-tuning free framework for few-shot entity linking via large language model prompting. Preprint ,arXiv:2410.07549. Ziyan Liu, Junwen Li, Kaiwen Li, Tong Ruan, Chao Wang, Xinyan He, Zongyu Wang, Xuezhi Cao, and Jingping Liu. 2025. I2cr: Intra- and inter-modal col-laborative reflections for multimodal entity linking. In Proceedings of the 33rd ACM International Con-ference on Multimedia , MM ’25, page 4942–4951. ACM. Pan Lu, Hritik Bansal, Tony Xia, Jiacheng Liu, Chun-yuan Li, Hannaneh Hajishirzi, Hao Cheng, Kai-Wei Chang, Michel Galley, and Jianfeng Gao. 2024. Mathvista: Evaluating mathematical reasoning of foundation models in visual contexts. Preprint ,arXiv:2310.02255. Yajie Luo, Yihong Wu, Muzhi Li, Fengran Mo, Jia Ao Sun, Xinyu Wang, Liheng Ma, Yingxue Zhang, and Jian-Yun Nie. 2025. An entity linking agent for ques-tion answering. Preprint , arXiv:2508.03865. Xing Han Lù. 2024. Bm25s: Orders of magnitude faster lexical search via eager sparse scoring. Preprint ,arXiv:2407.03618. Alex Mallen, Akari Asai, Victor Zhong, Rajarshi Das, Daniel Khashabi, and Hannaneh Hajishirzi. 2023. When not to trust language models: Investigating effectiveness of parametric and non-parametric mem-ories. In Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Vol-ume 1: Long Papers) , pages 9802–9822, Toronto, Canada. Association for Computational Linguistics. Marc Miquel-Ribé and David Laniado. 2018. Wikipedia culture gap: Quantifying content imbalances across 40 language editions. Frontiers in Physics , 6:54. Seungwhan Moon, Leonardo Neves, and Vitor Carvalho. 2018. Multimodal named entity disambiguation for noisy social media posts. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , pages 2000– 2008, Melbourne, Australia. Association for Compu-tational Linguistics. Tarek Naous, Michael J. Ryan, Alan Ritter, and Wei Xu. 2024. Having beer after prayer? measuring cultural bias in large language models. Preprint ,arXiv:2305.14456. Gerard Pons, Besim Bilalli, and Anna Queralt. 2024. 
+
+Knowledge Graphs for Enhancing Large Language Models in Entity Disambiguation , page 162–179. Springer Nature Switzerland. Sathyanarayanan Ramamoorthy, Vishwa Shah, Simran Khanuja, Zaid Sheikh, Shan Jie, Ann Chia, Shearman Chua, and Graham Neubig. 2025. Merlin: A testbed for multilingual multimodal entity recognition and linking. Preprint , arXiv:2510.14307. Özge Sevgili, Artem Shelmanov, Mikhail Arkhipov, Alexander Panchenko, and Chris Biemann. 2022. Neural entity linking: A survey of models based on deep learning. Semantic Web , 13(3):527–570. Wei Shen, Jianyong Wang, and Jiawei Han. 2015. Entity linking with a knowledge base: Issues, techniques, and solutions. IEEE Transactions on Knowledge and Data Engineering , 27(2):443–460. Senbao Shi, Zhenran Xu, Baotian Hu, and Min Zhang. 2024. Generative multimodal entity linking. In Pro-ceedings of the 2024 Joint International Conference on Computational Linguistics, Language Resources and Evaluation (LREC-COLING 2024) , pages 7654– 7665, Torino, Italia. ELRA and ICCL. Charlie Snell, Jaehoon Lee, Kelvin Xu, and Aviral Ku-mar. 2024. Scaling llm test-time compute optimally can be more effective than scaling model parameters. 
+
+Preprint , arXiv:2408.03314. Yan Tao, Olga Viberg, Ryan S Baker, and René F Kizil-cec. 2024. Cultural bias and cultural alignment of large language models. PNAS nexus , 3(9):pgae346. Qwen Team. 2025. Qwen3 technical report. Preprint ,arXiv:2505.09388. V Team, Wenyi Hong, Wenmeng Yu, Xiaotao Gu, Guo Wang, Guobing Gan, Haomiao Tang, Jiale Cheng, Ji Qi, Junhui Ji, Lihang Pan, Shuaiqi Duan, Wei-han Wang, Yan Wang, Yean Cheng, Zehai He, Zhe Su, Zhen Yang, Ziyang Pan, and 69 others. 2025. Glm-4.5v and glm-4.1v-thinking: Towards versatile multimodal reasoning with scalable reinforcement learning. Preprint , arXiv:2507.01006. Harsh Trivedi, Niranjan Balasubramanian, Tushar Khot, and Ashish Sabharwal. 2023. Interleav-ing retrieval with chain-of-thought reasoning for knowledge-intensive multi-step questions. Preprint ,arXiv:2212.10509. Veniamin Veselovsky, Berke Argin, Benedikt Stroebl, Chris Wendler, Robert West, James Evans, Thomas L. Griffiths, and Arvind Narayanan. 2025. Localized cultural knowledge is conserved and controllable in large language models. Preprint , arXiv:2504.10191. Liang Wang, Nan Yang, Xiaolong Huang, Linjun Yang, Rangan Majumder, and Furu Wei. 2024. Multilingual e5 text embeddings: A technical report. Preprint ,arXiv:2402.05672. 
+
+12 Xuwu Wang, Junfeng Tian, Min Gui, Zhixu Li, Rui Wang, Ming Yan, Lihan Chen, and Yanghua Xiao. 2022. WikiDiverse: A multimodal entity linking dataset with diversified contextual topics and entity types. In Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Vol-ume 1: Long Papers) , pages 4785–4797, Dublin, Ireland. Association for Computational Linguistics. Amy Xin, Yunjia Qi, Zijun Yao, Fangwei Zhu, Kaisheng Zeng, Xu Bin, Lei Hou, and Juanzi Li. 2025. Llmael: Large language models are good context augmenters for entity linking. Preprint , arXiv:2407.04020. Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, and Yuan Cao. 2023. React: Synergizing reasoning and acting in language models. Preprint , arXiv:2210.03629. Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng, Ruoqi Liu, Ge Zhang, Samuel Stevens, Dongfu Jiang, Weiming Ren, Yuxuan Sun, Cong Wei, Botao Yu, Ruibin Yuan, Renliang Sun, Ming Yin, Boyuan Zheng, Zhenzhu Yang, Yibo Liu, Wenhao Huang, and 3 others. 2024. Mmmu: A massive multi-discipline multimodal understanding and reasoning benchmark for expert agi. Preprint , arXiv:2311.16502. Lianmin Zheng, Liangsheng Yin, Zhiqiang Xie, Chuyue Sun, Jeff Huang, Cody Hao Yu, Shiyi Cao, Christos Kozyrakis, Ion Stoica, Joseph E. Gonzalez, Clark Barrett, and Ying Sheng. 2024. Sglang: Efficient execution of structured language model programs. 
+
+Preprint , arXiv:2312.07104. 
+
+13 A Appendix 
+
+A.1 Rarity Metric Independence 
+
+To verify that the 15 rarity metrics identify gen-uinely different entities as “rare” rather than mea-suring a single underlying construct, we com-pute pairwise Jaccard overlap between the bottom-5% entity sets for each metric (Figure 5). The mean pairwise overlap is only 37%, confirming that different metrics flag largely non-overlapping entity sets. Within-family overlap is moderate (Wikipedia: 48%, Wikidata: 38%), while between-family overlap is lower still (30%), with some cross-family pairs sharing as few as 10% of entities. Qualitative analysis reinforces this finding. We identify 50 entities that are Wikidata-rare (bottom-5% on ≥3 Wikidata metrics) but Wikipedia-normal (zero Wikipedia metrics flagged), including well-documented news events like the 2016 Indian ban-knote demonetisation (36K pageviews, 980 editors, but only 11 Wikidata statements) and the Pitts-burgh synagogue shooting (88K pageviews but structurally sparse in Wikidata). Conversely, 92 entities are Wikipedia-rare but Wikidata-normal, such as the Muttahida Qaumi Movement (minimal English Wikipedia article but 287 Wikidata incom-ing links). These examples illustrate that editorial attention and structural connectivity are different dimensions of rarity. 
+
+A.2 Baseline Degradation Across All Systems                              
+
+> Eval. Slice GEMEL mGENRE Pangea
+> Full Test Set 58.7 72.9 81.1
+> Wikidata structural (Bottom 5%)
+> Lang. Editions 32.3 40.7 47.6 Statements 31.9 42.7 44.0 WD Out-Links 31.3 42.4 44.6 Qualifiers 32.4 44.9 45.1 WD In-Links 37.2 45.2 57.5
+> Wikipedia engagement (Bottom 5%)
+> Pageviews 29.0 42.6 43.3 Categories 25.4 44.6 41.2
+> Table 9: Baseline accuracy (%) on the full test set and bottom-5% rare entity slices. All three baselines degrade on rare entities.
+
+A.3 Full Rare Entity Slice Breakdown 
+
+Figure 6 presents the advantage of 8B-Think+Embed over Cultural Pangea across all 15 bottom-5% rare entity slices. Every gain is positive, and the largest gains occur for qualifiers, statements, and Wikidata outgoing links. 
+
+A.4 Redirect-Aware Evaluation 
+
+Our main results use MERLIN’s standard exact-match protocol. We additionally evaluate after resolving English Wikipedia redirects. Redirect-aware scoring raises our accuracy from 87.9% to 89.5% and CulturalPangea’s accuracy from 80.1% to 84.6%. Our advantage remains 4.9% (paired bootstrap 95% CI [+4.01, +5.79]), showing that the improvement is not caused by non-canonical title variants. We keep exact match as the primary metric for comparability with prior MERLIN work.           
+
+> Scoring Ours Pangea Difference
+> Exact match 87.9 80.1 +7.8 Redirect-aware 89.5 84.6 +4.9
+> Table 10: Accuracy (%) under exact-match and redirect-aware scoring.
+
+A.5 RAG Effect by Model Size 
+
+Table 11 shows the Think-vs-Instruct gap broken down by model size and retrieval method. The gap is largest with embedding retrieval, consistent across scales.                
+
+> Size No RAG BM25 Embed
+> 2B −0.8+6.8 +4.8 4B +3.4 +8.0 +7.6 8B +0.7 +7.3 +5.0
+> Table 11: Think −Instruct gap (%, average across languages) by model size and retrieval method. Reasoning models benefit more from retrieval at every scale.
+
+A.6 Robustness Analysis 
+
+We define the robustness gap as the difference be-tween Pangea’s accuracy drop and our system’s accuracy drop on each rare slice. A positive robust-ness gap means our system degrades less. Table 12 presents the full robustness analysis. Our system degrades less than Pangea on 14 of the 15 rare entity slices, with robustness gaps up to 16.4%. Entity age is the single exception. 
+
+A.7 Threshold Robustness 
+
+Table 13 shows that our system’s advantage over Pangea remains positive across 1%, 5%, and 10% rarity thresholds. The gap ranges from +8.0% to +41.1%, confirming that the result is not caused by the 5% cutoff. 14 Entity Age Qualifiers WD Out-Links Statements WD In-Links Images Backlinks Lang. Editions Categories Art. Size Ext. Links References Pageviews Revisions Editors Entity Age Qualifiers WD Out-Links Statements WD In-Links Images Backlinks Lang. Editions Categories Art. Size Ext. Links References Pageviews Revisions Editors                                                                                                                                                                                                                   
+
+> 1.00 0.19 0.21 0.22 0.29 0.22 0.23 0.24 0.10 0.14 0.13 0.11 0.19 0.18 0.21 0.19 1.00 0.50 0.53 0.34 0.24 0.31 0.34 0.24 0.27 0.27 0.25 0.29 0.29 0.31 0.21 0.50 1.00 0.81 0.37 0.26 0.32 0.40 0.28 0.29 0.30 0.26 0.34 0.35 0.35 0.22 0.53 0.81 1.00 0.39 0.28 0.34 0.40 0.27 0.29 0.31 0.27 0.34 0.35 0.35 0.29 0.34 0.37 0.39 1.00 0.32 0.46 0.41 0.16 0.26 0.23 0.21 0.36 0.33 0.35 0.22 0.24 0.26 0.28 0.32 1.00 0.40 0.44 0.32 0.38 0.37 0.33 0.36 0.43 0.44 0.23 0.31 0.32 0.34 0.46 0.40 1.00 0.47 0.25 0.40 0.37 0.32 0.49 0.46 0.49 0.24 0.34 0.40 0.40 0.41 0.44 0.47 1.00 0.29 0.38 0.39 0.34 0.49 0.51 0.53 0.10 0.24 0.28 0.27 0.16 0.32 0.25 0.29 1.00 0.42 0.45 0.42 0.33 0.40 0.39 0.14 0.27 0.29 0.29 0.26 0.38 0.40 0.38 0.42 1.00 0.72 0.68 0.47 0.60 0.56 0.13 0.27 0.30 0.31 0.23 0.37 0.37 0.39 0.45 0.72 1.00 0.76 0.47 0.57 0.54 0.11 0.25 0.26 0.27 0.21 0.33 0.32 0.34 0.42 0.68 0.76 1.00 0.41 0.51 0.49 0.19 0.29 0.34 0.34 0.36 0.36 0.49 0.49 0.33 0.47 0.47 0.41 1.00 0.62 0.64 0.18 0.29 0.35 0.35 0.33 0.43 0.46 0.51 0.40 0.60 0.57 0.51 0.62 1.00 0.88 0.21 0.31 0.35 0.35 0.35 0.44 0.49 0.53 0.39 0.56 0.54 0.49 0.64 0.88 1.00
+
+0.0 0.2 0.4 0.6 0.8 1.0 
+
+Jaccard Overlap 
+
+Metric Family Wikipedia Wikidata Figure 5: Pairwise Jaccard overlap between bottom-5% rare entity sets for each of the 15 rarity metrics. Mean overlap is 37%, confirming that different metrics identify substantially different entities as rare. Sidebar color indicates metric family (orange = Wikipedia, blue = Wikidata). 
+
+A.8 Accuracy by Rarity Decile 
+
+Figure 7 additionally plots accuracy against rarity decile (1 = rarest, 10 = most common) for two representative Wikidata-structural metrics. Each decile is a disjoint bin holding one tenth of the test entities, ranked by the metric, so the point at decile 
+
+d is the accuracy computed on that bin alone rather than a cumulative accuracy over all entities up to d.This makes the plot a conditional accuracy curve, showing how accuracy varies with rarity level in-stead of tracking a running total. Read this way, the baseline declines steeply and near-monotonically toward the sparse end on every Wikidata-structural metric (Spearman ρ ≥ 0.92 ), while our system degrades roughly half as fast (decile-1-vs-10 gap 
+
+≈ 26% vs. 45–47%). At the common-entity end (decile 10) the baseline is at ceiling and edges ahead of us by 2 to 3%, but the two curves cross as entities get rarer and the gap opens in our favor. The advantage is therefore a gradient across the full distribution, not an artifact of any single thresh-old, and the small head-of-distribution deficit is outweighed by our gains on the other nine deciles (net +6.9% overall). 
+
+A.9 Error Taxonomy Shift on Rare Entities 
+
+Table 14 presents the full error taxonomy across all configurations. 15 0 5 10 15 20 25 
+
+Advantage over CulturalPangea (%) 
+
+Entity Age Image Count WP Backlinks WD In-Links Revision Count Reference Count Unique Editors Article Size Pageviews (90d) External Links Lang. Editions Category Count WD Out-Links Statements Qualifiers 
+
+> +5.5 +7.6 +9.3 +11.5 +12.5 +13.2 +13.7 +14.0 +14.1 +14.4 +16.3 +18.3 +21.7 +22.1 +23.3
+> full set +6.9
+
+Wikidata-based Wikipedia-based Figure 6: Advantage (%) of 8B-Think+Embed over Cultural Pangea across all 15 bottom-5% rare entity slices, sorted by magnitude. 
+
+Metric Ours Pangea Gap 
+
+Qualifiers −19 .5 −35 .9 16.4 Statements −21 .8 −37 .0 15.2 WD Out-Links −21 .7 −36 .5 14.8 Categories −28 .4 −39 .9 11.4 Lang. Editions −24 .0 −33 .4 9.4 Ext. Links −29 .6 −37 .2 7.5 Pageviews −30 .5 −37 .7 7.3 Art. Size −26 .9 −34 .0 7.1 Editors −29 .7 −36 .5 6.9 References −27 .7 −34 .1 6.4 Revisions −30 .7 −36 .4 5.7 WD In-Links −18 .9 −23 .6 4.7 WP Backlinks −28 .7 −31 .1 2.4 Images −26 .5 −27 .3 0.7 Entity Age −16 .8 −15 .4 −1.4
+
+Table 12: Accuracy drop (%) from full dataset to bottom-5% slices. “Gap” = Pangea drop − our drop. Sorted by robustness gap. 
+
+A.10 Pipeline Decomposition 
+
+Table 15 decomposes errors by pipeline stage for RAG-based configurations. Retrieval fail-ures dominate across all configurations, but 8B-Think+Embed shows the lowest retrieval failure rate (72.1%) due to embedding retrieval’s better cross-lingual recall. BM25-based configurations (8B-Think+BM25, 8B-Inst+BM25) have retrieval failure rates of 89.5% and 80.9% respectively. 
+
+A.11 Reasoning Compensates for Size 
+
+Figure 8 compares 4B-Think+Embed against 8B-Inst across the full dataset and rare entity slices. On the full MERLIN test set, the two configurations are nearly identical (83.7% vs. 83.5%, a gap of 
+
+Metric Thr. n Ours Pangea Gap 
+
+Lang. Ed. 1% 9 55.6 22.2 +33.3 5% 346 63.9 47.6 +16.3 10% 548 66.6 51.5 +15.1 Statements 1% 35 66.1 30.9 +35.3 5% 339 66.1 44.0 +22.1 10% 573 68.2 49.2 +19.0 WD Out-Links 1% 24 65.6 24.4 +41.1 5% 331 66.3 44.6 +21.7 10% 579 68.0 49.4 +18.6 Qualifiers 1% 15 66.7 46.7 +20.0 5% 323 68.4 45.1 +23.3 10% 551 72.1 51.4 +20.7 Pageviews 1% 34 44.2 36.2 +8.0 5% 350 57.5 43.3 +14.1 10% 549 61.0 47.3 +13.8 
+
+Table 13: Accuracy (%) at 1%, 5%, and 10% rarity thresholds for five metrics, using per-language macro-averages. The 5% rows reproduce Table 3. Gains are positive for every metric and threshold, ranging from +8.0% to +41.1%. 
+
+just +0.3%), despite the reasoning model having half the parameters. However, the systems diverge sharply on rare entities: 4B-Think+Embed out-performs 8B-Inst by +5.9% on language editions, +6.9% on statements, and +7.1% on Wikidata out-links. This suggests that reasoning with retrieval is a more cost-effective strategy than scaling model size alone, particularly for the long tail where para-metric knowledge is insufficient and effective use of retrieved evidence becomes the dominant factor. 16 Error Category 8B-Th+Em 8B-Th+BM 8B-Think 8B-Inst 8B-In+BM                                                             
+
+> Completely Wrong 436 (51.8%) 501 (50.8%) 448 (40.5%) 508 (44.0%) 560 (37.5%) Name Format 180 (21.4%) 221 (22.4%) 333 (30.1%) 326 (28.2%) 362 (24.2%) Disambiguation 112 (13.3%) 134 (13.6%) 121 (10.9%) 119 (10.3%) 349 (23.4%) Wikipedia Variant 55 (6.5%) 73 (7.4%) 130 (11.8%) 121 (10.5%) 61 (4.1%) Concept Granularity 45 (5.4%) 44 (4.5%) 61 (5.5%) 68 (5.9%) 48 (3.2%) Empty (Pipeline Error) 13 (1.5%) 13 (1.3%) 13 (1.2%) 13 (1.1%) 113 (7.6%) Total 841 986 1106 1155 1493
+> Table 14: Full error taxonomy across 8B configurations. Th+Em has the fewest total errors (841) but the highest proportion of “Completely Wrong” (51.8%), because its easier errors (Name Format, Wikipedia Variant) are resolved by retrieval, leaving harder cases. 1510 Rarity decile (1=rarest) 60 80 100
+> Accuracy (%)  Language editions
+> 1510 Rarity decile (1=rarest)
+> Statements
+> Ours (8B-Think+Embed) CulturalPangea
+> Figure 7: Accuracy (%) by rarity decile (1 = rarest, 10 = most common) for two representative Wikidata-structural metrics. Each decile is a disjoint bin of one tenth of the entities. Our system (8B-Think+Embed) degrades roughly half as steeply as CulturalPangea toward the sparse end.
+> Stage Th+Em Th+BM In+BM
+> Retrieval Failure 72.1% 89.5% 80.9% Selection Failure 2.9% 1.4% 3.7% Extraction Failure 23.5% 7.8% 7.8% Empty 1.5% 1.3% 7.6%
+> Table 15: Pipeline decomposition of errors for RAG-based 8B configurations.
+
+A.12 Prompt Templates 
+
+We use the same system prompt across all configu-rations, varying only the retrieval tool availability. The model receives the article text, image, and marked entity mention, and is instructed to output the English Wikipedia title of the referenced entity. The full prompt is available with our released code on the project page. 
+
+System prompt (with retrieval). The model is instructed that it has access to a Wikipedia search tool. We force the first search call, while all later tool choices are automatic. Each call injects the top-
+
+k retrieved titles and descriptions into the context. The model may search up to 20 times per example. The prompt guides a six-step methodology: lock in the entity mention, analyze context for disambigua-tion, evaluate the image, translate or transliterate for search, search strategically with iterative refine-ment, and verify the answer. After completing its reasoning, the full trace is passed to a second ex-traction prompt that instructs the model to output only the final answer. This two-pass design de-couples open-ended deliberation from structured answer extraction. The model also receives an OpenAI-compatible tool definition for search_wikipedia(query, limit) that instructs it to translate or transliterate entity names to English for best results. 
+
+System prompt (without retrieval). Identical to the above, but Step 5 is replaced with “Using your internal knowledge, identify the correct English Wikipedia page title” and the search tool is not provided. 
+
+A.13 Search Behavior Analysis 
+
+We quantify how Thinking and Instruct models dif-fer in their use of the Wikipedia search tool across all 12 RAG configurations (3 sizes × 2 variants ×
+
+2 retrieval methods). 
+
+Search count and deliberation. Table 16 shows that Instruct models make substantially more searches per example (3.2–5.2 average) than Think-ing models (1.0–2.2), yet achieve lower accuracy. Thinking models generate 1,400–3,100 completion tokens between consecutive searches, using this reasoning to analyze retrieved results and decide whether and what to search next. Instruct models generate only 26–30 tokens between searches (bare tool-call overhead) indicating they issue searches with no analysis of previous results. The behavioral contrast is strategic precision vs. brute-force vol-ume. Think models achieve higher accuracy with fewer, more deliberate searches. 
+
+Retrieval success. Figure 10 shows per-search and cumulative retrieval success for 8B models. 17 Full Lang. Ed. Statements WD Out-Links Qualifiers Categories Pageviews     
+
+> 010 20 30 40 50 60 70 80
+> Accuracy (%)
+> +0.3 +5.9 +6.9 +7.1 +6.0 +5.8 +4.8
+> 4B-Think+Embed 8B-Inst
+
+Figure 8: 4B-Think+Embed vs. 8B-Inst on the full dataset and rare entity slices. The two systems are nearly identical on the full dataset but diverge on rare entities, with the smaller reasoning model winning by +5–7%. 
+
+Model RAG Avg Med %1 %5+ %20 %Q1 
+
+2B-Instr BM25 5.2 4 0 31 8 91 2B-Instr Embed 3.3 3 1 8 0 98 2B-Think BM25 1.0 1 91 0 0 98 2B-Think Embed 1.0 1 97 0 0 100 4B-Instr BM25 3.5 3 0 18 1 83 4B-Instr Embed 3.0 3 0 7 0 88 4B-Think BM25 1.2 1 80 0 0 92 4B-Think Embed 1.1 1 93 0 0 97 8B-Instr BM25 3.6 3 0 12 1 95 8B-Instr Embed 3.2 3 0 3 0 98 8B-Think BM25 2.2 2 29 0 0 74 8B-Think Embed 1.5 1 68 0 0 88 
+
+Table 16: Search behavior summary across all 12 RAG configurations. “Avg/Med”: searches per example. “%1/%5+/%20”: fraction with 1 / 5+ / 20 (max) searches. “%Q1”: fraction of searches in first quarter of output. 2B 4B 8B 
+
+Model Size 
+
+> 50 60 70 80 90
+> Accuracy (%)
+> No RAG Think
+> BM25 Think
+> Embed Think
+> No RAG Instr
+> BM25 Instr
+> Embed Instr
+
+Figure 9: Accuracy vs. model size (2B/4B/8B) across all 6 configurations. 
+
+Embedding retrieval finds the target entity in the first search 25–40% of the time, versus 6–15% for BM25. The per-search hit rate peaks at search 2 (the primary refinement step) and drops sharply thereafter, showing diminishing returns from addi-tional searches. The cumulative panel shows that Instruct models end up finding the target in more examples overall, but only because they make more searches, not because any individual search is more effective. Despite this higher cumulative retrieval rate, Instruct models achieve lower accuracy than Think models, indicating that finding the target in results is not the bottleneck, reasoning about the results is. 
+
+Query degradation over successive searches. 
+
+Figure 11 reveals that Instruct models’ queries de-grade over successive iterations. For all models, the first search is a short entity name ( ∼10 characters) and the second doubles in length by adding disam-biguation context. After this, Thinking models stop (68% of 8B-Think+Embed examples use exactly one search). Instruct models continue with progres-sively worsening queries: Jaccard diversity drops from 0.63 at transition 1 →2 to 0.24 at 19 →20, ver-batim repetition climbs from 0.3% to 34%, and query length bloats from 9.9 to 45.1 characters as 18 010 20 30 40 50 60 
+
+> Hit Rate at Search k (%)
+
+Per-Search Hit Rate        
+
+> Think+BM25 Think+Embed Instr+BM25 Instr+Embed
+> 12345678
+
+Search Ordinal (k) 
+
+> 020 40 60 80 100
+> Target Ever Found (%)
+
+Cumulative (more searches higher) 
+
+> Think+BM25 Think+Embed Instr+BM25 Instr+Embed
+
+Figure 10: Top: per-search hit rate (fraction of examples where search k returns the target). Search 2 is most produc-tive; later searches have sharply diminishing returns. Bottom: cumulative. Instruct (dashed) ends higher only because it makes more total searches, not because any individual search is better. 8B models shown. 
+
+the model appends context words. This indicates Instruct models lack an effective stopping criterion. 
+
+A.14 Computational Cost Analysis 
+
+Table 17 reports the computational cost per exam-ple across all 18 configurations, including the 6 no-RAG baselines. All experiments were run on a sin-gle NVIDIA L40S GPU (48 GB VRAM) per con-figuration, with 10 CPU cores and 25 GB system RAM. Models were served with SGLang (Zheng et al., 2024). 
+
+Accuracy–cost tradeoff. Figure 13 shows the Pareto frontier of accuracy vs. token cost. The frontier runs from 4B-Instr (76.2%, 2.8k tokens) through 8B-Think (84.2%, 5.0k tokens) to 8B-Think+Embed (87.9%, 11.1k tokens). Our best configuration costs 3.9 × the cheapest (4B-Instr), gaining +11.7% accuracy. The no-RAG 8B-Think baseline (84.2%, 5.0k tokens) represents a strong low-cost option: 96% of the best system’s accuracy at 45% of its token cost. 0.0 0.2 0.4 0.6 0.8 1.0 
+
+> Mean Jaccard Distance
+
+Query Diversity     
+
+> Think+BM25 Think+Embed Instr+BM25 Instr+Embed
+> 2.5 5.0 7.5 10.0 12.5
+
+Search Transition ( k k+1 )
+
+> 010 20 30
+> Verbatim Repeat Rate (%)
+
+Query Repetition 
+
+> Think+BM25 Think+Embed Instr+BM25 Instr+Embed
+
+Figure 11: Query diversity (left) and verbatim repetition rate (right) across successive search transitions for 8B models. Instruct+BM25 (orange dashed) shows clear degradation: di-versity collapses while repetition climbs. Think models (solid) stop after 2–3 transitions with stable quality. 
+
+A.15 Search Query Analysis Query length. Table 19 shows mean query length across configurations. All models produce queries of similar average length (14–21 charac-ters), suggesting that query length is not a differen-tiating factor in the Think–Instruct gap. 
+
+Query transition patterns. Table 20 categorizes each consecutive query pair by transition type. The dominant patterns are refinement (adding disam-biguation context to the previous query, 30–55% of transitions) and variation (moderate change, 25– 50%). Verbatim repetition is rare in early searches but increases for Instruct models in long search chains (see Figure 11). Pivot transitions (com-pletely different query) occur 5–15% of the time, typically when initial approaches fail. 
+
+A.16 Second Model Family: GLM-4.6V-Flash 
+
+All controlled factorial experiments in the main paper use Qwen3-VL. We evaluate a second family, GLM-4.6V-Flash (Team et al., 2025), as a cross-family check of whether retrieval also improves 19 0.00 0.25 0.50 0.75 1.00       
+
+> Fraction
+> 2B / BM25 2B / Embed
+> Think Instr
+> 0.00 0.25 0.50 0.75 1.00
+> Fraction
+> 4B / BM25 4B / Embed 0510 15 20
+
+# Searches     
+
+> 0.00 0.25 0.50 0.75 1.00
+> Fraction
+> 8B / BM25 0510 15 20
+
+# Searches  
+
+> 8B / Embed Figure 12: Search count distributions across all 12 RAG configurations. Think (blue) concentrates at 1–2 searches; Instruct (orange) spreads across 3–5+. At 2B, Think barely uses search at all.
+
+rare-entity accuracy in a reasoning configuration. Without retrieval, the two families start at par-ity: 84.5 for GLM-4.6V-Flash thinking mode vs. 84.2 for Qwen3-VL-8B-Thinking, each under its vendor-recommended decoding configuration. On published multimodal-reasoning benchmarks the two families are comparable, each leading on some: MMMU (Yue et al., 2024) 74.1 vs. 71.1, Math-Vista (Lu et al., 2024) 82.7 vs. 81.4. The families also differ in how reasoning is implemented. Qwen realizes reasoning as two separately post-trained checkpoints (Thinking and Instruct), while GLM exposes reasoning as an inference-time toggle on a single set of weights. Table 21 shows the effect of adding embedding retrieval for each configuration. For GLM’s think-ing mode, adding embedding retrieval improves all 15 rare-entity slices, with statistically signifi-cant gains on 11. This shows that the rare-entity retrieval benefit is not limited to Qwen. How-ever, GLM’s non-thinking mode could not sustain the retrieval loop, so this experiment does not test whether reasoning is necessary for those gains. The controlled Qwen factorial therefore provides the evidence for the reasoning-by-retrieval interaction. On the full set, where parametric knowledge al-ready covers most entities, GLM with retrieval loses 2.7% compared to its no-retrieval counter-part. Qwen’s reasoning checkpoint generates roughly 4.5 × the completion tokens per example of GLM’s thinking mode. This difference may help explain why Qwen converts retrieval into a full-set gain while GLM pays a modest cost from anchoring on retrieved candidates. 
+
+A.17 Licenses for Artifacts Used and Released Models. We use Qwen3-VL (Team, 2025) under the Apache License 2.0, and the 
+
+multilingual-e5-large-instruct embedding model (Wang et al., 2024) under the MIT License. The CulturalPangea-7B baseline (de Dieu Nyandwi et al., 2025) is used under the Apache License 20 Model RAG Acc% M1 In M1 Out M2 Total Time(s) Ratio 
+
+2B-Instr — 63.5 1485 2856 3056 7397 81.9 2.6 ×
+
+2B-Instr BM25 53.6 14961 4867 3699 23527 167.8 8.4 ×
+
+2B-Instr Embed 54.3 10622 4048 3210 17880 99.1 6.4 ×
+
+2B-Think — 62.7 1487 2984 1286 5757 53.3 2.0 ×
+
+2B-Think BM25 60.4 3804 8514 1513 13832 167.9 4.9 ×
+
+2B-Think Embed 59.1 3799 7396 1507 12702 113.4 4.5 ×
+
+4B-Instr — 76.2 1485 565 765 2815 17.6 1.0 ×
+
+4B-Instr BM25 72.7 10145 1458 367 11970 66.2 4.3 ×
+
+4B-Instr Embed 76.1 8906 1482 391 10780 51.4 3.8 ×
+
+4B-Think — 79.6 1487 2272 1359 5119 62.2 1.8 ×
+
+4B-Think BM25 80.7 4322 5150 1327 10799 166.1 3.8 ×
+
+4B-Think Embed 83.7 4022 4495 1320 9837 124.6 3.5 ×
+
+8B-Instr — 83.5 1485 895 1095 3475 50.7 1.2 ×
+
+8B-Instr BM25 78.6 11500 502 600 12602 24.6 4.5 ×
+
+8B-Instr Embed 82.9 9851 419 536 10806 19.7 3.8 ×
+
+8B-Think — 84.2 1487 2027 1505 5019 81.6 1.8 ×
+
+8B-Think BM25 85.8 6658 5566 1486 13709 247.1 4.9 ×
+
+8B-Think Embed 87.9 5137 4426 1489 11052 176.9 3.9 ×
+
+Table 17: Computational cost per example across all 18 configurations. M1 In/Out: Module 1 input/output tokens. M2: Module 2 total tokens. Ratio: number of tokens (cost) relative to cheapest configuration (the most token-efficient). 
+
+2.0. The mGENRE baseline (Cao et al., 2021b) is used under the MIT License, and the GEMEL baseline (Shi et al., 2024) is used under the terms of its original release. 
+
+Software. We use FAISS (Douze et al., 2024) under the MIT License, BM25S (Lù, 2024) under the MIT License, and SGLang (Zheng et al., 2024) under the Apache License 2.0. 
+
+Data. We use the MERLIN benchmark (Ra-mamoorthy et al., 2025) for evaluation in accor-dance with the terms set by its authors. English Wikipedia article content is used under the CC BY-SA 4.0 License, and Wikidata structural metadata is used under the CC0 1.0 Public Domain Dedication. 
+
+Released artifacts. MERLIN-Rare consists of subsets of the existing MERLIN benchmark iden-tified by structural-rarity metrics computed from Wikidata and is released under CC BY-SA 4.0. Our code is released under the MIT License. All artifacts are used consistently with their in-tended research purposes. 21 5000 10000 15000 20000 
+
+Mean Total Tokens per Example 
+
+55 60 65 70 75 80 85 
+
+> Accuracy (%)
+> 2B-Instr 2B-Instr+BM25 2B-Instr+Embed 2B-Think 2B-Think+BM25 2B-Think+Embed
+> 4B-Instr
+> 4B-Instr+BM25 4B-Instr+Embed 4B-Think 4B-Think+BM25 4B-Think+Embed 8B-Instr
+> 8B-Instr+BM25 8B-Instr+Embed
+> 8B-Think
+> 8B-Think+BM25
+> 8B-Think+Embed
+
+Accuracy--Cost Tradeoff (bold = Pareto frontier) 
+
+> Pareto frontier Think (edge) Instr (edge) --- (fill) BM25 (fill) Embed (fill) 2B (shape) 4B (shape) 8B (shape)
+
+Figure 13: Accuracy vs. average token cost for all 18 configurations. Bold labels mark the Pareto frontier. Shape encodes model size, edge color encodes Think/Instruct, fill color encodes RAG method. 
+
+Model RAG Tok (F) Tok (R) R/F Dur (F) Dur (R) 
+
+2B-Instr — 7397 11013 1.49 81.9 133.9 2B-Instr BM25 23527 27346 1.16 167.8 178.8 2B-Instr Embed 17880 19523 1.09 99.1 115.8 2B-Think — 5757 6968 1.21 53.3 71.6 2B-Think BM25 13832 15728 1.14 167.9 201.9 2B-Think Embed 12702 14958 1.18 113.4 144.6 4B-Instr — 2815 3198 1.14 17.6 23.6 4B-Instr BM25 11970 13451 1.12 66.2 64.8 4B-Instr Embed 10780 11966 1.11 51.4 79.5 4B-Think — 5119 6067 1.19 62.2 82.8 4B-Think BM25 10799 14011 1.30 166.1 250.8 4B-Think Embed 9837 12700 1.29 124.6 187.5 8B-Instr — 3475 4704 1.35 50.7 80.3 8B-Instr BM25 12602 16947 1.34 24.6 37.2 8B-Instr Embed 10806 11351 1.05 19.7 23.1 8B-Think — 5019 6234 1.24 81.6 120.3 8B-Think BM25 13709 15907 1.16 247.1 344.9 8B-Think Embed 11052 13890 1.26 176.9 260.7 
+
+Table 18: Cost on full dataset (F) vs. rare entities (R, bottom-5% popularity). R/F: token ratio. 
+
+22 Model RAG Mean Chars Mean Words 
+
+2B-Instr BM25 18.9 3.0 2B-Instr Embed 14.6 2.4 2B-Think BM25 7.8 1.3 2B-Think Embed 7.8 1.3 4B-Instr BM25 16.2 2.4 4B-Instr Embed 15.9 2.4 4B-Think BM25 10.3 1.6 4B-Think Embed 9.5 1.5 8B-Instr BM25 18.5 2.8 8B-Instr Embed 17.5 2.6 8B-Think BM25 14.5 2.2 8B-Think Embed 12.8 2.0 
+
+Table 19: Mean search query length across configurations. 
+
+Model RAG Refine Variation Pivot Repeat Simplify 
+
+2B-Instr BM25 21 12 18 46 32B-Instr Embed 34 15 19 28 32B-Think BM25 2 1 96 0 02B-Think Embed 6 0 81 12 04B-Instr BM25 38 38 14 7 34B-Instr Embed 46 37 14 2 24B-Think BM25 62 12 21 2 34B-Think Embed 60 9 24 2 68B-Instr BM25 35 41 19 3 38B-Instr Embed 40 38 19 1 28B-Think BM25 56 19 13 9 38B-Think Embed 58 17 16 6 3
+
+Table 20: Query transition patterns (% of all consecutive query pairs). Refine : previous query is substring of current (context added). Variation : moderate change. Pivot : completely different query (Jaccard > 0.8). Repeat : verbatim copy. Simplify : current is substring of previous. 
+
+Configuration Full set (no retrieval → embed.) Rare subsets (no retrieval → embed.) 
+
+Qwen3-VL-8B-Instruct 83.5 → 82.9 ( −0.5, n.s.) 41.5–60.1 → 59.8–74.1 ( +8 .2 to +21.6) Qwen3-VL-8B-Thinking 84.2 → 87.9 (+3.8, p < 10 −10 ) 41.5–54.2 → 57.1–71.1 (+8.6 to +18.3) GLM-4.6V-Flash, non-thinking 82.7 → search loop not sustained 1 46.9–62.4 → —GLM-4.6V-Flash, thinking 84.5 → 81.8 ( −2.7, p < 10 −7) 46.9–62.4 → 57.1–73.1 (+3.4 to +15.8) 
+
+Table 21: Accuracy (%) with and without embedding retrieval, for Qwen3-VL and GLM-4.6V-Flash. Deltas are calculated from unrounded scores. Rare-entity ranges span 15 bottom-5% slices. 1GLM entered the forced search tool-call format but degenerated into token repetition until exhausting the generation budget, on about 15% of examples, at both the original and a doubled budget; we therefore report this configuration as unable to sustain the search loop rather than as an accuracy number. 
+
+23

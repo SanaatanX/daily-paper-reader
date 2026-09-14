@@ -1,0 +1,169 @@
+{
+  "date": "20260914",
+  "date_label": "",
+  "generated_at": "2026-09-14 22:53:12 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.12035v1",
+      "route": "202609/14/2609.12035v1-reading-the-whole-heart-latent-attention-masked-autoencoders-for-multimodal-cardiac-representation-learning",
+      "title": "Reading the Whole Heart: Latent-Attention Masked Autoencoders for Multimodal Cardiac Representation Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨 ECG、超声、胸片与临床变量的联合多模态表示学习",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12497v1",
+      "route": "202609/14/2609.12497v1-roes-rotational-equivariant-selective-frequency-fusion-for-multimodal-images",
+      "title": "RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "选择性频率多模态图像融合网络",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12552v1",
+      "route": "202609/14/2609.12552v1-relateanything-real-time-open-vocabulary-relation-prediction-from-any-inputs",
+      "title": "RelateAnything: Real-Time Open-Vocabulary Relation Prediction From Any Inputs",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "开放词汇关系预测，突破固定谓词集合的关系抽取",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.08896v1",
+      "route": "202609/14/2609.08896v1-evolution-of-multimodal-question-answering-from-modality-adaptive-extraction-to-unified-language-representation",
+      "title": "Evolution of Multimodal Question Answering: From Modality-Adaptive Extraction to Unified Language Representation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态问答中的跨模态交互与模态表示",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.10745v1",
+      "route": "202609/14/2609.10745v1-think-before-you-link-rarity-reasoning-and-retrieval-in-multilingual-entity-linking",
+      "title": "Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "将文本与图像中的实体指代链接到知识库的多模态实体链接",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.11058v1",
+      "route": "202609/14/2609.11058v1-emmi-edge-multi-modal-intelligence-for-communication-efficient-mllm-inference-via-fused-representation-compression",
+      "title": "EMMI: Edge Multi-Modal Intelligence for Communication-Efficient MLLM Inference via Fused Representation Compression",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态推理的融合表征压缩",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12364v1",
+      "route": "202609/14/2609.12364v1-latentverse-a-framework-for-understanding-shared-and-modality-specific-information-in-multimodal-latent-representations",
+      "title": "LatentVerse: A Framework for Understanding Shared and Modality-Specific Information in Multimodal Latent Representations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分析多模态表示中的共有与模态特有信息",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12723v1",
+      "route": "202609/14/2609.12723v1-multimodal-floorplan-encoding-learning-dense-modality-invariant-representations",
+      "title": "Multimodal Floorplan Encoding: Learning Dense Modality-Invariant Representations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "逐单元 InfoNCE 对齐跨模态对应区域以获得模态不变表示",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12897v1",
+      "route": "202609/14/2609.12897v1-tracing-and-coordinating-cross-layer-influence-for-multimodal-model-merging",
+      "title": "Tracing and Coordinating Cross-Layer Influence for Multimodal Model Merging",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "视觉与文本表示的多模态合并",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    },
+    {
+      "paper_id": "2609.12898v1",
+      "route": "202609/14/2609.12898v1-unipart-towards-zero-shot-language-grounded-3d-part-segmentation-for-embodied-interaction",
+      "title": "UniPart: Towards Zero-shot Language-Grounded 3D Part Segmentation for Embodied Interaction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以CLIP文本嵌入为条件的跨模态三维Transformer",
+      "first_seen_at": "2026-09-14 22:53:12 UTC",
+      "updated_at": "2026-09-14 22:53:12 UTC"
+    }
+  ]
+}

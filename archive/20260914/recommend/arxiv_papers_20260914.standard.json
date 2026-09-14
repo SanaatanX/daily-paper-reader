@@ -1,0 +1,430 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-14T22:46:37.497473+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 10,
+    "quick_skim_target": 12,
+    "quick_selected": 10
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.12035v1",
+      "source": "arxiv",
+      "title": "Reading the Whole Heart: Latent-Attention Masked Autoencoders for Multimodal Cardiac Representation Learning",
+      "abstract": "Cardiovascular diagnosis rests on integrating complementary modalities, like ECG, echocardiography, chest radiographs, and clinical variables, each capturing distinct but correlated aspects of cardiac physiology. Yet most medical foundation models remain modality-specific, combining modalities only for finetuning or post-training. This discards the cross-modal evidence clinicians naturally integrate and ignores the structure within each modality. We introduce Latent-Attention Masked Autoencoders (LAMAE), a multimodal, structure-aware masked autoencoder that jointly learns patient-level representations during self-supervised pretraining. Rather than fusing modalities post hoc, LAMAE exchanges information directly in the latent space through a shared latent-attention module operating over a study-view-entity hierarchy, enabling aggregation of variable observations and graceful handling of missing modalities. Pretrained on over 1.2 million MIMIC-IV hospital stays, LAMAE outperforms modality-specific pretraining and strong contrastive and vision-language baselines across multimodal hospital-stay tasks, such as in-hospital mortality, ICD-10 and DRG coding, and length of stay, while remaining competitive on unimodal tasks. These gains persist even when only a single modality is available at test time, showing that modeling both intra- and inter-modal structure yields more robust, transferable representations.",
+      "authors": [
+        "Andrea Agostini",
+        "Simon Böhi",
+        "Moritz Vandenhirtz",
+        "Samuel Ruiperez-Campillo",
+        "Max Krähenmann",
+        "Silke Mühlstedt",
+        "Irene Cannistraci",
+        "Ece Özkan Elsen",
+        "Julia E. Vogt",
+        "Thomas M. Sutter"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-10T17:49:44+00:00",
+      "link": "https://arxiv.org/pdf/2609.12035v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "joint multimodal representation learning across ECG, echo, radiographs and clinical variables",
+      "llm_evidence_cn": "跨 ECG、超声、胸片与临床变量的联合多模态表示学习",
+      "llm_evidence": "跨 ECG、超声、胸片与临床变量的联合多模态表示学习",
+      "canonical_evidence": "跨 ECG、超声、胸片与临床变量的联合多模态表示学习",
+      "llm_tldr_en": "Most medical foundation models stay modality-specific and fuse only at finetuning, discarding cross-modal evidence. LAMAE is a structure-aware multimodal masked autoencoder that exchanges information during self-supervised pretraining to learn patient-level representations.",
+      "llm_tldr_cn": "心血管诊断需要整合 ECG、超声心动图、胸片与临床变量等互补模态，但多数医学基础模型仍局限于单一模态，仅在微调或后训练阶段融合，丢失了临床医生自然整合的跨模态证据与模态内结构。本文提出潜在注意力掩码自编码器 LAMAE，一种结构感知的多模态掩码自编码器，在自监督预训练中直接交换信息以联合学习患者级表示。结果表明预训练阶段的跨模态信息交换优于事后融合，为多模态医学表示学习提供了新范式。",
+      "llm_tldr": "心血管诊断需要整合 ECG、超声心动图、胸片与临床变量等互补模态，但多数医学基础模型仍局限于单一模态，仅在微调或后训练阶段融合，丢失了临床医生自然整合的跨模态证据与模态内结构。本文提出潜在注意力掩码自编码器 LAMAE，一种结构感知的多模态掩码自编码器，在自监督预训练中直接交换信息以联合学习患者级表示。结果表明预训练阶段的跨模态信息交换优于事后融合，为多模态医学表示学习提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.08896v1",
+      "source": "arxiv",
+      "title": "Evolution of Multimodal Question Answering: From Modality-Adaptive Extraction to Unified Language Representation",
+      "abstract": "The rapid growth of multimodal data has intensified the need for question answering (QA) systems capable of reasoning across heterogeneous sources such as text, tables, and images. In this paper, we present a comprehensive methodological comparison of three influential frameworks, namely Multimodal Adaptive Extraction (MAE), Solar, and UniMMQA, tracing the evolution of multimodal question answering from modality-adaptive pipelines to fully unified architectures. We examine how each approach models cross-modal interactions, transforms heterogeneous inputs, and performs reasoning, highlighting key design differences in modality representation, reasoning, and answer generation. Our analysis demonstrates a clear shift from explicit modality-specific processing toward unified text-centric formulations enabled by pre-trained language models (PLMs). Empirical comparisons across benchmark datasets show that this transition leads to substantial improvements in both Exact Match (EM) and F1-Scores, with UniMMQA achieving the most consistent and scalable performance. Despite these advances, we identify persistent challenges, including information loss during modality transformation, error propagation in multi-stage pipelines, and limitations in capturing fine-grained cross-modal dependencies. Overall, this study provides a deeper understanding of current design trends and offers insights into the future direction of unified multimodal reasoning systems.",
+      "authors": [
+        "Abdullah Al Shafi"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "published": "2026-09-08T15:34:00+00:00",
+      "link": "https://arxiv.org/pdf/2609.08896v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal interaction and modality representation in multimodal QA",
+      "llm_evidence_cn": "多模态问答中的跨模态交互与模态表示",
+      "llm_evidence": "多模态问答中的跨模态交互与模态表示",
+      "canonical_evidence": "多模态问答中的跨模态交互与模态表示",
+      "llm_tldr_en": "This survey-style comparison traces multimodal QA evolution across MAE, Solar and UniMMQA, examining cross-modal interaction, heterogeneous input transformation, and unified language representation.",
+      "llm_tldr_cn": "多模态数据快速增长，要求问答系统能够跨文本、表格与图像等异构来源进行推理。本文对多模态自适应抽取MAE、Solar与UniMMQA三个代表性框架进行系统方法学比较，梳理多模态问答从模态自适应流水线到完全统一架构的演进路径。作者分析了各方法如何建模跨模态交互、转换异构输入并执行推理，指出在模态表示、推理与答案生成上的关键设计差异。该研究为理解多模态问答的统一化趋势与跨模态对齐提供了清晰脉络。",
+      "llm_tldr": "多模态数据快速增长，要求问答系统能够跨文本、表格与图像等异构来源进行推理。本文对多模态自适应抽取MAE、Solar与UniMMQA三个代表性框架进行系统方法学比较，梳理多模态问答从模态自适应流水线到完全统一架构的演进路径。作者分析了各方法如何建模跨模态交互、转换异构输入并执行推理，指出在模态表示、推理与答案生成上的关键设计差异。该研究为理解多模态问答的统一化趋势与跨模态对齐提供了清晰脉络。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12497v1",
+      "source": "arxiv",
+      "title": "RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images",
+      "abstract": "Infrared-visible image fusion facilitates robust multimodal perception by integrating complementary textural nuances from visible sensors with thermal signatures from infrared systems. Due to the task's inherently ill-posed nature, existing methods heavily rely on structural priors but typically enforce rotation equivariance uniformly across all features. Such a holistic approach overlooks a critical distinction where low-frequency shared structures strictly adhere to equivariant constraints while high-frequency modality-specific details require greater flexibility to preserve unique information. To bridge this gap, we propose RoES, a Rotational Equivariant Selective-frequency fusion network. Instead of employing static decomposition, we introduce a trainable rotation-enhanced updater/predictor module to dynamically decouple low- and high-frequency components. The resulting representations are then processed through a dual-branch fusion module tailored for spectral consistency. Specifically, a rotation-equivariant Mamba is employed to capture long-range structural dependencies in the low-frequency domain, while a polar spectral attention-based Dual-Fourier block refines high-frequency details under explicit low-frequency guidance. Extensive experiments demonstrate that RoES consistently achieves state-of-the-art performance in both fusion quality and downstream object detection, establishing a robust solution for multimodal fusion by reconciling frequency-selective features with equivariant constraints. The source code is available at https://github.com/BryceLosky/RoES-Fusion.",
+      "authors": [
+        "Jiabao Wang",
+        "Wenjian Liu",
+        "Yaoming Cai",
+        "Gengyu Zhang",
+        "Boyan Zhao",
+        "Zijia Zhang",
+        "Yao Ding",
+        "Xiaobo Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-11T06:59:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.12497v1",
+      "tags": [
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "selective-frequency multimodal image fusion network",
+      "llm_evidence_cn": "选择性频率多模态图像融合网络",
+      "llm_evidence": "选择性频率多模态图像融合网络",
+      "canonical_evidence": "选择性频率多模态图像融合网络",
+      "llm_tldr_en": "Infrared-visible fusion applies rotation equivariance uniformly, ignoring frequency differences. RoES selectively enforces equivariance for low-frequency shared structure while keeping high-frequency modality details flexible, better preserving complementary information.",
+      "llm_tldr_cn": "红外与可见光图像融合需整合互补信息，但现有方法对所有特征统一施加旋转等变约束，忽视低频共享结构与高频模态细节的差异。本文提出RoES旋转等变选择性频率融合网络，让低频结构严格等变、高频细节灵活保留。实验证明其能更好保留模态特有信息、提升融合感知效果，为多模态融合提供频域解耦思路。",
+      "llm_tldr": "红外与可见光图像融合需整合互补信息，但现有方法对所有特征统一施加旋转等变约束，忽视低频共享结构与高频模态细节的差异。本文提出RoES旋转等变选择性频率融合网络，让低频结构严格等变、高频细节灵活保留。实验证明其能更好保留模态特有信息、提升融合感知效果，为多模态融合提供频域解耦思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.10745v1",
+      "source": "arxiv",
+      "title": "Think Before You Link: Rarity, Reasoning, and Retrieval in Multilingual Entity Linking",
+      "abstract": "Multimodal entity linking grounds entity mentions in text and images to knowledge-base entries. These systems degrade on rare entities, but prior work measures rarity primarily through popularity-based metrics such as pageviews. We broaden this view using knowledge-graph structural metrics that capture how well an entity is documented and connected. These metrics identify many rare entities that popularity metrics miss. Across the resulting rare-entity slices, state-of-the-art accuracy drops by 15.4-39.9%, showing that different rarity definitions expose different failure modes. To address these failures, we introduce a simple, training-free framework in which a reasoning-capable vision-language model iteratively searches and reasons over Wikipedia, gathering evidence dynamically. Controlled experiments show that reasoning and retrieval are complementary. Reasoning alone does not significantly improve accuracy on rare entities. Retrieval without reasoning improves rare-entity accuracy but can hurt overall accuracy. Their combination performs best. On MERLIN, a multilingual multimodal entity linking benchmark over five languages (Hindi, Indonesian, Japanese, Tamil, Vietnamese), our best system improves over the state of the art by 6.9% overall and by up to 23.3% on rare-entity slices. We release MERLIN-Rare, rare-entity test slices for targeted evaluation, with our framework.",
+      "authors": [
+        "Parinthapat Pengpun",
+        "Simran Khanuja",
+        "Graham Neubig"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-09T18:41:35+00:00",
+      "link": "https://arxiv.org/pdf/2609.10745v1",
+      "tags": [
+        "keyword:MRE",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal entity linking grounding text and image mentions to knowledge base",
+      "llm_evidence_cn": "将文本与图像中的实体指代链接到知识库的多模态实体链接",
+      "llm_evidence": "将文本与图像中的实体指代链接到知识库的多模态实体链接",
+      "canonical_evidence": "将文本与图像中的实体指代链接到知识库的多模态实体链接",
+      "llm_tldr_en": "This paper measures entity rarity via knowledge-graph structural metrics and proposes a training-free reasoning VLM framework to improve multimodal entity linking on rare entities.",
+      "llm_tldr_cn": "多模态实体链接需要将文本与图像中的实体指代链接到知识库条目，但系统在稀有实体上性能明显下降，而以往工作主要用浏览量等流行度指标衡量稀有性。本文引入知识图谱结构指标，刻画实体的文档化与连接程度，识别出流行度指标遗漏的众多稀有实体。实验显示在最先进方法上，这些稀有实体切片的准确率下降15.4%至39.9%，暴露不同稀有性定义下的失败模式。作者进一步提出免训练的推理式视觉语言框架，通过迭代搜索与推理缓解该问题。",
+      "llm_tldr": "多模态实体链接需要将文本与图像中的实体指代链接到知识库条目，但系统在稀有实体上性能明显下降，而以往工作主要用浏览量等流行度指标衡量稀有性。本文引入知识图谱结构指标，刻画实体的文档化与连接程度，识别出流行度指标遗漏的众多稀有实体。实验显示在最先进方法上，这些稀有实体切片的准确率下降15.4%至39.9%，暴露不同稀有性定义下的失败模式。作者进一步提出免训练的推理式视觉语言框架，通过迭代搜索与推理缓解该问题。",
+      "llm_tags": [
+        "query:mre:composite"
+      ],
+      "matched_query_tag": "query:mre:composite",
+      "matched_query_text": "Papers central to 多模态关系抽取相关论文 使用数据集如MNRE UMRE MORE, especially work that connects or combines: multimodal relation extraction; cross-modal relation extraction using vision and language; datasets for multimodal relation extraction such as MNRE UMRE MORE; relation extraction across visual and textual modalities; extracting relational facts from multimodal data; How to combine text and images for relation extraction?; state of the art multimodal relation extraction models; Locate recent research on image text relation extraction benchmarks; Search for approaches to cross modal relation extraction between text and images.",
+      "matched_requirement_id": "req-composite-mre",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12552v1",
+      "source": "arxiv",
+      "title": "RelateAnything: Real-Time Open-Vocabulary Relation Prediction From Any Inputs",
+      "abstract": "Open-vocabulary detection accepts any class list at inference, and promptable segmentation returns regions without class names: the taxonomy has left the model and become an input. Relation prediction has not. Scene-graph models are still trained and evaluated on the 50 or 56 predicates of one annotation style, their relation head conditioned on object labels and so tied to one detector. Three obstacles explain this, none primarily modelling: no relation corpus is both free-text and verified, a label-conditioned architecture cannot accept a vocabulary it was not trained on, and the standard metric rewards agreement with the training corpus, so a larger vocabulary scores as a regression. We present RelateAnything, a 53M-parameter model taking an image and regions from any source and returning scored relations over a predicate vocabulary supplied at inference as strings. Object labels are never an input, so the region source can change without retraining, and the vocabulary is a bank of text embeddings, not a learned classifier. It runs at 20 ms/frame. Training over 19,103 predicates requires positive-unlabeled supervision and a text encoder that separates antonyms, which contrastive encoders embed at cosine 0.95. To supply the supervision we build RA-4M, 474k images and 4.3M relations over 10,102 free-text predicates, generated against numbered box markers and geometrically verified. To measure it we build OV-SGG-Bench, six axes scored across datasets that the priors standard recall rewards cannot satisfy. On three cross-dataset benchmarks and a fourth zero-shot, RelateAnything has 2.3-3.5x the mean recall of the strongest open-vocabulary method of comparable scale, margins that survive a real detector, and leads a 3B-VLM scene-graph model on both metrics at under 2% of its parameters. In-domain measurement overstates transfer gains ~5x. Model, corpus and benchmark are public.",
+      "authors": [
+        "Maëlic Neau"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-11T07:57:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.12552v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "open-vocabulary relation prediction going beyond fixed predicate sets",
+      "llm_evidence_cn": "开放词汇关系预测，突破固定谓词集合的关系抽取",
+      "llm_evidence": "开放词汇关系预测，突破固定谓词集合的关系抽取",
+      "canonical_evidence": "开放词汇关系预测，突破固定谓词集合的关系抽取",
+      "llm_tldr_en": "RelateAnything proposes a 53M-parameter open-vocabulary relation prediction model that accepts free-text predicates from any inputs, overcoming label-conditioned scene-graph models tied to fixed vocabularies.",
+      "llm_tldr_cn": "开放词汇检测与可提示分割已让分类体系成为输入，但关系预测仍受限于固定谓词集，场景图模型依赖目标标签并绑定特定检测器。本文提出RelateAnything，一个5300万参数的模型，可从任意输入进行实时开放词汇关系预测，摆脱标签条件化架构与固定词表约束。作者还指出缺乏自由文本且经校验的关系语料与不合理的评估指标等障碍。该工作推动了开放词汇关系抽取与场景图构建的发展。",
+      "llm_tldr": "开放词汇检测与可提示分割已让分类体系成为输入，但关系预测仍受限于固定谓词集，场景图模型依赖目标标签并绑定特定检测器。本文提出RelateAnything，一个5300万参数的模型，可从任意输入进行实时开放词汇关系预测，摆脱标签条件化架构与固定词表约束。作者还指出缺乏自由文本且经校验的关系语料与不合理的评估指标等障碍。该工作推动了开放词汇关系抽取与场景图构建的发展。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "extracting relational facts from multimodal data",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.11058v1",
+      "source": "arxiv",
+      "title": "EMMI: Edge Multi-Modal Intelligence for Communication-Efficient MLLM Inference via Fused Representation Compression",
+      "abstract": "Recent advances in multimodal large language mod- els (MLLMs) have opened new opportunities for edge intelligence by enabling reasoning across heterogeneous sensor modalities, such as vision, text, and telemetry data. However, deploying these capabilities on resource-constrained edge platforms remains challenging due to the substantial computational, memory, and communication demands of modern MLLMs. Rather than transmitting raw sensor observations or partitioning neural networks at intermediate layers, Edge Multi-Modal Intelligence (EMMI) communicates a compact representation between edge devices and server resources, enabling communication-efficient edge MLLM inference. To achieve this, EMMI performs modality-specific encoding, cross-modal representation fusion, and learned compression at the edge, transmitting only a compact latent representation to server-side resources for high-capacity MLLM reasoning. This representation-centric design reduces communication overhead, preserves local data privacy, and provides a fixed-size interface between heterogeneous edge devices and server-side MLLMs. Evaluation on a representative multimodal benchmark demonstrates that EMMI can reduce the communication payload by 32x while maintaining comparable downstream accuracy, resulting in up to a 3.4x reduction in estimated end-to-end inference latency under bandwidth-constrained edge conditions.",
+      "authors": [
+        "Motahare Mounesan",
+        "Irfan Khan"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.DC"
+      ],
+      "published": "2026-09-10T04:04:25+00:00",
+      "link": "https://arxiv.org/pdf/2609.11058v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "fused representation compression for multimodal inference",
+      "llm_evidence_cn": "面向多模态推理的融合表征压缩",
+      "llm_evidence": "面向多模态推理的融合表征压缩",
+      "canonical_evidence": "面向多模态推理的融合表征压缩",
+      "llm_tldr_en": "Deploying MLLMs on edge devices is costly in compute, memory and communication. EMMI transmits a compact fused representation between edge and server instead of raw observations, enabling communication-efficient multimodal inference.",
+      "llm_tldr_cn": "在资源受限边缘平台部署多模态大模型面临巨大计算、内存与通信开销。本文提出EMMI边缘多模态智能框架，不传输原始观测也不做中间层网络切分，而是传输紧凑的融合表征，实现通信高效的边缘MLLM推理。该工作通过融合表征压缩降低通信负担，为多模态大模型在边缘侧的落地提供可行路径。",
+      "llm_tldr": "在资源受限边缘平台部署多模态大模型面临巨大计算、内存与通信开销。本文提出EMMI边缘多模态智能框架，不传输原始观测也不做中间层网络切分，而是传输紧凑的融合表征，实现通信高效的边缘MLLM推理。该工作通过融合表征压缩降低通信负担，为多模态大模型在边缘侧的落地提供可行路径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12364v1",
+      "source": "arxiv",
+      "title": "LatentVerse: A Framework for Understanding Shared and Modality-Specific Information in Multimodal Latent Representations",
+      "abstract": "Latent embeddings have become a central data abstraction in modern machine learning, especially in biomedicine, where foundation models are increasingly used to encode multimodal data like clinical text, medical images, omics, and physiological signals. However, the utility and value of these representations depends on understanding their quality, structure, and the information they encode. Existing analysis workflows for evaluating representations remain fragmented across custom scripts, isolated metrics, and most importantly lack multimodal analysis, limiting accessibility and reproducibility. We present LatentVerse, a representation analysis resource that combines a web-based visual analytics platform for accessible, report-driven exploration with a command-line interface for scalable technical workflows. LatentVerse unifies diagnostics for various representation quality metrics and extends to multimodal settings by decomposing embeddings into shared and modality-specific components. We evaluate LatentVerse through controlled unimodal and multimodal simulations, discovery-oriented analyses on real biomedical embeddings, and a user study across diverse use cases. By supporting thorough and interpretable evaluation of latent spaces, LatentVerse makes foundation model representations more understandable in biomedical and data science applications.",
+      "authors": [
+        "Majd Alafrange",
+        "Samuel Friedman",
+        "John Kitonyo",
+        "Sana Tonekaboni",
+        "Mahnaz Maddah"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.HC"
+      ],
+      "published": "2026-09-11T02:34:29+00:00",
+      "link": "https://arxiv.org/pdf/2609.12364v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "analyzing shared and modality-specific multimodal representations",
+      "llm_evidence_cn": "分析多模态表示中的共有与模态特有信息",
+      "llm_evidence": "分析多模态表示中的共有与模态特有信息",
+      "canonical_evidence": "分析多模态表示中的共有与模态特有信息",
+      "llm_tldr_en": "Multimodal latent representations lack unified analysis tools. This work presents LatentVerse, a representation analysis resource combining a visual analytics platform with metrics to study shared and modality-specific information across clinical text, images, omics, and signals.",
+      "llm_tldr_cn": "隐表示已成为多模态机器学习的核心抽象，但其质量与所编码信息缺乏统一分析工具，现有流程分散且缺少多模态分析。该工作提出LatentVerse，将可视化分析平台与指标分析结合，用于理解多模态隐表示中的共有与模态特有信息。该资源支持对临床文本、医学图像、组学与生理信号等表示进行深入分析，提升可及性与可复现性。",
+      "llm_tldr": "隐表示已成为多模态机器学习的核心抽象，但其质量与所编码信息缺乏统一分析工具，现有流程分散且缺少多模态分析。该工作提出LatentVerse，将可视化分析平台与指标分析结合，用于理解多模态隐表示中的共有与模态特有信息。该资源支持对临床文本、医学图像、组学与生理信号等表示进行深入分析，提升可及性与可复现性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12723v1",
+      "source": "arxiv",
+      "title": "Multimodal Floorplan Encoding: Learning Dense Modality-Invariant Representations",
+      "abstract": "Floorplans arise in many forms, from vector CAD drawings to raster renderings and sensor-derived density maps. This heterogeneity makes it difficult to build learning systems that transfer across modalities and support geometry-centric tasks such as alignment and retrieval. We introduce the Multimodal Floorplan Encoder (MMFE), which maps diverse 2D indoor representations into a shared dense latent grid. MMFE combines a frozen DINOv3 backbone with a trainable Dense Prediction Transformer (DPT) head, and is trained with a per-cell Information Noise-Contrastive Estimation (InfoNCE) objective that aligns spatially corresponding regions across modalities while using all other cells as negatives. To improve robustness to geometric distortions, we incorporate controlled similarity transformations and enforce geometric consistency through feature-grid warping. On Structured3D, a held-out out-of-domain dataset, MMFE improves cross-modal dense matching, enables robust similarity alignment with RANSAC, and yields strong retrieval when paired with learned aggregation.",
+      "authors": [
+        "Xavier Anadón",
+        "Rémi Pautrat",
+        "Rui Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-11T11:21:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.12723v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "per-cell InfoNCE aligning spatially corresponding regions across modalities for modality-invariant representations",
+      "llm_evidence_cn": "逐单元 InfoNCE 对齐跨模态对应区域以获得模态不变表示",
+      "llm_evidence": "逐单元 InfoNCE 对齐跨模态对应区域以获得模态不变表示",
+      "canonical_evidence": "逐单元 InfoNCE 对齐跨模态对应区域以获得模态不变表示",
+      "llm_tldr_en": "Floorplans appear as vectors, rasters and density maps, making cross-modal transfer hard. The Multimodal Floorplan Encoder maps heterogeneous 2D indoor representations into a shared dense latent grid, aligned by a per-cell InfoNCE objective.",
+      "llm_tldr_cn": "户型图存在矢量 CAD、栅格渲染与传感器密度图等多种形式，这种异构性使学习系统难以跨模态迁移，也难支持对齐与检索等几何任务。本文提出多模态户型图编码器 MMFE，结合冻结的 DINOv3 主干与可训练的稠密预测 Transformer 头，将多种二维室内表示映射到共享稠密潜网格，并用逐单元 InfoNCE 目标对齐跨模态空间对应区域。该方法提升了模态不变性与对几何畸变的鲁棒性，为异构二维模态的稠密表示对齐提供了可迁移框架。",
+      "llm_tldr": "户型图存在矢量 CAD、栅格渲染与传感器密度图等多种形式，这种异构性使学习系统难以跨模态迁移，也难支持对齐与检索等几何任务。本文提出多模态户型图编码器 MMFE，结合冻结的 DINOv3 主干与可训练的稠密预测 Transformer 头，将多种二维室内表示映射到共享稠密潜网格，并用逐单元 InfoNCE 目标对齐跨模态空间对应区域。该方法提升了模态不变性与对几何畸变的鲁棒性，为异构二维模态的稠密表示对齐提供了可迁移框架。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12897v1",
+      "source": "arxiv",
+      "title": "Tracing and Coordinating Cross-Layer Influence for Multimodal Model Merging",
+      "abstract": "Multimodal model merging aims to consolidate task experts into a single model that retains their complementary capabilities. Most unimodal model merging methods combine expert updates within individual layers, and multimodal approaches largely follow this design. However, an expert update changes the representations passed to subsequent layers, allowing its influence to propagate across depth and affect how visual and textual information interact. When visual and language updates are combined, later updates act on inputs already modified by earlier ones, coupling their effects. This poses two challenges: (1) how to characterize the multimodal influence of individual expert updates across depth, and (2) how to jointly combine expert updates based on their multimodal influence. To address these challenges, we propose TAC-Merge for tracing and coordinating cross-layer influence in multimodal model merging. It contains two modules, i.e., multimodal influence mapping (MIM) and coupled merge control (CMC). MIM constructs graphs of update effects and uses Ricci curvature together with expert predictions to define a shared fusion objective. CMC models interactions among coefficient adjustments and jointly optimizes regional weights to synthesize one shared model. Experiments across diverse multimodal tasks demonstrate the effectiveness of TAC-Merge in consolidating complementary expert capabilities and supporting generalization to unseen tasks.",
+      "authors": [
+        "Pengyang Zhou",
+        "Xiaobin Tu",
+        "Zhengxi Liu",
+        "Rongkun Xue",
+        "Haochen Li",
+        "Miancan Liu",
+        "Ziyuan Chen",
+        "Yinggui Wang",
+        "Jinkui Ren",
+        "Xiantao Zhang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-11T14:24:07+00:00",
+      "link": "https://arxiv.org/pdf/2609.12897v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal merging of visual and textual representations",
+      "llm_evidence_cn": "视觉与文本表示的多模态合并",
+      "llm_evidence": "视觉与文本表示的多模态合并",
+      "canonical_evidence": "视觉与文本表示的多模态合并",
+      "llm_tldr_en": "This work traces how individual expert updates propagate across layers and couple visual-textual interactions, then coordinates cross-layer influence to merge multimodal experts into one model retaining complementary capabilities.",
+      "llm_tldr_cn": "多模态模型合并旨在将多个任务专家整合为保留互补能力的单一模型，但现有方法多在单层内合并参数，忽略了专家更新跨层传播对视觉与文本信息交互的耦合影响。本文追踪并刻画单个专家更新的跨层多模态影响，并据此联合协调视觉与语言专家更新的合并。该框架为多模态模型合并提供了跨深度影响协调的新思路，有助于更完整地保留视觉-语言互补能力。",
+      "llm_tldr": "多模态模型合并旨在将多个任务专家整合为保留互补能力的单一模型，但现有方法多在单层内合并参数，忽略了专家更新跨层传播对视觉与文本信息交互的耦合影响。本文追踪并刻画单个专家更新的跨层多模态影响，并据此联合协调视觉与语言专家更新的合并。该框架为多模态模型合并提供了跨深度影响协调的新思路，有助于更完整地保留视觉-语言互补能力。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.12898v1",
+      "source": "arxiv",
+      "title": "UniPart: Towards Zero-shot Language-Grounded 3D Part Segmentation for Embodied Interaction",
+      "abstract": "Fine-grained robotic manipulation depends on understanding parts, not only whole objects. Existing 3D foundation models tend to be either generalized but object-aware, or part-aware but limited to closed-set taxonomies, which weakens zero-shot transfer. We study text-conditioned 3D part segmentation, where a free-form phrase selects a functional part on point cloud. We introduce UniPart, a feed-forward cross-modal 3D Transformer that conditions CLIP text embedding. To scale supervision, we build LangPart-1M with 160K+ Objaverse assets and 8M text to part pairs using multi-view consistent part generation. We further manually label a high-quality subset, LangPart-4K, for fine-tuning and evaluation. UniPart achieves strong zero-shot results on open-vocabulary part benchmarks and transfers to language-conditioned part grasping in real world.",
+      "authors": [
+        "Xinqiang Yu",
+        "Zekun qi",
+        "Jiawei He",
+        "Wenyao Zhang",
+        "Xuchuan Chen",
+        "Guaocai Yao",
+        "Li Yi",
+        "Zhaoxiang Zhang",
+        "He Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-09-11T14:25:17+00:00",
+      "link": "https://arxiv.org/pdf/2609.12898v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal 3D transformer conditioning CLIP text embedding",
+      "llm_evidence_cn": "以CLIP文本嵌入为条件的跨模态三维Transformer",
+      "llm_evidence": "以CLIP文本嵌入为条件的跨模态三维Transformer",
+      "canonical_evidence": "以CLIP文本嵌入为条件的跨模态三维Transformer",
+      "llm_tldr_en": "UniPart performs zero-shot, language-grounded 3D part segmentation by conditioning a cross-modal transformer on CLIP text embeddings, trained on the large LangPart-1M dataset with manual fine-tuning subset.",
+      "llm_tldr_cn": "细粒度机器人操作需要理解部件而非整体对象，但现有三维基础模型要么泛化强却只关注整体，要么具备部件感知却局限于封闭类别。本文提出UniPart，一种以CLIP文本嵌入为条件的跨模态三维Transformer，并构建包含160K以上Objaverse资产、800万文本-部件对的LangPart-1M数据集，另人工标注LangPart-4K用于微调与评测。实验表明UniPart具备较强的零样本迁移能力，为语言引导的三维部件分割提供了可扩展的跨模态方案。",
+      "llm_tldr": "细粒度机器人操作需要理解部件而非整体对象，但现有三维基础模型要么泛化强却只关注整体，要么具备部件感知却局限于封闭类别。本文提出UniPart，一种以CLIP文本嵌入为条件的跨模态三维Transformer，并构建包含160K以上Objaverse资产、800万文本-部件对的LangPart-1M数据集，另人工标注LangPart-4K用于微调与评测。实验表明UniPart具备较强的零样本迁移能力，为语言引导的三维部件分割提供了可扩展的跨模态方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
