@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-14</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-15</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-14 22:53:12 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-15 21:55:47 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-14 日报：今日共筛出 10 篇论文，全部速读、无精读，其中 3 篇以 7.0 分并列领跑。最值得关注的是多模态心脏表征学习（Latent-Attention MAE）与开放词汇关系预测（RelateAnything）两条线，分别指向医学影像和实时关系理解的落地潜力。普通读者可优先从这两篇的摘要和任务设定入手，再按兴趣延伸到旋转等变多模态融合方向。</p>
+<p>今日精读1篇、速读6篇，重点覆盖多模态学习的统一信息论视角与对话情感识别、无人机定位等应用。最值得看的是8.0分的《Dependency, Compression, and Synergy》用信息论统一解释多模态依赖、压缩与协同，速读中的ReH-FUSE则提供可靠性感知的专家分层融合思路。普通读者可先读精读篇建立框架，再按需查阅速读中的轻量化与跨模态对比学习方案。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dependency, Compression, and Synergy: A Unified Information-Theoretic View of Multimodal Learning">Dependency, Compression, and Synergy: A Unified Information-Theoretic View of Multimodal Learning</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Reading the Whole Heart: Latent-Attention Masked Autoencoders for Multimodal Cardiac Representation Learning">Reading the Whole Heart: Latent-Attention Masked Autoencoders for Multimodal Cardiac Representation Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images">RoES: Rotational Equivariant Selective-frequency Fusion for Multimodal Images</span></li><li><span class="dpr-home-dashboard-paper-title" title="RelateAnything: Real-Time Open-Vocabulary Relation Prediction From Any Inputs">RelateAnything: Real-Time Open-Vocabulary Relation Prediction From Any Inputs</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ReH-FUSE: Reliability-Aware Hierarchical Fusion of Experts for Multimodal Emotion Recognition in Conversation">ReH-FUSE: Reliability-Aware Hierarchical Fusion of Experts for Multimodal Emotion Recognition in Conversation</span></li><li><span class="dpr-home-dashboard-paper-title" title="PRI-Net: A Lightweight Multimodal Framework for 3D UAV Localization">PRI-Net: A Lightweight Multimodal Framework for 3D UAV Localization</span></li><li><span class="dpr-home-dashboard-paper-title" title="Inferring Dislocation Microstructures from X-ray Diffraction via Cross-Modal Contrastive Learning">Inferring Dislocation Microstructures from X-ray Diffraction via Cross-Modal Contrastive Learning</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>8</strong></span><span class="dpr-home-dashboard-tag">mre <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
 </section>
 </div>
 

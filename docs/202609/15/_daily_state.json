@@ -1,0 +1,121 @@
+{
+  "date": "20260915",
+  "date_label": "",
+  "generated_at": "2026-09-15 21:55:47 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.14421v1",
+      "route": "202609/15/2609.14421v1-dependency-compression-and-synergy-a-unified-information-theoretic-view-of-multimodal-learning",
+      "title": "Dependency, Compression, and Synergy: A Unified Information-Theoretic View of Multimodal Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "多模态学习与模态信息共享的统一信息论视角",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.13857v1",
+      "route": "202609/15/2609.13857v1-reh-fuse-reliability-aware-hierarchical-fusion-of-experts-for-multimodal-emotion-recognition-in-conversation",
+      "title": "ReH-FUSE: Reliability-Aware Hierarchical Fusion of Experts for Multimodal Emotion Recognition in Conversation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "文本、音频与跨模态专家的可靠性感知分层融合",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.14469v1",
+      "route": "202609/15/2609.14469v1-pri-net-a-lightweight-multimodal-framework-for-3d-uav-localization",
+      "title": "PRI-Net: A Lightweight Multimodal Framework for 3D UAV Localization",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "缓解模态不平衡的多模态融合",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.12713v1",
+      "route": "202609/15/2609.12713v1-inferring-dislocation-microstructures-from-x-ray-diffraction-via-cross-modal-contrastive-learning",
+      "title": "Inferring Dislocation Microstructures from X-ray Diffraction via Cross-Modal Contrastive Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用跨模态对比学习在共享隐空间对齐结构与衍射表征",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.15152v1",
+      "route": "202609/15/2609.15152v1-pace-progressive-angular-to-norm-contrastive-embedding",
+      "title": "PACE: Progressive Angular-to-Norm Contrastive Embedding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态嵌入模型在共享空间对齐异构输入",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.15320v1",
+      "route": "202609/15/2609.15320v1-hypergraph-regularized-gramian-volumes-for-multimodal-retrieval",
+      "title": "Hypergraph-Regularized Gramian Volumes for Multimodal Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "超图正则化的跨模态对齐多模态检索",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    },
+    {
+      "paper_id": "2609.15335v1",
+      "route": "202609/15/2609.15335v1-query-conditioned-spherical-centroid-aggregation-for-multimodal-retrieval",
+      "title": "Query-Conditioned Spherical Centroid Aggregation for Multimodal Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "查询条件自适应模态权重缓解模态影响失衡",
+      "first_seen_at": "2026-09-15 21:55:47 UTC",
+      "updated_at": "2026-09-15 21:55:47 UTC"
+    }
+  ]
+}
