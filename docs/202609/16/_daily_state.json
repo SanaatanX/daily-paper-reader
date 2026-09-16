@@ -1,0 +1,41 @@
+{
+  "date": "20260916",
+  "date_label": "",
+  "generated_at": "2026-09-16 22:17:35 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.15296v1",
+      "route": "202609/16/2609.15296v1-reason-what-matters-retrieval-grounded-reasoning-for-universal-multimodal-embeddings",
+      "title": "Reason What Matters: Retrieval-Grounded Reasoning for Universal Multimodal Embeddings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨模态对齐与统一多模态嵌入表示学习",
+      "first_seen_at": "2026-09-16 22:17:35 UTC",
+      "updated_at": "2026-09-16 22:17:35 UTC"
+    },
+    {
+      "paper_id": "2609.15418v1",
+      "route": "202609/16/2609.15418v1-vico-sam3-vision-conditioned-alignment-for-open-vocabulary-camouflaged-object-segmentation",
+      "title": "ViCo-SAM3: Vision-Conditioned Alignment for Open-Vocabulary Camouflaged Object Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "文本与视觉线索的视觉条件跨模态对齐",
+      "first_seen_at": "2026-09-16 22:17:35 UTC",
+      "updated_at": "2026-09-16 22:17:35 UTC"
+    }
+  ]
+}

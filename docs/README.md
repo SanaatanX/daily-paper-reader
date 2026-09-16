@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-15</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-16</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 7 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-15 21:55:47 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-16 22:17:35 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日精读1篇、速读6篇，重点覆盖多模态学习的统一信息论视角与对话情感识别、无人机定位等应用。最值得看的是8.0分的《Dependency, Compression, and Synergy》用信息论统一解释多模态依赖、压缩与协同，速读中的ReH-FUSE则提供可靠性感知的专家分层融合思路。普通读者可先读精读篇建立框架，再按需查阅速读中的轻量化与跨模态对比学习方案。</p>
+<p>2026-09-16 日报：今日共筛出 2 篇速读、0 篇精读，聚焦多模态嵌入与开放词汇伪装目标分割两个方向。最值得看的是《Reason What Matters》（7.0/10），它用检索接地的推理提升通用多模态嵌入；《ViCo-SAM3》（6.0/10）则用视觉条件对齐处理伪装目标分割。建议普通读者先读第一篇了解多模态检索思路，第二篇可按需关注分割应用。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Dependency, Compression, and Synergy: A Unified Information-Theoretic View of Multimodal Learning">Dependency, Compression, and Synergy: A Unified Information-Theoretic View of Multimodal Learning</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -84,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="ReH-FUSE: Reliability-Aware Hierarchical Fusion of Experts for Multimodal Emotion Recognition in Conversation">ReH-FUSE: Reliability-Aware Hierarchical Fusion of Experts for Multimodal Emotion Recognition in Conversation</span></li><li><span class="dpr-home-dashboard-paper-title" title="PRI-Net: A Lightweight Multimodal Framework for 3D UAV Localization">PRI-Net: A Lightweight Multimodal Framework for 3D UAV Localization</span></li><li><span class="dpr-home-dashboard-paper-title" title="Inferring Dislocation Microstructures from X-ray Diffraction via Cross-Modal Contrastive Learning">Inferring Dislocation Microstructures from X-ray Diffraction via Cross-Modal Contrastive Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Reason What Matters: Retrieval-Grounded Reasoning for Universal Multimodal Embeddings">Reason What Matters: Retrieval-Grounded Reasoning for Universal Multimodal Embeddings</span></li><li><span class="dpr-home-dashboard-paper-title" title="ViCo-SAM3: Vision-Conditioned Alignment for Open-Vocabulary Camouflaged Object Segmentation">ViCo-SAM3: Vision-Conditioned Alignment for Open-Vocabulary Camouflaged Object Segmentation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 </div>
 
