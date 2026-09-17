@@ -1,0 +1,458 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-17T22:26:53.223354+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 10,
+    "quick_skim_target": 12,
+    "quick_selected": 10
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.16591v1",
+      "source": "arxiv",
+      "title": "FLAT: Resampling Image and Text into 1D Flexible-Length Aligned Transmodal Tokens for Retrieval and Generation",
+      "abstract": "Traditional multimodal representation learning and generation are two stages: a contrastive or self-supervised visual encoder is trained first, followed by a separate downstream generative model. This setup bottlenecks generative performance behind frozen embeddings. To bridge this gap, we revisit joint multimodal representation learning and generation to produce linearly interpolatable embeddings that are directly consumable by generative decoders. We present FLAT (Flexible-Length Aligned Transmodal representations), a representation pre-training framework that jointly optimizes a shared multimodal encoder alongside downstream text-to-image (T2I) and image-to-text (I2T) decoders. By combining contrastive alignment with bidirectional cross-modal generative objectives, FLAT ensures its representations function as both discriminative semantic descriptors and generative conditions. Architecturally, FLAT maps visual and textual inputs into a unified continuous 1D sequence space, applying nested dropout over prefix-K tokens to enable dynamic output lengths. A single pre-training stage allows FLAT to perform cross-modal retrieval and generation across variable prefix K, achieving a T2I GenEval score of 71.1. Task-specific fine-tuning aligns model performance with state-of-the-art baselines: 83.1 GenEval on T2I generation; 40.5 BLEU-4 and 138.6 CIDEr on MS-COCO image captioning; and Recall@5 scores of 86.8 (I2T) / 75.8 (T2I) on MS-COCO alongside 98.3 (I2T) / 93.6 (T2I) on Flickr30K. Finally, qualitative evaluations demonstrate that FLAT representations natively support linear interpolation, latent space arithmetic, and zero-shot composed retrieval.",
+      "authors": [
+        "Guangyu Sun",
+        "Shlok Kumar Mishra",
+        "Wentao Bao",
+        "Robert Zhenheng Yang",
+        "Xiao Wang",
+        "Xiyuan Wang",
+        "Yujunrong Ma",
+        "Chen Yuan",
+        "Max Xiangjun Fan",
+        "Jun Xiao",
+        "Jianpeng Cheng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-15T03:35:59+00:00",
+      "link": "https://arxiv.org/pdf/2609.16591v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "joint multimodal representation learning with contrastive alignment",
+      "llm_evidence_cn": "联合多模态表示学习与对比对齐",
+      "llm_evidence": "联合多模态表示学习与对比对齐",
+      "canonical_evidence": "联合多模态表示学习与对比对齐",
+      "llm_tldr_en": "FLAT jointly optimizes a shared multimodal encoder with text-to-image and image-to-text decoders, producing linearly interpolatable transmodal embeddings that bridge representation learning and generation.",
+      "llm_tldr_cn": "传统多模态表示学习与生成分两阶段进行，冻结嵌入限制了生成性能。本文提出FLAT预训练框架，将共享多模态编码器与文生图、图生文解码器联合优化，结合对比对齐生成可线性插值的跨模态嵌入。该框架打通表示学习与生成，使嵌入可被生成解码器直接使用，为多模态表示学习与生成一体化提供了新范式。",
+      "llm_tldr": "传统多模态表示学习与生成分两阶段进行，冻结嵌入限制了生成性能。本文提出FLAT预训练框架，将共享多模态编码器与文生图、图生文解码器联合优化，结合对比对齐生成可线性插值的跨模态嵌入。该框架打通表示学习与生成，使嵌入可被生成解码器直接使用，为多模态表示学习与生成一体化提供了新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.16689v1",
+      "source": "arxiv",
+      "title": "Efficient Quantization-Aware Distillation with Cross-Modal Alignment for Edge Vision-Language Models",
+      "abstract": "Large-scale vision-language models (VLM) such as CLIP enable strong open-vocabulary reasoning, yet deploying these capabilities on resource-constrained edge devices remains challenging. EdgeVL addresses this problem by distilling CLIP representations into lightweight multi-modal encoders and applying quantization-aware training (QAT) for efficient Open-Vocabulary Classification (OVC) on edge hardware. However, its two-stage optimization applies different objectives for distillation and QAT, and contrastive learning is performed within the quantized student space, which can result in inconsistent optimization and reduced training efficiency. Moreover, identical supervision across RGB and non-RGB modalities may lead to modality imbalance. We propose a unified framework for quantized semantic distillation tailored to edge deployment. By jointly optimizing distillation and quantization within a unified teacher-anchored framework, our method ensures consistent training under quantization, suppressing hard negatives and enlarging decision margins. Additionally, we design a lightweight cross-attention adapter that enhances non-RGB representations through RGB-guided semantic transfer, narrowing the modality gap. Extensive experiments demonstrate consistent improvements on non-RGB modalities while maintaining deployment efficiency.",
+      "authors": [
+        "Jinwoo Jeon",
+        "GyuYeop Do",
+        "Yubin Lim",
+        "Nam-Joon Kim",
+        "Hyun Gon Ryu",
+        "Hyuk-Jae Lee",
+        "Byung-Jun Lee"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-15T06:12:54+00:00",
+      "link": "https://arxiv.org/pdf/2609.16689v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment and modality imbalance in distillation",
+      "llm_evidence_cn": "蒸馏中的跨模态对齐与模态失衡",
+      "llm_evidence": "蒸馏中的跨模态对齐与模态失衡",
+      "canonical_evidence": "蒸馏中的跨模态对齐与模态失衡",
+      "llm_tldr_en": "Large vision-language models are hard to deploy on edge devices, and existing distillation plus quantization suffers inconsistent objectives and modality imbalance; this paper proposes quantization-aware distillation with cross-modal alignment to fix both.",
+      "llm_tldr_cn": "大型视觉语言模型难以在边缘设备部署，且现有蒸馏加量化方案存在优化目标不一致、不同模态监督相同导致模态失衡的问题。本文提出量化感知蒸馏与跨模态对齐方法，将CLIP表示蒸馏到轻量多模态编码器并做量化训练。实验表明该方案在开放词汇分类上兼顾效率与一致性。工作为跨模态对齐与模态不平衡问题提供了可迁移的解决思路。",
+      "llm_tldr": "大型视觉语言模型难以在边缘设备部署，且现有蒸馏加量化方案存在优化目标不一致、不同模态监督相同导致模态失衡的问题。本文提出量化感知蒸馏与跨模态对齐方法，将CLIP表示蒸馏到轻量多模态编码器并做量化训练。实验表明该方案在开放词汇分类上兼顾效率与一致性。工作为跨模态对齐与模态不平衡问题提供了可迁移的解决思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.17094v1",
+      "source": "arxiv",
+      "title": "Hub-Spectral Activation of Latent Multimodal Knowledge",
+      "abstract": "Multimodal representation learning seeks shared representations for cross-modal retrieval and knowledge transfer. Hub-based binding reduces pairwise supervision costs, but separate hub connections cannot guarantee reliable alignment between modalities without direct joint training. We introduce Hub-Spectral Activation (HSA), a closed-form method for recovering and activating the hub-readable component of latent multimodal knowledge in frozen representations. We formalize this knowledge as source-induced cross-modal dependence and characterize the component determined by the second-order statistics of two trained hub edges. Under a second-order source model, we establish conditions for exact recovery of the complete source-induced relation and bound the dimension of its hub-readable component by the hub covariance rank. HSA composes and standardizes hub-edge statistics, extracts paired spectral directions, and combines reliability-weighted matching evidence with source-gated candidate resolution for bidirectional retrieval and prototype classification. HSA requires no target-pair supervision, gradient optimization, or backbone updates. Across 19 retrieval and 11 prototype-classification relations on ImageBind and LanguageBind, HSA raises mean bidirectional Recall@10 from 18.27% to 31.15% and mean macro Top-1 accuracy from 29.01% to 52.43%, respectively. Controlled analyses further identify valid hub-edge correspondence and leading spectral directions as key sources of retrieval gains, demonstrating the utility of latent multimodal knowledge beyond native similarity scores. Code and models are publicly available at https://github.com/Luo1Yan/HSA.",
+      "authors": [
+        "Ying Guo",
+        "Haidong Chen",
+        "Linrui Xu",
+        "Xiaohao Liu",
+        "Chuancheng Shi",
+        "Canran Xiao",
+        "Dan Zhang",
+        "Fei Shen",
+        "Li Shen",
+        "Tat-Seng Chua"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-15T12:27:42+00:00",
+      "link": "https://arxiv.org/pdf/2609.17094v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal representation learning and cross-modal alignment via hub binding",
+      "llm_evidence_cn": "通过枢纽绑定实现多模态表示学习与跨模态对齐",
+      "llm_evidence": "通过枢纽绑定实现多模态表示学习与跨模态对齐",
+      "canonical_evidence": "通过枢纽绑定实现多模态表示学习与跨模态对齐",
+      "llm_tldr_en": "Proposes Hub-Spectral Activation, a closed-form method to recover hub-readable latent multimodal knowledge in frozen representations, formalizing cross-modal dependence and giving exact recovery conditions.",
+      "llm_tldr_cn": "针对多模态表示学习中基于枢纽的绑定难以保证跨模态可靠对齐的问题，本文提出枢纽谱激活（HSA）这一闭式方法，用于在冻结表示中恢复并激活枢纽可读的潜在多模态知识。作者将知识形式化为源诱导的跨模态依赖，并利用两条已训练枢纽边的二阶统计量刻画相应成分，在二阶源模型下给出完整源诱导关系精确恢复的条件及其维度上界。该工作为免联合训练的跨模态对齐提供了理论支撑与可复用工具。",
+      "llm_tldr": "针对多模态表示学习中基于枢纽的绑定难以保证跨模态可靠对齐的问题，本文提出枢纽谱激活（HSA）这一闭式方法，用于在冻结表示中恢复并激活枢纽可读的潜在多模态知识。作者将知识形式化为源诱导的跨模态依赖，并利用两条已训练枢纽边的二阶统计量刻画相应成分，在二阶源模型下给出完整源诱导关系精确恢复的条件及其维度上界。该工作为免联合训练的跨模态对齐提供了理论支撑与可复用工具。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.16847v1",
+      "source": "arxiv",
+      "title": "RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models",
+      "abstract": "Region-level retrieval aims to align user-specified image regions with relevant regions or textual descriptions, playing a crucial role in realworld applications such as e-commerce product search and RAG. Although recent Large Multimodal Models (LMMs) have made significant strides in multimodal retrieval, they primarily focus on global-level tasks and struggle to capture effective region-level representations. To bridge this gap, we present RegRet, an LMM-based Region-level Retrieval framework that enhances the regional representations without compromising overall global retrieval performance. At its core, RegRet integrates a Region-Aware Encoder to capture detailed regional features while balancing them with the global background context. To further enhance the fine-grained understanding and discriminability of representations, we design a multi-stage training pipeline that includes detailed localized captioning and regional contrastive learning tasks. In addition, considering the absence of region-level contrastive training data and the limited diversity of evaluation tasks in current benchmarks, we introduce the REGMB benchmark. It comprises 225k contrastive pairs, covering four multimodal retrieval tasks. Extensive experiments validate the effectiveness of our approach. RegRet outperforms strong baselines in the zero-shot setting. Further training with contrastive learning leads to an average improvement of more than 20\\% on both REGMB and public benchmarks, while achieving comparable or better results on global-level retrieval tasks.",
+      "authors": [
+        "Xun Liang",
+        "Honghui Yang",
+        "Weihang Pan",
+        "Ruisi Zhao",
+        "Boyuan Pan",
+        "Yao Hu",
+        "Wenxiao Wang",
+        "Binbin Lin",
+        "Deng Cai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.IR"
+      ],
+      "published": "2026-09-15T08:39:55+00:00",
+      "link": "https://arxiv.org/pdf/2609.16847v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "align image regions with textual descriptions, region-aware cross-modal alignment",
+      "llm_evidence_cn": "对齐图像区域与文本描述的区域级跨模态对齐",
+      "llm_evidence": "对齐图像区域与文本描述的区域级跨模态对齐",
+      "canonical_evidence": "对齐图像区域与文本描述的区域级跨模态对齐",
+      "llm_tldr_en": "Region-level retrieval is underserved by global-focused LMMs. RegRet adds a Region-Aware Encoder to align image regions with text while balancing global context, improving regional representations without hurting global retrieval.",
+      "llm_tldr_cn": "大型多模态模型在检索上多聚焦全局任务，难以捕获有效的区域级表示，限制了图像区域与文本描述的细粒度对齐。本文提出RegRet，一种基于LMM的区域级检索框架，引入区域感知编码器捕捉细节区域特征并与全局背景上下文平衡。实验表明该方法在不损害全局检索性能的前提下显著增强区域表示，服务电商搜索与RAG等应用。",
+      "llm_tldr": "大型多模态模型在检索上多聚焦全局任务，难以捕获有效的区域级表示，限制了图像区域与文本描述的细粒度对齐。本文提出RegRet，一种基于LMM的区域级检索框架，引入区域感知编码器捕捉细节区域特征并与全局背景上下文平衡。实验表明该方法在不损害全局检索性能的前提下显著增强区域表示，服务电商搜索与RAG等应用。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.16962v1",
+      "source": "arxiv",
+      "title": "Affect-Prototype Guided Fusion for Open-Vocabulary Incomplete Multi-modal Emotion Recognition",
+      "abstract": "Open-vocabulary multimodal emotion recognition (OV-MER) aims to generate open natural-language emotion labels from multimodal affective cues. In real-world scenarios, however, complete and synchronized modal data are difficult to obtain due to limitations of acquisition devices and user privacy constraints. Existing OV-MER methods are largely designed for full-modal inputs, and fail to perform effective feature fusion under modal missing conditions. Meanwhile, current fusion approaches designed for incomplete modalities mainly focus on fixed-label recognition context, and cannot satisfy the demand for fuse emotional cues guided with arbitrary emotion semantics in OV-MER context. To tackle these challenges, this paper proposes an Affect-Prototype-Conditioned Fusion (APCF) framework for incomplete open-vocabulary emotion recognition. As a candidate-free generative framework, APCF extends modal contribution learning to scenarios guided by arbitrary emotional semantics. Specifically, we construct an affect-prototype library to explicitly model multimodal contribution characteristics corresponding to diverse emotions, which provides dynamic constraints for modal fusion under different emotional semantic perspectives. Conditional retrieval and feature aggregation are conducted based on available modal features. The refined fused affective representations are then fed into an LLM decoder to produce open-vocabulary emotion labels. Experiments on the OV-MERD+ and MER-FG datasets demonstrate that APCF substantially outperforms state-of-the-art baselines.",
+      "authors": [
+        "Yichi Zhang",
+        "Shenyue Wang",
+        "Jing Luo",
+        "Chunyang Yu",
+        "Xinyu Yang"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-15T10:37:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.16962v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "feature fusion under missing modalities for multimodal recognition",
+      "llm_evidence_cn": "模态缺失条件下的多模态特征融合",
+      "llm_evidence": "模态缺失条件下的多模态特征融合",
+      "canonical_evidence": "模态缺失条件下的多模态特征融合",
+      "llm_tldr_en": "An affect-prototype guided fusion framework performs effective feature fusion under modal missing for open-vocabulary multimodal emotion recognition.",
+      "llm_tldr_cn": "开放词汇多模态情感识别需从多模态线索生成自然语言情感标签，但现实中设备与隐私限制常导致模态缺失，现有方法多为完整模态设计，难以在缺失下有效融合。本文提出情感原型引导的融合框架，利用任意情感语义引导缺失模态的特征融合。实验证明该方法在不完整输入下仍能进行开放词汇情感识别，推动了缺失模态融合与开放词汇任务的结合。",
+      "llm_tldr": "开放词汇多模态情感识别需从多模态线索生成自然语言情感标签，但现实中设备与隐私限制常导致模态缺失，现有方法多为完整模态设计，难以在缺失下有效融合。本文提出情感原型引导的融合框架，利用任意情感语义引导缺失模态的特征融合。实验证明该方法在不完整输入下仍能进行开放词汇情感识别，推动了缺失模态融合与开放词汇任务的结合。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.17524v1",
+      "source": "arxiv",
+      "title": "Modality-Autoregressive World-Action Models",
+      "abstract": "World-action models (WAMs) jointly model future observations and actions, typically predicting the future as RGB images. Other visual modalities such as depth, pretrained visual features, and point tracks can more efficiently capture geometric, semantic, and motion features. However, how best to combine these modalities within WAMs remains an open question. We introduce ModAR, the first WAM to autoregressively denoise multiple future modalities before predicting actions. This allows each prediction to condition on previously generated modalities. We train from scratch to systematically study how training-data mixtures, predicted modalities, and WAM formulations affect performance. In our evaluations, WAMs benefit from predicting point tracks, DINO features, and depth maps, while additionally predicting future RGB does not provide a consistent benefit. We also find that ModAR's sequential generation outperforms existing WAM formulations, with the highest average success rate at all evaluated data scales. We also fine-tune the video-model-initialized WAM Flex-$π$ on the same data; ModAR achieves a slightly higher observed average success rate (75% vs. 72%) while using approximately $20\\times$ fewer training FLOPs and no pretraining. On three real-world bimanual tasks, ModAR outperforms baselines and improves with human videos.",
+      "authors": [
+        "Adam Hung",
+        "Bardienus P. Duisterhof",
+        "Deva Ramanan",
+        "Jeffrey Ichnowski"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-15T17:56:24+00:00",
+      "link": "https://arxiv.org/pdf/2609.17524v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "combining multiple visual modalities in world-action models",
+      "llm_evidence_cn": "在世界动作模型中组合多种视觉模态",
+      "llm_evidence": "在世界动作模型中组合多种视觉模态",
+      "canonical_evidence": "在世界动作模型中组合多种视觉模态",
+      "llm_tldr_en": "World-action models typically predict future as RGB images. ModAR autoregressively denoises multiple future modalities (point tracks, DINO features, depth) before predicting actions, systematically studying how to combine modalities.",
+      "llm_tldr_cn": "世界动作模型通常以RGB图像预测未来，而深度、预训练视觉特征、点轨迹等模态能更高效地表达几何、语义与运动信息，但如何组合尚不明确。本文提出ModAR，首个在预测动作前自回归地去噪多种未来模态的世界动作模型，使每次预测都能条件化于先前生成的模态。从头训练的系统实验表明，预测点轨迹、DINO特征与深度图能提升性能，为多模态组合设计提供了实证指导。",
+      "llm_tldr": "世界动作模型通常以RGB图像预测未来，而深度、预训练视觉特征、点轨迹等模态能更高效地表达几何、语义与运动信息，但如何组合尚不明确。本文提出ModAR，首个在预测动作前自回归地去噪多种未来模态的世界动作模型，使每次预测都能条件化于先前生成的模态。从头训练的系统实验表明，预测点轨迹、DINO特征与深度图能提升性能，为多模态组合设计提供了实证指导。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18041v1",
+      "source": "arxiv",
+      "title": "Correlation-Guided Encoder Selection for Multi-Encoder Large Audio-Language Models",
+      "abstract": "Multi-encoder fusion extends Large Audio-Language Models (LALMs) beyond speech-centric recognition, but selecting encoders via intuition or exhaustive search often introduces redundant representations and inflates an already constrained compute budget. We propose CUES (Correlation-gUided Encoder Selection), a lightweight heuristic that estimates complementarity through task- and category-level Pearson correlations between encoders' performance profiles, scoring a candidate set from single-encoder evaluations alone--without fusion training during selection. Evaluated on the XARES-LLM benchmark with a frozen SmolLM2-135M backbone (LoRA-adapted) via five-fold cross-validation, CUES consistently identifies the same configuration per track from held-out development splits alone, without using test data for selection. For the broad Track~A suite, CUES selects a cross-family trio (Whisper-medium, mHuBERT-147, and Dasheng-base), achieving a 4.3% relative gain over Whisper-medium (0.771 vs. 0.739). For Track~B text generation, it re-anchors on a focused, speech-only pair (mHuBERT-147 and WavLM-base-plus) and actively abstains from adding a divergent encoder, outperforming mHuBERT-147 by 6.3% (0.589 vs. 0.554). Rather than a failure to scale, this divergence is consistent with a diversity--interference trade-off that CUES navigates per track from correlation signals alone: across the evaluated pool, added cross-family diversity tends toward an inverted-U on broad audio tasks but toward steady degradation on text generation, which favors a focused, speech-anchored set.",
+      "authors": [
+        "Pei-Jun Liao",
+        "Hung-Shin Lee",
+        "Wenze Ren",
+        "Kuo-Hsuan Hung",
+        "Hung-yi Lee",
+        "Hsin-Min Wang"
+      ],
+      "primary_category": "eess.AS",
+      "categories": [
+        "eess.AS",
+        "cs.CL",
+        "cs.SD"
+      ],
+      "published": "2026-09-16T02:41:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.18041v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multi-encoder fusion and encoder selection to reduce redundant representations",
+      "llm_evidence_cn": "多编码器融合与编码器选择以减少冗余表示",
+      "llm_evidence": "多编码器融合与编码器选择以减少冗余表示",
+      "canonical_evidence": "多编码器融合与编码器选择以减少冗余表示",
+      "llm_tldr_en": "Proposes CUES, a correlation-guided heuristic that scores encoder complementarity from single-encoder evaluations alone, selecting fusion configurations without fusion training and reducing redundancy in audio-language models.",
+      "llm_tldr_cn": "针对多编码器融合中凭直觉或穷举选择编码器易引入冗余表示、加重算力负担的问题，本文提出CUES这一相关性引导的轻量启发式方法。它通过任务级与类别级的Pearson相关估计编码器互补性，仅凭单编码器评测即可为候选集合打分，无需在选型时进行融合训练。在XARES-LLM基准上以冻结SmolLM2-135M主干进行五折交叉验证，CUES能稳定识别各赛道一致的最优配置。该工作为多模态融合的编码器选择提供了高效可复用方案。",
+      "llm_tldr": "针对多编码器融合中凭直觉或穷举选择编码器易引入冗余表示、加重算力负担的问题，本文提出CUES这一相关性引导的轻量启发式方法。它通过任务级与类别级的Pearson相关估计编码器互补性，仅凭单编码器评测即可为候选集合打分，无需在选型时进行融合训练。在XARES-LLM基准上以冻结SmolLM2-135M主干进行五折交叉验证，CUES能稳定识别各赛道一致的最优配置。该工作为多模态融合的编码器选择提供了高效可复用方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18124v1",
+      "source": "arxiv",
+      "title": "Aligned Consensus Teaching for Label-Efficient Oriented Object Detection in Weakly-Aligned Visible-Infrared Imagery",
+      "abstract": "Visible-infrared object detection (VIOD) detects objects with oriented bounding boxes from paired visible and infrared images. Existing methods depend on costly dual-modality annotations. Semi-supervised learning can reduce this burden, but extending it from single-modal detection to VIOD is challenging. In the practical image-pair-level setting considered here, only a few pairs are labeled in both modalities, while the rest are completely unlabeled. This limited supervision creates three challenges: (i) too few labeled boxes for robust cross-modal alignment; (ii) pseudo-label errors caused by branch-wise misses accumulate during self-training; and (iii) tail-class annotations become critically scarce as the labeling budget decreases. We propose Aligned Consensus Teacher (ACT) for label-efficient VIOD in this setting. Its Cycle-Consistent Region Alignment (CRA) combines cycle consistency and sparse anchors with reliability-weighted regional matching. Cross-Modal Consensus Mean-Teacher (CMC-MT) forms consensus pseudo labels under pair-preserving views to recover branch-wise misses and supervise unlabeled pairs. Text-Guided Cross-Modal Instance Augmentation (TG-CMIA) uses a vision-language scene prior to compose tail-class instance pairs while preserving RGB--IR offsets. To the best of our knowledge, ACT is the first framework to study semi-supervised VIOD under this image-pair-level setting. Experiments on DroneVehicle and VEDAI show consistent gains across annotation ratios. With 10\\% labeled pairs on DroneVehicle, ACT reaches 94.3\\% of the mAP obtained by the same detector under full supervision. Code and models will be available on GitHub to facilitate future work.",
+      "authors": [
+        "Qi Ming",
+        "Xiaxin Yuan",
+        "Jiahuan Zhou",
+        "Jiangmeng Li",
+        "Xudong Zhao",
+        "Zhanchao Huang",
+        "Juan Fang",
+        "Shaoguang Huang",
+        "Aleksandra Pizurica"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-16T04:59:37+00:00",
+      "link": "https://arxiv.org/pdf/2609.18124v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment between visible and infrared modalities under limited supervision",
+      "llm_evidence_cn": "弱监督下可见光与红外模态的跨模态对齐",
+      "llm_evidence": "弱监督下可见光与红外模态的跨模态对齐",
+      "canonical_evidence": "弱监督下可见光与红外模态的跨模态对齐",
+      "llm_tldr_en": "Visible-infrared object detection needs costly dual-modality annotations. Under image-pair-level semi-supervision, Aligned Consensus Teaching performs cross-modal alignment and collaborative self-training to reduce pseudo-label errors and improve tail-class detection.",
+      "llm_tldr_cn": "可见光-红外目标检测需在成对图像上用旋转框定位目标，但双模态标注成本高昂。论文研究图像对级半监督设置，仅有少量图像对双模态标注而其余完全无标注，导致跨模态对齐样本不足、伪标签误差累积以及尾类标注稀缺。作者提出对齐共识教学框架，通过跨模态对齐与协同自训练缓解上述问题。该方法提升了标注高效场景下的可见光-红外目标检测性能。",
+      "llm_tldr": "可见光-红外目标检测需在成对图像上用旋转框定位目标，但双模态标注成本高昂。论文研究图像对级半监督设置，仅有少量图像对双模态标注而其余完全无标注，导致跨模态对齐样本不足、伪标签误差累积以及尾类标注稀缺。作者提出对齐共识教学框架，通过跨模态对齐与协同自训练缓解上述问题。该方法提升了标注高效场景下的可见光-红外目标检测性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18404v1",
+      "source": "arxiv",
+      "title": "Multimodal Aspect-Level Sentiment Analysis Based on Gated Noise Filtering and Emotion-Relevance Interaction",
+      "abstract": "Multimodal Aspect-Based Sentiment Analysis (MABSA) infers fine-grained sentiment polarity toward specific aspects by jointly modeling text and images. Despite progress in cross-modal fusion, two challenges remain in multi-aspect settings: (1) multimodal noise, where aspect-irrelevant content distracts sentiment learning; and (2) weak cross-modal sentiment alignment, as visual evidence can be ambiguous and textual--visual sentiments may conflict, limiting multimodal complementarity. To address these issues, we propose a Gated Noise-filtered Sentiment-Relevance Interaction (GNSRI) framework. It employs a gated noise-filtering module to suppress sentiment-irrelevant features and enhance aspect-aware sentiment cues, and a sentiment-relevance interaction module to capture consistent and conflicting cross-modal signals at micro and macro levels. Finally, a learnable decision fusion mechanism adaptively combines predictions from textual, visual, and cross-modal branches at the aspect level. Experiments on public MABSA benchmarks show that GNSRI outperforms state-of-the-art methods, improving accuracy by 1.94\\% and 2.06\\% on Twitter-2015 and Twitter-2017, respectively.",
+      "authors": [
+        "Chen Huang",
+        "Liangwei Guo",
+        "Yamin Li",
+        "Yan Zhang",
+        "Chao Yang",
+        "Li Yang",
+        "Jianhua Song"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM"
+      ],
+      "published": "2026-09-16T09:58:36+00:00",
+      "link": "https://arxiv.org/pdf/2609.18404v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal fusion of text and images with gated interaction",
+      "llm_evidence_cn": "图文跨模态融合与门控交互",
+      "llm_evidence": "图文跨模态融合与门控交互",
+      "canonical_evidence": "图文跨模态融合与门控交互",
+      "llm_tldr_en": "Proposes GNSRI, a gated noise-filtered sentiment-relevance interaction framework that suppresses aspect-irrelevant multimodal features and strengthens cross-modal sentiment alignment for multimodal aspect-based sentiment analysis.",
+      "llm_tldr_cn": "该文关注多模态方面级情感分析中多模态噪声干扰与跨模态情感对齐薄弱的问题，提出门控噪声过滤与情感相关性交互（GNSRI）框架。方法通过门控噪声过滤模块抑制与情感无关的特征，并增强方面感知的情感线索，同时强化文本与图像间的相关性交互。实验表明该框架能缓解视觉歧义与情感冲突，提升多模态互补性，为细粒度图文情感分析提供了有效方案。",
+      "llm_tldr": "该文关注多模态方面级情感分析中多模态噪声干扰与跨模态情感对齐薄弱的问题，提出门控噪声过滤与情感相关性交互（GNSRI）框架。方法通过门控噪声过滤模块抑制与情感无关的特征，并增强方面感知的情感线索，同时强化文本与图像间的相关性交互。实验表明该框架能缓解视觉歧义与情感冲突，提升多模态互补性，为细粒度图文情感分析提供了有效方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.18470v1",
+      "source": "arxiv",
+      "title": "Divide and Conquer: Mixture-of-Bottleneck Experts in Informative Ordinal Space for Video-based Multimodal Sentiment Analysis",
+      "abstract": "Video-based Multimodal sentiment analysis (MSA) must handle information from text, audio, and image sequence in human speaking videos, yet current methods often fail to integrate modalities with task awareness. Most models treat video sentiment prediction as a single task, overlooking its ordinal nature, and their fusion strategies struggle to capture diverse unique and synergic cues across modalities. To address these limitations, we adopt a divide-and-conquer perspective by reformulating MSA as an ordinal regression problem and decoupling it into polarity recognition and intensity prediction. Driven by information theory, we introduce a Mixture-of-Bottleneck (MoB) framework that assigns different latents to polarity- and intensity-specific experts for different modalities. With the learning of information bottleneck, each expert learns compact and task-relevant representations while filtering out redundancy and noise. A multimodal bottleneck routing fusion module then fuses these expert latents with hard mining strategy, guiding the prediction in the ordinal sentiment space. Extensive experiments on 4 MSA datasets and 4 language models show that MoB effectively leverages informative latents from diverse modalities and captures general sentiment structure. Beyond stronger performance, MoB comprehensively captures fine-grained intra- and inter-modal dynamics, enabling more trustworthy localization of nuanced video sentiment signals.",
+      "authors": [
+        "Ronghao Lin",
+        "Qiaolin He",
+        "Zefeng Lu",
+        "Yichu Liu",
+        "Li Huang",
+        "Sijie Mai",
+        "Haifeng Hu",
+        "Yap-peng Tan"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.CL"
+      ],
+      "published": "2026-09-16T11:04:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.18470v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "mixture-of-bottleneck modality fusion for video sentiment",
+      "llm_evidence_cn": "面向视频情感分析的瓶颈专家混合模态融合",
+      "llm_evidence": "面向视频情感分析的瓶颈专家混合模态融合",
+      "canonical_evidence": "面向视频情感分析的瓶颈专家混合模态融合",
+      "llm_tldr_en": "Reformulates video multimodal sentiment analysis as ordinal regression and proposes a Mixture-of-Bottleneck framework for task-aware modality fusion, capturing unique and synergistic cues across text, audio and image.",
+      "llm_tldr_cn": "视频多模态情感分析需融合文本、音频与图像序列信息，但现有方法常缺乏任务感知的融合且忽略情感的序数性质。该文将情感分析重构为序数回归问题，分解为极性识别与强度预测，并提出基于信息论的瓶颈专家混合（MoB）框架为不同模态分配差异化处理。实验证明该框架能更好捕获模态间的独特与协同线索，提升视频情感预测效果。",
+      "llm_tldr": "视频多模态情感分析需融合文本、音频与图像序列信息，但现有方法常缺乏任务感知的融合且忽略情感的序数性质。该文将情感分析重构为序数回归问题，分解为极性识别与强度预测，并提出基于信息论的瓶颈专家混合（MoB）框架为不同模态分配差异化处理。实验证明该框架能更好捕获模态间的独特与协同线索，提升视频情感预测效果。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

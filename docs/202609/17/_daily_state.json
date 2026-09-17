@@ -1,0 +1,169 @@
+{
+  "date": "20260917",
+  "date_label": "",
+  "generated_at": "2026-09-17 22:32:08 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.16591v1",
+      "route": "202609/17/2609.16591v1-flat-resampling-image-and-text-into-1d-flexible-length-aligned-transmodal-tokens-for-retrieval-and-generation",
+      "title": "FLAT: Resampling Image and Text into 1D Flexible-Length Aligned Transmodal Tokens for Retrieval and Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "联合多模态表示学习与对比对齐",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.17094v1",
+      "route": "202609/17/2609.17094v1-hub-spectral-activation-of-latent-multimodal-knowledge",
+      "title": "Hub-Spectral Activation of Latent Multimodal Knowledge",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "通过枢纽绑定实现多模态表示学习与跨模态对齐",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.16689v1",
+      "route": "202609/17/2609.16689v1-efficient-quantization-aware-distillation-with-cross-modal-alignment-for-edge-vision-language-models",
+      "title": "Efficient Quantization-Aware Distillation with Cross-Modal Alignment for Edge Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "蒸馏中的跨模态对齐与模态失衡",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.16847v1",
+      "route": "202609/17/2609.16847v1-regret-enhancing-region-level-retrieval-in-large-multimodal-models",
+      "title": "RegRet: Enhancing Region-Level Retrieval in Large Multimodal Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对齐图像区域与文本描述的区域级跨模态对齐",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.16962v1",
+      "route": "202609/17/2609.16962v1-affect-prototype-guided-fusion-for-open-vocabulary-incomplete-multi-modal-emotion-recognition",
+      "title": "Affect-Prototype Guided Fusion for Open-Vocabulary Incomplete Multi-modal Emotion Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "模态缺失条件下的多模态特征融合",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.17524v1",
+      "route": "202609/17/2609.17524v1-modality-autoregressive-world-action-models",
+      "title": "Modality-Autoregressive World-Action Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在世界动作模型中组合多种视觉模态",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.18041v1",
+      "route": "202609/17/2609.18041v1-correlation-guided-encoder-selection-for-multi-encoder-large-audio-language-models",
+      "title": "Correlation-Guided Encoder Selection for Multi-Encoder Large Audio-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多编码器融合与编码器选择以减少冗余表示",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.18124v1",
+      "route": "202609/17/2609.18124v1-aligned-consensus-teaching-for-label-efficient-oriented-object-detection-in-weakly-aligned-visible-infrared-imagery",
+      "title": "Aligned Consensus Teaching for Label-Efficient Oriented Object Detection in Weakly-Aligned Visible-Infrared Imagery",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "弱监督下可见光与红外模态的跨模态对齐",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.18404v1",
+      "route": "202609/17/2609.18404v1-multimodal-aspect-level-sentiment-analysis-based-on-gated-noise-filtering-and-emotion-relevance-interaction",
+      "title": "Multimodal Aspect-Level Sentiment Analysis Based on Gated Noise Filtering and Emotion-Relevance Interaction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "图文跨模态融合与门控交互",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    },
+    {
+      "paper_id": "2609.18470v1",
+      "route": "202609/17/2609.18470v1-divide-and-conquer-mixture-of-bottleneck-experts-in-informative-ordinal-space-for-video-based-multimodal-sentiment-analysis",
+      "title": "Divide and Conquer: Mixture-of-Bottleneck Experts in Informative Ordinal Space for Video-based Multimodal Sentiment Analysis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向视频情感分析的瓶颈专家混合模态融合",
+      "first_seen_at": "2026-09-17 22:32:08 UTC",
+      "updated_at": "2026-09-17 22:32:08 UTC"
+    }
+  ]
+}
