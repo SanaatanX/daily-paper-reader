@@ -1,0 +1,257 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-18T22:05:10.921806+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.19878v1",
+      "source": "arxiv",
+      "title": "Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning",
+      "abstract": "Multimodal reasoning requires models to draw on information from multiple modalities throughout the reasoning process. Yet existing methods often concatenate modality-specific thought tokens in a single sequence, leaving the model to bridge representational differences as it reasons across modalities. We introduce Uni-LaDiR (Unified Latent Diffusion Reasoner), a framework that brings these thoughts into a shared latent space for reasoning. A unified encoder maps teacher reasoning steps from different modalities into shared thought tokens, trained to preserve the information needed for later reasoning steps and the final answer or action. Because the same context can support multiple valid next steps, we use diffusion to predict the next block of thought tokens from the input and preceding blocks. Jointly training the encoder and diffusion reasoner with shared model weights encourages thought tokens to be both useful for the task and predictable from the available context. At inference, the model generates these tokens without teacher observations. Across eleven vision-language model (VLM) benchmarks and two vision-language-action (VLA) suites, Uni-LaDiR achieves relative gains over the strongest evaluated baselines of 7.3% on visual reasoning tasks and 6.1% on robot manipulation tasks.",
+      "authors": [
+        "Haoqiang Kang",
+        "Yizhe Zhang",
+        "Nikki Lijing Kuang",
+        "Yian Ma",
+        "Lianhui Qin"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-09-17T08:28:18+00:00",
+      "link": "https://arxiv.org/pdf/2609.19878v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "maps multimodal thoughts into a shared latent space for multimodal reasoning",
+      "llm_evidence_cn": "将多模态思维映射到共享潜在空间进行多模态推理",
+      "llm_evidence": "将多模态思维映射到共享潜在空间进行多模态推理",
+      "canonical_evidence": "将多模态思维映射到共享潜在空间进行多模态推理",
+      "llm_tldr_en": "Multimodal reasoning methods often concatenate modality-specific thought tokens, forcing the model to bridge representational differences. Uni-LaDiR maps reasoning steps into shared latent thought tokens and uses diffusion to predict the next block, unifying cross-modal reasoning.",
+      "llm_tldr_cn": "现有多模态推理方法常把各模态的思维标记简单拼接成单一序列，迫使模型自行弥合表示差异，跨模态融合并不充分。作者提出Uni-LaDiR，将不同模态的教师推理步骤映射为共享潜在空间中的思维标记，并用扩散模型预测下一块思维标记。该框架统一了跨模态推理表示，实验表明其能更有效地融合多模态信息并提升推理与动作预测表现，为多模态表示学习提供新思路。",
+      "llm_tldr": "现有多模态推理方法常把各模态的思维标记简单拼接成单一序列，迫使模型自行弥合表示差异，跨模态融合并不充分。作者提出Uni-LaDiR，将不同模态的教师推理步骤映射为共享潜在空间中的思维标记，并用扩散模型预测下一块思维标记。该框架统一了跨模态推理表示，实验表明其能更有效地融合多模态信息并提升推理与动作预测表现，为多模态表示学习提供新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.15640v1",
+      "source": "arxiv",
+      "title": "Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models",
+      "abstract": "Long-text image--text congruence scoring is increasingly important for vision-language systems that must evaluate whether detailed textual descriptions match visual content. However, raw similarity scores from dual-encoder models are difficult to interpret as calibrated congruence measures, especially under the modality gap between image and text embeddings. This paper proposes Congruency Score (CS), a lightweight calibration layer that maps image--text similarity evidence into a bounded score. Using DOCCI and Urban1k, we evaluate four frozen vision-language backbones and show that observed reductions in post-projection centroid distance do not uniformly improve image--text retrieval performance. Human-grounded evaluations on DOCCI further reveal a trade-off: direct post-hoc calibration preserves high association with human judgments, whereas selected projection-based configurations can reduce threshold-relevant slope and intercept distortions at the cost of retrieval performance and association strength. These results establish long-text image--text congruence scoring as a calibrated score-estimation problem, where retrieval performance, human association, and threshold calibration must be evaluated as distinct objectives. CS provides a lightweight way to expose and operationalize this separation.",
+      "authors": [
+        "Alessandro Gambetti",
+        "Qiwei Han"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.CL"
+      ],
+      "published": "2026-09-14T14:26:53+00:00",
+      "link": "https://arxiv.org/pdf/2609.15640v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "calibrating image-text similarity and cross-modal embedding gap",
+      "llm_evidence_cn": "校准图文相似度与跨模态嵌入差距",
+      "llm_evidence": "校准图文相似度与跨模态嵌入差距",
+      "canonical_evidence": "校准图文相似度与跨模态嵌入差距",
+      "llm_tldr_en": "Raw similarity scores from dual-encoder VLMs are hard to interpret as calibrated image-text congruence, especially under the modality gap. This paper proposes Congruency Score, a lightweight calibration layer, evaluated on DOCCI and Urban1k with human-grounded judgments.",
+      "llm_tldr_cn": "双编码器视觉语言模型的原始相似度难以直接解释为校准后的图文一致性度量，尤其在图像与文本嵌入存在模态鸿沟时。作者提出一致性分数CS，一种轻量校准层，将图文相似度证据映射为有界分数，并在DOCCI与Urban1k上用四个冻结视觉语言骨干进行评估。结果表明投影后质心距离的缩小并不总带来检索性能提升，强调需要基于人类的校准评估跨模态对齐质量。",
+      "llm_tldr": "双编码器视觉语言模型的原始相似度难以直接解释为校准后的图文一致性度量，尤其在图像与文本嵌入存在模态鸿沟时。作者提出一致性分数CS，一种轻量校准层，将图文相似度证据映射为有界分数，并在DOCCI与Urban1k上用四个冻结视觉语言骨干进行评估。结果表明投影后质心距离的缩小并不总带来检索性能提升，强调需要基于人类的校准评估跨模态对齐质量。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.16535v1",
+      "source": "arxiv",
+      "title": "Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation",
+      "abstract": "Emergency vehicle detection in autonomous driving is a safety-critical perception task that demands robustness under diverse and adverse real-world conditions. Existing approaches rely on a single modality, either audio or video, which leads to systematic failure when that modality is degraded: microphone-based systems fail in noisy urban environments, and camera-based systems fail at night or under occlusion. This report presents AVNet, a multimodal audio-visual transformer that classifies emergency vehicles (ambulance, fire engine, police car) and road background using both audio and video, while gracefully handling the absence of either modality at inference time. AVNet introduces three key contributions: (1) a temporally aligned cross-modal fusion module that performs second-level cross-attention between audio spectrogram tokens and video frame tokens, exploiting their exact temporal correspondence without any learned alignment mechanism; (2) learned null embeddings that substitute for missing modality tokens, enabling a single unified model to operate in audio-only, video-only, or joint audio-visual mode without retraining; and (3) a knowledge distillation training strategy in which specialist unimodal teacher models transfer inter-class dark knowledge into the multimodal student fusion branch via soft probability targets. Evaluated on 281 clips from the Google AudioSet dataset, AVNet achieves 66.6% overall accuracy in audio-visual mode, outperforming the audio-only branch by +10.4% and the video-only branch by +15.0%. The largest per-class gain is observed for the hardest class, Ambulance, where fusion achieves +29.5% over either unimodal branch alone, demonstrating that the two modalities provide complementary information that the aligned cross attention mechanism successfully exploits.",
+      "authors": [
+        "Vijay John",
+        "Amar Dabaja"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.SD"
+      ],
+      "published": "2026-09-15T02:34:07+00:00",
+      "link": "https://arxiv.org/pdf/2609.16535v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal audio-visual transformer fusing two modalities and handling missing modality",
+      "llm_evidence_cn": "融合音频与视频并处理模态缺失的多模态Transformer",
+      "llm_evidence": "融合音频与视频并处理模态缺失的多模态Transformer",
+      "canonical_evidence": "融合音频与视频并处理模态缺失的多模态Transformer",
+      "llm_tldr_en": "Single-modality emergency vehicle detection fails when audio or video degrades. AVNet is a multimodal audio-visual transformer that fuses both modalities and gracefully handles the absence of either at inference time, improving robustness in adverse conditions.",
+      "llm_tldr_cn": "自动驾驶中的紧急车辆检测在单模态下易失效，麦克风在嘈杂环境、摄像头在夜间或遮挡时均会出错。本文提出AVNet，一种融合音频与视频的多模态Transformer，可分类救护车、消防车、警车及背景，并在推理时优雅处理任一模态缺失的情况。该工作通过多模态融合提升安全关键感知任务在恶劣条件下的鲁棒性。",
+      "llm_tldr": "自动驾驶中的紧急车辆检测在单模态下易失效，麦克风在嘈杂环境、摄像头在夜间或遮挡时均会出错。本文提出AVNet，一种融合音频与视频的多模态Transformer，可分类救护车、消防车、警车及背景，并在推理时优雅处理任一模态缺失的情况。该工作通过多模态融合提升安全关键感知任务在恶劣条件下的鲁棒性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.16811v1",
+      "source": "arxiv",
+      "title": "Hyper-RED: Scalable Event Pre-training via Semantic Hypergraph Distillation",
+      "abstract": "Event cameras have shown great potential for robust visual perception, yet scaling event representation learning remains challenging due to the scarcity of large-scale annotated event data. Pretrained image models provide scalable semantic supervision, but existing image-to-event methods rely on rigid pixel-wise or token-wise alignment that overlooks modality discrepancies in texture, density, and appearance, potentially causing semantic collapse and limiting transferability. To address this issue, we propose Hyper-RED, a simple, painless, and scalable image-to-event pretraining framework that transfers high-order semantic structures from images to events. Hyper-RED uses hypergraphs to model and align high-order semantic associations among multiple image and event tokens, enabling cross-modal knowledge transfer while accommodating modality-specific differences rather than enforcing rigid one-to-one correspondence. Specifically, given a paired event--image sample, Hyper-RED leverages DINOv3 to extract spatial token representations and constructs image, event, and cross-modal semantic hypergraphs, where each hyperedge connects multiple semantically correlated tokens. We further introduce a hypergraph relational distillation loss that imposes complementary intra- and cross-modal constraints, enabling the event encoder to inherit image-derived semantic organization while preserving local relational consistency and event-specific characteristics. Experiments on three tasks across five event datasets demonstrate consistent scaling from ViT-S to ViT-L and state-of-the-art performance (Fig.1). The code is available at: https://github.com/meisenwang/Hyper--RED.",
+      "authors": [
+        "Meisen Wang",
+        "Zhiqiang Tian",
+        "Wei Bao",
+        "Chengjie Wang",
+        "Shaoyi Du",
+        "Siqi Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-15T08:17:37+00:00",
+      "link": "https://arxiv.org/pdf/2609.16811v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment of high-order semantics between image and event modalities",
+      "llm_evidence_cn": "图像与事件模态间的高阶语义跨模态对齐",
+      "llm_evidence": "图像与事件模态间的高阶语义跨模态对齐",
+      "canonical_evidence": "图像与事件模态间的高阶语义跨模态对齐",
+      "llm_tldr_en": "Hyper-RED tackles scarce event data and rigid image-to-event alignment by using hypergraphs to transfer high-order semantic structures from images to events, enabling scalable cross-modal pretraining with improved transferability.",
+      "llm_tldr_cn": "事件相机的表示学习长期受限于大规模标注数据稀缺，而现有图像到事件预训练依赖像素或词元级刚性对齐，忽略纹理、密度等模态差异，易导致语义崩塌。为此提出Hyper-RED框架，利用超图建模并对齐图像与事件之间的高阶语义关联，实现简单可扩展的图像到事件预训练。实验表明该方法能缓解语义崩塌并提升迁移性，为跨模态高阶语义对齐式表示学习提供了通用思路。",
+      "llm_tldr": "事件相机的表示学习长期受限于大规模标注数据稀缺，而现有图像到事件预训练依赖像素或词元级刚性对齐，忽略纹理、密度等模态差异，易导致语义崩塌。为此提出Hyper-RED框架，利用超图建模并对齐图像与事件之间的高阶语义关联，实现简单可扩展的图像到事件预训练。实验表明该方法能缓解语义崩塌并提升迁移性，为跨模态高阶语义对齐式表示学习提供了通用思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.19417v1",
+      "source": "arxiv",
+      "title": "Less Is More: Graph-free Multimodal RAG via Multi-signal Late Fusion",
+      "abstract": "Graph-based retrieval-augmented generation (RAG) is widely used for multimodal, cross-document question answering. However, building corpus-level graphs is expensive, slow to query, and difficult to maintain. We present TrioRAG, a graph-free multimodal framework that integrates evidence from three complementary signals: the question, the anchor image, and a VLM-enhanced query generated from both. Each signal retrieves independently over a shared multi-vector index of page text and page images, and the results are combined through late fusion. Further, we introduce AutoQA, a multimodal automotive benchmark whose questions are grounded in noisy, web-sourced images rather than clean document-sourced figures. Its questions require reasoning across manuals. We position it as a model-curated testbed rather than a human-validated gold standard. Across three benchmarks, TrioRAG matches or outperforms graph-based systems while reducing total cost and accelerating per-query inference by 1.6-2.3 times. By construction, AutoQA grounds its questions in out-of-corpus web images. In this setting image retrieval reaches only 19.3% document-level recall, while text-derived signals, especially the VLM-enhanced query, keep retrieval robust.",
+      "authors": [
+        "Tithi Rakshit",
+        "Hongkuan Zhou",
+        "Lavdim Halilaj",
+        "Yuqicheng Zhu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-16T20:54:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.19417v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "graph-free multimodal RAG combining question, image and text signals via late fusion",
+      "llm_evidence_cn": "通过后融合组合问题、图像与文本信号的无图多模态RAG",
+      "llm_evidence": "通过后融合组合问题、图像与文本信号的无图多模态RAG",
+      "canonical_evidence": "通过后融合组合问题、图像与文本信号的无图多模态RAG",
+      "llm_tldr_en": "Graph-based multimodal RAG is costly and slow. TrioRAG is a graph-free framework fusing three signals, question, anchor image and a VLM-enhanced query, over a shared multi-vector index of page text and images via late fusion, plus the AutoQA benchmark.",
+      "llm_tldr_cn": "基于图的多模态检索增强生成构建成本高、查询慢且难维护。本文提出TrioRAG，一种无图框架，融合问题、锚点图像以及由二者生成的VLM增强查询三种互补信号，各自在共享的页面文本与图像多向量索引上检索，再通过后融合合并结果。同时发布AutoQA多模态汽车领域基准，其问题基于含噪网络图像并需跨手册推理。",
+      "llm_tldr": "基于图的多模态检索增强生成构建成本高、查询慢且难维护。本文提出TrioRAG，一种无图框架，融合问题、锚点图像以及由二者生成的VLM增强查询三种互补信号，各自在共享的页面文本与图像多向量索引上检索，再通过后融合合并结果。同时发布AutoQA多模态汽车领域基准，其问题基于含噪网络图像并需跨手册推理。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.19826v1",
+      "source": "arxiv",
+      "title": "Consensus-Guided Shared-Specific Tri-View Learning for Speech Emotion Recognition",
+      "abstract": "Speech emotion recognition (SER) benefits from heterogeneous acoustic representations, but views derived from the same utterance contain both overlapping emotional evidence and representation-dependent cues. Direct fusion may therefore propagate redundant information or obscure complementary details. To address this issue, we propose Tri-view Consensus-Guided Fusion (TriCGF) for jointly modeling spectrogram, Mel-frequency cepstral coefficients, and HuBERT representations. TriCGF organizes each view into common and view-specific components before fusion. Cross-view Consensus Learning aggregates the common components into a global reference, while View-wise Gated Integration adaptively combines this reference with each view-specific component. A soft difference regularizer further discourages excessive information overlap. Under speaker-independent evaluation, TriCGF achieves 74.19% weighted accuracy (WA) and 75.17% unweighted accuracy (UA) on IEMOCAP, and 94.36% WA and 94.28% UA on EmoDB, outperforming representative SER methods on both datasets.",
+      "authors": [
+        "Bing Huang",
+        "Yujian Ma",
+        "Xikun Lu",
+        "Xianquan Jiang",
+        "Jinqiu Sang"
+      ],
+      "primary_category": "eess.AS",
+      "categories": [
+        "eess.AS"
+      ],
+      "published": "2026-09-17T07:32:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.19826v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "shared-specific decomposition and consensus-guided multimodal fusion",
+      "llm_evidence_cn": "共享-特异分解与共识引导的多模态融合",
+      "llm_evidence": "共享-特异分解与共识引导的多模态融合",
+      "canonical_evidence": "共享-特异分解与共识引导的多模态融合",
+      "llm_tldr_en": "Speech emotion recognition from same-utterance views risks propagating redundant cues and obscuring complementary detail during direct fusion. TriCGF decomposes each view into common and view-specific components, aggregates commons via cross-view consensus learning, and adaptively integrates them with view-wise gated fusion.",
+      "llm_tldr_cn": "针对语音情感识别中同源多视图表示直接融合会传播冗余信息、掩盖互补细节的问题，本文提出三视图共识引导融合方法TriCGF，将各视图分解为公共与特异分量，通过跨视图共识学习聚合公共信息，并用视图门控整合特异分量。实验表明该方法能有效整合频谱图、MFCC与HuBERT表示，提升情感识别性能。",
+      "llm_tldr": "针对语音情感识别中同源多视图表示直接融合会传播冗余信息、掩盖互补细节的问题，本文提出三视图共识引导融合方法TriCGF，将各视图分解为公共与特异分量，通过跨视图共识学习聚合公共信息，并用视图门控整合特异分量。实验表明该方法能有效整合频谱图、MFCC与HuBERT表示，提升情感识别性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-17</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-18</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 6 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-17 22:32:08 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-18 22:07:37 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今天速读10篇多模态论文、精读0篇，焦点集中在跨模态对齐、检索生成与潜在知识激活。</p>
-<p>最值得看的是两篇7.0分工作：FLAT用1D可变长对齐token统一图文检索与生成，Hub-Spectral Activation关注潜在多模态知识激活。</p>
-<p>普通读者可先看这两篇的摘要和图表，若关心边缘视觉语言模型，再补看6.0分的量化感知蒸馏与跨模态对齐研究。</p>
+<p>今日速读6篇、精读0，已列出的3篇全聚焦多模态，Uni-LaDiR以7.0分领跑。</p>
+<p>最值得看“潜扩散统一多模态推理”，其次是“视觉语言模型长文本图文一致性校准”。</p>
+<p>普通读者可先读7分那篇的摘要与结论，再顺带了解多模态评测和音视频分类的应用。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="FLAT: Resampling Image and Text into 1D Flexible-Length Aligned Transmodal Tokens for Retrieval and Generation">FLAT: Resampling Image and Text into 1D Flexible-Length Aligned Transmodal Tokens for Retrieval and Generation</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hub-Spectral Activation of Latent Multimodal Knowledge">Hub-Spectral Activation of Latent Multimodal Knowledge</span></li><li><span class="dpr-home-dashboard-paper-title" title="Efficient Quantization-Aware Distillation with Cross-Modal Alignment for Edge Vision-Language Models">Efficient Quantization-Aware Distillation with Cross-Modal Alignment for Edge Vision-Language Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning">Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models">Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation">Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
 </section>
 </div>
 

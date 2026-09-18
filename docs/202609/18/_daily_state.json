@@ -1,0 +1,105 @@
+{
+  "date": "20260918",
+  "date_label": "",
+  "generated_at": "2026-09-18 22:07:37 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.19878v1",
+      "route": "202609/18/2609.19878v1-uni-ladir-latent-diffusion-unifies-multimodal-reasoning",
+      "title": "Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "将多模态思维映射到共享潜在空间进行多模态推理",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    },
+    {
+      "paper_id": "2609.15640v1",
+      "route": "202609/18/2609.15640v1-human-grounded-calibration-for-long-text-image-text-congruence-in-vision-language-models",
+      "title": "Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "校准图文相似度与跨模态嵌入差距",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    },
+    {
+      "paper_id": "2609.16535v1",
+      "route": "202609/18/2609.16535v1-multimodal-emergency-vehicle-classification-via-audio-visual-transformers-and-knowledge-distillation",
+      "title": "Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合音频与视频并处理模态缺失的多模态Transformer",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    },
+    {
+      "paper_id": "2609.16811v1",
+      "route": "202609/18/2609.16811v1-hyper-red-scalable-event-pre-training-via-semantic-hypergraph-distillation",
+      "title": "Hyper-RED: Scalable Event Pre-training via Semantic Hypergraph Distillation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "图像与事件模态间的高阶语义跨模态对齐",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    },
+    {
+      "paper_id": "2609.19417v1",
+      "route": "202609/18/2609.19417v1-less-is-more-graph-free-multimodal-rag-via-multi-signal-late-fusion",
+      "title": "Less Is More: Graph-free Multimodal RAG via Multi-signal Late Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过后融合组合问题、图像与文本信号的无图多模态RAG",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    },
+    {
+      "paper_id": "2609.19826v1",
+      "route": "202609/18/2609.19826v1-consensus-guided-shared-specific-tri-view-learning-for-speech-emotion-recognition",
+      "title": "Consensus-Guided Shared-Specific Tri-View Learning for Speech Emotion Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "共享-特异分解与共识引导的多模态融合",
+      "first_seen_at": "2026-09-18 22:07:37 UTC",
+      "updated_at": "2026-09-18 22:07:37 UTC"
+    }
+  ]
+}
