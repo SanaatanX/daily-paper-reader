@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-18</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-19</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 6 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-18 22:07:37 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-19 21:53:32 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速读6篇、精读0，已列出的3篇全聚焦多模态，Uni-LaDiR以7.0分领跑。</p>
-<p>最值得看“潜扩散统一多模态推理”，其次是“视觉语言模型长文本图文一致性校准”。</p>
-<p>普通读者可先读7分那篇的摘要与结论，再顺带了解多模态评测和音视频分类的应用。</p>
+<p>今日速读两篇均分6.0的论文，聚焦跨传感器材料识别与多模态罕见病理检测。前者的语言引导表征学习有望提升不同传感器间的识别稳健性，后者的专家混合架构为稀缺病例检测提供新思路，值得优先浏览。普通读者可关注这两类&quot;少样本+跨域&quot;思路如何迁移到自己的识别或筛查场景。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning">Uni-LaDiR: Latent Diffusion Unifies Multimodal Reasoning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models">Human-Grounded Calibration for Long-Text Image-Text Congruence in Vision-Language Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation">Multimodal Emergency Vehicle Classification via Audio-Visual Transformers and Knowledge Distillation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition">Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Generalist-Specialist Mixture-of-Experts for Rare Pathology Detection in Multimodal Imaging">Generalist-Specialist Mixture-of-Experts for Rare Pathology Detection in Multimodal Imaging</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 </div>
 

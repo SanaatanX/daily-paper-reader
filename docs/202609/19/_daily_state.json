@@ -1,0 +1,41 @@
+{
+  "date": "20260919",
+  "date_label": "",
+  "generated_at": "2026-09-19 21:53:32 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.14783v1",
+      "route": "202609/19/2609.14783v1-language-guided-representation-learning-for-robust-cross-sensor-material-recognition",
+      "title": "Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "语言引导的触觉跨模态表示学习",
+      "first_seen_at": "2026-09-19 21:53:32 UTC",
+      "updated_at": "2026-09-19 21:53:32 UTC"
+    },
+    {
+      "paper_id": "2609.18688v1",
+      "route": "202609/19/2609.18688v1-generalist-specialist-mixture-of-experts-for-rare-pathology-detection-in-multimodal-imaging",
+      "title": "Generalist-Specialist Mixture-of-Experts for Rare Pathology Detection in Multimodal Imaging",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过特征融合平衡模态专家与跨模态通用表示",
+      "first_seen_at": "2026-09-19 21:53:32 UTC",
+      "updated_at": "2026-09-19 21:53:32 UTC"
+    }
+  ]
+}
