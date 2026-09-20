@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-19</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-20</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 2 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-19 21:53:32 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-20 21:18:37 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速读两篇均分6.0的论文，聚焦跨传感器材料识别与多模态罕见病理检测。前者的语言引导表征学习有望提升不同传感器间的识别稳健性，后者的专家混合架构为稀缺病例检测提供新思路，值得优先浏览。普通读者可关注这两类&quot;少样本+跨域&quot;思路如何迁移到自己的识别或筛查场景。</p>
+<p>2026-09-20 日报：今日速读两篇，聚焦高效多模态学习与语音文本模型的生成模态差距。</p>
+<p>最值得关注的是《From Models to Systems》以 7.0 分系统梳理高效多模态学习，以及《Quantifying the Generation Modality Gap》以 6.0 分量化语音与文本语言模型的生成差异。</p>
+<p>普通读者可优先从多模态效率综述入手，再结合语音文本差距研究理解跨模态生成的实际挑战。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -87,7 +89,7 @@
     <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition">Language-Guided Representation Learning for Robust Cross-Sensor Material Recognition</span></li><li><span class="dpr-home-dashboard-paper-title" title="Generalist-Specialist Mixture-of-Experts for Rare Pathology Detection in Multimodal Imaging">Generalist-Specialist Mixture-of-Experts for Rare Pathology Detection in Multimodal Imaging</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning">From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Quantifying the Generation Modality Gap in Speech-Text Language Models">Quantifying the Generation Modality Gap in Speech-Text Language Models</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>

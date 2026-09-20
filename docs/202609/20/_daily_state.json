@@ -1,0 +1,41 @@
+{
+  "date": "20260920",
+  "date_label": "",
+  "generated_at": "2026-09-20 21:18:37 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.19445v1",
+      "route": "202609/20/2609.19445v1-from-models-to-systems-a-comprehensive-survey-of-efficient-multimodal-learning",
+      "title": "From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "涵盖融合与表示的多模态学习综述",
+      "first_seen_at": "2026-09-20 21:18:37 UTC",
+      "updated_at": "2026-09-20 21:18:37 UTC"
+    },
+    {
+      "paper_id": "2609.14743v1",
+      "route": "202609/20/2609.14743v1-quantifying-the-generation-modality-gap-in-speech-text-language-models",
+      "title": "Quantifying the Generation Modality Gap in Speech-Text Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "量化语音与文本模型之间的模态差距",
+      "first_seen_at": "2026-09-20 21:18:37 UTC",
+      "updated_at": "2026-09-20 21:18:37 UTC"
+    }
+  ]
+}

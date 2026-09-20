@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-20",
+  "date": "2026-09-20",
+  "generated_at": "2026-09-20T21:18:39",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/20/2609.19445v1-from-models-to-systems-a-comprehensive-survey-of-efficient-multimodal-learning",
+      "section": "quick",
+      "title_en": "From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning",
+      "authors": "Pan Wang, Siwei Song, Hui Ji, Siqi Cao, Heng Yu, Zhijian Liu, Huanrui Yang, Yingyan Celine Lin, Beidi Chen, Mohit Bansal, Xiaoming Liu, Pengfei Zhou, Ming-Hsuan Yang, Tianlong Chen, Jingtong Hu",
+      "date": "2026-09-16",
+      "pdf": "https://arxiv.org/pdf/2609.19445v1",
+      "score": "7.0",
+      "evidence": "涵盖融合与表示的多模态学习综述",
+      "tldr": "多模态模型计算、内存与部署瓶颈日益突出，高效多模态学习（EML）成为关键前沿。本综述提出首个从模型到系统的结构化分类体系，将300余项工作归入模型、算法、系统三层，分别对应架构精简、执行优化与硬件感知编排。文章进一步综合跨层协同设计，剖析“效率-效用-隐私”权衡，并以MLLMs为案例梳理从结构微调到全栈资源编排的演进。该工作为原生高效、可泛化、易部署的多模态系统提供框架，并展望自调节智能与开放挑战。",
+      "tags": "query:ml",
+      "abstract_en": "The rapid expansion of multimodal models has surfaced formidable bottlenecks in computation, memory, and deployment, catalyzing the rise of Efficient Multimodal Learning (EML) as a pivotal research frontier. Despite intensive progress, a cohesive understanding of what, how, and where efficiency is manifested across the learning stack remains fragmented. This survey systematizes the EML landscape by introducing the first structured, model-to-system taxonomy. We distill insights from over 300 seminal works into three hierarchical levels--model, algorithm, and system--addressing architectural parsimony, execution refinement, and hardware-aware orchestration, respectively. Moving beyond a purely categorical review, we offer a methodological synthesis of the vertical synergies between these layers, elucidating how cross-layer co-design contributes to the fundamental \"Efficiency-Utility-Privacy\" trade-off. Through an integrative case study of Multimodal Large Language Models (MLLMs), we trace the field's evolutionary trajectory from initial structural adjustments to modern full-stack resource orchestration. Furthermore, we provide a holistic discussion and application-specific optimization blueprints for diverse domains and posit a paradigm shift toward self-regulating intelligence, where efficiency is an intrinsic, emergent property of the model's fundamental design rather than a post-hoc constraint. Finally, we present open challenges and future directions that will define the trajectory of EML research. This survey establishes a structured framework for multimodal systems that are not only high-performing and generalizable but natively efficient and ready for ubiquitous deployment. A continuously updated version is available at https://github.com/pwang322/Efficient-Multimodal-Learning-Survey.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/20/2609.14743v1-quantifying-the-generation-modality-gap-in-speech-text-language-models",
+      "section": "quick",
+      "title_en": "Quantifying the Generation Modality Gap in Speech-Text Language Models",
+      "authors": "Ju-Chieh Chou, Jiawei Zhou, Karen Livescu",
+      "date": "2026-09-13",
+      "pdf": "https://arxiv.org/pdf/2609.14743v1",
+      "score": "6.0",
+      "evidence": "量化语音与文本模型之间的模态差距",
+      "tldr": "纯语音语言模型在生成连贯内容上常落后于文本及语音-文本模型，但二者因评测指标和训练数据不同，模态差距难以量化。本文基于流匹配的连续声学特征生成模型族，构建统一生成式评测套件，在匹配数据和生成设置下比较纯语音、纯文本与语音-文本模型。结果显示，联合建模显著提升语义连贯性，但音素级指标改善有限，说话人相似度与预测质量下降，情绪分布指标提升。相比更大纯语音模型，该模型缩小了基于转写语义连贯性的扩展差距，表明文本是高效语义训练信号。",
+      "tags": "query:ml",
+      "abstract_en": "Pure speech language models often lag behind text and speech-text language models in generating coherent content, but this gap is difficult to quantify because speech and text systems are typically evaluated with different metrics and trained on different data. We study the speech-text modality gap in a family of spoken language models, based on flow matching for continuous acoustic feature generation. We construct a unified generation-based evaluation suite that compares speech-only, text-only, and speech-text language models trained on matched data distributions and evaluated in matched generation settings. We evaluate generated continuations along multiple dimensions: semantic coherence, measured by transcribing generated speech and scoring it with a reference language model; local phonetic structure, measured by phone n-gram distributional statistics; speaker consistency and acoustic quality; and emotion-based distributional metrics. Across datasets, we find that joint speech-text modeling substantially improves semantic coherence. However, the improvement is not uniform across metrics: phone-level metrics change only modestly, speaker similarity and predicted quality are lower for speech-text continuations, while emotion-based distributional metrics improve. Compared with larger-scale speech-only models, our speech-text model closes much of the scaling gap in transcript-based semantic coherence, suggesting that text provides an efficient semantic training signal for spoken language modeling.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

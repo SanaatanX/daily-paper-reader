@@ -1,0 +1,111 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-20T21:16:09.739146+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 2,
+    "quick_skim_target": 12,
+    "quick_selected": 2
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.19445v1",
+      "source": "arxiv",
+      "title": "From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning",
+      "abstract": "The rapid expansion of multimodal models has surfaced formidable bottlenecks in computation, memory, and deployment, catalyzing the rise of Efficient Multimodal Learning (EML) as a pivotal research frontier. Despite intensive progress, a cohesive understanding of what, how, and where efficiency is manifested across the learning stack remains fragmented. This survey systematizes the EML landscape by introducing the first structured, model-to-system taxonomy. We distill insights from over 300 seminal works into three hierarchical levels--model, algorithm, and system--addressing architectural parsimony, execution refinement, and hardware-aware orchestration, respectively. Moving beyond a purely categorical review, we offer a methodological synthesis of the vertical synergies between these layers, elucidating how cross-layer co-design contributes to the fundamental \"Efficiency-Utility-Privacy\" trade-off. Through an integrative case study of Multimodal Large Language Models (MLLMs), we trace the field's evolutionary trajectory from initial structural adjustments to modern full-stack resource orchestration. Furthermore, we provide a holistic discussion and application-specific optimization blueprints for diverse domains and posit a paradigm shift toward self-regulating intelligence, where efficiency is an intrinsic, emergent property of the model's fundamental design rather than a post-hoc constraint. Finally, we present open challenges and future directions that will define the trajectory of EML research. This survey establishes a structured framework for multimodal systems that are not only high-performing and generalizable but natively efficient and ready for ubiquitous deployment. A continuously updated version is available at https://github.com/pwang322/Efficient-Multimodal-Learning-Survey.",
+      "authors": [
+        "Pan Wang",
+        "Siwei Song",
+        "Hui Ji",
+        "Siqi Cao",
+        "Heng Yu",
+        "Zhijian Liu",
+        "Huanrui Yang",
+        "Yingyan Celine Lin",
+        "Beidi Chen",
+        "Mohit Bansal",
+        "Xiaoming Liu",
+        "Pengfei Zhou",
+        "Ming-Hsuan Yang",
+        "Tianlong Chen",
+        "Jingtong Hu"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.AI",
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-16T21:27:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.19445v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "survey of multimodal learning spanning fusion, representation and efficiency",
+      "llm_evidence_cn": "涵盖融合与表示的多模态学习综述",
+      "llm_evidence": "涵盖融合与表示的多模态学习综述",
+      "canonical_evidence": "涵盖融合与表示的多模态学习综述",
+      "llm_tldr_en": "This survey systematizes Efficient Multimodal Learning with a model-to-system taxonomy spanning model, algorithm, and system levels, distilling insights from over 300 works.",
+      "llm_tldr_cn": "多模态模型规模扩张带来计算、内存与部署瓶颈，但高效多模态学习的整体认识仍较分散。本文构建首个从模型到系统的三层分类体系，从模型、算法与系统三个层级归纳架构精简、执行优化与硬件感知编排。综述综合了300余项代表性工作，给出结构化地图与方法论总结。该工作为高效多模态学习研究提供了统一框架与路线参考。",
+      "llm_tldr": "多模态模型规模扩张带来计算、内存与部署瓶颈，但高效多模态学习的整体认识仍较分散。本文构建首个从模型到系统的三层分类体系，从模型、算法与系统三个层级归纳架构精简、执行优化与硬件感知编排。综述综合了300余项代表性工作，给出结构化地图与方法论总结。该工作为高效多模态学习研究提供了统一框架与路线参考。",
+      "llm_tags": [
+        "query:ml:composite"
+      ],
+      "matched_query_tag": "query:ml:composite",
+      "matched_query_text": "Papers central to 查找多模态学习相关论文 包括模态不平衡 模态融合等, especially work that connects or combines: multimodal learning methods combining different data modalities; addressing modality imbalance in multimodal learning; techniques for multimodal fusion in deep learning; cross-modal alignment representation learning; multimodal representation learning approaches; feature-level fusion methods for multimodal inputs; How to handle modality imbalance in multimodal learning?; Latest techniques for multimodal fusion in neural networks.",
+      "matched_requirement_id": "req-composite-ml",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.14743v1",
+      "source": "arxiv",
+      "title": "Quantifying the Generation Modality Gap in Speech-Text Language Models",
+      "abstract": "Pure speech language models often lag behind text and speech-text language models in generating coherent content, but this gap is difficult to quantify because speech and text systems are typically evaluated with different metrics and trained on different data. We study the speech-text modality gap in a family of spoken language models, based on flow matching for continuous acoustic feature generation. We construct a unified generation-based evaluation suite that compares speech-only, text-only, and speech-text language models trained on matched data distributions and evaluated in matched generation settings. We evaluate generated continuations along multiple dimensions: semantic coherence, measured by transcribing generated speech and scoring it with a reference language model; local phonetic structure, measured by phone n-gram distributional statistics; speaker consistency and acoustic quality; and emotion-based distributional metrics. Across datasets, we find that joint speech-text modeling substantially improves semantic coherence. However, the improvement is not uniform across metrics: phone-level metrics change only modestly, speaker similarity and predicted quality are lower for speech-text continuations, while emotion-based distributional metrics improve. Compared with larger-scale speech-only models, our speech-text model closes much of the scaling gap in transcript-based semantic coherence, suggesting that text provides an efficient semantic training signal for spoken language modeling.",
+      "authors": [
+        "Ju-Chieh Chou",
+        "Jiawei Zhou",
+        "Karen Livescu"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-13T19:09:07+00:00",
+      "link": "https://arxiv.org/pdf/2609.14743v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "quantifying and analyzing the modality gap between speech and text models",
+      "llm_evidence_cn": "量化语音与文本模型之间的模态差距",
+      "llm_evidence": "量化语音与文本模型之间的模态差距",
+      "canonical_evidence": "量化语音与文本模型之间的模态差距",
+      "llm_tldr_en": "This work quantifies the speech-text modality gap by building a unified generation-based evaluation suite that compares speech-only, text-only and speech-text language models trained on matched data across coherence and other dimensions.",
+      "llm_tldr_cn": "纯语音语言模型在生成连贯内容上常落后于文本及语音-文本模型，但由于评估指标与训练数据不同，这一模态差距难以量化。本文基于连续声学特征的流匹配建模，构建统一的生成式评估套件，在匹配的数据分布与生成设置下比较纯语音、纯文本与语音-文本三类语言模型。实验从语义连贯性等多个维度系统刻画了模态间差距。该工作为模态不平衡问题提供了可量化的分析框架与基准工具。",
+      "llm_tldr": "纯语音语言模型在生成连贯内容上常落后于文本及语音-文本模型，但由于评估指标与训练数据不同，这一模态差距难以量化。本文基于连续声学特征的流匹配建模，构建统一的生成式评估套件，在匹配的数据分布与生成设置下比较纯语音、纯文本与语音-文本三类语言模型。实验从语义连贯性等多个维度系统刻画了模态间差距。该工作为模态不平衡问题提供了可量化的分析框架与基准工具。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
