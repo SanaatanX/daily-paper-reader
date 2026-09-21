@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-20</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-21</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-20 21:18:37 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-21 22:16:26 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-20 日报：今日速读两篇，聚焦高效多模态学习与语音文本模型的生成模态差距。</p>
-<p>最值得关注的是《From Models to Systems》以 7.0 分系统梳理高效多模态学习，以及《Quantifying the Generation Modality Gap》以 6.0 分量化语音与文本语言模型的生成差异。</p>
-<p>普通读者可优先从多模态效率综述入手，再结合语音文本差距研究理解跨模态生成的实际挑战。</p>
+<p>今日速读5篇多模态AI论文，精读0篇，最高分7.0。最值得看的是免训练3D点云适配（先精炼再融合），以及低延迟多摄像头行人重识别方向。普通读者可优先关注免训练适配思路，看它能否迁移到自己手头的跨模态任务上。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning">From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Quantifying the Generation Modality Gap in Speech-Text Language Models">Quantifying the Generation Modality Gap in Speech-Text Language Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Refine Then Fusion: Training-Free 3D Point Cloud Adaptation with Priority Refinement and Multi-Modal Knowledge Fusion">Refine Then Fusion: Training-Free 3D Point Cloud Adaptation with Priority Refinement and Multi-Modal Knowledge Fusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification">A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification</span></li><li><span class="dpr-home-dashboard-paper-title" title="DUPAR: Dual-Path Conversational Retrieval via Speech Retriever with Cross-Turn Evidence Caching">DUPAR: Dual-Path Conversational Retrieval via Speech Retriever with Cross-Turn Evidence Caching</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span></div>
 </section>
 </div>
 

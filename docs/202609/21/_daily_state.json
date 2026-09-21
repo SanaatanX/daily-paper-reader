@@ -1,0 +1,89 @@
+{
+  "date": "20260921",
+  "date_label": "",
+  "generated_at": "2026-09-21 22:16:26 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.21522v1",
+      "route": "202609/21/2609.21522v1-refine-then-fusion-training-free-3d-point-cloud-adaptation-with-priority-refinement-and-multi-modal-knowledge-fusion",
+      "title": "Refine Then Fusion: Training-Free 3D Point Cloud Adaptation with Priority Refinement and Multi-Modal Knowledge Fusion",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "考虑样本级模态可靠性的多模态知识融合",
+      "first_seen_at": "2026-09-21 22:16:26 UTC",
+      "updated_at": "2026-09-21 22:16:26 UTC"
+    },
+    {
+      "paper_id": "2609.14419v1",
+      "route": "202609/21/2609.14419v1-a-generative-ai-integrated-multimodal-framework-for-low-latency-multi-camera-person-re-identification",
+      "title": "A Generative AI Integrated Multimodal Framework for Low-Latency Multi-Camera Person Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "代价感知早退级联的多模态融合",
+      "first_seen_at": "2026-09-21 22:16:26 UTC",
+      "updated_at": "2026-09-21 22:16:26 UTC"
+    },
+    {
+      "paper_id": "2609.18042v1",
+      "route": "202609/21/2609.18042v1-dupar-dual-path-conversational-retrieval-via-speech-retriever-with-cross-turn-evidence-caching",
+      "title": "DUPAR: Dual-Path Conversational Retrieval via Speech Retriever with Cross-Turn Evidence Caching",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "音频编码器与文本嵌入跨模态对齐检索",
+      "first_seen_at": "2026-09-21 22:16:26 UTC",
+      "updated_at": "2026-09-21 22:16:26 UTC"
+    },
+    {
+      "paper_id": "2609.21164v1",
+      "route": "202609/21/2609.21164v1-m2g-llm-enhancing-clinical-prediction-via-multimodal-graph-reasoning-and-llm-context-injection",
+      "title": "M2G-LLM: Enhancing Clinical Prediction via Multimodal Graph Reasoning and LLM Context Injection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "用图神经网络与大模型对齐异构模态",
+      "first_seen_at": "2026-09-21 22:16:26 UTC",
+      "updated_at": "2026-09-21 22:16:26 UTC"
+    },
+    {
+      "paper_id": "2609.21193v1",
+      "route": "202609/21/2609.21193v1-multimodal-learning-for-beamforming-using-camera-lidar-and-radio-frequency-pilots",
+      "title": "Multimodal Learning for Beamforming Using Camera, LiDAR, and Radio-Frequency Pilots",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合相机、LiDAR与射频模态的多模态学习框架",
+      "first_seen_at": "2026-09-21 22:16:26 UTC",
+      "updated_at": "2026-09-21 22:16:26 UTC"
+    }
+  ]
+}
