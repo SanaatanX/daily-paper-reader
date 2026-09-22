@@ -1,0 +1,451 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-22T22:25:21.563583+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 1,
+    "deep_cap": 7,
+    "deep_selected": 1,
+    "quick_candidates": 9,
+    "quick_skim_target": 12,
+    "quick_selected": 9
+  },
+  "deep_dive": [
+    {
+      "id": "2609.23533v1",
+      "source": "arxiv",
+      "title": "GeoBalance: Geometry-Aware Monitoring and Reconstruction with Asymmetric Optimization for Balanced Multimodal Learning",
+      "abstract": "Multimodal classifiers can converge to modality-dominant solutions in which one modality dominates the joint prediction, suppressing the learning of others. Existing balancing methods mainly adjust losses, gradients, or modality contributions, largely treating modality imbalance as an optimization problem while implicitly treating the weak modality as under-optimized but representationally intact. In this work, we find that this assumption does not always hold, as persistent modality dominance can induce a representation-level collapse of the weak modality, which we term \\emph{manifold modality collapse} (MMC). MMC manifests as a coupled geometric degradation in which weak-modality representations collapse onto fewer directions within each class and become less separable across classes. Motivated by this observation, we propose \\emph{GeoBalance}, a geometry-aware framework that monitors these two geometric properties and reconstructs the weak modality representation only when it exhibits signs of MMC. Once triggered, GeoBalance uses a fixed Simplex-ETF class scaffold and spectral regularization to restore class separation while preventing collapse onto a few feature directions. To preserve reconstruction during joint training, asymmetric gradient projection removes the joint-gradient component conflicting with reconstruction, leaving non-conflicting optimization unchanged. Extensive experiments across six multimodal benchmarks demonstrate great improvements over competitive balancing methods, validating its effectiveness.",
+      "authors": [
+        "Zechang Xiong",
+        "Da Li",
+        "Rong Yin",
+        "Kexin Tang",
+        "Biao Yang",
+        "Pengyuan Li",
+        "Wenkang Kong",
+        "Yulan Hu",
+        "Shengyu Zhu",
+        "Hao Peng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.MM"
+      ],
+      "published": "2026-09-20T10:25:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.23533v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "balanced multimodal learning addressing modality dominance and imbalance",
+      "llm_evidence_cn": "解决模态主导与不平衡的平衡多模态学习",
+      "llm_evidence": "解决模态主导与不平衡的平衡多模态学习",
+      "canonical_evidence": "解决模态主导与不平衡的平衡多模态学习",
+      "llm_tldr_en": "GeoBalance reveals manifold modality collapse where dominant modalities geometrically degrade weak-modality representations, and mitigates it via geometry-aware monitoring, reconstruction and asymmetric optimization.",
+      "llm_tldr_cn": "针对多模态分类器易收敛到模态主导解、弱模态被抑制的问题，该文指出现有平衡方法默认弱模态表示完好这一假设并不总成立。作者发现持续的模态主导会引发弱模态表示层面的几何退化，称为流形模态崩溃，并提出GeoBalance，通过几何感知监控、表示重构与非对称优化加以缓解。实验验证了该崩溃现象及方法的有效性，把模态不平衡从优化问题拓展到表示几何层面。",
+      "llm_tldr": "针对多模态分类器易收敛到模态主导解、弱模态被抑制的问题，该文指出现有平衡方法默认弱模态表示完好这一假设并不总成立。作者发现持续的模态主导会引发弱模态表示层面的几何退化，称为流形模态崩溃，并提出GeoBalance，通过几何感知监控、表示重构与非对称优化加以缓解。实验验证了该崩溃现象及方法的有效性，把模态不平衡从优化问题拓展到表示几何层面。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.19445v1",
+      "source": "arxiv",
+      "title": "From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning",
+      "abstract": "The rapid expansion of multimodal models has surfaced formidable bottlenecks in computation, memory, and deployment, catalyzing the rise of Efficient Multimodal Learning (EML) as a pivotal research frontier. Despite intensive progress, a cohesive understanding of what, how, and where efficiency is manifested across the learning stack remains fragmented. This survey systematizes the EML landscape by introducing the first structured, model-to-system taxonomy. We distill insights from over 300 seminal works into three hierarchical levels--model, algorithm, and system--addressing architectural parsimony, execution refinement, and hardware-aware orchestration, respectively. Moving beyond a purely categorical review, we offer a methodological synthesis of the vertical synergies between these layers, elucidating how cross-layer co-design contributes to the fundamental \"Efficiency-Utility-Privacy\" trade-off. Through an integrative case study of Multimodal Large Language Models (MLLMs), we trace the field's evolutionary trajectory from initial structural adjustments to modern full-stack resource orchestration. Furthermore, we provide a holistic discussion and application-specific optimization blueprints for diverse domains and posit a paradigm shift toward self-regulating intelligence, where efficiency is an intrinsic, emergent property of the model's fundamental design rather than a post-hoc constraint. Finally, we present open challenges and future directions that will define the trajectory of EML research. This survey establishes a structured framework for multimodal systems that are not only high-performing and generalizable but natively efficient and ready for ubiquitous deployment. A continuously updated version is available at https://github.com/pwang322/Efficient-Multimodal-Learning-Survey.",
+      "authors": [
+        "Pan Wang",
+        "Siwei Song",
+        "Hui Ji",
+        "Siqi Cao",
+        "Heng Yu",
+        "Zhijian Liu",
+        "Huanrui Yang",
+        "Yingyan Celine Lin",
+        "Beidi Chen",
+        "Mohit Bansal",
+        "Xiaoming Liu",
+        "Pengfei Zhou",
+        "Ming-Hsuan Yang",
+        "Tianlong Chen",
+        "Jingtong Hu"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.AI",
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-16T21:27:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.19445v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "survey of efficient multimodal learning methods",
+      "llm_evidence_cn": "高效多模态学习方法综述",
+      "llm_evidence": "高效多模态学习方法综述",
+      "canonical_evidence": "高效多模态学习方法综述",
+      "llm_tldr_en": "This survey systematizes efficient multimodal learning with a model-to-system taxonomy across model, algorithm and system levels, distilling over 300 works to guide efficient multimodal model design.",
+      "llm_tldr_cn": "针对多模态模型在计算、内存与部署上的瓶颈，本文系统梳理了高效多模态学习领域。作者提出首个从模型到系统的层级化分类体系，将300余篇工作归纳为模型、算法、系统三个层次，分别对应架构精简、执行优化与硬件感知调度。该综述为高效多模态模型的设计与落地提供了统一的方法论参考与结构框架。",
+      "llm_tldr": "针对多模态模型在计算、内存与部署上的瓶颈，本文系统梳理了高效多模态学习领域。作者提出首个从模型到系统的层级化分类体系，将300余篇工作归纳为模型、算法、系统三个层次，分别对应架构精简、执行优化与硬件感知调度。该综述为高效多模态模型的设计与落地提供了统一的方法论参考与结构框架。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.23191v1",
+      "source": "arxiv",
+      "title": "Low resource cross-modal alignment using HGNN to enhance speech representation",
+      "abstract": "Speech-text space alignment is a multimodal representation learning method consisting to map different speech and text into a shared representation space, leading to enrichment of the representation of each modality. Proposed architectures, such as SAMU-XLSR, typically follow a student/teacher framework, with the goal of fine-tuning an audio encoder to produce representations that closely match those of the text. In this way a speech representation is semantically enriched. However, such systems generally require large amounts of training data and considerable computational resource, making them difficult to apply to low resources languages under frugal constraints. The present work proposes a data-efficient space alignment method based on Heterogeneous Graph Neural Networks and link prediction. The core idea is to leverage message passing to explicitly transfer information from the text modality to the speech modality, thereby reducing the need for large training datasets and intrinsically enriching the acoustic representations, all in a more interpretable manner. Although thoroughly explored for high-resource languages, word-level tasks in speech remain relevant for certain low-resource languages. Therefore, we conducted experiments on speech-text alignment at the word level using the TIMIT (English) dataset and Yemba (a Cameroonian language). Our approach yields results comparable to those of SAMU-XLSR, a state-of-the-art method, and even surpasses it for the Yemba language in the task of word retrieval, while using far fewer resources, demonstrating its power, frugality, and efficiency.",
+      "authors": [
+        "Yannick Yomie Nzeuhang",
+        "Marie Tahon",
+        "Paulin Melatagia Yonta"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-19T19:31:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.23191v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment maps speech and text into shared space",
+      "llm_evidence_cn": "跨模态对齐将语音与文本映射到共享空间",
+      "llm_evidence": "跨模态对齐将语音与文本映射到共享空间",
+      "canonical_evidence": "跨模态对齐将语音与文本映射到共享空间",
+      "llm_tldr_en": "A data-efficient cross-modal alignment method based on heterogeneous graph neural networks maps speech and text into a shared space, enriching speech representations under low-resource constraints.",
+      "llm_tldr_cn": "针对现有语音-文本对齐方法依赖大量训练数据与算力、难以用于低资源语言的问题，本文提出一种数据高效的跨模态空间对齐方法。该方法基于异构图神经网络，将语音与文本映射到共享表征空间，从而语义增强语音表征。结果显示在低资源与节俭算力约束下仍能取得有效对齐。这为跨模态表征学习在资源受限场景的落地提供了可行路径。",
+      "llm_tldr": "针对现有语音-文本对齐方法依赖大量训练数据与算力、难以用于低资源语言的问题，本文提出一种数据高效的跨模态空间对齐方法。该方法基于异构图神经网络，将语音与文本映射到共享表征空间，从而语义增强语音表征。结果显示在低资源与节俭算力约束下仍能取得有效对齐。这为跨模态表征学习在资源受限场景的落地提供了可行路径。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.23248v1",
+      "source": "arxiv",
+      "title": "SPACE: Semantic Projection and Alignment of CLIP Embeddings for Domain Adaptation",
+      "abstract": "A fundamental challenge in deploying vision models is domain shift, which arises when training and test data follow different distributions, leading to degraded performance. This challenge is amplified when the same semantic concept appears under distinct visual forms, such as photographs and sketches, where visual similarity is weak despite semantic correspondence. Existing unsupervised domain-adaptation methods aim to align distributions across domains but often ignore semantic relationships among samples of the same class. To address this issue, this paper introduces SPACE, a method that exploits the semantic structure of CLIP's vision-language space for domain adaptation. The key idea is to use text descriptions as semantic anchors by applying Singular Value Decomposition to CLIP embeddings of class descriptions, yielding an orthogonal basis that captures semantic relationships among categories. Visual features from both domains are projected into this semantic subspace, aligning images based on meaning rather than appearance.",
+      "authors": [
+        "João Renato Ribeiro Manesco",
+        "Danilo Samuel Jodas",
+        "Douglas Rodrigues",
+        "Leandro Aparecido Passos",
+        "João Paulo Papa"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-19T23:20:57+00:00",
+      "link": "https://arxiv.org/pdf/2609.23248v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment in CLIP vision-language space",
+      "llm_evidence_cn": "CLIP视觉语言空间的跨模态对齐",
+      "llm_evidence": "CLIP视觉语言空间的跨模态对齐",
+      "canonical_evidence": "CLIP视觉语言空间的跨模态对齐",
+      "llm_tldr_en": "SPACE exploits the semantic structure of CLIP vision-language space for domain adaptation, using text descriptions as semantic anchors to project and align embeddings.",
+      "llm_tldr_cn": "视觉模型部署时常受域偏移影响，当同一语义概念以照片、素描等不同视觉形态出现时，视觉相似度低而语义对应强，现有无监督域适应方法往往忽略同类样本间的语义关系。本文提出SPACE，利用CLIP视觉语言空间的语义结构，以文本描述作为语义锚点进行投影与对齐。实验表明该方法在多种域适应场景下提升了性能，为跨域语义对齐提供了新思路。",
+      "llm_tldr": "视觉模型部署时常受域偏移影响，当同一语义概念以照片、素描等不同视觉形态出现时，视觉相似度低而语义对应强，现有无监督域适应方法往往忽略同类样本间的语义关系。本文提出SPACE，利用CLIP视觉语言空间的语义结构，以文本描述作为语义锚点进行投影与对齐。实验表明该方法在多种域适应场景下提升了性能，为跨域语义对齐提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.23267v1",
+      "source": "arxiv",
+      "title": "Knowing When to Trust Images: Reliability-Aware Multi-modal Entity Alignment",
+      "abstract": "The visual modality, i.e., images, plays a key role in multi-modal entity alignment (MMEA). Existing approaches often directly fuse the image with other modalities to align different entities. Although simple, such strategies overlook the potential noise in the images and their semantic misalignment with corresponding entities, resulting in suboptimal fusion and degraded performance. Addressing this, we propose a novel Reliability-Aware framework for MMEA (RA-MMEA), which assesses visual reliability and adaptively improves unreliable visual representations for robust entity alignment. The core lies in two modules, including dependency-aware visual reliability prediction (DA-VRP) and stability-regularized visual embedding generation (SR-VEG). The former aims to estimate the reliability of an image by leveraging multi-modal dependency within the entity, while the latter focuses on producing alternative visual representation conditioned on semantics encoded in textual modalities for multi-modal fusion. Compared to current methods, RA-MMEA enables more reliable visual representations for modality fusion, thereby improving performance. In extensive experiments, RA-MMEA achieves state-of-the-art results, verifying the importance of reliable visual modality for entity alignment and the effectiveness of RA-MMEA. The code and results will be released.",
+      "authors": [
+        "Chenxiao Li",
+        "Yunhe Feng",
+        "Dongfang Liu",
+        "Dong Nie",
+        "Yan Huang",
+        "Heng Fan"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-20T00:55:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.23267v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "adaptive multimodal fusion for entity alignment",
+      "llm_evidence_cn": "面向实体对齐的自适应多模态融合",
+      "llm_evidence": "面向实体对齐的自适应多模态融合",
+      "canonical_evidence": "面向实体对齐的自适应多模态融合",
+      "llm_tldr_en": "RA-MMEA assesses visual reliability and adaptively repairs unreliable visual representations for robust multimodal entity alignment, avoiding naive image fusion.",
+      "llm_tldr_cn": "图像在多模态实体对齐中作用关键，但现有方法直接融合图像，忽略图像噪声及其与实体的语义错位，导致融合次优。本文提出可靠性感知框架RA-MMEA，包含依赖感知的视觉可靠性预测与稳定性正则化的视觉嵌入生成两个模块。该框架能评估视觉可靠性并自适应改善不可靠表示，实现更鲁棒的多模态实体对齐。",
+      "llm_tldr": "图像在多模态实体对齐中作用关键，但现有方法直接融合图像，忽略图像噪声及其与实体的语义错位，导致融合次优。本文提出可靠性感知框架RA-MMEA，包含依赖感知的视觉可靠性预测与稳定性正则化的视觉嵌入生成两个模块。该框架能评估视觉可靠性并自适应改善不可靠表示，实现更鲁棒的多模态实体对齐。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.23507v1",
+      "source": "arxiv",
+      "title": "Detecting Phone-Induced Pedestrian Distraction via a Multimodal Fusion Transformer",
+      "abstract": "The increasing reliance on mobile phones has made phone-induced pedestrian distraction increasingly prevalent. Activities such as texting, watching videos, and making phone calls have become significant contributors to traffic accidents. Reliable detection of pedestrian distraction is essential for autonomous vehicles, as it improves situational awareness and enables timely risk assessment, thereby supporting safe motion planning and vehicle control. We propose a multimodal fusion Transformer (MFT) for detecting phone-induced pedestrian distraction. MFT jointly extracts skeletal dynamics from body pose keypoints and visual appearance features from pedestrian images, effectively leveraging the complementary information provided by the two modalities. A cross-modal attention module is proposed to capture inter-modal dependencies through multi-head cross-attention, facilitating effective fusion of complementary information across the two modalities. Then, a temporal attention fusion module, implemented with a Transformer encoder, is employed to capture temporal dependencies. MFT is trained and evaluated on a manually annotated dataset comprising 287 pedestrian instances with 20,741 images. Extensive experiments demonstrate that MFT attains an overall accuracy of 95%, exceeding the performance of six baseline approaches by 6%.",
+      "authors": [
+        "Yuanzhe Li",
+        "Hounian Liu",
+        "Xiaotong Chang",
+        "Yidi Huang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-20T09:46:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.23507v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal fusion Transformer combining pose and appearance features",
+      "llm_evidence_cn": "融合姿态与外观特征的多模态融合Transformer",
+      "llm_evidence": "融合姿态与外观特征的多模态融合Transformer",
+      "canonical_evidence": "融合姿态与外观特征的多模态融合Transformer",
+      "llm_tldr_en": "To detect phone-induced pedestrian distraction for autonomous driving, this work proposes a multimodal fusion Transformer that jointly extracts skeletal dynamics from pose keypoints and visual appearance features, leveraging complementary modalities.",
+      "llm_tldr_cn": "手机引发的行人分心日益普遍，成为交通事故的重要诱因，自动驾驶需要可靠检测以进行风险预警与运动规划。本文提出多模态融合Transformer，联合提取人体姿态关键点的骨骼动态特征与行人图像的视觉外观特征，充分利用两种模态的互补信息。实验表明该融合模型能有效检测分心行为，为智能交通场景下的多模态特征级融合提供了实践案例。",
+      "llm_tldr": "手机引发的行人分心日益普遍，成为交通事故的重要诱因，自动驾驶需要可靠检测以进行风险预警与运动规划。本文提出多模态融合Transformer，联合提取人体姿态关键点的骨骼动态特征与行人图像的视觉外观特征，充分利用两种模态的互补信息。实验表明该融合模型能有效检测分心行为，为智能交通场景下的多模态特征级融合提供了实践案例。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.23541v1",
+      "source": "arxiv",
+      "title": "Towards robust multimodal 3D object detection via visual foundation models",
+      "abstract": "Multimodal 3D object detection is fundamental to robust perception in autonomous driving because it integrates complementary information from LiDAR and camera sensors. However, existing methods often fail to maintain robustness under out-of-distribution (OOD) corruptions caused by sensor noise, adverse weather, and environmental changes. To address this problem, we propose RoboDistill, a robust and generalizable multimodal 3D object detection framework that leverages visual foundation models (VFMs), such as the Segment Anything Model (SAM). First, we introduce SAM-AD, a domain-specific pretraining strategy that fine-tunes SAM on autonomous-driving imagery to extract feature representations with rich semantic information. Second, we design the AD Feature Pyramid Network (AD-FPN) to refine and upsample SAM features at multiple scales for seamless fusion with LiDAR features. Third, we develop the Depth-Guided Wavelet Attention (DGWA) module, which suppresses high-frequency sensor noise while preserving critical contextual information. Finally, we introduce KD Fusion, in which the pretrained SAM-AD serves as a teacher that distills high-quality visual knowledge into a lightweight point-cloud network, thereby improving robustness under noisy conditions. Extensive experiments across 27 challenging OOD corruption settings show that RoboDistill generally delivers stronger or competitive detection performance and robustness relative to representative state-of-the-art methods. This work bridges the gap between VFMs and 3D object detection and advances robust multimodal perception for real-world autonomous-driving applications.",
+      "authors": [
+        "Ziying Song",
+        "Lin Liu",
+        "Hongyu Pan",
+        "Shaoqing Xu",
+        "Lei Yang",
+        "Mingzhe Guo",
+        "Caiyan Jia"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-20T10:41:37+00:00",
+      "link": "https://arxiv.org/pdf/2609.23541v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal fusion of LiDAR and camera for 3D detection",
+      "llm_evidence_cn": "激光雷达与相机的多模态融合三维检测",
+      "llm_evidence": "激光雷达与相机的多模态融合三维检测",
+      "canonical_evidence": "激光雷达与相机的多模态融合三维检测",
+      "llm_tldr_en": "RoboDistill leverages visual foundation models with a domain-specific SAM-AD pretraining and adaptive feature distillation to make multimodal 3D object detection robust under OOD corruptions.",
+      "llm_tldr_cn": "多模态三维目标检测通过融合激光雷达与相机信息支撑自动驾驶感知，但现有方法在传感器噪声、恶劣天气与环境变化等分布外扰动下鲁棒性不足。本文提出RoboDistill框架，利用SAM等视觉基础模型，先以SAM-AD在自动驾驶图像上做领域特定预训练提取语义特征，再设计自适应特征蒸馏模块实现跨模态融合。实验表明该方法在分布外损坏条件下保持稳健且具备泛化能力，为多模态感知融合提供了鲁棒性方案。",
+      "llm_tldr": "多模态三维目标检测通过融合激光雷达与相机信息支撑自动驾驶感知，但现有方法在传感器噪声、恶劣天气与环境变化等分布外扰动下鲁棒性不足。本文提出RoboDistill框架，利用SAM等视觉基础模型，先以SAM-AD在自动驾驶图像上做领域特定预训练提取语义特征，再设计自适应特征蒸馏模块实现跨模态融合。实验表明该方法在分布外损坏条件下保持稳健且具备泛化能力，为多模态感知融合提供了鲁棒性方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.23717v1",
+      "source": "arxiv",
+      "title": "BindCLIP: One Balanced Coupling For Compositional Vision Language Scoring",
+      "abstract": "Global vision--language similarities compress an image and a caption into one vector, preserving semantics but not which word corresponds to which region or how those regions are arranged; a model can recognize every word and object yet prefer a compositionally incorrect caption. We argue that a frozen encoder retains this association structure, so the problem is to read it rather than to rebuild it beside the pretrained similarity. We introduce BindCLIP, a pairwise scorer built on one latent object: a balanced token--patch--depth optimal-transport coupling that places both candidate captions and several visual depths in a single plan. Semantic, entity, order, and spatial evidence are read as energies of this state, and exchanging the candidates permutes the plan, making the score exactly antisymmetric. A geometric refinement inside the coupling contracts moves that the candidates and the visual depths do not support. No task label, parser, relation inventory, or detector is used. One checkpoint and one inference path improve the official What'sUp, ARO, and SugarCrepe benchmarks over frozen global CLIP, with the strongest transfer on the relation splits. Controls rule out patch access and caption-length shortcuts, and an inference-time lesion localizes spatial arrangement to the coupling.",
+      "authors": [
+        "Liuyang Song",
+        "Yi Zhang",
+        "Zhongyi Deng",
+        "Daqian Yang",
+        "Hongbo Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-20T15:50:19+00:00",
+      "link": "https://arxiv.org/pdf/2609.23717v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal token-patch optimal-transport alignment",
+      "llm_evidence_cn": "跨模态token-块最优传输对齐",
+      "llm_evidence": "跨模态token-块最优传输对齐",
+      "canonical_evidence": "跨模态token-块最优传输对齐",
+      "llm_tldr_en": "BindCLIP builds a pairwise vision-language scorer on a balanced token-patch-depth optimal-transport coupling, reading semantic, entity, order and spatial evidence for compositional scoring.",
+      "llm_tldr_cn": "全局图文相似度把图像与描述压缩为单一向量，虽保留语义却丢失词与区域的对应关系，导致模型偏爱组合错误的描述。本文提出BindCLIP，基于一个平衡的token-块-深度最优传输耦合构建成对评分器，将候选描述与多个视觉深度放入同一传输方案，把语义、实体、顺序与空间证据读作该状态的能量。实验表明其在组合式图文评分上更准确地捕捉词区对应关系。",
+      "llm_tldr": "全局图文相似度把图像与描述压缩为单一向量，虽保留语义却丢失词与区域的对应关系，导致模型偏爱组合错误的描述。本文提出BindCLIP，基于一个平衡的token-块-深度最优传输耦合构建成对评分器，将候选描述与多个视觉深度放入同一传输方案，把语义、实体、顺序与空间证据读作该状态的能量。实验表明其在组合式图文评分上更准确地捕捉词区对应关系。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.24539v1",
+      "source": "arxiv",
+      "title": "Incentive Noise and Structural Prior Infusion for Multi-modal Object Re-Identification",
+      "abstract": "Multi-modal object Re-Identification (ReID) benefits from complementary information across heterogeneous imaging modalities. To further enrich semantic representation, text descriptions have recently been incorporated as an additional modality. However, recent vision-language approaches often treat text descriptions as clean, deterministic signals and overlook their inherent noise, including modality-mismatched phrases and semantically ambiguous expressions. Moreover, prevailing methods lack explicit mechanisms to reconcile fine-grained structural discrepancies between modalities, even after high-level semantic alignment. To address these challenges, we propose a novel framework centered on Positive-Incentive Noise (π-noise) and structured prompt modulation. First, the Semantic Cross-Modal Modulator harnesses task-aware π-noise, sampled from a distribution conditioned on both visual and text inputs, to perturb global tokens and enable semantics-guided cross-modal compensation. Second, the Structure-Aware Prompt Adapter injects learnable geometric priors via prompts to enhance spatial consistency. Third, the Context-Aware Sparse Fusion module distills structural context to guide adaptive fusion while shielding identity features from noisy local details. Experiments on three multi-modal ReID benchmarks demonstrate the effectiveness and robustness of our approach. The code is available at https://github.com/zw-absin/INSPI.",
+      "authors": [
+        "Weixiang Zhou",
+        "Yuhao Wang",
+        "Xingguo Xu",
+        "Weizhen Zhou",
+        "Zhixun Su",
+        "Jinshan Pan",
+        "Cong Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-21T13:10:35+00:00",
+      "link": "https://arxiv.org/pdf/2609.24539v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment and structural reconciliation between modalities",
+      "llm_evidence_cn": "跨模态对齐与模态间结构协调",
+      "llm_evidence": "跨模态对齐与模态间结构协调",
+      "canonical_evidence": "跨模态对齐与模态间结构协调",
+      "llm_tldr_en": "Multimodal ReID uses text as an extra modality but treats it as clean and ignores modality-mismatched or ambiguous phrases, lacking mechanisms to reconcile fine-grained structural gaps. This framework uses positive-incentive noise and structural prior infusion to align and fuse modalities, improving multimodal ReID performance.",
+      "llm_tldr_cn": "多模态目标重识别利用异构模态的互补信息，近期方法引入文本描述作为额外模态，却把文本视为干净确定的信号，忽略其中的模态不匹配短语与语义歧义，也缺乏协调模态间细粒度结构差异的机制。本文提出以正向激励噪声与结构先验注入为核心的框架，在高层语义对齐之外显式建模并弥合模态间的结构偏差。实验表明该方法能提升多模态重识别性能，为跨模态对齐与鲁棒融合提供了新思路。",
+      "llm_tldr": "多模态目标重识别利用异构模态的互补信息，近期方法引入文本描述作为额外模态，却把文本视为干净确定的信号，忽略其中的模态不匹配短语与语义歧义，也缺乏协调模态间细粒度结构差异的机制。本文提出以正向激励噪声与结构先验注入为核心的框架，在高层语义对齐之外显式建模并弥合模态间的结构偏差。实验表明该方法能提升多模态重识别性能，为跨模态对齐与鲁棒融合提供了新思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.24564v1",
+      "source": "arxiv",
+      "title": "HyperCLIP++: Fine-tuning CLIP forOpen-vocabulary Semantic Segmentation in Hyperbolic Space",
+      "abstract": "CLIP, a foundational vision-language model, has emerged as a powerful tool for open-vocabulary semantic segmentation. While freezing CLIP's text encoder is known to preserve its generalization capability, recent studies show that fine-tuning both CLIP's text and image encoders jointly significantly enhances segmentation performance, especially for classes from open sets. In this work, we explain this phenomenon from the perspective of hierarchy alignment, since during fine-tuning, the hierarchical level of image embeddings shifts from image-level to pixel-level. We achieve this by leveraging hyperbolic space, which naturally encodes hierarchical structures. Our key observation is that, during fine-tuning, the hyperbolic radius of CLIP's text embeddings decreases, facilitating better alignment with the pixel-level granularity of visual data. Building on this, we propose HyperCLIP++, a novel and parameter-efficient adaptation strategy. HyperCLIP++ directly adjusts the hyperbolic radius of CLIP's embeddings via scaling transformations to achieve a hierarchy alignment to the target task, i.e., segmentation. To ensure this hierarchy alignment is effected consistently across both modalities and preserves their cross-modal alignment during training, HyperCLIP++ integrates a Dual Cross-Relation Communication (DCRC) module that synchronizes these adjustments between the vision and text pathways. Our experiments show that HyperCLIP++ achieves state-of-the-art performance across three benchmarks while fine-tuning only approximately 5% of CLIP's total parameters. More importantly, we observe that after adjustment, CLIP's text embeddings exhibit a relatively fixed hyperbolic radius across datasets, suggesting that the hierarchical level required for this segmentation task might be quantified using the hyperbolic radius.",
+      "authors": [
+        "Zelin Peng",
+        "Zhengqin Xu",
+        "Changsong Wen",
+        "Yu Huang",
+        "Yaoming Wang",
+        "Xiaokang Yang",
+        "Wei Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-21T13:26:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.24564v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal alignment via hyperbolic space for vision-language CLIP",
+      "llm_evidence_cn": "双曲空间中的视觉语言跨模态对齐",
+      "llm_evidence": "双曲空间中的视觉语言跨模态对齐",
+      "canonical_evidence": "双曲空间中的视觉语言跨模态对齐",
+      "llm_tldr_en": "HyperCLIP++ explains why jointly fine-tuning CLIP text and image encoders improves open-vocabulary segmentation, using hyperbolic space to capture the hierarchical shift of image embeddings from image-level to pixel-level.",
+      "llm_tldr_cn": "针对CLIP文本与图像编码器联合微调为何能提升开放词汇语义分割这一未明机理，该文从层级对齐视角切入，指出微调使图像嵌入的层级由图像级偏移到像素级。作者利用天然编码层级结构的双曲空间，观察到微调过程中CLIP嵌入的双曲半径变化，并据此解释与改进分割性能。该工作为视觉语言模型的跨模态对齐与微调提供了层级几何层面的解释。",
+      "llm_tldr": "针对CLIP文本与图像编码器联合微调为何能提升开放词汇语义分割这一未明机理，该文从层级对齐视角切入，指出微调使图像嵌入的层级由图像级偏移到像素级。作者利用天然编码层级结构的双曲空间，观察到微调过程中CLIP嵌入的双曲半径变化，并据此解释与改进分割性能。该工作为视觉语言模型的跨模态对齐与微调提供了层级几何层面的解释。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

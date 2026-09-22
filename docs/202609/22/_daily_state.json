@@ -1,0 +1,169 @@
+{
+  "date": "20260922",
+  "date_label": "",
+  "generated_at": "2026-09-22 22:31:17 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.23533v1",
+      "route": "202609/22/2609.23533v1-geobalance-geometry-aware-monitoring-and-reconstruction-with-asymmetric-optimization-for-balanced-multimodal-learning",
+      "title": "GeoBalance: Geometry-Aware Monitoring and Reconstruction with Asymmetric Optimization for Balanced Multimodal Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "解决模态主导与不平衡的平衡多模态学习",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.19445v1",
+      "route": "202609/22/2609.19445v1-from-models-to-systems-a-comprehensive-survey-of-efficient-multimodal-learning",
+      "title": "From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "高效多模态学习方法综述",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23191v1",
+      "route": "202609/22/2609.23191v1-low-resource-cross-modal-alignment-using-hgnn-to-enhance-speech-representation",
+      "title": "Low resource cross-modal alignment using HGNN to enhance speech representation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态对齐将语音与文本映射到共享空间",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23248v1",
+      "route": "202609/22/2609.23248v1-space-semantic-projection-and-alignment-of-clip-embeddings-for-domain-adaptation",
+      "title": "SPACE: Semantic Projection and Alignment of CLIP Embeddings for Domain Adaptation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "CLIP视觉语言空间的跨模态对齐",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23267v1",
+      "route": "202609/22/2609.23267v1-knowing-when-to-trust-images-reliability-aware-multi-modal-entity-alignment",
+      "title": "Knowing When to Trust Images: Reliability-Aware Multi-modal Entity Alignment",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向实体对齐的自适应多模态融合",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23507v1",
+      "route": "202609/22/2609.23507v1-detecting-phone-induced-pedestrian-distraction-via-a-multimodal-fusion-transformer",
+      "title": "Detecting Phone-Induced Pedestrian Distraction via a Multimodal Fusion Transformer",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合姿态与外观特征的多模态融合Transformer",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23541v1",
+      "route": "202609/22/2609.23541v1-towards-robust-multimodal-3d-object-detection-via-visual-foundation-models",
+      "title": "Towards robust multimodal 3D object detection via visual foundation models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "激光雷达与相机的多模态融合三维检测",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.23717v1",
+      "route": "202609/22/2609.23717v1-bindclip-one-balanced-coupling-for-compositional-vision-language-scoring",
+      "title": "BindCLIP: One Balanced Coupling For Compositional Vision Language Scoring",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态token-块最优传输对齐",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.24539v1",
+      "route": "202609/22/2609.24539v1-incentive-noise-and-structural-prior-infusion-for-multi-modal-object-re-identification",
+      "title": "Incentive Noise and Structural Prior Infusion for Multi-modal Object Re-Identification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态对齐与模态间结构协调",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    },
+    {
+      "paper_id": "2609.24564v1",
+      "route": "202609/22/2609.24564v1-hyperclip-fine-tuning-clip-foropen-vocabulary-semantic-segmentation-in-hyperbolic-space",
+      "title": "HyperCLIP++: Fine-tuning CLIP forOpen-vocabulary Semantic Segmentation in Hyperbolic Space",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "双曲空间中的视觉语言跨模态对齐",
+      "first_seen_at": "2026-09-22 22:31:17 UTC",
+      "updated_at": "2026-09-22 22:31:17 UTC"
+    }
+  ]
+}
