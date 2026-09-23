@@ -1,0 +1,57 @@
+{
+  "date": "20260923",
+  "date_label": "",
+  "generated_at": "2026-09-23 22:07:08 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.25165v1",
+      "route": "202609/23/2609.25165v1-ovis-embedding-pushing-the-frontiers-of-universal-omni-modal-embeddings",
+      "title": "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "统一表示空间的全模态嵌入",
+      "first_seen_at": "2026-09-23 22:07:08 UTC",
+      "updated_at": "2026-09-23 22:07:08 UTC"
+    },
+    {
+      "paper_id": "2609.16565v1",
+      "route": "202609/23/2609.16565v1-vision-and-text-transformer-for-predicting-answerability-on-visual-question-answering",
+      "title": "Vision And Text Transformer For Predicting Answerability On Visual Question Answering",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "融合视觉与文本特征的Transformer跨模态预测",
+      "first_seen_at": "2026-09-23 22:07:08 UTC",
+      "updated_at": "2026-09-23 22:07:08 UTC"
+    },
+    {
+      "paper_id": "2609.24510v2",
+      "route": "202609/23/2609.24510v2-05100-bidirectional-reciprocal-learning-for-referring-image-segmentation",
+      "title": "0.5%>100%: Bidirectional Reciprocal Learning for Referring Image Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "双向跨模态视觉-语言对齐表示学习",
+      "first_seen_at": "2026-09-23 22:07:08 UTC",
+      "updated_at": "2026-09-23 22:07:08 UTC"
+    }
+  ]
+}

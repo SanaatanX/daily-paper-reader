@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-22</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-23</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>9</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-22 22:31:17 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-23 22:07:08 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,10 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 10 篇推荐（精读 1 篇，速读 9 篇）</p>
-<p>精读：《GeoBalance: Geometry-Aware Monitoring and Reconstruction with Asymmetric Optimization for Balanced Multimodal Learning》（8.0/10）</p>
-<p>速读：《From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning》（7.0/10）, 《Low resource cross-modal alignment using HGNN to enhance speech representation》（6.0/10）, 《SPACE: Semantic Projection and Alignment of CLIP Embeddings for Domain Adaptation》（6.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日精读1篇、速读2篇，聚焦全模态嵌入与视觉问答、指代分割新方法。最值得看的是拿下8.0分的《Ovis-Embedding》，探索通用全模态嵌入的边界。普通读者可先读这篇精读，再按兴趣扫两眼两篇6分速读。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -77,7 +74,7 @@
     <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="GeoBalance: Geometry-Aware Monitoring and Reconstruction with Asymmetric Optimization for Balanced Multimodal Learning">GeoBalance: Geometry-Aware Monitoring and Reconstruction with Asymmetric Optimization for Balanced Multimodal Learning</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings">Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings</span></li></ul>
   </div>
   <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>1</strong></span></div>
 </section>
@@ -87,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">9 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning">From Models to Systems: A Comprehensive Survey of Efficient Multimodal Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Low resource cross-modal alignment using HGNN to enhance speech representation">Low resource cross-modal alignment using HGNN to enhance speech representation</span></li><li><span class="dpr-home-dashboard-paper-title" title="SPACE: Semantic Projection and Alignment of CLIP Embeddings for Domain Adaptation">SPACE: Semantic Projection and Alignment of CLIP Embeddings for Domain Adaptation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Vision And Text Transformer For Predicting Answerability On Visual Question Answering">Vision And Text Transformer For Predicting Answerability On Visual Question Answering</span></li><li><span class="dpr-home-dashboard-paper-title" title="0.5%&gt;100%: Bidirectional Reciprocal Learning for Referring Image Segmentation">0.5%&gt;100%: Bidirectional Reciprocal Learning for Referring Image Segmentation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>9</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 </div>
 

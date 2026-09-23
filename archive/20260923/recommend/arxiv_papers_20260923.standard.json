@@ -1,0 +1,137 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-23T22:03:52.052317+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 1,
+    "deep_cap": 7,
+    "deep_selected": 1,
+    "quick_candidates": 2,
+    "quick_skim_target": 12,
+    "quick_selected": 2
+  },
+  "deep_dive": [
+    {
+      "id": "2609.25165v1",
+      "source": "arxiv",
+      "title": "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+      "abstract": "In this report, we introduce \\textbf{Ovis-Embedding}, a state-of-the-art omni-modal embedding family built on native integration of text, image, video, and audio. Instead of assembling separate modality towers, Ovis-Embedding uses a shared multimodal backbone to encode different modalities in a common representation space. Specifically, we make \\textbf{three key advances}: (1) \\textbf{native omni-modal initialization}: we adopt a pretrained Qwen-omni model as the embedding backbone and adapt it through contrastive training with low-rank initialization; (2) \\textbf{data-centric omni-modal training}: we construct a broad, high-quality corpus spanning text, images, video, audio, and interleaved multimodal data. To improve data efficiency, we introduce homogeneous-source sampling to form task-consistent batches with informative in-batch negatives; and (3) \\textbf{embedding-specific training and inference optimization}: we use focal loss to emphasize hard examples and similarity-based Embedding Distillation to transfer fine-grained similarity structure from complementary experts. At inference time, low-rank feature decomposition enables compact embeddings with flexible dimensionality and minimal performance loss. Empirical evaluations show that the \\textbf{Ovis-Embedding} family achieves state-of-the-art performance on \\textbf{MMEB-v3}, \\textbf{MMEB-v2}, \\textbf{MVEB}, \\textbf{MAEB}, and \\textbf{RTEB}, demonstrating its effectiveness across text, image, video, and audio modalities. These results highlight the potential of unified omni-modal training to overcome modality fragmentation and advance universal embedding models for any-to-any retrieval.",
+      "authors": [
+        "Ovis-Embedding Team"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-21T12:44:27+00:00",
+      "link": "https://arxiv.org/pdf/2609.25165v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "omni-modal embeddings in a common representation space",
+      "llm_evidence_cn": "统一表示空间的全模态嵌入",
+      "llm_evidence": "统一表示空间的全模态嵌入",
+      "canonical_evidence": "统一表示空间的全模态嵌入",
+      "llm_tldr_en": "Ovis-Embedding uses a shared multimodal backbone with low-rank contrastive adaptation and large omni-modal data to encode text, image, video and audio in one common representation space.",
+      "llm_tldr_cn": "现有全模态嵌入通常由彼此独立的模态塔拼装而成，难以在统一空间中对齐文本、图像、视频与音频。作者提出 Ovis-Embedding，采用预训练 Qwen-omni 作为共享多模态主干，通过低秩初始化的对比训练与覆盖多模态及交错数据的大规模语料进行原生全模态初始化。实验表明该模型能在公共表示空间中高效编码多种模态并取得领先性能，说明共享主干可原生融合多模态信息，为跨模态对齐与统一表示学习提供新方案。",
+      "llm_tldr": "现有全模态嵌入通常由彼此独立的模态塔拼装而成，难以在统一空间中对齐文本、图像、视频与音频。作者提出 Ovis-Embedding，采用预训练 Qwen-omni 作为共享多模态主干，通过低秩初始化的对比训练与覆盖多模态及交错数据的大规模语料进行原生全模态初始化。实验表明该模型能在公共表示空间中高效编码多种模态并取得领先性能，说明共享主干可原生融合多模态信息，为跨模态对齐与统一表示学习提供新方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.16565v1",
+      "source": "arxiv",
+      "title": "Vision And Text Transformer For Predicting Answerability On Visual Question Answering",
+      "abstract": "Answerability on Visual Question Answering is a novel and attractive task to predict answerable scores between images and questions in multi-modal data. Existing works often utilize a binary mapping from visual question answering systems into Answerability. It does not reflect the essence of this problem. Together with our consideration of Answerability in a regression task, we propose VT-Transformer, which exploits visual and textual features through Transformer architecture. Experimental results on VizWiz 2020 dataset show the effectiveness and robustness of VT-Transformer for Answerability on Visual Question Answering when comparing with competitive baselines.",
+      "authors": [
+        "Tung Le",
+        "Huy Tien Nguyen",
+        "Le Minh Nguyen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-15T03:02:23+00:00",
+      "link": "https://arxiv.org/pdf/2609.16565v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "transformer combining visual and textual features for cross-modal prediction",
+      "llm_evidence_cn": "融合视觉与文本特征的Transformer跨模态预测",
+      "llm_evidence": "融合视觉与文本特征的Transformer跨模态预测",
+      "canonical_evidence": "融合视觉与文本特征的Transformer跨模态预测",
+      "llm_tldr_en": "VT-Transformer combines visual and textual features via a Transformer and treats VQA answerability as regression, improving robustness on the VizWiz 2020 dataset.",
+      "llm_tldr_cn": "针对视觉问答可回答性预测中常用二值映射、未体现问题本质的缺陷，本文提出VT-Transformer模型。该方法将可回答性建模为回归任务，利用Transformer架构融合图像与问题的视觉和文本特征。在VizWiz 2020数据集上，模型相较竞争基线表现出有效性与鲁棒性。该工作为图文跨模态特征融合与联合预测提供了实用范式。",
+      "llm_tldr": "针对视觉问答可回答性预测中常用二值映射、未体现问题本质的缺陷，本文提出VT-Transformer模型。该方法将可回答性建模为回归任务，利用Transformer架构融合图像与问题的视觉和文本特征。在VizWiz 2020数据集上，模型相较竞争基线表现出有效性与鲁棒性。该工作为图文跨模态特征融合与联合预测提供了实用范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.24510v2",
+      "source": "arxiv",
+      "title": "0.5%>100%: Bidirectional Reciprocal Learning for Referring Image Segmentation",
+      "abstract": "Recent advances in vision foundation models (VFMs) have shown remarkable capabilities across diverse unimodal visual tasks. However, adapting VFMs to referring image segmentation (RIS) typically necessitates precise vision-language alignment via full fine-tuning, incurring substantial computational overhead and risking catastrophic forgetting. While existing parameter-efficient fine-tuning (PEFT) methods enable safe knowledge transfer with minimal training costs, they predominantly operate independently within individual modalities or focus exclusively on unidirectional guidance from language to vision, overlooking progressive cross-modal interaction and visual feedback for textual refinement. To address these limitations, we propose $\\textbf{B}$idirectional $\\textbf{R}$eciprocal $\\textbf{L}$earning ($\\textbf{BRL}$), a novel adapter-based PEFT framework that facilitates hierarchical, bidirectional information flow within both token-mixing and channel-mixing layers of frozen foundation models. Specifically, BRL introduces two complementary lightweight modules. The Reciprocal Attention Adapter (RAA) performs cross-modal query-key exchanges at the token level, enabling visual and linguistic tokens to mutually attend to each other for fine-grained spatial grounding. The Reciprocal Gate Adapter (RGA) generates cross-modal gating signals at the channel level, allowing global semantic context from one modality to adaptively recalibrate channel activations of the other. Extensive experiments on RefCOCO, RefCOCO+, and RefCOCOg benchmarks demonstrate the superiority of BRL over prior RIS methods, achieving state-of-the-art performance while requiring less than 0.5% backbone parameter updates. Code and models will be released at https://github.com/xiaoqiang-lu/BRL.",
+      "authors": [
+        "Xiaoqiang Lu",
+        "Licheng Jiao",
+        "Lingling Li",
+        "Yuting Yang",
+        "Long Sun",
+        "Wenping Ma",
+        "Xu Liu",
+        "Fang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-21T12:48:34+00:00",
+      "link": "https://arxiv.org/pdf/2609.24510v2",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "bidirectional cross-modal vision-language alignment representation learning",
+      "llm_evidence_cn": "双向跨模态视觉-语言对齐表示学习",
+      "llm_evidence": "双向跨模态视觉-语言对齐表示学习",
+      "canonical_evidence": "双向跨模态视觉-语言对齐表示学习",
+      "llm_tldr_en": "A bidirectional reciprocal learning method achieves cross-modal alignment in referring image segmentation, outperforming full fine-tuning with only 0.5% trainable parameters.",
+      "llm_tldr_cn": "将视觉基础模型适配到指代图像分割通常依赖全量微调来对齐视觉与语言，计算开销大且易灾难性遗忘，而现有参数高效微调方法多局限于单模态或仅从语言到视觉的单向引导，缺乏渐进式跨模态交互。论文提出双向互学习方法，让语言引导视觉的同时引入视觉反馈以精炼文本表示，形成双向的跨模态对齐。实验表明仅用0.5%的可训练参数即可超过全量微调100%的效果，凸显双向跨模态交互在参数高效适配中的价值。",
+      "llm_tldr": "将视觉基础模型适配到指代图像分割通常依赖全量微调来对齐视觉与语言，计算开销大且易灾难性遗忘，而现有参数高效微调方法多局限于单模态或仅从语言到视觉的单向引导，缺乏渐进式跨模态交互。论文提出双向互学习方法，让语言引导视觉的同时引入视觉反馈以精炼文本表示，形成双向的跨模态对齐。实验表明仅用0.5%的可训练参数即可超过全量微调100%的效果，凸显双向跨模态交互在参数高效适配中的价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
