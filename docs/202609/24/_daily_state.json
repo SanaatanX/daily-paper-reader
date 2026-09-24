@@ -1,0 +1,153 @@
+{
+  "date": "20260924",
+  "date_label": "",
+  "generated_at": "2026-09-24 22:12:33 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.27577v1",
+      "route": "202609/24/2609.27577v1-vcmm-variance-calibrated-momentum-for-multimodal-learning",
+      "title": "VCMM: Variance-Calibrated Momentum for Multimodal Learning",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过方差校准动量解决多模态联合训练中的模态不平衡",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.28165v1",
+      "route": "202609/24/2609.28165v1-confidence-falls-short-asymmetric-certainty-gains-from-optimization-hinder-multimodal-classification",
+      "title": "Confidence Falls Short: Asymmetric Certainty Gains from Optimization Hinder Multimodal Classification",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "通过跨模态干预纠正多模态学习中的模态不平衡",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.28222v1",
+      "route": "202609/24/2609.28222v1-from-alignment-to-fusion-in-3d-vision-language",
+      "title": "From Alignment to Fusion in 3D Vision-Language",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "先对齐后融合框架，整合点云、体素与多视角图像",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.26617v1",
+      "route": "202609/24/2609.26617v1-mmap-multimodal-missing-aware-pretraining-for-longitudinal-alzheimers-prediction",
+      "title": "MMAP: Multimodal Missing-Aware Pretraining for Longitudinal Alzheimer's Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态缺失感知对齐预训练",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.26907v1",
+      "route": "202609/24/2609.26907v1-small-cues-big-consequences-learning-pivotal-cues-for-multimodal-meme-classification",
+      "title": "Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于最优传输的跨模态对齐与证据融合",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.27615v1",
+      "route": "202609/24/2609.27615v1-bicflow-mer-orchestrating-discriminative-and-generative-multimodal-emotion-recognition-via-conditional-transport",
+      "title": "BiCFlow-MER: Orchestrating Discriminative and Generative Multimodal Emotion Recognition via Conditional Transport",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于条件传输的判别-生成式多模态融合",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.21811v1",
+      "route": "202609/24/2609.21811v1-mist-multimodal-survival-prediction-with-genomic-guided-histology-attention",
+      "title": "MIST: Multimodal Survival Prediction with Genomic-Guided Histology Attention",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过跨模态注意力融合组织学与基因组多模态信息",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.26513v1",
+      "route": "202609/24/2609.26513v1-virtual-encoders-in-multimodal-transformers",
+      "title": "Virtual Encoders in Multimodal Transformers",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态Transformer在内部构建感知表示",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    },
+    {
+      "paper_id": "2609.26920v1",
+      "route": "202609/24/2609.26920v1-cross-modal-contrastive-learning-from-histopathology-and-ct-for-automated-renal-cell-carcinoma-grading",
+      "title": "Cross-Modal Contrastive Learning from Histopathology and CT for Automated Renal Cell Carcinoma Grading",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "组织病理与CT表征的跨模态对比对齐",
+      "first_seen_at": "2026-09-24 22:12:33 UTC",
+      "updated_at": "2026-09-24 22:12:33 UTC"
+    }
+  ]
+}

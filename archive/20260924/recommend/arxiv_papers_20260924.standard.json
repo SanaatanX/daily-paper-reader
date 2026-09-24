@@ -1,0 +1,381 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-24T22:07:32.979748+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 3,
+    "deep_cap": 7,
+    "deep_selected": 3,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [
+    {
+      "id": "2609.27577v1",
+      "source": "arxiv",
+      "title": "VCMM: Variance-Calibrated Momentum for Multimodal Learning",
+      "abstract": "Multimodal joint training often suffers from modality imbalance, where a dominant modality suppresses the optimization of others. Existing methods mainly balance modality learning by modulating gradient magnitudes or directions, modifying optimization objectives, or adjusting training strategies, with most interventions focusing on the current update. However, when combined with widely used momentum-based optimizers, the update also incorporates accumulated information from previous gradients, which is not explicitly addressed by current-step modulation alone. To address this issue, we propose Variance-Calibrated MomentuM (VCMM), which adapts gradient memory to modality-specific gradient dynamics. Specifically, VCMM estimates minibatch noise and temporal drift online and uses their relative strength to determine modality-specific momentum through a Kalman-inspired controller. We further center the control signal across modalities and apply exact bias correction for the time-varying first moment, enabling adaptive gradient memory without extra network passes or explicit learning-rate scaling. Experiments on four multimodal benchmarks demonstrate consistent improvements with modest training overhead.",
+      "authors": [
+        "Zhongjing Gu",
+        "Chenyang Huang",
+        "Yufa Feng",
+        "Chong He",
+        "Qinxu Ding",
+        "Yiming Cui"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-23T08:57:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.27577v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "addresses modality imbalance in multimodal joint training via variance-calibrated momentum",
+      "llm_evidence_cn": "通过方差校准动量解决多模态联合训练中的模态不平衡",
+      "llm_evidence": "通过方差校准动量解决多模态联合训练中的模态不平衡",
+      "canonical_evidence": "通过方差校准动量解决多模态联合训练中的模态不平衡",
+      "llm_tldr_en": "Multimodal joint training suffers from modality imbalance where a dominant modality suppresses others, and current-step modulation ignores momentum memory. VCMM adapts gradient memory to modality-specific dynamics, improving balanced multimodal learning.",
+      "llm_tldr_cn": "多模态联合训练常受模态不平衡困扰，主导模态会抑制其他模态的优化；现有方法多只调制当前步梯度，忽略了动量优化器中累积的历史梯度信息。本文提出方差校准动量VCMM，在动量中估计小批量噪声与时间漂移，自适应地为各模态调整梯度记忆。该方法从优化器层面缓解模态不平衡，为多模态学习中的平衡训练提供了新的动量视角。",
+      "llm_tldr": "多模态联合训练常受模态不平衡困扰，主导模态会抑制其他模态的优化；现有方法多只调制当前步梯度，忽略了动量优化器中累积的历史梯度信息。本文提出方差校准动量VCMM，在动量中估计小批量噪声与时间漂移，自适应地为各模态调整梯度记忆。该方法从优化器层面缓解模态不平衡，为多模态学习中的平衡训练提供了新的动量视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.28165v1",
+      "source": "arxiv",
+      "title": "Confidence Falls Short: Asymmetric Certainty Gains from Optimization Hinder Multimodal Classification",
+      "abstract": "Multimodal learning (MML) falls into the optimization dilemma due to the modality imbalance phenomenon, leading to suboptimal overall performance in practice. While many attempts primarily focus on balancing the optimization dynamics across modalities to address this issue, we identify a subtle yet critical flaw: optimization yields asymmetric gains in predictive certainty, with the strong modality more confident than the weak one, driving imbalanced modality contributions. In this paper, our analysis reveals that this flaw stems from unimodal characteristics rather than multimodal learning, and this confidence discrepancy can be corrected by positive cross-modal intervention. Based on this insight, we propose multimodal Max Confidence Regularization (MaxCR) to dynamically intervene in modality semantic confidence. Specifically, the semantic confidence of each modality is tracked using a nonlinear sparsity measure. We then design max suppression and max excitation based on this measure to regularize strong and weak modalities, respectively. They penalize and encourage the top-1 confidence, thereby constraining multimodal prediction. To this end, strong and weak modalities are expected to make calibrated confidence, thereby improving the overall performance. Empirical experiments on widely used datasets reveal the superiority of our method through comparison with various state-of-the-art (SOTA) multimodal learning baselines.",
+      "authors": [
+        "Longfei Huang",
+        "Xiangyu Wu",
+        "Yang Yang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-23T14:12:10+00:00",
+      "link": "https://arxiv.org/pdf/2609.28165v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "modality imbalance in multimodal learning corrected by cross-modal intervention",
+      "llm_evidence_cn": "通过跨模态干预纠正多模态学习中的模态不平衡",
+      "llm_evidence": "通过跨模态干预纠正多模态学习中的模态不平衡",
+      "canonical_evidence": "通过跨模态干预纠正多模态学习中的模态不平衡",
+      "llm_tldr_en": "This paper identifies asymmetric certainty gains across modalities as a key cause of modality imbalance in multimodal learning, tracing it to unimodal characteristics, and proposes a positive cross-modal intervention to correct confidence discrepancy.",
+      "llm_tldr_cn": "论文针对多模态学习因模态不平衡陷入优化困境、整体性能受限的问题。分析发现优化会给强模态带来更高的预测确定性，形成非对称增益，而这种置信度差异源于单模态特性而非多模态学习本身。据此提出正向跨模态干预来纠正置信度差距。实验表明该干预能缓解模态贡献失衡，为多模态优化提供新视角。",
+      "llm_tldr": "论文针对多模态学习因模态不平衡陷入优化困境、整体性能受限的问题。分析发现优化会给强模态带来更高的预测确定性，形成非对称增益，而这种置信度差异源于单模态特性而非多模态学习本身。据此提出正向跨模态干预来纠正置信度差距。实验表明该干预能缓解模态贡献失衡，为多模态优化提供新视角。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.28222v1",
+      "source": "arxiv",
+      "title": "From Alignment to Fusion in 3D Vision-Language",
+      "abstract": "Unified 3D vision-language systems must combine complementary geometry, scale, and appearance cues while supporting tasks from instance segmentation to language-guided reasoning. Existing methods often process point clouds, voxel grids, and multi-view images independently; directly combining these heterogeneous representations may leave substantial feature discrepancy unresolved, while subsequent unconstrained adaptation may distort their internal geometry. We propose an align-then-fuse framework that first applies triple pairwise cosine alignment to establish segment-level correspondence across the three representations and then retrieves task-conditioned features with a prompt-guided query decoder. Before fusion, representation-specific query features are transformed by learnable mappings constrained to the special orthogonal group. These mappings preserve inner products and Euclidean distances within each representation, permitting controlled representation-specific re-parameterisation without arbitrarily distorting its internal geometry. The transformed features are subsequently combined through Adaptive Fusion under downstream task supervision. Experiments cover eight datasets for instance segmentation, visual grounding, question answering, and dense captioning. Compared with PQ3D, the model improves average precision by 3.2 points on ScanNet200 and grounding accuracy by 2.9, 10.6, 4.6, and 4.1 points on ScanRefer, Nr3D, Sr3D, and Multi3DRefer, respectively, while also improving performance on ScanQA, SQA3D, and Scan2Cap. Ablations further support the complementary roles of alignment and orthogonal re-parameterisation and the effectiveness of Adaptive Fusion.",
+      "authors": [
+        "Xueqi Qiu",
+        "Xingyu Miao",
+        "Jingjing Deng",
+        "Haoran Duan",
+        "Yang Long",
+        "Ling Shao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-23T14:52:14+00:00",
+      "link": "https://arxiv.org/pdf/2609.28222v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "align-then-fuse framework combining point clouds, voxels and multi-view images",
+      "llm_evidence_cn": "先对齐后融合框架，整合点云、体素与多视角图像",
+      "llm_evidence": "先对齐后融合框架，整合点云、体素与多视角图像",
+      "canonical_evidence": "先对齐后融合框架，整合点云、体素与多视角图像",
+      "llm_tldr_en": "Unified 3D vision-language systems must combine heterogeneous geometry and appearance cues, but independent processing leaves feature discrepancy. An align-then-fuse framework applies triple pairwise cosine alignment then prompt-guided query decoding to fuse representations.",
+      "llm_tldr_cn": "统一的3D视觉语言系统需要整合几何、尺度与外观线索，但现有方法独立处理点云、体素与多视角图像，直接组合会残留较大特征差异，无约束适配还可能破坏内部几何结构。本文提出先对齐后融合框架，先用三重两两余弦对齐建立三类表示的分段对应，再用提示引导查询解码器检索任务条件特征。该框架有效弥合异构表示差异，为3D跨模态融合与语言引导推理提供统一方案。",
+      "llm_tldr": "统一的3D视觉语言系统需要整合几何、尺度与外观线索，但现有方法独立处理点云、体素与多视角图像，直接组合会残留较大特征差异，无约束适配还可能破坏内部几何结构。本文提出先对齐后融合框架，先用三重两两余弦对齐建立三类表示的分段对应，再用提示引导查询解码器检索任务条件特征。该框架有效弥合异构表示差异，为3D跨模态融合与语言引导推理提供统一方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.26617v1",
+      "source": "arxiv",
+      "title": "MMAP: Multimodal Missing-Aware Pretraining for Longitudinal Alzheimer's Prediction",
+      "abstract": "Clinical decision making heavily relies on predicting the disease progression trajectory by seeking to understand patient's health status which is characterised by multimodal medical data. AI holds great potential for learning useful representations from multimodal medical data to predict disease progression and aid clinical decision making. However, development of predictive AI models is constrained by missing modalities and incomplete tabular data frequently occurring in medical datasets. In addition, disease labels alone may only provide limited supervisory signals for learning representations from high-dimensional multimodal data. Here, we present MMAP, a novel Multimodal Missing-aware Alignment Pretraining method for learning image-tabular representations from incomplete data. An image encoder is pretrained with efficient sigmoid contrastive learning combined with generative reconstruction. A tabular encoder is built upon a tabular foundation model. A missing token generator enables the two encoders to take incomplete data as input, enabling the model to be robust against missing modalities, either with missing images or missing tabular data. We evaluate the clinical usefulness of the learnt multimodal representations on two challenging longitudinal clinical tasks for Alzheimer's disease: predicting disease stage conversion and predicting amyloid status. The proposed method outperforms strong multimodal and unimodal baselines.",
+      "authors": [
+        "Fiona Kekwick",
+        "Matthew Baugh",
+        "Bernhard Kainz",
+        "Paul M. Matthews",
+        "Wenjia Bai"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-22T15:50:42+00:00",
+      "link": "https://arxiv.org/pdf/2609.26617v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "multimodal missing-aware alignment pretraining",
+      "llm_evidence_cn": "多模态缺失感知对齐预训练",
+      "llm_evidence": "多模态缺失感知对齐预训练",
+      "canonical_evidence": "多模态缺失感知对齐预训练",
+      "llm_tldr_en": "MMAP targets Alzheimer's progression prediction from multimodal medical data hampered by missing modalities and weak supervision, proposing a missing-aware alignment pretraining method to learn image-tabular representations robust to incomplete inputs.",
+      "llm_tldr_cn": "面向阿尔茨海默病进展预测的AI模型常受模态缺失、表格数据不完整与监督信号不足的限制。作者提出MMAP多模态缺失感知对齐预训练方法，在缺失模态条件下学习图像与表格数据的联合表征，缓解不完整输入带来的性能下降。方法用于纵向疾病进展预测任务，提升了表征学习效果。该工作为缺失模态下的多模态表征与对齐提供了可迁移思路。",
+      "llm_tldr": "面向阿尔茨海默病进展预测的AI模型常受模态缺失、表格数据不完整与监督信号不足的限制。作者提出MMAP多模态缺失感知对齐预训练方法，在缺失模态条件下学习图像与表格数据的联合表征，缓解不完整输入带来的性能下降。方法用于纵向疾病进展预测任务，提升了表征学习效果。该工作为缺失模态下的多模态表征与对齐提供了可迁移思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.21811v1",
+      "source": "arxiv",
+      "title": "MIST: Multimodal Survival Prediction with Genomic-Guided Histology Attention",
+      "abstract": "Multimodal survival models can combine complementary prognostic information from whole-slide images and genomic profiles, but effective fusion remains challenging amid external cohort shift and computational complexity. To address these challenges, we propose MIST, multimodal survival prediction with genomic-guided histology attention. MIST represents genomic features as tokens and allows them to query compact foundation-model-derived histology context tokens before survival prediction. This design enriches molecular information with histology context rather than merging separately encoded modalities only at the final stage. Training combines discrete-time survival prediction with genomic feature masking, WSI dropout, and paired WSI-genomics contrastive alignment. Across four external evaluations in colon, renal, lung, and glioblastoma cohorts, MIST improves external C-index over standard fusion baselines in the primary comparisons. These results support genomic-guided histology attention as a compact and effective strategy for multimodal oncology outcome prediction. Our code is available at https://github.com/samiyavuuz/MIST .",
+      "authors": [
+        "Muhammet Sami Yavuz",
+        "Sabri Mustafa Kahya",
+        "Richard R. Chen",
+        "Jana Lipkova",
+        "Benedikt Wiestler"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-18T14:21:37+00:00",
+      "link": "https://arxiv.org/pdf/2609.21811v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal fusion of histology and genomics via cross-modal attention",
+      "llm_evidence_cn": "通过跨模态注意力融合组织学与基因组多模态信息",
+      "llm_evidence": "通过跨模态注意力融合组织学与基因组多模态信息",
+      "canonical_evidence": "通过跨模态注意力融合组织学与基因组多模态信息",
+      "llm_tldr_en": "MIST fuses whole-slide histology images with genomic profiles for survival prediction via genomic-guided attention, letting genomic tokens query histology context tokens instead of late merging, improving robustness under cohort shift.",
+      "llm_tldr_cn": "针对多模态生存预测中跨队列漂移与计算复杂度导致融合困难的问题，本文提出MIST，将基因组特征表示为查询token，去查询基础模型提取的紧凑组织学上下文token，从而在预测前实现基因组引导的跨模态注意力融合，而非仅在末端拼接编码结果。训练结合离散时间生存预测、基因组掩码、WSI丢弃与配对WSI-基因组对比，验证了跨模态注意力融合在医学多模态任务中的有效性，为多模态融合方法提供了可迁移思路。",
+      "llm_tldr": "针对多模态生存预测中跨队列漂移与计算复杂度导致融合困难的问题，本文提出MIST，将基因组特征表示为查询token，去查询基础模型提取的紧凑组织学上下文token，从而在预测前实现基因组引导的跨模态注意力融合，而非仅在末端拼接编码结果。训练结合离散时间生存预测、基因组掩码、WSI丢弃与配对WSI-基因组对比，验证了跨模态注意力融合在医学多模态任务中的有效性，为多模态融合方法提供了可迁移思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.26907v1",
+      "source": "arxiv",
+      "title": "Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification",
+      "abstract": "Memes often derive their harmful, hateful, or sarcastic meaning from small but decisive visual, textual, or cross-modal cues. Existing multimodal classifiers can miss such evidence when relying mainly on global image-text representations. We introduce MemeCF, a cue-focused benchmark of 9,895 memes across harm, hate, and sarcasm, with annotations identifying the modality and rationale of the pivotal evidence. We also propose MemePIVOT, a local-global architecture for meme classification. MemePIVOT uses frozen CLIP features, unbalanced optimal transport to align words with image patches while allowing irrelevant evidence to remain unmatched, and an evidential fusion head to combine local grounding with global meme context under uncertainty. Experiments on HarMeme, PrideMM, and MemeCF show consistent gains over strong text-only, image-only, multimodal, and vision-language baselines. Cross-dataset and ablation results further show that explicit pivotal-evidence modeling improves robustness and contributes meaningfully beyond global multimodal representations. Our code and dataset are publicly available at https://github.com/AkshitSharma1/MemePIVOT",
+      "authors": [
+        "Akshit Sharma",
+        "Prashant W. Patil"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "published": "2026-09-22T18:04:27+00:00",
+      "link": "https://arxiv.org/pdf/2609.26907v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "cross-modal alignment via optimal transport and evidential fusion",
+      "llm_evidence_cn": "基于最优传输的跨模态对齐与证据融合",
+      "llm_evidence": "基于最优传输的跨模态对齐与证据融合",
+      "canonical_evidence": "基于最优传输的跨模态对齐与证据融合",
+      "llm_tldr_en": "Meme meaning often hinges on small visual, textual or cross-modal cues that global image-text classifiers miss. MemePIVOT aligns words with image patches via unbalanced optimal transport and fuses local grounding with global context, released with the MemeCF benchmark.",
+      "llm_tldr_cn": "表情包的伤害、仇恨或讽刺含义往往来自细小却决定性的视觉、文本或跨模态线索，而现有分类器主要依赖全局图文表示，容易忽略这些关键证据。本文提出MemeCF基准，包含9895个表情包并标注了关键证据的模态与理由，同时提出MemePIVOT局部-全局架构，利用冻结CLIP特征和不平衡最优传输将词与图像块对齐，并用证据融合头在不确定性下结合局部接地与全局上下文。该工作为细粒度跨模态对齐与多模态分类提供了新基准与方法。",
+      "llm_tldr": "表情包的伤害、仇恨或讽刺含义往往来自细小却决定性的视觉、文本或跨模态线索，而现有分类器主要依赖全局图文表示，容易忽略这些关键证据。本文提出MemeCF基准，包含9895个表情包并标注了关键证据的模态与理由，同时提出MemePIVOT局部-全局架构，利用冻结CLIP特征和不平衡最优传输将词与图像块对齐，并用证据融合头在不确定性下结合局部接地与全局上下文。该工作为细粒度跨模态对齐与多模态分类提供了新基准与方法。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.26513v1",
+      "source": "arxiv",
+      "title": "Virtual Encoders in Multimodal Transformers",
+      "abstract": "Multimodal language models traditionally rely on dedicated perceptual encoders to construct task-usable representations. More integrated architectures have recently emerged, which instead expose the shared transformer to lightly projected patches, audio frames, or discrete visual tokens. Where does this encoding happen when such representations are not provided? We find that the transformer can internalize this missing computation, constructing task-usable perceptual representations within its own early-to-middle layers before the downstream language model. We call this computational structure a Virtual Encoder. Across linear probing, similarities to perceptual encoders, and causal analyses, we identify signatures of this structure in models that receive perceptual tokens without continuous encoder-derived features. These analyses also suggest that the boundary between perception and language processing need not coincide within an architectural module. Instead, encoder-like computation can emerge as a functional regime within a shared transformer, providing a new perspective for understanding where and how multimodal models process perception.",
+      "authors": [
+        "Katsuya Ogata",
+        "Yuta Nakashima"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-22T14:41:33+00:00",
+      "link": "https://arxiv.org/pdf/2609.26513v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal transformers construct perceptual representations internally",
+      "llm_evidence_cn": "多模态Transformer在内部构建感知表示",
+      "llm_evidence": "多模态Transformer在内部构建感知表示",
+      "canonical_evidence": "多模态Transformer在内部构建感知表示",
+      "llm_tldr_en": "The paper shows that multimodal transformers without dedicated perceptual encoders internally construct task-usable perceptual representations in early-to-middle layers, a structure called a Virtual Encoder, identified via probing and causal analyses.",
+      "llm_tldr_cn": "论文针对多模态语言模型在缺少专用感知编码器时表示如何形成的问题展开研究。发现共享Transformer能在自身早中层内化缺失的感知计算，构建可用的感知表示，作者称之为虚拟编码器。通过线性探测、与感知编码器相似度及因果分析识别出该结构。其贡献在于揭示集成式多模态架构的内部表示机制。",
+      "llm_tldr": "论文针对多模态语言模型在缺少专用感知编码器时表示如何形成的问题展开研究。发现共享Transformer能在自身早中层内化缺失的感知计算，构建可用的感知表示，作者称之为虚拟编码器。通过线性探测、与感知编码器相似度及因果分析识别出该结构。其贡献在于揭示集成式多模态架构的内部表示机制。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal representation learning approaches",
+      "matched_requirement_id": "req-14",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27615v1",
+      "source": "arxiv",
+      "title": "BiCFlow-MER: Orchestrating Discriminative and Generative Multimodal Emotion Recognition via Conditional Transport",
+      "abstract": "In multimodal emotion recognition (MER), human affective states are inferred by integrating complementary cues from multiple modalities. In audio-text MER, affective cues are often entangled with speaker style and lexical content, while cross-modal disagreement further complicates how the evidence should be integrated. Under conventional discriminative fusion, multimodal evidence is compressed into a terminal prediction, with modality-specific cues and conflict information insufficiently preserved. In large generative affective models, by contrast, affective reasoning is typically embedded in language decoding, leaving emotion evidence implicit and difficult to verify in a structured space. To address these limitations, BiCFlow-MER (Bidirectional Conditional Flow for Multimodal Emotion Recognition) is proposed as a conditional-flow framework in which audio-text MER is formulated as generative evidence transport within a structured emotion space. Within BiCFlow-MER, emotion-oriented evidence is disentangled from speaker-style and lexical-content factors to construct a conflict-aware affective condition. Guided by this condition, each utterance is transported to an explicit emotion-space endpoint through a bidirectional rectified flow. Candidate emotions are jointly verified through adaptive prototype-cloud scoring of the transported endpoint and backward class-to-condition consistency with the original multimodal condition, enabling conflict-aware recognition. BiCFlow-MER is shown to outperform all compared methods across IEMOCAP, MELD, and the zero-shot CASE benchmark. By orchestrating discriminative recognition and generative evidence modeling through conditional transport, BiCFlow-MER defines a new MER paradigm.",
+      "authors": [
+        "Yanbing Wang",
+        "Shenyue Wang",
+        "Chunyang Yu"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.SD"
+      ],
+      "published": "2026-09-23T09:36:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.27615v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "discriminative-generative multimodal fusion via conditional transport",
+      "llm_evidence_cn": "基于条件传输的判别-生成式多模态融合",
+      "llm_evidence": "基于条件传输的判别-生成式多模态融合",
+      "canonical_evidence": "基于条件传输的判别-生成式多模态融合",
+      "llm_tldr_en": "BiCFlow-MER tackles entangled affective cues and cross-modal disagreement in audio-text emotion recognition by orchestrating discriminative and generative fusion via conditional transport, better preserving modality-specific and conflict evidence.",
+      "llm_tldr_cn": "多模态情感识别中，情感线索常与说话人风格和词汇内容纠缠，跨模态分歧也使证据融合困难；传统判别式融合会压缩模态信息，生成式模型则使证据隐式难以验证。为此作者提出BiCFlow-MER，通过条件传输协调判别式与生成式融合，保留模态特有线索与冲突信息。方法在多模态情感识别任务上验证了融合效果。其意义在于为冲突感知的多模态融合提供了可验证的结构化框架。",
+      "llm_tldr": "多模态情感识别中，情感线索常与说话人风格和词汇内容纠缠，跨模态分歧也使证据融合困难；传统判别式融合会压缩模态信息，生成式模型则使证据隐式难以验证。为此作者提出BiCFlow-MER，通过条件传输协调判别式与生成式融合，保留模态特有线索与冲突信息。方法在多模态情感识别任务上验证了融合效果。其意义在于为冲突感知的多模态融合提供了可验证的结构化框架。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.26920v1",
+      "source": "arxiv",
+      "title": "Cross-Modal Contrastive Learning from Histopathology and CT for Automated Renal Cell Carcinoma Grading",
+      "abstract": "Background: Clear cell renal cell carcinoma (ccRCC) exhibits substantial clinical heterogeneity, and accurate grade assessment is essential for risk stratification and treatment planning. However, conventional grading requires invasive tissue sampling. We developed RCC-Align, a cross-modal contrastive learning framework that leverages paired histopathology and computed tomography (CT) data during training to improve noninvasive CT-based ccRCC grade prediction. Methods: RCC-Align aligns paired whole-slide histopathology images (WSIs) and CT scans through contrastive cross-modal objectives, transferring grade-discriminative information from microscopic tissue morphology to macroscopic radiologic representations. The framework was trained and evaluated on paired TCGA and CPTAC cohorts using patient-level five-fold cross-validation. Performance for low- versus high-grade ccRCC classification was compared against CT-only baselines (DINOv2-Base and DINOv2-Finetuned) and a WSI-based reference model (GigaPath-Finetuned). Cross-modal alignment was assessed using cosine similarity analysis. Results: RCC-Align achieved an AUC of 0.601 (95% CI, 0.524-0.673) and AUPRC of 0.599 (95% CI, 0.541-0.676), outperforming DINOv2-Finetuned (AUC 0.545; AUPRC 0.543) with significantly improved low-grade prediction (p = 0.004). RCC-Align also demonstrated stronger paired WSI-CT embedding alignment compared with baselines. The WSI-based GigaPath reference achieved an AUC of 0.719. Conclusion: Pathology-guided contrastive learning improves CT-based ccRCC grading while requiring only CT at inference. This approach may complement tissue diagnosis when biopsy is unsafe, infeasible, or limited by intratumoral heterogeneity. Validation in larger, multi-institutional cohorts with external testing is needed before clinical translation.",
+      "authors": [
+        "Amit Das",
+        "Tanmay Shukla",
+        "Naofumi Tomita",
+        "Faraz Farhadi",
+        "Jessica Sin",
+        "Ari Hakimi",
+        "Chad Vanderbilt",
+        "Jie-Fu Chen",
+        "Ritesh Kotecha",
+        "Weijie Ma",
+        "Bing Ren",
+        "Saeed Hassanpour"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-22T18:16:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.26920v1",
+      "tags": [
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-modal contrastive alignment between histopathology and CT representations",
+      "llm_evidence_cn": "组织病理与CT表征的跨模态对比对齐",
+      "llm_evidence": "组织病理与CT表征的跨模态对比对齐",
+      "canonical_evidence": "组织病理与CT表征的跨模态对比对齐",
+      "llm_tldr_en": "RCC-Align uses cross-modal contrastive learning on paired histopathology and CT data to transfer grade-discriminative information into CT representations for noninvasive renal cell carcinoma grading.",
+      "llm_tldr_cn": "透明细胞肾细胞癌分级通常依赖有创组织取样，亟需无创评估手段。本文提出RCC-Align跨模态对比学习框架，训练时利用配对的病理全切片图像与CT扫描进行跨模态对齐，把组织形态中的分级判别信息迁移到影像表征。该框架提升了基于CT的无创分级预测，展示了跨模态对比对齐在医学多模态表示学习中的价值。",
+      "llm_tldr": "透明细胞肾细胞癌分级通常依赖有创组织取样，亟需无创评估手段。本文提出RCC-Align跨模态对比学习框架，训练时利用配对的病理全切片图像与CT扫描进行跨模态对齐，把组织形态中的分级判别信息迁移到影像表征。该框架提升了基于CT的无创分级预测，展示了跨模态对比对齐在医学多模态表示学习中的价值。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
