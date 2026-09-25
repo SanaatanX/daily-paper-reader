@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-24</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-25</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 9 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>3</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-24 22:12:33 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-25 21:55:01 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,10 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 9 篇推荐（精读 3 篇，速读 6 篇）</p>
-<p>精读：《VCMM: Variance-Calibrated Momentum for Multimodal Learning》（9.0/10）, 《Confidence Falls Short: Asymmetric Certainty Gains from Optimization Hinder Multimodal Classification》（9.0/10）</p>
-<p>速读：《MMAP: Multimodal Missing-Aware Pretraining for Longitudinal Alzheimer&#x27;s Prediction》（7.0/10）, 《Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification》（7.0/10）, 《BiCFlow-MER: Orchestrating Discriminative and Generative Multimodal Emotion Recognition via Conditional Transport》（7.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日速读10篇、精读挂零，多模态持续学习与文档QA成为最亮眼的两条线。</p>
+<p>最值得看的是7.0分的《Hyperbolic Multimodal Continual Learning》提出的最近可容许解思路，以及6.0分文档QA对文本、像素与两者输入的评估。</p>
+<p>普通读者可先读7.0分这篇抓持续学习主线，再用文档QA那篇判断实际任务该选哪种输入表示。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">3 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="VCMM: Variance-Calibrated Momentum for Multimodal Learning">VCMM: Variance-Calibrated Momentum for Multimodal Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Confidence Falls Short: Asymmetric Certainty Gains from Optimization Hinder Multimodal Classification">Confidence Falls Short: Asymmetric Certainty Gains from Optimization Hinder Multimodal Classification</span></li><li><span class="dpr-home-dashboard-paper-title" title="From Alignment to Fusion in 3D Vision-Language">From Alignment to Fusion in 3D Vision-Language</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">10 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MMAP: Multimodal Missing-Aware Pretraining for Longitudinal Alzheimer&#x27;s Prediction">MMAP: Multimodal Missing-Aware Pretraining for Longitudinal Alzheimer&#x27;s Prediction</span></li><li><span class="dpr-home-dashboard-paper-title" title="Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification">Small Cues, Big Consequences: Learning Pivotal Cues for Multimodal Meme Classification</span></li><li><span class="dpr-home-dashboard-paper-title" title="BiCFlow-MER: Orchestrating Discriminative and Generative Multimodal Emotion Recognition via Conditional Transport">BiCFlow-MER: Orchestrating Discriminative and Generative Multimodal Emotion Recognition via Conditional Transport</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Hyperbolic Multimodal Continual Learning: A Closest-Admissible Solution">Hyperbolic Multimodal Continual Learning: A Closest-Admissible Solution</span></li><li><span class="dpr-home-dashboard-paper-title" title="Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA">Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA</span></li><li><span class="dpr-home-dashboard-paper-title" title="S2A:Semantic-to-Spatial Alignment for Alignment-Free RGB-T Salient Object Detection">S2A:Semantic-to-Spatial Alignment for Alignment-Free RGB-T Salient Object Detection</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span></div>
 </section>
 </div>
 

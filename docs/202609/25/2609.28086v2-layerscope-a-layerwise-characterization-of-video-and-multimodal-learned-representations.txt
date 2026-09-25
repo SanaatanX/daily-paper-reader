@@ -1,0 +1,829 @@
+Title: LAYERSCOPE: A Layerwise Characterization of Video and Multimodal Learned Representations
+
+URL Source: https://arxiv.org/pdf/2609.28086v2
+
+Published Time: Fri, 25 Sep 2026 00:41:48 GMT
+
+Number of Pages: 25
+
+Markdown Content:
+# LAYER SCOPE : A Layerwise Characterization of Video and Multimodal Learned Representations 
+
+Sandra Arcos-Holzinger ∗∗1,4 Debashish Chakraborty ∗∗2 Rohita Mocharla ∗∗1,3
+
+Will Walden 1,2 Andrew Yates 1,2 Reno Kriz 1,2
+
+Sarah M. Erfani 4 James Bailey 5 Vishal M. Patel 1 Sanjeev Khudanpur 1,21Johns Hopkins University 2Human Language Technology Center of Excellence 
+
+> 3
+
+Johns Hopkins Applied Physics Lab 4University of Melbourne 5Monash University 
+
+{sarcosh1,dchakra6,nmochar1 }@jh.edu 
+
+Abstract 
+
+We propose L AYER SCOPE , a label-free, layerwise framework that aims to character-ize a model’s learned representations in video and multimodal settings. Evaluating downstream performance using representations from final or intermediate layers typically requires large amounts of labeled data, repeated task-specific evaluations, and substantial computation. To address these limitations, L AYER SCOPE uses local, global, distributional, and correspondence-based geometric metrics to com-pare layerwise representation structure within and across models without requiring task-specific labels. We evaluate seven architecturally diverse models across video and multimodal classification, clustering, and text-to-video retrieval tasks from MVEB/MVEB+. We find that intermediate-layer representations can outperform final-layer and model-default outputs. We also find that no single geometric metric consistently predicts downstream performance, but note that distinct layerwise geometric signatures emerge across model families. LID shows task-dependent 
+
+relationships with performance, while RankMe provides the strongest measure for classification and clustering, but is not a universal layer selector. We also find that pairing-aware metrics explain retrieval better than distributional distances alone. LAYER SCOPE therefore offers a framework for comparing representations across models and layers, enabling a more systematic evaluation in video and multimodal settings. 
+
+1 Introduction 
+
+Multimodal embedding models are typically evaluated through downstream benchmarks such as MVEB [5] or MTEB [31] and their default output representations. These benchmarks measure capability across tasks including classification, clustering, and retrieval, but treat the internal learned representations as a black box. Thus, benchmark scores merely indicate model success or failure, but provide limited insight into how useful representations develop throughout the network. Evaluating intermediate layers can be computationally expensive and task-dependent. Geometric measures provide label-free, task-independent diagnostics of representation structure: the metrics themselves do not depend on downstream labels or task scores, although their relationship with downstream performance may vary across tasks. While geometric measures do not replace benchmark perfor-mance, they characterize the intrinsic properties of the learned representations i.e., local, global, distributional and correspondence-sensitive properties that downstream scores do not expose. In this work, we refer to label-free geometric diagnostics for metrics that do not require downstream labels or task scores, and are primarily computed using a model’s learned representations. We also 
+
+> ∗These authors contributed equally. Preprint. arXiv:2609.28086v2 [cs.LG] 24 Sep 2026 min-SW
+> Shared spac
+> Default pai
+
+A. Benchmark inputs   
+
+> Classification &Clustering VIDEO-ONLY TASKS
+> Retrieval SHARED-SPACE TASKS
+> A woman is carving a pumpkin and gives instructions how to do it
+> True pair
+> Permuted Pairing
+> MODEL FAMILIES
+> Predictive Video
+> Video-Text Contrastive
+> Audio-Video Contrastive
+> Autoregressive Multimodal
+
+B. Frozen layer representations            
+
+> 1 Video-layer sweep
+> Mean-pooled representation at each layer
+> video
+> 1…ℓ
+> video layers: ℓ = 1,…,Bₘ
+> Bₘ Model-default
+> output
+> 2 Text–video layer pairs
+> Complete matrix p = (ℓ T, ℓ V)
+> 1…ℓBₘᵀ
+> text
+> 1…ℓBₘⱽ
+> Shared
+> space
+> video
+> Video-only interface
+> Mean over eligible hidden states after block ℓ, before the model-specific output readout.
+> Shared-space interface
+> Apply the frozen normalization, pooling, and projection used by the retrieval interface.
+> text layer ↓
+> oracle pair min-SW₂ default pair
+> video layer →
+
+C. Layerwise evaluation   
+
+> GEOMETRIC DIAGNOSTICS
+> LOCAL
+> GRIDS-LID
+> SPECTRAL
+> RankMe + covariance effective rank
+> MARGINAL
+> Sliced 2-Wasserstein distance
+> PAIRED
+> Held-out orthogonal Procrustes error
+> DOWNSTREAM PERFORMANCE
+> Clustering
+> V-measure
+> Retrieval
+> nDCG@10
+> Zero-shot
+> classification accuracy
+> Analyze across layers and pairs
+> Association Geometry-only
+> selection Regret
+> Classification
+> Accuracy
+
+Figure 1: L AYER SCOPE framework. Given video-only tasks or tasks evaluated in a shared text–video space, L AYER SCOPE freezes each model and evaluates representations across transformer depth. For classification and clustering, eligible post-block hidden states are mean pooled; model-default outputs are evaluated separately. For models with shared text–video spaces, the model-specific normalization, pooling, and projection operations are applied at every text and video layer, producing the complete pair matrix p = ( ℓT , ℓ V ) ∈ P m,t . LAYER SCOPE relates GRIDS-LID, RankMe, covariance effective rank, sliced 2-Wasserstein distance, and held-out orthogonal Procrustes error to downstream performance through within-model association and geometry-only selection regret. refer to task-dependent conditions, in cases where a model’s geometric properties changes with downstream performance. Our work aims to investigate beyond whether geometric measures capture 
+
+representation quality , but to identify the conditions under which geometric metrics may explain, characterize, or predict useful downstream behavior in models. 
+
+Why layerwise representation geometry may help. Internal representations can change substan-tially across layers in the model, and useful semantic information can emerge before the final layer in a network; this motivates auditing intermediate representations rather than considering only the output of the last layer as the object of evaluation [10]. This has direct implications across encoder model families and objective functions used during training. Geometric quantities such as local intrinsic dimensionality (LID), effective rank [39], and cross-modal distributional distance provide different mathematical approaches to characterize the high dimensional structure of a model’s representations— and in some cases, without requiring task labels. Global and local geometric diagnostics provide complementary views of learned representations. Global measures characterize dataset-level dimen-sionality or spectral utilization, whereas local measures such as LID characterize neighborhood-level manifold complexity. Prior work such as GRIDS-LID [4] motivates intrinsic-dimensionality analysis of learned representations for anomaly detection in self-supervised speech models (S3Ms), but it remains unclear whether intrinsic metrics such as LID are reliable diagnostics for the evaluation of different model architectures, layers, modalities, and downstream tasks. In this context, L AYER -SCOPE asks whether geometric metrics can explain or predict downstream performance by inspection of a model’s representations. Geometry is thus not a replacement for representation quality, but rather a complementary metric to characterize learned representations and capture when geometric diagnostics agree with, or diverge from downstream performance. Positive results establish where geometry is informative; negative results pinpoint to the limits of the diagnostics, e.g., constraints in LID as a single metric when identifying the best-performing layer. 
+
+Contributions. We study how the geometry and downstream performance of video and multimodal representations evolve across network depth. To do so, we introduce L AYER SCOPE , a layerwise evaluation framework that jointly audits intermediate representations using downstream tasks and complementary local, global, and cross-modal geometric diagnostics. This allows us to address three 2distinct questions: first , how representation geometry evolves across network depth; second , whether geometric measures are associated with downstream performance; and third , whether those measures can reliably identify high-performing representations. Using L AYER SCOPE , we first ask when intermediate representations outperform final-layer or usual model outputs across classification, clustering, zero-shot classification, and text-to-video retrieval (T2VR). We then examine whether intrinsic geometric metrics track layerwise downstream perfor-mance, and whether layer selection using these metrics can identify high-performing representations with low regret. Finally, for multimodal models, we study how text and video representations relate across network depth; this is achieved by distinguishing marginal distributional proximity from pair-sensitive alignment and evaluating how each relates to retrieval behavior. Across predictive, contrastive, and autoregressive model families, we also compare their layerwise geometric profiles, allowing us to understand the evolution of representations in the network and emerging patterns which we refer to as geometric signatures. 
+
+LAYER SCOPE evaluates models using geometric diagnostics to uncover aspects of representation structure that are not directly observable from benchmark scores alone. Our framework does not propose geometric analyses as alternatives to downstream tasks, but rather, as complementary label-free evaluation proxies. In our work, these support the evaluation of failure modes in a model, as well as layer-selection criteria. Figure 1 summarizes the framework and experimental workflow. Our contributions are: (i) We introduce L AYER SCOPE , a layerwise evaluation framework that jointly audits down-stream performance and local, global, and cross-modal representation geometry across seven heterogeneous video and multimodal models; (ii) We conduct a systematic layerwise evaluation across classification, clustering, zero-shot classification, and T2VR, and analyze geometry as both a performance correlate and a 
+
+label-free layer-selection criterion using association and selection regret; and (iii) We distinguish marginal distributional proximity from pair-sensitive alignment, showing when geometric measures track retrieval behavior and when correspondence-aware diagnos-tics reveal text–video structure that marginal distribution measures cannot capture. 
+
+2 Related Work 
+
+Embedding and multimodal evaluation benchmarks. Embedding benchmarks have expanded from individual modalities toward broad, task-diverse evaluation suites. MTEB standardized evalua-tion of text embeddings across multiple downstream tasks [31], while MSEB extended this style of evaluation to sound representations [18]. More recently, MVEB introduced a video embedding bench-mark spanning (zero-shot) classification, pair classification, clustering, retrieval, and video-centric question answering—with MVEB+ providing a larger pool of tasks across video, text, and audio [5]. These benchmarks measure downstream performance, but do not generally examine how learned representations vary within the network, nor do they commonly treat network depth as an evaluation variable i.e., layer number. For example, MVEB evaluates models using its model-default embedding output without layer-specific tuning [5]. This leaves a few open questions: how does downstream performance vary across layers in a network? Is it possible to identify high-performing internal representations in a model, without exhaustively evaluating every layer on labeled tasks? From this perspective, L AYER SCOPE complements downstream benchmarking by treating network-depth (i.e., number of hidden layers) as an evaluation variable, and testing whether label-free layerwise geometric measures can be both descriptive and predictive of downstream behavior. 
+
+Geometry of learned representations. The geometric view of representation learning is motivated by the manifold hypothesis, under which high-dimensional observations can concentrate near a lower-dimensional structure [32, 12]. Studies of neural representations similarly find that learned features can occupy low-dimensional structures within much larger ambient spaces [3, 14, 37], and recent work has examined how computations inside transformers can modify manifold structure across layers [17]. These results motivate intrinsic and spectral measurements as tools for studying how representation structure changes throughout a network. This includes complementary local and global measurements that aid in the analysis of latent representations. Respectively, at the local scale, 3metrics are more granular in capturing neighborhood structure, while at the global scale, metrics are more coarse and use the full embedding space. These approaches have been used extensively in data mining [8] with clear applications for distributional analysis and outlier detection of latent representations. For example, global rank-based methods summarize global spectral structure and have been proposed as label-free indicators associated with downstream performance [13]. In S3Ms, global rank measures have been found to correlate with downstream performance, although they do not reliably identify the best-performing layer for a given task [1, 50]. At the local scale, LID provides a complementary view by estimating the effective dimensionality of the neighborhood around a query point (e.g., embedding corresponding to an image frame) in relation to nearest-neighbor distances; thus, measuring the rate at which the mass of such neighborhood grows with distance [2, 7, 26]. LID has been used to characterize adversarial examples, noisy-label memorization, and contextual-language-model training dynamics [29, 30, 41]. Related local density statistics have been used to identify backdoor-poisoned samples [19], while GRIDS-LID uses layerwise LID features for anomaly detection in S3Ms [4]. In the context of recent applications, LID is motivated as an evaluation metric of local structure of latent representations; however, it does not imply that a high or low LID value is a universal indicator of better downstream performance. GRIDS-LID [4] builds on this distinction by using LID as a layerwise local geometric diagnostic while contrasting it with global dimensionality and similarity-based approaches. A key distinction is that intrinsic dimensionality is not equivalent to representation quality. LID describes local geometric complexity, while effective rank describes global spectral utilization, and the relationship between either quantity and downstream performance remains empirical. Therefore, L AYER SCOPE evaluates these measurements against classification, clustering, and retrieval behavior across architectures and network-depth rather than assuming that a particular geometric measurement is universal indicator of performance. 
+
+Intermediate representations and layer selection Intermediate representations can retain task-relevant information that is weakened or specialized in the final layers, making network-depth an important downstream evaluation. This pattern has been observed in vision encoders [10] and in layerwise studies of self-supervised speech models [35, 36]. Representation-similarity metrics such as centered kernel alignment (CKA) quantify similarity between representations spaces across layers in a model [23]. Recent work has also studied intermediate language model representations across text and vision tasks [43], selected task-discriminative subspaces with spectral criteria [9], and combined intermediate video-MLLM states with a calibrated retrieval head [47]. Our study instead examines a set of label-free geometric diagnostics across classification, clustering, and complete text-video layer configurations. This allows to distinguish association with downstream performance, layer selection, and cross-modal correspondence, rather than treating these as a single aspect of layerwise representation analysis. 
+
+Cross-modal alignment and distributional proximity. Multimodal models are often trained so that semantically related inputs from different modalities can be matched in a shared representation space, yet successful matching does not imply that different modalities will have identical distributions. Prior work on contrastive multimodal learning has shown the presence of modality gaps both under random and pretrained weight initialization [28]. Other work has also shown that reducing this gap can improve retrieval in some settings [52], harm performance when modality-specific information is removed [21], or impact robustness and semantics at different levels when comparing group-level retrieval versus instance-level retrieval [11, 15]. Together, these results motivate treating distributional proximity - rather than a strict distributional identity - as the key representational property underlying semantic matching in retrieval. As such, L AYER SCOPE aims to study this relationship between proximity and performance across transformer layers in a model. Analyses of intermediate vision-language representations also suggest that cross-modal integration develops progressively across layers [20, 44], while large-scale benchmarks such as MVEB [5] show that retrieval behavior varies substantially across multimodal model families and modality combinations. In our work, we therefore make a clear distinction regarding distributional proximity : the closeness of the overall text and video representation distributions; cross-modal correspondence : whether the correct text and video examples are associated with one another; and semantic alignment : whether corresponding inputs expressing the same underlying semantic content can be correctly matched. LAYER SCOPE , also aims to study retrieval behavior through sliced Wasserstein distance [34] and 4Procrustes error [42] [16]. These metrics serve as measures of representation alignment; the first evaluating marginal text-video distributional proximity, while the second determining paired cross-modal correspondence. 
+
+3 Methods 
+
+We evaluate the hidden representations of seven video and multimodal models on classification, clustering, and T2VR. For each model and dataset, we extract the layerwise representations once, compute geometric measurements from the resulting cache, and evaluate the same representations on the corresponding downstream task. We compare geometry with performance across depth and use regret to quantify the cost of choosing a layer from geometry alone. 
+
+3.1 Problem setting 
+
+For model m and task t, let Bm,t ⊆ { 1, . . . , B m} denote the set of evaluated layers for which geometry and downstream performance are available. Let bℓg ∈ B m,t be the layer selected by geometric measure g without consulting downstream scores. For evaluation seed s, let 
+
+ℓ⋆m,t,s = arg max 
+
+> ℓ∈B m,t
+
+Pm,t,s (ℓ)
+
+denote the oracle best-performing layer, where Pm,t,s (ℓ) is performance at layer ℓ on task t for evaluation seed s. Following [38], we report absolute regret: 
+
+Rm,t,s (g) = Pm,t,s (ℓ⋆m,t,s ) − Pm,t,s (bℓg ), (1) For retrieval, let Pm,t denote the set of evaluated text-video layer pairs p = ( ℓT , ℓ V ). Retrieval is deterministic for fixed representations, and so is not indexed by evaluation seed. We define the retrieval oracle as 
+
+p⋆m,t = arg max 
+
+> p∈P m,t
+
+Pm,t (p),
+
+where Pm,t (p) is mean nDCG@10 for pair p. If geometric measure g selects the set bPm,t (g) ⊆ P m,t ,the pair-selection regret is 
+
+Rpair  
+
+> m,t
+
+(g) = Pm,t (p⋆m,t ) − max  
+
+> p∈bPm,t (g)
+
+Pm,t (p). (2) For the minimum sliced 2-Wasserstein distance (SW 2) selector [34], bPm,t (SW 2) contains all exact minimum-SW 2 pairs. We use the same oracle-minus-reference convention for the model-default pair and matched-depth baseline, but report these separately from geometry-based selection. 
+
+3.2 Models, representations, and tasks 
+
+We treat the final-layer representation and model-default output as distinct representations. We define the model-default output as the embedding after any additional normalization, pooling, projection, etc. For a model m with Bm transformer blocks, layer ℓ ∈ { 1, . . . , B m} refers to the hidden state immediately after transformer block ℓ. On the other hand, we refer to the representation obtained from the hidden state at ℓ = Bm as the final-layer representation .
+
+Models. We evaluate V-JEPA 2 ViT-L [6], PE-AV Small and Large [48], Gemma 4 E4B-IT [46], X-CLIP Base [33], Qwen3-VL-Embedding-2B [27], and LCO-Embedding-Omni-3B [51]. All model parameters remain frozen, and we train no layer-specific or cross-modal alignment adapters. The models differ in architecture, training data, objective, and model-default output, so we treat layer profiles as descriptive comparisons rather than strictly caused by difference in training objectives. Model-specific representation extraction and checkpoints are listed in Table 1. 5Representations. For classification and clustering, the representation at layer ℓ is the mean of the hidden states after transformer block ℓ and before the model-default output. We exclude padding and special token hidden states. For LCO-Embedding-Omni (3B) (LCO), the mean is taken over eligible modality token hidden states. In order to ensure layer representation in the model’s shared text-video embedding space for retrieval tasks, we apply model-specific normalization, pooling, and projection. For a single representation stream, we define normalized depth is defined to be τℓ = ℓ/B m. For classification and clustering, we evaluate every video layer in all seven models. Retrieval evaluates every (text layer, video layer) pair for the five models with a shared text-video space. 
+
+Tasks and evaluation. Task definitions follow MVEB and MVEB+ through MTEB [5, 31]. We evaluate Breakfast classification [25], UCF101 classification and clustering [45], and T2VR on TUNA-Bench [22] and VATEX [49]. We additionally evaluate HMDB51 [24] as an independent all-layer classification replication and UCF101 zero-shot classification over complete text–video layer pairs for the five shared-space models. Classification uses eight-shot linear probing and accuracy; clustering uses MiniBatchKMeans and V-measure; retrieval ranks videos by cosine similarity and reports mean nDCG@10. Classification and clustering use ten evaluation seeds. 
+
+Geometry pools. Classification and clustering geometry is computed from the corresponding training representations rather than the evaluation labels. Retrieval geometry uses the target query and corpus representations and is therefore target-specific, but does not access relevance judgments. 
+
+3.3 Geometric measurements Local geometry and Local Instrinsic Dimensionality. For an embedding z, let ri(z) be its Euclidean distance to its i-th nearest neighbor (excluding itself). Each coordinate of the layer matrix is standardized to zero mean and unit population variance before nearest-neighbor search. We use the bias-corrected maximum-likelihood estimator [26, 2] 
+
+bd(z) = 
+
+"
+
+1
+
+k − 2
+
+> k−1
+
+X
+
+> i=1
+
+log rk(z)
+
+ri(z)
+
+#−1
+
+, k = 100 . (3) The layer value is the harmonic mean of the finite, strictly positive pointwise estimates. LID describes local neighborhood complexity and is distinct from representation quality. Sensitivity to k is reported in the Section B.1. 
+
+Global geometry and RankMe. We compute RankMe [13] from the singular values of the native representation matrix . We additionally compute covariance effective rank from the squared singular values after coordinate standardization and centering [39]. The former describes the native singular spectrum; the latter describes the standardized covariance spectrum. Implementation details and the normalization used for visualization are given in Section B.2. 
+
+3.4 Cross-modal geometry 
+
+For a shared-space model m, let B(T ) 
+
+> m
+
+and B(V ) 
+
+> m
+
+denote the numbers of transformer blocks in the text and video streams, respectively. Their normalized layer depths are τℓT = ℓT /B (T ) 
+
+> m
+
+and 
+
+τℓV = ℓV /B (V ) 
+
+> m
+
+. We evaluate every combination of text and video layers. To compare streams with different number of layers, we also match each layer in one stream to the layer in the other stream at the nearest normalized depths. We compare text and video marginal distributions using empirical SW 2 distance. For equally sized matrices X, Y ∈ Rn×D and unit projection directions θq ,
+
+SW 2(X, Y ) = 
+
+"
+
+1
+
+M
+
+> M
+
+X
+
+> q=1
+
+1
+
+n
+
+> n
+
+X
+
+> i=1
+
+
+
+X(q)(i) − Y (q)(i)
+
+2
+
+#1/2
+
+, (4) where X(q)(i) and Y (q)(i) are the ordered projections onto θq . Vectors receive the same row-wise normalization as the retrieval scorer and are not coordinate-standardized. We use M = 1 ,024 fixed 6Gaussian directions for each model-task grid. We measure paired structure separately using held-out orthogonal Procrustes error since SW 2 depends only on the marginal distributions, it is unchanged by reassigning the correspondence between text and video examples. Given paired text and video representations, we use orthogonal Procrustes to fit a rotation between the two spaces on a training subset and then measure the alignment error on held-out pairs. Lower error indicates that corresponding text and video representations share recoverable geometric structure under such orthogonal transformation. Unlike SW 2, this measure depends on the specific pairing between text and video examples. Additional details on SW 2 and Procrustes metrics are provided in Section B.3 and Section B.4, respectively. For each evaluated configuration across model, task and depth, we generate 1,000 permutations by reassigning text-video correspondence while leaving both marginal distributions unchanged. 
+
+4 Results 
+
+First, we examine how representation geometry changes across layers, and whether these changes in geometry can be used to identify useful representations. Next, we evaluate every layer on single-modal tasks,classification and clustering, and multi-modal tasks, to text–video correspondence and retrieval. Full results are reported in the Appendix. 
+
+4.1 Layerwise geometry differs across models 
+
+The models follow different geometric profiles across depth. Figure 2 shows GRIDS-LID ( k = 100 ), RankMe, and standardized covariance effective rank on UCF101. V-JEPA 2 has a broad mid-layer GRIDS-LID peak followed by a sharp decline, while RankMe rises near the end. X-CLIP shows a similar separation: GRIDS-LID peaks early, whereas RankMe peaks later. Both PE-AV models show increasing GRIDS-LID over their four video layers. Gemma 4 changes abruptly near the middle of the network, while Qwen3-VL and LCO show a late increase in RankMe as GRIDS-LID falls or remains non-monotonic. Some similarities emerge within related model families: PE-AV Small and Large have similar GRIDS-LID profiles, and Qwen3-VL and LCO both show late RankMe growth. X-CLIP is also trained for cross-modal joint embedding, but follows a different trajectory for GRIDS-LID and RankMe. These are descriptive patterns rather than model-family effects as the models differ in architecture, data, scale, preprocessing, and output processing. 0.00 0.25 0.50 0.75 1.00 Normalized depth 46810 12 14 GRIDS-LID                         
+
+> V-JEPA 2 (24 layers) predictive video encoder
+> 0.4 0.6 0.8 1.0 Normalized depth 46810 12 14 GRIDS-LID
+> PE-AV Small (4 layers) contrastive audio-video encoder
+> 0.4 0.6 0.8 1.0 Normalized depth 46810 12 14 GRIDS-LID
+> PE-AV Large (4 layers) contrastive audio-video encoder
+> 0.25 0.50 0.75 1.00 Normalized depth 46810 12 14 GRIDS-LID
+> X-CLIP (12 layers) contrastive video-text dual encoder
+> 0.00 0.25 0.50 0.75 1.00 Normalized depth 46810 12 14 GRIDS-LID
+> Gemma 4 (42 layers) generative multimodal decoder
+> 0.00 0.25 0.50 0.75 1.00 Normalized depth 46810 12 14 GRIDS-LID
+> Qwen3-VL (28 layers) decoder-backed contrastive embedding model
+> 0.00 0.25 0.50 0.75 1.00 Normalized depth 46810 12 14 GRIDS-LID
+> LCO-Embedding-Omni-3B (36 layers) decoder-backed contrastive embedding model
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> 0.00 0.15 0.30 0.45 0.60 Normalized spectral value
+> GRIDS-LID (k=100) RankMe / fl at-rank reference Std. covariance e-rank / min(D, n −1)
+
+Figure 2: Full-pool UCF101 geometry signatures grouped by architecture and readout family. Spectral values are normalized for display only; accepted associations and selectors use their absolute values. 7Figure 3: Layer-choice regret by task and model. Each cell shows the regret from selecting a layer using a geometric measure. Lower values are better; this makes it clear that the usefulness of a geometric measure depends on the task and model. 
+
+4.2 No geometric measure identifies the best layer across all tasks 
+
+No geometric measure provides a consistently reliable layer choice across all the evaluated model– task comparisons. Across the 21 Breakfast and UCF101 classification and clustering comparisons, choosing the layer with minimum GRIDS-LID gives a mean regret of 4.47%, while choosing the layer with maximum GRIDS-LID gives 9.97%. RankMe gives the lowest mean regret, 1.43%, followed by the final-layer baseline at 2.49% and standardized covariance effective rank at 3.99%. Figure 3 shows how these averages break down by task and model. GRIDS-LID varies in as a layer-selector on Breakfast and UCF101, with the favorable GRIDS-LID extremum changing across dataset and task. In several cases choosing the wrong extremum leads to large regret, specifically for V-JEPA 2 and X-CLIP on UCF101. The main pattern in GRID-LID’s performance as a layer-selector is that it is dataset and task dependent, while RankMe is more stable across the same comparisons. Looking at the correlation between GRIDS-LID values for each model and task (Figure 10), we see positive correlations for some model–task pairs and negative correlations for others. For the LCO model, the Spearman correlation between GRIDS-LID and performance is +0 .942 on Breakfast, 
+
+−0.375 on UCF101 classification, and −0.656 on UCF101 clustering. GRIDS-LID-performance correlations range from −0.935 to +0 .962 across model-task pairs. Across models and tasks, higher LID is not consistently associated with either better or worse downstream performance. This task dependence is consistent with LID measuring local neighborhood complexity rather than task-specific properties. High LID may reflect useful fine-grained structure, but it may also arise from nuisance variation, mixed neighborhoods, or anomalies. Lower LID may similarly reflect useful abstraction or denoising, but can also arise from representation collapse. Therefore, neither higher nor lower LID is consistently associated with better downstream performance for the task in our study. Nevertheless, local dimensionality remains informative when neighborhood complexity or irregularity is itself the object of analysis, as in adversarial, backdoor, and anomaly-detection settings discussed in Section 2. We hypothesize RankMe performs better here because it measures global structure, which is more closely related to linear classification and distance-based clustering than a local neighborhood measure such as LID. This is visible in models such as V-JEPA 2 and X-CLIP, for which increases in RankMe values generally align closely with downstream improvement, unlike layerwise trajectories in GRIDS-LID. However, even in this case, RankMe does not necessarily provide a consistent best-performing layer of choice. This is shown in the regret scores out of 21 comparison: lower in 8, the same in 9, and higher in only 4. 
+
+4.3 Intermediate layers often improve single-modality downstream performance 
+
+Because the geometric measures in Section 4.2 do not provide a universal measure for best layer selection, we next evaluate all hidden state embeddings at every model layer directly. Evaluating every layer changes the preferred representation in most of the models we study. Across Breakfast classification, HMDB51 classification, and UCF101 classification and clustering, six of seven models 80.0 0.5 1.0 7.0 7.5 8.0 8.5 9.0 9.5 10.0                
+
+> GRIDS-LID
+> V-JEPA 2 (24 layers)
+> 0.0 0.5 1.0 5.6 5.7 5.8 5.9 6.0 6.1
+> PE-AV Small (4 layers)
+> 0.0 0.5 1.0 78910 11 12 13 14
+> Gemma 4 (42 layers)
+> 0.0 0.5 1.0 4.9 5.0 5.1 5.2 5.3 5.4 5.5 5.6
+> PE-AV Large (4 layers)
+> 0.0 0.5 1.0 78910 11
+> GRIDS-LID
+> X-CLIP (12 layers)
+> 0.0 0.5 1.0 3.8 4.0 4.2 4.4 4.6 4.8 5.0 5.2
+> Qwen3-VL (28 layers)
+> 0.0 0.5 1.0 4.00 4.25 4.50 4.75 5.00 5.25 5.50 5.75
+> LCO-Embedding-Omni-3B (36 layers)
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Task score
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Task score
+> Normalized layer depth
+> GRIDS-LID (k=100) UCF101 cls. UCF101 clust. Default output
+
+Figure 4: UCF101 layerwise profiles for seven models. GRIDS-LID, classification and clustering means are plotted layerwise against normalized model depth. For each model profile, diamonds in each shaded margin mark the model-default output. Task scores are on a 0–1 scale. have an intermediate layer that perform better than the final layer for at least one task. The largest gain occurs for Gemma 4 on UCF101 clustering, where layer 13 improves V-measure by ∆ = +0 .1683 for UCF101 cluster and ∆ = +0 .0820 in HMDB51 classification over the last layer. PE-AV Large also improves at its first video layer on both UCF101 tasks by ∆ = +0 .0315 in classification accuracy and ∆ = +0 .0268 in V-measure. PE-AV Small improves performance over the last layer with a 
+
+∆ = +0 .0297 in the HMDB51 classification task. See Section Section D.2 for more details. Figure 4 shows that these gains on task performance do not follow one depth pattern. V-JEPA 2 [6] and X-CLIP continue to improve task performance after GRIDS-LID has reached its maximum and begun to fall. The PE-AV models show a different pattern, where their best UCF101 performance occurs at the first video layer while GRIDS-LID increases with depth. Qwen3-VL performs best at its final layer, while LCO peaks only slightly earlier, at layers 34 and 35. Gemma 4 reaches its best UCF101 scores before the sharp increase in GRIDS-LID at the middle of the network. These varying patterns across models opposes the idea of a universal intermediate-layer optimum or a universal GRIDS-LID direction. A layer’s task performance can improve as GRIDS-LID rises, falls, or remains nearly the same. The best layer depth for task depends on what the model is trained to produce. Gemma’s decoder layers support generation, while PE-AV is trained using scaled contrastive learning to align video, audio, and text. Neither objective directly optimizes a mean-pooled video representation for linear classification or clustering. Therefore, the best representation for the tasks may emerge earlier in the network. Qwen3-VL and LCO, both trained as embedding models, reach their best layerwise performance at or near the end of the network. We find that layer representations and model-default outputs also differ in performance. Across the 21 model-task comparisons, the best layer representations exceeds the model-default output in 100 cases, including nine intermediate layer gains across V-JEPA 2, PE-AV Small, PE-AV Large and Gemma 4. In contrast, the model-default output outperforms every evaluated layer representation for all three X-CLIP and LCO comparisons. These results show that downstream performance depends on both network depth and model-default output; the preferred representation varies by model and task. 9Figure 5: Cross-modal distributional alignment and retrieval performance across normalized text and vision depth. The top row shows average Sliced Wasserstein distance (SW 2) between text and vision representations, while the bottom rows show text-to-video retrieval performance (nDCG@10) on TUNA and VATEX. Although lower SW 2 often coincides with improved retrieval, we find that cross-modal layer pairs, with minimum SW 2, do not consistently result in a high retrieval performance. 
+
+4.4 Distributional distance tracks retrieval but does not determine it 
+
+Sliced Wasserstein (SW 2) distance provides a useful, but incomplete view of text-video retrieval. Using SW 2 to measure cross-modal distributional distance, we find a strong relationship between SW 2 and retrieval performance across layer pairs. Across 5 models and 2 retrieval benchmarks (TUNA and VATEX), SW 2 is negatively associated with nDCG@10 in 8 of the 10 evaluations, with median Spearman correlations of −0.6924 on TUNA and −0.7700 on VATEX. This negative correlation suggests that lower distributional distance is generally associated with higher retrieval performance. However, minimum SW 2 is not the best criterion for selecting best video-text layer for retrieval. Compared to the oracle layer pair, the models’ default outputs incur a mean regret of 0.0097, where as minimum-SW 2 layer pair output have a mean regret 0.2994, as presented in Figure 5. These results suggest that retrieval depends on more than cross modal distributional distance. SW 2
+
+measures the distance between the marginal text and video distributions while ignoring the corre-spondence between text-video pairs. Reassigning which text is associated with which video leaves SW 2 unchanged while disrupting text-video correspondence needed for retrieval. To isolate this effect, we use paired permutations as a correspondence control. The cross-modal pairs are randomly reassigned while the text and video embeddings are unchanged. Held-out orthogonal Procrustes error and retrieval performance are evaluated to identify if both metrics favor the true pairings over the randomized pairings. The correspondence control and orthogonal Procrustes error show that the original text-video pairs contain shared structure. Across the evaluated models, layer depths, and tasks, held-out orthogonal Procrustes error favors the true pairing in 31 of 32 comparisons. Retrieval is a more stringent evaluation because cross-modal structure must translate to correct ranking . The true pairing has higher nDCG@10 than the randomized pairing ( p ≤ 0.05 ) in 27 of the 32 comparisons, with failures concentrated at earlier PE-AV Large and X-CLIP layer depth. Figure 9 shows that at the final evaluated depth, every correspondence-sensitive metric and retrieval score distinguishes the true pairing from all 1,000 permutations. These results show that distributional distance, paired cross-modal structure, and ranked retrieval performance capture complementary characteristics of cross-modal representations (Figure 5). 10 4.5 Cross-modal retrieval peaks late, but the best text and video depths may differ 
+
+For each model and retrieval task, we define the best layer pair as the raw text–video layer pair with the highest nDCG@10. Unlike modality specific task layer performance as shown in Section 4.3, the cross-modal retrieval task prefers final and near-final layer pairs. One possible explanation is that retrieval depends more strongly on the model’s final processing steps that turn hidden states into retrieval embeddings, but we do not isolate this mechanism here. In most evaluations, the best pair also lies on the matched-depth diagonal. The main exceptions are X-CLIP and LCO. For X-CLIP, using the final text layer and penultimate video layer improves performance over the best matched-depth pair ( ∆ = +0 .0685 nDCG@10 on TUNA; ∆ = +0 .0198 
+
+on VATEX), while LCO reaches its best VATEX score at text layer 34 and video layer 35 ( ∆ = +0 .0062 ). These exceptions suggest that the most retrieval performance text and video layers do not always occur at matched depths. Full layer-pair results are reported in Table 4. The SW 2 heatmaps in Figure 5 show that models with similar retrieval performance can have different cross-modal geometries. PE-AV and X-CLIP show low distributional distance between text and video embeddings across a broad range of layer pairs. On the other hand, Qwen3-VL and LCO reach their lowest SW 2 distances at matched text–video layers. Measuring layer-wise SW 2 distance reveals differences in cross-modal organization throughout the model that are not visible from evaluating retrieval performance alone. Because the models vary in architecture, training setup, and output processing, we cannot attribute these patterns solely to their training objectives. 
+
+5 Discussion and Conclusion 
+
+We introduce L AYER SCOPE , a layerwise diagnostic framework for comparing representation geom-etry, downstream performance, and layer-selection across models and network depth. Layerwise evaluation shows that intermediate layers often improve single modality task performance for classifi-cation and clustering, while cross-modal retrieval often performs well at final or near-final text-video layer pairs. At a descriptive level, layerwise geometric trajectories differ substantially across model families and thus provide a label-free approach to characterize representation changes and behavior throughout the network. When using geometric metrics for layer selection, the layer of choice depends on the downstream task and model. In our results of both local and global measurements, GRIDS-LID exhibits task-dependent relationships with downstream performance, so neither higher nor lower local dimensionality values associate with a best-performing layer for all tasks. We have empirically shown that across a subset of MVEB tasks, RankMe has the lowest mean layer-selection regret among the geometric measures tested for classification and clustering comparisons; however, it does not generalize as a universal layer-selector. This shows that association with downstream performance does not necessarily imply reliable layer selection, and that the preferred representation depends on the model and task. Geometry is therefore most useful as a characterization tool to help identify where representations change and provides descriptive numerical measures for these changes, but it does not replace task-specific layer evaluation. In our retrieval analysis, we have first shown that a lower distribution distance, measured by SW 2, is associated with higher nDCG@10, but does not generally identify the best text-video layer pair. For 1,000 shuffle pairings, Procrustes error has identified 31 of 32 text-video comparisons across models, datasets, and network depth, revealing paired structure that SW 2 cannot support. Future work should use controlled comparisons to isolate how design choices such as training objective, architecture, data scale, and output mapping shape these layerwise geometric profiles. 11 References 
+
+[1] Zakaria Aldeneh, Vimal Thilak, Takuya Higuchi, Barry-John Theobald, and Tatiana Likhoma-nenko. Towards automatic assessment of self-supervised speech models using rank. In Proc. ICASSP , pages 1–5. IEEE, 2025. doi: 10.1109/ICASSP49660.2025.10889651. [2] Laurent Amsaleg, Oussama Chelly, Teddy Furon, St´ ephane Girard, Michael E. Houle, Ken-ichi Kawarabayashi, and Michael Nett. Extreme-value-theoretic estimation of local intrinsic dimensionality. Data Mining and Knowledge Discovery , 32(6):1768–1805, November 2018. ISSN 1573-756X. doi: 10.1007/s10618-018-0578-6. [3] Alessio Ansuini, Alessandro Laio, Jakob H. Macke, and Davide Zoccolan. Intrinsic dimension of data representations in deep neural networks. In Proceedings of the 33rd International Conference on Neural Information Processing Systems , 2019. [4] Sandra Arcos-Holzinger, Sarah M. Erfani, James Bailey, and Sanjeev Khudanpur. Dimensionality-aware anomaly detection in learned representations of self-supervised speech models, 2026. URL https://arxiv.org/abs/2605.02715 .[5] Adnan El Assadi, Roman Solomatin, Isaac Chung, Chenghao Xiao, Deep Shah, Manan Dey, Shriya Sudhakar, Zacharie Bugaud, Wissam Siblini, Ayush Sunil Munot, Yashwanth Devavarapu, Rakshitha Ireddi, Michelle Yang, M´ arton Kardos, Niklas Muennighoff, and Kenneth Enevoldsen. MVEB: Massive video embedding benchmark, 2026. URL https://arxiv.org/abs/2606. 14958 .[6] Mido Assran, Adrien Bardes, David Fan, Quentin Garrido, Russell Howes, Mojtaba, Komeili, Matthew Muckley, Ammar Rizvi, Claire Roberts, Koustuv Sinha, Artem Zholus, Sergio Arnaud, Abha Gejji, Ada Martin, Francois Robert Hogan, Daniel Dugas, Piotr Bojanowski, Vasil Khalidov, Patrick Labatut, Francisco Massa, Marc Szafraniec, Kapil Krishnakumar, Yong Li, Xiaodong Ma, Sarath Chandar, Franziska Meier, Yann LeCun, Michael Rabbat, and Nicolas Ballas. V-JEPA 2: Self-supervised video models enable understanding, prediction and planning, 2025. URL https://arxiv.org/abs/2506.09985 .[7] James Bailey, Michael E Houle, and Xingjun Ma. Relationships between local intrinsic dimensionality and tail entropy. In Lecture Notes in Computer Science , Lecture Notes in Computer Science, pages 186–200. Springer International Publishing, 2021. [8] James Bailey, Michael E. Houle, and Xingjun Ma. Local intrinsic dimensionality, entropy and statistical divergences. Entropy , 24, 2022. URL https://api.semanticscholar.org/ CorpusID:251985318 .[9] Arnesh Batra, Arush Gumber, Aniket Khandelwal, Jashn Khemani, and Anubha Gupta. Un-covering the latent potential of deep intermediate representations. In Forty-third Interna-tional Conference on Machine Learning , 2026. URL https://openreview.net/forum? id=6up1qGJwYZ .[10] Daniel Bolya, Po-Yao Huang, Peize Sun, Jang Hyun Cho, Andrea Madotto, Chen Wei, Tengyu Ma, Jiale Zhi, Jathushan Rajasegaran, Hanoona Rasheed, Junke Wang, Marco Monteiro, Hu Xu, Shiyu Dong, Nikhila Ravi, Daniel Li, Piotr Doll´ ar, and Christoph Feichtenhofer. Perception Encoder: The best visual embeddings are not at the output of the network. arXiv:2504.13181 ,2025. [11] Rhea Chowers, Oshri Naparstek, Udi Barzelay, and Yair Weiss. Is the modality gap a bug or a feature? a robustness perspective. arXiv preprint arXiv:2603.29080 , 2026. [12] Charles Fefferman, Sanjoy Mitter, and Hariharan Narayanan. Testing the manifold hypothesis. 
+
+Journal of the American Mathematical Society , 29(4):983–1049, 2016. [13] Quentin Garrido, Randall Balestriero, Laurent Najman, and Yann Lecun. RankMe: Assessing the downstream performance of pretrained self-supervised representations by their rank. In Andreas Krause, Emma Brunskill, Kyunghyun Cho, Barbara Engelhardt, Sivan Sabato, and Jonathan Scarlett, editors, Proceedings of the 40th International Conference on Machine Learn-ing , volume 202 of Proceedings of Machine Learning Research , pages 10929–10974. PMLR, 23–29 Jul 2023. URL https://proceedings.mlr.press/v202/garrido23a.html .12 [14] Sixue Gong, Vishnu Boddeti, and Anil Jain. On the intrinsic dimensionality of image represen-tations. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 3982–3991, 2019. [15] Eleonora Grassucci, Giordano Cicchetti, Emanuele Frasca, Aurelio Uncini, and Danilo Com-miniello. Closing the modality gap aligns group-wise semantics. In International Conference on Learning Representations , 2026. [16] Edouard Grave, Armand Joulin, and Quentin Berthet. Unsupervised alignment of embed-dings with Wasserstein Procrustes. ArXiv , abs/1805.11222, 2018. URL https://api. semanticscholar.org/CorpusID:44077554 .[17] Wes Gurnee, Emmanuel Ameisen, Isaac Kauvar, Julius Tarng, Adam Pearce, Chris Olah, and Joshua Batson. When models manipulate manifolds: The geometry of a counting task, 2026. URL https://arxiv.org/abs/2601.04480 .[18] Georg Heigold, Ehsan Variani, Tom Bagby, Cyril Allauzen, Ji Ma, Shankar Kumar, and Michael Riley. Massive sound embedding benchmark (MSEB), 2026. URL https://arxiv.org/ abs/2602.07143 .[19] Hanxun Huang, Sarah M. Erfani, Yige Li, Xingjun Ma, and James Bailey. Detecting backdoor samples in contrastive language image pretraining. In Proc. ICLR , 2025. [20] Qidong Huang, Xiaoyi Dong, Pan Zhang, Yuhang Zang, Yuhang Cao, Jiaqi Wang, Dahua Lin, Weiming Zhang, and Nenghai Yu. Deciphering cross-modal alignment in large vision-language models with modality integration rate. arXiv preprint arXiv:2410.07167 , 2024. [21] Qian Jiang, Changyou Chen, Han Zhao, Liqun Chen, Qing Ping, Son Dinh Tran, Yi Xu, Belinda Zeng, and Trishul Chilimbi. Understanding and constructing latent modality structures in multi-modal representation learning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , pages 7661–7671, 2023. [22] Fanheng Kong, Jingyuan Zhang, Hongzhi Zhang, Shi Feng, Daling Wang, Linhao Yu, Xingguang Ji, Yu Tian, Victoria W., and Fuzheng Zhang. TUNA: Comprehensive fine-grained temporal understanding evaluation on dense dynamic videos, 2025. URL https: //arxiv.org/abs/2505.20124 .[23] Simon Kornblith, Mohammad Norouzi, Honglak Lee, and Geoffrey Hinton. Similarity of neural network representations revisited. In Proc. ICML , pages 3519–3529. PMLR, 2019. [24] H. Kuehne, H. Jhuang, E. Garrote, T. Poggio, and T. Serre. HMDB: A large video database for human motion recognition. In 2011 International Conference on Computer Vision , pages 2556–2563, 2011. doi: 10.1109/ICCV.2011.6126543. [25] Hilde Kuehne, Ali Arslan, and Thomas Serre. The language of actions: Recovering the syntax and semantics of goal-directed human activities. In CVPR , 2014. [26] Elizaveta Levina and Peter J. Bickel. Maximum likelihood estimation of intrinsic dimension. In 
+
+Proc. NeurIPS , pages 777–784. MIT Press, 2004. [27] Mingxin Li, Yanzhao Zhang, Dingkun Long, Keqin Chen, Sibo Song, Shuai Bai, Zhibo Yang, Pengjun Xie, An Yang, Dayiheng Liu, Jingren Zhou, and Junyang Lin. Qwen3-VL-Embedding and Qwen3-VL-Reranker: A unified framework for state-of-the-art multimodal retrieval and ranking, 2026. URL https://arxiv.org/abs/2601.04720 .[28] Weixin Liang, Yuhui Zhang, Yongchan Kwon, Serena Yeung, and James Zou. Mind the gap: Understanding the modality gap in multi-modal contrastive representation learning. In NeurIPS ,2022. URL https://openreview.net/forum?id=S7Evzt9uit3 .[29] Xingjun Ma, Bo Li, Yisen Wang, Sarah M. Erfani, Sudanthi Wijewickrema, Grant Schoenebeck, Dawn Song, Michael E. Houle, and James Bailey. Characterizing adversarial subspaces using local intrinsic dimensionality. In Proc. ICLR , 2018. 13 [30] Xingjun Ma, Yisen Wang, Michael E. Houle, Shuo Zhou, Sarah Erfani, Shutao Xia, Sudanthi Wijewickrema, and James Bailey. Dimensionality-driven learning with noisy labels. In Jennifer Dy and Andreas Krause, editors, Proceedings of the 35th International Conference on Machine Learning , volume 80 of Proceedings of Machine Learning Research , pages 3355–3364. PMLR, 10–15 Jul 2018. URL https://proceedings.mlr.press/v80/ma18d.html .[31] Niklas Muennighoff, Nouamane Tazi, Lo¨ ıc Magne, and Nils Reimers. MTEB: Massive text embedding benchmark, 2023. URL https://arxiv.org/abs/2210.07316 .[32] Hariharan Narayanan and Sanjoy Mitter. Sample complexity of testing the manifold hypothesis. In J. Lafferty, C. Williams, J. Shawe-Taylor, R. Zemel, and A. Culotta, editors, Proc. NeurIPS ,volume 23, 2010. [33] Bolin Ni, Houwen Peng, Minghao Chen, Songyang Zhang, Gaofeng Meng, Jianlong Fu, Shiming Xiang, and Haibin Ling. Expanding language-image pretrained models for general video recognition, 2022. URL https://arxiv.org/abs/2208.02816 .[34] Sloan Nietert, Ziv Goldfeld, Ritwik Sadhu, and Kengo Kato. Statistical, robustness, and computational guarantees for sliced Wasserstein distances. In S. Koyejo, S. Mohamed, A. Agarwal, D. Belgrave, K. Cho, and A. Oh, editors, Advances in Neural Information Processing Systems , volume 35, pages 28179–28193. Curran Associates, Inc., 2022. doi: 10.52202/068431-2043. URL https://proceedings.neurips.cc/paper_files/paper/ 2022/file/b4bc180bf09d513c34ecf66e53101595-Paper-Conference.pdf .[35] Ankita Pasad, Ju-Chieh Chou, and Karen Livescu. Layer-wise analysis of a self-supervised speech representation model. In Proc. ASRU , pages 914–921. IEEE, 2021. doi: 10.1109/ ASRU51503.2021.9688093. [36] Ankita Pasad, Bowen Shi, and Karen Livescu. Comparative layer-wise analysis of self-supervised speech models. In Proc. ICASSP , pages 1–5, 2023. doi: 10.1109/ICASSP49357. 2023.10096149. [37] Phillip E Pope, Chen Zhu, Ahmed Abdelkader, Micah Goldblum, and Tom Goldstein. The intrinsic dimension of images and its impact on learning. In Proc. ICLR , 2021. [38] Cedric Renggli, Andr´ e Susano Pinto, Luka Rimanic, Joan Puigcerver, Carlos Riquelme, Ce Zhang, and Mario Luˇ ci´ c. Which model to transfer? Finding the needle in the grow-ing haystack. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 9205–9214, June 2022. [39] Olivier Roy and Martin Vetterli. The effective rank: A measure of effective dimensionality. 
+
+European signal processing conference , 2007. [40] A. Rozza, G. Lombardi, C. Ceruti, E. Casiraghi, and P. Campadelli. Novel high intrinsic dimensionality estimators. Mach. Learn. , 89(1–2):37–65, October 2012. ISSN 0885-6125. doi: 10.1007/s10994-012-5294-7. URL https://doi.org/10.1007/s10994-012-5294-7 .[41] Benjamin Matthias Ruppik, Julius von Rohrscheidt, Carel van Niekerk, Michael Heck, Renato Vukovic, Shutong Feng, Hsien chin Lin, Nurul Lubis, Bastian Rieck, Marcus Zibrowius, and Milica Gasic. Less is more: Local intrinsic dimensions of contextual language models. In Proc. NeurIPS , 2025. [42] Peter H Sch¨ onemann. A generalized solution of the orthogonal Procrustes problem. Psychome-trika , 31(1):1–10, March 1966. [43] Oscar Skean, Md Rifat Arefin, Dan Zhao, Niket Patel, Jalal Naghiyev, Yann LeCun, and Ravid Shwartz-Ziv. Layer by Layer: Uncovering hidden representations in language models. In 
+
+Proceedings of the 42nd International Conference on Machine Learning , ICML’25. JMLR.org, 2025. [44] Shezheng Song, Shasha Li, Shan Zhao, Xiaopeng Li, Qian Wan, Chengyu Wang, Tianwei Yan, Ma Jun, and Jie Yu. Where does vision meet language? understanding and refining visual fusion in mllms via contrastive attention. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pages 10051–10060, June 2026. 14 [45] Khurram Soomro, Amir Roshan Zamir, and Mubarak Shah. UCF101: A dataset of 101 human actions classes from videos in the wild, 2012. URL https://arxiv.org/abs/1212.0402 .[46] Gemma Team. Gemma 4 technical report, 2026. URL https://arxiv.org/abs/2607. 02770 .[47] Issar Tzachor, Dvir Samuel, and Rami Ben-Ari. VidVec: Unlocking video mllm embeddings for video-text retrieval, 2026. URL https://arxiv.org/abs/2602.08099 .[48] Apoorv Vyas, Heng-Jui Chang, Cheng-Fu Yang, Po-Yao Huang, Luya Gao, Julius Richter, Sanyuan Chen, Matt Le, Piotr Doll´ ar, Christoph Feichtenhofer, Ann Lee, and Wei-Ning Hsu. Pushing the frontier of audiovisual perception with large-scale multimodal correspondence learning, 2025. URL https://arxiv.org/abs/2512.19687 .[49] Xin Wang, Jiawei Wu, Junkun Chen, Lei Li, Yuan-Fang Wang, and William Yang Wang. VATEX: A large-scale, high-quality multilingual dataset for video-and-language research, 2020. URL https://arxiv.org/abs/1904.03493 .[50] Ryan Whetten, Lucas Maison, Titouan Parcollet, Marco Dinarelli, and Yannick Est` eve. Towards early prediction of self-supervised speech model performance. In Proc. Interspeech , pages 1228–1232, 2025. [51] Chenghao Xiao, Hou Pong Chan, Hao Zhang, Weiwen Xu, Mahani Aljunied, and Yu Rong. Scaling language-centric omnimodal representation learning. arXiv preprint arXiv:2510.11693 ,2025. [52] Can Yaras, Siyi Chen, Peng Wang, and Qing Qu. Explaining and mitigating the modality gap in contrastive multimodal learning. In Conference on Parsimony and Learning , volume 280 of 
+
+Proceedings of Machine Learning Research , pages 1365–1387. PMLR, 2025. 15 A Experimental Details and Reproducibility 
+
+Tables 1 to 3 summarize the models,evaluated layers, and downstream tasks. Definitions and implementation details for the geometric measures are given in Appendix B. Table 1: Models and checkpoints used in the experiments. Modalities indicate the inputs used in this study.                                 
+
+> Model Family Model Checkpoint Modalities Architecture Predictive video V-JEPA 2 facebook/vjepa2-vitl-fpc64-256 Video ViT-L Audio-video contrastive PE-AV Small facebook/pe-av-small Text/video Video + text encoders Audio-video contrastive PE-AV Large facebook/pe-av-large Text/video Video + text encoders Video-text contrastive X-CLIP microsoft/xclip-base-patch32 Text/video Base dual encoder Autoregressive multimodal Gemma 4 google/gemma-4-E4B-it Multimodal E4B-IT decoder Autoregressive multimodal Qwen3-VL Qwen/Qwen3-VL-Embedding-2B Text/video Embedding-2B decoder Autoregressive multimodal LCO LCO-Embedding/LCO-Embedding-Omni-3B Omnimodal Embedding-Omni-3B decoder
+
+Table 2: Evaluated layer ranges and retrieval eligibility. 
+
+Model # layers scored Scored layers Retrieval eligible? Notes V-JEPA 2 24 video Video 1–24 No Classification/clustering Gemma 4 42 video Video 1–42 No Classification/clustering PE-AV Small 4 video / 22 text Video 1–4; text 1–22 Yes Retrieval PE-AV Large 4 video / 22 text Video 1–4; text 1–22 Yes Retrieval X-CLIP 12 video / 12 text Video 1–12; text 1–12 Yes Retrieval Qwen3-VL 28 video / 28 text Video 1–28; text 1–28 Yes Retrieval LCO 36 video / 36 text Video 1–36; text 1–36 Yes Retrieval 
+
+We keep all model parameters frozen throughout the experiments. The model-default output is evaluated separately from the final-layer representation as it may have additional normalization, pooling, projection etc. 
+
+Representation and task scope. For classification and clustering, we evaluate every listed video layer, constructing its representation by averaging the eligible hidden states before the model-specific output mapping, excluding padding and special tokens. For LCO, this average includes only eligible modality tokens. For retrieval and zero-shot classification, we evaluate every text–video layer pair for PE-AV Small, PE-AV Large, X-CLIP, Qwen3-VL, and LCO. At each layer, we apply the normalization, pooling, and projection operations of the model’s frozen shared embedding interface. We then compare the resulting text and video vectors using cosine similarity. No layer-specific projections or cross-modal alignment adapters are trained. Table 3: Downstream evaluations. Classification and clustering scores are summarized over ten evaluator seeds. Retrieval and zero-shot classification are deterministic for fixed representations.                                 
+
+> Analysis Dataset Evaluated representations Evaluation Score Classification Breakfast Every video layer; model-default output Eight-shot linear probe Accuracy Classification UCF101 Every video layer; model-default output Eight-shot linear probe Accuracy Classification HMDB51 Every video layer; model-default output Eight-shot linear probe Accuracy Clustering UCF101 Every video layer; model-default output MiniBatchKMeans V-measure Text-to-video retrieval TUNA-Bench Every text–video layer pair; model-default pair Cosine ranking Mean nDCG@10 Text-to-video retrieval VATEX Every text–video layer pair; model-default pair Cosine ranking Mean nDCG@10 Zero-shot classification UCF101 Every text–video layer pair; model-default pair Fixed four-prompt ensemble Accuracy
+
+We compute classification and clustering geometry from the corresponding training representations without using class labels. Retrieval geometry is specific to the target dataset: it uses the query and video representations but not relevance judgments. 16 B Geometric measure definitions and implementation details 
+
+Let Xℓ ∈ Rn×D denote the representation matrix at layer ℓ, with one row per example. For classification and clustering, each row is the pooled layer representation defined in Section 3.2. For retrieval, each row is the representation produced by the model-specific shared-space readout at that layer. Unless stated otherwise, each geometric measure is computed separately at every evaluated layer using the full representation pool. Each metric applies its own preprocessing to 
+
+Xℓ. GRIDS-LID standardizes each feature coordinate before nearest-neighbor search. RankMe is computed directly from Xℓ, without additional centering or coordinate standardization. Standardized covariance effective rank first standardizes and centers Xℓ. Cross-modal measures use the row-wise normalization applied by the retrieval interface. 
+
+B.1 GRIDS-LID, depth roughness and neighborhood-size sensitivity 
+
+For a representation z ∈ Xℓ, let ri(z) denote the Euclidean distance from z to its i-th nearest neighbor, excluding z itself. Before nearest-neighbor search, each feature coordinate of Xℓ is standardized across the n examples to zero mean and unit population variance. We use the bias-corrected maximum-likelihood estimator [2, 26] 
+
+bd(z) = 
+
+"
+
+1
+
+k − 1
+
+> k−1
+
+X
+
+> i=1
+
+log rk(z)
+
+ri(z)
+
+#−1
+
+, k = 100 . (5) The k-th neighbor defines the radius of the neighborhood, and the estimator uses the first k − 2
+
+neighbor distances within that radius. 2
+
+Let S+ 
+
+> ℓ
+
+be the finite, strictly positive pointwise estimates at layer ℓ. The layer-level GRIDS-LID value is their harmonic mean, 
+
+dℓ =
+
+ 1
+
+|S + 
+
+> ℓ
+
+|
+
+X
+
+> z∈S +
+> ℓ
+
+1
+
+bd(z)
+
+
+
+> −1
+
+. (6) Nonfinite and nonpositive estimates are excluded from the layer-level aggregation. We evaluate both the minimum and maximum GRIDS-LID layers without assuming either direction as generally preferable. 
+
+LID depth roughness. We also measure local variation in GRIDS-LID across network depth. Let 
+
+Wℓ denote the contiguous odd-width window of neighboring layers associated with layer ℓ, and let 
+
+mℓ = median j∈Wℓ dj . (7) LID depth roughness is 
+
+ρLID (ℓ) = median j∈Wℓ |dj − mℓ||mℓ| + 10 −12 . (8) Lower roughness values indicate less variation in GRIDS-LID over neighboring layers. The primary analysis uses windows spanning approximately 20% of model depth – 10% and 30% windows are used for sensitivity analysis. Performance depth roughness is computed analogously from the mean downstream score at each layer. It is only used to compare local variation in geometry with local variation in downstream performance. We only analyze roughness-based performance for models with at least ten evaluated layers. 
+
+Neighborhood-size sensitivity. We repeat the GRIDS-LID calculation at k ∈ { 50 , 150 } using the same representation matrices, coordinate standardization, Euclidean distance, and layer-level aggregation as in the primary k = 100 analysis.           
+
+> 2Note that GRIDS-LID uses k−1neighbors. However, we use k−2with only drops that are less than 1% , thus rendering the choice statistically negligible [40].
+
+17 k=50 k=150 0.0 0.2 0.4 0.6 0.8 1.0     
+
+> Trajectory Spearman  ρ vs k=100
+> min 25/36 max 27/36 min 28/36 max 31/36
+> ATrajectory and layer-choice agreement
+> 50 100 150
+> Neighborhood size k
+> 010 20 30 40 50 60
+> Per-unit mean regret (pp)
+> BClassification/clustering layer-choice regret
+> Minimum GRIDS-LID Maximum GRIDS-LID
+
+Figure 6: Sensitivity of GRIDS-LID to neighborhood size. Panel A compares the k = 50 and 
+
+k = 150 trajectories with the primary k = 100 trajectory over 36 representation views and reports agreement of the minimum- and maximum-GRIDS-LID layers. Panel B reports layer-choice regret over the 21 primary classification and clustering comparisons, using evaluator seeds 0–9. Regret is shown on the 0–1 downstream-score scale. 
+
+B.2 Spectral measures RankMe. RankMe is computed from the singular values of the native representation matrix Xℓ,without additional centering or coordinate standardization [13]. Following the released implementation, 
+
+pi = σi(Xℓ)
+
+P 
+
+> j
+
+σj (Xℓ) , epi = pi + 10 −7. (9) and 
+
+RankMe( Xℓ) = exp − X
+
+> i
+
+epi log epi
+
+!
+
+. (10) The numerical offset is added after normalizing the singular values, and the resulting values are not renormalized. 
+
+Standardized covariance effective rank. Covariance effective rank is computed after coordinate standardization and centering. If si are the singular values of the resulting matrix, let 
+
+qi = s2
+
+> i
+
+P 
+
+> j
+
+s2
+
+> j
+
+. (11) The effective rank [39] is 
+
+rcov (Xℓ) = exp 
+
+− X
+
+> i:qi>0
+
+qi log qi
+
+ . (12) The analysis uses the absolute RankMe and covariance-effective-rank values. For display only, RankMe is divided by the value obtained from a flat singular-value spectrum of the same length, and covariance effective rank is divided by min( D, n − 1) . Thus, RankMe retains the feature scaling present in Xℓ, whereas standardized covariance effective rank is computed from the variance spectrum after coordinate standardization and centering. 18 B.3 Sliced Wasserstein distance and relative-depth alignment 
+
+For a shared-space model, let X, Y ∈ Rn×D contain text and video representations from the same retrieval evaluation pool. We ℓ2-normalize each row using the same normalization as the retrieval scorer, while feature coordinates are not standardized. For unit directions θ1, . . . , θ M , empirical sliced 2-Wasserstein distance [34] is 
+
+SW 2(X, Y ) = 
+
+"
+
+1
+
+M
+
+> M
+
+X
+
+> q=1
+
+1
+
+n
+
+> n
+
+X
+
+> i=1
+
+
+
+X(q)(i) − Y (q)(i)
+
+2
+
+#1/2
+
+, (13) where X(q)(i) and Y (q)(i) are the i-th ordered one-dimensional projections of the two sets of representa-tions onto θq .For each model–task comparison, we use M = 1024 fixed Gaussian directions normalized to unit length, and re-use the same directions for every evaluated text–video layer pair. SW 2 compares the empirical distributions of text and video representations without using which text corresponds to which video. Therefore, and importantly, permutation of the text–video correspondence leaves SW 2
+
+unchanged. When comparing text and video layers at corresponding relative depths, text layer ℓT is paired with the video layer whose relative position in the network is closest 
+
+ℓ† 
+
+> V
+
+(ℓT ) = arg min 
+
+> ℓV
+
+ℓT
+
+B(T )
+
+> m
+
+− ℓV
+
+B(V )
+
+> m
+
+.
+
+B.4 Correspondence-sensitive measures 
+
+Let 
+
+X = [ x1, . . . , x n]⊤, Y = [ y1, . . . , y n]⊤
+
+contain paired and row-normalized text and video representations, where xi and yi describe the same example. Unlike SW 2, the measures in this section depend on this paired example correspondence and therefore, change when we permute this text–video pairing. 
+
+Held-out orthogonal Procrustes error. We fit and evaluate the paired examples with an 80%/20% split respectively. We then estimate the modality means μX and μY from the fit set and used to center both the fit and evaluation representations, 
+
+Xc 
+
+> fit
+
+= Xfit − 1μ⊤ 
+
+> X
+
+, Y c 
+
+> fit
+
+= Yfit − 1μ⊤ 
+
+> Y
+
+.
+
+Finally, we fit an unscaled orthogonal map 
+
+R⋆ = arg min 
+
+> R⊤R=I
+
+∥Xc
+
+> fit
+
+R − Y c
+
+> fit
+
+∥2 
+
+> F
+
+. (14) The held-out error is the root-mean-square Euclidean residual, 
+
+EProc = (Xeval − 1μ⊤ 
+
+> X
+
+)R⋆ − (Yeval − 1μ⊤ 
+
+> Y
+
+) F
+
+√neval 
+
+. (15) Lower values indicate that a single orthogonal alignment fitted on one set of text–video pairs generalizes more accurately to unseen pairs. 
+
+B.5 Correspondence permutations 
+
+The registered correspondence analysis covers the 32 model–task–depth comparisons, more details in Section C.2. For each comparison, we construct 1000 permutations by shuffling the correspon-dence between text and video examples while leaving both sets of representations unchanged. The permutation therefore changes item pairing without changing either marginal empirical distribution. 19 0.035 0.040 0.045                                                              
+
+> 0.0 0.2 0.4 0.6 0.8 1.0 TUNA (retrieval, T →V) nDCG@10  ↑
+> Spearman -0.92 regret ↓0.114
+> PE-AV Small (22 text × 4 video blocks)
+> 0.030 0.036 0.042
+> 0.0 0.2 0.4 0.6 0.8 1.0 Spearman -0.92 regret ↓0.012
+> PE-AV Large (22 text × 4 video blocks)
+> 0.04 0.05 0.06
+> 0.0 0.1 0.2 0.3 0.4 Spearman -0.69 regret ↓0.069
+> X-CLIP (12 text × 12 video blocks)
+> 0.01 0.02 0.03
+> 0.0 0.2 0.4 0.6 0.8 1.0 Spearman -0.24 regret ↓0.925
+> Qwen3-VL (28 text × 28 video blocks)
+> 0.01 0.02 0.03
+> 0.0 0.2 0.4 0.6 0.8 1.0 Spearman +0.05 regret ↓0.953
+> LCO-Embedding-Omni-3B (36 text × 36 video blocks)
+> 0.035 0.040 0.045
+> Marginal sliced W2↓
+> 0.0 0.2 0.4 0.6 0.8 VATEX (retrieval, T →V) nDCG@10  ↑
+> Spearman -0.90 regret ↓0.103
+> 0.030 0.036 0.042
+> Marginal sliced W2↓
+> 0.0 0.2 0.4 0.6 0.8 Spearman -0.95 regret ↓0.010
+> 0.04 0.05 0.06
+> Marginal sliced W2↓
+> 0.0 0.1 0.2 0.3 0.4 Spearman -0.77 regret ↓0.020
+> 0.01 0.02 0.03
+> Marginal sliced W2↓
+> 0.0 0.2 0.4 0.6 0.8 Spearman -0.09 regret ↓0.023
+> 0.01 0.02 0.03
+> Marginal sliced W2↓
+> 0.0 0.2 0.4 0.6 0.8 Spearman +0.21 regret ↓0.764
+> Layer pair Minimum SW2 ↓nDCG oracle ↑Usual-output pair
+
+Figure 7: SW 2 and nDCG@10 across all 5218 accepted layer-pair cells. Cyan squares mark minimum SW 2, red stars the retrieval oracle, and black diamonds the detached default pair. Lower marginal distance often tracks retrieval but does not identify the optimum; axes are model-specific. For measure g, the one-sided Monte Carlo value is 
+
+pMC = 1 + b
+
+1001 , (16) where b is the number of permuted values at least as favorable as the observed value. Larger values are favorable for cosine margin, linear CKA, neighbor overlap, and nDCG@10; smaller values are favorable for Procrustes error. Note that the minimum attainable value is 1/1001 , when the observation is more favorable than all 1,000 permutations. Figure 9 illustrates the separation between the observed text-video pairing from the permutations. For a measure with permutation mean μperm and standard deviation σperm > 0, we define 
+
+zdir = sg
+
+gobs − μperm 
+
+σperm 
+
+, (17) where sg = +1 for larger-is-better measures and sg = −1 for Procrustes error. A positive value means the original text–video pairing gives a better result than the shuffled pairings on average. 
+
+C Cross-modal task details 
+
+C.1 Sliced Wasserstein distance and retrieval 
+
+For each shared-space model, we evaluate all text–video layer pairs p = ( ℓT , ℓ V ) on TUNA and VATEX. The model-default text and video outputs are evaluated separately. We also compare text and video layers at corresponding relative depths, pairing each text layer with the video layer at the closest relative position in the network. Figure 7 compares SW 2 and nDCG@10 across all evaluated text-video layer-pairs. SW 2 is negatively associated with nDGC@10 in eight of the ten model-task comparisons. However the layer pair with the minimum SW 2 is never the best performing retrieval pair, its mean selection regret is 0.2994 ,compared with 0.0097 for the model=default pair. The mean Spearman correlation across the ten comparisons is −0.514 , decreasing to −0.279 after accounting for relative text and video depth. Table 4 reports the best layer pair, the best matched-depth score, and the model-default score. The differences are computed relative to the retrieval oracle before the displayed values are rounded. 
+
+C.2 Cross-modal correspondence across depth 
+
+We next evaluate text–video correspondence using linear CKA and held-out orthogonal Procrustes error. Figure 8 reports both measures for text and video layers aligned by relative depth on TUNA 20 Table 4: Text-to-video retrieval over all text–video layer pairs. The oracle is the pair with the highest nDCG@10. The matched-depth optimum is selected from the normalized-depth path, while the model-default output is evaluated separately. Scores and differences use the 0–1 nDCG@10 scale. 
+
+Task Model Matrix Oracle (ℓT , ℓ V ) Oracle score Matched depth ∆matched Model-default ∆default 
+
+TUNA PE-AV Small 22 × 4 19 /4 0.9681 0.9681 +0.0000 0.9671 +0.0010 VATEX PE-AV Small 22 × 4 21 /4 0.7914 0.7914 +0.0000 0.7899 +0.0016 TUNA PE-AV Large 22 × 4 22 /4 0.9695 0.9695 +0.0000 0.9695 +0.0000 VATEX PE-AV Large 22 × 4 22 /4 0.8172 0.8172 +0.0000 0.8172 +0.0000 TUNA X-CLIP 12 × 12 12 /11 0.4014 0.3329 +0.0685 0.3328 +0.0686 VATEX X-CLIP 12 × 12 12 /11 0.4148 0.3950 +0.0198 0.3950 +0.0198 TUNA Qwen3-VL 28 × 28 28 /28 0.9924 0.9924 +0.0000 0.9924 +0.0000 VATEX Qwen3-VL 28 × 28 28 /28 0.8124 0.8124 +0.0000 0.8124 +0.0000 TUNA LCO 36 × 36 36 /36 0.9592 0.9592 +0.0000 0.9592 +0.0000 VATEX LCO 36 × 36 34 /35 0.7698 0.7636 +0.0062 0.7636 +0.0062 0.0 0.2 0.4 0.6 0.8 1.0            
+
+> Linear CKA ↑
+> PE-AV Small
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> PE-AV Large
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> X-CLIP
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> Qwen3-VL
+> 0.0 0.2 0.4 0.6 0.8 1.0
+> LCO-Embedding-Omni-3B
+> 0.0 0.5 1.0 0.0 0.2 0.4 0.6 0.8 1.0
+> Procrustes RMS Euclidean error ↓
+> 0.0 0.5 1.0 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.5 1.0 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.5 1.0 0.0 0.2 0.4 0.6 0.8 1.0
+> 0.0 0.5 1.0 0.0 0.2 0.4 0.6 0.8 1.0
+> TUNA VATEX
+
+Figure 8: Linear CKA and held-out orthogonal Procrustes error for text–video layer pairs aligned by relative depth on TUNA and VATEX. Higher CKA and lower Procrustes error are favorable. The figure includes all five shared-space models and uses every evaluated text layer. and VATEX. For PE-AV, each of the 22 text layers is paired with the video layer at the closest relative depth, so its four video layers are reused across multiple comparisons. The correspondence permutation analysis contains 32 comparisons: 4 models (PE-AV Small, PE-AV Large, X-CLIP, and Qwen3-VL) two retrieval tasks, and four prespecified relative-depth locations. LCO is included in the layerwise analysis above but not in this permutation analysis. For each comparison, 1,000 permutations shuffle the correspondence between text and video examples while leaving both sets of representation unchanged. The one-sided Monte Carlo value is 
+
+pMC = 1 + b
+
+1001 ,
+
+where b is the number of permutations at least as favorable as the observed value. The minimum attainable value is 1/1001 .Figure 9 reports separation from the permutation distribution in directional standard-deviation units: 
+
+zdir = sg
+
+gobs − μperm 
+
+σperm 
+
+,
+
+where sg = +1 for measures for which larger values are favorable and sg = −1 for held-out Procrustes error. Positive values favor the original text–video pairing. Held-out Procrustes error is more favorable than all 1,000 permutation values in 31 of 32 comparisons. The supplementary paired measures provide a similar check: linear CKA, matched-minus-unmatched 21 0 10 0 10 1 10 2        
+
+> Observed separation from correspondence permutations (directional SD units) ↑
+> Neighbor overlap (k=10) ↑
+> Neighbor overlap (20 neighbors) ↑
+> Neighbor overlap (k=50) ↑
+> Held-out Procrustes error ↓
+> Linear CKA ↑
+> Matched-minus-unmatched cosine ↑
+> nDCG@10 ↑
+> min p: 32/32
+> min p: 32/32
+> min p: 32/32
+> min p: 31/32
+> min p: 32/32
+> min p: 32/32
+> min p: 26/32
+> TUNA (retrieval, T →V) VATEX (retrieval, T →V)
+
+Figure 9: Separation between the observed text–video pairing and 1,000 correspondence permutations across 32 model–task–depth comparisons. cosine similarity, and neighbor overlap reach the minimum Monte Carlo value in all 32 comparisons. Retrieval itself is stricter. nDCG@10 beats all 1,000 permutations in 26 comparisons and satisfies 
+
+pMC ≤ 0.05 in 27. At the final evaluated depth, the paired measures and retrieval score all favor the observed correspondence. 
+
+C.3 UCF101 zero-shot classification 
+
+For UCF101 zero-shot classification, we evaluate every text–video layer pair and the model-default pair for the five shared-space models. Four fixed prompt templates are evaluated individually and as a fixed ensemble, without selecting prompts based on evaluation accuracy. With the ensemble, the best layer pair achieves higher accuracy than the model-default pair in four models, with gains of up to 
+
+0.0082 . For X-CLIP, the best layer pair scores 0.0005 lower than the model-default pair (Table 5). Table 5: UCF101 zero-shot classification with four-prompt ensemble. Here, the best pair is selected from all text–video layer pairs. 
+
+Model Best (ℓT , ℓ V ) Best accuracy Model-default Difference PE-AV Small 18 /4 0.7449 0.7366 +0.0082 PE-AV Large 21 /4 0.8421 0.8390 +0.0031 X-CLIP 12 /12 0.7598 0.7603 −0.0005 
+
+Qwen3-VL 27 /27 0.8724 0.8719 +0.0005 LCO 35 /35 0.8323 0.8302 +0.0021 
+
+D Layerwise classification and clustering performance 
+
+This section reports the complete classification and clustering results underlying Section 4.2 and Sec-tion 4.3. Every video layer is evaluated directly, with the model-default output evaluated separately. 
+
+D.1 Primary classification and clustering results 
+
+Table 6 summarizes the all-layer results on Breakfast classification and UCF101 classification and clustering. For each model–task comparison, ℓ⋆ is the layer with the highest mean score over ten evaluator seeds. We define 
+
+∆last = s⋆ − sL, ∆default = s⋆ − sdefault ,
+
+where s⋆ is the score at ℓ⋆, sL is the score at the last layer, and sdefault is the score of the model-default output. A positive difference favors the best layer. Differences are computed from the unrounded scores. 22 Table 6: Layerwise classification (cls.) and clustering (clust.) results on Breakfast and UCF101. Classification is measured by accuracy and clustering by V-measure. ℓbest is the layer with the highest mean score across ten evaluator seeds. sbest , sfinal , and sdefault denote the corresponding ten-seed mean scores; the standard deviation shown with sbest is computed at the fixed layer ℓbest .
+
+Model Task Layers ℓbest sbest sf inal ∆final sdefault ∆default 
+
+V-JEPA 2 Breakfast cls. 24 22 0.3325 ± 0.0243 0.3110 +0.0215 0.3124 +0.0201 V-JEPA 2 UCF101 cls. 24 23 0.8129 ± 0.0045 0.8072 +0.0058 0.8062 +0.0068 V-JEPA 2 UCF101 clust. 24 23 0.7707 ± 0.0040 0.7702 +0.0006 0.7830 −0.0123 
+
+PE-AV Small Breakfast cls. 4 4 0.5185 ± 0.0228 0.5185 +0.0000 0.4529 +0.0656 PE-AV Small UCF101 cls. 4 1 0.9338 ± 0.0027 0.9248 +0.0090 0.8759 +0.0579 PE-AV Small UCF101 clust. 4 1 0.8283 ± 0.0040 0.7589 +0.0694 0.8508 −0.0225 
+
+Gemma 4 Breakfast cls. 42 15 0.1263 ± 0.0103 0.1057 +0.0206 0.0912 +0.0351 Gemma 4 UCF101 cls. 42 14 0.8017 ± 0.0062 0.7076 +0.0941 0.1884 +0.6132 Gemma 4 UCF101 clust. 42 13 0.7665 ± 0.0018 0.5982 +0.1683 0.3457 +0.4208 PE-AV Large Breakfast cls. 4 2 0.5295 ± 0.0154 0.5200 +0.0095 0.4741 +0.0554 PE-AV Large UCF101 cls. 4 1 0.9275 ± 0.0019 0.8960 +0.0315 0.8991 +0.0284 PE-AV Large UCF101 clust. 4 1 0.9075 ± 0.0041 0.8806 +0.0268 0.8776 +0.0299 X-CLIP Breakfast cls. 12 12 0.1203 ± 0.0127 0.1203 +0.0000 0.2143 −0.0940 
+
+X-CLIP UCF101 cls. 12 12 0.8359 ± 0.0037 0.8359 +0.0000 0.9154 −0.0795 
+
+X-CLIP UCF101 clust. 12 10 0.8051 ± 0.0035 0.7960 +0.0092 0.9223 −0.1172 
+
+Qwen3-VL Breakfast cls. 28 28 0.4646 ± 0.0197 0.4646 +0.0000 0.6032 −0.1386 
+
+Qwen3-VL UCF101 cls. 28 28 0.9413 ± 0.0026 0.9413 +0.0000 0.9367 +0.0047 Qwen3-VL UCF101 clust. 28 28 0.9258 ± 0.0017 0.9258 +0.0000 0.9486 −0.0227 
+
+LCO Breakfast cls. 36 36 0.4327 ± 0.0149 0.4327 +0.0000 0.5464 −0.1136 
+
+LCO UCF101 cls. 36 34 0.9268 ± 0.0017 0.9238 +0.0030 0.9273 −0.0005 
+
+LCO UCF101 clust. 36 35 0.9141 ± 0.0024 0.9079 +0.0062 0.9360 −0.0219 
+
+Table 7: HMDB51 eight-shot classification across all evaluated video layers. ℓbest is selected by mean accuracy across ten evaluator seeds. sbest , sfinal , and sdefault are the corresponding mean accuracies. Positive differences favor the best raw layer. 
+
+Model ℓbest sbest sf inal sdefault ∆final ∆default 
+
+V-JEPA 2 23 0.4690 0.4682 0.4578 +0.0009 +0.0113 PE-AV Small 1 0.6284 0.5987 0.4247 +0.0297 +0.2036 Gemma 4 14 0.4724 0.3904 0.0891 +0.0820 +0.3833 PE-AV Large 2 0.6462 0.6237 0.5136 +0.0225 +0.1326 X-CLIP 12 0.4807 0.4807 0.6242 +0.0000 −0.1435 
+
+Qwen3-VL 28 0.6224 0.6224 0.6602 +0.0000 −0.0378 
+
+LCO 33 0.6006 0.5901 0.6466 +0.0105 −0.0460 
+
+D.2 HMDB51 classification replication 
+
+We repeat the eight-shot classification analysis on HMDB51 using the same layerwise evaluation protocol. This experiment provides a separate test of the intermediate-layer result, the results are detailed in Table 7. We see that an intermediate layer outperforms the final layer in five of seven models and the model-default output in four. X-CLIP, Qwen3-VL, and LCO instead perform best with their model-default outputs. 
+
+E Geometry and downstream performance 
+
+This section gives the full model–task breakdown behind Section 4.2. The primary analysis contains 21 model–task comparisons: seven models on Breakfast classification, UCF101 classification, and UCF101 clustering. 23 GRIDS-LID ↔ score RankMe ↔ score Cov. effective rank ↔ score GRIDS-LID roughness ↔ score RankMe ↔ GRIDS-LID Cov. effective rank ↔ GRIDS-LID GRIDS-LID roughness ↔ performance roughness V-JEPA 2 (24) — Breakfast cls. V-JEPA 2 (24) — UCF101 cls. V-JEPA 2 (24) — UCF101 clust. PE-AV Small (4) — Breakfast cls. PE-AV Small (4) — UCF101 cls. PE-AV Small (4) — UCF101 clust. Gemma 4 (42) — Breakfast cls. Gemma 4 (42) — UCF101 cls. Gemma 4 (42) — UCF101 clust. PE-AV Large (4) — Breakfast cls. PE-AV Large (4) — UCF101 cls. PE-AV Large (4) — UCF101 clust. X-CLIP (12) — Breakfast cls. X-CLIP (12) — UCF101 cls. X-CLIP (12) — UCF101 clust. Qwen3-VL (28) — Breakfast cls. Qwen3-VL (28) — UCF101 cls. Qwen3-VL (28) — UCF101 clust. LCO-Embedding-Omni-3B (36) — Breakfast cls. LCO-Embedding-Omni-3B (36) — UCF101 cls. LCO-Embedding-Omni-3B (36) — UCF101 clust.                                                                                           
+
+> +0.96 +0.93 +0.78 +0.55 +0.93 +0.83 +0.13 -0.20 +1.00 +0.83 -0.06 -0.19 +0.02 -0.54 -0.20 +1.00 +0.83 -0.06 -0.19 +0.02 +0.04 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 +0.15 +0.04 +0.22 +0.25 +0.66 +0.78 +0.85 -0.80 -0.34 -0.17 +0.21 +0.60 +0.54 +0.63 -0.83 -0.34 -0.25 +0.21 +0.60 +0.54 +0.79 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 LR n=4 +0.65 +0.29 +0.62 +0.40 -0.17 +0.85 +0.56 UD UD UD UD -0.57 -0.53 +0.56 -0.90 +0.71 +0.64 +0.11 -0.57 -0.53 +0.87 +0.69 +0.67 +0.71 -0.00 +0.25 +0.97 +0.60 -0.92 +0.67 -0.01 -0.45 -0.70 +0.04 +0.07 -0.94 +0.61 +0.07 -0.17 -0.70 +0.04 +0.02 +0.94 +0.90 +0.96 +0.54 +0.82 +0.97 +0.13 -0.37 +0.59 +0.78 +0.59 -0.65 +0.19 +0.62 -0.66 +0.65 +0.52 +0.70 -0.65 +0.19 +0.90
+
+−1.00 −0.75 −0.50 −0.25 0.00 0.25 0.50 0.75 1.00 
+
+> Within-unit Spearman  ρ
+
+Figure 10: Within-model, within-task Spearman associations between GRIDS-LID, RankMe, standardized covariance effective rank, and downstream performance across layers. Task scores are ten-seed means. LR denotes a four-layer trajectory, for which we do not report a primary correlation; 
+
+UD denotes an undefined association. Correlations use the [−1, 1] scale. 
+
+E.1 Geometry–performance associations 
+
+Figure 10 reports the within-model, within-task Spearman correlations between each geometric measure and downstream performance across layers. Downstream performance at each layer is averaged over ten evaluator seeds, while correlations are computed separately for each model–task comparison. Correlations are not reported for the four-layer PE-AV models and are marked LR (low resolution). UD denotes an undefined correlation because at least one ranked variable is degenerate. The direction of the association varies across tasks. For LCO, the GRIDS-LID correlation changes from +0 .94 on Breakfast to −0.37 on UCF101 classification and −0.66 on UCF101 clustering. RankMe and standardized covariance effective rank are more often positively associated with perfor-mance, but are not consistent across models. For example, both are negative for Gemma 4 on the UCF101 tasks. 
+
+E.2 Layer-choice regret 
+
+For each model–task comparison, we select layers using minimum and maximum GRIDS-LID, maximum RankMe, and maximum standardized covariance effective rank. The final layer is included as a fixed baseline. The geometry-based selection is fixed across evaluator seeds, while the best-performing layer is determined separately for each seed. We compute regret for seeds 0, . . . , 9 and average it within each model-task comparison. Table 8 summarizes the 21 comparisons. Maximum RankMe has the lowest mean regret, 0.0143, compared to 0.0249 for the final layer baseline. It improves on the final layer in eight comparison, 24 Table 8: Layer-choice regret across the 21 primary classification and clustering comparisons. Regret uses the native 0–1 task-score scale; lower values are better. “Zero” counts comparisons with zero mean regret. Win/tie/loss compares each geometric choice with the last-layer baseline. 
+
+Layer choice N Mean Median Maximum Zero W/T/L vs. last Maximum RankMe 21 0.0143 0.0081 0.0558 3 8/9/4 Last layer 21 0.0249 0.0090 0.1694 4 –Maximum standardized covariance effective rank 21 0.0399 0.0147 0.2172 3 10/3/8 Minimum GRIDS-LID ( k = 100 ) 21 0.0447 0.0063 0.2380 4 7/4/10 Maximum GRIDS-LID ( k = 100 ) 21 0.0997 0.0374 0.4734 0 3/6/12 Minimum GRIDS-LID Maximum GRIDS-LID Maximum RankMe Maximum std. covariance effective rank Minimum GRIDS-LID roughness Last layer V-JEPA 2 (24) — Breakfast cls. V-JEPA 2 (24) — UCF101 cls. V-JEPA 2 (24) — UCF101 clust. PE-AV Small (4) — Breakfast cls. PE-AV Small (4) — UCF101 cls. PE-AV Small (4) — UCF101 clust. Gemma 4 (42) — Breakfast cls. Gemma 4 (42) — UCF101 cls. Gemma 4 (42) — UCF101 clust. PE-AV Large (4) — Breakfast cls. PE-AV Large (4) — UCF101 cls. PE-AV Large (4) — UCF101 clust. X-CLIP (12) — Breakfast cls. X-CLIP (12) — UCF101 cls. X-CLIP (12) — UCF101 clust. Qwen3-VL (28) — Breakfast cls. Qwen3-VL (28) — UCF101 cls. Qwen3-VL (28) — UCF101 clust. LCO-Embedding-Omni-3B (36) — Breakfast cls. LCO-Embedding-Omni-3B (36) — UCF101 cls. LCO-Embedding-Omni-3B (36) — UCF101 clust.                               
+
+> 0.238* ±0.032 0.003 ±0.007 0.024 ±0.011 0.035 ±0.013 0.155 ±0.024 0.024 ±0.011 0.006 ±0.001 0.322* ±0.006 0.006 ±0.001 0.000 ±0.000 TIE 0.006 ±0.001 0.002 ±0.003 0.205 ±0.004 0.002 ±0.003 0.001 ±0.002 TIE 0.002 ±0.003 0.014 ±0.012 0.014 ±0.015 0.014 ±0.015 0.014 ±0.015 LR 0.013 ±0.017 0.000 ±0.000 0.009 ±0.001 0.004 ±0.002 0.004 ±0.002 LR 0.009 ±0.001 0.000 ±0.000 0.069 ±0.004 0.013 ±0.004 0.013 ±0.004 LR 0.069 ±0.004 0.040 ±0.009 0.027 ±0.015 0.028 ±0.016 0.026 ±0.010 TIE 0.034 ±0.015 0.036 ±0.004 0.155 ±0.004 0.028 ±0.004 0.061 ±0.006 0.079 ±0.006 0.095 ±0.006 0.002 ±0.002 0.197 ±0.002 0.021 ±0.004 0.066 ±0.004 0.058 ±0.001 0.169 ±0.004 0.031 ±0.015 0.006 ±0.009 0.006 ±0.009 0.006 ±0.009 LR 0.015 ±0.012 0.000 ±0.000 0.032 ±0.004 0.015 ±0.003 0.015 ±0.003 LR 0.032 ±0.004 0.001 ±0.002 0.028 ±0.003 0.008 ±0.003 0.008 ±0.003 LR 0.028 ±0.003 0.046 ±0.014 0.001 ±0.003 0.018 ±0.010 0.018 ±0.010 0.048 ±0.017 0.001 ±0.003 0.006 ±0.002 0.473* ±0.007 0.056 ±0.003 0.217 ±0.005 TIE 0.000 ±0.000 0.001 ±0.001 0.230* ±0.004 0.039 ±0.003 0.127 ±0.004 TIE 0.010 ±0.005 0.228* ±0.025 0.138 ±0.021 0.000 ±0.000 0.138 ±0.021 TIE 0.000 ±0.000 0.000 ±0.000 0.037 ±0.003 0.000 ±0.000 0.000 ±0.000 0.022 ±0.003 0.000 ±0.000 0.000 ±0.000 0.059 ±0.005 0.000 ±0.000 0.000 ±0.000 0.035 ±0.002 0.000 ±0.000 0.228* ±0.018 0.006 ±0.009 0.006 ±0.009 0.006 ±0.009 TIE 0.006 ±0.009 0.030 ±0.004 0.030 ±0.004 0.003 ±0.001 0.030 ±0.004 TIE 0.003 ±0.001 0.030 ±0.002 0.050 ±0.003 0.006 ±0.002 0.050 ±0.003 TIE 0.006 ±0.002
+
+0.000 0.025 0.050 0.075 0.100 0.125 0.150 0.175 0.200 
+
+> Mean layer-choice regret (raw score difference)
+
+Figure 11: Layer-choice regret for each of the 21 primary classification and clustering comparisons. Each cell reports the mean and sample standard deviation over evaluator seeds 0–9 on the 0–1 task-score scale. Minimum and maximum GRIDS-LID are evaluated separately, and the last layer is a fixed baseline. Asterisks mark values above the displayed 95th-percentile color cap. ties in nine, and performs worse in four. Maximum standardized covariance effective rank improves on the final layer in ten comparisons, but its larger errors give a higher mean regret of 0.0399. Minimum GRIDS-LID has a low median regret of 0.0063 , but a mean regret of 0.0447, reflecting several large errors. Maximum GRRIDS-LID performs worst overall, with a mean regret of 0.0997 and a maximum regret of 0.4734. Figure 11 shows that the GRIDS-LID errors depend strongly on the task. Maximum GRIDS-LID performs better on several Breakfast comparisons but incurs large regret on UCF101, partcularly for V-JEPA 2 and X-CLIP. Minimum GRIDS-LID shows the opposite pattern in several cases. Neither GRIDS-LID extremum therefore provides a consistent layer-selection rule across the evaluated tasks. 25

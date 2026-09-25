@@ -1,0 +1,169 @@
+{
+  "date": "20260925",
+  "date_label": "",
+  "generated_at": "2026-09-25 21:55:01 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.29329v1",
+      "route": "202609/25/2609.29329v1-hyperbolic-multimodal-continual-learning-a-closest-admissible-solution",
+      "title": "Hyperbolic Multimodal Continual Learning: A Closest-Admissible Solution",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态几何保持与跨模态对应关系的持续学习",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.22628v1",
+      "route": "202609/25/2609.22628v1-text-pixels-or-both-evaluating-input-representations-for-multimodal-document-qa",
+      "title": "Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "比较多模态问答的文本、图像与融合输入",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.27413v1",
+      "route": "202609/25/2609.27413v1-s2asemantic-to-spatial-alignment-for-alignment-free-rgb-t-salient-object-detection",
+      "title": "S2A:Semantic-to-Spatial Alignment for Alignment-Free RGB-T Salient Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态对齐与融合",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.27901v1",
+      "route": "202609/25/2609.27901v1-all-modalities-are-equal-but-video-is-more-equal-closing-the-cross-attention-gap-in-joint-video-generation",
+      "title": "All modalities are equal, but video is more equal: Closing the Cross-Attention Gap in Joint Video Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态融合的跨模态注意力正则化",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.28086v2",
+      "route": "202609/25/2609.28086v2-layerscope-a-layerwise-characterization-of-video-and-multimodal-learned-representations",
+      "title": "LAYERSCOPE: A Layerwise Characterization of Video and Multimodal Learned Representations",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态学习表示的分层刻画",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.29235v1",
+      "route": "202609/25/2609.29235v1-sarfusion-scene-aware-routing-fusion-for-robust-camera-lidar-3d-object-detection",
+      "title": "SARFusion: Scene-Aware Routing Fusion for Robust Camera-LiDAR 3D Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "不可靠模态下的自适应多模态融合",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.29398v1",
+      "route": "202609/25/2609.29398v1-ice-task-aligned-clifford-latent-fields-for-multimodal-graph-foundation-models",
+      "title": "ICE: Task-Aligned Clifford Latent Fields for Multimodal Graph Foundation Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "编码实体、视觉、语言与关系状态的多模态图基础模型",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.29940v1",
+      "route": "202609/25/2609.29940v1-mind-what-matters-for-reasoning-aligning-cross-modal-attention-via-selective-probability-mass-concentration",
+      "title": "Mind What Matters for Reasoning: Aligning Cross-Modal Attention via Selective Probability Mass Concentration",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对齐跨模态注意力以改善多模态推理",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.30210v1",
+      "route": "202609/25/2609.30210v1-the-alignment-illusion-in-multimodal-large-language-models",
+      "title": "The Alignment Illusion in Multimodal Large Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "检验标量视觉-文本对齐分数是否反映内容级跨模态交互",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    },
+    {
+      "paper_id": "2609.30238v1",
+      "route": "202609/25/2609.30238v1-semmsa-latent-semantic-aided-robust-multimodal-sentiment-analysis-with-incomplete-data",
+      "title": "SemMSA: Latent Semantic-Aided Robust Multimodal Sentiment Analysis with Incomplete Data",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "无锚谱对齐实现跨模态语义对齐",
+      "first_seen_at": "2026-09-25 21:55:01 UTC",
+      "updated_at": "2026-09-25 21:55:01 UTC"
+    }
+  ]
+}

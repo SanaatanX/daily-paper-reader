@@ -1,0 +1,605 @@
+Title: Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA
+
+URL Source: https://arxiv.org/pdf/2609.22628v1
+
+Published Time: Tue, 22 Sep 2026 00:26:32 GMT
+
+Number of Pages: 15
+
+Markdown Content:
+## Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA 
+
+Nikhil Reddy Pottanigari Sepideh Kharaghani Saverio Vadacchino Alejandro Posada Kurt MacDonald Ying Zhang ServiceNow Canada 
+
+{nikhilreddy.pottanigari, sepideh.kharaghani, saverio.vadacchino, alejandro.posada, kurt.macdonald, yin.zhang}@servicenow.com 
+
+Abstract 
+
+Every document QA system begins with a choice that is rarely studied on its own: whether to feed the model page images, extracted text, or both. We isolate this choice, holding the prompt, judge, and scoring pipeline fixed, across four commercial model endpoints, two corpora, and two context regimes (gold evi-dence pages and the full document). On doc-uments that fit the image budget, page images lead on accuracy at every document length on both corpora, but this advantage carries a grow-ing latency and cost premium: text latency stays roughly flat as documents lengthen while image latency rises steadily. Text and images also fail on different questions, with exactly one representation correct on 19–25% of items across the reported cells, so neither subsumes the other. Exploiting this complementarity, a lightweight TF-IDF router that reads only the question text gains 2.6 points over always-text while cutting median latency 30% relative to always-vision, on a document-disjoint held-out split. 
+
+1 Introduction 
+
+Before a document QA system can answer a ques-tion, a simple preprocessing choice sets how the document reaches the model: as page images, as extracted text, or both (Zhang et al., 2024). Aknowledge-base article may encode evidence in a screenshot, diagram, or spatial arrangement that OCR text preserves only partially. Sending every page as an image retains this visual evidence but increases input size and inference latency on long documents. Combining both modalities can be worse than either channel alone, depending on the model. This choice affects accuracy and latency together. Always sending images for a long report, or text for a screenshot-heavy knowledge base, can hurt answer quality or increase inference time. How-ever, representation is often evaluated together with 
+
+Figure 1: Three document representations use the same QA prompt and judge. IMAGE preserves layout and visual content. T EXT is compact and uncapped by page count. T EXT +I MAGE concatenates OCR text followed by page images at the cost of larger context. 
+
+changes to the model, prompt, retrieval method, or evaluator, making its contribution difficult to iden-tify. We address this by comparing IMAGE (page im-ages), TEXT (OCR text), and TEXT +I MAGE (text then images) across four commercial endpoints from two providers, one public benchmark (Ma et al., 2024b), and one enterprise knowledge base. Each model runs under two retrieval regimes: OR- 
+
+> ACLE
+
+(gold evidence pages) and FULL (full doc-ument). Within each model, corpus, and regime, the prompt, judge, and scoring pipeline are held constant; the representation and its resulting input size are the intended experimental differences. arXiv:2609.22628v1 [cs.AI] 18 Sep 2026 Table 1: Evaluation corpora. The ≤50-page columns count the documents short enough to fit the vision page cap and their questions (the subset used in Table 3).                
+
+> Corpus Docs
+> ≤50-page Docs Questions
+> ≤50-page Questions Profile Enterprise KB 1,447 1,445 5,169 5,163 Short support articles with screenshots, UI states, diagrams, and cross-modal references; median 4pp., max 237pp.; 99.86% of docs ≤50pp.
+> MMLongBench-Doc 135 101 1,091 798 Visually rich PDFs: reports, papers, manuals; cross-page and unanswerable questions (Ma et al., 2024b); median 28pp., max 468pp. (mean 48.3); 25% of docs >50pp.
+
+Our contributions: • A controlled representation benchmark across four models, two corpora, and two retrieval regimes with a fixed prompt and judge. • A systematic analysis of how document length interacts with input representation , showing that I MAGE leads on accuracy within the image budget while their latency and cost grow with document length (Section 4.1). • A lightweight question-text router that captures much of the accuracy gap to always-vision while retaining most of text’s latency advantage, evalu-ated on a document-disjoint held-out split (Sec-tion 5). 
+
+2 Related Work 
+
+Document QA and representation. Document QA has expanded from single-page visual under-standing (Mathew et al., 2021) to multi-page rea-soning over tables, charts, and cross-page evidence (Van Landeghem et al., 2023; Ma et al., 2024b; Deng et al., 2025). Layout-aware models such as LayoutLMv3 (Huang et al., 2022) and Pix2Struct (Lee et al., 2023) learn joint text–image representa-tions. Berghaus et al. (2025) compare image- and text-based processing for invoice extraction and report model- and dataset-dependent results. Our experiments compare representations under a com-mon prompt and evaluation pipeline across four models, two corpora, and two regimes. 
+
+Multimodal document retrieval and bench-marks. Retrieval-augmented generation (Lewis et al., 2020) couples two decisions: which evi-dence to retrieve and how to represent it. PDF-Triage (Saad-Falcon et al., 2024) routes questions to document structure; M3DocRAG (Cho et al., 2024) and MMDocRAG (Dong et al., 2025) re-trieve multimodal document evidence. Our O RA -
+
+> CLE
+
+/F ULL regimes compare gold-page input with no page retrieval. Long-context position effects are established for text (Liu et al., 2024), and prompt-compression methods reduce text context length (Jiang et al., 2023; Li et al., 2023). We examine how document representation interacts with full-document context and a fixed image budget. Aparallel line of work asks whether page images can replace extracted text directly. ColPali (Faysse et al., 2025) and Document Screenshot Embedding (Ma et al., 2024a) embed rendered pages rather than parsed text, and VisRAG (Yu et al., 2025) builds a vision-language RAG pipeline over page images, each reporting that image representations avoid parsing loss on layout-rich documents. Our con-trolled comparison isolates this same text-versus-image choice at generation time rather than at re-trieval time. 
+
+Parsing and evaluation. Text quality depends on the parsing pipeline. Neural parsers (Blecher et al., 2024; Nassar et al., 2025) produce structured markup from page images, while direct multimodal processing can retain non-textual evidence that text extraction omits (Shen et al., 2026). Our text con-dition uses a proprietary pipeline that outperforms Tesseract (Smith, 2007) on three OCR datasets (Ap-pendix Table 8); this comparison does not elimi-nate extraction error as a possible source of the text–image gap. We use the same LLM judge and prompt in every condition, while recognizing that LLM-based evaluation can itself introduce error (Zheng et al., 2023; Liu et al., 2023; Bavaresco et al., 2025). 
+
+3 Setup 
+
+Representation strategies. IMAGE sends each page as a 300-DPI image; T EXT sends page text from a proprietary OCR pipeline whose compar-ison with Tesseract (Smith, 2007) appears in Ap-pendix Table 8; T EXT +I MAGE supplies the OCR text followed by the page images. All three use the Table 2: Evaluation metrics: accuracy as the primary outcome; pairwise disagreement, and latency                      
+
+> Metric Definition Interpretation Accuracy Acc( s, m, d, r ) = |Q|−1P
+> qcq, with
+> cq∈[0 ,1] the mean judged correctness across prediction and judge runs. Average judged answer correctness; higher is better.
+> Pairwise disagreement Dis( si, s j) = |Q|−1P
+> q1[bq,i ̸=bq,j ], where
+> bq,s is the binary correctness label used for paired analysis. Higher values indicate more complementary correctness outcomes.
+> Latency Average seconds per question from run telemetry, by representation and regime. High latency can make an accurate route impractical.
+
+same QA prompt (Appendix E). 
+
+Datasets. Two corpora span short, visually dense articles and longer mixed-format documents (Ta-ble 1). The enterprise knowledge base (KB) av-erages 5.7 pages per document and has 93.6% of its questions labeled as requiring visual or cross-modal evidence. MMLongBench-Doc (Ma et al., 2024b) contains longer PDFs (48.3 pages on av-erage) with single-page, cross-page, and unan-swerable questions. The KB is internal, whereas MMLongBench-Doc provides a public comparison corpus (Appendix B). 
+
+Models and retrieval regimes. We evaluate four models from two providers: Gemini 3.1 Flash-Lite and Gemini 3.1 Pro (Google via Vertex AI), GPT-5.4 and GPT-5.4-mini (OpenAI via Azure) 1. Each model runs under two regimes that bracket realistic retrieval: • ORACLE supplies only the gold evidence pages. It measures answer generation when annotated evidence pages are provided, without evaluating page retrieval. • FULL sends the full document with no retrieval. Here the model has to both find the relevant pages and extract the answer from a much larger, nois-ier context. The gap between regimes measures sensitivity to re-placing annotated evidence pages with the full doc-ument: a large positive gap indicates that the rep-resentation benefits from page selection, whereas a small or negative gap indicates comparable or better performance with full context. 
+
+Page cap and document scope. Due to model-provider limits, we cap all requests at 50 page im-ages and restrict the main analysis to documents of 50 pages or fewer, so that every representation sees 
+
+> 1Exact API identifiers in Appendix A.
+
+the complete page set. We adopt this restriction specifically to isolate the page-cap truncation effect from any genuine modality effect. Applying the same cap to both providers keeps the I MAGE condi-tions comparable. For completeness, Appendix C reports results over all documents, still capped at 50 page images. In that setting, documents longer than 50 pages are truncated under I MAGE , while TEXT continues to see the full document, and the two effects are shown to be separable. 
+
+Scoring and metrics. Models produce free-form answers with a 3,000-token limit, temperature 0, and a fixed seed of 30. For each model, repre-sentation, dataset, and regime, we average correct-ness over five prediction runs . Each prediction is then evaluated by a fixed GPT-5.2 judge over 
+
+three judging runs , and we report the mean score. Per-cell run-to-run standard deviations are reported alongside every accuracy and latency value in Ta-bles 3 and 4. Reported ± values are standard devi-ations across the five prediction and three judging runs. Because decoding is greedy with a fixed seed, they quantify residual nondeterminism in the hosted endpoints and the judge rather than sam-pling uncertainty over questions. Table 2 defines the three metrics. 
+
+4 Results 
+
+We organize results around two questions: how the accuracy–latency trade-off changes with doc-ument length, and whether text and images miss the same questions. Table 3 and Figure 2 show that on the ≤50-page subset, image-bearing inputs (I MAGE , T EXT +I MAGE ) lead on accuracy across document lengths on both corpora, while T EXT 
+
+stays consistently lower but at a fraction of the latency: text latency is roughly flat in document length, whereas I MAGE and T EXT +I MAGE latency grows steadily. The accuracy gap narrows on the Table 3: Accuracy on the ≤50-page subset (documents short enough that every representation sees the full page set, i.e. no vision-input truncation). Cells show mean ± std across runs, quantifying endpoint and judge nondeterminism rather than question-level uncertainty; the Avg. row is the arithmetic mean of the four model means per column. Left block: O RACLE (gold evidence pages); right block: F ULL (full document). 
+
+ORACLE FULL 
+
+Model TEXT IMAGE TEXT +I MAGE TEXT IMAGE TEXT +I MAGE 
+
+Enterprise KB 
+
+Gemini 3.1 Flash-Lite 0.576 ± 0.002 0.729 ± 0.002 0.724 ± 0.001 0.594 ± 0.001 0.711 ± 0.003 0.714 ± 0.000 
+
+Gemini 3.1 Pro 0.618 ± 0.003 0.741 ± 0.004 0.736 ± 0.002 0.634 ± 0.003 0.728 ± 0.002 0.728 ± 0.003 
+
+GPT-5.4 0.639 ± 0.003 0.677 ± 0.002 0.733 ± 0.004 0.663 ± 0.006 0.679 ± 0.004 0.734 ± 0.005 
+
+GPT-5.4-mini 0.612 ± 0.002 0.683 ± 0.003 0.731 ± 0.002 0.628 ± 0.003 0.672 ± 0.003 0.715 ± 0.005 
+
+Avg. 0.611 0.708 0.731 0.630 0.698 0.723 MMLongBench-Doc 
+
+Gemini 3.1 Flash-Lite 0.529 ± 0.001 0.625 ± 0.003 0.613 ± 0.002 0.511 ± 0.001 0.615 ± 0.009 0.620 ± 0.006 
+
+Gemini 3.1 Pro 0.641 ± 0.007 0.711 ± 0.008 0.691 ± 0.003 0.628 ± 0.007 0.690 ± 0.004 0.623 ± 0.006 
+
+GPT-5.4 0.559 ± 0.007 0.667 ± 0.004 0.673 ± 0.003 0.599 ± 0.009 0.686 ± 0.008 0.683 ± 0.008 
+
+GPT-5.4-mini 0.527 ± 0.009 0.634 ± 0.005 0.643 ± 0.007 0.547 ± 0.005 0.633 ± 0.004 0.642 ± 0.007 
+
+Avg. 0.564 0.659 0.655 0.571 0.656 0.642 
+
+Table 4: Mean latency (seconds/question, ± std across runs) on the ≤50-page subset , where no representation is truncated by the vision page cap. Left block: O RACLE (gold evidence pages); right block: F ULL (full document). The Avg. row is the arithmetic mean of the four model means per column. Lower is better. 
+
+ORACLE FULL 
+
+Model TEXT IMAGE TEXT +I MAGE TEXT IMAGE TEXT +I MAGE 
+
+Enterprise KB 
+
+Gemini 3.1 Flash-Lite 1.29 ± 0.00 2.42 ± 0.38 2.52 ± 0.31 1.40 ± 0.01 3.26 ± 0.60 3.20 ± 0.32 
+
+Gemini 3.1 Pro 5.57 ± 0.25 5.69 ± 0.36 5.36 ± 0.37 6.21 ± 0.25 5.68 ± 0.15 5.81 ± 0.22 
+
+GPT-5.4 3.46 ± 0.29 4.97 ± 0.42 4.48 ± 0.42 3.42 ± 0.18 5.43 ± 1.07 5.71 ± 0.43 
+
+GPT-5.4-mini 1.68 ± 0.20 2.55 ± 0.15 2.42 ± 0.15 1.78 ± 0.42 3.36 ± 0.13 3.26 ± 0.16 
+
+Avg. 3.00 3.91 3.70 3.20 4.43 4.50 
+
+MMLongBench-Doc 
+
+Gemini 3.1 Flash-Lite 1.72 ± 0.09 3.59 ± 0.44 4.06 ± 0.16 2.10 ± 0.06 5.88 ± 0.52 6.93 ± 0.28 
+
+Gemini 3.1 Pro 6.10 ± 0.22 6.88 ± 0.69 6.80 ± 0.72 7.57 ± 0.31 8.40 ± 0.50 10 .12 ± 2.31 
+
+GPT-5.4 4.21 ± 0.32 8.03 ± 0.75 7.83 ± 0.67 4.78 ± 0.24 13 .37 ± 0.61 13 .36 ± 0.51 
+
+GPT-5.4-mini 2.00 ± 0.23 5.05 ± 0.36 5.03 ± 0.31 2.22 ± 0.27 10 .20 ± 0.31 10 .09 ± 0.36 
+
+Avg. 3.51 5.89 5.93 4.17 9.46 10.13 
+
+shortest and longest KB buckets but does not close. Section 5 then exploits the resulting complementar-ity with a lightweight router. 
+
+4.1 Accuracy–latency trade-off across representations 
+
+Page images retain layout and non-textual content that extracted text may omit (Shen et al., 2026), but any accuracy gain must be weighed against latency. We examine this trade-off under two regimes, on the ≤50-page subset where every representation sees the complete page set. 
+
+Oracle: image inputs lead with gold pages. Un-der O RACLE , either I MAGE or T EXT +I MAGE is best for every model on both corpora, with gains over T EXT of up to 14.8 percentage points on the KB and 11.6 points on MMLongBench-Doc (Ta-ble 3). This is consistent with image inputs re-taining evidence omitted by the text pipeline, but it does not identify whether the difference arises from visual evidence, OCR errors, or model-specific pro-cessing. The gain comes at a latency cost: on the KB, image input raises average latency from 3.0 s (T EXT ) to 3.9 s (I MAGE ) and 3.7 s (T EXT +I MAGE ), and on MMLongBench-Doc from 3.5 s to 5.9 s (Table 4). The larger O RACLE latency gap on MMLongBench-Doc is consistent with its ques-tions citing more evidence pages per query (1.88 vs. 1.05 on the KB (Appendix B)), so each I M- 
+
+> AGE
+
+or T EXT +I MAGE request carries more page images. 
+
+Full: image accuracy leads, but the latency gap widens. Under F ULL , image-bearing inputs still lead on accuracy on both corpora: on the Figure 2: Accuracy (top) and median latency (bottom) versus document-length bucket on the ≤50-page subset under FULL retrieval, aggregated across all four models. The Enterprise KB has no 40–50 page bucket, as its documents are shorter (median 4 pages). Bands show ± std across models. 
+
+KB, T EXT +I MAGE and I MAGE average 0.72 and 0.70 versus 0.63 for T EXT ; on MMLongBench-Doc, I MAGE averages 0.66 versus 0.57 for T EXT 
+
+(Table 3). Figure 2 shows T EXT latency staying roughly flat in document length ( ∼3 s on the KB, 
+
+∼3–4 s on MMLongBench-Doc), while I MAGE 
+
+and T EXT +I MAGE latency rise steadily, reaching 
+
+∼9 s on the longest KB bucket and ∼12 s on the longest MMLongBench-Doc bucket. Accuracy, by contrast, remains image-favored in every length bucket within the subset. The bucket-level view is included to show that the accuracy ordering does not reverse within the un-truncated range; the re-versal reported in Appendix C appears only once the page cap binds. 
+
+Does combining both modalities help? 
+
+Whether T EXT +I MAGE helps depends on the endpoint and corpus. GPT-5.4 and GPT-5.4-mini gain roughly 5 pp (5.6 and 4.8, respectively) from TEXT +I MAGE over I MAGE on the KB under ORACLE , and their IMAGE -vs-T EXT +I MAGE 
+
+disagreement is the highest among the KB cells (13–14%, Table 6), showing that the additional text changes some correctness outcomes. Gemini Pro’s IMAGE and T EXT +I MAGE outcomes differ less often ( ∼7–8% on the KB). On MMLongBench-Doc/F ULL , Gemini Pro’s TEXT +I MAGE falls behind its I MAGE result and roughly ties its T EXT 
+
+result (0.623 vs. 0.690 and 0.628), while for the 
+
+Table 5: Average cost (USD per 100 questions) and latency (seconds per question) per representation strat-egy, averaged across the four models and two datasets. Full per-model, per-dataset latency breakdowns are in Table 4.             
+
+> Strategy
+> Cost ($/100q) Latency (s/q)
+> ORACLE
+> TEXT 0.61 3.25 IMAGE 0.91 4.90 TEXT +I MAGE 1.29 4.81
+> FULL
+> TEXT 1.48 3.69 IMAGE 2.78 6.95 TEXT +I MAGE 3.51 7.31
+
+GPT endpoints T EXT +I MAGE is the most accurate condition on the KB. T EXT +I MAGE provides no consistent latency benefit and is the slowest condition on the longer corpus (Table 4).      
+
+> Finding 1. Document length governs the cost of the trade-off, not its direction. Within the ≤50-page subset, image-bearing inputs (I MAGE or T EXT +I MAGE ) lead on accuracy on both corpora, with no length bucket showing a text advantage; what grows with length is their latency, which rises steadily while text latency stays roughly flat.
+
+The image advantage carries a cost and la-tency premium. Table 5 summarizes cost and latency across the four models and two corpora. Within each regime, T EXT is consistently the Table 6: Pairwise disagreement rate (%) on the ≤50-page subset : share of questions where exactly one format is correct (i.e., the sum of text-only-correct and vision-only-correct questions). A rate of 10% in the T EXT /I MAGE 
+
+column means that on 10% of questions one format answered correctly and the other did not. Coral ≥20% ; mint 
+
+≤10% .                                                
+
+> Enterprise KB MMLongBench-Doc
+> TEXT / I MAGE IMAGE / T EXT +I MAGE TEXT / I MAGE IMAGE / T EXT +I MAGE
+> Model ORACLE FULL ORACLE FULL ORACLE FULL ORACLE FULL
+> Gemini 3.1 Flash-Lite 24.7 22.2 10.7 10.4 22.8 23.2 12.3 13.5 Gemini 3.1 Pro 20.4 19.2 6.7 8.4 19.3 21.2 10.4 16.0 GPT-5.4 22.9 19.7 13.5 12.7 19.7 20.2 8.9 7.9 GPT-5.4-mini 24.6 22.6 14.0 14.2 23.4 20.6 9.6 9.5
+
+cheapest and fastest condition: under O RACLE ,moving from T EXT to I MAGE raises cost 1.5 ×
+
+(0.61 to 0.91 $/100q) and latency from 3.3 to 4.9 s/q, and T EXT +I MAGE is more expensive still (1.29 $/100q). The premium widens under F ULL , where the full document is processed: I MAGE and T EXT +I MAGE 
+
+cost 1.9 × and 2.4 × as much as T EXT , respectively, while their latency is roughly twice that of text (7.0 and 7.3 s/q vs. 3.7 s/q). Since I MAGE or TEXT +I MAGE also lead on accuracy (Section 4.1), no representation dominates on both axes. This trade-off motivates per-question routing, using im-age input only when it is likely to improve the answer. 
+
+4.2 Text and images answer different questions 
+
+TEXT and I MAGE give different correctness out-comes on approximately 19–25% of questions across the reported corpus, model, and regime cells (Table 6). This disagreement decomposes into a text-only-correct slice and a larger vision-only-correct slice, reflecting vision’s higher over-all accuracy. On the short KB articles, O RACLE 
+
+and F ULL disagreement rates are nearly identical because the full document is already close to the evidence pages. On MMLongBench-Doc the two regimes diverge somewhat more, consistent with extra context amplifying representation differences. Because both exclusive-correct slices are present in every cell, an oracle that picks the correct format per question would beat either fixed policy.   
+
+> Finding 2. Text and images answer different questions: 19–25% T EXT /I MAGE disagreement across the reported cells. Neither format subsumes the other; this establishes headroom for per-question selection.
+
+5 Per-Question Representation Routing 
+
+Text and images each answer questions the other misses (Finding 2). This complementarity raises a concrete question: if a system could decide 
+
+per question whether to send text or images, it could capture the accuracy of images where they help while keeping text’s lower latency and cost elsewhere. We test whether this is achievable us-ing only the question text, as a proof of concept that quantifies the potential benefit rather than a production-ready system. 
+
+Router design. We frame routing as binary clas-sification. For each (question, model) pair un-der F ULL , the label is y = 1 if I MAGE is cor-rect and T EXT is incorrect, and y = 0 otherwise. When both representations are correct we default to T EXT because it is faster in aggregate; when both are incorrect we also assign T EXT , treating the example as a non-vision-win case. We exclude TEXT +I MAGE from the router: although often com-petitive, it adds a second input channel and closely tracks I MAGE in many settings (Table 3), so rout-ing between T EXT and I MAGE targets the primary accuracy–latency trade-off. Labels are obtained by running both represen-tations on every question. This makes the router a proof of concept: it measures how much a per-question policy could gain if it selected correctly, not the performance of a deployable classifier. In production, a similar router would be trained on a smaller labeled sample and applied to new ques-tions. In our training set only 13.2% of examples are positive, so I MAGE uniquely beats T EXT on a small fraction of questions. We represent each question with TF-IDF fea-tures and train a logistic regression classifier with balanced class weights, using an approximately 80/20 document-level split stratified by dataset and Table 7: Held-out question-text router results under FULL , pooling all four models. The test partition is the 20% split described in the text. Routing accuracy 
+
+= accuracy when every question uses the modality the strategy selects (cf. per-model accuracy in Table 3). Im-plied med. latency = median wall-clock seconds across the strategy’s per-question routing decisions (cf. per-model latency in Table 4). Gains are computed from unrounded scores. Bold = best per column within each dataset.                               
+
+> Strategy Routing acc. Gain vs text Lat. Overall
+> Always-text 63.6% +0.0 pp 2.5 s
+> Always-vision 67.7% +4.1 pp 4.4 s TF-IDF router 66.2% +2.6 pp 3.1 s
+> Enterprise KB
+> Always-text 65.0% +0.0 pp 2.4 s
+> Always-vision 69.2% +4.2 pp 4.1 s TF-IDF router 67.8% +2.7 pp 2.9 s
+> MMLongBench-Doc
+> Always-text 53.9% +0.0 pp 3.2 s
+> Always-vision 58.0% +4.1 pp 8.7 s TF-IDF router 55.9% +2.0 pp 5.6 s
+
+model. All questions from the same document stay in one partition, ensuring zero document leakage and a more reliable estimate of generalization to unseen documents. All router numbers in Table 7 are computed on this 20% held-out test partition over the full corpus (all documents, image budget still capped at 50 pages) and pooled across the four mod-els, so they are micro-averages over pooled ques-tions rather than the per-model, ≤50-page macro-averages in Table 3; the two are not directly compa-rable. Always-vision is correspondingly lower on MMLongBench-Doc here, because the held-out set includes documents beyond the 50-page cap where image inputs are truncated (Appendix C). 
+
+Accuracy. On the document-disjoint split, always-vision remains the strongest fixed pol-icy, reaching 69.2% on KB and 58.0% on MMLongBench-Doc (Table 7). The router does not beat it, but closes much of the gap over always-text, increasing accuracy by 2.7 pp on KB (65.0 →
+
+67.8%) and 2.0 pp on MMLongBench-Doc (53.9 
+
+→ 55.9%) while routing 26.8% of examples to vision. Overall, the router reaches 66.2%, gaining 
+
+2.6 pp over always-text while remaining 1.5 pp below always-vision. 
+
+Latency. Since the router keeps most questions on the faster text path, median latency drops sub-stantially relative to always-vision: from 4.4 s to 3.1 s overall, a savings of approximately 30% ,while routing only 26.8% of examples to vision.  
+
+> Finding 3. On the held-out split with no document over-lap, a lightweight TF-IDF router gains 2.0–2.7 pp over always-text while cutting median latency by 30% rela-tive to always-vision. Because training labels require running both representations on every question, this is a proof-of-concept estimate of achievable headroom, not a deployable classifier.
+
+6 Discussion 
+
+Document length as the organizing variable. 
+
+Document length organizes the accuracy–latency trade-off, but not by changing which representation is most accurate. On the ≤50-page subset, I MAGE 
+
+or T EXT +I MAGE leads on accuracy across all doc-ument lengths on both corpora; what scales with length is their cost and latency, which grow steadily while text stays roughly flat. The apparent accuracy crossover in favor of text on long documents is a consequence of the fixed 50-image cap truncating image inputs, and appears only in the full-corpus results (Appendix C); it is a property of the current deployment budget, not of the modality. Comple-mentary errors provide a separate motivation for routing: text and images disagree on roughly a fifth to a quarter of questions in every cell, so neither representation subsumes the other. The current router, however, is evaluated only under F ULL , and we treat it as a proof of concept rather than a tuned system. 
+
+Multimodal fusion is model-dependent, not ad-ditive. Sending both text and images does not uniformly help. The GPT endpoints gain approxi-mately 5 pp over image-only input on the KB un-der O RACLE , whereas the Gemini endpoints show smaller or less consistent changes (Section 4.1). These outcome differences do not reveal the mod-els’ internal fusion mechanisms, but they show that the preferred representation depends on the end-point as well as the document setting. 
+
+Implications for RAG pipelines. The results mo-tivate evaluating both text and image indices rather than assuming that one representation is uniformly best. The TF-IDF router is a proof of concept; a stronger evaluation would use realistic retrieval, and document features in addition to the question text. 7 Conclusion 
+
+We compared text, image, and combined document inputs under a common prompting and evaluation pipeline across four model endpoints, two corpora, and two context regimes. Image-bearing inputs out-perform text on both corpora, with the largest gains on the short, visually dense Enterprise KB, while text remains cheaper and faster per question. The two representations also produce complementary correctness outcomes, with approximately 19–25% pairwise disagreement across the reported cells. On a held-out document-level split with no train–test leakage, a lightweight TF-IDF question router re-covers 2.0–2.7 percentage points over always-text while reducing median latency by 30% relative to always-vision. 
+
+Limitations 
+
+First, O RACLE and F ULL do not evaluate a realistic top-k retriever. They compare annotated evidence pages against full-document input, so the results bound two extremes and do not establish perfor-mance for intermediate retrieval quality. Second, we report run-to-run variation but not question-level uncertainty. Our design fixes the question set and varies only prediction and judging runs, so the reported standard deviations capture endpoint and judge nondeterminism. Paired sig-nificance testing over the per-question correctness scores would sharpen these comparisons. Third, the T EXT condition depends on our OCR pipeline. The pipeline outperforms Tesseract on standard document-OCR benchmarks (Appendix Table 8) but is not state of the art, and may ex-tract text less faithfully than the frontier models themselves would from the same pages. Part of the text–image gap we report may therefore reflect extraction error rather than an intrinsic limitation of the text modality. 
+
+Ethics Statement 
+
+The Enterprise KB contains internal product-support documentation owned by the authors’ orga-nization and was accessed under existing internal data-use policies. Questions were created and re-viewed by internal annotators as part of their regu-lar work. All model endpoints, including the judge, were accessed under enterprise agreements with Vertex AI and Azure OpenAI, which exclude sub-mitted prompts and outputs from provider model training. No data was retained beyond the terms of these agreements. The Enterprise KB and OCR pipeline cannot be released because they are propri-etary. We therefore include MMLongBench-Doc to enable independent reproduction of the main text-versus-image comparison. 
+
+References                  
+
+> Anna Bavaresco, Raffaella Bernardi, Leonardo Berto-lazzi, Desmond Elliott, Raquel Fernández, Albert Gatt, Esam Ghaleb, Mario Giulianelli, Michael Hanna, Alexander Koller, André F. T. Martins, Philipp Mondorf, Vera Neplenbroek, Sandro Pezzelle, Barbara Plank, David Schlangen, Alessandro Sug-lia, Aditya K. Surikuchi, Ece Takmaz, and Alberto Testoni. 2025. LLMs instead of human judges? a large scale empirical study across 20 NLP evaluation tasks. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Vol-ume 2: Short Papers) , pages 238–255. Association for Computational Linguistics. David Berghaus, Armin Berger, Lars Hillebrand, Kostadin Cvejoski, and Rafet Sifa. 2025. Multi-modal vision vs. text-based parsing: Benchmarking LLM strategies for invoice processing. In 2025 IEEE International Conference on Big Data , pages 2519– 2526. IEEE. Lukas Blecher, Guillem Cucurull, Thomas Scialom, and Robert Stojnic. 2024. Nougat: Neural optical under-standing for academic documents. In International Conference on Learning Representations .Jaemin Cho, Debanjan Mahata, Ozan Irsoy, Yujie He, and Mohit Bansal. 2024. M3DocRAG: Multi-modal retrieval is what you need for multi-page multi-document understanding. arXiv preprint arXiv:2411.04952 .Chao Deng, Jiale Yuan, Pi Bu, Peijie Wang, Zhong-Zhi Li, Jian Xu, Xiao-Hui Li, Yuan Gao, Jun Song, Bo Zheng, and Cheng-Lin Liu. 2025. LongDocURL: a comprehensive multimodal long document bench-mark integrating understanding, reasoning, and locat-ing. In Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Vol-ume 1: Long Papers) , pages 1135–1159. Association for Computational Linguistics. Kuicai Dong, Yujing Chang, Shijie Huang, Yasheng Wang, Ruiming Tang, and Yong Liu. 2025. Bench-marking retrieval-augmented multimodal generation for document question answering. In Advances in Neural Information Processing Systems , volume 38. Manuel Faysse, Hugues Sibille, Tony Wu, Bilel Om-rani, Gautier Viaud, Céline Hudelot, and Pierre Colombo. 2025. ColPali: Efficient document re-trieval with vision language models. In International Conference on Learning Representations (ICLR) .ArXiv:2407.01449.
+
+Yupan Huang, Tengchao Lv, Lei Cui, Yutong Lu, and Furu Wei. 2022. LayoutLMv3: Pre-training for doc-ument AI with unified text and image masking. In 
+
+Proceedings of the 30th ACM International Confer-ence on Multimedia , pages 4083–4091. Association for Computing Machinery. Huiqiang Jiang, Qianhui Wu, Chin-Yew Lin, Yuqing Yang, and Lili Qiu. 2023. LLMLingua: Compressing prompts for accelerated inference of large language models. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing ,pages 13358–13376. Association for Computational Linguistics. Kenton Lee, Mandar Joshi, Iulia Raluca Turc, Hexi-ang Hu, Fangyu Liu, Julian Martin Eisenschlos, Ur-vashi Khandelwal, Peter Shaw, Ming-Wei Chang, and Kristina Toutanova. 2023. Pix2Struct: Screen-shot parsing as pretraining for visual language under-standing. In Proceedings of the 40th International Conference on Machine Learning , volume 202 of 
+
+Proceedings of Machine Learning Research , pages 18893–18912. PMLR. Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Hein-rich Küttler, Mike Lewis, Wen-tau Yih, Tim Rock-täschel, Sebastian Riedel, and Douwe Kiela. 2020. Retrieval-augmented generation for knowledge-intensive NLP tasks. In Advances in Neural Infor-mation Processing Systems , volume 33, pages 9459– 9474. Yucheng Li, Bo Dong, Frank Guerin, and Chenghua Lin. 2023. Compressing context to enhance inference ef-ficiency of large language models. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing , pages 6342–6353. As-sociation for Computational Linguistics. Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paran-jape, Michele Bevilacqua, Fabio Petroni, and Percy Liang. 2024. Lost in the middle: How language mod-els use long contexts. Transactions of the Association for Computational Linguistics , 12:157–173. Yang Liu, Dan Iter, Yichong Xu, Shuohang Wang, Ruochen Xu, and Chenguang Zhu. 2023. G-eval: NLG evaluation using GPT-4 with better human alignment. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing ,pages 2511–2522. Association for Computational Linguistics. Xueguang Ma, Sheng-Chieh Lin, Minghan Li, Wenhu Chen, and Jimmy Lin. 2024a. Unifying multimodal retrieval via document screenshot embedding. In 
+
+Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP) ,pages 6492–6505, Miami, Florida, USA. Association for Computational Linguistics. Yubo Ma, Yuhang Zang, Liangyu Chen, Meiqi Chen, Yizhu Jiao, Xinze Li, Xinyuan Lu, Ziyu Liu, Yan Ma, Xiaoyi Dong, Pan Zhang, Liangming Pan, Yu-Gang Jiang, Jiaqi Wang, Yixin Cao, and Aixin Sun. 2024b. Mmlongbench-doc: Benchmarking long-context document understanding with visualizations. In Advances in Neural Information Processing Sys-tems , volume 37, pages 95963–96010. Minesh Mathew, Dimosthenis Karatzas, and C. V. Jawa-har. 2021. DocVQA: A dataset for VQA on docu-ment images. In Proceedings of the IEEE/CVF Win-ter Conference on Applications of Computer Vision ,pages 2199–2208. IEEE. Ahmed Nassar, Andres Marafioti, Matteo Omenetti, Maksym Lysak, Nikolaos Livathinos, Christoph Auer, Lucas Morin, Rafael Teixeira de Lima, Yusik Kim, A. Said Gurbuz, Michele Dolfi, Miquel Farré, and Peter W. J. Staar. 2025. SmolDocling: An ultra-compact vision-language model for end-to-end multi-modal document conversion. In Proceedings of the IEEE/CVF International Conference on Computer Vision , pages 21972–21983. IEEE. Jon Saad-Falcon, Joe Barrow, Alexa Siu, Ani Nenkova, Seunghyun Yoon, Ryan A. Rossi, and Franck Der-noncourt. 2024. PDFTriage: Question answering over long, structured documents. In Proceedings of the 2024 Conference on Empirical Methods in Nat-ural Language Processing: Industry Track , pages 153–169. Association for Computational Linguistics. Jiyuan Shen, Peiyue Yuan, Atin Ghosh, Yifan Mai, and Daniel Dahlmeier. 2026. OCR or not? rethinking document information extraction in the MLLMs era with real-world large-scale datasets. In Proceedings of the 19th Conference of the European Chapter of the Association for Computational Linguistics (Vol-ume 5: Industry Track) , pages 385–396. Association for Computational Linguistics. Ray Smith. 2007. An overview of the Tesseract OCR engine. In Ninth International Conference on Doc-ument Analysis and Recognition , volume 2, pages 629–633. IEEE. Jordy Van Landeghem, Rubèn Tito, Łukasz Borchmann, Michał Pietruszka, Paweł Józiak, Rafał Powalski, Dawid Jurkiewicz, Mickaël Coustaty, Bertrand Ack-aert, Ernest Valveny, Matthew B. Blaschko, Sien Moens, and Tomasz Stanisławek. 2023. Document understanding dataset and evaluation (DUDE). In 
+
+Proceedings of the IEEE/CVF International Confer-ence on Computer Vision , pages 19471–19483. IEEE. Shi Yu, Chaoyue Tang, Bokai Xu, Junbo Cui, Jun-hao Ran, Yukun Yan, Zhenghao Liu, Shuo Wang, Xu Han, Zhiyuan Liu, and Maosong Sun. 2025. VisRAG: Vision-based retrieval-augmented genera-tion on multi-modality documents. In International Conference on Learning Representations (ICLR) .ArXiv:2410.10594. Qintong Zhang, Victor Shea-Jay Huang, Bin Wang, Jun-yuan Zhang, Zhengren Wang, Hao Liang, Shawn Wang, Matthieu Lin, Conghui He, and Wentao Zhang. Table 8: Direct OCR comparison against Tesseract. Scores report End2End recall under case-sensitive matching.           
+
+> Dataset End2End Recall (case-sensitive) Tesseract In-house
+> CORD-1k 0.474 0.881
+> DeepForm 0.668 0.970
+> FUNSD 0.738 0.815
+> 2024. Document parsing unveiled: Techniques, chal-lenges, and prospects for structured information ex-traction. arXiv preprint arXiv:2410.21169 .Lianmin Zheng, Wei-Lin Chiang, Ying Sheng, Siyuan Zhuang, Zhanghao Wu, Yonghao Zhuang, Zi Lin, Zhuohan Li, Dacheng Li, Eric P. Xing, Hao Zhang, Joseph E. Gonzalez, and Ion Stoica. 2023. Judging LLM-as-a-judge with MT-Bench and chatbot arena. In Advances in Neural Information Processing Sys-tems , volume 36, pages 46595–46623.
+
+A Experimental Settings and Provenance 
+
+Input and inference. Images use 300-DPI PDF page renders . Text uses page text , a proprietary OCR pipeline outperforming Tesseract (Smith, 2007) (Table 8). All runs use the same QA prompt (Appendix E), no learned retriever, seed 30, a 3,000-token answer limit , and at most 50 page images 
+
+per request. Temperature is 0 for all four models. 
+
+Latency measurement. Provider-side automatic retries are disabled for all API calls. Reported latency is the wall-clock time of the single call that produced the answer, excluding any internal retry overhead the provider would otherwise add. 
+
+Judging. GPT-5.2 judges answers across three runs (8,000-token limit, two parallel calls per batch) (Zheng et al., 2023; Liu et al., 2023; Bavaresco et al., 2025). Questions are batched in fixed document order. 
+
+Model Identifiers. Run identifiers are gemini-3.1-flash-lite ,
+
+gemini-3.1-pro-preview , gpt-5.4 ,and gpt-5.4-mini . These are the exact strings passed at inference time. 
+
+B Dataset Details 
+
+MMLongBench-Doc. MMLongBench-Doc con-tains 135 PDFs with 6,522 pages, averaging 48.3 pages per document (median 28, range 9–468) (Ma et al., 2024b). We use the current 1,091-question re-lease. Questions include 485 single-page (44.5%), 360 cross-page (33.0%), and 246 unanswerable (22.5%). On answerable questions, the evidence labels are multi-label: Pure-text 298 (35.3%), Ta-ble 218 (25.8%), Chart 178 (21.1%), Image 293 (34.7%), and Layout 119 (14.1%). Answer formats include Integer 34.2%, String 29.5%, Float 18.9%, and List 17.3%. Questions cite 1.88 evidence pages on average (9.08 distinct evidence pages per docu-ment). 
+
+Enterprise KB (internal). The enterprise KB contains 1,447 documents (8,296 pages; avg. 5.7 pages/doc) with 5,169 human-reviewed questions (avg. 3.6 questions/doc). Answer mode: visual 3,314 (64.1%), cross-modal 1,527 (29.5%), tex-tual 328 (6.3%). Difficulty: easy 3,731 (72.2%), medium 1,425 (27.6%), hard 13 (0.3%). 93.6% of questions require visual or cross-modal interpreta-tion. Questions cite 1.05 evidence pages on average (2.42 distinct evidence pages per document). 
+
+C Full-corpus results 
+
+This appendix reports the per-model results under-lying the main text over all documents, with the image budget still capped at 50 pages. Documents longer than 50 pages are therefore truncated under IMAGE and T EXT +I MAGE , while T EXT sees the full document. We report the effect of the ≤50-page restriction on accuracy (Table 9) and latency (Table 10), the full length-bucket breakdown ex-tending past the cap (Figure 3). 
+
+The restriction isolates the page-cap truncation effect. On the Enterprise KB, restricting to ≤50 pages changes every accuracy and latency cell by less than 0.001 (Tables 9, 10): only 6 of 5,169 ques-tions come from longer documents, so the subset and the full corpus are effectively the same mea-surement. On MMLongBench-Doc, where 25% of documents exceed the cap, the restriction has a clear and localized effect. The accuracy gain from restricting concentrates entirely in I MAGE /F ULL ,where it reaches +0 .041 to +0 .058 across the four models, and is an order of magnitude smaller for TEXT /F ULL and for every O RACLE cell. The la-tency change mirrors this: the large reductions (−1.0 to −1.6 s) fall on I MAGE and T EXT +I MAGE 
+
+under F ULL , while T EXT and all O RACLE cells barely move. Both patterns identify the same cause: only the image conditions on long documents are affected by the restriction, because only they are truncated by the page cap. Table 9: Effect of restricting to the ≤50-page subset. Accuracy is mean ± std across runs; ∆ = acc ≤50 − acc all .
+
+Bold ∆ marks |∆| ≥ 0.02 . Large positive ∆ concentrates in I MAGE /F ULL , reflecting vision-input truncation on documents longer than the page cap. 
+
+Model Representation Regime Acc ≤50 Acc all ∆
+
+Enterprise KB 
+
+GPT-5.4 TEXT FULL 0.6634 ± 0.0059 0.6626 ± 0.0059 +0 .0008 
+
+GPT-5.4 TEXT ORACLE 0.6387 ± 0.0033 0.6382 ± 0.0033 +0 .0005 
+
+GPT-5.4 IMAGE FULL 0.6792 ± 0.0043 0.6788 ± 0.0043 +0 .0004 
+
+GPT-5.4 IMAGE ORACLE 0.6774 ± 0.0018 0.6769 ± 0.0018 +0 .0005 
+
+GPT-5.4 TEXT +I MAGE FULL 0.7344 ± 0.0051 0.7338 ± 0.0052 +0 .0006 
+
+GPT-5.4 TEXT +I MAGE ORACLE 0.7329 ± 0.0039 0.7324 ± 0.0039 +0 .0005 
+
+GPT-5.4-mini TEXT FULL 0.6277 ± 0.0033 0.6269 ± 0.0033 +0 .0007 
+
+GPT-5.4-mini TEXT ORACLE 0.6122 ± 0.0015 0.6116 ± 0.0015 +0 .0006 
+
+GPT-5.4-mini IMAGE FULL 0.6720 ± 0.0027 0.6714 ± 0.0027 +0 .0006 
+
+GPT-5.4-mini IMAGE ORACLE 0.6825 ± 0.0027 0.6821 ± 0.0028 +0 .0005 
+
+GPT-5.4-mini TEXT +I MAGE FULL 0.7148 ± 0.0054 0.7142 ± 0.0053 +0 .0006 
+
+GPT-5.4-mini TEXT +I MAGE ORACLE 0.7309 ± 0.0020 0.7304 ± 0.0020 +0 .0005 
+
+Gemini 3.1 Pro TEXT FULL 0.6335 ± 0.0031 0.6330 ± 0.0031 +0 .0005 
+
+Gemini 3.1 Pro TEXT ORACLE 0.6179 ± 0.0029 0.6174 ± 0.0028 +0 .0004 
+
+Gemini 3.1 Pro IMAGE FULL 0.7280 ± 0.0016 0.7276 ± 0.0016 +0 .0005 
+
+Gemini 3.1 Pro IMAGE ORACLE 0.7409 ± 0.0035 0.7406 ± 0.0035 +0 .0003 
+
+Gemini 3.1 Pro TEXT +I MAGE FULL 0.7275 ± 0.0034 0.7271 ± 0.0035 +0 .0005 
+
+Gemini 3.1 Pro TEXT +I MAGE ORACLE 0.7364 ± 0.0017 0.7361 ± 0.0017 +0 .0003 
+
+Gemini 3.1 Flash-Lite TEXT FULL 0.5942 ± 0.0009 0.5938 ± 0.0008 +0 .0004 
+
+Gemini 3.1 Flash-Lite TEXT ORACLE 0.5762 ± 0.0024 0.5757 ± 0.0024 +0 .0005 
+
+Gemini 3.1 Flash-Lite IMAGE FULL 0.7112 ± 0.0025 0.7110 ± 0.0025 +0 .0002 
+
+Gemini 3.1 Flash-Lite IMAGE ORACLE 0.7294 ± 0.0015 0.7292 ± 0.0015 +0 .0003 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE FULL 0.7141 ± 0.0002 0.7138 ± 0.0002 +0 .0004 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE ORACLE 0.7243 ± 0.0010 0.7241 ± 0.0010 +0 .0003 
+
+MMLongBench-Doc 
+
+GPT-5.4 TEXT FULL 0.5990 ± 0.0093 0.5927 ± 0.0086 +0 .0063 
+
+GPT-5.4 TEXT ORACLE 0.5589 ± 0.0065 0.5615 ± 0.0077 −0.0026 
+
+GPT-5.4 IMAGE FULL 0.6857 ± 0.0078 0.6348 ± 0.0082 +0 .0509 
+
+GPT-5.4 IMAGE ORACLE 0.6672 ± 0.0043 0.6585 ± 0.0039 +0 .0087 
+
+GPT-5.4 TEXT +I MAGE FULL 0.6830 ± 0.0080 0.6636 ± 0.0079 +0 .0193 
+
+GPT-5.4 TEXT +I MAGE ORACLE 0.6734 ± 0.0027 0.6643 ± 0.0027 +0 .0091 
+
+GPT-5.4-mini TEXT FULL 0.5466 ± 0.0046 0.5430 ± 0.0038 +0 .0036 
+
+GPT-5.4-mini TEXT ORACLE 0.5268 ± 0.0093 0.5340 ± 0.0097 −0.0072 
+
+GPT-5.4-mini IMAGE FULL 0.6333 ± 0.0038 0.5923 ± 0.0025 +0 .0410 
+
+GPT-5.4-mini IMAGE ORACLE 0.6343 ± 0.0052 0.6279 ± 0.0025 +0 .0065 
+
+GPT-5.4-mini TEXT +I MAGE FULL 0.6424 ± 0.0073 0.6236 ± 0.0040 +0 .0187 
+
+GPT-5.4-mini TEXT +I MAGE ORACLE 0.6426 ± 0.0065 0.6354 ± 0.0054 +0 .0072 
+
+Gemini 3.1 Pro TEXT FULL 0.6276 ± 0.0072 0.6053 ± 0.0084 +0 .0223 
+
+Gemini 3.1 Pro TEXT ORACLE 0.6413 ± 0.0074 0.6320 ± 0.0066 +0 .0093 
+
+Gemini 3.1 Pro IMAGE FULL 0.6902 ± 0.0040 0.6326 ± 0.0050 +0 .0576 
+
+Gemini 3.1 Pro IMAGE ORACLE 0.7113 ± 0.0076 0.7039 ± 0.0063 +0 .0073 
+
+Gemini 3.1 Pro TEXT +I MAGE FULL 0.6233 ± 0.0060 0.6077 ± 0.0042 +0 .0156 
+
+Gemini 3.1 Pro TEXT +I MAGE ORACLE 0.6912 ± 0.0030 0.6849 ± 0.0013 +0 .0064 
+
+Gemini 3.1 Flash-Lite TEXT FULL 0.5109 ± 0.0006 0.5108 ± 0.0004 +0 .0000 
+
+Gemini 3.1 Flash-Lite TEXT ORACLE 0.5292 ± 0.0006 0.5228 ± 0.0004 +0 .0065 
+
+Gemini 3.1 Flash-Lite IMAGE FULL 0.6145 ± 0.0093 0.5778 ± 0.0074 +0 .0367 
+
+Gemini 3.1 Flash-Lite IMAGE ORACLE 0.6253 ± 0.0027 0.6205 ± 0.0033 +0 .0048 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE FULL 0.6199 ± 0.0056 0.6101 ± 0.0011 +0 .0097 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE ORACLE 0.6128 ± 0.0018 0.6101 ± 0.0017 +0 .0026 
+
+The text advantage appears only past the cap. 
+
+Figure 3 extends the length-bucket view to the full corpus (shaded region marks buckets above the 50-page cap). Within the un-truncated range, image-bearing inputs lead at every length, matching the main text. The crossover in favor of T EXT emerges only in the truncated buckets: on MMLongBench-Doc, I MAGE accuracy falls to ∼42% at 100–150 pages and ∼39% beyond 150, while T EXT holds near 58%. This is the behavior that motivates re-porting the ≤50-page subset in the main text: the crossover is a property of the fixed image budget, not of the modalities, and it disappears once every representation sees the complete page set. 
+
+D Error Category Analysis 
+
+Tables 11 and 12 break down errors by model, representation, and regime (tagged by judge; Ap-pendix E). Categories are non-exclusive. On the KB, partial_correctness is the most frequent reported category (44–57%), 
+
+extra_incorrect_information follows (18–25%), and switching from O RACLE to F ULL 
+
+barely changes the profile. On MMLongBench-Doc, answered_when_unanswerable is high (36–53%), consistent with the fact that 22.5% of questions are unanswerable by design; this category means the model gave an answer to Table 10: Effect of the ≤50-page restriction on latency (seconds/question, mean ± std); ∆ = lat ≤50 − lat all 
+
+(negative = subset is faster). Bold ∆ marks |∆| ≥ 0.5s. Large negative ∆ concentrates in I MAGE /T EXT +I MAGE 
+
+under F ULL : the excluded long documents are the ones that inflate vision latency. 
+
+Model Representation Regime Lat ≤50 Lat all ∆ (s) Enterprise KB 
+
+GPT-5.4 TEXT FULL 3.42 ± 0.18 3.42 ± 0.18 −0.003 
+
+GPT-5.4 TEXT ORACLE 3.46 ± 0.29 3.46 ± 0.29 −0.001 
+
+GPT-5.4 IMAGE FULL 5.43 ± 1.07 5.44 ± 1.08 −0.011 
+
+GPT-5.4 IMAGE ORACLE 4.97 ± 0.42 4.98 ± 0.42 −0.009 
+
+GPT-5.4 TEXT +I MAGE FULL 5.71 ± 0.43 5.73 ± 0.43 −0.013 
+
+GPT-5.4 TEXT +I MAGE ORACLE 4.48 ± 0.42 4.49 ± 0.42 −0.004 
+
+GPT-5.4-mini TEXT FULL 1.78 ± 0.42 1.78 ± 0.42 −0.000 
+
+GPT-5.4-mini TEXT ORACLE 1.68 ± 0.20 1.68 ± 0.20 −0.001 
+
+GPT-5.4-mini IMAGE FULL 3.36 ± 0.13 3.37 ± 0.13 −0.011 
+
+GPT-5.4-mini IMAGE ORACLE 2.55 ± 0.15 2.55 ± 0.15 −0.002 
+
+GPT-5.4-mini TEXT +I MAGE FULL 3.26 ± 0.16 3.27 ± 0.16 −0.012 
+
+GPT-5.4-mini TEXT +I MAGE ORACLE 2.42 ± 0.15 2.43 ± 0.15 −0.000 
+
+Gemini 3.1 Pro TEXT FULL 6.21 ± 0.25 6.21 ± 0.25 −0.001 
+
+Gemini 3.1 Pro TEXT ORACLE 5.57 ± 0.25 5.57 ± 0.25 −0.001 
+
+Gemini 3.1 Pro IMAGE FULL 5.68 ± 0.15 5.68 ± 0.15 −0.005 
+
+Gemini 3.1 Pro IMAGE ORACLE 5.69 ± 0.36 5.69 ± 0.36 +0 .000 
+
+Gemini 3.1 Pro TEXT +I MAGE FULL 5.81 ± 0.22 5.82 ± 0.22 −0.009 
+
+Gemini 3.1 Pro TEXT +I MAGE ORACLE 5.36 ± 0.37 5.36 ± 0.37 +0 .000 
+
+Gemini 3.1 Flash-Lite TEXT FULL 1.40 ± 0.01 1.40 ± 0.01 −0.001 
+
+Gemini 3.1 Flash-Lite TEXT ORACLE 1.29 ± 0.00 1.29 ± 0.00 −0.000 
+
+Gemini 3.1 Flash-Lite IMAGE FULL 3.26 ± 0.60 3.27 ± 0.60 −0.008 
+
+Gemini 3.1 Flash-Lite IMAGE ORACLE 2.42 ± 0.38 2.42 ± 0.38 +0 .000 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE FULL 3.20 ± 0.32 3.21 ± 0.32 −0.007 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE ORACLE 2.52 ± 0.31 2.52 ± 0.31 +0 .000 
+
+MMLongBench-Doc 
+
+GPT-5.4 TEXT FULL 4.78 ± 0.24 4.99 ± 0.27 −0.207 
+
+GPT-5.4 TEXT ORACLE 4.21 ± 0.32 4.15 ± 0.30 +0 .067 
+
+GPT-5.4 IMAGE FULL 13 .37 ± 0.61 14 .75 ± 0.65 −1.386 
+
+GPT-5.4 IMAGE ORACLE 8.03 ± 0.75 7.99 ± 0.74 +0 .044 
+
+GPT-5.4 TEXT +I MAGE FULL 13 .36 ± 0.51 14 .92 ± 0.52 −1.555 
+
+GPT-5.4 TEXT +I MAGE ORACLE 7.83 ± 0.67 7.83 ± 0.65 −0.004 
+
+GPT-5.4-mini TEXT FULL 2.22 ± 0.27 2.32 ± 0.30 −0.103 
+
+GPT-5.4-mini TEXT ORACLE 2.00 ± 0.23 1.99 ± 0.23 +0 .013 
+
+GPT-5.4-mini IMAGE FULL 10 .20 ± 0.31 11 .53 ± 0.33 −1.332 
+
+GPT-5.4-mini IMAGE ORACLE 5.05 ± 0.36 5.07 ± 0.37 −0.020 
+
+GPT-5.4-mini TEXT +I MAGE FULL 10 .09 ± 0.36 11 .50 ± 0.36 −1.405 
+
+GPT-5.4-mini TEXT +I MAGE ORACLE 5.03 ± 0.31 5.04 ± 0.31 −0.014 
+
+Gemini 3.1 Pro TEXT FULL 7.57 ± 0.31 7.82 ± 0.48 −0.246 
+
+Gemini 3.1 Pro TEXT ORACLE 6.10 ± 0.22 6.12 ± 0.44 −0.015 
+
+Gemini 3.1 Pro IMAGE FULL 8.40 ± 0.50 9.45 ± 1.17 −1.046 
+
+Gemini 3.1 Pro IMAGE ORACLE 6.88 ± 0.69 7.06 ± 0.65 −0.180 
+
+Gemini 3.1 Pro TEXT +I MAGE FULL 10 .12 ± 2.31 11 .61 ± 2.86 −1.492 
+
+Gemini 3.1 Pro TEXT +I MAGE ORACLE 6.80 ± 0.72 7.01 ± 0.81 −0.211 
+
+Gemini 3.1 Flash-Lite TEXT FULL 2.10 ± 0.06 2.31 ± 0.08 −0.209 
+
+Gemini 3.1 Flash-Lite TEXT ORACLE 1.72 ± 0.09 1.74 ± 0.08 −0.022 
+
+Gemini 3.1 Flash-Lite IMAGE FULL 5.88 ± 0.52 6.58 ± 0.57 −0.694 
+
+Gemini 3.1 Flash-Lite IMAGE ORACLE 3.59 ± 0.44 3.74 ± 0.41 −0.152 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE FULL 6.93 ± 0.28 8.05 ± 0.20 −1.119 
+
+Gemini 3.1 Flash-Lite TEXT +I MAGE ORACLE 4.06 ± 0.16 4.19 ± 0.13 −0.124 
+
+an unanswerable question (over-answering), and its rate is largely stable across regimes rather than growing with the O RACLE →FULL shift. 
+
+numerical_imprecision is also frequent (25–41%); Integer and Float are common answer formats in this benchmark. Figure 3: Full-corpus accuracy (top) and median latency (bottom) versus document-length bucket under F ULL 
+
+retrieval, aggregated across all four models. The shaded region marks buckets above the 50-page image cap, where IMAGE and T EXT +I MAGE inputs are truncated while T EXT sees the full document. Within the un-truncated range, image-bearing inputs lead on accuracy at every length; the crossover in favor of T EXT appears only in the truncated buckets, and image latency falls there as truncation caps the number of page images processed. Bands show ± std across models. Table 11: Non-exclusive error-category shares (% of incorrect answers) by model, representation, and regime on Enterprise KB. Left block: O RACLE (gold evidence pages); right block: F ULL (full document). Columns need not sum to 100%. 
+
+ORACLE FULL 
+
+Model TEXT IMAGE TEXT +I MAGE TEXT IMAGE TEXT +I MAGE 
+
+partial_correctness 
+
+Gemini 3.1 Flash-Lite 44.9 53.0 52.9 46.0 52.0 52.1 Gemini 3.1 Pro 50.5 56.8 56.0 49.5 52.0 52.0 GPT-5.4 51.5 49.1 54.7 52.4 45.5 52.0 GPT-5.4-mini 49.4 48.1 53.7 51.0 49.3 51.5 
+
+extra_incorrect_information 
+
+Gemini 3.1 Flash-Lite 18.7 18.6 19.8 21.2 23.3 25.5 Gemini 3.1 Pro 18.1 17.7 20.4 20.4 22.9 22.4 GPT-5.4 20.8 19.9 22.4 22.6 21.1 23.7 GPT-5.4-mini 21.8 18.5 21.6 23.8 20.8 24.4 
+
+contradiction 
+
+Gemini 3.1 Flash-Lite 19.1 18.3 17.1 19.2 19.6 21.4 Gemini 3.1 Pro 16.3 16.9 15.8 19.9 19.2 19.9 GPT-5.4 21.9 23.1 19.0 20.6 23.0 20.2 GPT-5.4-mini 21.7 21.3 19.5 21.9 21.1 20.0 
+
+answered_when_unanswerable 
+
+Gemini 3.1 Flash-Lite 20.7 10.4 10.8 17.7 6.6 4.9 Gemini 3.1 Pro 14.8 8.3 9.8 15.4 10.6 9.3 GPT-5.4 9.3 8.3 6.1 9.6 9.1 7.2 GPT-5.4-mini 9.6 7.3 4.7 9.3 6.6 4.9 
+
+numerical_imprecision 
+
+Gemini 3.1 Flash-Lite 6.0 4.6 5.3 5.9 5.6 5.9 Gemini 3.1 Pro 4.8 4.0 4.1 4.4 4.0 4.2 GPT-5.4 6.9 10.3 6.8 6.2 10.3 5.7 GPT-5.4-mini 8.4 11.7 7.9 7.1 10.6 7.5 
+
+Table 12: Non-exclusive error-category shares (% of incorrect answers) by model, representation, and regime on MMLongBench-Doc. Left block: O RACLE (gold evidence pages); right block: F ULL (full document). Columns need not sum to 100%. 
+
+ORACLE FULL 
+
+Model TEXT IMAGE TEXT +I MAGE TEXT IMAGE TEXT +I MAGE 
+
+partial_correctness 
+
+Gemini 3.1 Flash-Lite 9.6 11.7 11.7 10.1 10.8 10.6 Gemini 3.1 Pro 9.3 11.7 10.5 10.8 8.5 10.6 GPT-5.4 12.3 10.4 10.2 8.7 7.6 9.1 GPT-5.4-mini 9.0 9.2 8.8 11.0 8.8 9.3 
+
+extra_incorrect_information 
+
+Gemini 3.1 Flash-Lite 4.0 5.5 6.5 6.0 5.7 8.2 Gemini 3.1 Pro 4.4 5.7 4.4 8.2 6.7 7.8 GPT-5.4 6.1 5.3 5.5 5.8 5.1 5.5 GPT-5.4-mini 5.8 4.0 5.9 5.4 7.0 6.6 
+
+contradiction 
+
+Gemini 3.1 Flash-Lite 6.7 8.6 8.4 14.0 8.9 8.9 Gemini 3.1 Pro 8.8 9.2 7.0 8.7 7.5 7.1 GPT-5.4 9.0 8.6 9.1 11.4 9.8 10.5 GPT-5.4-mini 10.8 8.2 9.5 12.2 11.1 9.5 
+
+answered_when_unanswerable 
+
+Gemini 3.1 Flash-Lite 51.6 40.4 39.0 36.3 38.2 36.5 Gemini 3.1 Pro 52.9 42.9 45.3 52.7 44.3 42.4 GPT-5.4 43.6 46.8 44.6 40.5 47.2 39.7 GPT-5.4-mini 44.0 45.5 42.8 37.1 41.4 37.7 
+
+numerical_imprecision 
+
+Gemini 3.1 Flash-Lite 30.5 35.6 37.4 37.6 39.3 40.7 Gemini 3.1 Pro 26.5 32.1 33.6 24.9 35.8 34.8 GPT-5.4 32.4 31.6 33.1 36.7 32.1 36.1 GPT-5.4-mini 33.7 33.9 34.7 38.6 35.3 40.6 E Prompt Templates 
+
+E.1 QA Prompt 
+
+All conditions use the prompt below; I MAGE and T EXT +I MAGE additionally append the rendered page images after the text context block. 
+
+QA Prompt Template 
+
+You are an expert question answering assistant. Your task is to provide a concise and accurate answer to the user’s question, strictly based on the provided context. Instructions: 1. Read the question and the provided context carefully. 2. In the "explanation" field, think step-by-step to determine how the context answers the question. 3. Formulate an answer that directly addresses the question. 4. Your answer must be derived solely from the information present in the context. Do not use outside knowledge or invent facts. 5. If the context does not contain enough information, state "Not Answerable". 6. Keep the answer as short as possible: a single value, phrase, or list of items. Output Format: {"explanation": "<reasoning>", "answer": "<concise answer>" }Question: {{question}} Context: 
+
+E.2 LLM-as-Judge Prompt 
+
+The judge receives batches of question-answer pairs through the {{qa_pairs}} placeholder, following reference-guided evaluation protocols for open-ended model outputs (Zheng et al., 2023; Liu et al., 2023; Bavaresco et al., 2025). 
+
+LLM-as-Judge Prompt Template 
+
+You are an expert evaluator assessing answers in a Question and Answer system. For each question-answer pair you receive: 1. A unique question ID 2. The question text 3. The predicted answer 4. The ground truth answer Determine: 1. Whether the predicted answer is semantically equivalent to the ground truth. 2. All applicable error or warning categories. Evaluation Instructions: - Evaluate based on semantic meaning, not exact wording. - Be flexible with phrasing, terminology, units, abbreviations, and formatting. - Mark incorrect only if: (1) core meaning differs, (2) contains factually incorrect information, (3) contradicts the ground truth, or (4) omits key information. - For numeric values: accept more-precise expansions of rounded ground truths; penalize rounding that loses accuracy. - For lists: every item must match; order does not matter. - For multiple-choice: accept the option letter, text, or both. ERROR CATEGORIES (incorrect answers only): partial_correctness, extra_incorrect_information, contradiction, overly_vague, incorrect_yes_no, answered_when_unanswerable, numerical_imprecision, minor_spelling_error WARNING CATEGORIES (correct answers only): ground_truth_rounding, ground_truth_spelling_error, redundant_information, extra_information, missing_information, other Output Format: { "evaluations": [{ "question_id": "<id>", "is_correct": true/false, "explanation": "<pred> vs <truth>", "errors": [{"class": "...", "explanation": "..."}], "warnings": [{"class": "...", "explanation": "..."}] }, ... ] }
