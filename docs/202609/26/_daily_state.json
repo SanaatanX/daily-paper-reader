@@ -1,0 +1,57 @@
+{
+  "date": "20260926",
+  "date_label": "",
+  "generated_at": "2026-09-26 22:27:14 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.24409v1",
+      "route": "202609/26/2609.24409v1-deco-efficient-decouple-to-couple-learning-for-multi-task-visual-grounding",
+      "title": "DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向视觉定位的多模态表示解耦与耦合学习",
+      "first_seen_at": "2026-09-26 22:27:14 UTC",
+      "updated_at": "2026-09-26 22:27:14 UTC"
+    },
+    {
+      "paper_id": "2609.27554v1",
+      "route": "202609/26/2609.27554v1-phymo-a-physical-field-modality-for-multimodal-ai4physics",
+      "title": "PhyMo: A Physical-Field Modality for Multimodal AI4Physics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向物理领域的多模态学习框架，融合异构观测",
+      "first_seen_at": "2026-09-26 22:27:14 UTC",
+      "updated_at": "2026-09-26 22:27:14 UTC"
+    },
+    {
+      "paper_id": "2609.28860v1",
+      "route": "202609/26/2609.28860v1-multimodal-routing-and-region-refinement-for-language-guided-medical-image-segmentation",
+      "title": "Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在稠密预测前对图文特征进行路由与融合",
+      "first_seen_at": "2026-09-26 22:27:14 UTC",
+      "updated_at": "2026-09-26 22:27:14 UTC"
+    }
+  ]
+}

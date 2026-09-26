@@ -1,0 +1,145 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-26T22:24:52.398515+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.24409v1",
+      "source": "arxiv",
+      "title": "DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding",
+      "abstract": "Multi-task visual grounding requires models to jointly understand linguistic semantics and perform accurate visual localization and segmentation. Despite the success of multimodal large language models, effectively adapting them to multiple grounding objectives remains challenging. Existing methods commonly enforce task cooperation through shared representations, while overlooking the intrinsic conflict between task-oriented feature interests. In this paper, we introduce $\\textbf{DeCo}$, an efficient $\\textbf{De}$couple-to-$\\textbf{Co}$uple learning framework that resolves this dilemma through a two-stage paradigm: task-specific representation decoupling followed by complementary prior coupling. Specifically, we first propose Task-aware Semantic Decoupling (TSD) to route shared visual cues into individual features under salient word-level guidance, alleviating representation interference between localization and segmentation. Furthermore, we observe that segmentation naturally provides informative localization priors due to dense supervision. Based on this insight, we introduce Hybrid Prior Coupling (HPC), which integrates sentence-level semantic prior with mask-derived spatial prior for enhanced grounding. Built upon a frozen multimodal encoder, DeCo requires lightweight trainable parameters while achieving strong generalization across multiple grounding objectives. Extensive experiments on RefCOCO/+, G-Ref, ReferIt, Flickr, DIOR-RSVG, SARVG1.0, RRSIS-D, RIS-LAD, and RefDIOR demonstrate that DeCo achieves state-of-the-art performance on both natural and remote sensing benchmarks. The code and models are available at https://github.com/xiaoqiang-lu/DeCo.",
+      "authors": [
+        "Xiaoqiang Lu",
+        "Licheng Jiao",
+        "Long Sun",
+        "Yuting Yang",
+        "Xu Liu",
+        "Lingling Li",
+        "Wenping Ma",
+        "Fang Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-21T10:58:55+00:00",
+      "link": "https://arxiv.org/pdf/2609.24409v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "decouple-to-couple learning of multimodal representations for visual grounding",
+      "llm_evidence_cn": "面向视觉定位的多模态表示解耦与耦合学习",
+      "llm_evidence": "面向视觉定位的多模态表示解耦与耦合学习",
+      "canonical_evidence": "面向视觉定位的多模态表示解耦与耦合学习",
+      "llm_tldr_en": "DeCo tackles conflicting task-oriented feature interests in multi-task visual grounding via a two-stage paradigm of task-specific representation decoupling followed by complementary prior coupling.",
+      "llm_tldr_cn": "多任务视觉定位需同时理解语言语义并完成精确定位与分割，但现有多模态大模型方法常通过共享表示强制任务协作，忽视任务导向特征之间的内在冲突。本文提出DeCo，一个高效的解耦-耦合学习框架，采用两阶段范式：先进行任务特定表示解耦，再进行互补先验耦合。方法引入任务感知的语义分解机制以缓解特征冲突。该工作为多模态表示的学习与融合提供了任务解耦再耦合的新思路，提升多任务定位性能。",
+      "llm_tldr": "多任务视觉定位需同时理解语言语义并完成精确定位与分割，但现有多模态大模型方法常通过共享表示强制任务协作，忽视任务导向特征之间的内在冲突。本文提出DeCo，一个高效的解耦-耦合学习框架，采用两阶段范式：先进行任务特定表示解耦，再进行互补先验耦合。方法引入任务感知的语义分解机制以缓解特征冲突。该工作为多模态表示的学习与融合提供了任务解耦再耦合的新思路，提升多任务定位性能。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.27554v1",
+      "source": "arxiv",
+      "title": "PhyMo: A Physical-Field Modality for Multimodal AI4Physics",
+      "abstract": "Multimodal learning is emerging as a powerful paradigm for AI for Physics (AI4Physics), where predicting physical systems requires the joint interpretation of heterogeneous observations, measurements, and domain knowledge. However, existing approaches typically represent physical quantities and governing equations as generic numerical or textual tokens, overlooking the physical constraints that determine their spatiotemporal interactions. To address this limitation, we introduce the \\textbf{physical-field modality} and propose \\textbf{PhyMo}, a physics-grounded multimodal framework that organizes heterogeneous measurements through PDE-associated operators. PhyMo follows a three-stage learning procedure: the physical-field encoder is first pretrained through field reconstruction under PDE residual supervision, its representations are subsequently aligned with visual embeddings in a shared latent space, and the fused multimodal representations are finally processed by corresponding downstream prediction heads. Experiments on five datasets spanning diverse physical environments show that PhyMo achieves state-of-the-art performance, compared to the strongest baseline on each dataset, demonstrating the superiority of PhyMo on multimodal representation learning in AI4Physics.",
+      "authors": [
+        "Henan Sun",
+        "Haitao Hu",
+        "Jin Liu",
+        "Jianfeng Zhang",
+        "Lujia Pan",
+        "Nuo Chen",
+        "Jia Li"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-23T08:41:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.27554v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "physics-grounded multimodal framework combining heterogeneous measurements",
+      "llm_evidence_cn": "面向物理领域的多模态学习框架，融合异构观测",
+      "llm_evidence": "面向物理领域的多模态学习框架，融合异构观测",
+      "canonical_evidence": "面向物理领域的多模态学习框架，融合异构观测",
+      "llm_tldr_en": "PhyMo introduces a physical-field modality and a three-stage multimodal framework that organizes heterogeneous measurements through PDE-associated operators for AI for Physics.",
+      "llm_tldr_cn": "多模态学习正成为AI for Physics的重要范式，需联合解读异构观测、测量与领域知识，但现有方法把物理量与控制方程当作通用数值或文本词元，忽视决定其时空交互的物理约束。本文提出物理场模态与PhyMo框架，通过偏微分方程关联算子组织异构测量，并采用三阶段学习流程，先预训练物理场编码器再进行后续学习。该工作为物理领域的多模态融合与表示学习提供了物理约束驱动的新范式。",
+      "llm_tldr": "多模态学习正成为AI for Physics的重要范式，需联合解读异构观测、测量与领域知识，但现有方法把物理量与控制方程当作通用数值或文本词元，忽视决定其时空交互的物理约束。本文提出物理场模态与PhyMo框架，通过偏微分方程关联算子组织异构测量，并采用三阶段学习流程，先预训练物理场编码器再进行后续学习。该工作为物理领域的多模态融合与表示学习提供了物理约束驱动的新范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "multimodal learning methods combining different data modalities",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.28860v1",
+      "source": "arxiv",
+      "title": "Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation",
+      "abstract": "Textual descriptions can reduce ambiguity in medical image segmentation by specifying the finding and location to be delineated. Existing text-guided methods mainly improve where image and language features interact but generally retain a single learned update pathway across all image-text pairs. We propose MRSeg, a parameter-efficient framework that uses each image-text pair to route the adaptation of visual and textual features before dense prediction. Frozen ConvNeXt-Tiny and PubMedBERT encoders provide multiscale visual features and clinical text tokens. A joint router uses the deepest visual feature and pooled text to predict a sparse mixture over low-rank adapter bases. The resulting route is shared across separate adapter banks for two visual scales and text, coordinating their adaptation while keeping the feature-specific parameters separate. Region Bridge uses text-derived queries to aggregate dense visual tokens into latent regions, refines these regions through self-attention and text cross-attention, and redistributes the refined information back to the feature maps. Finally, a multiscale decoder combines refined semantic features with shallow image evidence. On QaTa-COV19 and MosMedData+, MRSeg achieves 90.90/83.32 and 81.53/68.82 Dice/mIoU, respectively, with 7.11M trainable parameters and 7.60 GFLOPs. Code: https://github.com/maklachur/MRSeg.",
+      "authors": [
+        "Md Maklachur Rahman",
+        "Md Hasan Al Banna",
+        "Saraf Anjum",
+        "Assame Arnob",
+        "Tracy Hammond"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-24T00:03:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.28860v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "routing and refining visual-textual features before dense prediction",
+      "llm_evidence_cn": "在稠密预测前对图文特征进行路由与融合",
+      "llm_evidence": "在稠密预测前对图文特征进行路由与融合",
+      "canonical_evidence": "在稠密预测前对图文特征进行路由与融合",
+      "llm_tldr_en": "MRSeg is a parameter-efficient framework that routes adaptation of visual and textual features per image-text pair using a sparse mixture over low-rank adapters before medical segmentation.",
+      "llm_tldr_cn": "文本描述可指定待分割病灶与位置，从而降低医学图像分割的歧义，但现有文本引导方法多只改进图文交互位置，对所有图文对沿用单一更新路径。本文提出MRSeg，一个参数高效框架，用每对图文特征路由视觉与文本特征的适配。冻结ConvNeXt-Tiny与PubMedBERT提供多尺度视觉特征和临床文本词元，联合路由器预测低秩适配器基上的稀疏混合。该工作实现了更细粒度的图文特征级融合与适配，提升分割表现。",
+      "llm_tldr": "文本描述可指定待分割病灶与位置，从而降低医学图像分割的歧义，但现有文本引导方法多只改进图文交互位置，对所有图文对沿用单一更新路径。本文提出MRSeg，一个参数高效框架，用每对图文特征路由视觉与文本特征的适配。冻结ConvNeXt-Tiny与PubMedBERT提供多尺度视觉特征和临床文本词元，联合路由器预测低秩适配器基上的稀疏混合。该工作实现了更细粒度的图文特征级融合与适配，提升分割表现。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "feature-level fusion methods for multimodal inputs",
+      "matched_requirement_id": "req-15",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "label": "2026-09-26",
+  "date": "2026-09-26",
+  "generated_at": "2026-09-26T22:27:19",
+  "count": 3,
+  "papers": [
+    {
+      "paper_id": "202609/26/2609.24409v1-deco-efficient-decouple-to-couple-learning-for-multi-task-visual-grounding",
+      "section": "quick",
+      "title_en": "DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding",
+      "authors": "Xiaoqiang Lu, Licheng Jiao, Long Sun, Yuting Yang, Xu Liu, Lingling Li, Wenping Ma, Fang Liu",
+      "date": "2026-09-21",
+      "pdf": "https://arxiv.org/pdf/2609.24409v1",
+      "score": "6.0",
+      "evidence": "面向视觉定位的多模态表示解耦与耦合学习",
+      "tldr": "多任务视觉定位需同时理解语言并完成定位与分割，但现有方法多用共享表示，忽视任务间特征兴趣冲突。DeCo提出解耦到耦合的两阶段框架：先用任务感知语义解耦，在显著词引导下将共享视觉线索路由为任务专属特征；再用混合先验耦合，融合句级语义先验与掩码空间先验。基于冻结多模态编码器，仅需轻量可训练参数，在自然与遥感多个基准上取得SOTA。",
+      "tags": "query:ml",
+      "abstract_en": "Multi-task visual grounding requires models to jointly understand linguistic semantics and perform accurate visual localization and segmentation. Despite the success of multimodal large language models, effectively adapting them to multiple grounding objectives remains challenging. Existing methods commonly enforce task cooperation through shared representations, while overlooking the intrinsic conflict between task-oriented feature interests. In this paper, we introduce $\\textbf{DeCo}$, an efficient $\\textbf{De}$couple-to-$\\textbf{Co}$uple learning framework that resolves this dilemma through a two-stage paradigm: task-specific representation decoupling followed by complementary prior coupling. Specifically, we first propose Task-aware Semantic Decoupling (TSD) to route shared visual cues into individual features under salient word-level guidance, alleviating representation interference between localization and segmentation. Furthermore, we observe that segmentation naturally provides informative localization priors due to dense supervision. Based on this insight, we introduce Hybrid Prior Coupling (HPC), which integrates sentence-level semantic prior with mask-derived spatial prior for enhanced grounding. Built upon a frozen multimodal encoder, DeCo requires lightweight trainable parameters while achieving strong generalization across multiple grounding objectives. Extensive experiments on RefCOCO/+, G-Ref, ReferIt, Flickr, DIOR-RSVG, SARVG1.0, RRSIS-D, RIS-LAD, and RefDIOR demonstrate that DeCo achieves state-of-the-art performance on both natural and remote sensing benchmarks. The code and models are available at https://github.com/xiaoqiang-lu/DeCo.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/26/2609.27554v1-phymo-a-physical-field-modality-for-multimodal-ai4physics",
+      "section": "quick",
+      "title_en": "PhyMo: A Physical-Field Modality for Multimodal AI4Physics",
+      "authors": "Henan Sun, Haitao Hu, Jin Liu, Jianfeng Zhang, Lujia Pan, Nuo Chen, Jia Li",
+      "date": "2026-09-23",
+      "pdf": "https://arxiv.org/pdf/2609.27554v1",
+      "score": "6.0",
+      "evidence": "面向物理领域的多模态学习框架，融合异构观测",
+      "tldr": "AI4Physics 需要联合理解异构观测与物理规律，但现有方法把物理量和控制方程当作通用数值或文本 token，忽略决定时空相互作用的物理约束。为此，本文提出物理场模态与 PhyMo 框架，用 PDE 关联算子组织异构测量，并采用三阶段学习：PDE 残差监督下的场重建预训练、与视觉嵌入对齐、融合表示下游预测。在五个物理环境数据集上，PhyMo 均优于最强基线，验证了物理场模态对 AI4Physics 多模态表示学习的有效性。",
+      "tags": "query:ml",
+      "abstract_en": "Multimodal learning is emerging as a powerful paradigm for AI for Physics (AI4Physics), where predicting physical systems requires the joint interpretation of heterogeneous observations, measurements, and domain knowledge. However, existing approaches typically represent physical quantities and governing equations as generic numerical or textual tokens, overlooking the physical constraints that determine their spatiotemporal interactions. To address this limitation, we introduce the \\textbf{physical-field modality} and propose \\textbf{PhyMo}, a physics-grounded multimodal framework that organizes heterogeneous measurements through PDE-associated operators. PhyMo follows a three-stage learning procedure: the physical-field encoder is first pretrained through field reconstruction under PDE residual supervision, its representations are subsequently aligned with visual embeddings in a shared latent space, and the fused multimodal representations are finally processed by corresponding downstream prediction heads. Experiments on five datasets spanning diverse physical environments show that PhyMo achieves state-of-the-art performance, compared to the strongest baseline on each dataset, demonstrating the superiority of PhyMo on multimodal representation learning in AI4Physics.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/26/2609.28860v1-multimodal-routing-and-region-refinement-for-language-guided-medical-image-segmentation",
+      "section": "quick",
+      "title_en": "Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation",
+      "authors": "Md Maklachur Rahman, Md Hasan Al Banna, Saraf Anjum, Assame Arnob, Tracy Hammond",
+      "date": "2026-09-24",
+      "pdf": "https://arxiv.org/pdf/2609.28860v1",
+      "score": "6.0",
+      "evidence": "在稠密预测前对图文特征进行路由与融合",
+      "tldr": "文本引导医学图像分割可借助描述定位病灶并降低歧义，但现有方法多在所有图文对上共享单一更新路径，难以自适应不同样本。MRSeg以冻结ConvNeXt-Tiny和PubMedBERT提取多尺度视觉与临床文本特征，用联合路由器预测低秩适配器基上的稀疏混合，为两个视觉尺度与文本分别路由适配，并通过Region Bridge聚合、精炼和回写区域信息，最终多尺度解码融合浅层证据。在QaTa-COV19和MosMedData+上取得90.90/83.32与81.53/68.82 Dice/mIoU，仅7.11M可训练参数和7.60 GFLOPs。",
+      "tags": "query:ml",
+      "abstract_en": "Textual descriptions can reduce ambiguity in medical image segmentation by specifying the finding and location to be delineated. Existing text-guided methods mainly improve where image and language features interact but generally retain a single learned update pathway across all image-text pairs. We propose MRSeg, a parameter-efficient framework that uses each image-text pair to route the adaptation of visual and textual features before dense prediction. Frozen ConvNeXt-Tiny and PubMedBERT encoders provide multiscale visual features and clinical text tokens. A joint router uses the deepest visual feature and pooled text to predict a sparse mixture over low-rank adapter bases. The resulting route is shared across separate adapter banks for two visual scales and text, coordinating their adaptation while keeping the feature-specific parameters separate. Region Bridge uses text-derived queries to aggregate dense visual tokens into latent regions, refines these regions through self-attention and text cross-attention, and redistributes the refined information back to the feature maps. Finally, a multiscale decoder combines refined semantic features with shallow image evidence. On QaTa-COV19 and MosMedData+, MRSeg achieves 90.90/83.32 and 81.53/68.82 Dice/mIoU, respectively, with 7.11M trainable parameters and 7.60 GFLOPs. Code: https://github.com/maklachur/MRSeg.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}

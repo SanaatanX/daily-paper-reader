@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-25</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-26</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 10 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>10</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-25 21:55:01 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-26 22:27:14 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速读10篇、精读挂零，多模态持续学习与文档QA成为最亮眼的两条线。</p>
-<p>最值得看的是7.0分的《Hyperbolic Multimodal Continual Learning》提出的最近可容许解思路，以及6.0分文档QA对文本、像素与两者输入的评估。</p>
-<p>普通读者可先读7.0分这篇抓持续学习主线，再用文档QA那篇判断实际任务该选哪种输入表示。</p>
+<p>今天速读3篇（均6.0/10、精读0篇），覆盖多任务视觉定位、AI4Physics物理场模态和语言引导医学图像分割。</p>
+<p>最值得看的是《DeCo》的解耦-耦合学习与《PhyMo》的物理场模态，前者面向多任务视觉定位，后者探索多模态AI4Physics。</p>
+<p>普通读者建议先读摘要与结论，判断是否匹配自己的多模态或医学影像任务，再决定是否深入全文。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">10 篇</strong>
+    <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Hyperbolic Multimodal Continual Learning: A Closest-Admissible Solution">Hyperbolic Multimodal Continual Learning: A Closest-Admissible Solution</span></li><li><span class="dpr-home-dashboard-paper-title" title="Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA">Text, Pixels, or Both? Evaluating Input Representations for Multimodal Document QA</span></li><li><span class="dpr-home-dashboard-paper-title" title="S2A:Semantic-to-Spatial Alignment for Alignment-Free RGB-T Salient Object Detection">S2A:Semantic-to-Spatial Alignment for Alignment-Free RGB-T Salient Object Detection</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding">DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding</span></li><li><span class="dpr-home-dashboard-paper-title" title="PhyMo: A Physical-Field Modality for Multimodal AI4Physics">PhyMo: A Physical-Field Modality for Multimodal AI4Physics</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation">Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
 </section>
 </div>
 
