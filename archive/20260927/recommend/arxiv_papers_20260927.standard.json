@@ -1,0 +1,141 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-27T22:04:08.614839+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 3,
+    "quick_skim_target": 12,
+    "quick_selected": 3
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.23376v1",
+      "source": "arxiv",
+      "title": "If You Hear It, Help Find It: Orthogonal Knowledge Distillation for Open-Vocabulary Audio-Visual Event Localization",
+      "abstract": "Open-vocabulary audio-visual event localization (OV-AVEL) grounds a text-queried event in time from video, audio, and language. The supervision sources available to this task can differ in temporal-boundary reliability: on OV-AVEBench, our configured visual teacher gives more reliable boundary cues than the configured audio teacher, although the latter is a strong pretrained audio model and remains semantically informative. This is a setting-specific diagnostic rather than a universal ranking of vision and audio. We formulate the resulting challenge as supervision placement: which teacher signals may shape the localization decision, and which should remain auxiliary. Based on this view, we propose OV-OrthKD, a reliability-aware asymmetric distillation framework. Visual feature transfer shapes a decision-aligned representation, audio feature transfer enriches a complementary auxiliary subspace, a text prototype anchors seen/unseen category semantics, and an orthogonality loss limits directional overlap between the two teacher-specific projections. The student continues to use both modalities through query-aware fusion at inference, while the default training recipe keeps audio-teacher supervision off the segment-logit path. On OV-AVEBench, OV-OrthKD achieves 0.816 segment AP and improves F1@0.5 over the official fine-tuning baseline by 2.7 points overall and 3.4 points on unseen categories. Path-assignment, role-swap, corruption, and transfer analyses consistently support supervision placement as a task-specific design axis for OV-AVEL.",
+      "authors": [
+        "Yi Xu",
+        "Cheng Chen",
+        "Wenzhuo Lei"
+      ],
+      "primary_category": "cs.MM",
+      "categories": [
+        "cs.MM",
+        "cs.CV",
+        "cs.LG",
+        "cs.SD"
+      ],
+      "published": "2026-09-20T05:57:07+00:00",
+      "link": "https://arxiv.org/pdf/2609.23376v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multimodal supervision fusion across vision audio and language",
+      "llm_evidence_cn": "跨视觉、音频与语言的多模态监督融合",
+      "llm_evidence": "跨视觉、音频与语言的多模态监督融合",
+      "canonical_evidence": "跨视觉、音频与语言的多模态监督融合",
+      "llm_tldr_en": "OV-OrthKD formulates supervision placement for open-vocabulary audio-visual event localization, orthogonally distilling reliable visual and audio teacher signals for text-queried grounding.",
+      "llm_tldr_cn": "论文研究开放词汇音视频事件定位，即根据文本查询在视频、音频和语言中定位事件。作者发现不同监督源在时间边界可靠性上存在差异，例如在OV-AVEBench上视觉教师比音频教师提供更可靠的边界线索，于是把问题表述为监督放置：哪些教师信号可影响定位决策，哪些应保持辅助。基于此提出OV-OrthKD正交知识蒸馏方法，为多模态监督融合与模态可靠性建模提供了可迁移的思路。",
+      "llm_tldr": "论文研究开放词汇音视频事件定位，即根据文本查询在视频、音频和语言中定位事件。作者发现不同监督源在时间边界可靠性上存在差异，例如在OV-AVEBench上视觉教师比音频教师提供更可靠的边界线索，于是把问题表述为监督放置：哪些教师信号可影响定位决策，哪些应保持辅助。基于此提出OV-OrthKD正交知识蒸馏方法，为多模态监督融合与模态可靠性建模提供了可迁移的思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.29721v1",
+      "source": "arxiv",
+      "title": "SALI: Shot-Aware Late Interaction for Cross-Shot Relation Matching in Text-to-Video Retrieval using Film-Grammar Knowledge",
+      "abstract": "Text-to-video retrieval usually represents a video clip by a single embedding. This embedding often loses important relations between people. E.g., an interaction \"Anna confronts Mark\" is regularly filmed as alternating shot and reverse shot of both (Fig. 1a). No single shot or averaged embedding over clip shots captures this relation. Thus, we propose SALI (Shot-Aware Late Interaction). It extracts the subject and object from a single-sentence query, and matches the query, its subject and object text embeddings against each visual shot embedding of a video clip. The matching operator is greedy max or optimal transport. A film-grammar penalty in fine-tuning adds a small, consistent shift. Built on CLIP4Clip-meanP, SALI keeps overall recall on par on Condensed Movies and ActivityNet while raising R@1 on multi-shot relation queries by 3 and 12 points, the most among all compared methods, and improves such queries on MSR-VTT at a cost of 1.4 R@1 overall.",
+      "authors": [
+        "Toya Oyama",
+        "Rainer Lienhart",
+        "Shin'ichi Satoh"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.IR",
+        "cs.MM"
+      ],
+      "published": "2026-09-24T12:39:40+00:00",
+      "link": "https://arxiv.org/pdf/2609.29721v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Cross-shot relation matching between text subject-object and visual shots",
+      "llm_evidence_cn": "文本主客体与视觉镜头之间的跨镜头关系匹配",
+      "llm_evidence": "文本主客体与视觉镜头之间的跨镜头关系匹配",
+      "canonical_evidence": "文本主客体与视觉镜头之间的跨镜头关系匹配",
+      "llm_tldr_en": "Proposes SALI, a shot-aware late interaction method that extracts subject and object from a query and matches their text embeddings against visual shot embeddings to capture cross-shot relations in text-to-video retrieval.",
+      "llm_tldr_cn": "文本到视频检索通常用单一嵌入表示视频片段，往往丢失人物之间的交互关系。论文提出SALI方法，从单句查询中抽取主语和宾语，将其文本嵌入与视频各镜头的视觉嵌入进行贪婪最大或最优传输匹配，并引入电影语法惩罚进行微调。该设计能更好捕捉跨镜头的关系，为跨模态关系匹配提供了新思路。",
+      "llm_tldr": "文本到视频检索通常用单一嵌入表示视频片段，往往丢失人物之间的交互关系。论文提出SALI方法，从单句查询中抽取主语和宾语，将其文本嵌入与视频各镜头的视觉嵌入进行贪婪最大或最优传输匹配，并引入电影语法惩罚进行微调。该设计能更好捕捉跨镜头的关系，为跨模态关系匹配提供了新思路。",
+      "llm_tags": [
+        "query:mre"
+      ],
+      "matched_query_tag": "query:mre",
+      "matched_query_text": "cross-modal relation extraction using vision and language",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.29816v1",
+      "source": "arxiv",
+      "title": "AV-GRPO: Modality-Anchored Decoupling Diffusion Reinforcement Learning for Joint Audio-Video Generation",
+      "abstract": "Recent years have witnessed major progress in joint audio-video generation. Existing models still suffer from limited per-modality fidelity, insufficient text-modality alignment and weak cross-modal synchronization. While reinforcement-learning post-training offers a promising remedy, directly adapting it to joint audio-video generation is challenging. Heterogeneous multimodal rewards entangle learning signals and complicate credit assignment. Joint optimization of two modality towers is computationally expensive given their divergent dynamics. Moreover, synchronization evaluation difficulty depends on paired samples, preventing fair reward comparisons. We propose AV-GRPO, a modality-anchored online diffusion RL framework, and 5DAV, a decoupled, difficulty-controllable training dataset. AV-GRPO includes three key modules: (1) modality-anchored rollouts to disentangle learning signals and stabilize difficulty; (2) trajectory-locked frozen-tower optimization to reduce cost and reassign credit; (3) adaptive objectives and perturbation strengths tailored to modality-specific dynamics. This converts coupled multimodal preference learning into unimodal subproblems for precise reward attribution and better synchronization. Our 5DAV dataset decouples samples across five dimensions for systematic training. Experiments on JavisBench and VABench demonstrate AV-GRPO outperforms LTX-2.3 in generation quality, semantic alignment and cross-modal synchronization under LoRA and full fine-tuning. Ablations confirm our designs. Code and data: https://github.com/zhiyuxu03/AV-GRPO",
+      "authors": [
+        "Zhiyu Xu",
+        "Weilong Yan",
+        "Yufei Shi",
+        "Shiyang Li",
+        "Yihao Liu",
+        "Kin-Man Lam",
+        "Yuewen Cao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.SD"
+      ],
+      "published": "2026-09-24T13:53:05+00:00",
+      "link": "https://arxiv.org/pdf/2609.29816v1",
+      "tags": [
+        "keyword:ml",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "modality-anchored decoupling addresses entangled heterogeneous multimodal rewards",
+      "llm_evidence_cn": "模态锚定解耦缓解异构多模态奖励纠缠",
+      "llm_evidence": "模态锚定解耦缓解异构多模态奖励纠缠",
+      "canonical_evidence": "模态锚定解耦缓解异构多模态奖励纠缠",
+      "llm_tldr_en": "Joint audio-video generation suffers from limited per-modality fidelity and weak cross-modal synchronization, while RL post-training entangles heterogeneous multimodal rewards; AV-GRPO anchors and decouples modality rewards for fair credit assignment and synchronized generation.",
+      "llm_tldr_cn": "联合音视频生成存在单模态保真度不足、文本对齐与跨模态同步较弱的问题，而直接套用强化学习后训练会导致异构多模态奖励纠缠、信用分配困难。本文提出AV-GRPO，以模态锚定的解耦扩散强化学习框架分离各模态奖励并设计可比较的同步评价。实验表明该框架能改善单模态保真度与跨模态同步，为多模态生成中的奖励平衡与模态解耦提供了思路。",
+      "llm_tldr": "联合音视频生成存在单模态保真度不足、文本对齐与跨模态同步较弱的问题，而直接套用强化学习后训练会导致异构多模态奖励纠缠、信用分配困难。本文提出AV-GRPO，以模态锚定的解耦扩散强化学习框架分离各模态奖励并设计可比较的同步评价。实验表明该框架能改善单模态保真度与跨模态同步，为多模态生成中的奖励平衡与模态解耦提供了思路。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

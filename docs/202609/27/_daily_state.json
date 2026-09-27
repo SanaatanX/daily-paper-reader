@@ -1,0 +1,57 @@
+{
+  "date": "20260927",
+  "date_label": "",
+  "generated_at": "2026-09-27 22:05:34 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.23376v1",
+      "route": "202609/27/2609.23376v1-if-you-hear-it-help-find-it-orthogonal-knowledge-distillation-for-open-vocabulary-audio-visual-event-localization",
+      "title": "If You Hear It, Help Find It: Orthogonal Knowledge Distillation for Open-Vocabulary Audio-Visual Event Localization",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨视觉、音频与语言的多模态监督融合",
+      "first_seen_at": "2026-09-27 22:05:34 UTC",
+      "updated_at": "2026-09-27 22:05:34 UTC"
+    },
+    {
+      "paper_id": "2609.29721v1",
+      "route": "202609/27/2609.29721v1-sali-shot-aware-late-interaction-for-cross-shot-relation-matching-in-text-to-video-retrieval-using-film-grammar-knowledge",
+      "title": "SALI: Shot-Aware Late Interaction for Cross-Shot Relation Matching in Text-to-Video Retrieval using Film-Grammar Knowledge",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "文本主客体与视觉镜头之间的跨镜头关系匹配",
+      "first_seen_at": "2026-09-27 22:05:34 UTC",
+      "updated_at": "2026-09-27 22:05:34 UTC"
+    },
+    {
+      "paper_id": "2609.29816v1",
+      "route": "202609/27/2609.29816v1-av-grpo-modality-anchored-decoupling-diffusion-reinforcement-learning-for-joint-audio-video-generation",
+      "title": "AV-GRPO: Modality-Anchored Decoupling Diffusion Reinforcement Learning for Joint Audio-Video Generation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "模态锚定解耦缓解异构多模态奖励纠缠",
+      "first_seen_at": "2026-09-27 22:05:34 UTC",
+      "updated_at": "2026-09-27 22:05:34 UTC"
+    }
+  ]
+}

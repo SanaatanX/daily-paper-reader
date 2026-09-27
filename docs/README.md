@@ -41,7 +41,7 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-26</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-27</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
     <strong class="dpr-home-dashboard-count">共 3 篇</strong>
@@ -51,7 +51,7 @@
     <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>3</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-26 22:27:14 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-27 22:05:34 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今天速读3篇（均6.0/10、精读0篇），覆盖多任务视觉定位、AI4Physics物理场模态和语言引导医学图像分割。</p>
-<p>最值得看的是《DeCo》的解耦-耦合学习与《PhyMo》的物理场模态，前者面向多任务视觉定位，后者探索多模态AI4Physics。</p>
-<p>普通读者建议先读摘要与结论，判断是否匹配自己的多模态或医学影像任务，再决定是否深入全文。</p>
+<p>今天速读3篇音视频多模态论文，无精读，全部集中在跨模态检索与生成方向。</p>
+<p>最值得关注两个方向：一是《If You Hear It, Help Find It》用正交知识蒸馏做开放词汇音视频事件定位，二是《SALI》把电影语法知识引入文本到视频检索的镜头级后期交互。</p>
+<p>对普通读者来说，若关注AI如何&quot;听声找画&quot;或&quot;按文字找视频&quot;，可优先从这两篇的摘要和图示入手。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -89,9 +89,9 @@
     <strong class="dpr-home-dashboard-count">3 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding">DeCo: Efficient Decouple-to-Couple Learning for Multi-Task Visual Grounding</span></li><li><span class="dpr-home-dashboard-paper-title" title="PhyMo: A Physical-Field Modality for Multimodal AI4Physics">PhyMo: A Physical-Field Modality for Multimodal AI4Physics</span></li><li><span class="dpr-home-dashboard-paper-title" title="Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation">Multimodal Routing and Region Refinement for Language-Guided Medical Image Segmentation</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="If You Hear It, Help Find It: Orthogonal Knowledge Distillation for Open-Vocabulary Audio-Visual Event Localization">If You Hear It, Help Find It: Orthogonal Knowledge Distillation for Open-Vocabulary Audio-Visual Event Localization</span></li><li><span class="dpr-home-dashboard-paper-title" title="SALI: Shot-Aware Late Interaction for Cross-Shot Relation Matching in Text-to-Video Retrieval using Film-Grammar Knowledge">SALI: Shot-Aware Late Interaction for Cross-Shot Relation Matching in Text-to-Video Retrieval using Film-Grammar Knowledge</span></li><li><span class="dpr-home-dashboard-paper-title" title="AV-GRPO: Modality-Anchored Decoupling Diffusion Reinforcement Learning for Joint Audio-Video Generation">AV-GRPO: Modality-Anchored Decoupling Diffusion Reinforcement Learning for Joint Audio-Video Generation</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>3</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span><span class="dpr-home-dashboard-tag">mre <strong>1</strong></span></div>
 </section>
 </div>
 
