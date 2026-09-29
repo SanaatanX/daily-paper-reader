@@ -1,0 +1,275 @@
+Title: Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction
+
+URL Source: https://arxiv.org/pdf/2609.34383v1
+
+Published Time: Tue, 29 Sep 2026 03:23:40 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction 
+
+# Junhao Zhang ∗† 
+
+# Feiran Hu ∗
+
+junhao.zjh@alibaba-inc.com hufeiran.hfr@alibaba-inc.com Alibaba International Digital Commerce Group Hangzhou, China 
+
+# Xiao Hu 
+
+hx319433@alibaba-inc.com Alibaba International Digital Commerce Group Hangzhou, China 
+
+# Baoliang Cui 
+
+moqing.cbl@taobao.com Alibaba International Digital Commerce Group Hangzhou, China 
+
+# Xiaoyi Zeng 
+
+yuanhan@taobao.com Alibaba International Digital Commerce Group Hangzhou, China 
+
+## Abstract 
+
+Product attribute value extraction (AVE) is a fundamental task in e-commerce, aiming to identify specific values of predefined attributes from multimodal product profiles such as text and images. While multimodal large language models (MLLMs) have shown promise for AVE, they face challenges in extracting implicit attributes that require joint reasoning over visual and textual cues, often confus-ing semantically similar values. However, existing methods often fail to resolve such ambiguities because the correct value often depends on subtle multimodal cues that are easy to miss or over-ride. To address this challenge, we propose Correcting to Predict (C2P), a framework that treats attribute extraction as a correction process. Given an initial pseudo-value such as a retrieved candidate or placeholder, the model learns to correct it using multimodal evidence. During training, diverse pseudo-values help the model learn evidence-based correction behavior, and a self-consistency refinement stage further reduces sensitivity to pseudo-value per-turbations. At inference, a fixed placeholder triggers the learned correction behavior, enabling efficient single-pass prediction with-out online retrieval or iterative refinement. We evaluate C2P on a public benchmark and a large-scale industrial dataset. Offline results show that C2P outperforms strong baselines, with notable gains on ambiguous attributes. Online A/B tests on AliExpress fur-ther show consistent improvements in seller adoption, attribute completeness, and user engagement, validating C2P’s effectiveness and efficiency in real-world deployment. 
+
+## CCS Concepts 
+
+• Computing methodologies → Information extraction ; • Ap-plied computing → Online shopping .
+
+> ∗Both authors contributed equally to this research.
+> †Corresponding author
+> This work is licensed under a Creative Commons Attribution 4.0 International License.
+> CIKM ’26, Rome, Italy
+> © 2026 Copyright held by the owner/author(s). ACM ISBN 979-8-4007-2539-5/2026/11 https://doi.org/10.1145/3799682.3840167
+
+## Keywords 
+
+Attribute-Value Extraction, Multimodal Large Language Models, E-Commerce 
+
+ACM Reference Format: 
+
+Junhao Zhang, Feiran Hu, Xiao Hu, Baoliang Cui, and Xiaoyi Zeng. 2026. Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction. In Proceedings of the 35th ACM International Conference on Information and Knowledge Management (CIKM ’26), November 07–11, 2026, Rome, Italy. ACM, New York, NY, USA, 8 pages. https://doi.org/10. 1145/3799682.3840167 
+
+## 1 Introduction 
+
+Product attributes are fundamental for e-commerce, enabling user navigation (e.g., faceted filtering) [13, 16], powering algorithmic systems (e.g., semantic retrieval, recommendation, and question answering) [11], and supporting business operations (e.g., demand forecasting, assortment optimization) [7]. Despite their importance, attribute values are often missing or misaligned due to unstructured seller input and optional comple-tion [5, 13]. As a result, only a small fraction of products have complete and reliable attribute annotations, severely limiting both user experience and algorithmic performance [17, 22]. This ne-cessitates automated attribute value extraction (AVE): identifying correct values from a product’s title, description, and image, for predefined attributes without manual labeling. Over the past decade, AVE has evolved significantly. Early named entity recognition (NER) approaches extracted explicit spans from text [13, 15], but struggled when values were not verbatim in de-scriptions. Question answering frameworks improved generaliza-tion by treating attributes as queries [17], while hierarchical multi-task learning scaled to thousands of categories [11]. However, text-only methods faced fundamental limits in disambiguating attributes like whether “golden” refers to color or material. This spurred multimodal frameworks that jointly model textual and visual fea-tures [23], yet challenges persisted for implicit AVE—inferring val-ues not explicitly mentioned [21, 26]. However, applying multimodal LLMs (MLLMs) to implicit AVE remains challenging: benchmarks on ImplicitAVE [24] show sig-nificant performance drops on context-dependent attributes like arXiv:2609.34383v1 [cs.IR] 28 Sep 2026 CIKM ’26, November 07–11, 2026, Rome, Italy Junhao Zhang, Feiran Hu, Xiao Hu, Baoliang Cui, and Xiaoyi Zeng 
+
+Boot Style or Season [26]. A key challenge is ensuring that pre-dictions are adequately supported by multimodal evidence ,rather than by surface-level features or linguistic priors. In response, recent work has explored various strategies to im-prove reliability. For example, model ensembles combine predic-tions from multiple LLMs to improve accuracy [6]. Multi-agent debate frameworks iteratively refine responses through cross-model critique [10]. Others explore self-correction mechanisms that prompt a model to revise its own output [3]. While these approaches aim to improve robustness, they share a critical limitation: their ini-tial prediction step may still be insufficiently grounded in multimodal evidence . Subsequent steps, such as voting, debate, or revision, attempt to refine this initial prediction, but early errors can persist or even be reinforced. 
+
+Figure 1: At inference, our C2P framework replaces external context with pseudo-value correction, enabling single-pass, retrieval-free prediction. 
+
+To address this challenge, we propose Correcting to Predict (C2P) , a framework that reformulates AVE as correcting an initial pseudo-value rather than directly generating an attribute value. The key idea is to train prediction under a supplied hypothesis: the pseudo-value can be a retrieved candidate or a simple placeholder, and the model learns when it should be retained or corrected accord-ing to multimodal evidence. Retrieved candidates, when available, are therefore treated as hypotheses to be verified rather than as trusted context to be copied. To further reduce sensitivity to pseudo-value perturbations, we introduce a self-consistency refinement (SCR) stage that identifies samples with inconsistent predictions under different pseudo-values and refines the model on these cases. At inference time, a fixed placeholder is sufficient to trigger the learned correction behavior, enabling efficient single-pass predic-tion without online retrieval or iterative refinement. Our main contributions can be summarized as follows: (1) We reformulate multimodal AVE as correcting an initial pseudo-value with multimodal evidence, providing an alternative to direct generation for implicit attribute extraction. (2) We propose Correcting to Predict (C2P) , a framework that learns evidence-based correction behavior from diverse pseudo-values, together with a Self-Consistency Refinement (SCR) stage that further reduces sensitivity to pseudo-value perturbations. (3) We show that the learned correction behavior enables a sim-ple deployment design based on a fixed placeholder, supporting retrieval-free single-pass inference with strong efficiency in large-scale production systems. (4) We conduct extensive evaluations on the public ImplicitAVE 
+
+benchmark, a large-scale industrial dataset, and online A/B tests on AliExpress. The results show that C2P consistently outperforms strong baselines, especially on ambiguous attributes. 
+
+## 2 Related Work 
+
+Direct Generation Approaches for AVE. Recent AVE methods in-creasingly leverage large language models (LLMs) and multimodal LLMs (MLLMs) for end-to-end generation given a predefined at-tribute. ExtractGPT [4] demonstrates strong zero-shot performance using GPT-4 and Llama-3, while EIVEN [26] pioneers MLLMs for implicit attribute value extraction, using multi-granularity visual features and a Learning-by-Comparison (LBC) technique to reduce confusion among similar values. MICE [8] further enhances inputs with offline-generated captions from multiple MLLMs. Despite their effectiveness, these approaches treat AVE as direct generation from multimodal context, without explicitly training the model to verify or revise its outputs against multimodal evidence. 
+
+Retrieval-Augmented Generation for AVE. MVP-RAG [25] ad-dresses the broader Product Attribute Value Identification (PAVI) task by retrieving similar products and their attribute values to condition a generative model. Although designed for PAVI, it can be adapted to AVE by fixing the target attribute 𝑎 . In this setting, retrieved candidates serve as reference context. In contrast, C2P treats retrieved values as hypotheses to be verified and corrected against multimodal evidence. As a result, MVP-RAG does not ex-plicitly train the model to detect and correct mismatches between retrieved references and the current product’s visual-textual cues, which can propagate retrieval errors and increase inference latency. 
+
+Post-Generation Refinement in AVE. Self-correction methods first generate an initial, potentially incorrect output, then prompt the model to revise it [3]. However, empirical studies show limited gains: self-correction often fails to improve accuracy despite higher computational cost [3]. Multi-agent debate (e.g., MADIAVE [10]) improves robustness by iterative refinement through cross-model critique. While these strategies enhance reliability, they share a fun-damental constraint: correction occurs after the initial prediction, which may already be biased due to insufficient grounding in mul-timodal evidence. Consequently, these post-hoc mechanisms often struggle to effectively override deeply entrenched initial errors. 
+
+Connection to Curriculum Learning. Our Self-Consistency Re-finement (SCR) is inspired by curriculum learning (CL) [2], which improves robustness by progressively introducing challenging sam-ples. Conventional CL typically defines sample difficulty using Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction CIKM ’26, November 07–11, 2026, Rome, Italy 
+
+generic signals such as training loss or prediction confidence [18]. In contrast, SCR uses a task-specific signal: prediction inconsistency under pseudo-value perturbation. This helps focus training on cases where the model’s output changes when the input value is altered, indicating that the prediction may rely too much on the input guess rather than the actual product evidence. Unlike generic curriculum learning, SCR directly targets the failure mode of interest, namely prediction instability under pseudo-value perturbation. 
+
+Synthesis and Our Position. Crucially, C2P embeds verification into prediction by treating pseudo-values, including retrieved can-didates, as correctable hypotheses rather than contextual references (as in RAG) or post-hoc refinements. At inference, it uses a fixed placeholder instead of retrieval, enabling retrieval-free, single-pass prediction based on the learned correction behavior. 
+
+## 3 Problem Statement 
+
+We consider the task of Multimodal Product Attribute Value Extraction (AVE) in e-commerce. Formally, given a product profile with an image 𝐼 , textual fields 𝑇 = (𝑇 𝑡 ,𝑇 𝑑 ) consisting of a title 𝑇 𝑡 
+
+and an optional description 𝑇 𝑑 , and a predefined attribute name 
+
+𝑎 , the task is to predict the correct value 𝑣 for attribute 𝑎 using evidence from both 𝐼 and 𝑇 .The extracted value 𝑣 should satisfy two key requirements: (1) Evidence-based : 𝑣 must be justified by visual and textual evi-dence. If the attribute is inapplicable to the product (e.g., Shoe Size for a dress) or no sufficient evidence exists, the model outputs invalid .(2) Canonical : If 𝑣 ≠ invalid , it must be selected from the plat-form’s Canonical Product Vocabulary (CPV) for 𝑎 (e.g., crew neck not round collar ). This ensures that all model outputs are standardized, enabling reliable exact string matching during consistency checks and downstream processing. Let O𝑐,𝑎 = V𝑐,𝑎 ∪{ invalid } denote the output space for attribute 
+
+𝑎 in category 𝑐 , where V𝑐,𝑎 is the finite set of valid canonical labels defined in the platform’s Canonical Product Vocabulary (CPV) for the (category, attribute) pair (𝑐, 𝑎 ). Each label in V𝑐,𝑎 is a single standardized string, which may represent a composite concept (e.g., 
+
+Cotton,Polyester ). The AVE task is thus formalized as mapping 
+
+(𝐼,𝑇 , 𝑐, 𝑎 ) to a value 𝑣 ∈ O 𝑐,𝑎 .
+
+Key Challenge : This task is especially difficult for implicit at-tributes —values not explicitly mentioned in text and requiring joint visual-textual reasoning (e.g., inferring turtleneck from an image of a high-collar sweater when the title states only winter top ). Real-world profiles often contain noisy, missing, or conflicting cues, demanding models that actively justify predictions against multi-modal evidence rather than relying on surface-level patterns. 
+
+## 4 Methods 
+
+We present Correcting to Predict (C2P) , a framework that refor-mulates multimodal AVE as correcting an initial pseudo-value with multimodal evidence. We first describe the basic C2P formulation and the construction of train-time pseudo-values. We then intro-duce a Self-Consistency Refinement (SCR) stage to further reduce sensitivity to pseudo-value perturbations. Finally, we describe the inference design of C2P, which uses a fixed placeholder for single-pass prediction without online retrieval or iterative refinement. 
+
+## 4.1 C2P as Correction with Pseudo-Values 
+
+Given a product with image 𝐼 , title 𝑇 𝑡 , optional description 𝑇 𝑑 , cat-egory 𝑐 , and target attribute 𝑎 , the goal of AVE is to predict the canonical attribute value 𝑦 . Conventional approaches formulate this task as direct generation from the multimodal product profile. In contrast, C2P introduces an explicit pseudo-value 𝑣 pseudo and reformulates AVE as correcting this initial hypothesis according to multimodal evidence. Accordingly, the model is trained on structured prompts that explicitly encode the correction task. For a sample with pseudo-value 𝑣 pseudo and a prompt option subset C ( ≤ 20 ) 
+
+> 𝑐,𝑎
+
+⊆ V 𝑐,𝑎 , the input prompt is:        
+
+> Question: What is {a} of this product? Context: [Category] {c} <img> [Title] {T_t} [Description] {T_d} [Pseudo-Value] {v_pseudo} [Options] [𝑜 1,𝑜 2,. . . ,𝑜 𝑘 ] (up to 20 most frequent values from V𝑐,𝑎 )
+> [Rule] If image or title or description contradicts the pseudo-value, correct it to the accurate value; otherwise, keep it but use the standard expression if available in options. Answer:
+
+The option set C ( ≤ 20 ) 
+
+> 𝑐,𝑎
+
+contains up to 20 frequent canonical val-ues for attribute 𝑎 under category 𝑐 , derived from the platform’s Canonical Product Vocabulary (CPV). Although only a subset of options is shown in the prompt, the model can still output any value in O𝑐,𝑎 when supported by multimodal evidence. The options therefore serve as soft guidance rather than hard constraints. Training uses standard supervised fine-tuning. Let 𝑦 = (𝑦 1, . . . , 𝑦 𝐿 )
+
+denote the tokenized ground-truth canonical value. The base train-ing loss is: 
+
+Lbase = −
+
+> 𝐿
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝑃 (𝑦 𝑡 | 𝐼,𝑇 , 𝑐, 𝑎, 𝑣 pseudo , 𝑦 <𝑡 ; 𝜃 ), (1) where 𝜃 denotes the trainable parameters. 
+
+## 4.2 Train-time Pseudo-Values 
+
+A key design choice in C2P is how to construct train-time pseudo-values so that the model learns when an initial hypothesis should be retained or corrected. We use two complementary types of pseudo-values. 
+
+(1) Placeholder pseudo-values. We use simple placeholders such as invalid , which carry little useful information for the cur-rent sample and encourage the model to rely more heavily on multimodal evidence. However, such placeholders can also be rela-tively easy to bypass, especially on datasets where most samples have valid answers. 
+
+(2) Retrieved pseudo-values. We also construct pseudo-values from retrieved similar products using General Multimodal Embed-der (GME) [20]. For each sample, we retrieve the top-3 most similar products (excluding itself) that share the same target attribute and use their ground-truth values as pseudo-values. These retrieved CIKM ’26, November 07–11, 2026, Rome, Italy Junhao Zhang, Feiran Hu, Xiao Hu, Baoliang Cui, and Xiaoyi Zeng 
+
+Figure 2: Overview of the C2P framework. (1) Base training: the model learns to correct diverse pseudo-values using multimodal evidence. (2) Self-Consistency Refinement (SCR): inconsistent samples are retrained to reduce pseudo-value sensitivity and encourage greater reliance on product evidence. (3) Inference: a fixed placeholder enables retrieval-free, single-pass prediction. 
+
+values are often plausible but imperfect, requiring the model to verify and, when necessary, correct them using product evidence. For each training sample, one pseudo-value is supplied while the target output remains the same ground-truth canonical value. As shown in Section 5.3, exposing the model to diverse pseudo-values during training is important for learning evidence-based correction. 
+
+## 4.3 Self-Consistency Refinement 
+
+Although base C2P already learns to correct pseudo-values, some samples remain sensitive to the supplied pseudo-value, especially for ambiguous or confusable attributes. Different pseudo-values may still yield different predictions, indicating that the model has not yet learned stable correction behavior under pseudo-value per-turbations. To reduce this sensitivity, we introduce a second-stage training procedure called Self-Consistency Refinement (SCR). Given a trained base C2P model, we evaluate each training sam-ple under a predefined set of pseudo-values. If the predicted at-tribute value changes across pseudo-values, we mark the sample as 
+
+inconsistent . These inconsistent samples identify cases where the model’s prediction is still influenced by the initial hypothesis, and therefore serve as natural targets for refinement. We then continue training on the inconsistent subset using the same supervised AVE objective as in base training. To maintain over-all stability and avoid over-specializing to the inconsistent cases, we replay a portion of the original base training data during refinement. SCR thus uses prediction instability under pseudo-value perturba-tion as a task-specific signal for targeted refinement. As shown in Section 5.4, this signal is enriched with hard and confusable cases, making it effective in practice. Formally, let P ( 𝑥 ) denote the predefined set of pseudo-values used to evaluate training sample 𝑥 , and let 𝑓 𝜃 (𝑥, 𝑝 ) denote prediction of the current C2P model for sample 𝑥 under pseudo-value 𝑝 . We mark 𝑥 as inconsistent if there exist 𝑝 𝑖 , 𝑝 𝑗 ∈ P ( 𝑥 ) such that 
+
+𝑓 𝜃 (𝑥, 𝑝 𝑖 ) ≠ 𝑓 𝜃 (𝑥, 𝑝 𝑗 ). (2) Let Dinc denote the resulting inconsistent subset. SCR then trains on Dinc together with 50% replayed base-training samples. In our implementation, the inconsistency-mining step is per-formed offline during training. For each sample, we evaluate the model under a predefined set of pseudo-values, consisting of leastV ,
+
+invalid , and C ( ≤ 20 ) 
+
+> 𝑐,𝑎
+
+, where C ( ≤ 20 ) 
+
+> 𝑐,𝑎
+
+denotes the displayed option set containing up to 20 frequent canonical values for the corresponding category-attribute pair. A sample is marked as inconsistent if its prediction changes across these pseudo-values. We apply SCR for two iterations in all main results. After base C2P training, the mined inconsistent subset is used for C2P-SCR-iter1 training. We then re-evaluate the updated model on the train-ing set to identify the remaining inconsistent samples for C2P-SCR-iter2. In practice, the resulting inconsistent subset is relatively small: the first and second SCR iterations use roughly 5% and 4% of the original training set, respectively, before adding replayed samples. 
+
+## 4.4 Inference with a Fixed Placeholder 
+
+Having learned correction behavior during training, C2P can use a simple fixed-placeholder design at inference time to trigger single-pass prediction without online retrieval or iterative refinement. We therefore supply a fixed placeholder 𝑝 ∗ and perform a single forward pass: ˆ𝑦 = 𝑓 𝜃 (𝑥, 𝑝 ∗). (3) Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction CIKM ’26, November 07–11, 2026, Rome, Italy 
+
+Table 1: Details of two datasets.                   
+
+> Datasets #cate #attr #(cate, attr) #train #val #test
+> ImplicitAVE 523 25 54881 13723 1610
+> AE-Product 371 1267 3457 233908 25989 34042
+
+This design keeps inference simple and efficient, which is important for industrial deployment. In practice, different fixed placeholders are possible. Rather than relying on online candidate retrieval, C2P uses a single placeholder chosen empirically from a small set of fixed options. As shown in Section 5.5, fixed placeholders are sufficient to trigger the correction behavior learned during training, and SCR further reduces sensi-tivity to the specific placeholder choice. In our main setting, we use leastV , i.e., the least frequent canonical value for the category-attribute pair, as a practical default. We do not treat this choice as theoretically special; it is simply the best-performing fixed place-holder among those tested in our setting. 
+
+## 5 Experiments 5.1 Datasets and implementation 
+
+We evaluate C2P on both a public benchmark and a large-scale industrial dataset. ImplicitAVE [24] is an open benchmark adapted from MAVE [19] for implicit multimodal attribute value extraction, where the target value is not explicitly stated in the text and must be inferred from multimodal evidence. AE-Product is a large-scale in-dustrial dataset collected from AliExpress, covering 371 categories, 1,267 attributes, and 3,457 category-attribute pairs. Unlike Implici-tAVE , AE-Product also contains invalid cases in which no supported canonical value exists. Table 1 summarizes the dataset statistics. We use Micro-F1 as the primary offline metric. We use Qwen2.5-VL-7B-Instruct [1] as the backbone and fine-tune it with LoRA [9] (rank 8, 𝛼 = 2), implemented in PyTorch [14] and optimized with AdamW [12]. Base C2P is trained for one epoch with learning rate 1 × 10 −4, weight decay 0 .1, and batch size 16. During SCR, we continue training on the mined inconsistent subset together with 50% replayed base-training samples to mitigate for-getting, while keeping the other settings unchanged and reducing the learning rate to 1 × 10 −5. All models are trained on NVIDIA A100 GPUs, while serving efficiency is measured on L20 GPUs. For retrieved pseudo-values, we use the General Multimodal Embedder (GME) [20], specifically gme-Qwen2-VL-2B-Instruct ,which encodes image-title pairs into joint embeddings. We compute cosine similarity and retrieve the top-3 nearest products (excluding itself) that share the same target attribute, without applying a similarity threshold. We compare against representative baselines from four families: strong closed-source zero-shot MLLMs (GPT-4V, GPT-4o, and GPT-o1), a zero-shot multi-agent refinement method (MADIAVE), a strong supervised AVE baseline (MICE), and direct supervised fine-tuning of the same Qwen2.5-VL backbone. 
+
+## 5.2 Main Results 
+
+Table 2 reports the Micro-F1 comparisons among representative baselines on the five categories of ImplicitAVE . Unless otherwise specified, C2P-based results in this section are reported under the default fixed-placeholder inference setting. Compared with the direct-generation baseline obtained by supervised fine-tuning the backbone, our method performs better in all categories, improving the overall score by 1.68 points and yielding a 3.29-point gain on 
+
+Home . Moreover, our method surpasses the zero-shot baseline GPT-4V and the strongest supervised fine-tuning baseline MICE by 2.10 and 0.92 points, respectively, on the full evaluation set. Notably, in 
+
+Clothing and Jewelry , our approach achieves substantial gains of 2.84 and 2.68 points over the previous best-performing models. Table 3 further summarizes the progressive effect of the main C2P components on both ImplicitAVE and AE-Product . In #2, the placeholder invalid is used for both training and inference, and performance remains close to direct generation. By contrast, adding retrieved pseudo-values yields clear gains on both datasets. SCR brings further improvements on top of base C2P, reaching 88.87 on ImplicitAVE and 91.39 on AE-Product . These results show that the correction-based formulation is effective on both the public benchmark and the industrial setting. To better understand where the gains of C2P come from, we further partition attributes by difficulty under the direct-generation Qwen2.5-VL SFT baseline. Specifically, we label an attribute as 
+
+hard if the baseline achieves Micro-F1 below 0.85 on that attribute, and easy otherwise. Table 4 reports the results on the resulting subsets. C2P preserves strong performance on easy attributes while yielding substantially larger gains on hard ones, and C2P-SCR further amplifies these improvements. This pattern suggests that the proposed correction-based formulation is particularly helpful for hard attributes, which in practice often correspond to ambiguous or confusable cases where subtle multimodal cues are more critical for disambiguation. 
+
+## 5.3 Why Pseudo-Value Correction Helps 
+
+We next analyze why the correction-based formulation improves over direct generation, focusing on two training-time questions: what kind of pseudo-values are most useful during training, and how retrieved values should be used during training. Table 5 compares different pseudo-value strategies in base C2P. To isolate the effect of pseudo-value quality from the number of training instances, both C2P-fixV and C2P-randV are matched to C2P-GME-top3 in training size. C2P-fixV, which always uses the uninformative placeholder invalid for both training and inference, remains close to direct generation, suggesting that a trivially by-passable pseudo-value provides limited correction supervision. In contrast, C2P-randV already improves over the baseline on both datasets, showing that the correction formulation itself is beneficial even with noisy hypotheses. More importantly, retrieved pseudo-values from GME (C2P-GME-top3) perform best, indicating that plausible but imperfect hypotheses provide stronger and more in-formative supervision for learning correction behavior than either meaningless placeholders or arbitrary random values. We further compare C2P with retrieval-augmented generation (RAG), which injects retrieved product cases directly into the prompt. Here the key difference is not whether retrieval is used, but how retrieved values are used. In realistic Test →Train retrieval, the top-1 retrieved value matches the query ground-truth only 65 .9% and 55 .1% on ImplicitAVE and AE-Product , respectively, indicating CIKM ’26, November 07–11, 2026, Rome, Italy Junhao Zhang, Feiran Hu, Xiao Hu, Baoliang Cui, and Xiaoyi Zeng 
+
+Table 2: Micro-F1 (%) comparisons on ImplicitAVE across categories between Correcting-to-Predict with Self-Consistency Refinement (C2P-SCR) and zero-shot/supervised fine-tuned (SFT) methods. Best results are highlighted in bold. Methods Clothing Footwear Jewelry Food Home Overall Zero Shot Methods 
+
+GPT-4V 77.43 81.39 90.45 90.77 89.93 86.77 GPT-4o 85.66 80.48 91.87 90.26 82.41 85.68 GPT-o1 84.96 81.08 91.36 90.26 83.81 86.27 Qwen2.5-VL-7B 64.16 61.83 77.72 74.87 75.71 71.43 MADIAVE (Qwen2.5-VL-7B) 61.95 65.93 85.00 85.13 81.84 77.14 
+
+SFT Methods 
+
+MICE 85.40 83.60 91.82 91.54 87.31 87.95 Qwen2.5-VL-7B 85.40 85.80 93.64 89.74 83.74 87.19 C2P-SCR (ours) 88.50 85.80 94.55 90.26 87.03 88.87 Table 3: Micro-F1 (%) of progressively adding the main com-ponents of C2P on ImplicitAVE and AE-Product .                   
+
+> Configurations APV RPV SCR ImplicitAVE AE-Product
+> #1 87.19 88.12 #2 ✓87.00 88.29 #3 ✓✓88.31 90.38 #4 ✓✓✓88.87 91.39
+
+Table 4: Micro-F1 (%) on easy and hard attribute subsets, with hard attributes defined by low baseline performance.                  
+
+> Methods ImplicitAVE AE-Product
+> easy hard easy hard
+> baseline 91.56 76.89 94.30 66.87 C2P 92.68 (+1.12) 78.03 (+1.14) 94.79 (+0.49) 75.12 (+8.25) C2P-SCR 92.72 (+1.16) 79.92 (+3.03) 95.36 (+1.06) 76.79 (+9.92)
+
+Table 5: Micro-F1 (%) of different training strategies in base Correcting-to-Predict (C2P). C2P-GME-top3 corresponds to the default base C2P model. 
+
+Methods ImplicitAVE AE-Product 
+
+baseline 87.19 88.12 C2P-fixV 87.13 88.53 C2P-randV 87.50 88.86 C2P-GME-top3 88.31 90.38 
+
+that retrieved candidates are informative but imperfect. As shown in Table 6, C2P-top3 consistently outperforms RAG-top3 on both datasets while using substantially fewer input tokens. This sug-gests that, for AVE, retrieved values are more effective when used as compact hypotheses to be verified and corrected than when used as prompt context. Since top-3 provides the best trade-off in our setting, we use it as the default configuration in base C2P. 
+
+## 5.4 Self-Consistency Refinement Analysis 
+
+We next examine why Self-Consistency Refinement (SCR) is effec-tive. The starting point is that, even after base C2P training, some 
+
+Table 6: Micro-F1 (%) and inference-time efficiency metrics (average input tokens and queries per second, QPS) com-paring the base Correcting-to-Predict (C2P) with Retrieval-Augmented Generation (RAG) under top-k retrieval. 
+
+Methods ImplicitAVE AE-Product avg. tokens QPS baseline 87.19 88.12 201 5.18 RAG-top1 87.71 89.03 340 2.69 RAG-top3 87.77 89.13 585 1.45 RAG-top5 87.77 89.26 832 1.01 C2P-top1 87.87 89.56 233 4.88 C2P-top3 88.31 90.38 233 4.77 C2P-top5 88.00 89.92 234 4.92 samples remain sensitive to the supplied pseudo-value. SCR tar-gets this residual instability by mining samples whose predictions change under pseudo-value perturbations and retraining them. A natural question is whether this inconsistency signal identifies meaningful error-prone cases or merely reflects random variation. Empirically, the mined subset is strongly enriched with difficult attributes: the proportion of hard attributes increases from 28.29% to 68.14% on ImplicitAVE and from 33.71% to 58.58% on AE-Product .This suggests that prediction inconsistency is a useful task-specific signal for locating ambiguous and confusable samples where stable evidence-based correction behavior has not yet been learned. We next verify that SCR improves the intended failure modes rather than acting as generic extra fine-tuning. To this end, we measure three diagnostics under fixed-placeholder inference: PRR, the fraction of predictions identical to the supplied pseudo-value; E-PRR, the same ratio restricted to error cases; and E-FVR, the fraction of error cases predicted as the most frequent value for the corresponding category-attribute pair. As shown in Table 7, after SCR, PRR changes only marginally on ImplicitAVE (14.05 →13.93), while E-PRR and E-FVR drop from 14.97/24.06 to 13.97/21.79. This suggests that SCR improves accuracy not by indiscriminately sup-pressing retention behavior, but by reducing errors that remain overly driven by the supplied pseudo-value or by frequent-value priors. We observe the same directional trend on AE-Product. Table 8 further compares SCR with a curriculum-learning-style baseline (C2P-CL) and multiple refinement iterations under the Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction CIKM ’26, November 07–11, 2026, Rome, Italy 
+
+Table 7: Pseudo-value-sensitive error metrics before and after SCR on ImplicitAVE and AE-Product .                   
+
+> Method ImplicitAVE AE-Product
+> PRR E-PRR E-FVR PRR E-PRR E-FVR C2P 14.05 14.97 24.06 10.14 47.99 72.41 C2P-SCR 13.93 13.97 21.79 8.87 45.57 71.64
+
+Table 8: Micro-F1 (%) of refinement variants.           
+
+> Method ImplicitAVE AE-Product
+> C2P 88.31 90.38 C2P-CL 88.06 90.33 C2P-SCR-iter1 88.87 91.36 C2P-SCR-iter2 88.87 91.39
+
+Table 9: Micro-F1 (%) under fixed and retrieved pseudo-values at inference time.                      
+
+> Placeholder C2P C2P-SCR
+> ImplicitAVE AE-Product ImplicitAVE AE-Product
+> invalid 87.94 89.73 88.87 91.26
+> mostV 87.50 89.53 88.74 91.30
+> leastV 88.31 90.38 88.87 91.39
+> GME-top3 87.75 89.75 88.81 91.35
+
+default leastV inference setting. Unlike SCR, C2P-CL selects sam-ples based on prediction difficulty rather than pseudo-value stabil-ity. C2P-CL remains slightly below base C2P, whereas SCR yields clear gains on both datasets. Moreover, most of the gain is already achieved in the first refinement iteration, with the second iteration providing only marginal improvement. Overall, these results show that SCR acts as a targeted refinement stage for unstable correction behavior rather than as a generic second-stage fine-tuning procedure. 
+
+## 5.5 Fixed-Placeholder Inference Analysis 
+
+We next analyze the inference-time design of C2P. A key question is whether the learned correction behavior still requires retrieval-time pseudo-values, or whether it can be triggered by a fixed placeholder in a single forward pass. Table 9 reports the Micro-F1 under dif-ferent inference-time pseudo-values, including fixed placeholders (invalid , mostV , and leastV ) and GME-top3, where one retrieved pseudo-value is sampled from the top-3 retrieved candidates. For the base C2P model, leastV yields the best performance on both ImplicitAVE and AE-Product , achieving 88.31 and 90.38, respectively. However, the more important observation is that inference-time retrieval is not necessary to realize the benefit of C2P: fixed placeholders already trigger effective correction behav-ior, and in our setting perform comparably to or better than sampled retrieved pseudo-values. In particular, retrieval-based GME-top3 reaches 87.75 and 89.75, while invalid gives 87.94 and 89.73. After SCR, the gap across inference-time pseudo-values becomes even smaller. On ImplicitAVE , C2P-SCR achieves 88.87 with both 
+
+invalid and leastV , compared with 88.81 under GME-top3; on 
+
+AE-Product , the corresponding numbers are 91.26, 91.39, and 91.35. 
+
+Table 10: Inference efficiency in industrial deployment.        
+
+> Method QPS (single L20) Time for 1M samples (8 L20 GPUs, hours) Direct Generation 5.18 6.7 C2P 4.77 7.3 RAG-top3 1.45 23.9
+
+This indicates that SCR further reduces sensitivity to the specific pseudo-value supplied at inference time. We therefore adopt leastV as the default inference placeholder, but emphasize that C2P does not rely on retrieval-time pseudo-values for its gains. Overall, these results support a simple and prac-tical deployment design: C2P can perform retrieval-free, single-pass inference with a fixed placeholder, while maintaining accuracy com-parable to or better than inference with retrieved pseudo-values. 
+
+## 5.6 Efficiency and Online Deployment 
+
+A practical advantage of C2P is that correction behavior is learned during training, while inference remains retrieval-free and single-pass. Table 10 reports the serving efficiency. Compared with direct generation and RAG-top3, C2P preserves near-baseline serving throughput (4.77 vs. 5.18 QPS on a single L20 GPU) while avoiding the substantial latency increase of retrieval-based inference (1.45 QPS for RAG-top3). The C2P framework has been deployed across multiple produc-tion scenarios on AliExpress. These deployment gains are consistent with two effects observed offline: improved extraction quality and an expanded set of category-attribute pairs that satisfy deployment-time accuracy requirements. In a 7-day online A/B test with 10% of live traffic, C2P-SCR improved business metrics over the production Qwen2.5-VL SFT baseline across listing, search, and product-card scenarios: deployable category-attribute pairs increased by 22.6% ;the GMV share of products with complete core attributes improved by 9.8% ; seller adoption in listing rose from 83% to 85% ; search ob-tained 37.2% more relevant filter options, with +15.6% filter usage and +3.3% CTR in filtered sessions; and product-card highlights improved overall CTR by +0.94% and buyers by +0.54% .
+
+## 6 Conclusion 
+
+This paper presented Correcting to Predict (C2P) , a practical framework for multimodal attribute value extraction (AVE) in e-commerce. C2P reformulates AVE as correcting an initial pseudo-value with multimodal evidence, rather than directly generating an attribute value from scratch. By training with diverse pseudo-values, the model learns when a supplied hypothesis should be retained or revised, and a subsequent Self-Consistency Refinement (SCR) stage further reduces sensitivity to pseudo-value perturbations. Experiments on the public ImplicitAVE benchmark, a large-scale industrial dataset, and online A/B tests on AliExpress show that C2P consistently outperforms strong baselines, especially on hard attributes that are often ambiguous or confusable, while supporting efficient single-pass deployment without online retrieval or itera-tive refinement. We hope this work encourages further study of correction-based formulations for multimodal prediction tasks in real-world systems. CIKM ’26, November 07–11, 2026, Rome, Italy Junhao Zhang, Feiran Hu, Xiao Hu, Baoliang Cui, and Xiaoyi Zeng 
+
+## GenAI Usage Disclosure 
+
+We acknowledge the use of Generative AI (GenAI) tools in the preparation of this work. GenAI tools were only used to improve the spelling and grammar of certain passages. All uses of GenAI tools complied with the ACM Authorship Policy on GenAI usage. 
+
+## References 
+
+[1] Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wenbin Ge, Sibo Song, Kai Dang, Peng Wang, Shijie Wang, and et al. 2025. Qwen2.5-VL Technical Report. 
+
+arXiv preprint arXiv:2502.13923 (2025). [2] Yoshua Bengio, Jérôme Louradour, Ronan Collobert, and Jason Weston. 2009. Curriculum learning. In Proc. Int. Conf. Mach. Learn. 41–48. [3] Alexander Brinkmann and Christian Bizer. 2025. Self-Refinement Strategies for LLM-based Product Attribute Value Extraction. In Datenbanksysteme für Business, Technologie und Web-Workshopband (BTW 2025) . 291–304. [4] Alexander Brinkmann, Roee Shraga, and Christian Bizer. 2024. ExtractGPT: Exploring the potential of large language models for product attribute value extraction. In International Conference on Information Integration and Web Intelli-gence . 38–52. [5] Xin Luna Dong, Xiang He, Andrey Kan, Xian Li, Yan Liang, Jun Ma, Yifan Ethan Xu, Chenwei Zhang, Tong Zhao, Gabriel Blanco Saldana, et al. 2020. Autoknow: Self-driving knowledge collection for products of thousands of types. In Proc. ACM SIGKDD Int. Conf. Knowledge discovery & data mining . 2724–2734. [6] Chenhao Fang, Xiaohan Li, Zezhong Fan, Jianpeng Xu, Kaushiki Nag, Evren Korpeoglu, Sushant Kumar, and Kannan Achan. 2024. Llm-Ensemble: Optimal large language model ensemble method for e-commerce product attribute value extraction. In Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval . 2910–2914. [7] Rayid Ghani, Katharina Probst, Yan Liu, Marko Krema, and Andrew Fano. 2006. Text mining for product attribute extraction. ACM SIGKDD Explorations Newslet-ter 8, 1 (2006), 41–48. [8] Jiaying Gong, Hongda Shen, and Janet Jenq. 2025. MICE: Mixture of Image Captioning Experts Augmented e-Commerce Product Attribute Value Extraction. In Proc. Conf. Association for Computational Linguistics . 1151–1160. [9] Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, and Weizhu Chen. 2022. LoRA: Low-Rank Adaptation of Large Language Models. In Proc. Int. Conf. Learn. Representations .[10] Wei-Chieh Huang and Cornelia Caragea. 2026. MADIAVE: Multi-Agent De-bate for Implicit Attribute Value Extraction. In Findings of the Association for Computational Linguistics: EACL 2026 . 3035–3053. [11] Giannis Karamanolakis, Jun Ma, and Xin Luna Dong. 2020. TXtract: Taxonomy-Aware Knowledge Extraction for Thousands of Product Categories. In Proc. Conf. Association for Computational Linguistics . 8489–8502. [12] Diederik P. Kingma and Jimmy Ba. 2015. Adam: A Method for Stochastic Opti-mization. In Proc. Int. Conf. Learn. Representations .[13] Ajinkya More. 2016. Attribute extraction from product titles in ecommerce. arXiv preprint arXiv:1608.04670 (2016). [14] Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban Des-maison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu Fang, Junjie Bai, and Soumith Chintala. 2019. PyTorch: An Imperative Style, High-Performance Deep Learning Library. In Advances in Neural Inf. Process. Syst. 8024–8035. [15] Duangmanee Putthividhya and Junling Hu. 2011. Bootstrapped named entity recognition for product attribute extraction. In Proc. Conf. Empirical Methods in Natural Language Processing . 1557–1567. [16] Keiji Shinzato and Satoshi Sekine. 2013. Unsupervised extraction of attributes and their values from product description. In Proceedings of the 6th International Joint Conference on Natural Language Processing . 1339–1347. [17] Qifan Wang, Li Yang, Bhargav Kanagal, Sumit Sanghai, D Sivakumar, Bin Shu, Zac Yu, and Jon Elsas. 2020. Learning to extract attribute value from product via question answering: A multi-task approach. In Proc. ACM SIGKDD Int. Conf. Knowledge discovery & data mining . 47–55. [18] Xin Wang, Yudong Chen, and Wenwu Zhu. 2021. A survey on curriculum learning. 
+
+IEEE Trans. Pattern Anal. Mach. Intell. 44, 9 (2021), 4555–4576. [19] Li Yang, Qifan Wang, Zac Yu, Anand Kulkarni, Sumit Sanghai, Bin Shu, Jon Elsas, and Bhargav Kanagal. 2022. Mave: A product dataset for multi-source attribute value extraction. In Proceedings of the 15th ACM international conference on web search and data mining . 1256–1265. [20] Xin Zhang, Yanzhao Zhang, Wen Xie, Mingxin Li, Ziqi Dai, Dingkun Long, Pengjun Xie, Meishan Zhang, Wenjie Li, and Min Zhang. 2025. Bridging Modali-ties: Improving Universal Multimodal Retrieval by Multimodal Large Language Models. In Proc. IEEE Conf. Comp. Vis. Patt. Recogn. 9274–9285. [21] Yupeng Zhang, Shensi Wang, Peiguang Li, Guanting Dong, Sirui Wang, Yunsen Xian, Zhoujun Li, and Hongzhi Zhang. 2023. Pay attention to implicit attribute values: A multi-modal generative framework for AVE task. In Findings of the association for computational linguistics: ACL 2023 . 13139–13151. [22] Guineng Zheng, Subhabrata Mukherjee, Xin Luna Dong, and Feifei Li. 2018. Opentag: Open attribute value extraction from product profiles. In Proc. ACM SIGKDD Int. Conf. Knowledge discovery & data mining . 1049–1058. [23] Tiangang Zhu, Yue Wang, Haoran Li, Youzheng Wu, Xiaodong He, and Bowen Zhou. 2020. Multimodal joint attribute prediction and value extraction for e-commerce product. In Proc. Conf. Empirical Methods in Natural Language Process-ing . 2129–2139. [24] Henry Zou, Vinay Samuel, Yue Zhou, Weizhi Zhang, Liancheng Fang, Zihe Song, Philip S Yu, and Cornelia Caragea. 2024. ImplicitAVE: An Open-Source Dataset and Multimodal LLMs Benchmark for Implicit Attribute Value Extraction. In 
+
+Findings of the Association for Computational Linguistics ACL 2024 . 338–354. [25] Huike Zou, Haiyang Yang, Yindu Su, Chen Li Yu, Qinye Xie, Chengbao Lian, Qingheng Zhang, Shuguang Han, Fei Huang, and Jufeng Chen. 2025. Multi-Value-Product Retrieval-Augmented Generation for Industrial Product Attribute Value Identification. In Proc. Conf. Empirical Methods in Natural Language Processing .2096–2105. [26] Henry Zou, Gavin Yu, Ziwei Fan, Dan Bu, Han Liu, Peng Dai, Dongmei Jia, and Cornelia Caragea. 2024. EIVEN: Efficient Implicit Attribute Value Extraction using Multimodal LLM. In Proc. Conf. of North American Chapter of Association for Computational Linguistics . 453–463.

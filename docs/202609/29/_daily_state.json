@@ -1,0 +1,233 @@
+{
+  "date": "20260929",
+  "date_label": "",
+  "generated_at": "2026-09-29 23:18:35 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.32272v1",
+      "route": "202609/29/2609.32272v1-learning-through-game-skewed-transfer-of-tabular-knowledge-to-strengthen-image-model",
+      "title": "Learning Through Game: Skewed Transfer of Tabular Knowledge to Strengthen Image Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "显式处理跨模态迁移中的模态不平衡",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.35502v1",
+      "route": "202609/29/2609.35502v1-structured-latent-modeling-for-supervised-multimodal-information-decomposition",
+      "title": "Structured Latent Modeling for Supervised Multimodal Information Decomposition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将多模态表示分解为共享与模态特有变化",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.32846v1",
+      "route": "202609/29/2609.32846v1-synco-learning-cross-modal-synergy-by-contrasting-interaction-residuals",
+      "title": "SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨模态协同的对比学习",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33492v1",
+      "route": "202609/29/2609.33492v1-federated-multi-modal-human-activity-recognition-using-multi-agent-reinforcement-learning",
+      "title": "Federated Multi-Modal Human Activity Recognition using Multi-Agent Reinforcement Learning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "自适应多模态融合",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33800v1",
+      "route": "202609/29/2609.33800v1-binding-multiple-modalities-via-multimodal-wasserstein-barycenter",
+      "title": "Binding Multiple Modalities via Multimodal Wasserstein Barycenter",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "多模态表示与对齐",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.34383v1",
+      "route": "202609/29/2609.34383v1-correcting-to-predict-pseudo-value-correction-for-multimodal-attribute-value-extraction",
+      "title": "Correcting to Predict: Pseudo-Value Correction for Multimodal Attribute Value Extraction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "联合视觉与文本线索抽取多模态属性值",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.31718v1",
+      "route": "202609/29/2609.31718v1-mm-verirec-failure-guided-fusion-for-verifiable-agentic-multimodal-recommendation",
+      "title": "MM-VeriRec: Failure-Guided Fusion for Verifiable Agentic Multimodal Recommendation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态推荐的失败引导图文证据融合",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.32263v1",
+      "route": "202609/29/2609.32263v1-representation-editing-for-multimodal-test-time-adaptation",
+      "title": "Representation Editing for Multimodal Test-Time Adaptation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态融合自适应的表示编辑",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.32671v1",
+      "route": "202609/29/2609.32671v1-concepts-complement-dense-semantics-learning-compact-sparse-spaces-for-text-image-retrieval",
+      "title": "Concepts Complement Dense Semantics: Learning Compact Sparse Spaces for Text-Image Retrieval",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "跨模态对齐表示",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.32895v1",
+      "route": "202609/29/2609.32895v1-pilar-a-page-grounded-unified-evidence-representation-via-an-entity-linked-assertion-graph-for-open-domain-qa-agents-over-multimodal-document-corpora",
+      "title": "PILAR: A Page-Grounded Unified Evidence Representation via an Entity-Linked Assertion Graph for Open-Domain QA Agents over Multimodal Document Corpora",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mre"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "统一证据表示链接文本表格图像事实",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33402v1",
+      "route": "202609/29/2609.33402v1-vame-exploring-variational-latent-reasoning-for-multimodal-embeddings",
+      "title": "VaME: Exploring Variational Latent Reasoning for Multimodal Embeddings",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多模态嵌入表示学习",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33431v1",
+      "route": "202609/29/2609.33431v1-moground-measuring-and-mitigating-modality-distraction-in-vision-language-models",
+      "title": "MoGround: Measuring and Mitigating Modality Distraction in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "视觉语言模型中的模态干扰与不平衡",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33561v1",
+      "route": "202609/29/2609.33561v1-graphselect-for-budgeted-representation-selection-in-multimodal-graph-inference",
+      "title": "GraphSelect for Budgeted Representation Selection in Multimodal Graph Inference",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "在多模态图推理中选择文本与图像表示",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    },
+    {
+      "paper_id": "2609.33659v1",
+      "route": "202609/29/2609.33659v1-learning-multimodal-embeddings-with-evidence-aligned-readout",
+      "title": "Learning Multimodal Embeddings with Evidence-Aligned Readout",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向多模态嵌入的证据对齐读出",
+      "first_seen_at": "2026-09-29 23:18:35 UTC",
+      "updated_at": "2026-09-29 23:18:35 UTC"
+    }
+  ]
+}

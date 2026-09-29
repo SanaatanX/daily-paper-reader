@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-28</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-29</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-28 23:45:26 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 23:18:35 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日速读5篇、精读0篇，三篇7.0分推荐集中在多模态情感分析与情绪识别。</p>
-<p>最值得看的方向是“可靠性感知跨样本增强”提升鲁棒多模态情感分析，以及“差分注意力”解锁EEG与语音互补融合。</p>
-<p>普通读者可先关注多模态情绪识别中的可靠性、对齐与互补融合思路，再按兴趣回看具体论文。</p>
+<p>2026-09-29日报：共扫14篇论文，精读2篇（均8.0分）、速读12篇，重点锁定知识迁移与多模态建模。</p>
+<p>最值得看的是两篇8分精读：用游戏化偏斜迁移把表格知识强化图像模型，以及用结构化潜变量做有监督多模态信息分解；速读也集中在跨模态协同、联邦多模态活动识别和多模态Wasserstein重心融合。</p>
+<p>普通读者可先读这两篇精读，再顺带浏览速读中的多模态融合</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">0 篇</strong>
+    <strong class="dpr-home-dashboard-count">2 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Learning Through Game: Skewed Transfer of Tabular Knowledge to Strengthen Image Model">Learning Through Game: Skewed Transfer of Tabular Knowledge to Strengthen Image Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="Structured Latent Modeling for Supervised Multimodal Information Decomposition">Structured Latent Modeling for Supervised Multimodal Information Decomposition</span></li></ul>
   </div>
-
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">5 篇</strong>
+    <strong class="dpr-home-dashboard-count">12 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Reliability-aware Cross-sample Enhancement for Robust Multimodal Sentiment Analysis">Reliability-aware Cross-sample Enhancement for Robust Multimodal Sentiment Analysis</span></li><li><span class="dpr-home-dashboard-paper-title" title="SAGE: Source-Anchored Guidance via Frequency Equalization for Hierarchical RGB-T Alignment and Fusion">SAGE: Source-Anchored Guidance via Frequency Equalization for Hierarchical RGB-T Alignment and Fusion</span></li><li><span class="dpr-home-dashboard-paper-title" title="Differential Attention Unlocks Complementary EEG and Speech Fusion for Emotion Recognition">Differential Attention Unlocks Complementary EEG and Speech Fusion for Emotion Recognition</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals">SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals</span></li><li><span class="dpr-home-dashboard-paper-title" title="Federated Multi-Modal Human Activity Recognition using Multi-Agent Reinforcement Learning">Federated Multi-Modal Human Activity Recognition using Multi-Agent Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Binding Multiple Modalities via Multimodal Wasserstein Barycenter">Binding Multiple Modalities via Multimodal Wasserstein Barycenter</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span><span class="dpr-home-dashboard-tag">mre <strong>2</strong></span></div>
 </section>
 </div>
 

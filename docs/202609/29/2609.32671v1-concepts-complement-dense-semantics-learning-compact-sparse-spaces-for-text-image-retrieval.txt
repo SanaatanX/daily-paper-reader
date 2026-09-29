@@ -1,0 +1,272 @@
+Title: Concepts Complement Dense Semantics: Learning Compact Sparse Spaces for Text-Image Retrieval
+
+URL Source: https://arxiv.org/pdf/2609.32671v1
+
+Published Time: Tue, 29 Sep 2026 01:08:45 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# Concepts Complement Dense Semantics: Learning Compact Sparse Spaces for Text-Image Retrieval 
+
+## Yoonseo Kim ∗
+
+seo3167@korea.ac.kr Korea University South Korea 
+
+## Jungwoo Choi ∗
+
+wjd030828@g.skku.edu Sungkyunkwan University South Korea 
+
+## Cheonyoung Park 
+
+park.cheonyoung@kt.com KT Corporation South Korea 
+
+## Youngwook Kim 
+
+young-wook.kim@kt.com KT Corporation South Korea 
+
+## Yongho Song 
+
+yongho.song@kt.com KT Corporation South Korea 
+
+## SeongKu Kang †
+
+seongkukang@korea.ac.kr Korea University South Korea 
+
+## ABSTRACT 
+
+Cross-modal retrieval has been advanced by vision-language pre-trained models that encode images and texts into a shared dense embedding space. While dense representations effectively capture overall semantic similarity, they often obscure fine-grained visual-textual information needed for precise cross-modal matching. Re-cent methods introduce a learned sparse branch to complement dense matching with lexical evidence, but they rely on a redundant language-model token space and lack explicit grounding for sparse dimensions. We propose GRASP, a compact and grounded sparse learning framework that mines visual-textual concepts from the corpus. A lightweight sparse head is trained to predict concepts relevant to each image or text, yielding interpretable concept-level evidence that complements dense semantic matching. Extensive experiments show that GRASP improves retrieval accuracy over the state-of-the-art dense-sparse baselines while yielding a more compact and grounded sparse space. 
+
+## CCS CONCEPTS 
+
+• Information systems → Information retrieval .
+
+## KEYWORDS 
+
+Text-image Retrieval, Sparse Retrieval, Cross-Modal Representation 
+
+## 1 INTRODUCTION 
+
+Cross-modal retrieval is central to multimodal information ac-cess, aiming to retrieve relevant images for textual queries or vice versa [8, 17, 24, 26, 27]. Recent progress has been driven by vision-language pre-trained (VLP) models [14, 15], which encode images and texts into a shared dense embedding space. By compressing 
+
+> ∗These authors contributed equally to this work.
+> †Corresponding author. Accepted for oral presentation at the 3rd Workshop on Knowledge-Enhanced Informa-tion Retrieval (KEIR@CIKM 2026). Permission to make digital or hard copies of part or all of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for third-party components of this work must be honored. For all other uses, contact the owner/author(s).
+> KEIR@CIKM 2026, November 8, 2026, Rome, Italy
+> © 2026 Copyright held by the owner/author(s).
+
+each input as a dense vector, these models effectively capture overall semantic similarity across modalities. However, dense representa-tions have been reported to underrepresent fine-grained signals, limiting their effectiveness for queries that require precise matching of detailed content, such as specific entities or attributes [9, 12, 23]. To supply fine-grained signals, prior studies have incorporated explicit knowledge into dense retrievers. Such knowledge is often derived from domain-specific structures, such as product attributes (e.g., brand, category) in e-commerce search [1, 12, 23] or academic topics (e.g., fields of study) in scientific search [9, 13], and com-bined with dense embeddings to form enriched representations for granular matching. However, these approaches have largely been limited to single-modal, domain-specific settings. In cross-modal retrieval, a closely related line of work integrates learned sparse retrieval with dense models [3, 18, 22], where images and texts are additionally projected into the token space of a language model. By representing inputs over lexical dimensions, the sparse branch cap-tures token-level fine-grained information, offering complementary guidance to dense models during both training and retrieval. 1
+
+The state-of-the-art method, Sparse and Dense Learn Better To-gether (SDLBT) [22], encourages dense and sparse branches to learn from each other through bidirectional distillation. It computes a 
+
+teacher score by combining cross-modal similarities from the dense and sparse branches, and uses this score to supervise both branches. This joint optimization benefits both branches, particularly improv-ing the standalone retrieval accuracy of the sparse branch. Still, this design has two limitations. First, SDLBT relies on the full token space of a language model, which is overly redundant for image-text retrieval. Many dimensions are weakly related to visual content, including discourse tokens (e.g., “therefore”, “however”) and fragmented subword units (e.g., “##ny”, “##ism”). This bloated space increases computational overhead, obscures meaningful lexi-cal evidence, and degrades interpretability. We argue that the sparse space should be compact and tailored to retrieval-relevant concepts. Second, SDLBT lacks an explicit mechanism to preserve explicit grounding of the sparse branch, which can cause activated tokens to drift away from meaningful visual-textual concepts. The sparse projection is largely trained to mimic the teacher score, without 
+
+direct supervision that encourages meaningful lexical tokens to be activated for each image or text. As a result, the sparse branch  
+
+> 1These fine-grained signals can also support retrieval efficiency (e.g., index-based can-didate generation [2, 20]), but this work focuses on improving final retrieval accuracy. arXiv:2609.32671v1 [cs.IR] 26 Sep 2026 KEIR@CIKM 2026, November 8, 2026, Rome, Italy Yoonseo Kim, Jungwoo Choi, Cheonyoung Park, Youngwook Kim, Yongho Song, and SeongKu Kang
+
+can behave like a pseudo-dense representation, improving accuracy through high-dimensional space while losing token-level meaning. We argue that the sparse branch should be explicitly grounded in meaningful concepts while complementing dense semantics. To address these limitations, we propose GRASP , a GR ounded 
+
+And compact SP arse concept framework for text-image retrieval. Before training, GRASP performs concept space construction by min-ing concepts to bridge visual and textual content from the corpus. To capture comprehensive contexts, we instantiate these concepts from two complementary aspects: entity- and relation-level units. The mined concepts define a compact space tailored to cross-modal retrieval, replacing the redundant language-model token space with semantically meaningful sparse dimensions. During training, GRASP introduces concept-grounded relevance learning , where a sparse projection head learns to predict the concepts relevant to each image or text. This enables GRASP to infer relevant concepts for unseen images or texts, yielding sparse concept representations that complement dense semantic matching while preserving in-terpretable grounding. At inference time, GRASP uses the sparse branch as complementary evidence to enhance dense retrieval, adding only negligible cost via the lightweight projection head. 
+
+## 2 PRELIMINARIES 2.1 Problem Formulation 
+
+We consider a cross-modal dataset D consisting of images and their associated texts (e.g., descriptions). For each image 𝑖 , T𝑖 denotes its associated text set. Following [22], we focus on text-to-image retrieval, where a textual query is used to retrieve images in D.This setting reflects real-world visual content retrieval applications. 
+
+## 2.2 Dense Retrieval with Learned Sparse Head 
+
+We describe SDLBT [22], a dense-sparse retrieval framework with a sparse head on top of the backbone VLP, which forms the basis of this work. Let 𝑓 denote a VLP model that encodes text and im-age inputs into contextual embeddings. Given a text 𝑡 (or image 
+
+𝑖 ), 𝑓 encodes lexical token (or visual patch) sequences into contex-tual embeddings. These embeddings are pooled (e.g., CLS or mean pooling) to obtain dense representations h𝑡 , h𝑖 ∈ R𝑑 .
+
+Dense retrieval. Dense retrieval computes cross-modal similarity as 𝑠 dense (𝑡, 𝑖 ) = sim (h𝑡 , h𝑖 ). As each input is compressed into a sin-gle dense vector, it mainly captures the overall semantic similarity. 
+
+Learned sparse branch. To supply fine-grained lexical signals, a sparse projection head is added on top of the backbone VLP model. Specifically, a projection head 𝑔 : R𝑑 → R| V | maps dense repre-sentations into a vocabulary-sized token space V.2 A sparsifying activation function [7] is then applied to obtain non-negative sparse weights: z∗ = log (1 + ReLU (𝑔 (h∗))) . The sparse similarity is com-puted as 𝑠 sparse (𝑡, 𝑖 ) = sim (z𝑡 , z𝑖 ). Each dimension of z∗ corresponds to a lexical token, allowing the sparse branch to encode token-level matching signals that may be underrepresented in dense vectors. 
+
+Integration and optimization. Sparse lexical signals complement dense matching through a combined score: 
+
+𝑠 comb (𝑡, 𝑖 ) = 𝑤 dense · 𝑠 dense (𝑡, 𝑖 ) + 𝑤 sparse · 𝑠 sparse (𝑡, 𝑖 ), (1)  
+
+> 2Prior work [22] uses the BERT WordPiece vocabulary ( | V | ≈ 30K ).
+
+where 𝑤 dense and 𝑤 sparse control their contributions. The standard contrastive loss [19] is applied to the dense, sparse, and combined scores. Further, the combined score is used as a teacher signal to enhance both dense and sparse branches through distillation. For each (𝑡, 𝑖 ) pair, the learning objective is: 
+
+Lbase = LCL + L distill , (2) where LCL = − log exp (𝑠 (𝑡,𝑖 ) ) Í𝑖 ′ ∈B exp (𝑠 (𝑡,𝑖 ′ ) ) is applied to all three scores, and Ldistill = Í𝑠 −𝑝 (𝑠 comb ) log 𝑝 (𝑠 ) is applied to dense and sparse scores. 𝑝 (·) is the softmax over in-batch candidates. Regularization and opposite direction (image-to-text) are omitted for simplicity. 
+
+## 3 METHODOLOGY 
+
+We follow the dense retrieval with a learned sparse head paradigm. Our key distinctions lie in two aspects: how we define the sparse space and how we ensure concept grounding of sparse space (Fig. 1). 
+
+## 3.1 Compact Concept Space Construction 
+
+We construct a compact concept space tailored to text-image re-trieval. The space should bridge the two modalities with fine-grained and interpretable information. Inspired by scene graphs [11, 25], which represent a visual scene through entities and their relations, we use entity- and relation-level concepts as language-based units for connecting visual content with textual descriptions. 
+
+Concept vocabulary construction. Given an image 𝑖 and its associated text 𝑡 ∈ T 𝑖 , we instruct an LLM to extract entity-relation-entity triplets, each describing a relation between two entities: 
+
+F𝑖,𝑡 = LLM (𝑖, 𝑡 ; 𝑃 extract ), F𝑖 = Ð𝑡 ∈ T 𝑖 F𝑖,𝑡 . (3) where F𝑖,𝑡 = {( 𝑒 1, 𝑟, 𝑒 2)} is the resulting set for (𝑖, 𝑡 ), and F𝑖 is the union over all associated texts of image 𝑖 . 𝑃 extract is the prompt. 3
+
+As the extracted information can be inconsistent or noisy, we refine it across the corpus. We collect all entity and relation phrases and apply 𝐾 -means clustering to their textual embeddings to group semantically similar phrases. For each cluster ˜ C𝑘 , an LLM refines it with prompt 𝑃 refine , removing phrases without semantic integrity and merging only fully substitutable concepts: 4
+
+C𝑘 = LLM ( ˜C𝑘 ; 𝑃 refine ), (4) As the dense branch already captures holistic semantics, we define sparse dimensions at the entity/relation level rather than pair/triplet level. This keeps the sparse space compact while provid-ing complementary signals. The final concept vocabulary is defined as C = Ð𝐾 𝑘 =1 C𝑘 , consisting of entities and relations that character-ize images in the corpus. In our experiments, |C| is about 4K to 9K, yielding a compact yet expressive set of retrieval-relevant concepts. 
+
+Concept indexing. Using the concept vocabulary C, we index con-cepts (i.e., entities, relations) for both images and texts. For image 𝑖 ,we obtain a concept indicator c𝑖 ∈ { 0, 1}| C | using F𝑖 , where c𝑖 𝑗 = 1    
+
+> 3The core instruction is: “Extract visual triplets in the form of (subject, relation, object). Use atomic base nouns for subjects and objects, and use the most direct relation labels”. When the associated texts are insufficient, T𝑖 can be augmented by first generating image descriptions and using them as additional textual context (§4).
+> 4The core instruction is: “Remove phrases without semantic integrity or clear meaning. Merge phrases only when they are fully interchangeable synonyms”. To validate extraction quality, we run RoBERTa-Large-MNLI on Flickr30K captions and their extracted triplets, observing only 1.50% contradiction, suggesting that the extracted triplets are mostly faithful to the captions. Concepts Complement Dense Semantics: Learning Compact Sparse Spaces for Text-Image Retrieval KEIR@CIKM 2026, November 8, 2026, Rome, Italy Concept indexing 𝒄 𝒊
+> Sparse projection head Intermediate layers Final layer
+
+𝑠 !"#$" 
+
+𝑧 !ℎ% ℎ&  
+
+> text 𝑡
+> Intermediate layers Final layer
+> image 𝑖
+
+𝑧 "
+
+𝑠 $'()$" 
+
+𝑠 *+,-    
+
+> (man, hold, spoon) (kitchen, equipped, cabinet) (kitchen, have, backsplash) (countertop, have, bottle) …Two men in a kitchen, both smiling and enjoying a moment …
+> refine & merge extract
+> Multi-modal corpus
+> Concept vocabulary 𝑪
+> entities relations
+> …image 𝑖
+> …
+> kitchen equipped backsplash
+> 𝒄 𝒊
+
+𝒛 "   
+
+> text 𝑡
+> Sparse projection
+> image or text
+> kitchen, backsplash, cabinet ,countertop, …
+> Indexed concepts
+> ℒconcept−ground
+> (a) Compact Concept Space Construction (b) Concept-Grounded Relevance Learning Dense Retrieval with Learned Sparse Head
+> Inferred concepts
+> Unseen image
+> dog, jeans, frisbee, sitting, shirt, leash, play, hold, ground, .. A woman who is sitting in a field listening to music throws ..
+> Unseen text
+> dog, filed, hold, ground, throwing, sitting ..
+
+Figure 1: Overview of GRASP framework. We illustrate the image-side process, with the text side handled analogously. 
+
+if the 𝑗 -th concept in C appears in F𝑖 , and 0 otherwise. For each text 
+
+𝑡 ∈ T 𝑖 , we obtain c𝑡 in the same way using F𝑖,𝑡 . The resulting indi-cators contain up to 0.75% active dimensions in our experiments. 
+
+## 3.2 Concept-Grounded Relevance Learning 
+
+Given C, we replace the vast token space of the sparse branch with the concept space, with a projection head 𝑔 C : R𝑑 → R| C | .
+
+Sparse concept branch. Unlike SDLBT, which projects the pooled representation h∗, GRASP applies the projection before pooling to better preserve fine-grained signals. Let h∗,𝑚 denote the contextual embedding at position 𝑚 , where positions correspond to tokens or patches. The sparse concept representation is obtained with the sparsifying activation and max pooling over positions: 
+
+z∗,𝑗 = max  
+
+> 𝑚
+
+log  1 + ReLU  𝑔 C (h∗,𝑚 )𝑗 
+
+ , 𝑗 = 1, . . . , |C| . (5) 
+
+𝑔 C (·) 𝑗 is the raw score for the 𝑗 -th concept. The max pooling keeps the strongest evidence for each concept across positions, allowing each concept dimension to capture fine-grained evidence from the input. This yields compact sparse representations z𝑡 , z𝑖 ∈ R| C | .
+
+Concept grounding objective. To ensure that each dimension of 
+
+z∗ accurately reflects its corresponding concept, we train the sparse branch to predict concepts relevant to each input. Using the concept-indexed information, we cast this as a multi-label classification task formulated with binary cross-entropy (BCE): 
+
+Lconcept −ground = LBCE (z𝑖 , c𝑖 ) + L BCE (z𝑡 , c𝑡 ). (6) This concept grounding loss is applied to both modalities, using each image 𝑖 and each associated text 𝑡 ∈ T 𝑖 .This concept prediction learning provides several benefits. First, the sparse branch can infer relevant concepts for unseen images or texts and further supports implicit concept expansion by activating related concepts beyond exact surface matches. Moreover, multi-label supervision penalizes irrelevant concept dimensions, leading to sparse and interpretable concept-grounded representations. 
+
+Integration and optimization. The final retrieval score is ob-tained by combining the dense and sparse similarities. For simplic-ity, we define 𝑠 comb (𝑡, 𝑖 ) = 𝑠 dense (𝑡, 𝑖 ) + 𝑤 · 𝑠 sparse (𝑡, 𝑖 ), where we set 𝑤 = 0.1. The training process follows the base pipeline in §2.2, except that the sparse branch is guided by the concept grounding loss instead of the contrastive loss: 
+
+LGRASP = Lbase + 𝜆 · L concept −ground , (7) where 𝜆 balances the concept grounding loss. We set 𝜆 = 0.5. 
+
+Remarks on efficiency. Concept space construction introduces additional computation, but it is performed only during offline in-dexing phase. During online retrieval, GRASP adds a lightweight projection head, requiring one matrix multiplication over the stacked contextual embeddings followed by max pooling. This introduces negligible overhead compared with the backbone encoder. 
+
+## 4 EXPERIMENTS 
+
+We follow the setup of the state-of-the-art method, SDLBT, in-cluding datasets, backbones, and metrics. As the original image descriptions are often short and limited [5, 6], we augment T𝑖 with one LLM-generated description per image. All baselines use the same augmented training data, which is not used for testing. 
+
+Datasets and metrics. We evaluate on two widely used datasets: Flickr30k [21] with 29,000/1,014/1,000 (train / val / test) images and MSCOCO [16] with 113,287/5,000/5,000 images, following the Karpathy split [10]. The concept vocabulary has |𝐶 | = 4,046 on Flickr30k (#ent = 2,964, #rel = 1,082) and |𝐶 | = 9,771 on MSCOCO (#ent = 5,951, #rel = 3,820). We report Recall@ {1, 5} and MRR@10. 
+
+Backbone. We adopt two VLP backbones, ALBEF [15] and BLIP [14], using public checkpoints fine-tuned on each dataset, following [22]. 
+
+Compared methods. We compare GRASP with various recent cross-modal dense-sparse retrieval methods. (1) Dense denotes a standard dense retriever fully fine-tuned with the augmented data. (2) STAIR [3] maps images and text into a shared sparse token space by grounding visual representations to BERT vocabulary tokens. (3) D2S [18] maps fixed dense vectors into a sparse token space with probabilistic term expansion. (4) SDLBT [22] is the state-of-the-art method that leverages the combined dense-sparse score as a stronger teacher signal (§2.2). We report sparse-only (S), dense-only (D), and combined dense-sparse (D+S) results when applicable. As GRASP’s sparse branch is designed to complement dense retrieval, D+S is our main setting. For STAIR, whose original model was trained from scratch with a CLIP-style dual encoder, we reimplement its sparse learning method using the same frozen VLP backbones. KEIR@CIKM 2026, November 8, 2026, Rome, Italy Yoonseo Kim, Jungwoo Choi, Cheonyoung Park, Youngwook Kim, Yongho Song, and SeongKu Kang 
+
+Table 1: Performance comparison ( †: 𝑝 < 0.05 , paired 𝑡 -test against the best baseline). LLM-as-judge compares top-1 re-sults against the best baseline following [4]. Method Flickr30k MS-COCO R@1 R@5 MRR@10 R@1 R@5 MRR@10                                                                                                                                                                         
+
+> ALBEF Dense 79.65 95.49 86.58 54.65 80.46 65.67 STAIR (S) 74.98 93.86 83.05 49.76 76.92 61.34 STAIR (D+S) 79.61 95.54 86.57 54.75 80.57 65.78 D2S (S) 75.94 94.22 83.85 51.31 78.32 62.81 D2S (D+S) 79.70 95.30 86.44 53.44 79.44 64.53 SDLBT (S) 78.61 95.27 85.79 52.97 79.20 64.14 SDLBT (D) 79.61 95.34 86.54 54.76 80.44 65.69 SDLBT (D+S) 78.61 95.27 85.81 52.98 79.21 64.15 GRASP 80.81 †95.92 †87.38 †55.47 †80.70 66.25 †
+> Sparse only 26.10 50.14 36.35 10.61 26.97 17.61 Dense only 79.75 95.44 86.62 54.49 80.38 65.56 BLIP Dense 83.35 96.44 89.12 58.95 83.28 69.31 STAIR (S) 78.41 94.80 85.51 54.42 80.04 65.33 STAIR (D+S) 83.34 96.52 89.10 59.02 83.40 69.36 D2S (S) 79.66 95.55 86.47 54.73 80.62 65.67 D2S (D+S) 82.98 96.46 88.93 57.01 81.68 67.51 SDLBT (S) 81.87 96.15 88.10 57.64 82.21 68.16 SDLBT (D) 82.91 96.49 88.83 58.62 83.09 69.02 SDLBT (D+S) 81.89 96.17 88.10 57.67 82.21 68.16 GRASP 83.95 †96.92 †89.61 †59.40 †83.40 69.59 †
+> Sparse only 30.79 56.26 41.71 13.63 31.80 21.46 Dense only 83.17 96.62 89.16 58.80 83.15 69.18
+> LLM-as-judge Flickr30k MS-COCO Win Lose Tie Win Lose Tie
+> ALBEF 60 .0±0.1% 33 .0±0.3% 7.0±0.3% 51 .6±0.6% 30 .4±0.2% 18 .0±0.4% BLIP 56 .8±0.2% 29 .3±0.1% 13 .9±0.1% 46 .6±0.1% 35 .7±0.9% 17 .8±0.8%
+
+Implementation details. We train all models with AdamW (batch size 256; patience 20; max 200 epochs), tuning the learning rate over 10 −5, 10 −4, 10 −3, 10 −2, with 𝑤 = 0.1 and 𝜆 = 0.5. We use 
+
+all-MiniLM-L6-v2 for phrase embeddings, set 𝐾 to roughly 10 phrases per cluster, and implement 𝑔 C as a linear layer with concept-IDF bias initialization. We use InternVL2-26B for image-description generation and GPT-4o mini for concept construction and LLM-as-a-judge evaluation. For all baselines, we follow the official im-plementations and tuning ranges. 
+
+## 4.1 Results 
+
+4.1.1 Overall Evaluation . Table 1 reports retrieval performance averaged over three independent runs. Overall, GRASP consistently achieves the best overall retrieval performance across backbones and datasets, using a substantially smaller concept space than the sparse token-space baselines (i.e., STAIR, D2S, SDLBT). As noted in prior work [5, 6], relevance labels in these benchmarks are often incomplete, leading to false negatives where relevant images are not labeled as positives. For more comprehensive evaluation, we further conduct an LLM-as-a-judge evaluation [4]. GRASP consistently achieves a higher winning ratio, outperforming the best baseline by 10.9% to 27.5%. The improvements of GRASP come from the complementarity of its sparse branch, not from making it a stronger standalone retriever. Indeed, its sparse-only performance is relatively low, as expected from the highly compact sparse space and absence of a contrastive loss. Nevertheless, fusion with the dense branch achieves the best performance in every setting. By contrast, prior sparse branches can show relatively strong sparse-only performance, but they often fail to provide complementary gains after fusion. For example, SDLBT’s BERT-vocabulary sparse branch lowers R@1 below its SDLBT (V=30K) SDLBT pruned (V=4K) GRASP (V=4K)    
+
+> 0.78 0.79 0.80 0.81
+> R@1
+> 0.786 0.781 0.808
+> ALBEF
+> SDLBT (V=30K) SDLBT pruned (V=4K) GRASP (V=4K)
+> 0.79 0.80 0.81 0.82 0.83 0.84 0.85
+> R@1
+> 0.819 0.797 0.840
+> BLIP
+> leaning jersey ball stance watching
+> entity /relation
+> GRASP (concept)
+> ##tu wed tail ##lan marathon
+> SDLBT (BERT token)
+> (a) Size-matched comparison on Flickr30k (b) Top-5 sparse token activations for an example image
+
+Figure 2: In-depth comparison with SDLBT on Flickr30k. Table 2: Design choice analysis on Flickr30k with ALBEF. The first row corresponds to SDLBT. Active dims denotes the percentage of sparse dimensions activated during inference. Concept space Concept grounding R@1 Active dims (text/image) Sparse dimension 
+
+× (BERT tokens) × 78.61 5.8 / 8.1 30,522 
+
+✓ (entity + relation) × 78.91 34.3 / 39.9 4,046 
+
+✓ (entity only) ✓ 80.66 0.3 / 3.8 2,964 
+
+✓ (entity + relation) ✓ 80.81 0.5 / 4.6 4,046 own dense branch after fusion in all settings. These results show that the concept-grounded sparse branch captures complementary cross-modal evidence missed by the dense representation. 
+
+4.1.2 In-depth Comparison with SDLBT . We compare GRASP and SDLBT in sparse space design and grounding in Figure 2. 
+
+Sparse space design. We conduct a size-matched comparison by pruning SDLBT’s BERT token space to the top-activated 4K tokens ,matching the dimensionality of our concept space. As shown in Figure 2(a), this simple pruning substantially degrades SDLBT, while GRASP outperforms both the full 30K SDLBT and the 4K pruned variant. This validates the effectiveness of our sparse space design. 
+
+Sparse activation grounding. We analyze the top activated sparse dimensions for an image to examine whether sparse activations are meaningfully grounded. As discussed earlier, SDLBT lacks di-rect grounding supervision. Indeed, SDLBT activates fragmented or weakly grounded tokens (e.g., ##tu , ##lan ). In contrast, GRASP activates interpretable object and relation concepts relevant to the image (e.g., jersey , leaning ), showing that concept grounding pro-vides compact and interpretable evidence. 
+
+4.1.3 Design Choice Analysis . Table 2 analyzes the contribution of the two main design choices: concept space construction and concept grounding. First, replacing the 30K BERT token space with our compact 4K concept space lifts R@1 from 78 .61 to 78 .91 while reducing the sparse dimensionality by 7 .5×. This suggests that the compact space compresses redundant token dimensions, reducing computational cost while preserving retrieval-relevant signals. Furthermore, concept grounding improves R@1 to 80 .81, show-ing that explicitly aligning sparse dimensions with their correspond-ing concepts is crucial for fully leveraging the compact concept space. Notably, concept grounding makes the sparse representation substantially more selective: the portion of active dimensions drops Concepts Complement Dense Semantics: Learning Compact Sparse Spaces for Text-Image Retrieval KEIR@CIKM 2026, November 8, 2026, Rome, Italy 
+
+from 34 .3% /39 .9% to 0 .5% /4.6% for text/image. This shows that explicit grounding encourages selective activation of concepts rele-vant to each input. The entity-only variant ablates relation concepts, and the full entity+relation space achieves the best performance. 
+
+## 5 CONCLUSION 
+
+We present GRASP, a text-image retrieval framework that addresses two limitations of prior dense-sparse retrieval: a redundant token space and insufficient grounding of sparse dimensions. GRASP in-troduces concept space construction to replace the large token vocab-ulary, and concept-grounded relevance learning to explicitly anchor sparse dimensions to their target concepts. Across Flickr30k and MS-COCO with ALBEF and BLIP backbones, GRASP consistently outperforms the state-of-the-art method while using a substantially smaller sparse space. In future work, we plan to extend concept-grounded sparse learning to more diverse retrieval scenarios. 
+
+## ACKNOWLEDGMENTS 
+
+This work was the result of project supported by KT (Korea Telecom)-Korea University AICT R&D Center. This work was also supported by the IITP grant funded by the MSIT (IITP-2026-RS-2026-25616664, AI Star Fellowship Support Program). 
+
+## GenAI Usage Disclosure 
+
+In compliance with ACM’s Authorship Policy and CIKM submission guidelines, we disclose that generative AI tools were selectively employed during this research. Specifically, InternVL2-26B was utilized to augment insufficient textual contexts by generating im-age descriptions. For concept vocabulary construction, GPT-4o mini was employed to extract entity-relation-entity triplets and refine these concepts within clusters. Finally, GPT-4o mini served as an automated judge to evaluate top-1 results via pairwise com-parisons. No AI-generated text, data, or technical conclusions were incorporated without rigorous human validation, and the authors remain fully accountable for all content and work integrity. 
+
+## REFERENCES 
+
+[1] Keping Bi, Xiaojie Sun, Jiafeng Guo, and Xueqi Cheng. 2024. Reproducibility Anal-ysis and Enhancements for Multi-aspect Dense Retriever with Aspect Learning. In European Conference on Information Retrieval . Springer, 194–209. [2] Sebastian Bruch, Franco Maria Nardini, Cosimo Rulli, and Rossano Venturini. 2024. Efficient inverted indexes for approximate retrieval over learned sparse representations. In Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval . 152–162. [3] Chen Chen, Bowen Zhang, Liangliang Cao, Jiguang Shen, Tom Gunter, Albin Jose, Alexander Toshev, Yantao Zheng, Jonathon Shlens, Ruoming Pang, et al. 2023. Stair: Learning sparse text and image representation in grounded tokens. In Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing . 15079–15094. [4] Dongping Chen, Ruoxi Chen, Shilin Zhang, Yaochen Wang, Yinuo Liu, Huichi Zhou, Qihui Zhang, Yao Wan, Pan Zhou, and Lichao Sun. 2024. Mllm-as-a-judge: Assessing multimodal llm-as-a-judge with vision-language benchmark. In 
+
+Forty-first International Conference on Machine Learning .[5] Weijing Chen, Linli Yao, and Qin Jin. 2023. Rethinking benchmarks for cross-modal image-text retrieval. In Proceedings of the 46th international ACM SIGIR conference on research and development in information retrieval . 1241–1251. [6] Sanghyuk Chun, Wonjae Kim, Song Park, Minsuk Chang, and Seong Joon Oh. 2022. Eccv caption: Correcting false negatives by collecting machine-and-human-verified image-caption associations for ms-coco. In European conference on com-puter vision . Springer, 1–19. [7] Thibault Formal, Benjamin Piwowarski, and Stéphane Clinchant. 2021. Splade: Sparse lexical and expansion model for first stage ranking. In Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval . 2288–2292. [8] Ding Jiang and Mang Ye. 2023. Cross-modal implicit relation reasoning and align-ing for text-to-image person retrieval. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition . 2787–2797. [9] SeongKu Kang, Yunyi Zhang, Pengcheng Jiang, Dongha Lee, Jiawei Han, and Hwanjo Yu. 2024. Taxonomy-guided semantic indexing for academic paper search. In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing . 7169–7184. [10] Andrej Karpathy and Li Fei-Fei. 2015. Deep visual-semantic alignments for generating image descriptions. In Proceedings of the IEEE conference on computer vision and pattern recognition . 3128–3137. [11] Kibum Kim, Kanghoon Yoon, Jaehyeong Jeon, Yeonjun In, Jinyoung Moon, Donghyun Kim, and Chanyoung Park. 2024. Llm4sgg: Large language mod-els for weakly supervised scene graph generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition . 28306–28316. [12] Weize Kong, Swaraj Khadanga, Cheng Li, Shaleen Kumar Gupta, Mingyang Zhang, Wensong Xu, and Michael Bendersky. 2022. Multi-aspect dense retrieval. In Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining . 3178–3186. [13] Wonbin Kweon, Runchu Tian, Seongku Kang, Pengcheng Jiang, Zhiyong Lu, Jiawei Han, and Hwanjo Yu. 2026. PairSem: LLM-Guided Pairwise Semantic Matching for Scientific Document Retrieval. In Proceedings of the ACM Web Conference 2026 . 2396–2407. [14] Junnan Li, Dongxu Li, Caiming Xiong, and Steven Hoi. 2022. Blip: Bootstrapping language-image pre-training for unified vision-language understanding and generation. In International conference on machine learning . PMLR, 12888–12900. [15] Junnan Li, Ramprasaath Selvaraju, Akhilesh Gotmare, Shafiq Joty, Caiming Xiong, and Steven Chu Hong Hoi. 2021. Align before fuse: Vision and language repre-sentation learning with momentum distillation. Advances in neural information processing systems 34 (2021), 9694–9705. [16] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick. 2014. Microsoft coco: Common objects in context. In European conference on computer vision . Springer, 740–755. [17] Haoyu Ma, Handong Zhao, Zhe Lin, Ajinkya Kale, Zhangyang Wang, Tong Yu, Jiuxiang Gu, Sunav Choudhary, and Xiaohui Xie. 2022. Ei-clip: Entity-aware interventional contrastive learning for e-commerce cross-modal retrieval. In 
+
+Proceedings of the IEEE/CVF conference on computer vision and pattern recognition .18051–18061. [18] Thong Nguyen, Mariya Hendriksen, Andrew Yates, and Maarten de Rijke. 2024. Multimodal learned sparse retrieval with probabilistic expansion control. In 
+
+European Conference on Information Retrieval . Springer, 448–464. [19] Aaron van den Oord, Yazhe Li, and Oriol Vinyals. 2018. Representation learning with contrastive predictive coding. arXiv preprint arXiv:1807.03748 (2018). [20] Manish Patil, Sharma V Thankachan, Rahul Shah, Wing-Kai Hon, Jeffrey Scott Vitter, and Sabrina Chandrasekaran. 2011. Inverted indexes for phrases and strings. In Proceedings of the 34th international ACM SIGIR conference on Research and development in Information Retrieval . 555–564. [21] Bryan A Plummer, Liwei Wang, Chris M Cervantes, Juan C Caicedo, Julia Hock-enmaier, and Svetlana Lazebnik. 2015. Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models. In Proceedings of the IEEE international conference on computer vision . 2641–2649. [22] Jonghyun Song, Youngjune Lee, Gyu-Hwung Cho, Ilhyeon Song, Saehun Kim, and Yohan Jo. 2025. Sparse and Dense Retrievers Learn Better Together: Joint Sparse-Dense Optimization for Text-Image Retrieval. In Proceedings of the 34th ACM International Conference on Information and Knowledge Management . 5268–5272. [23] Xiaojie Sun, Keping Bi, Jiafeng Guo, Sihui Yang, Qishen Zhang, Zhongyi Liu, Guannan Zhang, and Xueqi Cheng. 2024. A multi-granularity-aware aspect learning model for multi-aspect dense retrieval. In Proceedings of the 17th ACM International Conference on Web Search and Data Mining . 674–682. [24] Tianshi Wang, Fengling Li, Lei Zhu, Jingjing Li, Zheng Zhang, and Heng Tao Shen. 2025. Cross-modal retrieval: a systematic review of methods and future directions. Proc. IEEE 112, 11 (2025), 1716–1754. [25] Rowan Zellers, Mark Yatskar, Sam Thomson, and Yejin Choi. 2018. Neural motifs: Scene graph parsing with global context. In Proceedings of the IEEE conference on computer vision and pattern recognition . 5831–5840. [26] Yan Zhang, Zhong Ji, Di Wang, Yanwei Pang, and Xuelong Li. 2024. USER: Unified semantic enhancement with momentum contrast for image-text retrieval. IEEE Transactions on Image Processing 33 (2024), 595–609. [27] Xiaoyang Zheng, Zilong Wang, Sen Li, Ke Xu, Tao Zhuang, Qingwen Liu, and Xiaoyi Zeng. 2023. Make: Vision-language pre-training based product retrieval in taobao search. In Companion Proceedings of the ACM Web Conference 2023 .356–360.
