@@ -1,0 +1,105 @@
+{
+  "date": "20260930",
+  "date_label": "",
+  "generated_at": "2026-09-30 23:36:04 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.30739v1",
+      "route": "202609/30/2609.30739v1-sea-clip-tiny-efficient-multilingual-text-vision-embedding-for-southeast-asian-languages",
+      "title": "SEA-CLIP-Tiny: Efficient Multilingual Text-Vision Embedding for Southeast Asian Languages",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多语言文本-视觉嵌入与跨模态对齐",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    },
+    {
+      "paper_id": "2609.32489v1",
+      "route": "202609/30/2609.32489v1-when-helpful-text-hurts-option-redirecting-bias-in-vision-language-models",
+      "title": "When Helpful Text Hurts: Option-Redirecting Bias in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "三模态VQA中的辅助文本可靠性与模态冲突",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    },
+    {
+      "paper_id": "2609.32780v1",
+      "route": "202609/30/2609.32780v1-omnimoe-vl-a-sparse-vision-language-model-with-coupled-visual-depth-routing",
+      "title": "OmniMoE-VL: A Sparse Vision-Language Model with Coupled Visual-Depth Routing",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "稀疏视觉语言模型中的跨模态融合与视觉注入",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    },
+    {
+      "paper_id": "2609.34088v1",
+      "route": "202609/30/2609.34088v1-trace-expert-aligned-ecg-representation-learning-with-rigorous-benchmarking-and-real-world-validation-in-acute-cardiac-care",
+      "title": "TRACE: Expert-Aligned ECG Representation Learning with Rigorous Benchmarking and Real-World Validation in Acute Cardiac Care",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "联合学习单模态与跨模态心电-文本表示",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    },
+    {
+      "paper_id": "2609.34363v1",
+      "route": "202609/30/2609.34363v1-syncra-learning-temporal-correspondence-in-omni-modal-models",
+      "title": "SyncRA: Learning Temporal Correspondence in Omni-Modal Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "对比中间层音视频表示以增强跨模态对齐",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    },
+    {
+      "paper_id": "2609.35304v1",
+      "route": "202609/30/2609.35304v1-signal-or-noise-modality-contribution-and-cooperation-in-multimodal-graphrag",
+      "title": "Signal or Noise? Modality Contribution and Cooperation in Multimodal GraphRAG",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "ml"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "研究各模态是否同等贡献，关注多模态检索中的模态不平衡",
+      "first_seen_at": "2026-09-30 23:36:04 UTC",
+      "updated_at": "2026-09-30 23:36:04 UTC"
+    }
+  ]
+}

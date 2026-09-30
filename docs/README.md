@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-29</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-30</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 14 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 6 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>2</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>6</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-29 23:18:35 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-30 23:36:04 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-29日报：共扫14篇论文，精读2篇（均8.0分）、速读12篇，重点锁定知识迁移与多模态建模。</p>
-<p>最值得看的是两篇8分精读：用游戏化偏斜迁移把表格知识强化图像模型，以及用结构化潜变量做有监督多模态信息分解；速读也集中在跨模态协同、联邦多模态活动识别和多模态Wasserstein重心融合。</p>
-<p>普通读者可先读这两篇精读，再顺带浏览速读中的多模态融合</p>
+<p>今日6篇全速读：视觉-语言模型成主线，精读为零。</p>
+<p>最值得看SEA-CLIP-Tiny的东南亚多语言图文嵌入效率，以及“有用文本反致选项重定向偏差”的VLM可靠性风险，均为6.0分速读。</p>
+<p>普通读者可先扫这两类速读，关注多语言落地与模型偏差，再决定是否深挖。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Learning Through Game: Skewed Transfer of Tabular Knowledge to Strengthen Image Model">Learning Through Game: Skewed Transfer of Tabular Knowledge to Strengthen Image Model</span></li><li><span class="dpr-home-dashboard-paper-title" title="Structured Latent Modeling for Supervised Multimodal Information Decomposition">Structured Latent Modeling for Supervised Multimodal Information Decomposition</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>2</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +86,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">6 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals">SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals</span></li><li><span class="dpr-home-dashboard-paper-title" title="Federated Multi-Modal Human Activity Recognition using Multi-Agent Reinforcement Learning">Federated Multi-Modal Human Activity Recognition using Multi-Agent Reinforcement Learning</span></li><li><span class="dpr-home-dashboard-paper-title" title="Binding Multiple Modalities via Multimodal Wasserstein Barycenter">Binding Multiple Modalities via Multimodal Wasserstein Barycenter</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="SEA-CLIP-Tiny: Efficient Multilingual Text-Vision Embedding for Southeast Asian Languages">SEA-CLIP-Tiny: Efficient Multilingual Text-Vision Embedding for Southeast Asian Languages</span></li><li><span class="dpr-home-dashboard-paper-title" title="When Helpful Text Hurts: Option-Redirecting Bias in Vision-Language Models">When Helpful Text Hurts: Option-Redirecting Bias in Vision-Language Models</span></li><li><span class="dpr-home-dashboard-paper-title" title="OmniMoE-VL: A Sparse Vision-Language Model with Coupled Visual-Depth Routing">OmniMoE-VL: A Sparse Vision-Language Model with Coupled Visual-Depth Routing</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>10</strong></span><span class="dpr-home-dashboard-tag">mre <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">ml <strong>6</strong></span></div>
 </section>
 </div>
 

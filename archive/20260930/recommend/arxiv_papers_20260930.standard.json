@@ -1,0 +1,271 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-30T23:30:49.295649+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 6,
+    "quick_skim_target": 12,
+    "quick_selected": 6
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.30739v1",
+      "source": "arxiv",
+      "title": "SEA-CLIP-Tiny: Efficient Multilingual Text-Vision Embedding for Southeast Asian Languages",
+      "abstract": "Multilingual text-vision embedding models are essential for cross-lingual image-text retrieval, but Southeast Asian languages remain poorly supported due to the region's linguistic diversity and limited data and computing resources. In this paper, we introduce SEA-CLIP-Tiny, a compact multilingual text-vision embedding model for Southeast Asia with fewer than 50M parameters. Our model adapts a CLIP-KD-style framework to Southeast Asian multilingual settings through regional data curation and multilingual teacher guidance. Experiments across seven Southeast Asian languages show that SEA-CLIP-Tiny achieves the strongest average retrieval performance among the evaluated student models, reaching 12.9%, 31.5%, and 42.2% at R@1, R@5, and R@10, respectively. Compared with MobileCLIP2, it improves average R@10 by 12.1 points while using 38.4% fewer parameters and lower measured CPU latency. These results highlight the importance of region-aware training for efficient multilingual text-vision models in Southeast Asia.",
+      "authors": [
+        "Puja Ahmad Habibi",
+        "Faiz Assabil Firdaus",
+        "Ashvanth S",
+        "Ekapol Chuangsuwanich",
+        "Pume Tuchinda",
+        "Peerat Limkonchotiwat"
+      ],
+      "primary_category": "cs.CL",
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-09-25T03:10:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.30739v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "multilingual text-vision embedding for cross-lingual retrieval",
+      "llm_evidence_cn": "多语言文本-视觉嵌入与跨模态对齐",
+      "llm_evidence": "多语言文本-视觉嵌入与跨模态对齐",
+      "canonical_evidence": "多语言文本-视觉嵌入与跨模态对齐",
+      "llm_tldr_en": "SEA-CLIP-Tiny adapts a CLIP-KD framework with regional data curation and multilingual teacher guidance to build a sub-50M-parameter text-vision embedding model for seven Southeast Asian languages.",
+      "llm_tldr_cn": "论文针对东南亚语言在文本-视觉嵌入模型中支持不足的问题，提出紧凑模型SEA-CLIP-Tiny。该方法通过区域数据整理与多语言教师指导，将CLIP-KD式知识蒸馏框架适配到东南亚多语言场景，模型参数量不足5000万。在七种东南亚语言的检索评测中，该模型取得学生模型中最优的平均性能，R@1、R@5与R@10分别为12.9%、31.5%与42.2%。该工作为低资源语言的跨模态对齐与图文检索提供了高效可行方案。",
+      "llm_tldr": "论文针对东南亚语言在文本-视觉嵌入模型中支持不足的问题，提出紧凑模型SEA-CLIP-Tiny。该方法通过区域数据整理与多语言教师指导，将CLIP-KD式知识蒸馏框架适配到东南亚多语言场景，模型参数量不足5000万。在七种东南亚语言的检索评测中，该模型取得学生模型中最优的平均性能，R@1、R@5与R@10分别为12.9%、31.5%与42.2%。该工作为低资源语言的跨模态对齐与图文检索提供了高效可行方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.32489v1",
+      "source": "arxiv",
+      "title": "When Helpful Text Hurts: Option-Redirecting Bias in Vision-Language Models",
+      "abstract": "In tri-modal visual question answering (VQA), auxiliary text is commonly used to complement visual and textual inputs, yet its reliability is often uncontrolled. While prior work studies modality conflicts in general, it remains unclear how different types of unreliable auxiliary text affect answer selection under fixed image-question-option contexts. In this work, we show that the most harmful auxiliary text is not necessarily the most factually incorrect, but the one that aligns with the question while contradicting the image and favoring a specific distractor, leading to systematic redirection of model predictions. To isolate this effect, we introduce the Textual Reliability Ladder, a controlled diagnostic protocol that decomposes auxiliary text along three axes: image consistency, question relevance, and option support. Across multiple datasets (ScienceQA, VCR, A-OKVQA, Causal-VidQA) and recent VLMs, we find that such distractor-supporting text induces the largest accuracy drops (up to 53.1%) and concentrates errors on specific incorrect options. To mitigate this failure mode, we propose a training-free inference-time intervention that explicitly counteracts this redirection effect via noise-stability steering and dynamic grounding, reducing redirected errors while largely preserving performance under faithful text. Our results highlight that auxiliary-text reliability must be understood at the decision level, rather than solely through factual correctness, and provide a practical pathway toward more robust tri-modal reasoning.",
+      "authors": [
+        "Tam Le Thi Thanh",
+        "Hoang Tran Van",
+        "Hong-Hanh Nguyen-Le",
+        "Thanh Duc Ngo"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-09-26T11:33:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.32489v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "unreliable auxiliary text and modality conflict in tri-modal VQA",
+      "llm_evidence_cn": "三模态VQA中的辅助文本可靠性与模态冲突",
+      "llm_evidence": "三模态VQA中的辅助文本可靠性与模态冲突",
+      "canonical_evidence": "三模态VQA中的辅助文本可靠性与模态冲突",
+      "llm_tldr_en": "The paper studies how unreliable auxiliary text affects answer selection in tri-modal VQA and introduces the Textual Reliability Ladder to isolate option-redirecting bias.",
+      "llm_tldr_cn": "论文研究三模态视觉问答中辅助文本可靠性失控的问题，指出不同类型的不可靠文本对答案选择的影响机制尚不明确。作者提出文本可靠性阶梯这一受控诊断协议，在固定图像-问题-选项条件下分解并测量各类辅助文本的作用。实验发现，最具危害的并非事实最错误的文本，而是与问题一致、与图像矛盾且偏向特定干扰项的文本，它会系统性地重定向模型预测。该工作为理解多模态冲突与偏差提供了诊断工具。",
+      "llm_tldr": "论文研究三模态视觉问答中辅助文本可靠性失控的问题，指出不同类型的不可靠文本对答案选择的影响机制尚不明确。作者提出文本可靠性阶梯这一受控诊断协议，在固定图像-问题-选项条件下分解并测量各类辅助文本的作用。实验发现，最具危害的并非事实最错误的文本，而是与问题一致、与图像矛盾且偏向特定干扰项的文本，它会系统性地重定向模型预测。该工作为理解多模态冲突与偏差提供了诊断工具。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "How to handle modality imbalance in multimodal learning?",
+      "matched_requirement_id": "req-16",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.32780v1",
+      "source": "arxiv",
+      "title": "OmniMoE-VL: A Sparse Vision-Language Model with Coupled Visual-Depth Routing",
+      "abstract": "Vision-language models (VLMs) increasingly use sparse mixture-of-experts (MoE) to scale language-side computation, yet visual information is typically routed only after passing through a fixed cross-modal interface. This leaves an important decision unresolved: which intermediate visual representations should be exposed to language computation for a given question? We introduce OmniMoE-VL, a sparse VLM with a coupled visual-depth routed projector. For each image-prompt pair, the projector selects a sparse set of intermediate visual depths and reuses the resulting global preference to guide both local patch fusion and dynamic visual injection into the language model. This design enables question-dependent visual access while preserving the native visual-token sequence, and complements token-level expert routing in the vision and language stacks. Across eight image-based benchmarks, OmniMoE-VL achieves an average score of 85.9 with 28B total and 9B activated parameters. Controlled comparisons show that the routed visual interface provides the dominant architectural gain, while matched route and component controls, same-image route analysis, and route interventions further support the value of coupling and question-conditioned visual access.",
+      "authors": [
+        "Long Qian",
+        "Bingke Zhu",
+        "Jiaqi Wei",
+        "Yingying Chen",
+        "Jinqiao Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-26T16:55:15+00:00",
+      "link": "https://arxiv.org/pdf/2609.32780v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "cross-modal fusion and visual injection in sparse VLM",
+      "llm_evidence_cn": "稀疏视觉语言模型中的跨模态融合与视觉注入",
+      "llm_evidence": "稀疏视觉语言模型中的跨模态融合与视觉注入",
+      "canonical_evidence": "稀疏视觉语言模型中的跨模态融合与视觉注入",
+      "llm_tldr_en": "OmniMoE-VL is a sparse vision-language model with a coupled visual-depth routed projector that selects intermediate visual depths per prompt, guiding patch fusion and dynamic visual injection.",
+      "llm_tldr_cn": "视觉语言模型日益采用稀疏混合专家扩展语言侧计算，但视觉信息通常经固定跨模态接口后才被路由，无法按问题选择应暴露给语言计算的中间视觉表示。作者提出OmniMoE-VL，设计耦合视觉-深度路由投影器，为每个图像-提示对选择稀疏的中间视觉深度，并用所得偏好同时指导局部块融合与动态视觉注入。实验表明该设计实现了问题依赖的视觉访问，为跨模态融合提供新路由机制。",
+      "llm_tldr": "视觉语言模型日益采用稀疏混合专家扩展语言侧计算，但视觉信息通常经固定跨模态接口后才被路由，无法按问题选择应暴露给语言计算的中间视觉表示。作者提出OmniMoE-VL，设计耦合视觉-深度路由投影器，为每个图像-提示对选择稀疏的中间视觉深度，并用所得偏好同时指导局部块融合与动态视觉注入。实验表明该设计实现了问题依赖的视觉访问，为跨模态融合提供新路由机制。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "techniques for multimodal fusion in deep learning",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.34088v1",
+      "source": "arxiv",
+      "title": "TRACE: Expert-Aligned ECG Representation Learning with Rigorous Benchmarking and Real-World Validation in Acute Cardiac Care",
+      "abstract": "TRACE (Text-Reinforced Analysis of Cardio ECGs) is a multimodal electrocardiogram (ECG) representation model that learns clinically grounded signal embeddings for downstream cardiac classification. It is designed to address the limitations of existing CLIP-style training, which often struggles with noisy clinical text and fails to leverage the complementary strengths of unimodal (from ECG) and cross-modal (between ECG and matched cardiologist reports) learning. To bridge this gap, we propose a hybrid architecture that jointly learns unimodal and cross-modal representations via uncertainty-weighted multi-task learning while utilizing an LLM-based pipeline to extract high-fidelity findings from cardiologist reports. We evaluate TRACE across a spectrum of clinical urgency, establishing robust performance on public benchmarks for arrhythmia classification and structural abnormalities relative to existing unimodal and multimodal ECG models. To demonstrate real-world utility, we further validate the model on acute coronary occlusion (ACO), where the prevailing ST-elevation criteria miss 25-34% of true occlusions. Utilizing a large private ACO dataset with expert-annotated ground truth, TRACE significantly outperforms real-world clinical practice, yielding a 19.0% increase in sensitivity or a 62.6% reduction in false positive rates at the clinical baseline. This extensive evaluation confirms that TRACE delivers both strong performance on benchmark tasks and tangible clinical impact in the most acute, high-risk cardiac scenarios.",
+      "authors": [
+        "Lovely Yeswanth Panchumarthi",
+        "Andrew Lu",
+        "Saurabh Kataria",
+        "Delgersuren Bold",
+        "Minxiao Wang",
+        "Runze Yan",
+        "Patricia Dykes",
+        "Brian J. Gow",
+        "Tom J. Pollard",
+        "Jessica K. Zègre-Hemsey",
+        "Dillon J. Dzikowicz",
+        "Lekshmi Kumar",
+        "Xiao Hu",
+        "Ran Xiao"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-09-28T01:26:53+00:00",
+      "link": "https://arxiv.org/pdf/2609.34088v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "jointly learns unimodal and cross-modal ECG-text representations",
+      "llm_evidence_cn": "联合学习单模态与跨模态心电-文本表示",
+      "llm_evidence": "联合学习单模态与跨模态心电-文本表示",
+      "canonical_evidence": "联合学习单模态与跨模态心电-文本表示",
+      "llm_tldr_en": "TRACE is a multimodal ECG representation model that jointly learns unimodal and cross-modal embeddings via uncertainty-weighted multi-task learning, overcoming noisy clinical text limitations of CLIP-style training for cardiac classification.",
+      "llm_tldr_cn": "现有CLIP式训练在心电文本表示中易受噪声临床文本干扰，且未能充分利用单模态与跨模态学习的互补优势。TRACE提出混合架构，通过不确定性加权的多任务学习联合学习心电单模态与心电-报告跨模态表示，并借助LLM流程提取高保真心电发现。实验在急性心脏护理场景下完成严格基准与真实世界验证，表明该表示能有效支撑下游心脏分类。其贡献在于为临床心电多模态表示与跨模态对齐提供了稳健的训练范式。",
+      "llm_tldr": "现有CLIP式训练在心电文本表示中易受噪声临床文本干扰，且未能充分利用单模态与跨模态学习的互补优势。TRACE提出混合架构，通过不确定性加权的多任务学习联合学习心电单模态与心电-报告跨模态表示，并借助LLM流程提取高保真心电发现。实验在急性心脏护理场景下完成严格基准与真实世界验证，表明该表示能有效支撑下游心脏分类。其贡献在于为临床心电多模态表示与跨模态对齐提供了稳健的训练范式。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.34363v1",
+      "source": "arxiv",
+      "title": "SyncRA: Learning Temporal Correspondence in Omni-Modal Models",
+      "abstract": "Recent omni-modal models demonstrate strong perception of audio and visual inputs, yet often struggle to connect what they hear with what they see at the same moment. This weakness in temporal correspondence can cause models to associate spoken cues with the wrong visual scenes, producing plausible answers grounded in incorrect audio-visual pairings. We diagnose this problem through controlled temporal swaps, revealing that model answers do not reliably follow changes in these pairings. To address it, we propose Synchrony-Guided Representation Alignment (SyncRA), a lightweight method for strengthening temporal correspondence between audio and vision. Specifically, SyncRA contrasts intermediate audio-visual representations within each video, aligning matching moments while separating mismatched ones to capture local temporal correspondence within a shared global context. The objective derives supervision directly from existing input timing, requiring no additional annotations and leaving inference unchanged. We evaluate SyncRA across four open omni-modal models spanning different sizes and architectures on five public video benchmarks. SyncRA consistently outperforms answer-only fine-tuning across all model-benchmark combinations, while substantially improving the ability to track changing audio-visual pairings in controlled evaluations. These results demonstrate that lightweight, targeted supervision can effectively strengthen temporal correspondence and translate into broad improvements in audio-visual question answering.",
+      "authors": [
+        "Zelong Xu",
+        "Yan Li",
+        "Wenhe Hu",
+        "Xiyang Hu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.MM"
+      ],
+      "published": "2026-09-28T05:40:09+00:00",
+      "link": "https://arxiv.org/pdf/2609.34363v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "contrasts intermediate audio-visual representations to strengthen cross-modal alignment",
+      "llm_evidence_cn": "对比中间层音视频表示以增强跨模态对齐",
+      "llm_evidence": "对比中间层音视频表示以增强跨模态对齐",
+      "canonical_evidence": "对比中间层音视频表示以增强跨模态对齐",
+      "llm_tldr_en": "Omni-modal models often fail to bind what they hear and see at the same moment, yielding plausible answers grounded in wrong audio-visual pairings. SyncRA contrasts intermediate audio-visual representations within each video to strengthen temporal correspondence.",
+      "llm_tldr_cn": "全模态模型常难以把同一时刻听到与看到的内容对应起来，导致音画错配仍给出看似合理的答案。作者通过受控时序交换诊断该问题，并提出同步引导表示对齐SyncRA，在视频内对比中间层音视频表示以对齐匹配模态。实验显示模型答案原先不随时序配对改变，SyncRA能有效增强时序对应。该工作把时序对应视为可独立增强的跨模态对齐问题，为多模态表征对齐提供了轻量方案。",
+      "llm_tldr": "全模态模型常难以把同一时刻听到与看到的内容对应起来，导致音画错配仍给出看似合理的答案。作者通过受控时序交换诊断该问题，并提出同步引导表示对齐SyncRA，在视频内对比中间层音视频表示以对齐匹配模态。实验显示模型答案原先不随时序配对改变，SyncRA能有效增强时序对应。该工作把时序对应视为可独立增强的跨模态对齐问题，为多模态表征对齐提供了轻量方案。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "cross-modal alignment representation learning",
+      "matched_requirement_id": "req-13",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.35304v1",
+      "source": "arxiv",
+      "title": "Signal or Noise? Modality Contribution and Cooperation in Multimodal GraphRAG",
+      "abstract": "Multimodal knowledge graphs (KGs) integrate information from text, figures, tables, and other modalities into a unified structured representation, with the promise that richer evidence enables better inference. In GraphRAG systems built over such graphs, it is commonly assumed that retrieving evidence from more modalities at inference time improves downstream performance. Yet, redundant or overlapping multimodal evidence may distract language models in question answering (QA), and whether each modality contributes equally across questions, models, and tasks remains poorly understood. In this work, we study how modality-aware retrieval affects downstream inference in a multimodal GraphRAG pipeline, using document visual question answering (DocVQA) as a testbed. We extend an existing KG-based QA framework to be modality-aware, leveraging the graph structure to track which modality supports which facts and to selectively filter evidence at the edge level. This enables us to investigate whether providing all available multimodal evidence at inference time benefits QA, and to evaluate the contribution and cooperation of modalities across question, task, and model characteristics. Through a controlled analysis within a state-of-the-art multimodal GraphRAG pipeline, five multimodal LLMs and two DocVQA benchmarks, we find that tables and text provide the strongest contributions, and that combining modalities frequently produces redundancy rather than synergy, particularly for pairs involving textual information. Positive cooperation appears mainly between non-text modalities and depends on question intent and task type. Our findings argue for selective, modality-aware retrieval in the design of more effective GraphRAG systems, where modalities are filtered according to the downstream task rather than retrieved uniformly.",
+      "authors": [
+        "Antonios Georgakopoulos",
+        "Paul Groth",
+        "Lise Stork"
+      ],
+      "primary_category": "cs.IR",
+      "categories": [
+        "cs.IR"
+      ],
+      "published": "2026-09-28T14:44:24+00:00",
+      "link": "https://arxiv.org/pdf/2609.35304v1",
+      "tags": [
+        "keyword:MRE",
+        "keyword:ml",
+        "query:MRE",
+        "query:ml"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "studies whether each modality contributes equally, addressing modality imbalance in multimodal retrieval",
+      "llm_evidence_cn": "研究各模态是否同等贡献，关注多模态检索中的模态不平衡",
+      "llm_evidence": "研究各模态是否同等贡献，关注多模态检索中的模态不平衡",
+      "canonical_evidence": "研究各模态是否同等贡献，关注多模态检索中的模态不平衡",
+      "llm_tldr_en": "This work studies how modality-aware retrieval affects downstream inference in multimodal GraphRAG, showing redundant multimodal evidence can distract language models and modalities do not contribute equally.",
+      "llm_tldr_cn": "针对多模态知识图谱GraphRAG中普遍假设检索更多模态证据即可提升推理、但冗余证据可能干扰语言模型的问题，本文研究模态感知检索对下游推理的影响。作者在多模态GraphRAG流水线上分析不同模态在问题、模型与任务间的贡献差异。实验表明并非所有模态都同等有益，部分证据反而成为噪声。工作揭示了多模态检索中模态贡献与合作的重要性。",
+      "llm_tldr": "针对多模态知识图谱GraphRAG中普遍假设检索更多模态证据即可提升推理、但冗余证据可能干扰语言模型的问题，本文研究模态感知检索对下游推理的影响。作者在多模态GraphRAG流水线上分析不同模态在问题、模型与任务间的贡献差异。实验表明并非所有模态都同等有益，部分证据反而成为噪声。工作揭示了多模态检索中模态贡献与合作的重要性。",
+      "llm_tags": [
+        "query:ml"
+      ],
+      "matched_query_tag": "query:ml",
+      "matched_query_text": "addressing modality imbalance in multimodal learning",
+      "matched_requirement_id": "req-11",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
